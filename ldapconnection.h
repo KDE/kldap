@@ -75,7 +75,9 @@ namespace KLDAP {
       void setServer( const LdapServer &server );
       /** Connects to the specified LDAP server with the appropriate SSL/TLS, bind method,
         * authentication method, username and password. Also sets sizelimit and timelimit */
-      int connect( SASL_Callback_Proc *saslproc = 0, void *data = 0);
+      int connect();
+
+      int bind( SASL_Callback_Proc *saslproc = 0, void *data = 0 );
       /** Closes the LDAP connection */
       void close();
 

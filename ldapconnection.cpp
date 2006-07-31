@@ -20,6 +20,8 @@
 
 #include "ldapconnection.h"
 
+#include <malloc.h>
+
 #include <klocale.h>
 #include <kdebug.h>
 
@@ -91,7 +93,8 @@ void *LdapConnection::handle() const
 
 QString LdapConnection::ldapError( int code )
 {
-  return i18n("No translated LDAP messages yet...");
+  //No translated error messages yet
+  return QString::fromUtf8( ldap_err2string( code ) );
 #ifdef LDAP_FOUND
   switch ( code ) {
     case LDAP_OPERATIONS_ERROR: return i18n("LDAP Operations error");
@@ -129,7 +132,9 @@ QString LdapConnection::ldapErrorString()
   Q_ASSERT( d->mLDAP );
   char *errmsg;
   ldap_get_option( d->mLDAP, LDAP_OPT_ERROR_STRING, &errmsg );
-  return QString::fromLocal8Bit( errmsg );
+  QString msg = QString::fromLocal8Bit( errmsg );
+  free( errmsg );
+  return msg;
 }
 
 bool LdapConnection::setSizeLimit( int sizelimit )
@@ -195,7 +200,8 @@ static int kldap_sasl_interact( LDAP *, unsigned, void *defaults, void *in )
           break;
       }
     }
-    if ( data->proc( data->creds, data->data ) ) return LDAP_OTHER;
+    int retval;
+    if ( (retval = data->proc( data->creds, data->data )) ) return retval;
   }
 
   QString value;
@@ -233,7 +239,7 @@ static int kldap_sasl_interact( LDAP *, unsigned, void *defaults, void *in )
   return LDAP_SUCCESS;
 }
 
-int LdapConnection::connect( SASL_Callback_Proc *saslproc, void *data )
+int LdapConnection::connect()
 {
   int ret;
   QString url;
@@ -291,7 +297,13 @@ int LdapConnection::connect( SASL_Callback_Proc *saslproc, void *data )
       return ret;
     }
   }
+  return 0;
+}
 
+int LdapConnection::bind( SASL_Callback_Proc *saslproc, void *data )
+{
+  int ret;
+  
   if ( mServer.auth() == LdapServer::SASL ) {
 #ifdef SASL2_FOUND
     QString mech = mServer.mech();
@@ -310,7 +322,6 @@ int LdapConnection::connect( SASL_Callback_Proc *saslproc, void *data )
       LDAP_SASL_INTERACTIVE, &kldap_sasl_interact, &sasldata );
 #else
     mError = i18n("No SASL support.");
-    close();
     return -1;
 #endif
   } else {
@@ -323,8 +334,8 @@ int LdapConnection::connect( SASL_Callback_Proc *saslproc, void *data )
     ret = ldap_simple_bind_s( d->mLDAP, bindname.toUtf8(), pass.toUtf8() );
   }
   if ( ret != LDAP_SUCCESS ) {
+    kDebug() << "bind error: " << ret << " : " << ldapErrorString() << endl;
     mError = i18n("Cannot bind to LDAP server");
-    close();
   }
   return ret;
 }
