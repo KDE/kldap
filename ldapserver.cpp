@@ -58,17 +58,17 @@ void LdapServer::setUrl( const LdapUrl &url )
   if ( port <= 0 ) mPort = 389; else mPort = port;
   mBaseDn = url.dn();
   
+  mSecurity = None;
   if ( url.protocol() == "ldaps" ) 
     mSecurity = SSL; 
-  else if ( url.extension("x-tls"), critical )
+  else if ( url.hasExtension("x-tls") )
     mSecurity = TLS;
-  else
-    mSecurity = None;
-    
+  kDebug() << "security: " << mSecurity << endl;
+
   mMech = mUser = mBindDn = QString();
   if ( url.hasExtension("x-sasl") ) {
     mAuth = SASL;
-    if ( url.hasExtension("x-mech") ) 
+    if ( url.hasExtension("x-mech") )
       mMech = url.extension( "x-mech", critical );
     if ( url.hasExtension("x-realm") ) 
       mRealm = url.extension( "x-realm", critical );
