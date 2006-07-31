@@ -96,7 +96,7 @@ namespace KLDAP {
     /** Updates the query component from the attributes, scope, filter and extensions */
     void updateQuery();
 
-    /** Parses the query argument of the URL and makes it availble via the 
+    /** Parses the query argument of the URL and makes it available via the 
       * attributes(), extension(), filter() and scope() methods
       */
     void parseQuery();

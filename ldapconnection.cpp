@@ -249,7 +249,7 @@ int LdapConnection::connect( SASL_Callback_Proc *saslproc, void *data )
   kDebug() << "ldap url: " << url << endl;
   ret = ldap_initialize( &d->mLDAP, url.toLatin1() );
   if ( ret != LDAP_SUCCESS ) {
-    mError = i18n("An error occured during the connection initialization phase");
+    mError = i18n("An error occurred during the connection initialization phase");
     return ret;
   }
 

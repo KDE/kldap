@@ -84,7 +84,7 @@ namespace KLDAP {
       int exop( const QString &oid, const QByteArray &data );
       int abandon( int id );
       
-      /** Returns the type of the result LDAP message (RES_XXX constants). -1 if error occured. */
+      /** Returns the type of the result LDAP message (RES_XXX constants). -1 if error occurred. */
       int result( int id );
       /** Returns the result object if result() returned RES_SEARCH_ENTRY */
       const LdapObject &object() const { return mObject; }
