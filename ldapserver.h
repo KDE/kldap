@@ -23,8 +23,8 @@
 
 #include <QString>
 
-#include <ldapurl.h>
-#include <kldap.h>
+#include <kldap/ldapurl.h>
+#include <kldap/kldap.h>
 
 namespace KLDAP {
 

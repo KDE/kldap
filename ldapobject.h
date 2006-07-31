@@ -25,7 +25,7 @@
 #include <QList>
 #include <QMap>
 
-#include <kldap.h>
+#include <kldap/kldap.h>
 
 namespace KLDAP {
 

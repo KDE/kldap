@@ -25,13 +25,13 @@
 #include <QList>
 #include <QByteArray>
 
-#include <ldapurl.h>
-#include <ldapobject.h>
-#include <ldapcontrol.h>
-#include <ldapserver.h>
-#include <ldapconnection.h>
+#include <kldap/ldapurl.h>
+#include <kldap/ldapobject.h>
+#include <kldap/ldapcontrol.h>
+#include <kldap/ldapserver.h>
+#include <kldap/ldapconnection.h>
 
-#include <kldap.h>
+#include <kldap/kldap.h>
 
 namespace KLDAP {
 

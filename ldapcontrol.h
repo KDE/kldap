@@ -24,7 +24,7 @@
 #include <QString>
 #include <QList>
 
-#include <kldap.h>
+#include <kldap/kldap.h>
 
 namespace KLDAP {
 

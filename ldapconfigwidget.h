@@ -26,9 +26,9 @@
 
 #include <kio/job.h>
 
-#include <ldif.h>
-#include <ldapurl.h>
-#include <ldapserver.h>
+#include <kldap/ldif.h>
+#include <kldap/ldapurl.h>
+#include <kldap/ldapserver.h>
 
 #include <kldap.h>
 

@@ -23,9 +23,9 @@
 
 #include <QString>
 
-#include <ldapurl.h>
-#include <ldapserver.h>
-#include <kldap.h>
+#include <kldap/ldapurl.h>
+#include <kldap/ldapserver.h>
+#include <kldap/kldap.h>
 
 namespace KLDAP {
 
