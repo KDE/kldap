@@ -29,7 +29,7 @@ QString LdapObject::toString() const
   for ( LdapAttrMap::ConstIterator it = mAttrs.begin(); it != mAttrs.end(); ++it ) {
     QString attr = it.key();
     for ( LdapAttrValue::ConstIterator it2 = (*it).begin(); it2 != (*it).end(); ++it2 ) {
-      result += QString::fromUtf8( Ldif::assembleLine( attr, *it2, 76 ) ) + "\n";
+      result += QString::fromUtf8( Ldif::assembleLine( attr, *it2, 76 ) ) + '\n';
     }
   }
   return result;

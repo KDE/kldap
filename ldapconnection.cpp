@@ -244,7 +244,7 @@ int LdapConnection::connect( SASL_Callback_Proc *saslproc, void *data )
   url = mServer.security() == LdapServer::SSL ? "ldaps" : "ldap";
   url += "://";
   url += mServer.host();
-  url += ":";
+  url += ':';
   url += QString::number( mServer.port() );
   kDebug() << "ldap url: " << url << endl;
   ret = ldap_initialize( &d->mLDAP, url.toLatin1() );
