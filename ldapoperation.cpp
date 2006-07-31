@@ -491,4 +491,23 @@ int LdapOperation::result( int id )
   return -1;
 }
 
+int LdapOperation::compare( const QString &dn, const QString &attr, const QByteArray &value )
+{
+  kError() << "LDAP support not compiled" << endl;
+  return -1;
+}
+
+int LdapOperation::exop( const QString &oid, const QByteArray &data )
+{
+  kError() << "LDAP support not compiled" << endl;
+  return -1;
+}
+
+int LdapOperation::abandon( int id )
+{
+  kError() << "LDAP support not compiled" << endl;
+  return -1;
+}
+
+
 #endif
