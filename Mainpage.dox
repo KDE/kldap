@@ -1,0 +1,21 @@
+/*
+  Mainpage.dox
+ */
+
+/**
+@mainpage LIBKLDAP - LDAP access API for KDE
+
+@section purpose Purpose
+
+LIBKLDAP 
+
+@section features Features
+
+- Allows LDAP accessing with a convenient Qt style C++ API.
+
+@author György Szombathelyi \<gyurco@freemail.hu\>
+
+<b>LICENCE: LGPL</b>
+*/
+// DOXYGEN_REFERENCES = kdecore kdeui
+// DOXYGEN_EXCLUDE = scripts
