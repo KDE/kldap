@@ -36,7 +36,7 @@
 namespace KLDAP {
 
   /** This class allows sending an ldap operation 
-   * (search, rename, modify, delete) to an LDAP server.
+   * (search, rename, modify, delete, compare, exop) to an LDAP server.
    */
   class KLDAP_EXPORT LdapOperation
   {
@@ -68,27 +68,79 @@ namespace KLDAP {
       LdapOperation( const LdapConnection &conn );
       virtual ~LdapOperation();
 
+      /**
+       * Sets the connection object. Without living connection object, 
+       * LDAP operations are not possible
+       */
       void setConnection( const LdapConnection &conn );
+      /**
+       * Sets the client controls which will sent with each operation
+       */
       void setClientControls( const LdapControls &ctrls );
+      /**
+       * Sets the server controls which will sent with each operation
+       */
       void setServerControls( const LdapControls &ctrls );
+      /**
+       * Returns the client controls (which set by setClientControls())
+       */
       const LdapControls &clientControls() const;
+      /**
+       * Returns the server controls (which set by setServerControls())
+       */
       const LdapControls &serverControls() const;
 
+      /**
+       * Starts a search operation with the given base DN, scope, filter and 
+       * result attributes. Returns a message id if successful, -1 if not 
+       */
       int search( const QString &base, LdapUrl::Scope scope, 
         const QString &filter, const QStringList& attrs );
+      /**
+       * Starts a modrdn operation on given DN, changing its RDN to newRdn,
+       * changing its parent to newSuperior (if it's not empty), and deletes
+       * the old dn if deleteold is true.
+       * Returns a message id if successful, -1 if not 
+       */
       int rename( const QString &dn, const QString &newRdn, 
         const QString &newSuperior, bool deleteold = true );
+      /**
+       * Deletes the given DN.
+       * Returns a message id if successful, -1 if not 
+       */
       int del( const QString &dn );
+      /**
+       * Starts a modify operation on the given DN.
+       * Returns a message id if successful, -1 if not 
+       */
       int modify( const QString &dn, const ModOps &ops );
+      /**
+       * Starts a compare operation on the given DN, compares the specified
+       * attribute with the given value.
+       * Returns a message id if successful, -1 if not 
+       */
       int compare( const QString &dn, const QString &attr, const QByteArray &value );
+      /**
+       * Starts an extended operation specified with oid and data
+       * Returns a message id if successful, -1 if not 
+       */
       int exop( const QString &oid, const QByteArray &data );
+      /**
+       * Abandons a long-running operation. Requires the message id
+       */
       int abandon( int id );
       
-      /** Returns the type of the result LDAP message (RES_XXX constants). -1 if error occurred. */
+      /**
+       * Returns the type of the result LDAP message (RES_XXX constants). -1 if error occurred. 
+       */
       int result( int id );
-      /** Returns the result object if result() returned RES_SEARCH_ENTRY */
+      /**
+       * Returns the result object if result() returned RES_SEARCH_ENTRY 
+       */
       const LdapObject &object() const;
-      /** Returns the server controls from the returned ldap message (grabbed by result()) */
+      /** 
+       * Returns the server controls from the returned ldap message (grabbed by result()) 
+       */
       const LdapControls &controls() const;
 
     private:
