@@ -22,50 +22,74 @@
 
 using namespace KLDAP;
 
+class LdapControl::LdapControlPrivate {
+  public:
+    QString mOid;
+    QByteArray mValue;
+    bool mCritical;
+};
+
 LdapControl::LdapControl()
 {
+  d = new LdapControlPrivate();
 }
 
 LdapControl::LdapControl( QString &oid, QByteArray &value, bool critical )
 {
+  d = new LdapControlPrivate;
   setControl( oid, value, critical );
 }
-            
+
+LdapControl::LdapControl( const LdapControl &that )
+{
+  d = new LdapControlPrivate();
+  setControl( that.d->mOid, that.d->mValue, that.d->mCritical );
+}
+
+LdapControl& LdapControl::operator= (const LdapControl& that)
+{
+  if ( this == &that ) return *this;
+  d = new LdapControlPrivate();
+  setControl( that.d->mOid, that.d->mValue, that.d->mCritical );
+  return *this;
+}     
+
 LdapControl::~LdapControl()
 {
+  delete d;
 }
 
 void LdapControl::setControl( const QString &oid, const QByteArray &value, bool critical )
 {
-  mOid = oid; mValue = value; mCritical = critical;
+  d->mOid = oid; d->mValue = value; d->mCritical = critical;
 }
 
 QString LdapControl::oid() const
 {
-  return mOid;
+  return d->mOid;
 }
 
 QByteArray LdapControl::value() const
 {
-  return mValue;
+  return d->mValue;
 }
 
 bool LdapControl::critical() const
 {
-  return mCritical;
+  return d->mCritical;
 }
 
 void LdapControl::setOid( const QString &oid )
 {
-  mOid = oid;
+  d->mOid = oid;
 }
 
 void LdapControl::setValue( const QByteArray &value )
 {
-  mValue = value;
+  d->mValue = value;
 }
 
 void LdapControl::setCritical( bool critical )
 {
-  mCritical = critical;
+  d->mCritical = critical;
 }

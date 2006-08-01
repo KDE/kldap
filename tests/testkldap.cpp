@@ -66,7 +66,22 @@ void KLdapTest::testKLdap()
   server.setUrl( url );
   QCOMPARE( url.query(), QString::fromLatin1("??base??x-timelimit=5") );
   QCOMPARE( url.url(), server.url().toString() );
-  
+
+  LdapControl c1;
+  c1.setControl( QString::fromLatin1("1.2.3.4.5.6"), QByteArray("abcdefg"), true );
+  //test copy constructor
+  LdapControl c2(c1);
+  QCOMPARE( c2.oid(), QString::fromLatin1("1.2.3.4.5.6") );
+  QCOMPARE( c2.value(), QByteArray("abcdefg") );
+  QCOMPARE( c2.critical(), true );
+  //test assignment operator
+  LdapControl c3;
+  c3 = c1;
+  QCOMPARE( c3.oid(), QString::fromLatin1("1.2.3.4.5.6") );
+  QCOMPARE( c3.value(), QByteArray("abcdefg") );
+  QCOMPARE( c3.critical(), true );
+
+/*  
   url.setUrl("ldap://localhost/dc=gyurco,dc=localdomain");
   url.parseQuery();
   server.setUrl( url );
@@ -104,5 +119,5 @@ void KLdapTest::testKLdap()
   kDebug() << "search msgid " << msgid << endl;
   result = op.result( msgid );
   kDebug() << "error code " << conn.ldapErrorCode() << " str: " << conn.ldapErrorString() << endl;
-
+*/
 }

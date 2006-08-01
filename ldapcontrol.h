@@ -33,19 +33,49 @@ namespace KLDAP {
   class KLDAP_EXPORT LdapControl
   {
     public:
+      /**
+       * Creates an empty control.
+       */
       LdapControl();
+      /**
+       * Creates a control with the given OID, value and criticality.
+       */
       LdapControl( QString &oid, QByteArray &value, bool critical = false );
-      
-      void setControl( const QString &oid, const QByteArray &value, bool critical = false);
 
-      void setOid( const QString &oid );
-      void setValue( const QByteArray &value );
-      void setCritical( bool critical );
-      QString oid() const;
-      QByteArray value() const;
-      bool critical() const;
-    
+      LdapControl( const LdapControl &that );
+      LdapControl& operator= (const LdapControl &that);
+      /**
+       * Destroys the control object.
+       */
       virtual ~LdapControl();
+      /**
+       * Sets the control's OID, value and criticality.
+       */
+      void setControl( const QString &oid, const QByteArray &value, bool critical = false);
+      /**
+       * Sets the control's OID.
+       */
+      void setOid( const QString &oid );
+      /**
+       * Sets the control's value.
+       */
+      void setValue( const QByteArray &value );
+      /**
+       * Sets the control's criticality.
+       */
+      void setCritical( bool critical );
+      /**
+       * Returns the control's OID.
+       */
+      QString oid() const;
+      /**
+       * Returns the control's value.
+       */
+      QByteArray value() const;
+      /**
+       * Returns the control's criticality.
+       */
+      bool critical() const;
 
     private:
       

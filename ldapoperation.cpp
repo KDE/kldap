@@ -33,25 +33,66 @@
 
 using namespace KLDAP;
 
+class LdapOperation::LdapOperationPrivate {
+  public:
+    LdapControls mClientCtrls,mServerCtrls, mControls;
+    LdapObject mObject;
+            
+    const LdapConnection *mConnection;
+};
+
 LdapOperation::LdapOperation()
 {
-  mConnection = 0;
+  d = new LdapOperationPrivate;
+  d->mConnection = 0;
 }
 
 LdapOperation::LdapOperation( const LdapConnection &conn )
 {
+  d = new LdapOperationPrivate;
   setConnection( conn );
 }
 
 LdapOperation::~LdapOperation()
 {
+  delete d;
 }
                   
 void LdapOperation::setConnection( const LdapConnection &conn )
 {
-  mConnection = &conn;
+  d->mConnection = &conn;
 }
-                        
+
+void LdapOperation::setClientControls( const LdapControls &ctrls )
+{ 
+  d->mClientCtrls = ctrls;
+}
+
+void LdapOperation::setServerControls( const LdapControls &ctrls )
+{ 
+  d->mServerCtrls = ctrls;
+}
+
+const LdapControls &LdapOperation::clientControls() const 
+{ 
+  return d->mClientCtrls;
+}
+
+const LdapControls &LdapOperation::serverControls() const 
+{ 
+  return d->mServerCtrls;
+}
+
+const LdapObject &LdapOperation::object() const
+{ 
+  return d->mObject;
+}
+
+const LdapControls &LdapOperation::controls() const 
+{ 
+  return d->mControls;
+}
+                  
 #ifdef LDAP_FOUND
 
 static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
@@ -184,15 +225,15 @@ static void extractControls( LdapControls &ctrls, LDAPControl **pctrls )
 int LdapOperation::search( const QString &base, LdapUrl::Scope scope,
     const QString &filter, const QStringList& attributes )
 {
-  Q_ASSERT( mConnection );
-  LDAP *ld = (LDAP*) mConnection->handle();
+  Q_ASSERT( d->mConnection );
+  LDAP *ld = (LDAP*) d->mConnection->handle();
 
   char **attrs = 0;
   int msgid;
 
   LDAPControl **serverctrls = 0, **clientctrls = 0;
-  createControls( &serverctrls, mServerCtrls );
-  createControls( &serverctrls, mClientCtrls );
+  createControls( &serverctrls, d->mServerCtrls );
+  createControls( &serverctrls, d->mClientCtrls );
       
   int count = attributes.count();
   if ( count > 0 ) {
@@ -219,7 +260,7 @@ int LdapOperation::search( const QString &base, LdapUrl::Scope scope,
     " filter=\"" << filter << "\" attrs=" << attributes << endl;
   int retval = ldap_search_ext( ld, base.toUtf8(), lscope, 
     filter.isEmpty() ? QByteArray("objectClass=*") : filter.toUtf8(),
-    attrs, 0, serverctrls, clientctrls, 0, mConnection->sizeLimit(), &msgid );
+    attrs, 0, serverctrls, clientctrls, 0, d->mConnection->sizeLimit(), &msgid );
                     
   ldap_controls_free( serverctrls );
   ldap_controls_free( clientctrls );
@@ -237,14 +278,14 @@ int LdapOperation::search( const QString &base, LdapUrl::Scope scope,
 int LdapOperation::rename( const QString &dn, const QString &newRdn,
       const QString &newSuperior, bool deleteold )
 {
-  Q_ASSERT( mConnection );
-  LDAP *ld = (LDAP*) mConnection->handle();
+  Q_ASSERT( d->mConnection );
+  LDAP *ld = (LDAP*) d->mConnection->handle();
 
   int msgid;
 
   LDAPControl **serverctrls = 0, **clientctrls = 0;
-  createControls( &serverctrls, mServerCtrls );
-  createControls( &serverctrls, mClientCtrls );
+  createControls( &serverctrls, d->mServerCtrls );
+  createControls( &serverctrls, d->mClientCtrls );
 
   int retval = ldap_rename( ld, dn.toUtf8(), newRdn.toUtf8(), newSuperior.toUtf8(), 
     deleteold, serverctrls, clientctrls, &msgid );
@@ -258,14 +299,14 @@ int LdapOperation::rename( const QString &dn, const QString &newRdn,
 
 int LdapOperation::del( const QString &dn )
 {
-  Q_ASSERT( mConnection );
-  LDAP *ld = (LDAP*) mConnection->handle();
+  Q_ASSERT( d->mConnection );
+  LDAP *ld = (LDAP*) d->mConnection->handle();
 
   int msgid;
 
   LDAPControl **serverctrls = 0, **clientctrls = 0;
-  createControls( &serverctrls, mServerCtrls );
-  createControls( &serverctrls, mClientCtrls );
+  createControls( &serverctrls, d->mServerCtrls );
+  createControls( &serverctrls, d->mClientCtrls );
 
   int retval = ldap_delete_ext( ld, dn.toUtf8(), serverctrls, clientctrls, &msgid );
 
@@ -278,15 +319,15 @@ int LdapOperation::del( const QString &dn )
 
 int LdapOperation::modify( const QString &dn, const ModOps &ops )
 {
-  Q_ASSERT( mConnection );
-  LDAP *ld = (LDAP*) mConnection->handle();
+  Q_ASSERT( d->mConnection );
+  LDAP *ld = (LDAP*) d->mConnection->handle();
 
   int msgid;
   LDAPMod **lmod = 0;
 
   LDAPControl **serverctrls = 0, **clientctrls = 0;
-  createControls( &serverctrls, mServerCtrls );
-  createControls( &serverctrls, mClientCtrls );
+  createControls( &serverctrls, d->mServerCtrls );
+  createControls( &serverctrls, d->mClientCtrls );
 
   for ( int i = 0; i < ops.count(); ++i ) {
     int mtype = 0;
@@ -317,13 +358,13 @@ int LdapOperation::modify( const QString &dn, const ModOps &ops )
 
 int LdapOperation::compare( const QString &dn, const QString &attr, const QByteArray &value )
 {
-  Q_ASSERT( mConnection );
-  LDAP *ld = (LDAP*) mConnection->handle();
+  Q_ASSERT( d->mConnection );
+  LDAP *ld = (LDAP*) d->mConnection->handle();
   int msgid;
 
   LDAPControl **serverctrls = 0, **clientctrls = 0;
-  createControls( &serverctrls, mServerCtrls );
-  createControls( &serverctrls, mClientCtrls );
+  createControls( &serverctrls, d->mServerCtrls );
+  createControls( &serverctrls, d->mClientCtrls );
 
   int vallen = value.size();
   BerValue *berval;
@@ -345,13 +386,13 @@ int LdapOperation::compare( const QString &dn, const QString &attr, const QByteA
 
 int LdapOperation::exop( const QString &oid, const QByteArray &data )
 {
-  Q_ASSERT( mConnection );
-  LDAP *ld = (LDAP*) mConnection->handle();
+  Q_ASSERT( d->mConnection );
+  LDAP *ld = (LDAP*) d->mConnection->handle();
   int msgid;
 
   LDAPControl **serverctrls = 0, **clientctrls = 0;
-  createControls( &serverctrls, mServerCtrls );
-  createControls( &serverctrls, mClientCtrls );
+  createControls( &serverctrls, d->mServerCtrls );
+  createControls( &serverctrls, d->mClientCtrls );
 
   int vallen = data.size();
   BerValue *berval;
@@ -373,12 +414,12 @@ int LdapOperation::exop( const QString &oid, const QByteArray &data )
 
 int LdapOperation::abandon( int id )
 {
-  Q_ASSERT( mConnection );
-  LDAP *ld = (LDAP*) mConnection->handle();
+  Q_ASSERT( d->mConnection );
+  LDAP *ld = (LDAP*) d->mConnection->handle();
 
   LDAPControl **serverctrls = 0, **clientctrls = 0;
-  createControls( &serverctrls, mServerCtrls );
-  createControls( &serverctrls, mClientCtrls );
+  createControls( &serverctrls, d->mServerCtrls );
+  createControls( &serverctrls, d->mClientCtrls );
 
   int retval = ldap_abandon_ext( ld, id, serverctrls, clientctrls );
   
@@ -390,26 +431,25 @@ int LdapOperation::abandon( int id )
 
 int LdapOperation::result( int id )
 {
-  Q_ASSERT( mConnection );
-  LDAP *ld = (LDAP*) mConnection->handle();
+  Q_ASSERT( d->mConnection );
+  LDAP *ld = (LDAP*) d->mConnection->handle();
 
   LDAPMessage *msg;
-  int rescode, retval, errcodep;
-  LDAPControl **serverctrls = 0;
+  int rescode, retval;
   
   rescode = ldap_result( ld, id, 0, NULL, &msg );
   if ( rescode == -1 ) return -1;
 
   switch ( rescode ) {
     case LDAP_RES_SEARCH_ENTRY: {
-      mObject.clear();
+      d->mObject.clear();
       LdapAttrMap attrs;
       char *name;
       struct berval **bvals;
       BerElement     *entry;
             
       char *dn = ldap_get_dn( ld, msg );
-      mObject.setDn( QString::fromUtf8( dn ) );
+      d->mObject.setDn( QString::fromUtf8( dn ) );
       ldap_memfree( dn );
                     
       // iterate over the attributes
@@ -431,23 +471,28 @@ int LdapOperation::result( int id )
         name = ldap_next_attribute(ld, msg, entry);
       }
       ber_free( entry , 0 );
-      mObject.setAttributes( attrs );
+      d->mObject.setAttributes( attrs );
       break;
     }
     default: {
+      LDAPControl **serverctrls = 0;
       char *matcheddn = 0, *errmsg = 0;
-      retval = ldap_parse_result( ld, msg, &errcodep, &matcheddn, &errmsg, NULL, &serverctrls, 0 );
+      char **referralsp;
+      int errcodep;
+      retval = ldap_parse_result( ld, msg, &errcodep, &matcheddn, &errmsg, &referralsp, &serverctrls, 0 );
       kDebug() << "rescode " << rescode << " retval: " << retval << " matcheddn: " << matcheddn << " errcode: " 
         << errcodep << " errmsg: " << errmsg << endl;
       if ( retval != LDAP_SUCCESS ) {
         ldap_msgfree( msg );
         return -1;
       }
-      mControls.clear();
+      d->mControls.clear();
       if ( serverctrls ) {
-        extractControls( mControls, serverctrls );
+        extractControls( d->mControls, serverctrls );
         ldap_controls_free( serverctrls );
       }
+//FIXME: ldap_value_free deprecated, what to use?
+//      if ( referralsp ) ldap_value_free( referralsp );
       if ( matcheddn ) ldap_memfree( matcheddn );
       if ( errmsg ) ldap_memfree( errmsg );
     }

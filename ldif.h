@@ -118,15 +118,15 @@ namespace KLDAP {
     /**
      * Returns the Distinguished Name of the current entry.
      */
-    const QString& dn() const { return mDn; }
+    QString dn() const { return mDn; }
     /**
      * Returns the new Relative Distinguished Name if modType() returned Entry_Modrdn.
      */
-    const QString& newRdn() const { return mNewRdn; }
+    QString newRdn() const { return mNewRdn; }
     /**
      * Returns the new parent of the entry if modType() returned Entry_Modrdn.
      */
-    const QString& newSuperior() const { return mNewSuperior; }
+    QString newSuperior() const { return mNewSuperior; }
     /**
      * Returns if the delete of the old RDN is required.
      */
@@ -134,11 +134,11 @@ namespace KLDAP {
     /**
      * Returns the attribute name.
      */
-    const QString& attr() const { return mAttr; }
+    QString attr() const { return mAttr; }
     /**
      * Returns the attribute value.
      */
-    const QByteArray& value() const { return mValue; }
+    QByteArray value() const { return mValue; }
     /**
      * Returns if val() is an url
      */
@@ -150,7 +150,7 @@ namespace KLDAP {
     /**
      * Returns the OID when modType() returned Control.
      */
-    const QString& oid() const { return mOid; }
+    QString oid() const { return mOid; }
     /**
      * Returns the line number which the parser processes.
      */

@@ -43,6 +43,9 @@ using namespace KLDAP;
 class LdapConnection::LdapConnectionPrivate 
 {
   public:
+    LdapServer mServer;
+    QString mConnectionError;
+          
 #ifdef LDAP_FOUND
     LDAP *mLDAP;
 #else
@@ -78,12 +81,12 @@ LdapConnection::~LdapConnection()
 
 void LdapConnection::setUrl( const LdapUrl &url )
 {
-  mServer.setUrl( url );
+  d->mServer.setUrl( url );
 }
 
 void LdapConnection::setServer( const LdapServer &server )
 {
-  mServer = server;
+  d->mServer = server;
 }
 
 void *LdapConnection::handle() const
@@ -91,7 +94,7 @@ void *LdapConnection::handle() const
   return (void*) d->mLDAP;
 }
 
-QString LdapConnection::ldapError( int code )
+QString LdapConnection::errorString( int code )
 {
   //No translated error messages yet
   return QString::fromUtf8( ldap_err2string( code ) );
@@ -105,6 +108,11 @@ QString LdapConnection::ldapError( int code )
   return i18n("No LDAP Support...");
 #endif
 }
+
+QString LdapConnection::connectionError()
+{ 
+  return d->mConnectionError; 
+}      
 
 #ifdef LDAP_FOUND
 int LdapConnection::getOption( int option, void *value ) const
@@ -245,55 +253,55 @@ int LdapConnection::connect()
   QString url;
   if ( d->mLDAP ) close();
   
-  int version = mServer.version();
+  int version = d->mServer.version();
 
-  url = mServer.security() == LdapServer::SSL ? "ldaps" : "ldap";
+  url = d->mServer.security() == LdapServer::SSL ? "ldaps" : "ldap";
   url += "://";
-  url += mServer.host();
+  url += d->mServer.host();
   url += ':';
-  url += QString::number( mServer.port() );
+  url += QString::number( d->mServer.port() );
   kDebug() << "ldap url: " << url << endl;
   ret = ldap_initialize( &d->mLDAP, url.toLatin1() );
   if ( ret != LDAP_SUCCESS ) {
-    mError = i18n("An error occurred during the connection initialization phase");
+    d->mConnectionError = i18n("An error occurred during the connection initialization phase.");
     return ret;
   }
 
   kDebug() << "setting version to: " << version << endl;
   if ( (setOption( LDAP_OPT_PROTOCOL_VERSION, &version )) != LDAP_OPT_SUCCESS ) {
     ret = ldapErrorCode();
-      mError = i18n("Cannot set protocol version to %1.").arg(version);
+      d->mConnectionError = i18n("Cannot set protocol version to %1.").arg(version);
     close();
     return ret;
   }
 
   //FIXME: accessing to certificate handling would be good
-  kDebug() << "setting security to: " << mServer.security() << endl;
-  if ( mServer.security() == LdapServer::TLS ) {
+  kDebug() << "setting security to: " << d->mServer.security() << endl;
+  if ( d->mServer.security() == LdapServer::TLS ) {
     kDebug() << "start TLS" << endl;
     if ( ( ret = ldap_start_tls_s( d->mLDAP, NULL, NULL ) ) != LDAP_SUCCESS ) {
       close();
-      mError = i18n("Cannot start TLS.");
+      d->mConnectionError = i18n("Cannot start TLS.");
       return ret;
     }
   }
   
-  kDebug() << "setting sizelimit to: " << mServer.sizeLimit() << endl;
-  if ( mServer.sizeLimit() ) {
-    if ( !setSizeLimit( mServer.sizeLimit() ) ) {
+  kDebug() << "setting sizelimit to: " << d->mServer.sizeLimit() << endl;
+  if ( d->mServer.sizeLimit() ) {
+    if ( !setSizeLimit( d->mServer.sizeLimit() ) ) {
       ret = ldapErrorCode();
       close();
-      mError = i18n("Cannot set size limit.");
+      d->mConnectionError = i18n("Cannot set size limit.");
       return ret;
     }
   }
 
-  kDebug() << "setting timelimit to: " << mServer.timeLimit() << endl;
-  if ( mServer.timeLimit() ) {
-    if ( !setTimeLimit( mServer.timeLimit() ) ) {
+  kDebug() << "setting timelimit to: " << d->mServer.timeLimit() << endl;
+  if ( d->mServer.timeLimit() ) {
+    if ( !setTimeLimit( d->mServer.timeLimit() ) ) {
       ret = ldapErrorCode();
       close();
-      mError = i18n("Cannot set time limit.");
+      d->mConnectionError = i18n("Cannot set time limit.");
       return ret;
     }
   }
@@ -304,38 +312,33 @@ int LdapConnection::bind( SASL_Callback_Proc *saslproc, void *data )
 {
   int ret;
   
-  if ( mServer.auth() == LdapServer::SASL ) {
+  if ( d->mServer.auth() == LdapServer::SASL ) {
 #ifdef SASL2_FOUND
-    QString mech = mServer.mech();
+    QString mech = d->mServer.mech();
     if ( mech.isEmpty() ) mech = "DIGEST-MD5";
 
     SASL_Data sasldata;
     sasldata.proc = saslproc;
     sasldata.data = data;
     sasldata.creds.fields = 0;
-    sasldata.creds.realm = mServer.realm();
-    sasldata.creds.authname = mServer.user();
-    sasldata.creds.authzid = mServer.bindDn();
-    sasldata.creds.password = mServer.password();
+    sasldata.creds.realm = d->mServer.realm();
+    sasldata.creds.authname = d->mServer.user();
+    sasldata.creds.authzid = d->mServer.bindDn();
+    sasldata.creds.password = d->mServer.password();
     
     ret = ldap_sasl_interactive_bind_s( d->mLDAP, 0, mech.toLatin1(), 0, 0,
       LDAP_SASL_INTERACTIVE, &kldap_sasl_interact, &sasldata );
 #else
-    mError = i18n("No SASL support.");
-    return -1;
+    return -0xff;
 #endif
   } else {
     QString bindname, pass;
-    if ( mServer.auth() == LdapServer::Simple ) {
-      bindname = mServer.bindDn();
-      pass = mServer.password();
+    if ( d->mServer.auth() == LdapServer::Simple ) {
+      bindname = d->mServer.bindDn();
+      pass = d->mServer.password();
     }
     kDebug() << "binding to server, bindname: " << bindname << " password: *****" << endl;
     ret = ldap_simple_bind_s( d->mLDAP, bindname.toUtf8(), pass.toUtf8() );
-  }
-  if ( ret != LDAP_SUCCESS ) {
-    kDebug() << "bind error: " << ret << " : " << ldapErrorString() << endl;
-    mError = i18n("Cannot bind to LDAP server");
   }
   return ret;
 }

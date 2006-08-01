@@ -37,29 +37,58 @@ namespace KLDAP {
   class KLDAP_EXPORT LdapObject
   {
     public:
-      LdapObject()
-            : mDn( QString() ) {}
-      explicit LdapObject( const QString& dn ) : mDn( dn ) {}
-      LdapObject( const LdapObject& that ) { assign( that ); }
-                    
-      LdapObject& operator=( const LdapObject& that ) { assign( that ); return *this; }
-                                            
-      QString toString() const;
-                                             
-      void clear();
+      LdapObject();
+      explicit LdapObject( const QString& dn );
+      virtual ~LdapObject();
       
-      void setDn( const QString &dn ) { mDn = dn; }
-      void setAttributes( const LdapAttrMap &attrs ) { mAttrs = attrs; }
-      const QString &dn() const { return mDn; }
-      const LdapAttrMap &attributes() const { return mAttrs; }
-                                                                 
-    protected:
-      void assign( const LdapObject& that );
-                                                                        
-    private:
-      QString mDn;
-      LdapAttrMap mAttrs;
+      LdapObject( const LdapObject& that );
+      LdapObject& operator=( const LdapObject& that );
+                                            
+      /**
+       * Returns the text presentation (LDIF format) of the object.
+       */
+      QString toString() const;
 
+      /**
+       * Clears the name and attributes of the object.
+       */
+      void clear();
+      /**
+       * Sets the Distinguished Name of the object.
+       */
+      void setDn( const QString &dn );
+      /**
+       * Sets the attributes and attribute values of the object.
+       */
+      void setAttributes( const LdapAttrMap &attrs );
+      /**
+       * Sets the given attribute values. If the given attribute not exists, then 
+       * it's created, if exists, it's overwritten.
+       */
+      void setValues( const QString &attributeName, const LdapAttrValue& values );
+      /**
+       * Return the Distinguished Name of the object.
+       */
+      QString dn() const;
+      /**
+       * Returns the attributes and their values.
+       */
+      LdapAttrMap attributes() const;
+      /**
+       * Returns all values of the attribute with the given name.
+       */
+      LdapAttrValue values( const QString &attributeName ) const;
+      /**
+       * Returns the first value of the attribute with the given name
+       * or an empty byte array if the attribute does not exists.
+       */
+      QByteArray value( const QString &attributeName ) const;
+      /**
+       * Returns true if the given attributethe exists, false otherwise.
+       */
+      bool hasAttribute( const QString &attributeName ) const;
+                                                                 
+    private:
       class LdapObjectPrivate;
       LdapObjectPrivate *d;
 

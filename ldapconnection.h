@@ -67,18 +67,37 @@ namespace KLDAP {
       
       virtual ~LdapConnection();
 
-      /** Sets the connection parameters via the specified url. After this, you need
-        * to call connect() to connect with the new parameters */
+      /**
+       * Sets the connection parameters via the specified url. After this, you need
+       * to call connect() to connect with the new parameters.
+       */
       void setUrl( const LdapUrl &url );
-      /** Sets the connection parameters via the specified server structure. 
-        * After this, you need to call connect() to connect with the new parameters */
+      /** 
+       *Sets the connection parameters via the specified server structure. 
+       * After this, you need to call connect() to connect with the new parameters.
+       */
       void setServer( const LdapServer &server );
-      /** Connects to the specified LDAP server with the appropriate SSL/TLS, bind method,
-        * authentication method, username and password. Also sets sizelimit and timelimit */
+      /**
+       * Connects to the specified LDAP server with the appropriate SSL/TLS setting.
+       * Also sets sizelimit and timelimit.
+       * Returns 0 if successful, else returns an LDAP error code, and an error string
+       * which is available via connectionError().
+       */
       int connect();
-
+      /** 
+       * Returns a translated error string if connect() failed.
+       */
+      QString connectionError();
+      /**
+       * Binds to the LDAP server (authenticates), via simple/SASL method.
+       * Returns 0 if successful, -0xff if the specified authentication method
+       * is not available (the SASL library was not present during compiling),
+       * an LDAP error code if other error occured.
+       */
       int bind( SASL_Callback_Proc *saslproc = 0, void *data = 0 );
-      /** Closes the LDAP connection */
+      /**
+       *  Closes the LDAP connection.
+       */
       void close();
 
       /** Sets the size limit for the connection. */
@@ -102,20 +121,15 @@ namespace KLDAP {
       int ldapErrorCode();
       /** Returns the LDAP error string from the last operation */
       QString ldapErrorString();
-      /** Returns a translated error string */
-      QString errorString() { return mError; }
       /** Returns a translated error code from the specified LDAP error code */
-      static QString ldapError( int code );
+      static QString errorString( int code );
       
       /** Returns the opaqe client-library specific LDAP object. Avoid it's usage if you can */
       void *handle() const;
    
     private:
 
-      LdapConnection( const LdapConnection &conn );
-
-      LdapServer mServer;
-      QString mError;
+      LdapConnection( const LdapConnection &conn ); //disable copy
     
       class LdapConnectionPrivate;
       LdapConnectionPrivate *d;

@@ -69,10 +69,10 @@ namespace KLDAP {
       virtual ~LdapOperation();
 
       void setConnection( const LdapConnection &conn );
-      void setClientControls( const LdapControls &ctrls ) { mClientCtrls = ctrls; }
-      void setServerControls( const LdapControls &ctrls ) { mServerCtrls = ctrls; }
-      const LdapControls &clientControls() const { return mClientCtrls; }
-      const LdapControls &serverControls() const { return mServerCtrls; }
+      void setClientControls( const LdapControls &ctrls );
+      void setServerControls( const LdapControls &ctrls );
+      const LdapControls &clientControls() const;
+      const LdapControls &serverControls() const;
 
       int search( const QString &base, LdapUrl::Scope scope, 
         const QString &filter, const QStringList& attrs );
@@ -87,17 +87,14 @@ namespace KLDAP {
       /** Returns the type of the result LDAP message (RES_XXX constants). -1 if error occurred. */
       int result( int id );
       /** Returns the result object if result() returned RES_SEARCH_ENTRY */
-      const LdapObject &object() const { return mObject; }
+      const LdapObject &object() const;
       /** Returns the server controls from the returned ldap message (grabbed by result()) */
-      const LdapControls &controls() const { return mControls; }
+      const LdapControls &controls() const;
 
     private:
 
-      LdapControls mClientCtrls,mServerCtrls, mControls;
-      LdapObject mObject;
-
-      const LdapConnection *mConnection;
-
+      LdapOperation( const LdapOperation &conn ); //disable copy
+      
       class LdapOperationPrivate;
       LdapOperationPrivate *d;
 

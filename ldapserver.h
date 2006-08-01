@@ -45,18 +45,18 @@ namespace KLDAP {
       
       QString host() const { return mHost; }
       int port() const { return mPort; }
-      const QString &baseDn() const { return mBaseDn; }
-      const QString &user() const { return mUser; }
-      const QString &bindDn() const { return mBindDn; }
-      const QString &realm() const { return mRealm; }
-      const QString &password() const { return mPassword; }
+      QString baseDn() const { return mBaseDn; }
+      QString user() const { return mUser; }
+      QString bindDn() const { return mBindDn; }
+      QString realm() const { return mRealm; }
+      QString password() const { return mPassword; }
       int timeLimit() const { return mTimeLimit; }
       int sizeLimit() const { return mSizeLimit; }
       int pageSize() const { return mPageSize; }
       int version() const { return mVersion; }
       Security security() const { return mSecurity; }
       Auth auth() const { return mAuth; }
-      const QString &mech() const { return mMech; }
+      QString mech() const { return mMech; }
 
       void setHost( const QString &host ) { mHost = host; }
       void setPort( int port ) { mPort = port; }

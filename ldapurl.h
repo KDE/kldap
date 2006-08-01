@@ -64,7 +64,7 @@ namespace KLDAP {
     void setDn( const QString &dn );
 
     /** Returns the attributes part of the LDAP Url */
-    const QStringList &attributes() { return m_attributes; }
+    QStringList attributes() { return m_attributes; }
     /** Sets the attributes part of the LDAP Url */
     void setAttributes( const QStringList &attributes ) 
       { m_attributes=attributes; updateQuery(); }
@@ -75,7 +75,7 @@ namespace KLDAP {
     void setScope(Scope scope) { m_scope = scope; updateQuery(); }
 
     /** Returns the filter part of the LDAP Url */
-    const QString &filter() const { return m_filter; }
+    QString filter() const { return m_filter; }
     /** Sets the filter part of the LDAP Url */
     void setFilter( const QString &filter ) { m_filter = filter; updateQuery(); }
 
