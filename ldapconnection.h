@@ -92,7 +92,7 @@ namespace KLDAP {
        * Binds to the LDAP server (authenticates), via simple/SASL method.
        * Returns 0 if successful, -0xff if the specified authentication method
        * is not available (the SASL library was not present during compiling),
-       * an LDAP error code if other error occured.
+       * an LDAP error code if other error occurred.
        */
       int bind( SASL_Callback_Proc *saslproc = 0, void *data = 0 );
       /**
