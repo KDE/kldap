@@ -33,6 +33,6 @@ install(TARGETS kldap DESTINATION ${LIB_INSTALL_DIR})
 
 ########### install files ###############
 
-install( FILES kldap.h ldif.h ldapurl.h ldapserver.h ldapobject.h 
+install( FILES kldap.h ldapdefs.h ldif.h ldapurl.h ldapserver.h ldapobject.h 
   ldapconnection.h ldapoperation.h 
   ldapconfigwidget.h ldapcontrol.h DESTINATION ${INCLUDE_INSTALL_DIR}/kldap)
