@@ -38,7 +38,7 @@ class LdapOperation::LdapOperationPrivate {
     LdapControls mClientCtrls,mServerCtrls, mControls;
     LdapObject mObject;
             
-    const LdapConnection *mConnection;
+    LdapConnection *mConnection;
 };
 
 LdapOperation::LdapOperation()
@@ -47,7 +47,7 @@ LdapOperation::LdapOperation()
   d->mConnection = 0;
 }
 
-LdapOperation::LdapOperation( const LdapConnection &conn )
+LdapOperation::LdapOperation( LdapConnection &conn )
 {
   d = new LdapOperationPrivate;
   setConnection( conn );
@@ -58,9 +58,14 @@ LdapOperation::~LdapOperation()
   delete d;
 }
                   
-void LdapOperation::setConnection( const LdapConnection &conn )
+void LdapOperation::setConnection( LdapConnection &conn )
 {
   d->mConnection = &conn;
+}
+
+LdapConnection &LdapOperation::connection() const
+{
+  return *d->mConnection;
 }
 
 void LdapOperation::setClientControls( const LdapControls &ctrls )
