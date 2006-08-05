@@ -302,6 +302,25 @@ int LdapOperation::rename( const QString &dn, const QString &newRdn,
   return retval;
 }
 
+int LdapOperation::rename_s( const QString &dn, const QString &newRdn,
+      const QString &newSuperior, bool deleteold )
+{
+  Q_ASSERT( d->mConnection );
+  LDAP *ld = (LDAP*) d->mConnection->handle();
+
+  LDAPControl **serverctrls = 0, **clientctrls = 0;
+  createControls( &serverctrls, d->mServerCtrls );
+  createControls( &serverctrls, d->mClientCtrls );
+
+  int retval = ldap_rename_s( ld, dn.toUtf8(), newRdn.toUtf8(), newSuperior.toUtf8(), 
+    deleteold, serverctrls, clientctrls );
+
+  ldap_controls_free( serverctrls );
+  ldap_controls_free( clientctrls );
+
+  return retval;
+}
+
 int LdapOperation::del( const QString &dn )
 {
   Q_ASSERT( d->mConnection );
@@ -319,6 +338,23 @@ int LdapOperation::del( const QString &dn )
   ldap_controls_free( clientctrls );
 
   if ( retval == 0 ) retval = msgid;
+  return retval;
+}
+
+int LdapOperation::del_s( const QString &dn )
+{
+  Q_ASSERT( d->mConnection );
+  LDAP *ld = (LDAP*) d->mConnection->handle();
+
+  LDAPControl **serverctrls = 0, **clientctrls = 0;
+  createControls( &serverctrls, d->mServerCtrls );
+  createControls( &serverctrls, d->mClientCtrls );
+
+  int retval = ldap_delete_ext_s( ld, dn.toUtf8(), serverctrls, clientctrls );
+
+  ldap_controls_free( serverctrls );
+  ldap_controls_free( clientctrls );
+
   return retval;
 }
 
@@ -361,6 +397,43 @@ int LdapOperation::modify( const QString &dn, const ModOps &ops )
   return retval;
 }
 
+int LdapOperation::modify_s( const QString &dn, const ModOps &ops )
+{
+  Q_ASSERT( d->mConnection );
+  LDAP *ld = (LDAP*) d->mConnection->handle();
+
+  LDAPMod **lmod = 0;
+
+  LDAPControl **serverctrls = 0, **clientctrls = 0;
+  createControls( &serverctrls, d->mServerCtrls );
+  createControls( &serverctrls, d->mClientCtrls );
+
+  for ( int i = 0; i < ops.count(); ++i ) {
+    int mtype = 0;
+    switch ( ops[i].type ) {
+      case Mod_Add: 
+        mtype = LDAP_MOD_ADD;
+        break;
+      case Mod_Replace: 
+        mtype = LDAP_MOD_REPLACE;
+        break;
+      case Mod_Del:
+        mtype = LDAP_MOD_DELETE;
+        break;
+    }
+    for ( int j = 0; j < ops[i].values.count(); ++j ) {
+      addModOp( &lmod, mtype, ops[i].attr, ops[i].values[j] );
+    }
+  }
+
+  int retval = ldap_modify_ext_s( ld, dn.toUtf8(), lmod, serverctrls, clientctrls );
+
+  ldap_controls_free( serverctrls );
+  ldap_controls_free( clientctrls );
+  ldap_mods_free( lmod, 1 );
+  return retval;
+}
+
 int LdapOperation::compare( const QString &dn, const QString &attr, const QByteArray &value )
 {
   Q_ASSERT( d->mConnection );
@@ -389,6 +462,32 @@ int LdapOperation::compare( const QString &dn, const QString &attr, const QByteA
   return retval;
 }
 
+int LdapOperation::compare_s( const QString &dn, const QString &attr, const QByteArray &value )
+{
+  Q_ASSERT( d->mConnection );
+  LDAP *ld = (LDAP*) d->mConnection->handle();
+
+  LDAPControl **serverctrls = 0, **clientctrls = 0;
+  createControls( &serverctrls, d->mServerCtrls );
+  createControls( &serverctrls, d->mClientCtrls );
+
+  int vallen = value.size();
+  BerValue *berval;
+  berval = ( BerValue* ) malloc( sizeof( BerValue ) );
+  berval -> bv_val = (char*) malloc( vallen );
+  berval -> bv_len = vallen;
+  memcpy( berval -> bv_val, value.data(), vallen );
+
+  int retval = ldap_compare_ext_s( ld, dn.toUtf8(), attr.toUtf8(), berval, 
+    serverctrls, clientctrls );
+  
+  ber_bvfree( berval );
+  ldap_controls_free( serverctrls );
+  ldap_controls_free( clientctrls );
+
+  return retval;
+}
+
 int LdapOperation::exop( const QString &oid, const QByteArray &data )
 {
   Q_ASSERT( d->mConnection );
@@ -414,6 +513,36 @@ int LdapOperation::exop( const QString &oid, const QByteArray &data )
   ldap_controls_free( clientctrls );
 
   if ( retval == 0 ) retval = msgid;
+  return retval;
+}
+
+int LdapOperation::exop_s( const QString &oid, const QByteArray &data )
+{
+  Q_ASSERT( d->mConnection );
+  LDAP *ld = (LDAP*) d->mConnection->handle();
+  BerValue *retdata;
+  char *retoid;
+  
+  LDAPControl **serverctrls = 0, **clientctrls = 0;
+  createControls( &serverctrls, d->mServerCtrls );
+  createControls( &serverctrls, d->mClientCtrls );
+
+  int vallen = data.size();
+  BerValue *berval;
+  berval = ( BerValue* ) malloc( sizeof( BerValue ) );
+  berval -> bv_val = (char*) malloc( vallen );
+  berval -> bv_len = vallen;
+  memcpy( berval -> bv_val, data.data(), vallen );
+
+  int retval = ldap_extended_operation_s( ld, oid.toUtf8(), berval, 
+    serverctrls, clientctrls, &retoid, &retdata );
+  
+  ber_bvfree( berval );
+  ber_bvfree( retdata );
+  free( retoid );
+  ldap_controls_free( serverctrls );
+  ldap_controls_free( clientctrls );
+
   return retval;
 }
 
@@ -523,7 +652,20 @@ int LdapOperation::rename( const QString &dn, const QString &newRdn,
   return -1;
 }
 
+int LdapOperation::rename_s( const QString &dn, const QString &newRdn,
+      const QString &newSuperior, bool deleteold )
+{
+  kError() << "LDAP support not compiled" << endl;
+  return -1;
+}
+
 int LdapOperation::del( const QString &dn )
+{
+  kError() << "LDAP support not compiled" << endl;
+  return -1;
+}
+
+int LdapOperation::del_s( const QString &dn )
 {
   kError() << "LDAP support not compiled" << endl;
   return -1;
@@ -535,7 +677,7 @@ int LdapOperation::modify( const QString &dn, const ModOps &ops )
   return -1;
 }
 
-int LdapOperation::result( int id )
+int LdapOperation::modify_s( const QString &dn, const ModOps &ops )
 {
   kError() << "LDAP support not compiled" << endl;
   return -1;
@@ -552,6 +694,25 @@ int LdapOperation::exop( const QString &oid, const QByteArray &data )
   kError() << "LDAP support not compiled" << endl;
   return -1;
 }
+
+int LdapOperation::compare_s( const QString &dn, const QString &attr, const QByteArray &value )
+{
+  kError() << "LDAP support not compiled" << endl;
+  return -1;
+}
+
+int LdapOperation::exop_s( const QString &oid, const QByteArray &data )
+{
+  kError() << "LDAP support not compiled" << endl;
+  return -1;
+}
+
+int LdapOperation::result( int id )
+{
+  kError() << "LDAP support not compiled" << endl;
+  return -1;
+}
+
 
 int LdapOperation::abandon( int id )
 {

@@ -405,9 +405,16 @@ int LdapConnection::connect( SASL_Callback_Proc *saslproc, void *data )
   return -1;
 }
 
+int LdapConnection::bind( SASL_Callback_Proc *saslproc, void *data )
+{
+  kError() << "No LDAP support..." << endl;
+  return -1;
+}
+
 void LdapConnection::close()
 {
   kError() << "No LDAP support..." << endl;
 }
+
 
 #endif

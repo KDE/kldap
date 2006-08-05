@@ -109,15 +109,33 @@ namespace KLDAP {
       int rename( const QString &dn, const QString &newRdn, 
         const QString &newSuperior, bool deleteold = true );
       /**
-       * Deletes the given DN.
+       * Performs a modrdn operation on given DN, changing its RDN to newRdn,
+       * changing its parent to newSuperior (if it's not empty), and deletes
+       * the old dn if deleteold is true. This is the synchronous version.
+       * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
+       */
+      int rename_s( const QString &dn, const QString &newRdn, 
+        const QString &newSuperior, bool deleteold = true );
+      /**
+       * Starts a delete operation on the given DN.
        * Returns a message id if successful, -1 if not.
        */
       int del( const QString &dn );
+      /**
+       * Deletes the given DN. This is the synchronous version.
+       * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
+       */
+      int del_s( const QString &dn );
       /**
        * Starts a modify operation on the given DN.
        * Returns a message id if successful, -1 if not.
        */
       int modify( const QString &dn, const ModOps &ops );
+      /**
+       * Performs a modify operation on the given DN. This is the synchronous version.
+       * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
+       */
+      int modify_s( const QString &dn, const ModOps &ops );
       /**
        * Starts a compare operation on the given DN, compares the specified
        * attribute with the given value.
@@ -125,10 +143,23 @@ namespace KLDAP {
        */
       int compare( const QString &dn, const QString &attr, const QByteArray &value );
       /**
-       * Starts an extended operation specified with oid and data
+       * Performs a compare operation on the given DN, compares the specified
+       * attribute with the given value. This is the synchronous version.
+       * Returns KLDAP_COMPARE_TRUE if the  entry contains the attribute value
+       * and KLDAP_COMPARE_FALSE if it does not. Otherwise, some error code is returned.
+       */
+      int compare_s( const QString &dn, const QString &attr, const QByteArray &value );
+      /**
+       * Starts an extended operation specified with oid and data.
        * Returns a message id if successful, -1 if not.
        */
       int exop( const QString &oid, const QByteArray &data );
+      /**
+       * Performs an extended operation specified with oid and data.
+       * This is the synchronous version.
+       * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
+       */
+      int exop_s( const QString &oid, const QByteArray &data );
       /**
        * Abandons a long-running operation. Requires the message id.
        */

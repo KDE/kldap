@@ -93,5 +93,7 @@ namespace KLDAP {
       LdapObjectPrivate *d;
 
   };
+  
+  typedef QList<LdapObject> LdapObjects;
 }
 #endif
