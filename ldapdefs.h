@@ -127,4 +127,33 @@
 /* for the LDAP No-Op control */
 #define KLDAP_X_NO_OPERATION                             0x410e
 
+
+
+/** API Error Codes
+ *
+ * Based on draft-ietf-ldap-c-api-xx
+ * but with new negative code values
+ */
+#define KLDAP_API_ERROR(n)               ((n)<0)
+#define KLDAP_API_RESULT(n)              ((n)<=0)
+    
+#define KLDAP_SERVER_DOWN                                (-1)
+#define KLDAP_LOCAL_ERROR                                (-2)
+#define KLDAP_ENCODING_ERROR                             (-3)
+#define KLDAP_DECODING_ERROR                             (-4)
+#define KLDAP_TIMEOUT                                    (-5)
+#define KLDAP_AUTH_UNKNOWN                               (-6)
+#define KLDAP_FILTER_ERROR                               (-7)
+#define KLDAP_USER_CANCELLED                             (-8)
+#define KLDAP_PARAM_ERROR                                (-9)
+#define KLDAP_NO_MEMORY                                  (-10)
+#define KLDAP_CONNECT_ERROR                              (-11)
+#define KLDAP_NOT_SUPPORTED                              (-12)
+#define KLDAP_CONTROL_NOT_FOUND                  (-13)
+#define KLDAP_NO_RESULTS_RETURNED                (-14)
+#define KLDAP_MORE_RESULTS_TO_RETURN             (-15)   /* Obsolete */
+#define KLDAP_CLIENT_LOOP                                (-16)
+#define KLDAP_REFERRAL_LIMIT_EXCEEDED    (-17)
+    
+
 #endif //KLDAP_DEFS_H
