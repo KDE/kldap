@@ -67,6 +67,11 @@ namespace KLDAP {
        */
       void setValues( const QString &attributeName, const LdapAttrValue& values );
       /**
+       * Adds the given value to the specified attribute. If the given attribute 
+       * not exists, then it's created.
+       */
+      void addValue( const QString &attributeName, const QByteArray &value );
+      /**
        * Return the Distinguished Name of the object.
        */
       QString dn() const;

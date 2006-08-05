@@ -105,6 +105,11 @@ void LdapObject::setValues( const QString &attributeName, const LdapAttrValue& v
   d->mAttrs[ attributeName ] = values;
 }      
 
+void LdapObject::addValue( const QString &attributeName, const QByteArray &value )
+{
+  d->mAttrs[ attributeName ].append( value );
+}     
+
 LdapAttrValue LdapObject::values( const QString &attributeName ) const
 {
   if ( hasAttribute( attributeName ) ) {
