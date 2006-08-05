@@ -280,6 +280,62 @@ int LdapOperation::search( const QString &base, LdapUrl::Scope scope,
   return retval;
 }
 
+int LdapOperation::add( const LdapObject &object )
+{
+  Q_ASSERT( d->mConnection );
+  LDAP *ld = (LDAP*) d->mConnection->handle();
+
+  int msgid;
+  LDAPMod **lmod = 0;
+
+  LDAPControl **serverctrls = 0, **clientctrls = 0;
+  createControls( &serverctrls, d->mServerCtrls );
+  createControls( &serverctrls, d->mClientCtrls );
+
+  for ( LdapAttrMap::ConstIterator it = object.attributes().begin(); 
+        it != object.attributes().end(); ++it ) {
+    QString attr = it.key();
+    for ( LdapAttrValue::ConstIterator it2 = (*it).begin(); it2 != (*it).end(); ++it2 ) {
+      addModOp( &lmod, 0, attr, *it2 );
+    }
+  }
+
+  int retval = ldap_add_ext( ld, object.dn().toUtf8(), lmod, serverctrls, clientctrls, &msgid );
+
+  ldap_controls_free( serverctrls );
+  ldap_controls_free( clientctrls );
+  ldap_mods_free( lmod, 1 );
+  if ( retval == 0 ) retval = msgid;
+  return retval;
+}
+
+int LdapOperation::add_s( const LdapObject &object )
+{
+  Q_ASSERT( d->mConnection );
+  LDAP *ld = (LDAP*) d->mConnection->handle();
+
+  LDAPMod **lmod = 0;
+
+  LDAPControl **serverctrls = 0, **clientctrls = 0;
+  createControls( &serverctrls, d->mServerCtrls );
+  createControls( &serverctrls, d->mClientCtrls );
+
+  for ( LdapAttrMap::ConstIterator it = object.attributes().begin(); 
+        it != object.attributes().end(); ++it ) {
+    QString attr = it.key();
+    for ( LdapAttrValue::ConstIterator it2 = (*it).begin(); it2 != (*it).end(); ++it2 ) {
+      addModOp( &lmod, 0, attr, *it2 );
+    }
+  }
+
+  int retval = ldap_add_ext_s( ld, object.dn().toUtf8(), lmod, serverctrls, clientctrls );
+
+  ldap_controls_free( serverctrls );
+  ldap_controls_free( clientctrls );
+  ldap_mods_free( lmod, 1 );
+  return retval;
+}
+
 int LdapOperation::rename( const QString &dn, const QString &newRdn,
       const QString &newSuperior, bool deleteold )
 {
@@ -373,6 +429,9 @@ int LdapOperation::modify( const QString &dn, const ModOps &ops )
   for ( int i = 0; i < ops.count(); ++i ) {
     int mtype = 0;
     switch ( ops[i].type ) {
+      case Mod_None:
+        mtype = 0;
+        break;
       case Mod_Add: 
         mtype = LDAP_MOD_ADD;
         break;
@@ -411,6 +470,9 @@ int LdapOperation::modify_s( const QString &dn, const ModOps &ops )
   for ( int i = 0; i < ops.count(); ++i ) {
     int mtype = 0;
     switch ( ops[i].type ) {
+      case Mod_None:
+        mtype = 0;
+        break;
       case Mod_Add: 
         mtype = LDAP_MOD_ADD;
         break;
@@ -640,6 +702,18 @@ int LdapOperation::result( int id )
 #else
 int LdapOperation::search( const QString &base, LdapUrl::Scope scope,
     const QString &filter, const QStringList& attributes )
+{
+  kError() << "LDAP support not compiled" << endl;
+  return -1;
+}
+
+int LdapOperation::add( const LdapObject &object )
+{
+  kError() << "LDAP support not compiled" << endl;
+  return -1;
+}
+
+int LdapOperation::add_s( const LdapObject &object )
 {
   kError() << "LDAP support not compiled" << endl;
   return -1;

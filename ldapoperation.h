@@ -41,7 +41,7 @@ namespace KLDAP {
   class KLDAP_EXPORT LdapOperation
   {
     public:
-      typedef enum ModType{ Mod_Add, Mod_Replace, Mod_Del };
+      typedef enum ModType{ Mod_None, Mod_Add, Mod_Replace, Mod_Del };
       typedef enum ResultType {
         RES_BIND = 0x61,
         RES_SEARCH_ENTRY = 0x64,
@@ -100,6 +100,16 @@ namespace KLDAP {
        */
       int search( const QString &base, LdapUrl::Scope scope, 
         const QString &filter, const QStringList& attrs );
+      /**
+       * Starts an addition operation.
+       * Returns a message id if successful, -1 if not.
+       */
+      int add( const LdapObject &object );
+      /**
+       * Adds the specified object to the LDAP database.
+       * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
+       */
+      int add_s( const LdapObject &object );
       /**
        * Starts a modrdn operation on given DN, changing its RDN to newRdn,
        * changing its parent to newSuperior (if it's not empty), and deletes
