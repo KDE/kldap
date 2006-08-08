@@ -1,8 +1,5 @@
 project(kldap)
 
-macro_optional_find_package(Ldap)
-macro_optional_find_package(Sasl2)
-
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kldap_config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/kldap_config.h )
 
 add_subdirectory(tests)
