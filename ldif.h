@@ -21,8 +21,8 @@
 #ifndef KLDAP_LDIF_H
 #define KLDAP_LDIF_H
 
-#include <QString>
-#include <QByteArray>
+#include <QtCore/QString>
+#include <QtCore/QByteArray>
 
 #include <kldap/kldap.h>
 
@@ -44,6 +44,10 @@ namespace KLDAP {
     typedef enum EntryType{ Entry_None, Entry_Add, Entry_Del, Entry_Mod, Entry_Modrdn };
     typedef enum ModType{ Mod_None, Mod_Add, Mod_Replace, Mod_Del };
     Ldif();
+
+    Ldif( const Ldif &that );
+    Ldif& operator=( const Ldif &that );
+
     virtual ~Ldif();
     
     /**
@@ -101,7 +105,7 @@ namespace KLDAP {
      * Sets a chunk of Ldif. Call before startParsing(), or if nextItem() returned
      * MoreData.
      */
-    void setLdif( const QByteArray &ldif ) { mLdif = ldif; mPos = 0; };
+    void setLdif( const QByteArray &ldif );
     /**
       * Indicates the end of the Ldif file/stream. Call if nextItem() returned
       * MoreData, but actually you don't have more data.
@@ -110,65 +114,55 @@ namespace KLDAP {
     /**
      * Returns the requested LDAP operation extracted from the current entry.
      */
-    EntryType entryType() const { return mEntryType; }
+    EntryType entryType() const;
     /**
      * Returns the LDAP modify request type if entryType() returned Entry_Mod.
      */
-    int modType() const { return mModType; }
+    int modType() const;
     /**
      * Returns the Distinguished Name of the current entry.
      */
-    QString dn() const { return mDn; }
+    QString dn() const;
     /**
      * Returns the new Relative Distinguished Name if modType() returned Entry_Modrdn.
      */
-    QString newRdn() const { return mNewRdn; }
+    QString newRdn() const;
     /**
      * Returns the new parent of the entry if modType() returned Entry_Modrdn.
      */
-    QString newSuperior() const { return mNewSuperior; }
+    QString newSuperior() const;
     /**
      * Returns if the delete of the old RDN is required.
      */
-    bool delOldRdn() const { return mDelOldRdn; }
+    bool delOldRdn() const;
     /**
      * Returns the attribute name.
      */
-    QString attr() const { return mAttr; }
+    QString attr() const;
     /**
      * Returns the attribute value.
      */
-    QByteArray value() const { return mValue; }
+    QByteArray value() const;
     /**
      * Returns if val() is an url
      */
-    bool isUrl() const { return mUrl; }
+    bool isUrl() const;
     /**
      * Returns the criticality level when modType() returned Control.
      */
-    bool isCritical() const { return mCritical; }
+    bool isCritical() const;
     /**
      * Returns the OID when modType() returned Control.
      */
-    QString oid() const { return mOid; }
+    QString oid() const;
     /**
      * Returns the line number which the parser processes.
      */
-    uint lineNumber() const { return mLineNumber; }
+    uint lineNumber() const;
+
   private:
-    int mModType;
-    bool mDelOldRdn, mUrl;
-    QString mDn,mAttr,mNewRdn,mNewSuperior, mOid;
-    QByteArray mLdif, mValue;
-    EntryType mEntryType;
-    
-    bool mIsNewLine, mIsComment,mCritical;
-    ParseValue mLastParseValue;
-    uint mPos,mLineNumber;
-    QByteArray line;
-        
     class LdifPrivate;
-    LdifPrivate *d;
+    LdifPrivate* const d;
   };
 }
 

@@ -21,8 +21,8 @@
 #ifndef KLDAP_LDAPURL_H
 #define KLDAP_LDAPURL_H
 
-#include <QMap>
-#include <QStringList>
+#include <QtCore/QMap>
+#include <QtCore/QStringList>
 
 #include <kurl.h>
 #include <kldap/kldap.h>
@@ -54,6 +54,12 @@ namespace KLDAP {
     LdapUrl();
     /** Constructs a KLdapUrl from a KUrl. */
     LdapUrl( const KUrl &url );
+    /** Constructs a KLdapUrl from a LdapUrl. */
+    LdapUrl( const LdapUrl &that );
+
+    LdapUrl& operator=( const LdapUrl &that );
+
+    virtual ~LdapUrl();
   
     /**
      * Returns the dn part of the LDAP Url (same as path(), but slash removed
@@ -64,20 +70,19 @@ namespace KLDAP {
     void setDn( const QString &dn );
 
     /** Returns the attributes part of the LDAP Url */
-    QStringList attributes() { return m_attributes; }
+    QStringList attributes() const;
     /** Sets the attributes part of the LDAP Url */
-    void setAttributes( const QStringList &attributes ) 
-      { m_attributes=attributes; updateQuery(); }
+    void setAttributes( const QStringList &attributes );
 
     /** Returns the scope part of the LDAP Url */
-    Scope scope() const { return m_scope; };
+    Scope scope() const;
     /** Sets the scope part of the LDAP Url */
-    void setScope(Scope scope) { m_scope = scope; updateQuery(); }
+    void setScope( Scope scope );
 
     /** Returns the filter part of the LDAP Url */
-    QString filter() const { return m_filter; }
+    QString filter() const;
     /** Sets the filter part of the LDAP Url */
-    void setFilter( const QString &filter ) { m_filter = filter; updateQuery(); }
+    void setFilter( const QString &filter );
 
     /** Returns if the specified extension exists in the LDAP Url */
     bool hasExtension( const QString &key ) const;
@@ -102,11 +107,8 @@ namespace KLDAP {
     void parseQuery();
     
   private:
-
-    QMap<QString, Extension> m_extensions;
-    QStringList m_attributes;
-    Scope m_scope;
-    QString m_filter;
+    class LdapUrlPrivate;
+    LdapUrlPrivate* const d;
   };
 }
 

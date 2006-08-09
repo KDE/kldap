@@ -21,7 +21,7 @@
 #ifndef KLDAP_LDAPSERVER_H
 #define KLDAP_LDAPSERVER_H
 
-#include <QString>
+#include <QtCore/QString>
 
 #include <kldap/ldapurl.h>
 #include <kldap/kldap.h>
@@ -35,62 +35,53 @@ namespace KLDAP {
     public:
       LdapServer();
       LdapServer( const LdapUrl &url );
-    
+
+      LdapServer( const LdapServer &that );
+      LdapServer& operator= (const LdapServer &that);
+
       virtual ~LdapServer();
-    
+
       typedef enum Security{ None, TLS, SSL };
       typedef enum Auth{ Anonymous, Simple, SASL };
 
       void clear();
-      
-      QString host() const { return mHost; }
-      int port() const { return mPort; }
-      QString baseDn() const { return mBaseDn; }
-      QString user() const { return mUser; }
-      QString bindDn() const { return mBindDn; }
-      QString realm() const { return mRealm; }
-      QString password() const { return mPassword; }
-      int timeLimit() const { return mTimeLimit; }
-      int sizeLimit() const { return mSizeLimit; }
-      int pageSize() const { return mPageSize; }
-      int version() const { return mVersion; }
-      Security security() const { return mSecurity; }
-      Auth auth() const { return mAuth; }
-      QString mech() const { return mMech; }
 
-      void setHost( const QString &host ) { mHost = host; }
-      void setPort( int port ) { mPort = port; }
-      void setBaseDn( const QString &baseDn ) {  mBaseDn = baseDn; }
-      void setUser( const QString &user ) { mUser = user; }
-      void setBindDn( const QString &bindDn ) {  mBindDn = bindDn; }
-      void setRealm( const QString &realm ) {  mRealm = realm; }
-      void setPassword( const QString &password ) {  mPassword = password; }
-      void setTimeLimit( int timelimit ) { mTimeLimit = timelimit; }
-      void setSizeLimit( int sizelimit ) { mSizeLimit = sizelimit; }
-      void setPageSize( int pagesize ) { mPageSize = pagesize; }
-      void setVersion( int version ) { mVersion = version; }
-      void setSecurity( Security security ) { mSecurity = security; }
-      void setAuth( Auth auth ) { mAuth = auth; }
-      void setMech( const QString &mech ) { mMech = mech; }
-    
+      QString host() const;
+      int port() const;
+      QString baseDn() const;
+      QString user() const;
+      QString bindDn() const;
+      QString realm() const;
+      QString password() const;
+      int timeLimit() const;
+      int sizeLimit() const;
+      int pageSize() const;
+      int version() const;
+      Security security() const;
+      Auth auth() const;
+      QString mech() const;
+
+      void setHost( const QString &host );
+      void setPort( int port );
+      void setBaseDn( const QString &baseDn );
+      void setUser( const QString &user );
+      void setBindDn( const QString &bindDn );
+      void setRealm( const QString &realm );
+      void setPassword( const QString &password );
+      void setTimeLimit( int timelimit );
+      void setSizeLimit( int sizelimit );
+      void setPageSize( int pagesize );
+      void setVersion( int version );
+      void setSecurity( Security security );
+      void setAuth( Auth auth );
+      void setMech( const QString &mech );
+
       LdapUrl url() const;
       void setUrl( const LdapUrl &url );
 
     private:
-      QString mHost;
-      int mPort;
-      QString mBaseDn;
-      QString mUser;
-      QString mBindDn;
-      QString mRealm;
-      QString mPassword;
-      QString mMech;
-      int mTimeLimit, mSizeLimit, mVersion, mPageSize;
-      Security mSecurity;
-      Auth mAuth;
-    
       class LdapServerPrivate;
-      LdapServerPrivate *d;
+      LdapServerPrivate* const d;
   };
 
 }

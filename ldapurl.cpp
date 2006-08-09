@@ -27,13 +27,27 @@
 
 using namespace KLDAP;
 
-LdapUrl::LdapUrl()
+class LdapUrl::LdapUrlPrivate
 {
-  m_scope = Base;
+  public:
+    LdapUrlPrivate()
+      : m_scope( Base )
+    {
+    }
+
+    QMap<QString, Extension> m_extensions;
+    QStringList m_attributes;
+    Scope m_scope;
+    QString m_filter;
+};
+
+LdapUrl::LdapUrl()
+  : d( new LdapUrlPrivate )
+{
 }
 
 LdapUrl::LdapUrl(const KUrl &_url)
-  : KUrl(_url), m_extensions()
+  : KUrl(_url), d( new LdapUrlPrivate )
 {
   QString tmp = path();
   if ( !QDir::isRelativePath(tmp) )
@@ -43,6 +57,28 @@ LdapUrl::LdapUrl(const KUrl &_url)
     tmp.remove(0,1);
 #endif
   parseQuery();
+}
+
+LdapUrl::LdapUrl( const LdapUrl &that )
+  : KUrl( that ), d( new LdapUrlPrivate )
+{
+  *d = *that.d;
+}
+
+LdapUrl& LdapUrl::operator=( const LdapUrl &that )
+{
+  if ( this == &that )
+    return *this;
+
+  KUrl::operator=( that );
+  *d = *that.d;
+
+  return *this;
+}
+
+LdapUrl::~LdapUrl()
+{
+  delete d;
 }
 
 void LdapUrl::setDn( const QString &dn)
@@ -69,17 +105,50 @@ QString LdapUrl::dn() const
   return tmp;
 }
 
+QStringList LdapUrl::attributes() const
+{
+  return d->m_attributes;
+}
+
+void LdapUrl::setAttributes( const QStringList &attributes )
+{
+  d->m_attributes=attributes;
+  updateQuery();
+}
+
+LdapUrl::Scope LdapUrl::scope() const
+{
+  return d->m_scope;
+}
+
+void LdapUrl::setScope( Scope scope )
+{
+  d->m_scope = scope;
+  updateQuery();
+}
+
+QString LdapUrl::filter() const
+{
+  return d->m_filter;
+}
+
+void LdapUrl::setFilter( const QString &filter )
+{
+  d->m_filter = filter;
+  updateQuery();
+}
+
 bool LdapUrl::hasExtension( const QString &key ) const
 {
-  return m_extensions.contains( key );
+  return d->m_extensions.contains( key );
 }
 
 LdapUrl::Extension LdapUrl::extension( const QString &key ) const
 {
   QMap<QString, Extension>::const_iterator it;
 
-  it = m_extensions.find( key );
-  if ( it != m_extensions.constEnd() )
+  it = d->m_extensions.find( key );
+  if ( it != d->m_extensions.constEnd() )
     return (*it);
   else {
     Extension ext;
@@ -100,7 +169,7 @@ QString LdapUrl::extension( const QString &key, bool &critical ) const
 
 void LdapUrl::setExtension( const QString &key, const LdapUrl::Extension &ext )
 {
-  m_extensions[ key ] = ext;
+  d->m_extensions[ key ] = ext;
   updateQuery();
 }
 
@@ -122,7 +191,7 @@ void LdapUrl::setExtension( const QString &key, int value, bool critical )
 
 void LdapUrl::removeExtension( const QString &key )
 {
-  m_extensions.remove( key );
+  d->m_extensions.remove( key );
   updateQuery();
 }
 
@@ -133,11 +202,11 @@ void LdapUrl::updateQuery()
   QString q = "?";
 
   // set the attributes to query
-  if ( m_attributes.count() > 0 ) q += m_attributes.join(",");
+  if ( d->m_attributes.count() > 0 ) q += d->m_attributes.join(",");
 
   // set the scope
   q += '?';
-  switch( m_scope ) {
+  switch( d->m_scope ) {
     case Sub:
       q += "sub";
       break;
@@ -151,12 +220,12 @@ void LdapUrl::updateQuery()
 
   // set the filter
   q += '?';
-  if ( m_filter != "(objectClass=*)" && !m_filter.isEmpty() )
-    q += m_filter;
+  if ( d->m_filter != "(objectClass=*)" && !d->m_filter.isEmpty() )
+    q += d->m_filter;
 
   // set the extensions
   q += '?';
-  for ( it = m_extensions.constBegin(); it != m_extensions.constEnd(); ++it ) {
+  for ( it = d->m_extensions.constBegin(); it != d->m_extensions.constEnd(); ++it ) {
     if ( it.value().critical ) q += '!';
     q += it.key();
     if ( !it.value().value.isEmpty() )
@@ -182,23 +251,23 @@ void LdapUrl::parseQuery()
   // split into a list
   QStringList url_items = q.split('?');
 
-  m_attributes.clear();
-  m_scope = Base;
-  m_filter = "(objectClass=*)";
-  m_extensions.clear();
+  d->m_attributes.clear();
+  d->m_scope = Base;
+  d->m_filter = "(objectClass=*)";
+  d->m_extensions.clear();
 
   int i = 0;
   for ( QStringList::Iterator it = url_items.begin(); it != url_items.end(); ++it, i++ ) {
     switch (i) {
       case 0:
-        m_attributes = (*it).split( ',', QString::SkipEmptyParts );
+        d->m_attributes = (*it).split( ',', QString::SkipEmptyParts );
         break;
       case 1:
-        if ( (*it) == "sub" ) m_scope = Sub; else
-        if ( (*it) == "one") m_scope = One;
+        if ( (*it) == "sub" ) d->m_scope = Sub; else
+        if ( (*it) == "one") d->m_scope = One;
         break;
       case 2:
-        m_filter = fromPercentEncoding( (*it).toLatin1() );
+        d->m_filter = fromPercentEncoding( (*it).toLatin1() );
         break;
       case 3:
         extensions = (*it).split( ',', QString::SkipEmptyParts );

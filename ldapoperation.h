@@ -21,9 +21,9 @@
 #ifndef KLDAP_LDAPOPERATION_H
 #define KLDAP_LDAPOPERATION_H
 
-#include <QString>
-#include <QList>
-#include <QByteArray>
+#include <QtCore/QString>
+#include <QtCore/QList>
+#include <QtCore/QByteArray>
 
 #include <kldap/ldapurl.h>
 #include <kldap/ldapobject.h>
@@ -192,12 +192,10 @@ namespace KLDAP {
       const LdapControls &controls() const;
 
     private:
-
-      LdapOperation( const LdapOperation &conn ); //disable copy
-      
       class LdapOperationPrivate;
-      LdapOperationPrivate *d;
+      LdapOperationPrivate* const d;
 
+      Q_DISABLE_COPY( LdapOperation )
   };
 
 }

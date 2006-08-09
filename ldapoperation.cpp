@@ -42,14 +42,14 @@ class LdapOperation::LdapOperationPrivate {
 };
 
 LdapOperation::LdapOperation()
+  : d( new LdapOperationPrivate )
 {
-  d = new LdapOperationPrivate;
   d->mConnection = 0;
 }
 
 LdapOperation::LdapOperation( LdapConnection &conn )
+  : d( new LdapOperationPrivate )
 {
-  d = new LdapOperationPrivate;
   setConnection( conn );
 }
 

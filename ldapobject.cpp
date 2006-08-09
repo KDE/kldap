@@ -30,14 +30,14 @@ class LdapObject::LdapObjectPrivate {
 };
 
 LdapObject::LdapObject()
+  : d( new LdapObjectPrivate )
 {
-  d = new LdapObjectPrivate;
   d->mDn = QString();
 }
 
 LdapObject::LdapObject( const QString& dn )
+  : d( new LdapObjectPrivate )
 {
-  d = new LdapObjectPrivate;
   d->mDn = dn;
 }
 
@@ -47,18 +47,17 @@ LdapObject::~LdapObject()
 }                  
 
 LdapObject::LdapObject( const LdapObject& that )
+  : d( new LdapObjectPrivate )
 {
-  d = new LdapObjectPrivate;
-  d->mDn = that.d->mDn;
-  d->mAttrs = that.d->mAttrs;
+  *d = *that.d;
 }
       
 LdapObject& LdapObject::operator=( const LdapObject& that ) 
 { 
   if ( this == &that ) return *this;
-  d = new LdapObjectPrivate;
-  d->mDn = that.d->mDn;
-  d->mAttrs = that.d->mAttrs;
+
+  *d = *that.d;
+
   return *this; 
 }
             

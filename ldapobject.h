@@ -21,9 +21,9 @@
 #ifndef KLDAP_LDAPOBJECT_H
 #define KLDAP_LDAPOBJECT_H
 
-#include <QString>
-#include <QList>
-#include <QMap>
+#include <QtCore/QString>
+#include <QtCore/QList>
+#include <QtCore/QMap>
 
 #include <kldap/kldap.h>
 
@@ -95,7 +95,7 @@ namespace KLDAP {
                                                                  
     private:
       class LdapObjectPrivate;
-      LdapObjectPrivate *d;
+      LdapObjectPrivate* const d;
 
   };
   

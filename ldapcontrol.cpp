@@ -30,27 +30,28 @@ class LdapControl::LdapControlPrivate {
 };
 
 LdapControl::LdapControl()
+  : d( new LdapControlPrivate )
 {
-  d = new LdapControlPrivate();
 }
 
 LdapControl::LdapControl( QString &oid, QByteArray &value, bool critical )
+  : d( new LdapControlPrivate )
 {
-  d = new LdapControlPrivate;
   setControl( oid, value, critical );
 }
 
 LdapControl::LdapControl( const LdapControl &that )
+  : d( new LdapControlPrivate )
 {
-  d = new LdapControlPrivate();
   setControl( that.d->mOid, that.d->mValue, that.d->mCritical );
 }
 
 LdapControl& LdapControl::operator= (const LdapControl& that)
 {
   if ( this == &that ) return *this;
-  d = new LdapControlPrivate();
+
   setControl( that.d->mOid, that.d->mValue, that.d->mCritical );
+
   return *this;
 }     
 

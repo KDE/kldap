@@ -24,113 +24,293 @@
 
 using namespace KLDAP;
 
+class LdapServer::LdapServerPrivate
+{
+  public:
+      QString mHost;
+      int mPort;
+      QString mBaseDn;
+      QString mUser;
+      QString mBindDn;
+      QString mRealm;
+      QString mPassword;
+      QString mMech;
+      int mTimeLimit, mSizeLimit, mVersion, mPageSize;
+      Security mSecurity;
+      Auth mAuth;
+};
+
 LdapServer::LdapServer()
+  : d( new LdapServerPrivate )
 {
   clear();
 }
 
 LdapServer::LdapServer( const LdapUrl &url )
+  : d( new LdapServerPrivate )
 {
   clear();
+
   setUrl( url );
+}
+
+LdapServer::LdapServer( const LdapServer &that )
+  : d( new LdapServerPrivate )
+{
+  *d = *that.d;
+}
+
+LdapServer& LdapServer::operator= (const LdapServer &that)
+{
+  if ( this == &that )
+    return *this;
+
+  *d = *that.d;
+
+  return *this;
 }
 
 LdapServer::~LdapServer()
 {
+  delete d;
 }
 
 void LdapServer::clear()
 {
-  mPort = 389;
-  mHost = mUser = mBindDn = mMech = mPassword = QString();
-  mSecurity = None;
-  mAuth = Anonymous;
-  mVersion = 3;
-  mSizeLimit = mTimeLimit = mPageSize = 0;
+  d->mPort = 389;
+  d->mHost = d->mUser = d->mBindDn = d->mMech = d->mPassword = QString();
+  d->mSecurity = None;
+  d->mAuth = Anonymous;
+  d->mVersion = 3;
+  d->mSizeLimit = d->mTimeLimit = d->mPageSize = 0;
+}
+
+QString LdapServer::host() const
+{
+  return d->mHost;
+}
+
+int LdapServer::port() const
+{
+  return d->mPort;
+}
+
+QString LdapServer::baseDn() const
+{
+  return d->mBaseDn;
+}
+
+QString LdapServer::user() const
+{
+  return d->mUser;
+}
+
+QString LdapServer::bindDn() const
+{
+  return d->mBindDn;
+}
+
+QString LdapServer::realm() const
+{
+  return d->mRealm;
+}
+
+QString LdapServer::password() const
+{
+  return d->mPassword;
+}
+
+int LdapServer::timeLimit() const
+{
+  return d->mTimeLimit;
+}
+
+int LdapServer::sizeLimit() const
+{
+  return d->mSizeLimit;
+}
+
+int LdapServer::pageSize() const
+{
+  return d->mPageSize;
+}
+
+int LdapServer::version() const
+{
+  return d->mVersion;
+}
+
+LdapServer::Security LdapServer::security() const
+{
+  return d->mSecurity;
+}
+
+LdapServer::Auth LdapServer::auth() const
+{
+  return d->mAuth;
+}
+
+QString LdapServer::mech() const
+{
+  return d->mMech;
+}
+
+void LdapServer::setHost( const QString &host )
+{
+  d->mHost = host;
+}
+
+void LdapServer::setPort( int port )
+{
+  d->mPort = port;
+}
+
+void LdapServer::setBaseDn( const QString &baseDn )
+{
+  d->mBaseDn = baseDn;
+}
+
+void LdapServer::setUser( const QString &user )
+{
+  d->mUser = user;
+}
+
+void LdapServer::setBindDn( const QString &bindDn )
+{
+  d->mBindDn = bindDn;
+}
+
+void LdapServer::setRealm( const QString &realm )
+{
+  d->mRealm = realm;
+}
+
+void LdapServer::setPassword( const QString &password )
+{
+  d->mPassword = password;
+}
+
+void LdapServer::setTimeLimit( int timelimit )
+{
+  d->mTimeLimit = timelimit;
+}
+
+void LdapServer::setSizeLimit( int sizelimit )
+{
+  d->mSizeLimit = sizelimit;
+}
+
+void LdapServer::setPageSize( int pagesize )
+{
+  d->mPageSize = pagesize;
+}
+
+void LdapServer::setVersion( int version )
+{
+  d->mVersion = version;
+}
+
+void LdapServer::setSecurity( Security security )
+{
+  d->mSecurity = security;
+}
+
+void LdapServer::setAuth( Auth auth )
+{
+  d->mAuth = auth;
+}
+
+void LdapServer::setMech( const QString &mech )
+{
+  d->mMech = mech;
 }
 
 void LdapServer::setUrl( const LdapUrl &url )
 {
   bool critical;
-  
-  mHost = url.host();
-  int port = url.port();
-  if ( port <= 0 ) mPort = 389; else mPort = port;
-  mBaseDn = url.dn();
-  
-  mSecurity = None;
-  if ( url.protocol() == "ldaps" ) 
-    mSecurity = SSL; 
-  else if ( url.hasExtension("x-tls") )
-    mSecurity = TLS;
-  kDebug() << "security: " << mSecurity << endl;
 
-  mMech = mUser = mBindDn = QString();
+  d->mHost = url.host();
+  int port = url.port();
+  if ( port <= 0 )
+    d->mPort = 389;
+  else
+    d->mPort = port;
+
+  d->mBaseDn = url.dn();
+
+  d->mSecurity = None;
+  if ( url.protocol() == "ldaps" ) 
+    d->mSecurity = SSL; 
+  else if ( url.hasExtension("x-tls") )
+    d->mSecurity = TLS;
+  kDebug() << "security: " << d->mSecurity << endl;
+
+  d->mMech = d->mUser = d->mBindDn = QString();
   if ( url.hasExtension("x-sasl") ) {
-    mAuth = SASL;
+    d->mAuth = SASL;
     if ( url.hasExtension("x-mech") )
-      mMech = url.extension( "x-mech", critical );
+      d->mMech = url.extension( "x-mech", critical );
     if ( url.hasExtension("x-realm") ) 
-      mRealm = url.extension( "x-realm", critical );
+      d->mRealm = url.extension( "x-realm", critical );
     if ( url.hasExtension("binddn") ) 
-      mBindDn = url.extension( "binddn", critical );
-    mUser = url.user();
+      d->mBindDn = url.extension( "binddn", critical );
+    d->mUser = url.user();
   } else if ( url.hasExtension( "binddn" ) ) {
-    mAuth = Simple;
-    mBindDn = url.extension( "binddn", critical );
+    d->mAuth = Simple;
+    d->mBindDn = url.extension( "binddn", critical );
   } else {
     QString user = url.user();
     if ( user.isEmpty() ) {
-      mAuth = Anonymous;
+      d->mAuth = Anonymous;
     } else {
-      mAuth = Simple;
-      mBindDn = user;
+      d->mAuth = Simple;
+      d->mBindDn = user;
     }
   }
-  mPassword = url.password();
+  d->mPassword = url.password();
   if ( url.hasExtension("x-version") ) 
-    mVersion = url.extension( "x-version", critical ).toInt();
-  else 
-    mVersion = 3;
+    d->mVersion = url.extension( "x-version", critical ).toInt();
+  else
+    d->mVersion = 3;
 
   if ( url.hasExtension("x-timelimit") ) 
-    mTimeLimit = url.extension( "x-timelimit", critical ).toInt();
-  else 
-    mTimeLimit = 0;
+    d->mTimeLimit = url.extension( "x-timelimit", critical ).toInt();
+  else
+    d->mTimeLimit = 0;
 
   if ( url.hasExtension("x-sizelimit") ) 
-    mSizeLimit = url.extension( "x-sizelimit", critical ).toInt();
-  else 
-    mSizeLimit = 0;
+    d->mSizeLimit = url.extension( "x-sizelimit", critical ).toInt();
+  else
+    d->mSizeLimit = 0;
 
   if ( url.hasExtension("x-pagesize") ) 
-    mPageSize = url.extension( "x-pagesize", critical ).toInt();
-  else 
-    mPageSize = 0;
+    d->mPageSize = url.extension( "x-pagesize", critical ).toInt();
+  else
+    d->mPageSize = 0;
 }
 
 LdapUrl LdapServer::url() const
 {
   LdapUrl url;
-  url.setProtocol( mSecurity == SSL ? "ldaps" : "ldap" );
-  url.setPort( mPort );
-  url.setHost( mHost );
-  url.setPassword( mPassword );
-  url.setDn( mBaseDn );
-  if ( mAuth == SASL ) {
-    url.setUser( mUser );
-    url.setExtension( "binddn", mBindDn, true );
+  url.setProtocol( d->mSecurity == SSL ? "ldaps" : "ldap" );
+  url.setPort( d->mPort );
+  url.setHost( d->mHost );
+  url.setPassword( d->mPassword );
+  url.setDn( d->mBaseDn );
+  if ( d->mAuth == SASL ) {
+    url.setUser( d->mUser );
+    url.setExtension( "binddn", d->mBindDn, true );
     url.setExtension( "x-sasl", QString() );
-    if ( !mMech.isEmpty() ) url.setExtension( "x-mech", mMech );
-    if ( !mRealm.isEmpty() ) url.setExtension( "x-realm", mRealm );
+    if ( !d->mMech.isEmpty() ) url.setExtension( "x-mech", d->mMech );
+    if ( !d->mRealm.isEmpty() ) url.setExtension( "x-realm", d->mRealm );
   } else {
-    url.setUser( mBindDn );
+    url.setUser( d->mBindDn );
   }
-  if ( mVersion == 2 ) url.setExtension( "x-version", mVersion );
-  if ( mTimeLimit != 0 ) url.setExtension( "x-timelimit", mTimeLimit );
-  if ( mSizeLimit != 0 ) url.setExtension( "x-sizelimit", mSizeLimit );
-  if ( mPageSize != 0 ) url.setExtension( "x-pagesize", mPageSize );
-  if ( mSecurity == TLS ) url.setExtension( "x-tls", 1, true );
-  
+  if ( d->mVersion == 2 ) url.setExtension( "x-version", d->mVersion );
+  if ( d->mTimeLimit != 0 ) url.setExtension( "x-timelimit", d->mTimeLimit );
+  if ( d->mSizeLimit != 0 ) url.setExtension( "x-sizelimit", d->mSizeLimit );
+  if ( d->mPageSize != 0 ) url.setExtension( "x-pagesize", d->mPageSize );
+  if ( d->mSecurity == TLS ) url.setExtension( "x-tls", 1, true );
+
   return url;
 }

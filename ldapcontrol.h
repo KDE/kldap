@@ -21,8 +21,8 @@
 #ifndef KLDAP_LDAPCONTROL_H
 #define KLDAP_LDAPCONTROL_H
 
-#include <QString>
-#include <QList>
+#include <QtCore/QString>
+#include <QtCore/QList>
 
 #include <kldap/kldap.h>
 
@@ -78,13 +78,8 @@ namespace KLDAP {
       bool critical() const;
 
     private:
-      
-      QString mOid;
-      QByteArray mValue;
-      bool mCritical;
-      
       class LdapControlPrivate;
-      LdapControlPrivate *d;
+      LdapControlPrivate* const d;
   };
 
   typedef QList<LdapControl> LdapControls;

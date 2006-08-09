@@ -21,7 +21,7 @@
 #ifndef KLDAP_LDAPCONNECTION_H
 #define KLDAP_LDAPCONNECTION_H
 
-#include <QString>
+#include <QtCore/QString>
 
 #include <kldap/ldapurl.h>
 #include <kldap/ldapserver.h>
@@ -87,7 +87,7 @@ namespace KLDAP {
       /** 
        * Returns a translated error string if connect() failed.
        */
-      QString connectionError();
+      QString connectionError() const;
       /**
        * Binds to the LDAP server (authenticates), via simple/SASL method.
        * Returns 0 if successful, -0xff if the specified authentication method
@@ -118,9 +118,9 @@ namespace KLDAP {
       int setOption( int option, void *value );
       
       /** Returns the LDAP error code from the last operation */
-      int ldapErrorCode();
+      int ldapErrorCode() const;
       /** Returns the LDAP error string from the last operation */
-      QString ldapErrorString();
+      QString ldapErrorString() const;
       /** Returns a translated error code from the specified LDAP error code */
       static QString errorString( int code );
       
@@ -128,12 +128,10 @@ namespace KLDAP {
       void *handle() const;
    
     private:
-
-      LdapConnection( const LdapConnection &conn ); //disable copy
-    
       class LdapConnectionPrivate;
-      LdapConnectionPrivate *d;
-      
+      LdapConnectionPrivate* const d;
+
+      Q_DISABLE_COPY( LdapConnection )
   };
 
 }

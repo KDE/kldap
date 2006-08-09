@@ -54,21 +54,21 @@ class LdapConnection::LdapConnectionPrivate
 };
 
 LdapConnection::LdapConnection()
+  : d( new LdapConnectionPrivate )
 {
-  d = new LdapConnection::LdapConnectionPrivate();
   d->mLDAP = 0;
 }
 
 LdapConnection::LdapConnection( const LdapUrl &url )
+  : d( new LdapConnectionPrivate )
 {
-  d = new LdapConnection::LdapConnectionPrivate();
   d->mLDAP = 0;
   setUrl( url );
 }
 
 LdapConnection::LdapConnection( const LdapServer &server )
+  : d( new LdapConnectionPrivate )
 {
-  d = new LdapConnection::LdapConnectionPrivate();
   d->mLDAP = 0;
   setServer( server );
 }
@@ -109,7 +109,7 @@ QString LdapConnection::errorString( int code )
 #endif
 }
 
-QString LdapConnection::connectionError()
+QString LdapConnection::connectionError() const
 { 
   return d->mConnectionError; 
 }      
@@ -127,7 +127,7 @@ int LdapConnection::setOption( int option, void *value )
   return ldap_set_option( d->mLDAP, option, value );
 }
 
-int LdapConnection::ldapErrorCode()
+int LdapConnection::ldapErrorCode() const
 {
   Q_ASSERT( d->mLDAP );
   int err;
@@ -135,7 +135,7 @@ int LdapConnection::ldapErrorCode()
   return err;
 }
 
-QString LdapConnection::ldapErrorString()
+QString LdapConnection::ldapErrorString() const
 {
   Q_ASSERT( d->mLDAP );
   char *errmsg;
