@@ -76,7 +76,7 @@ namespace KLDAP {
       /**
        * Returns the connection object.
        */
-      LdapConnection &connection() const;
+      LdapConnection &connection();
       /**
        * Sets the client controls which will sent with each operation.
        */

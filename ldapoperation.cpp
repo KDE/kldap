@@ -63,7 +63,7 @@ void LdapOperation::setConnection( LdapConnection &conn )
   d->mConnection = &conn;
 }
 
-LdapConnection &LdapOperation::connection() const
+LdapConnection &LdapOperation::connection()
 {
   return *d->mConnection;
 }
