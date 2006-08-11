@@ -401,6 +401,7 @@ int LdapConnection::timeLimit() const
 
 int LdapConnection::connect( SASL_Callback_Proc *saslproc, void *data )
 {
+  d->mConnectionError = i18n("LDAP support not compiled in. Please recompile libkldap with the OpenLDAP (or compatible) client libraries, or complain to your distribution packagers.");
   kError() << "No LDAP support..." << endl;
   return -1;
 }
