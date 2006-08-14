@@ -97,8 +97,8 @@ void *LdapConnection::handle() const
 QString LdapConnection::errorString( int code )
 {
   //No translated error messages yet
-  return QString::fromUtf8( ldap_err2string( code ) );
 #ifdef LDAP_FOUND
+  return QString::fromUtf8( ldap_err2string( code ) );
   switch ( code ) {
     case LDAP_OPERATIONS_ERROR: return i18n("LDAP Operations error");
     //FIXME:
@@ -363,13 +363,13 @@ int LdapConnection::setOption( int option, void *value )
   return -1;
 }
 
-int LdapConnection::ldapErrorCode()
+int LdapConnection::ldapErrorCode() const
 {
   kError() << "No LDAP support..." << endl;
   return -1;
 }
 
-QString LdapConnection::ldapErrorString()
+QString LdapConnection::ldapErrorString() const
 {
   kError() << "No LDAP support..." << endl;
   return QString();
@@ -399,7 +399,7 @@ int LdapConnection::timeLimit() const
   return -1;
 }
 
-int LdapConnection::connect( SASL_Callback_Proc *saslproc, void *data )
+int LdapConnection::connect( )
 {
   d->mConnectionError = i18n("LDAP support not compiled in. Please recompile libkldap with the OpenLDAP (or compatible) client libraries, or complain to your distribution packagers.");
   kError() << "No LDAP support..." << endl;
