@@ -30,7 +30,7 @@
 #include <kldap/ldapurl.h>
 #include <kldap/ldapserver.h>
 
-#include <kldap.h>
+#include <kldap/kldap.h>
 
 class QGridLayout;
 class QSpinBox;
@@ -163,23 +163,23 @@ namespace KLDAP {
 
       /**
        * Sets the security type (None, SSL, TLS).
-       * Kconfig widget name: kcfg_ldapsecurity
+       * Kconfig widget names: kcfg_ldapnosec, kcfg_ldaptls, kcfg_ldapssl
        */
       void setSecurity( Security security );
       /**
        * Returns the security type.
-       * Kconfig widget name: kcfg_ldapsecurity
+       * Kconfig widget names: kcfg_ldapnosec, kcfg_ldaptls, kcfg_ldapssl
        */
       Security security() const;
 
       /**
        * Sets the authentication type (Anonymous, Simple, SASL).
-       * Kconfig widget name: kcfg_ldapauth
+       * Kconfig widget names: kcfg_ldapanon, kcfg_ldapsimple, kcfg_ldapsasl
        */
       void setAuth( Auth auth );
       /**
        * Returns the authentication type.
-       * Kconfig widget name: kcfg_ldapauth
+       * Kconfig widget names: kcfg_ldapanon, kcfg_ldapsimple, kcfg_ldapsasl
        */
       Auth auth() const;
 
@@ -224,6 +224,19 @@ namespace KLDAP {
        * Extensions are filled for use in the LDAP ioslave
        */
       LdapUrl url() const;
+      /**
+       * Set up the widget via an LDAP Url.
+       */
+      void setUrl( const LdapUrl &url );
+
+      /**
+       * Returns an LdapServer object constructed from the settings given.
+       */
+      LdapServer server() const;
+      /**
+       * Set up the widget via an LdapServer object.
+       */
+      void setServer( const LdapServer &server );
 
     private Q_SLOTS:
       void setLDAPPort();

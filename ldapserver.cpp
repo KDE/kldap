@@ -35,6 +35,7 @@ class LdapServer::LdapServerPrivate
       QString mRealm;
       QString mPassword;
       QString mMech;
+      QString mFilter;
       int mTimeLimit, mSizeLimit, mVersion, mPageSize;
       Security mSecurity;
       Auth mAuth;
@@ -118,6 +119,11 @@ QString LdapServer::realm() const
 QString LdapServer::password() const
 {
   return d->mPassword;
+}
+
+QString LdapServer::filter() const
+{
+  return d->mFilter;
 }
 
 int LdapServer::timeLimit() const
@@ -205,6 +211,11 @@ void LdapServer::setPageSize( int pagesize )
   d->mPageSize = pagesize;
 }
 
+void LdapServer::setFilter( const QString &filter )
+{
+  d->mFilter = filter;
+}
+
 void LdapServer::setVersion( int version )
 {
   d->mVersion = version;
@@ -237,6 +248,8 @@ void LdapServer::setUrl( const LdapUrl &url )
     d->mPort = port;
 
   d->mBaseDn = url.dn();
+  
+  d->mFilter = url.filter();
 
   d->mSecurity = None;
   if ( url.protocol() == "ldaps" ) 
@@ -253,11 +266,11 @@ void LdapServer::setUrl( const LdapUrl &url )
     if ( url.hasExtension("x-realm") ) 
       d->mRealm = url.extension( "x-realm", critical );
     if ( url.hasExtension("binddn") ) 
-      d->mBindDn = url.extension( "binddn", critical );
+      d->mBindDn = url.extension( "bindname", critical );
     d->mUser = url.user();
-  } else if ( url.hasExtension( "binddn" ) ) {
+  } else if ( url.hasExtension( "bindname" ) ) {
     d->mAuth = Simple;
-    d->mBindDn = url.extension( "binddn", critical );
+    d->mBindDn = url.extension( "bindname", critical );
   } else {
     QString user = url.user();
     if ( user.isEmpty() ) {
@@ -297,9 +310,10 @@ LdapUrl LdapServer::url() const
   url.setHost( d->mHost );
   url.setPassword( d->mPassword );
   url.setDn( d->mBaseDn );
+  url.setFilter( d->mFilter );
   if ( d->mAuth == SASL ) {
     url.setUser( d->mUser );
-    url.setExtension( "binddn", d->mBindDn, true );
+    url.setExtension( "bindname", d->mBindDn, true );
     url.setExtension( "x-sasl", QString() );
     if ( !d->mMech.isEmpty() ) url.setExtension( "x-mech", d->mMech );
     if ( !d->mRealm.isEmpty() ) url.setExtension( "x-realm", d->mRealm );

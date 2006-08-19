@@ -28,7 +28,8 @@
 
 namespace KLDAP {
 
-  /** This class holds various parameters about an LDAP server
+  /** This class holds various parameters about an LDAP server, 
+   * and the LDAP query parameters.
    */
   class KLDAP_EXPORT LdapServer
   {
@@ -44,6 +45,9 @@ namespace KLDAP {
       typedef enum Security{ None, TLS, SSL };
       typedef enum Auth{ Anonymous, Simple, SASL };
 
+      /**
+       * Clears all server settings.
+       */
       void clear();
 
       QString host() const;
@@ -53,13 +57,15 @@ namespace KLDAP {
       QString bindDn() const;
       QString realm() const;
       QString password() const;
-      int timeLimit() const;
-      int sizeLimit() const;
-      int pageSize() const;
       int version() const;
       Security security() const;
       Auth auth() const;
       QString mech() const;
+
+      int timeLimit() const;
+      int sizeLimit() const;
+      int pageSize() const;
+      QString filter() const;
 
       void setHost( const QString &host );
       void setPort( int port );
@@ -68,15 +74,27 @@ namespace KLDAP {
       void setBindDn( const QString &bindDn );
       void setRealm( const QString &realm );
       void setPassword( const QString &password );
-      void setTimeLimit( int timelimit );
-      void setSizeLimit( int sizelimit );
-      void setPageSize( int pagesize );
       void setVersion( int version );
       void setSecurity( Security security );
       void setAuth( Auth auth );
       void setMech( const QString &mech );
 
+      void setTimeLimit( int timelimit );
+      void setSizeLimit( int sizelimit );
+      void setPageSize( int pagesize );
+      void setFilter( const QString &filter );
+
+      /**
+       * Returns the server parameters as an RFC2255 compliant LDAP Url.
+       * The URL extensions which are supported:
+       * Standard: bindname
+       * KLDAP extensions: x-tls, x-version, x-sasl, x-mech, x-realm, 
+       * x-sizelimit, x-timelimit, x-pagesize
+       */
       LdapUrl url() const;
+      /**
+       * Sets the server parameters from an RFC2255 compliant LDAP Url.
+       */
       void setUrl( const LdapUrl &url );
 
     private:

@@ -422,40 +422,81 @@ void LdapConfigWidget::setLDAPSPort()
   mPort->setValue( 636 );
 }
 
-
 LdapUrl LdapConfigWidget::url() const
 {
-  LdapUrl _url;
-  if ( mSecSSL && mSecSSL->isChecked() )
-    _url.setProtocol( "ldaps" );
-  else
-    _url.setProtocol( "ldap" );
-
-  if ( mUser ) _url.setUser( mUser->text() );
-  if ( mPassword ) _url.setPass( mPassword->text() );
-  if ( mHost ) _url.setHost( mHost->text() );
-  if ( mPort ) _url.setPort( mPort->value() );
-  if ( mDn ) _url.setDn( mDn->text() );
-  if ( mVersion ) _url.setExtension( "x-ver", QString::number( mVersion->value() ) );
-  if ( mSizeLimit && mSizeLimit->value() != 0 )
-    _url.setExtension( "x-sizelimit", QString::number( mSizeLimit->value() ) );
-  if ( mTimeLimit && mTimeLimit->value() != 0 )
-    _url.setExtension( "x-timelimit", QString::number( mTimeLimit->value() ) );
-  if ( mPageSize && mPageSize->value() != 0 )
-    _url.setExtension( "x-pagesize", QString::number( mPageSize->value() ) );
-  if ( mSecTLS && mSecTLS->isChecked() ) _url.setExtension( "x-tls","" );
-  if ( mFilter && !mFilter->text().isEmpty() )
-    _url.setFilter( mFilter->text() );
-  if ( mSASL && mSASL->isChecked() ) {
-    _url.setExtension( "x-sasl", "" );
-    _url.setExtension( "x-mech", mMech->currentText() );
-    if ( mBindDn && !mBindDn->text().isEmpty() )
-      _url.setExtension( "bindname", mBindDn->text() );
-    if ( mRealm && !mRealm->text().isEmpty() )
-      _url.setExtension( "x-realm", mRealm->text() );
-  }
-  return ( _url );
+  return server().url();
 }
+
+void LdapConfigWidget::setUrl( const LdapUrl &url )
+{
+  LdapServer _server;
+  _server.setUrl( url );
+  setServer( _server );
+}
+
+LdapServer LdapConfigWidget::server() const
+{
+  LdapServer _server;
+  if ( mSecSSL && mSecSSL->isChecked() )
+    _server.setSecurity( LdapServer::SSL );
+  else if ( mSecTLS && mSecTLS->isChecked() )
+    _server.setSecurity( LdapServer::TLS );
+  else 
+    _server.setSecurity( LdapServer::None );
+
+  if ( mUser ) _server.setUser( mUser->text() );
+  if ( mBindDn ) _server.setBindDn( mBindDn->text() );
+  if ( mPassword ) _server.setPassword( mPassword->text() );
+  if ( mRealm ) _server.setRealm( mRealm->text() );
+  if ( mHost ) _server.setHost( mHost->text() );
+  if ( mPort ) _server.setPort( mPort->value() );
+  if ( mDn ) _server.setBaseDn( mDn->text() );
+  if ( mFilter ) _server.setFilter( mFilter->text() );
+  if ( mVersion ) _server.setVersion( mVersion->value() );
+  if ( mSizeLimit && mSizeLimit->value() != 0 ) 
+    _server.setSizeLimit( mSizeLimit->value() );
+  if ( mTimeLimit && mTimeLimit->value() != 0 )
+    _server.setTimeLimit( mTimeLimit->value() );
+  if ( mPageSize && mPageSize->value() != 0 )
+    _server.setPageSize( mTimeLimit->value() );
+  if ( mAnonymous && mAnonymous->isChecked() ) 
+    _server.setAuth( LdapServer::Anonymous );
+  else if ( mSimple && mSimple->isChecked() )
+    _server.setAuth( LdapServer::Simple );
+  else if ( mSASL && mSASL->isChecked() ) {
+    _server.setAuth( LdapServer::SASL );
+    _server.setMech( mMech->currentText() );
+  }
+  return ( _server );
+}
+
+void LdapConfigWidget::setServer( const LdapServer &server )
+{
+  switch ( server.security() ) {
+    case LdapServer::SSL: if ( mSecSSL ) mSecSSL->setChecked( true );
+    case LdapServer::TLS: if ( mSecTLS ) mSecTLS->setChecked( true );
+    case LdapServer::None: if ( mSecNo ) mSecNo->setChecked( true );
+  }
+  switch ( server.auth() ) {
+    case LdapServer::Anonymous: if ( mAnonymous ) mAnonymous->setChecked( true );
+    case LdapServer::Simple: if ( mSimple ) mSimple->setChecked( true );
+    case LdapServer::SASL: if ( mSASL ) mSASL->setChecked( true );
+  }
+  
+  setUser( server.user() );
+  setBindDn( server.bindDn() );
+  setPassword( server.password() );
+  setRealm( server.realm() );
+  setHost( server.host() );
+  setPort( server.port() );
+  setFilter( server.filter() );
+  setDn( server.baseDn() );
+  setVersion( server.version() );
+  setSizeLimit( server.sizeLimit() );
+  setTimeLimit( server.timeLimit() );
+  setPageSize( server.pageSize() );
+  setMech( server.mech() );
+}                                                                                    
 
 void LdapConfigWidget::setUser( const QString &user )
 {
@@ -587,7 +628,6 @@ LdapConfigWidget::Security LdapConfigWidget::security() const
   if ( mSecSSL->isChecked() ) return SSL;
   return None;
 }
-
 
 void LdapConfigWidget::setAuth( Auth auth )
 {
