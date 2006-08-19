@@ -75,8 +75,8 @@ LdapConnection::LdapConnection( const LdapServer &server )
                   
 LdapConnection::~LdapConnection()
 {
-  delete d;
   close();
+  delete d;
 }
 
 void LdapConnection::setUrl( const LdapUrl &url )
