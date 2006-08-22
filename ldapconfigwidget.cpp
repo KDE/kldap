@@ -35,6 +35,8 @@
 #include <klineedit.h>
 #include <kmessagebox.h>
 
+#include <kldap/ldapsearch.h>
+
 #include "ldapconfigwidget.h"
 
 using namespace KLDAP;
@@ -288,32 +290,19 @@ void LdapConfigWidget::initWidget()
 
 }
 
-void LdapConfigWidget::loadData( KIO::Job*, const QByteArray& d )
+void LdapConfigWidget::loadData( const LdapObject &object )
 {
-  Ldif::ParseValue ret;
-
-  if ( d.size() ) {
-    mLdif.setLdif( d );
-  } else {
-    mLdif.endLdif();
-  }
-  do {
-    ret = mLdif.nextItem();
-    if ( ret == Ldif::Item && mLdif.attr().toLower() == mAttr ) {
-      mProg->setValue( mProg->value() + 1 );
-      mQResult.push_back( QString::fromUtf8( mLdif.value(), mLdif.value().size() ) );
+  kDebug() << "loadData() object: " << object.toString() << endl;
+  mProg->setValue( mProg->value() + 1 );
+  for ( LdapAttrMap::ConstIterator it = object.attributes().constBegin(); it != object.attributes().constEnd(); ++it ) {
+    for ( LdapAttrValue::ConstIterator it2 = (*it).constBegin(); it2 != (*it).constEnd(); ++it2 ) {
+      mQResult.push_back( QString::fromUtf8( *it2 ) );
     }
-  } while ( ret != Ldif::MoreData );
+  }
 }
 
-void LdapConfigWidget::loadResult( KJob* job)
+void LdapConfigWidget::loadResult()
 {
-  int error = job->error();
-  if ( error && error != KIO::ERR_USER_CANCELED )
-    mErrorMsg = job->errorString();
-  else
-    mErrorMsg = "";
-
   mCancelled = false;
   mProg->close();
 }
@@ -335,13 +324,14 @@ void LdapConfigWidget::sendQuery()
   if ( mSecTLS && mSecTLS->isChecked() ) _url.setExtension( "x-tls", "" );
 
   kDebug(5700) << "sendQuery url: " << _url.prettyUrl() << endl;
-  mLdif.startParsing();
-  KIO::Job *job = KIO::get( _url, true, false );
-  job->addMetaData("no-auth-prompt","true");
-  connect( job, SIGNAL( data( KIO::Job*, const QByteArray& ) ),
-    this, SLOT( loadData( KIO::Job*, const QByteArray& ) ) );
-  connect( job, SIGNAL( result( KJob* ) ),
-    this, SLOT( loadResult( KJob* ) ) );
+
+  LdapSearch search;
+  connect( &search, SIGNAL( data( const LdapObject& ) ),
+    this, SLOT( loadData( const LdapObject& ) ) );
+  connect( &search, SIGNAL( done( ) ),
+    this, SLOT( loadResult( ) ) );
+
+  search.search( _url );
 
   if ( mProg == NULL )
   {
@@ -355,7 +345,7 @@ void LdapConfigWidget::sendQuery()
   mProg->exec();
   if ( mCancelled ) {
     kDebug(5700) << "query canceled!" << endl;
-    job->kill( KJob::Quietly );
+//    job->kill( KJob::Quietly );
   } else {
     if ( !mErrorMsg.isEmpty() ) KMessageBox::error( this, mErrorMsg );
   }

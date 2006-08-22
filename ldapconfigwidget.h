@@ -26,9 +26,9 @@
 
 #include <kio/job.h>
 
-#include <kldap/ldif.h>
 #include <kldap/ldapurl.h>
 #include <kldap/ldapserver.h>
+#include <kldap/ldapobject.h>
 
 #include <kldap/kldap.h>
 
@@ -246,12 +246,11 @@ namespace KLDAP {
       void setSASL( bool on );
       void mQueryDNClicked();
       void mQueryMechClicked();
-      void loadData( KIO::Job*, const QByteArray& );
-      void loadResult( KJob* );
+      void loadData( const LdapObject &object );
+      void loadResult();
     private:
 
       WinFlags mFeatures;
-      Ldif mLdif;
       QStringList mQResult;
       QString mAttr;
 
