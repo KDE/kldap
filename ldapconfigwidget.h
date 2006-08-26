@@ -44,7 +44,7 @@ class KLineEdit;
 namespace KLDAP {
 
   /**
-    @short LDAP Configuration widget
+    @brief LDAP Configuration widget
 
     This class can be used to query the user for LDAP connection parameters.
     It's KConfigXT compatible, using widget names starting with kcfg_
