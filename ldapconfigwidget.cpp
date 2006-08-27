@@ -448,7 +448,7 @@ LdapServer LdapConfigWidget::server() const
   if ( mTimeLimit && mTimeLimit->value() != 0 )
     _server.setTimeLimit( mTimeLimit->value() );
   if ( mPageSize && mPageSize->value() != 0 )
-    _server.setPageSize( mTimeLimit->value() );
+    _server.setPageSize( mPageSize->value() );
   if ( mAnonymous && mAnonymous->isChecked() ) 
     _server.setAuth( LdapServer::Anonymous );
   else if ( mSimple && mSimple->isChecked() )
