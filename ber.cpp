@@ -71,7 +71,7 @@ Ber::Ber( const Ber& that )
     ber_bvfree( bv );
   }
 }
-    
+
 Ber& Ber::operator=( const Ber& that )
 {
   if ( this == &that ) return *this;
@@ -83,7 +83,6 @@ Ber& Ber::operator=( const Ber& that )
   }
   return *this;
 }
-          
 
 QByteArray Ber::flatten()
 {
