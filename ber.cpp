@@ -62,6 +62,29 @@ Ber::~Ber()
   delete d;
 }
 
+Ber::Ber( const Ber& that )
+  : d( new BerPrivate )
+{
+  struct berval *bv;
+  if ( ber_flatten( that.d->mBer, &bv ) == 0 ) {
+    d->mBer = ber_init( bv );
+    ber_bvfree( bv );
+  }
+}
+    
+Ber& Ber::operator=( const Ber& that )
+{
+  if ( this == &that ) return *this;
+
+  struct berval *bv;
+  if ( ber_flatten( that.d->mBer, &bv ) == 0 ) {
+    d->mBer = ber_init( bv );
+    ber_bvfree( bv );
+  }
+  return *this;
+}
+          
+
 QByteArray Ber::flatten()
 {
   QByteArray ret;
@@ -84,20 +107,29 @@ bool Ber::scanf( const QString &format, ... )
 #else
 
 Ber::Ber()
- : d( new BerPrivate )
 {
   kError() << "LDAP support not compiled" << endl;
 }
 
 Ber::Ber( const QByteArray &value )
- : d( new BerPrivate )
 {
   kError() << "LDAP support not compiled" << endl;
 }
 
 Ber::~Ber()
 {
-  delete d;
+}
+
+Ber::Ber( const Ber& that )
+{
+  kError() << "LDAP support not compiled" << endl;
+}
+
+Ber& Ber::operator=( const Ber& that )
+{
+  if ( this == &that ) return *this;
+  kError() << "LDAP support not compiled" << endl;
+  return *this;
 }
 
 QByteArray Ber::flatten()

@@ -45,6 +45,10 @@ namespace KLDAP {
        * Destroys the Ber object.
        */
       virtual ~Ber();
+
+      Ber( const Ber& that );
+      Ber& operator=( const Ber& that );
+
       /**
        * Returns the Ber object as a flat QByteArray.
        */
