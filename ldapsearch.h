@@ -99,7 +99,7 @@ namespace KLDAP {
         const QString &filter, const QStringList& attributes, int pagesize );
       
       class LdapSearchPrivate;
-      LdapSearchPrivate* d;
+      LdapSearchPrivate* const d;
   };
 
 }
