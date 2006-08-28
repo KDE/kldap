@@ -29,7 +29,8 @@ add_subdirectory(tests)
 
 
 set(kldap_LIB_SRCS 
-   ldif.cpp 
+   ber.cpp
+   ldif.cpp
    ldapurl.cpp
    ldapserver.cpp
    ldapobject.cpp
@@ -53,6 +54,6 @@ install(TARGETS kldap DESTINATION ${LIB_INSTALL_DIR})
 
 ########### install files ###############
 
-install( FILES kldap.h ldapdefs.h ldif.h ldapurl.h ldapserver.h ldapobject.h 
+install( FILES ber.h kldap.h ldapdefs.h ldif.h ldapurl.h ldapserver.h ldapobject.h 
   ldapconnection.h ldapoperation.h 
   ldapconfigwidget.h ldapcontrol.h ldapsearch.h DESTINATION ${INCLUDE_INSTALL_DIR}/kldap)
