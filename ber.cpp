@@ -97,10 +97,14 @@ QByteArray Ber::flatten()
 
 bool Ber::printf( const QString &format, ... )
 {
+  Q_UNUSED( format );
+  return false;
 }
 
 bool Ber::scanf( const QString &format, ... )
 {
+  Q_UNUSED( format );
+  return false;
 }
 
 #else
@@ -110,7 +114,7 @@ Ber::Ber()
   kError() << "LDAP support not compiled" << endl;
 }
 
-Ber::Ber( const QByteArray &value )
+Ber::Ber( const QByteArray & )
 {
   kError() << "LDAP support not compiled" << endl;
 }
@@ -119,7 +123,7 @@ Ber::~Ber()
 {
 }
 
-Ber::Ber( const Ber& that )
+Ber::Ber( const Ber&)
 {
   kError() << "LDAP support not compiled" << endl;
 }
@@ -139,12 +143,14 @@ QByteArray Ber::flatten()
 
 bool Ber::printf( const QString &format, ... )
 {
+  Q_UNUSED( format );
   kError() << "LDAP support not compiled" << endl;
   return false;
 }
 
 bool Ber::scanf( const QString &format, ... )
 {
+  Q_UNUSED( format );
   kError() << "LDAP support not compiled" << endl;
   return false;
 }
