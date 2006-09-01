@@ -20,9 +20,13 @@
 
 #include "ber.h"
 
+#include <QtCore/QList>
+
 #include <kdebug.h>
 
 #include <kldap_config.h>
+
+#include <cstdarg>
 
 #ifdef LDAP_FOUND
 #include <ldap.h>
@@ -95,16 +99,124 @@ QByteArray Ber::flatten()
   return ret;
 }
 
-bool Ber::printf( const QString &format, ... )
+int Ber::printf( const QString &format, ... )
 {
-  Q_UNUSED( format );
-  return false;
+  char fmt[2];
+  va_list args;
+  va_start ( args, format );
+  fmt[1] = '\0';
+  
+  int i = 0, ret = 0;
+  while ( i < format.length() ) {
+    fmt[0] = format[i].toLatin1();
+    switch ( fmt[0] ) {
+      case 'b':
+      case 'e':
+      case 'i': 
+        {
+          ber_int_t v = va_arg( args, int );
+          ret = ber_printf( d->mBer, fmt, v );
+          break;
+        }
+      case 'B':
+        {
+          //FIXME: QBitArray vould be logical, but how to access the bits?
+          QByteArray *B = va_arg( args, QByteArray * );
+          int Bc = va_arg( args, int );
+          ret = ber_printf( d->mBer, fmt, B->data(), Bc );
+          break;
+        }
+      case 'o':
+        {
+          QByteArray *o = va_arg( args, QByteArray * );
+          ret = ber_printf( d->mBer, fmt, o->data(), o->size() );
+          break;
+        }
+      case 'O':
+        {
+          QByteArray *O = va_arg( args, QByteArray * );
+          struct berval bv;
+          bv.bv_val = (char*) O->data();
+          bv.bv_len = O->size();
+          ret = ber_printf( d->mBer, fmt, &bv );
+          break;
+        }
+        break;
+      case 's':
+        {
+          QByteArray *s = va_arg( args, QByteArray * );
+          ret = ber_printf( d->mBer, fmt, s->data() );
+          break;
+        }
+        break;
+      case 't':
+        {
+          unsigned int t = va_arg( args, unsigned int );
+          ret = ber_printf( d->mBer, fmt, t );
+          break;
+        }
+        break;
+      case 'v':
+        {
+          QList<QByteArray> *v = va_arg( args, QList<QByteArray> * );
+          const char *l[v->count()+1];
+          int j;
+          for ( j = 0; j < v->count(); j++ ) {
+            l[j] = v->at(j).data();
+          }
+          l[j] = 0;
+          ret = ber_printf( d->mBer, fmt, l );
+          break;
+        }
+      case 'V':
+        {
+          QList<QByteArray> *V = va_arg( args, QList<QByteArray> * );
+          struct berval *bv[V->count()+1];
+          struct berval bvs[V->count()];
+          int j;
+          for ( j = 0; j < V->count(); j++ ) {
+            bvs[j].bv_val = (char *) V->at(j).data();
+            bvs[j].bv_len = V->at(j).size();
+            bv[j] = &bvs[j];
+          }
+          bv[j] = 0;
+          ret = ber_printf( d->mBer, fmt, bv );
+          break;
+        }
+      case 'W':
+        {
+          QList<QByteArray> *W = va_arg( args, QList<QByteArray> * );
+          struct berval bvs[W->count()+1];
+          int j;
+          for ( j = 0; j < W->count(); j++ ) {
+            bvs[j].bv_val = (char*) W->at(j).data();
+            bvs[j].bv_len = W->at(j).size();
+          }
+          bvs[j].bv_val = 0;
+          ret = ber_printf( d->mBer, fmt, bvs );
+          break;
+        }
+      case 'n':
+      case '{':
+      case '}':
+      case '[':
+      case ']':
+        ret = ber_printf( d->mBer, fmt );
+        break;
+      default:
+        kWarning() << "Invalid BER format parameter: '" << fmt << "'" << endl;
+        ret = -1;
+    }
+    if ( ret == -1 ) break;
+  }
+  va_end( args );
+  return ret;
 }
 
-bool Ber::scanf( const QString &format, ... )
+int Ber::scanf( const QString &format, ... )
 {
   Q_UNUSED( format );
-  return false;
+  return -1;
 }
 
 #else
@@ -141,17 +253,17 @@ QByteArray Ber::flatten()
   return QByteArray();
 }
 
-bool Ber::printf( const QString &format, ... )
+int Ber::printf( const QString &format, ... )
 {
   Q_UNUSED( format );
   kError() << "LDAP support not compiled" << endl;
-  return false;
+  return -1;
 }
 
-bool Ber::scanf( const QString &format, ... )
+int Ber::scanf( const QString &format, ... )
 {
   Q_UNUSED( format );
   kError() << "LDAP support not compiled" << endl;
-  return false;
+  return -1;
 }
 #endif

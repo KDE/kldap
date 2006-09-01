@@ -54,8 +54,8 @@ namespace KLDAP {
        */
       QByteArray flatten();
 
-      bool printf( const QString &format, ... );
-      bool scanf( const QString &format, ... );
+      int printf( const QString &format, ... );
+      int scanf( const QString &format, ... );
     private:
       
       class BerPrivate;
