@@ -225,7 +225,7 @@ static void extractControls( LdapControls &ctrls, LDAPControl **pctrls )
   while ( pctrls[i] ) {
     ctrl = pctrls[ i ];
     control.setOid( QString::fromUtf8( ctrl->ldctl_oid ) );
-    control.setValue( QByteArray::fromRawData( ctrl->ldctl_value.bv_val,
+    control.setValue( QByteArray( ctrl->ldctl_value.bv_val,
       ctrl->ldctl_value.bv_len ) );
     control.setCritical( ctrl->ldctl_iscritical );
     ctrls.append( control );
