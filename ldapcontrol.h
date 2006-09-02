@@ -76,6 +76,17 @@ namespace KLDAP {
        * Returns the control's criticality.
        */
       bool critical() const;
+      
+      /**
+       * Parses a pageing results control, which the server returned. Puts the server's cookie into 
+       * @param cookie, and returns the estimated result set size. If the OID is not the page control's
+       * OID, or the value cannot be decoded, returns -1.
+       */
+      int parsePageControl( QByteArray &cookie );
+      /**
+       * Creates a pageing search control.
+       */
+      static LdapControl createPageControl( int pagesize, const QByteArray &cookie = QByteArray() );
 
     private:
       class LdapControlPrivate;

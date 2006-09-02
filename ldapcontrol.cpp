@@ -20,6 +20,8 @@
 
 #include "ldapcontrol.h"
 
+#include "ber.h"
+
 using namespace KLDAP;
 
 class LdapControl::LdapControlPrivate {
@@ -32,6 +34,7 @@ class LdapControl::LdapControlPrivate {
 LdapControl::LdapControl()
   : d( new LdapControlPrivate )
 {
+  setControl( QString(), QByteArray(), false );
 }
 
 LdapControl::LdapControl( QString &oid, QByteArray &value, bool critical )
@@ -93,4 +96,27 @@ void LdapControl::setValue( const QByteArray &value )
 void LdapControl::setCritical( bool critical )
 {
   d->mCritical = critical;
+}
+
+int LdapControl::parsePageControl( QByteArray &cookie )
+{
+  if ( d->mOid != "1.2.840.113556.1.4.319" ) return -1;
+  
+  Ber ber( d->mValue );
+  int size;
+  if ( ber.scanf( "{iO}", &size, &cookie ) == -1 ) 
+    return -1;
+  else
+    return size;
+}
+
+LdapControl LdapControl::createPageControl( int pagesize, const QByteArray &cookie )
+{
+  LdapControl control;
+  Ber ber;
+  
+  ber.printf( "{iO}", pagesize, &cookie );
+  control.setOid("1.2.840.113556.1.4.319");
+  control.setValue( ber.flatten() );
+  return control;
 }

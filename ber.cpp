@@ -109,12 +109,14 @@ int Ber::printf( const QString &format, ... )
   int i = 0, ret = 0;
   while ( i < format.length() ) {
     fmt[0] = format[i].toLatin1();
+    i++;
     switch ( fmt[0] ) {
       case 'b':
       case 'e':
       case 'i': 
         {
           ber_int_t v = va_arg( args, int );
+          kDebug() << fmt << ": " << v << endl;
           ret = ber_printf( d->mBer, fmt, v );
           break;
         }
@@ -179,7 +181,7 @@ int Ber::printf( const QString &format, ... )
             bvs[j].bv_len = V->at(j).size();
             bv[j] = &bvs[j];
           }
-          bv[j] = 0;
+          bv[V->count()] = 0;
           ret = ber_printf( d->mBer, fmt, bv );
           break;
         }
@@ -207,6 +209,7 @@ int Ber::printf( const QString &format, ... )
         kWarning() << "Invalid BER format parameter: '" << fmt << "'" << endl;
         ret = -1;
     }
+    kDebug() << " ber format: " << fmt << " ret: " << ret << endl;
     if ( ret == -1 ) break;
   }
   va_end( args );
@@ -215,10 +218,186 @@ int Ber::printf( const QString &format, ... )
 
 int Ber::scanf( const QString &format, ... )
 {
-  Q_UNUSED( format );
-  return -1;
+  char fmt[2];
+  va_list args;
+  va_start ( args, format );
+  fmt[1] = '\0';
+  
+  int i = 0, ret = 0;
+  while ( i < format.length() ) {
+    fmt[0] = format[i].toLatin1();
+    i++;
+    switch ( fmt[0] ) {
+      case 'l':
+      case 'b':
+      case 'e':
+      case 'i': 
+        {
+          int *v = va_arg( args, int * );
+          ret = ber_scanf( d->mBer, fmt, v );
+          break;
+        }
+      case 'B':
+        {
+          //FIXME: QBitArray vould be logical, but how to access the bits?
+          QByteArray *B = va_arg( args, QByteArray * );
+          int *Bc = va_arg( args, int * );
+          char *c;
+          ret = ber_scanf( d->mBer, fmt, &c, Bc );
+          if ( ret != -1 ) {
+            *B = QByteArray( c, (*Bc+7)/8 );
+            ber_memfree( c );
+          }
+          break;
+        }
+      case 'o':
+        {
+          QByteArray *o = va_arg( args, QByteArray * );
+          struct berval bv;
+          ret = ber_scanf( d->mBer, fmt, &bv );
+          if ( ret != -1 ) {
+            *o = QByteArray( bv.bv_val, bv.bv_len );
+            ber_memfree( bv.bv_val );
+          }
+          break;
+        }
+      case 'O':
+        {
+          QByteArray *O = va_arg( args, QByteArray * );
+          struct berval *bv;
+          ret = ber_scanf( d->mBer, fmt, &bv );
+          if ( ret != -1 ) {
+            *O = QByteArray( bv->bv_val, bv->bv_len );
+            ber_bvfree( bv );
+          }
+          break;
+        }
+        break;
+      case 'm': //the same as 'O', just *bv should not be freed.
+        {
+          QByteArray *m = va_arg( args, QByteArray * );
+          struct berval *bv;
+          ret = ber_scanf( d->mBer, fmt, &bv );
+          if ( ret != -1 ) {
+            *m = QByteArray( bv->bv_val, bv->bv_len );
+          }
+          break;
+        }
+      case 'a':
+        {
+          QByteArray *a = va_arg( args, QByteArray * );
+          char *c;
+          ret = ber_scanf( d->mBer, fmt, &c );
+          if ( ret != -1 ) {
+            *a = QByteArray( c );
+            ber_memfree( c );
+          }
+          break;
+        }
+      
+      case 's':
+        {
+          QByteArray *s = va_arg( args, QByteArray * );
+          char buf[255];
+          ber_len_t l = sizeof(buf);
+          ret = ber_scanf( d->mBer, fmt, &buf, &l );
+          if ( ret != -1 ) {
+            *s = QByteArray( buf, l );
+          }
+          break;
+        }
+      case 't':
+      case 'T':
+        {
+          unsigned int *t = va_arg( args, unsigned int * );
+          ret = ber_scanf( d->mBer, fmt, t );
+          break;
+        }
+        break;
+      case 'v':
+        {
+          QList<QByteArray> *v = va_arg( args, QList<QByteArray> * );
+          char **c, **c2;
+          ret = ber_scanf( d->mBer, fmt, &c );
+          if ( ret != -1 && c ) {
+            c2 = c;
+            while (*c) {
+              v->append( QByteArray( *c ) );
+              c++;
+            }
+            ber_memvfree( (void**) c2 );
+          }
+          break;
+        }
+      case 'V':
+        {
+          QList<QByteArray> *v = va_arg( args, QList<QByteArray> * );
+          struct berval **bv, **bv2;
+          ret = ber_scanf( d->mBer, fmt, &bv );
+          if ( ret != -1 && bv ) {
+            bv2 = bv;
+            while (*bv) {
+              v->append( QByteArray( (*bv)->bv_val, (*bv)->bv_len ) );
+              bv++;
+            }
+            ber_bvecfree( bv2 );
+          }
+          break;
+        }
+      case 'W':
+        {
+          QList<QByteArray> *W = va_arg( args, QList<QByteArray> * );
+          BerVarray bv;
+          ret = ber_scanf( d->mBer, fmt, &bv );
+          if ( ret != -1 && bv ) {
+            int j = 0;
+            while ( bv[j].bv_val ) {
+              W->append( QByteArray( bv[j].bv_val, bv[j].bv_len ) );
+              j++;
+            }
+//            ber_bvarray_free( bv );
+          }
+
+          break;
+        }
+//      case 'M': //This is so complicated, I'm lazy to implement. Use the 3 above instead.
+      case 'x':
+      case 'n':
+      case '{':
+      case '}':
+      case '[':
+      case ']':
+        ret = ber_scanf( d->mBer, fmt );
+        break;
+      default:
+        kWarning() << "Invalid BER format parameter: '" << fmt << "'" << endl;
+        ret = -1;
+    }
+    
+    if ( ret == -1 ) break;
+  
+  }
+  va_end( args );
+  return ret;
 }
 
+unsigned int Ber::peekTag( int &size )
+{
+  unsigned int ret;
+  ber_len_t len;
+  ret = ber_peek_tag( d->mBer, &len );
+  size = len;
+  return ret;
+}
+
+unsigned int Ber::skipTag( int &size )
+{
+  unsigned int ret;
+  ber_len_t len;
+  ret = ber_skip_tag( d->mBer, &len );
+  size = len;
+  return ret;
+}
 #else
 
 Ber::Ber()
@@ -266,4 +445,17 @@ int Ber::scanf( const QString &format, ... )
   kError() << "LDAP support not compiled" << endl;
   return -1;
 }
+
+unsigned int Ber::peekTag( int &size )
+{
+  kError() << "LDAP support not compiled" << endl;
+  return -1;
+}
+
+unsigned int Ber::skipTag( int &size )
+{
+  kError() << "LDAP support not compiled" << endl;
+  return -1;
+}
+
 #endif

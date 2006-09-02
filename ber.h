@@ -107,6 +107,8 @@ namespace KLDAP {
        */
       int printf( const QString &format, ... );
       int scanf( const QString &format, ... );
+      unsigned int peekTag( int &size );
+      unsigned int skipTag( int &size );
     private:
       
       class BerPrivate;

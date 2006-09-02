@@ -28,10 +28,14 @@
 #include "ldapserver.h"
 #include "ldapconnection.h"
 #include "ldapoperation.h"
+#include "ber.h"
 
 #include "kldap.h"
 #include <kdebug.h>
 #include <qtest_kde.h>
+
+#include <ldap.h>
+#include <lber.h>
 
 QTEST_KDEMAIN( KLdapTest, NoGUI )
 
@@ -81,6 +85,66 @@ void KLdapTest::testKLdap()
   QCOMPARE( c3.value(), QByteArray("abcdefg") );
   QCOMPARE( c3.critical(), true );
 
+  //test Ber functions
+/*
+  QByteArray left1("bertest"), right1;
+  int left2 = 0, right2;
+  int left3 = 1, right3;
+  int left4 = 2, right4;
+  int left5 = 3, right5;
+  int left6 = 1, right6;
+  QList<QByteArray> left7, right7;
+  left7.append( "abcdefghij" );
+  left7.append( "123456789" );
+  left7.append( "1234\0\0\056789" );
+  
+
+  Ber ber;
+  ber.printf("{seeiib}", &left1, left2, left3, left4, left5, left6 );
+
+//  ber.printf("{ioOi{i}}", left3, &left1, &left2, left4, left4 );
+  Ber ber2 = ber;
+
+  unsigned int a;
+  int b;
+  a = ber2.skipTag( b );
+  kDebug() << "next tag: " << a << " size: " << b << endl;
+  a = ber2.skipTag( b );
+  kDebug() << "next tag: " << a << " size: " << b << endl;
+  a = ber2.skipTag( b );
+  kDebug() << "next tag: " << a << " size: " << b << endl;
+  a = ber2.skipTag( b );
+  kDebug() << "next tag: " << a << " size: " << b << endl;
+  a = ber2.skipTag( b );
+  kDebug() << "next tag: " << a << " size: " << b << endl;
+  a = ber2.skipTag( b );
+  kDebug() << "next tag: " << a << " size: " << b << endl;
+  a = ber2.skipTag( b );
+  kDebug() << "next tag: " << a << " size: " << b << endl;
+  a = ber2.skipTag( b );
+  kDebug() << "next tag: " << a << " size: " << b << endl;
+
+  BerElement *_ber, *_ber2;
+  _ber = ber_alloc_t( LBER_USE_DER );  
+  
+  ber_len_t bl;
+  ber_printf( _ber, "{i}", 5 );
+  kDebug() << "native" << endl;
+  _ber2 = ber_dup( _ber );
+  a = ber_skip_tag( _ber2, &bl );
+  kDebug() << "next tag: " << a << " size: " << bl << endl;
+//  ber_dump( _ber, 0 );
+  
+//  ber2.scanf("{v}", &right5 );
+
+//  ber2.scanf("{inoOi{v}}", &right3, &right1, &right2, &right4, &right5 );
+  
+//  QCOMPARE( left1, right1 );
+//  QCOMPARE( left2, right2 );
+//  QCOMPARE( left3, right3 );
+//  QCOMPARE( left4, right4 );
+//  QCOMPARE( left5, right5 );
+*/
 /*  
   url.setUrl("ldap://localhost/dc=gyurco,dc=localdomain");
   url.parseQuery();
