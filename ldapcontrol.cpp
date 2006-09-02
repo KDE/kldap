@@ -98,7 +98,7 @@ void LdapControl::setCritical( bool critical )
   d->mCritical = critical;
 }
 
-int LdapControl::parsePageControl( QByteArray &cookie )
+int LdapControl::parsePageControl( QByteArray &cookie ) const
 {
   if ( d->mOid != "1.2.840.113556.1.4.319" ) return -1;
   

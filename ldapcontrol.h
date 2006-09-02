@@ -82,7 +82,7 @@ namespace KLDAP {
        * @param cookie, and returns the estimated result set size. If the OID is not the page control's
        * OID, or the value cannot be decoded, returns -1.
        */
-      int parsePageControl( QByteArray &cookie );
+      int parsePageControl( QByteArray &cookie ) const;
       /**
        * Creates a pageing search control.
        */
