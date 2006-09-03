@@ -21,6 +21,7 @@
 #include "ber.h"
 
 #include <QtCore/QList>
+#include <qvarlengtharray.h>
 
 #include <kdebug.h>
 
@@ -161,7 +162,7 @@ int Ber::printf( const QString &format, ... )
       case 'v':
         {
           QList<QByteArray> *v = va_arg( args, QList<QByteArray> * );
-          const char *l[v->count()+1];
+          QVarLengthArray<const char *> l( v->count()+1 );
           int j;
           for ( j = 0; j < v->count(); j++ ) {
             l[j] = v->at(j).data();
@@ -173,8 +174,8 @@ int Ber::printf( const QString &format, ... )
       case 'V':
         {
           QList<QByteArray> *V = va_arg( args, QList<QByteArray> * );
-          struct berval *bv[V->count()+1];
-          struct berval bvs[V->count()];
+          QVarLengthArray<struct berval *> bv ( V->count()+1 );
+          QVarLengthArray<struct berval> bvs( V->count( ) );
           int j;
           for ( j = 0; j < V->count(); j++ ) {
             bvs[j].bv_val = (char *) V->at(j).data();
@@ -188,7 +189,7 @@ int Ber::printf( const QString &format, ... )
       case 'W':
         {
           QList<QByteArray> *W = va_arg( args, QList<QByteArray> * );
-          struct berval bvs[W->count()+1];
+          QVarLengthArray<struct berval> bvs( W->count()+1 );
           int j;
           for ( j = 0; j < W->count(); j++ ) {
             bvs[j].bv_val = (char*) W->at(j).data();
