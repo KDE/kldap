@@ -69,7 +69,7 @@ void KLdapTest::testKLdap()
   url.parseQuery();
   server.setUrl( url );
   QCOMPARE( url.query(), QString::fromLatin1("??base??x-timelimit=5") );
-  QCOMPARE( url.url(), server.url().toString() );
+  QCOMPARE( url.url(), server.url().url() );
 
   LdapControl c1;
   c1.setControl( QString::fromLatin1("1.2.3.4.5.6"), QByteArray("abcdefg"), true );
