@@ -33,7 +33,10 @@ class LdapSearch::LdapSearchPrivate {
     LdapConnection *mConn;
     LdapOperation mOp;
     bool mOwnConnection;
-    int mId;
+    int mId, mPageSize;
+    QString mBase, mFilter;
+    QStringList mAttributes;
+    LdapUrl::Scope mScope;
 };
 
 LdapSearch::LdapSearch()
@@ -64,6 +67,16 @@ void LdapSearch::closeConnection()
   }
 }
 
+void LdapSearch::setClientControls( const LdapControls &ctrls )
+{
+  d->mOp.setClientControls( ctrls );
+}
+
+void LdapSearch::setServerControls( const LdapControls &ctrls )
+{
+  d->mOp.setServerControls( ctrls );
+}
+                               
 bool LdapSearch::search( const LdapServer &server, LdapUrl::Scope scope,
   const QStringList& attributes )
 {
@@ -116,7 +129,23 @@ bool LdapSearch::startSearch( const QString &base, LdapUrl::Scope scope,
   kDebug() << "search: base=" << base << " scope=" << scope << " filter=" << filter 
     << " attributes=" << attributes << " pagesize=" << pagesize  << endl;
   d->mOp.setConnection( *d->mConn );
+  d->mPageSize = pagesize;
+  d->mBase = base;
+  d->mScope = scope;
+  d->mFilter = filter;
+  d->mAttributes = attributes;
+  LdapControls savedctrls = d->mOp.serverControls();
+  if ( pagesize ) {
+    LdapControls ctrls = savedctrls;
+    ctrls.append( LdapControl::createPageControl( pagesize ) );
+    d->mOp.setServerControls( ctrls );
+  }                  
+
   d->mId = d->mOp.search( base, scope, filter, attributes );
+  if ( pagesize ) {
+    d->mOp.setServerControls( savedctrls );
+  }
+  
   if ( d->mId == -1 ) {
     return false;
   }
@@ -134,6 +163,31 @@ void LdapSearch::result()
     return;
   }
   if ( res == LdapOperation::RES_SEARCH_RESULT ) {
+    if ( d->mPageSize ) {
+      QByteArray cookie;
+      int estsize = -1;
+      for ( int i = 0; i < d->mOp.controls().count(); ++i ) {
+        estsize = d->mOp.controls()[i].parsePageControl( cookie );
+        if ( estsize != -1 ) break;
+      }
+      kDebug(7125) << " estimated size: " << estsize << endl;
+      if ( estsize != -1 && !cookie.isEmpty() ) {
+        LdapControls ctrls, savedctrls;
+        savedctrls = d->mOp.serverControls();
+        ctrls = savedctrls;
+        ctrls.append( LdapControl::createPageControl( d->mPageSize, cookie ) );
+        d->mOp.setServerControls( ctrls );
+        d->mId = d->mOp.search( d->mBase, d->mScope, d->mFilter, d->mAttributes );
+        d->mOp.setServerControls( savedctrls );
+        if ( d->mId == -1 ) {
+          emit error( d->mConn->ldapErrorCode(), d->mConn->ldapErrorString() );
+          emit done();
+          return;
+        }
+        QTimer::singleShot( 0, this, SLOT(result()) );
+        return;
+      }
+    }
     emit done();
     return;
   }

@@ -59,6 +59,14 @@ namespace KLDAP {
       virtual ~LdapSearch();
 
       /**
+       * Sets the client controls which will sent with each operation.
+       */
+      void setClientControls( const LdapControls &ctrls );
+      /**
+       * Sets the server controls which will sent with each operation.
+       */
+      void setServerControls( const LdapControls &ctrls );
+      /**
        * Starts a search operation on the LDAP server @param server, with the given scope and
        * returning the attributes specified with @param attributes.
        */
