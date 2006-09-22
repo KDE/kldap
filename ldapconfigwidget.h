@@ -24,8 +24,6 @@
 #include <QWidget>
 #include <QString>
 
-#include <kio/job.h>
-
 #include <kldap/ldapurl.h>
 #include <kldap/ldapserver.h>
 #include <kldap/ldapobject.h>
