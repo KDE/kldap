@@ -27,6 +27,7 @@
 #include <kldap/ldapurl.h>
 #include <kldap/ldapserver.h>
 #include <kldap/ldapobject.h>
+#include <kldap/ldapsearch.h>
 
 #include <kldap/kldap.h>
 
@@ -244,8 +245,8 @@ namespace KLDAP {
       void setSASL( bool on );
       void mQueryDNClicked();
       void mQueryMechClicked();
-      void loadData( const LdapObject &object );
-      void loadResult();
+      void loadData( const LdapSearch&, const LdapObject &object );
+      void loadResult( const LdapSearch& );
     private:
 
       WinFlags mFeatures;
@@ -265,7 +266,6 @@ namespace KLDAP {
       QRadioButton *mSecNo,*mSecTLS,*mSecSSL;
       KComboBox *mMech;
 
-      QString mErrorMsg;
       bool mCancelled;
       QProgressDialog *mProg;
 

@@ -290,7 +290,7 @@ void LdapConfigWidget::initWidget()
 
 }
 
-void LdapConfigWidget::loadData( const LdapObject &object )
+void LdapConfigWidget::loadData( const LdapSearch&, const LdapObject &object )
 {
   kDebug() << "loadData() object: " << object.toString() << endl;
   mProg->setValue( mProg->value() + 1 );
@@ -301,7 +301,7 @@ void LdapConfigWidget::loadData( const LdapObject &object )
   }
 }
 
-void LdapConfigWidget::loadResult()
+void LdapConfigWidget::loadResult( const LdapSearch& )
 {
   mCancelled = false;
   mProg->close();
@@ -326,12 +326,12 @@ void LdapConfigWidget::sendQuery()
   kDebug(5700) << "sendQuery url: " << _url.prettyUrl() << endl;
 
   LdapSearch search;
-  connect( &search, SIGNAL( data( const LdapObject& ) ),
-    this, SLOT( loadData( const LdapObject& ) ) );
-  connect( &search, SIGNAL( done( ) ),
-    this, SLOT( loadResult( ) ) );
+  connect( &search, SIGNAL( data( const LdapSearch&, const LdapObject& ) ),
+    this, SLOT( loadData( const LdapSearch&, const LdapObject& ) ) );
+  connect( &search, SIGNAL( done( const LdapSearch& ) ),
+    this, SLOT( loadResult( const LdapSearch& ) ) );
 
-  search.search( _url );
+  if ( !search.search( _url ) ) return;
 
   if ( mProg == NULL )
   {
@@ -345,9 +345,9 @@ void LdapConfigWidget::sendQuery()
   mProg->exec();
   if ( mCancelled ) {
     kDebug(5700) << "query canceled!" << endl;
-//    job->kill( KJob::Quietly );
+    search.abandon();
   } else {
-    if ( !mErrorMsg.isEmpty() ) KMessageBox::error( this, mErrorMsg );
+    if ( search.error() ) KMessageBox::error( this, search.errorString() );
   }
 }
 

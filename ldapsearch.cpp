@@ -32,11 +32,14 @@ class LdapSearch::LdapSearchPrivate {
   public:
     LdapConnection *mConn;
     LdapOperation mOp;
-    bool mOwnConnection;
+    bool mOwnConnection, mAbandoned;
     int mId, mPageSize;
     QString mBase, mFilter;
     QStringList mAttributes;
     LdapUrl::Scope mScope;
+    
+    QString mErrorString;
+    int mError;
 };
 
 LdapSearch::LdapSearch()
@@ -76,12 +79,9 @@ void LdapSearch::setServerControls( const LdapControls &ctrls )
 {
   d->mOp.setServerControls( ctrls );
 }
-                               
-bool LdapSearch::search( const LdapServer &server, LdapUrl::Scope scope,
-  const QStringList& attributes )
+
+bool LdapSearch::connect()
 {
-  closeConnection();
-  d->mConn = new LdapConnection( server );
   int ret = d->mConn->connect();
   if ( ret != KLDAP_SUCCESS ) {
     closeConnection();
@@ -91,25 +91,27 @@ bool LdapSearch::search( const LdapServer &server, LdapUrl::Scope scope,
   if ( ret != KLDAP_SUCCESS ) {
     closeConnection();
     return false;
+  }
+  return true;
+}
+                               
+bool LdapSearch::search( const LdapServer &server, LdapUrl::Scope scope,
+  const QStringList& attributes )
+{
+  if ( d->mOwnConnection ) {
+    closeConnection();
+    d->mConn = new LdapConnection( server );
+    if ( !connect() ) return false;
   }
   return startSearch( server.baseDn(), scope, server.filter(), attributes, server.pageSize() );
 }
 
 bool LdapSearch::search( const LdapUrl &url )
 {
-  closeConnection();
-  d->mConn = new LdapConnection( url );
-  int ret = d->mConn->connect();
-  kDebug() << "search::connect() " << ret << endl;
-  if ( ret != KLDAP_SUCCESS ) {
+  if ( d->mOwnConnection ) {
     closeConnection();
-    return false;
-  }
-  ret = d->mConn->bind();
-  kDebug() << "search::bind() " << ret << endl;
-  if ( ret != KLDAP_SUCCESS ) {
-    closeConnection();
-    return false;
+    d->mConn = new LdapConnection( url );
+    if ( !connect() ) return false;
   }
   bool critical;
   int pagesize = url.extension( QLatin1String("x-pagesize"), critical ).toInt();
@@ -128,6 +130,9 @@ bool LdapSearch::startSearch( const QString &base, LdapUrl::Scope scope,
 {
   kDebug() << "search: base=" << base << " scope=" << scope << " filter=" << filter 
     << " attributes=" << attributes << " pagesize=" << pagesize  << endl;
+  d->mAbandoned = false;
+  d->mError = 0;
+  d->mErrorString = QString();
   d->mOp.setConnection( *d->mConn );
   d->mPageSize = pagesize;
   d->mBase = base;
@@ -154,12 +159,22 @@ bool LdapSearch::startSearch( const QString &base, LdapUrl::Scope scope,
   return true;  
 }              
 
+void LdapSearch::abandon()
+{
+  d->mAbandoned = true;
+}
+
 void LdapSearch::result()
 {
+  if ( d->mAbandoned ) {
+    d->mOp.abandon( d->mId );
+    return;
+  }
   int res = d->mOp.result( d->mId );
   if ( res == -1 || d->mConn->ldapErrorCode() != KLDAP_SUCCESS ) {
-    emit error( d->mConn->ldapErrorCode(), d->mConn->ldapErrorString() );
-    emit done();
+    d->mError = d->mConn->ldapErrorCode();
+    d->mErrorString = d->mConn->ldapErrorString();
+    emit done( *this );
     return;
   }
   if ( res == LdapOperation::RES_SEARCH_RESULT ) {
@@ -180,21 +195,32 @@ void LdapSearch::result()
         d->mId = d->mOp.search( d->mBase, d->mScope, d->mFilter, d->mAttributes );
         d->mOp.setServerControls( savedctrls );
         if ( d->mId == -1 ) {
-          emit error( d->mConn->ldapErrorCode(), d->mConn->ldapErrorString() );
-          emit done();
+          d->mError = d->mConn->ldapErrorCode();
+          d->mErrorString = d->mConn->ldapErrorString();
+          emit done( *this );
           return;
         }
         QTimer::singleShot( 0, this, SLOT(result()) );
         return;
       }
     }
-    emit done();
+    emit done( *this );
     return;
   }
   if ( res == LdapOperation::RES_SEARCH_ENTRY ) {
-    emit data( d->mOp.object() );
+    emit data( *this, d->mOp.object() );
   }
   QTimer::singleShot( 0, this, SLOT(result()) );
+}
+
+int LdapSearch::error() const
+{
+  return d->mError;
+}
+
+QString LdapSearch::errorString() const
+{
+  return d->mErrorString;
 }
 
 #include "ldapsearch.moc"

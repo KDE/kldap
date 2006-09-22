@@ -84,30 +84,42 @@ namespace KLDAP {
         const QString &filter = QString(), 
         const QStringList& attributes = QStringList(),
         int pagesize = 0 );
+        
+      /**
+       * Tries to abandon the search.
+       */
+      void abandon();
+      /**
+       * Returns the error code of the search operation (0 if no error).
+       */
+      int error() const;
+      /**
+       * Returns the error description of the search operation.
+       */
+      QString errorString() const;
 
     Q_SIGNALS:
       /**
        * Emitted for each result object.
        */
-      void data( const LdapObject& );
+      void data( const LdapSearch&, const LdapObject& );
       /**
        * Emitted when the searching finished.
        */
-      void done();
-      /**
-       * Emitted when an LDAP error occurred.
-       */
-      void error( int, QString );
+      void done( const LdapSearch& );
 
     private Q_SLOTS:
       void result();
     private:
+      bool connect();
       void closeConnection();
       bool startSearch( const QString &base, LdapUrl::Scope scope, 
         const QString &filter, const QStringList& attributes, int pagesize );
       
       class LdapSearchPrivate;
       LdapSearchPrivate* const d;
+      
+      Q_DISABLE_COPY( LdapSearch );
   };
 
 }
