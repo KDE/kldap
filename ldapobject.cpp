@@ -76,7 +76,7 @@ QString LdapObject::dn() const
   return d->mDn; 
 }
                                             
-LdapAttrMap LdapObject::attributes() const 
+const LdapAttrMap &LdapObject::attributes() const 
 { 
   return d->mAttrs; 
 }

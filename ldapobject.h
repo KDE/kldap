@@ -78,7 +78,7 @@ namespace KLDAP {
       /**
        * Returns the attributes and their values.
        */
-      LdapAttrMap attributes() const;
+      const LdapAttrMap &attributes() const;
       /**
        * Returns all values of the attribute with the given name.
        */
