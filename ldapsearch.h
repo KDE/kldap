@@ -102,11 +102,11 @@ namespace KLDAP {
       /**
        * Emitted for each result object.
        */
-      void data( const LdapSearch&, const LdapObject& );
+      void data( LdapSearch*, const LdapObject& );
       /**
        * Emitted when the searching finished.
        */
-      void done( const LdapSearch& );
+      void result( LdapSearch* );
 
     private Q_SLOTS:
       void result();

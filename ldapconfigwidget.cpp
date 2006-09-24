@@ -290,7 +290,7 @@ void LdapConfigWidget::initWidget()
 
 }
 
-void LdapConfigWidget::loadData( const LdapSearch&, const LdapObject &object )
+void LdapConfigWidget::loadData( LdapSearch*, const LdapObject &object )
 {
   kDebug() << "loadData() object: " << object.toString() << endl;
   mProg->setValue( mProg->value() + 1 );
@@ -301,7 +301,7 @@ void LdapConfigWidget::loadData( const LdapSearch&, const LdapObject &object )
   }
 }
 
-void LdapConfigWidget::loadResult( const LdapSearch& )
+void LdapConfigWidget::loadResult( LdapSearch* )
 {
   mCancelled = false;
   mProg->close();
@@ -326,10 +326,10 @@ void LdapConfigWidget::sendQuery()
   kDebug(5700) << "sendQuery url: " << _url.prettyUrl() << endl;
 
   LdapSearch search;
-  connect( &search, SIGNAL( data( const LdapSearch&, const LdapObject& ) ),
-    this, SLOT( loadData( const LdapSearch&, const LdapObject& ) ) );
-  connect( &search, SIGNAL( done( const LdapSearch& ) ),
-    this, SLOT( loadResult( const LdapSearch& ) ) );
+  connect( &search, SIGNAL( data( LdapSearch*, const LdapObject& ) ),
+    this, SLOT( loadData( LdapSearch*, const LdapObject& ) ) );
+  connect( &search, SIGNAL( result( LdapSearch* ) ),
+    this, SLOT( loadResult( LdapSearch* ) ) );
 
   if ( !search.search( _url ) ) return;
 

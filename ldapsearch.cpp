@@ -174,7 +174,7 @@ void LdapSearch::result()
   if ( res == -1 || d->mConn->ldapErrorCode() != KLDAP_SUCCESS ) {
     d->mError = d->mConn->ldapErrorCode();
     d->mErrorString = d->mConn->ldapErrorString();
-    emit done( *this );
+    emit result( this );
     return;
   }
   if ( res == LdapOperation::RES_SEARCH_RESULT ) {
@@ -197,18 +197,18 @@ void LdapSearch::result()
         if ( d->mId == -1 ) {
           d->mError = d->mConn->ldapErrorCode();
           d->mErrorString = d->mConn->ldapErrorString();
-          emit done( *this );
+          emit result( this );
           return;
         }
         QTimer::singleShot( 0, this, SLOT(result()) );
         return;
       }
     }
-    emit done( *this );
+    emit result( this );
     return;
   }
   if ( res == LdapOperation::RES_SEARCH_ENTRY ) {
-    emit data( *this, d->mOp.object() );
+    emit data( this, d->mOp.object() );
   }
   QTimer::singleShot( 0, this, SLOT(result()) );
 }
