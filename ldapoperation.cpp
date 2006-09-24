@@ -43,6 +43,9 @@ class LdapOperation::LdapOperationPrivate {
   public:
     LdapControls mClientCtrls,mServerCtrls, mControls;
     LdapObject mObject;
+    QByteArray mExtOid, mExtData;
+    QString mMatchedDn;
+    QList<QByteArray> mReferrals;
             
     LdapConnection *mConnection;
 };
@@ -103,7 +106,27 @@ const LdapControls &LdapOperation::controls() const
 { 
   return d->mControls;
 }
-                  
+
+QByteArray LdapOperation::extendedOid() const
+{
+  return d->mExtOid;
+}
+
+QByteArray LdapOperation::extendedData() const
+{
+  return d->mExtData;
+}
+
+QString LdapOperation::matchedDn() const
+{
+  return d->mMatchedDn;
+}
+
+QList<QByteArray> LdapOperation::referrals() const
+{
+  return d->mReferrals;
+}
+
 #ifdef LDAP_FOUND
 
 static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
@@ -645,7 +668,7 @@ int LdapOperation::result( int id )
   if ( rescode == -1 ) return -1;
 
   switch ( rescode ) {
-    case LDAP_RES_SEARCH_ENTRY: {
+    case RES_SEARCH_ENTRY: {
       d->mObject.clear();
       LdapAttrMap attrs;
       char *name;
@@ -678,6 +701,20 @@ int LdapOperation::result( int id )
       d->mObject.setAttributes( attrs );
       break;
     }
+    case RES_EXTENDED: {
+      char *retoid;
+      struct berval *retdata;
+      retval = ldap_parse_extended_result( ld, msg, &retoid, &retdata, 0 );
+      if ( retval != LDAP_SUCCESS ) {
+        ldap_msgfree( msg );
+        return -1;
+      }
+      d->mExtOid = retoid ? QByteArray( retoid ) : QByteArray();
+      d->mExtData = retdata ? QByteArray( retdata->bv_val, retdata->bv_len ) : QByteArray();
+      ldap_memfree( retoid );
+      ber_bvfree( retdata );
+      break;
+    }
     default: {
       LDAPControl **serverctrls = 0;
       char *matcheddn = 0, *errmsg = 0;
@@ -695,9 +732,20 @@ int LdapOperation::result( int id )
         extractControls( d->mControls, serverctrls );
         ldap_controls_free( serverctrls );
       }
-//FIXME: ldap_value_free deprecated, what to use?
-//      if ( referralsp ) ldap_value_free( referralsp );
-      if ( matcheddn ) ldap_memfree( matcheddn );
+      d->mReferrals.clear();
+      if ( referralsp ) {
+        char **tmp = referralsp;
+        while ( *tmp ) {
+          d->mReferrals.append( QByteArray( *tmp ) );
+          tmp++;
+        }
+        ber_memvfree( (void**) referralsp );
+      }
+      d->mMatchedDn = QString();
+      if ( matcheddn ) {
+        d->mMatchedDn = QString::fromUtf8( matcheddn );
+        ldap_memfree( matcheddn );
+      }
       if ( errmsg ) ldap_memfree( errmsg );
     }
   }

@@ -190,6 +190,23 @@ namespace KLDAP {
        * Returns the server controls from the returned ldap message (grabbed by result()).
        */
       const LdapControls &controls() const;
+      /**
+       * Returns the OID of the extended operation response (result returned RES_EXTENDED).
+       */
+      QByteArray extendedOid() const;
+      /**
+       * Returns the data from the extended operation response (result returned RES_EXTENDED).
+       */
+      QByteArray extendedData() const;
+      /**
+       * The server might supply a matched DN string in the message indicating how much of a 
+       * name in a request was recognized. This can be grabbed by matchedDn().
+       */
+      QString matchedDn() const;
+      /**
+       * This function returns the referral strings from the parsed message (if any).
+       */
+      QList<QByteArray> referrals() const;      
 
     private:
       class LdapOperationPrivate;
