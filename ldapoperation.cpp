@@ -354,7 +354,8 @@ int LdapOperation::rename( const QString &dn, const QString &newRdn,
   createControls( &serverctrls, d->mServerCtrls );
   createControls( &serverctrls, d->mClientCtrls );
 
-  int retval = ldap_rename( ld, dn.toUtf8(), newRdn.toUtf8(), newSuperior.toUtf8(), 
+  int retval = ldap_rename( ld, dn.toUtf8(), newRdn.toUtf8(), 
+    newSuperior.isEmpty() ? (char *) 0 : newSuperior.toUtf8().data(), 
     deleteold, serverctrls, clientctrls, &msgid );
 
   ldap_controls_free( serverctrls );
@@ -374,7 +375,8 @@ int LdapOperation::rename_s( const QString &dn, const QString &newRdn,
   createControls( &serverctrls, d->mServerCtrls );
   createControls( &serverctrls, d->mClientCtrls );
 
-  int retval = ldap_rename_s( ld, dn.toUtf8(), newRdn.toUtf8(), newSuperior.toUtf8(), 
+  int retval = ldap_rename_s( ld, dn.toUtf8(), newRdn.toUtf8(),
+    newSuperior.isEmpty() ? (char *) 0 : newSuperior.toUtf8().data(), 
     deleteold, serverctrls, clientctrls );
 
   ldap_controls_free( serverctrls );
