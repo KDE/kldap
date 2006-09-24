@@ -95,7 +95,7 @@ bool LdapSearch::connect()
   return true;
 }
                                
-bool LdapSearch::search( const LdapServer &server, LdapUrl::Scope scope,
+bool LdapSearch::search( const LdapServer &server,
   const QStringList& attributes )
 {
   if ( d->mOwnConnection ) {
@@ -103,7 +103,7 @@ bool LdapSearch::search( const LdapServer &server, LdapUrl::Scope scope,
     d->mConn = new LdapConnection( server );
     if ( !connect() ) return false;
   }
-  return startSearch( server.baseDn(), scope, server.filter(), attributes, server.pageSize() );
+  return startSearch( server.baseDn(), server.scope(), server.filter(), attributes, server.pageSize() );
 }
 
 bool LdapSearch::search( const LdapUrl &url )
@@ -185,7 +185,7 @@ void LdapSearch::result()
         estsize = d->mOp.controls()[i].parsePageControl( cookie );
         if ( estsize != -1 ) break;
       }
-      kDebug(7125) << " estimated size: " << estsize << endl;
+      kDebug() << " estimated size: " << estsize << endl;
       if ( estsize != -1 && !cookie.isEmpty() ) {
         LdapControls ctrls, savedctrls;
         savedctrls = d->mOp.serverControls();

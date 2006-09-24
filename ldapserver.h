@@ -62,6 +62,7 @@ namespace KLDAP {
       Auth auth() const;
       QString mech() const;
 
+      LdapUrl::Scope scope() const;
       int timeLimit() const;
       int sizeLimit() const;
       int pageSize() const;
@@ -79,6 +80,7 @@ namespace KLDAP {
       void setAuth( Auth auth );
       void setMech( const QString &mech );
 
+      void setScope( LdapUrl::Scope scope );
       void setTimeLimit( int timelimit );
       void setSizeLimit( int sizelimit );
       void setPageSize( int pagesize );

@@ -39,6 +39,7 @@ class LdapServer::LdapServerPrivate
       int mTimeLimit, mSizeLimit, mVersion, mPageSize;
       Security mSecurity;
       Auth mAuth;
+      LdapUrl::Scope mScope;
 };
 
 LdapServer::LdapServer()
@@ -124,6 +125,11 @@ QString LdapServer::password() const
 QString LdapServer::filter() const
 {
   return d->mFilter;
+}
+
+LdapUrl::Scope LdapServer::scope() const
+{
+  return d->mScope;
 }
 
 int LdapServer::timeLimit() const
@@ -216,6 +222,11 @@ void LdapServer::setFilter( const QString &filter )
   d->mFilter = filter;
 }
 
+void LdapServer::setScope( LdapUrl::Scope scope )
+{
+  d->mScope = scope;
+}
+
 void LdapServer::setVersion( int version )
 {
   d->mVersion = version;
@@ -248,6 +259,7 @@ void LdapServer::setUrl( const LdapUrl &url )
     d->mPort = port;
 
   d->mBaseDn = url.dn();
+  d->mScope = url.scope();
   
   d->mFilter = url.filter();
 
@@ -311,6 +323,7 @@ LdapUrl LdapServer::url() const
   url.setPassword( d->mPassword );
   url.setDn( d->mBaseDn );
   url.setFilter( d->mFilter );
+  url.setScope( d->mScope );
   if ( d->mAuth == SASL ) {
     url.setUser( d->mUser );
     url.setExtension( "bindname", d->mBindDn, true );

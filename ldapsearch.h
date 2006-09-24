@@ -67,10 +67,10 @@ namespace KLDAP {
        */
       void setServerControls( const LdapControls &ctrls );
       /**
-       * Starts a search operation on the LDAP server @param server, with the given scope and
+       * Starts a search operation on the LDAP server @param server,
        * returning the attributes specified with @param attributes.
        */
-      bool search( const LdapServer &server, LdapUrl::Scope scope = LdapUrl::Sub, 
+      bool search( const LdapServer &server, 
         const QStringList& attributes = QStringList() );
       /**
        * Starts a search operation on the given LDAP URL.
