@@ -119,7 +119,7 @@ namespace KLDAP {
       class LdapSearchPrivate;
       LdapSearchPrivate* const d;
       
-      Q_DISABLE_COPY( LdapSearch );
+      Q_DISABLE_COPY( LdapSearch )
   };
 
 }
