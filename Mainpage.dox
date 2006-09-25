@@ -9,9 +9,9 @@
  *
  * Allows LDAP accessing with a convenient Qt style C++ API.
  *
- * @author György Szombathelyi \<gyurco@freemail.hu\>
+ * @authors György Szombathelyi \<gyurco@freemail.hu\>
  *
- * @maintainer György Szombathelyi \<gyurco@freemail.hu\>
+ * @maintainers György Szombathelyi \<gyurco@freemail.hu\>
  *
  * @licenses
  * @lgpl
