@@ -40,9 +40,9 @@ namespace KLDAP {
   {
   public:
 
-    typedef enum ParseValue{ None, NewEntry, EndEntry, Item, Control, Err, MoreData };
-    typedef enum EntryType{ Entry_None, Entry_Add, Entry_Del, Entry_Mod, Entry_Modrdn };
-    typedef enum ModType{ Mod_None, Mod_Add, Mod_Replace, Mod_Del };
+    typedef enum { None, NewEntry, EndEntry, Item, Control, Err, MoreData } ParseValue;
+    typedef enum { Entry_None, Entry_Add, Entry_Del, Entry_Mod, Entry_Modrdn } EntryType;
+    typedef enum { Mod_None, Mod_Add, Mod_Replace, Mod_Del } ModType;
     Ldif();
 
     Ldif( const Ldif &that );

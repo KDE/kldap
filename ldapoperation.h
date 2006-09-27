@@ -41,8 +41,8 @@ namespace KLDAP {
   class KLDAP_EXPORT LdapOperation
   {
     public:
-      typedef enum ModType{ Mod_None, Mod_Add, Mod_Replace, Mod_Del };
-      typedef enum ResultType {
+      typedef enum { Mod_None, Mod_Add, Mod_Replace, Mod_Del } ModType;
+      typedef enum {
         RES_BIND = 0x61,
         RES_SEARCH_ENTRY = 0x64,
         RES_SEARCH_REFERENCE = 0x73,
@@ -54,13 +54,13 @@ namespace KLDAP {
         RES_COMPARE = 0x6f,
         RES_EXTENDED = 0x78,
         RES_EXTENDED_PARTIAL = 0x79
-      };
+      } ResultType;
 
-      typedef struct ModOp {
+      typedef struct {
         ModType type;
         QString attr;
         QList<QByteArray> values;
-      };
+      }ModOp ;
 
       typedef QList<ModOp> ModOps;
 

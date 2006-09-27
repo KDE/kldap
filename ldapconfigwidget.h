@@ -93,8 +93,8 @@ namespace KLDAP {
         W_ALL = 0x2fff
       };
       
-      typedef enum Security { None, SSL, TLS };
-      typedef enum Auth { Anonymous, Simple, SASL };
+      typedef enum { None, SSL, TLS } Security;
+      typedef enum { Anonymous, Simple, SASL } Auth;
 
       Q_DECLARE_FLAGS( WinFlags, WinFlag )
 

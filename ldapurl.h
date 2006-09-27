@@ -43,12 +43,12 @@ namespace KLDAP {
   {
   public:
 
-    typedef struct Extension {
+    typedef struct {
       QString value;
       bool critical;
-    };
+    } Extension;
     
-    typedef enum Scope { Base, One, Sub };
+    typedef enum { Base, One, Sub } Scope;
 
     /** Constructs an empty KLdapUrl. */
     LdapUrl();

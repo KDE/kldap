@@ -42,8 +42,8 @@ namespace KLDAP {
 
       virtual ~LdapServer();
 
-      typedef enum Security{ None, TLS, SSL };
-      typedef enum Auth{ Anonymous, Simple, SASL };
+      typedef enum { None, TLS, SSL } Security;
+      typedef enum { Anonymous, Simple, SASL } Auth;
 
       /**
        * Clears all server settings.
