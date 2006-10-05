@@ -34,8 +34,10 @@
 #include <kdebug.h>
 #include <qtest_kde.h>
 
+#ifdef LDAP_FOUND
 #include <ldap.h>
 #include <lber.h>
+#endif
 
 QTEST_KDEMAIN( KLdapTest, NoGUI )
 
