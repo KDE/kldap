@@ -40,7 +40,7 @@ set(kldap_LIB_SRCS
    ldapsearch.cpp
    ldapconfigwidget.cpp )
 
-kde4_automoc(kldap ${kldap_LIB_SRCS})
+kde4_automoc(${kldap_LIB_SRCS})
 
 kde4_add_library(kldap SHARED ${kldap_LIB_SRCS})
 
