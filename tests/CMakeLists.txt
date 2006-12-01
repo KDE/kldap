@@ -19,5 +19,5 @@ target_link_libraries(testkldap  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} kldap
 add_test(kldap-testkldap ${EXECUTABLE_OUTPUT_PATH}/testkldap)
 
 
-endif(KDE4_BUILD_TESTS)
+endif(KDE4_BUILD_TESTS AND LDAP_FOUND)
 
