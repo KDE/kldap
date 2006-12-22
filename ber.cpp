@@ -449,12 +449,14 @@ int Ber::scanf( const QString &format, ... )
 
 unsigned int Ber::peekTag( int &size )
 {
+  Q_UNUSED( size );
   kError() << "LDAP support not compiled" << endl;
   return -1;
 }
 
 unsigned int Ber::skipTag( int &size )
 {
+  Q_UNUSED( size );
   kError() << "LDAP support not compiled" << endl;
   return -1;
 }
