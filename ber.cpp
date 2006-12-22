@@ -168,7 +168,7 @@ int Ber::printf( const QString &format, ... )
             l[j] = v->at(j).data();
           }
           l[j] = 0;
-          ret = ber_printf( d->mBer, fmt, l );
+          ret = ber_printf( d->mBer, fmt, l.data() );
           break;
         }
       case 'V':
@@ -183,7 +183,7 @@ int Ber::printf( const QString &format, ... )
             bv[j] = &bvs[j];
           }
           bv[V->count()] = 0;
-          ret = ber_printf( d->mBer, fmt, bv );
+          ret = ber_printf( d->mBer, fmt, bv.data() );
           break;
         }
       case 'W':
@@ -196,7 +196,7 @@ int Ber::printf( const QString &format, ... )
             bvs[j].bv_len = W->at(j).size();
           }
           bvs[j].bv_val = 0;
-          ret = ber_printf( d->mBer, fmt, bvs );
+          ret = ber_printf( d->mBer, fmt, bvs.data() );
           break;
         }
       case 'n':
