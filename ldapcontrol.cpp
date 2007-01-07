@@ -20,7 +20,7 @@
 
 #include "ldapcontrol.h"
 
-#include "ber.h"
+#include <kldap/ber.h>
 
 using namespace KLDAP;
 

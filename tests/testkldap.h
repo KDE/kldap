@@ -21,12 +21,37 @@
 #define KLDAPTEST_H
 
 #include <qobject.h>
+#include <ldapmodel.h>
+#include <ldapobject.h>
+#include <ldapsearch.h>
+
+
+using namespace KLDAP;
 
 class KLdapTest : public QObject
 {
-	Q_OBJECT
-	private Q_SLOTS:
-		void testKLdap();
+    Q_OBJECT
+    private Q_SLOTS:
+        //void testKLdap();
+
+        void initTestCase();
+        void cleanupTestCase();
+
+        void testLdapUrl();
+        void testLdapConnection();
+        void testLdapSearch();
+        void testLdapDN();
+        void testLdapModel();
+
+    public slots:
+        void searchResult( LdapSearch* );
+        void searchData( LdapSearch*, const LdapObject& );
+
+    private:
+        QString m_url;
+        LdapSearch* m_search;
+        LdapObjects m_objects;
+        LdapModel* m_model;
 };
 
 #endif

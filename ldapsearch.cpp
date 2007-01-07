@@ -19,7 +19,7 @@
 */
 
 #include "ldapsearch.h"
-#include "ldapdefs.h"
+#include <kldap/ldapdefs.h>
 
 #include "QtCore/QEventLoop"
 #include "QtCore/QTimer"
@@ -60,6 +60,13 @@ LdapSearch::~LdapSearch()
 {
   closeConnection();
   delete d;
+}
+
+void LdapSearch::setConnection( LdapConnection &connection )
+{
+  closeConnection();
+  d->mOwnConnection = false;
+  d->mConn = &connection;
 }
 
 void LdapSearch::closeConnection()

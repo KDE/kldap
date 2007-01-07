@@ -21,9 +21,9 @@
 #ifndef KLDAP_LDAPOPERATION_H
 #define KLDAP_LDAPOPERATION_H
 
-#include <QtCore/QString>
-#include <QtCore/QList>
-#include <QtCore/QByteArray>
+#include <QString>
+#include <QList>
+#include <QByteArray>
 
 #include <kldap/ldapurl.h>
 #include <kldap/ldapobject.h>

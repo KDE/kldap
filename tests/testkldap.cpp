@@ -24,10 +24,13 @@
 #include "testkldap.moc"
 
 #include "ldif.h"
+#include "ldapdn.h"
 #include "ldapurl.h"
 #include "ldapserver.h"
 #include "ldapconnection.h"
+#include "ldapmodel.h"
 #include "ldapoperation.h"
+#include "ldapsearch.h"
 #include "ber.h"
 
 #include "kldap.h"
@@ -41,8 +44,162 @@
 
 QTEST_KDEMAIN( KLdapTest, NoGUI )
 
-using namespace KLDAP;
+void KLdapTest::initTestCase()
+{
+    /*
+       Read in the connection details of an LDAP server to use for testing.
+       You should copy the file testurl.txt.tmpl to testurl.txt and specify a url in this file.
+       The specified server should not be a production server in case we break anything here.
+       You have been warned!
+    */
+    QString filename( "testurl.txt" );
+    QFile file( filename );
+    if ( file.open( QIODevice::ReadOnly | QIODevice::Text ) )
+    {
+        QTextStream stream( &file );
+        stream >> m_url;
+        file.close();
+    }
+    else
+        QCOMPARE( 0, 1 );
 
+    m_search = new LdapSearch;
+
+    /* Let's also create an LdapModel object */
+    m_model = new LdapModel( this );
+}
+
+
+void KLdapTest::cleanupTestCase()
+{
+    if ( m_search )
+        delete m_search;
+
+    if ( m_model )
+        delete m_model;
+}
+
+
+void KLdapTest::testLdapUrl()
+{
+    // Test LdapUrl using some hardwired values so that we know what to compare to
+    LdapUrl url;
+    bool critical;
+
+    url.setUrl("ldap://cn=manager,dc=kde,dc=org:password@localhost:3999/dc=kde,dc=org?cn,mail?sub?(objectClass=*)?x-dir=base");
+    url.parseQuery();
+
+    QCOMPARE( url.user(), QString::fromLatin1("cn=manager,dc=kde,dc=org") );
+    QCOMPARE( url.password(), QString::fromLatin1("password") );
+    QCOMPARE( url.dn(), QString::fromLatin1("dc=kde,dc=org") );
+    QCOMPARE( url.scope(), LdapUrl::Sub );
+    QCOMPARE( url.attributes().at(0), QString::fromLatin1("cn") );
+    QCOMPARE( url.attributes().at(1), QString::fromLatin1("mail") );
+    QCOMPARE( url.filter(), QString::fromLatin1("(objectClass=*)") );
+    QCOMPARE( url.extension(QString::fromLatin1("x-dir"), critical), QString::fromLatin1("base") );
+}
+
+
+void KLdapTest::testLdapConnection()
+{
+    // Try to connect using an LdapUrl (read in from testurl.txt).
+    LdapUrl url;
+    url.setUrl( m_url );
+
+    LdapConnection conn;
+    conn.setUrl( url );
+    int ret;
+    if ( ret = conn.connect() )
+        kDebug() << "Could not connect to LDAP server. Error was: " << conn.connectionError() << endl;
+    QCOMPARE( ret, 0 );
+
+    // Now attempt to bind
+    if ( ret = conn.bind() )
+        kDebug() << "Could not bind to server. Error was: " << conn.ldapErrorString() << endl;
+    QCOMPARE( ret, 0 );
+}
+
+
+void KLdapTest::testLdapSearch()
+{
+    // Lets try a search using the specified url
+    LdapUrl url;
+    url.setUrl( m_url );
+    url.parseQuery();
+    connect( m_search, SIGNAL( result( LdapSearch* ) ),
+             this, SLOT( searchResult( LdapSearch* ) ) );
+    connect( m_search, SIGNAL( data( LdapSearch*, const LdapObject& ) ),
+             this, SLOT( searchData( LdapSearch*, const LdapObject& ) ) );
+    bool success = m_search->search( url );
+    while( QCoreApplication::hasPendingEvents() )
+        qApp->processEvents();
+
+    QCOMPARE( success, true );
+
+    kDebug() << "Search found " << m_objects.size() << " matching entries" << endl;
+}
+
+void KLdapTest::searchResult( LdapSearch* search )
+{
+    kDebug() << "KLdapTest::searchResult()" << endl;
+    int err = search->error();
+    if ( err )
+        kDebug() << "Search returned the following error: " << search->errorString() << endl;
+    QCOMPARE( err, 0 );
+}
+
+
+void KLdapTest::searchData( LdapSearch* /*search*/, const LdapObject& obj )
+{
+    //kDebug() << "KLdapTest::searchData()" << endl;
+    //kDebug() << "Object:" << endl << obj.toString() << endl;
+    m_objects.append( obj );
+}
+
+
+void KLdapTest::testLdapDN()
+{
+    QString strDN( "uid=Test\\+Person+ou=accounts\\,outgoing,dc=kde,dc=org" );
+    LdapDN dn( strDN );
+    QCOMPARE( dn.isValid(), true );
+    QCOMPARE( dn.rdnString(), QString( "uid=Test\\+Person+ou=accounts\\,outgoing" ) );
+}
+
+
+void KLdapTest::testLdapModel()
+{
+    // Use the user-supplied testing url
+    LdapUrl url;
+    url.setUrl( m_url );
+
+    // Create a connection to use and bind with it
+    LdapConnection conn;
+    conn.setUrl( url );
+    int ret;
+    if ( ret = conn.connect() )
+        kDebug() << "Could not connect to LDAP server. Error was: " << conn.connectionError() << endl;
+    QCOMPARE( ret, 0 );
+
+    if ( ret = conn.bind() )
+        kDebug() << "Could not bind to server. Error was: " << conn.ldapErrorString() << endl;
+    QCOMPARE( ret, 0 );
+
+    // Let's use this connection with the model
+    m_model->setConnection( conn );
+
+    while( QCoreApplication::hasPendingEvents() )
+        qApp->processEvents();
+
+    QModelIndex rootIndex = QModelIndex();
+    QVariant data = m_model->data( rootIndex, Qt::DisplayRole );
+    kDebug() << "Root Item Distinguished Name = " << data.toString() << endl;
+
+    QVERIFY( m_model->hasChildren( rootIndex ) == true );
+    QVERIFY( m_model->canFetchMore( rootIndex ) == false );
+}
+
+
+/*
 void KLdapTest::testKLdap()
 {
   LdapUrl url;
@@ -86,7 +243,7 @@ void KLdapTest::testKLdap()
   QCOMPARE( c3.oid(), QString::fromLatin1("1.2.3.4.5.6") );
   QCOMPARE( c3.value(), QByteArray("abcdefg") );
   QCOMPARE( c3.critical(), true );
-
+*/
   //test Ber functions
 /*
   QByteArray left1("bertest"), right1;
@@ -186,4 +343,6 @@ void KLdapTest::testKLdap()
   result = op.result( msgid );
   kDebug() << "error code " << conn.ldapErrorCode() << " str: " << conn.ldapErrorString() << endl;
 */
+/*
 }
+*/

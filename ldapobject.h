@@ -21,10 +21,11 @@
 #ifndef KLDAP_LDAPOBJECT_H
 #define KLDAP_LDAPOBJECT_H
 
-#include <QtCore/QString>
-#include <QtCore/QList>
-#include <QtCore/QMap>
+#include <QString>
+#include <QList>
+#include <QMap>
 
+#include <kldap/ldapdn.h>
 #include <kldap/kldap.h>
 
 namespace KLDAP {
@@ -40,10 +41,10 @@ namespace KLDAP {
       LdapObject();
       explicit LdapObject( const QString& dn );
       virtual ~LdapObject();
-      
+
       LdapObject( const LdapObject& that );
       LdapObject& operator=( const LdapObject& that );
-                                            
+
       /**
        * Returns the text presentation (LDIF format) of the object.
        */
@@ -53,6 +54,10 @@ namespace KLDAP {
        * Clears the name and attributes of the object.
        */
       void clear();
+      /**
+       * Sets the Distinguished Name of the object.
+       */
+      void setDn( const LdapDN &dn );
       /**
        * Sets the Distinguished Name of the object.
        */
@@ -74,7 +79,7 @@ namespace KLDAP {
       /**
        * Return the Distinguished Name of the object.
        */
-      QString dn() const;
+      LdapDN dn() const;
       /**
        * Returns the attributes and their values.
        */

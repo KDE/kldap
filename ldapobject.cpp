@@ -19,51 +19,56 @@
 */
 
 #include "ldapobject.h"
-#include "ldif.h"
+#include <kldap/ldif.h>
 
 using namespace KLDAP;
 
 class LdapObject::LdapObjectPrivate {
   public:
-    QString mDn;
+    LdapDN mDn;
     LdapAttrMap mAttrs;
 };
 
 LdapObject::LdapObject()
   : d( new LdapObjectPrivate )
 {
-  d->mDn = QString();
+  d->mDn = LdapDN();
 }
 
 LdapObject::LdapObject( const QString& dn )
   : d( new LdapObjectPrivate )
 {
-  d->mDn = dn;
+  d->mDn = LdapDN( dn );
 }
 
 LdapObject::~LdapObject()
 {
   delete d;
-}                  
+}
 
 LdapObject::LdapObject( const LdapObject& that )
   : d( new LdapObjectPrivate )
 {
   *d = *that.d;
 }
-      
+
 LdapObject& LdapObject::operator=( const LdapObject& that ) 
-{ 
+{
   if ( this == &that ) return *this;
 
   *d = *that.d;
 
   return *this; 
 }
-            
+
+void LdapObject::setDn( const LdapDN &dn )
+{
+  d->mDn = dn;
+}
+
 void LdapObject::setDn( const QString &dn ) 
 { 
-  d->mDn = dn; 
+  d->mDn = LdapDN( dn );
 }
 
 void LdapObject::setAttributes( const LdapAttrMap &attrs ) 
@@ -71,11 +76,11 @@ void LdapObject::setAttributes( const LdapAttrMap &attrs )
   d->mAttrs = attrs; 
 }
 
-QString LdapObject::dn() const 
-{ 
-  return d->mDn; 
+LdapDN LdapObject::dn() const
+{
+  return d->mDn;
 }
-                                            
+
 const LdapAttrMap &LdapObject::attributes() const 
 { 
   return d->mAttrs; 
@@ -83,7 +88,7 @@ const LdapAttrMap &LdapObject::attributes() const
                                                 
 QString LdapObject::toString() const
 {
-  QString result = QString::fromLatin1( "dn: %1\n" ).arg( d->mDn );
+  QString result = QString::fromLatin1( "dn: %1\n" ).arg( d->mDn.toString() );
   for ( LdapAttrMap::ConstIterator it = d->mAttrs.begin(); it != d->mAttrs.end(); ++it ) {
     QString attr = it.key();
     for ( LdapAttrValue::ConstIterator it2 = (*it).begin(); it2 != (*it).end(); ++it2 ) {

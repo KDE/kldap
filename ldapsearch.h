@@ -21,10 +21,10 @@
 #ifndef KLDAP_LDAPSEARCH_H
 #define KLDAP_LDAPSEARCH_H
 
-#include <QtCore/QObject>
-#include <QtCore/QString>
-#include <QtCore/QList>
-#include <QtCore/QByteArray>
+#include <QObject>
+#include <QString>
+#include <QList>
+#include <QByteArray>
 
 #include <kldap/ldapurl.h>
 #include <kldap/ldapobject.h>
@@ -57,6 +57,12 @@ namespace KLDAP {
       LdapSearch( LdapConnection &connection );
 
       virtual ~LdapSearch();
+
+      /**
+       * Sets the connection for this object to use for searches from now onwards,
+       * regardless of the LDAP Url or LdapServer object passed to search().
+       */
+      void setConnection( LdapConnection &connection );
 
       /**
        * Sets the client controls which will sent with each operation.

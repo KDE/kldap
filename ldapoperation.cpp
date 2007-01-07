@@ -329,7 +329,7 @@ int LdapOperation::add( const LdapObject &object )
     }
   }
 
-  int retval = ldap_add_ext( ld, object.dn().toUtf8(), lmod, serverctrls, clientctrls, &msgid );
+  int retval = ldap_add_ext( ld, object.dn().toString().toUtf8(), lmod, serverctrls, clientctrls, &msgid );
 
   ldap_controls_free( serverctrls );
   ldap_controls_free( clientctrls );
@@ -357,7 +357,7 @@ int LdapOperation::add_s( const LdapObject &object )
     }
   }
 
-  int retval = ldap_add_ext_s( ld, object.dn().toUtf8(), lmod, serverctrls, clientctrls );
+  int retval = ldap_add_ext_s( ld, object.dn().toString().toUtf8(), lmod, serverctrls, clientctrls );
 
   ldap_controls_free( serverctrls );
   ldap_controls_free( clientctrls );

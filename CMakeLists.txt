@@ -38,7 +38,11 @@ set(kldap_LIB_SRCS
    ldapoperation.cpp
    ldapcontrol.cpp
    ldapsearch.cpp
-   ldapconfigwidget.cpp )
+   ldapconfigwidget.cpp
+   ldapdn.cpp
+   ldapmodeltreeitem.cpp
+   ldapmodel.cpp
+   ldapmodel_p.cpp )
 
 kde4_automoc(${kldap_LIB_SRCS})
 
@@ -56,4 +60,5 @@ install(TARGETS kldap DESTINATION ${LIB_INSTALL_DIR})
 
 install( FILES ber.h kldap.h ldapdefs.h ldif.h ldapurl.h ldapserver.h ldapobject.h 
   ldapconnection.h ldapoperation.h 
-  ldapconfigwidget.h ldapcontrol.h ldapsearch.h DESTINATION ${INCLUDE_INSTALL_DIR}/kldap)
+  ldapconfigwidget.h ldapcontrol.h ldapsearch.h
+  ldapdn.h ldapmodel.h ldapmodeltreeitem.h DESTINATION ${INCLUDE_INSTALL_DIR}/kldap)
