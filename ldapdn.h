@@ -21,12 +21,14 @@
 #ifndef KLDAP_LDAPDN_H
 #define KLDAP_LDAPDN_H
 
+#include <kldap/kldap.h>
+
 #include <QString>
 #include <QStringList>
 
 namespace KLDAP {
 
-class LdapDN
+class KLDAP_EXPORT LdapDN
 {
     public:
         explicit LdapDN();
