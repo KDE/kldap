@@ -1,17 +1,17 @@
 /*
   This file is part of libkldap.
   Copyright (c) 2004-2006 Szombathelyi György <gyurco@freemail.hu>
-    
+
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Library General  Public
   License as published by the Free Software Foundation; either
   version 2 of the License, or (at your option) any later version.
-            
+
   This library is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
   Library General Public License for more details.
-                    
+
   You should have received a copy of the GNU Library General Public License
   along with this library; see the file COPYING.LIB.  If not, write to
   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
@@ -20,7 +20,7 @@
 
 #include "ldapcontrol.h"
 
-#include <kldap/ber.h>
+#include "ber.h"
 
 using namespace KLDAP;
 
@@ -49,14 +49,16 @@ LdapControl::LdapControl( const LdapControl &that )
   setControl( that.d->mOid, that.d->mValue, that.d->mCritical );
 }
 
-LdapControl& LdapControl::operator= (const LdapControl& that)
+LdapControl &LdapControl::operator= ( const LdapControl &that )
 {
-  if ( this == &that ) return *this;
+  if ( this == &that ) {
+    return *this;
+  }
 
   setControl( that.d->mOid, that.d->mValue, that.d->mCritical );
 
   return *this;
-}     
+}
 
 LdapControl::~LdapControl()
 {
@@ -100,23 +102,26 @@ void LdapControl::setCritical( bool critical )
 
 int LdapControl::parsePageControl( QByteArray &cookie ) const
 {
-  if ( d->mOid != "1.2.840.113556.1.4.319" ) return -1;
-  
+  if ( d->mOid != "1.2.840.113556.1.4.319" ) {
+    return -1;
+  }
+
   Ber ber( d->mValue );
   int size;
-  if ( ber.scanf( "{iO}", &size, &cookie ) == -1 ) 
+  if ( ber.scanf( "{iO}", &size, &cookie ) == -1 ) {
     return -1;
-  else
+  } else {
     return size;
+  }
 }
 
 LdapControl LdapControl::createPageControl( int pagesize, const QByteArray &cookie )
 {
   LdapControl control;
   Ber ber;
-  
+
   ber.printf( "{iO}", pagesize, &cookie );
-  control.setOid("1.2.840.113556.1.4.319");
+  control.setOid( "1.2.840.113556.1.4.319" );
   control.setValue( ber.flatten() );
   return control;
 }
