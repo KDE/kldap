@@ -42,8 +42,8 @@ class LdapModel::LdapModelPrivate
             ChildObjects
         };
 
-        explicit LdapModelPrivate();
-        explicit LdapModelPrivate( LdapConnection& connection );
+        explicit LdapModelPrivate( LdapModel *parent );
+        explicit LdapModelPrivate( LdapModel *parent, LdapConnection& connection );
 
         ~LdapModelPrivate();
 
@@ -72,10 +72,13 @@ class LdapModel::LdapModelPrivate
         SearchType searchType() { return m_searchType; }
         LdapModelTreeItem* searchItem() { return m_searchItem; }
 
-    private:
         void createConnections();
+        void populateRootToBaseDN();
+        void gotSearchResult( LdapSearch* );
+        void gotSearchData( LdapSearch*, const LdapObject& );
 
     private:
+        LdapModel* m_parent;
         LdapModelTreeItem* m_root;
         LdapSearch* m_search;
         LdapObjects m_searchResultObjects;

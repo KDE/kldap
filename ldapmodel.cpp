@@ -29,36 +29,26 @@ using namespace KLDAP;
 
 LdapModel::LdapModel( QObject* parent )
     : QAbstractItemModel( parent ),
-      m_d( new LdapModelPrivate )
+      m_d( new LdapModelPrivate( this ) )
 {
-    createConnections();
+    m_d->createConnections();
 }
 
 
 LdapModel::LdapModel( LdapConnection& connection, QObject* parent )
     : QAbstractItemModel( parent ),
-      m_d( new LdapModelPrivate( connection ) )
+      m_d( new LdapModelPrivate( this, connection ) )
 {
-    createConnections();
+    m_d->createConnections();
 
     // Populate items from the root object to that representing the baseDN
-    populateRootToBaseDN();
+    m_d->populateRootToBaseDN();
 }
 
 
 LdapModel::~LdapModel()
 {
-    if ( m_d )
-        delete m_d;
-}
-
-
-void LdapModel::createConnections()
-{
-    connect( m_d->search(), SIGNAL( result( LdapSearch* ) ),
-             this, SLOT( gotSearchResult( LdapSearch* ) ) );
-    connect( m_d->search(), SIGNAL( data( LdapSearch*, const LdapObject& ) ),
-             this, SLOT( gotSearchData( LdapSearch*, const LdapObject& ) ) );
+    delete m_d;
 }
 
 
@@ -70,7 +60,7 @@ void LdapModel::setConnection( LdapConnection& connection )
     m_d->recreateRootItem();
 
     // Populate the root object by searching the baseDN
-    populateRootToBaseDN();
+    m_d->populateRootToBaseDN();
 }
 
 
@@ -216,121 +206,5 @@ void LdapModel::fetchMore( const QModelIndex& parent )
     parentItem->setPopulated( true );
 }
 
-
-void LdapModel::populateRootToBaseDN()
-{
-    kDebug() << "LdapModel::populateRootToBaseDN()" << endl;
-
-    if ( m_d->baseDN().isEmpty() )
-    {
-        // Query the server for the base DN
-        m_d->setSearchType( LdapModelPrivate::NamingContexts, m_d->rootItem() );
-        m_d->search( LdapDN(), LdapUrl::Base, QString(), QStringList() << "namingContexts" );
-        return;
-    }
-
-    // Start a search for the details of the baseDN object
-    m_d->searchResults().clear();
-    LdapModelTreeItem* searchItem = m_d->rootItem();
-    m_d->setSearchType( LdapModelPrivate::BaseDN, searchItem );
-    m_d->search( m_d->baseDN(), LdapUrl::Base, QString(), QStringList() << "dn" << "objectClass" );
-}
-
-
-void LdapModel::gotSearchResult( LdapSearch* )
-{
-    kDebug() << "LdapModel::gotSearchResult()" << endl;
-
-    switch ( m_d->searchType() )
-    {
-        case LdapModelPrivate::NamingContexts:
-        {
-            // Set the baseDN
-            QString baseDN;
-            if ( !m_d->searchResults().isEmpty() &&
-                m_d->searchResults().at( 0 ).hasAttribute( "namingContexts" ) )
-            {
-                baseDN = m_d->searchResults().at( 0 ).value( "namingContexts" );
-                kDebug() << "Found baseDN = " << baseDN << endl;
-            }
-            m_d->setBaseDN( LdapDN( baseDN ) );
-
-            // Flag that we are no longer searching for the baseDN
-            m_d->setSearchType( LdapModelPrivate::NotSearching );
-
-            // Populate the root item
-            populateRootToBaseDN();
-
-            break;
-        }
-        case LdapModelPrivate::BaseDN:
-        {
-            kDebug() << "Found details of the baseDN object. Creating objects down to this level." << endl;
-
-            // Get the baseDN LdapObject
-            LdapObject baseDNObj = m_d->searchResults().at( 0 );
-
-            // How many levels of items do we need to create?
-            int depth = baseDNObj.dn().depth();
-
-            // Create items that represent objects down to the baseDN
-            LdapModelTreeItem* parent = m_d->rootItem();
-            LdapModelTreeItem* item = 0;
-            for ( int i = 0; i < depth; i++ )
-            {
-                QString dn = m_d->baseDN().toString( i );
-                kDebug() << "Creating item for DN :" << dn << endl;
-                LdapObject obj( dn );
-                item = new LdapModelTreeItem( parent, obj );
-                parent = item;
-            }
-
-            // Store the search result
-            item->setLdapObject( m_d->searchResults().at( 0 ) );
-
-            // Flag that we are no longer searching
-            m_d->setSearchType( LdapModelPrivate::NotSearching );
-            //emit( layoutChanged() );
-
-            break;
-        }
-        case LdapModelPrivate::ChildObjects:
-        {
-            kDebug() << "Found " << m_d->searchResults().size() << " child objects" << endl;
-
-            // Create an index for the soon-to-be-a-parent item
-            LdapModelTreeItem* parentItem = m_d->searchItem();
-            int r = parentItem->row();
-            QModelIndex parentIndex = createIndex( r, 0, parentItem );
-
-            beginInsertRows( parentIndex, 0, m_d->searchResults().size() );
-            for ( int i = 0; i < m_d->searchResults().size(); i++ )
-            {
-                LdapObject itemData = m_d->searchResults().at( i );
-                LdapModelTreeItem* item = new LdapModelTreeItem( parentItem, itemData );
-                if ( !item )
-                    kDebug() << "Could not create LdapModelTreeItem" << endl;
-            }
-
-            // Flag that we are no longer searching
-            m_d->setSearchType( LdapModelPrivate::NotSearching );
-
-            endInsertRows();
-            emit( layoutChanged() );
-
-            break;
-        }
-        default:
-            break;
-    }
-}
-
-
-void LdapModel::gotSearchData( LdapSearch*, const LdapObject& obj )
-{
-    kDebug() << "LdapModel::gotSearchData()" << endl;
-    //kDebug() << "Object:" << endl << obj.toString() << endl;
-    m_d->searchResults().append( obj );
-}
 
 #include "ldapmodel.moc"

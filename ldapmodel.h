@@ -21,7 +21,7 @@
 #ifndef KLDAP_LDAPMODEL_H
 #define KLDAP_LDAPMODEL_H
 
-#include <QAbstractItemModel>
+#include <QtCore/QAbstractItemModel>
 
 #include <kldap/ldapconnection.h>
 #include <kldap/ldapobject.h>
@@ -54,16 +54,11 @@ class KLDAP_EXPORT LdapModel : public QAbstractItemModel
         virtual void fetchMore( const QModelIndex& parent );
 
     private:
-        void createConnections();
-        void populateRootToBaseDN();
-
-    private slots:
-        void gotSearchResult( LdapSearch* );
-        void gotSearchData( LdapSearch*, const LdapObject& );
-
-    private:
         class LdapModelPrivate;
         LdapModelPrivate* const m_d;
+
+        Q_PRIVATE_SLOT( m_d, void gotSearchResult( LdapSearch* ) )
+        Q_PRIVATE_SLOT( m_d, void gotSearchData( LdapSearch*, const LdapObject& ) )
 };
 
 }
