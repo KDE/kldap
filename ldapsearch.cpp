@@ -1,17 +1,17 @@
 /*
   This file is part of libkldap.
   Copyright (c) 2004-2006 Szombathelyi György <gyurco@freemail.hu>
-    
+
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Library General  Public
   License as published by the Free Software Foundation; either
   version 2 of the License, or (at your option) any later version.
-            
+
   This library is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
   Library General Public License for more details.
-                    
+
   You should have received a copy of the GNU Library General Public License
   along with this library; see the file COPYING.LIB.  If not, write to
   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
@@ -19,7 +19,7 @@
 */
 
 #include "ldapsearch.h"
-#include <kldap/ldapdefs.h>
+#include "ldapdefs.h"
 
 #include "QtCore/QEventLoop"
 #include "QtCore/QTimer"
@@ -37,7 +37,7 @@ class LdapSearch::LdapSearchPrivate {
     QString mBase, mFilter;
     QStringList mAttributes;
     LdapUrl::Scope mScope;
-    
+
     QString mErrorString;
     int mError;
 };
@@ -49,7 +49,7 @@ LdapSearch::LdapSearch()
   d->mConn = 0;
 }
 
-LdapSearch::LdapSearch( LdapConnection &connection ) 
+LdapSearch::LdapSearch( LdapConnection &connection )
  : d( new LdapSearchPrivate )
 {
   d->mOwnConnection = false;
@@ -101,16 +101,19 @@ bool LdapSearch::connect()
   }
   return true;
 }
-                               
+
 bool LdapSearch::search( const LdapServer &server,
-  const QStringList& attributes )
+                         const QStringList &attributes )
 {
   if ( d->mOwnConnection ) {
     closeConnection();
     d->mConn = new LdapConnection( server );
-    if ( !connect() ) return false;
+    if ( !connect() ) {
+      return false;
+    }
   }
-  return startSearch( server.baseDn(), server.scope(), server.filter(), attributes, server.pageSize() );
+  return startSearch( server.baseDn(), server.scope(), server.filter(),
+                      attributes, server.pageSize() );
 }
 
 bool LdapSearch::search( const LdapUrl &url )
@@ -118,24 +121,29 @@ bool LdapSearch::search( const LdapUrl &url )
   if ( d->mOwnConnection ) {
     closeConnection();
     d->mConn = new LdapConnection( url );
-    if ( !connect() ) return false;
+    if ( !connect() ) {
+      return false;
+    }
   }
   bool critical;
   int pagesize = url.extension( QLatin1String("x-pagesize"), critical ).toInt();
-  return startSearch( url.dn(), url.scope(), url.filter(), url.attributes(), pagesize );
+  return startSearch( url.dn(), url.scope(), url.filter(),
+                      url.attributes(), pagesize );
 }
 
 bool LdapSearch::search( const QString &base, LdapUrl::Scope scope,
-  const QString &filter, const QStringList& attributes, int pagesize )
+                         const QString &filter, const QStringList &attributes,
+                         int pagesize )
 {
   Q_ASSERT( !d->mOwnConnection );
   return startSearch( base, scope, filter, attributes, pagesize );
 }
 
 bool LdapSearch::startSearch( const QString &base, LdapUrl::Scope scope,
-  const QString &filter, const QStringList& attributes, int pagesize )
+                              const QString &filter,
+                              const QStringList &attributes, int pagesize )
 {
-  kDebug() << "search: base=" << base << " scope=" << scope << " filter=" << filter 
+  kDebug() << "search: base=" << base << " scope=" << scope << " filter=" << filter
     << " attributes=" << attributes << " pagesize=" << pagesize  << endl;
   d->mAbandoned = false;
   d->mError = 0;
@@ -151,20 +159,20 @@ bool LdapSearch::startSearch( const QString &base, LdapUrl::Scope scope,
     LdapControls ctrls = savedctrls;
     ctrls.append( LdapControl::createPageControl( pagesize ) );
     d->mOp.setServerControls( ctrls );
-  }                  
+  }
 
   d->mId = d->mOp.search( base, scope, filter, attributes );
   if ( pagesize ) {
     d->mOp.setServerControls( savedctrls );
   }
-  
+
   if ( d->mId == -1 ) {
     return false;
   }
   kDebug() << "search::startSearch msg id=" << d->mId << endl;
   QTimer::singleShot( 0, this, SLOT(result()) ); //maybe do this with threads?
-  return true;  
-}              
+  return true;
+}
 
 void LdapSearch::abandon()
 {
@@ -190,7 +198,9 @@ void LdapSearch::result()
       int estsize = -1;
       for ( int i = 0; i < d->mOp.controls().count(); ++i ) {
         estsize = d->mOp.controls()[i].parsePageControl( cookie );
-        if ( estsize != -1 ) break;
+        if ( estsize != -1 ) {
+          break;
+        }
       }
       kDebug() << " estimated size: " << estsize << endl;
       if ( estsize != -1 && !cookie.isEmpty() ) {
