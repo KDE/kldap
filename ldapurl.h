@@ -26,7 +26,7 @@
 
 #include <kurl.h>
 
-#include <kldap/kldap.h>
+#include "kldap.h"
 
 namespace KLDAP {
 
@@ -35,39 +35,40 @@ namespace KLDAP {
 
  * LdapUrl implements an RFC 2255 compliant LDAP Url parser, with minimal
  * differences. LDAP Urls implemented by this class has the following format:
- * ldap[s]://[user[:password]@]hostname[:port]["/" [dn ["?" [attributes] 
+ * ldap[s]://[user[:password]@]hostname[:port]["/" [dn ["?" [attributes]
  * ["?" [scope] ["?" [filter] ["?" extensions]]]]]]
  */
 
-
-  class KLDAP_EXPORT LdapUrl : public KUrl
-  {
+class KLDAP_EXPORT LdapUrl : public KUrl
+{
   public:
 
     typedef struct {
       QString value;
       bool critical;
     } Extension;
-    
-    typedef enum { Base, One, Sub } Scope;
+
+    typedef enum {
+      Base, One, Sub
+    } Scope;
 
     /** Constructs an empty KLdapUrl. */
     LdapUrl();
     /** Constructs a KLdapUrl from a KUrl. */
-    LdapUrl( const KUrl &url );
+    explicit LdapUrl( const KUrl &url );
     /** Constructs a KLdapUrl from a LdapUrl. */
     LdapUrl( const LdapUrl &that );
 
-    LdapUrl& operator=( const LdapUrl &that );
+    LdapUrl &operator=( const LdapUrl &that );
 
     virtual ~LdapUrl();
-  
+
     /**
      * Returns the dn part of the LDAP Url (same as path(), but slash removed
      * from the beginning).
      */
     QString dn() const;
-    /** Sets the the dn part of the LDAP Url. */ 
+    /** Sets the the dn part of the LDAP Url. */
     void setDn( const QString &dn );
 
     /** Returns the attributes part of the LDAP Url */
@@ -102,15 +103,16 @@ namespace KLDAP {
     /** Updates the query component from the attributes, scope, filter and extensions */
     void updateQuery();
 
-    /** Parses the query argument of the URL and makes it available via the 
+    /** Parses the query argument of the URL and makes it available via the
       * attributes(), extension(), filter() and scope() methods
       */
     void parseQuery();
-    
+
   private:
     class LdapUrlPrivate;
-    LdapUrlPrivate* const d;
-  };
+    LdapUrlPrivate *const d;
+};
+
 }
 
 #endif

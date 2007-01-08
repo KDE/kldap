@@ -46,15 +46,15 @@ LdapUrl::LdapUrl()
 {
 }
 
-LdapUrl::LdapUrl(const KUrl &_url)
-  : KUrl(_url), d( new LdapUrlPrivate )
+LdapUrl::LdapUrl( const KUrl &_url )
+  : KUrl( _url ), d( new LdapUrlPrivate )
 {
   QString tmp = path();
-  if ( !QDir::isRelativePath(tmp) )
+  if ( !QDir::isRelativePath( tmp ) )
 #ifdef Q_WS_WIN
-    tmp.remove(0,3); // e.g. "c:/"
+    tmp.remove( 0, 3 ); // e.g. "c:/"
 #else
-    tmp.remove(0,1);
+    tmp.remove( 0, 1 );
 #endif
   parseQuery();
 }
@@ -65,10 +65,11 @@ LdapUrl::LdapUrl( const LdapUrl &that )
   *d = *that.d;
 }
 
-LdapUrl& LdapUrl::operator=( const LdapUrl &that )
+LdapUrl &LdapUrl::operator=( const LdapUrl &that )
 {
-  if ( this == &that )
+  if ( this == &that ) {
     return *this;
+  }
 
   KUrl::operator=( that );
   *d = *that.d;
@@ -81,26 +82,26 @@ LdapUrl::~LdapUrl()
   delete d;
 }
 
-void LdapUrl::setDn( const QString &dn)
+void LdapUrl::setDn( const QString &dn )
 {
   QString tmp = dn;
-  if ( !QDir::isRelativePath(tmp) )
+  if ( !QDir::isRelativePath( tmp ) )
 #ifdef Q_WS_WIN
-    tmp.remove(0,3); // e.g. "c:/"
+    tmp.remove( 0, 3 ); // e.g. "c:/"
 #else
-    tmp.remove(0,1);
+    tmp.remove( 0, 1 );
 #endif
-  setPath(tmp);
+  setPath( tmp );
 }
 
 QString LdapUrl::dn() const
 {
   QString tmp = path();
-  if ( !QDir::isRelativePath(tmp) )
+  if ( !QDir::isRelativePath( tmp ) )
 #ifdef Q_WS_WIN
-    tmp.remove(0,3); // e.g. "c:/"
+    tmp.remove( 0, 3 ); // e.g. "c:/"
 #else
-    tmp.remove(0,1);
+    tmp.remove( 0, 1 );
 #endif
   return tmp;
 }
@@ -148,9 +149,9 @@ LdapUrl::Extension LdapUrl::extension( const QString &key ) const
   QMap<QString, Extension>::const_iterator it;
 
   it = d->m_extensions.find( key );
-  if ( it != d->m_extensions.constEnd() )
+  if ( it != d->m_extensions.constEnd() ) {
     return (*it);
-  else {
+  } else {
     Extension ext;
     ext.value = "";
     ext.critical = false;
@@ -202,7 +203,9 @@ void LdapUrl::updateQuery()
   QString q = "?";
 
   // set the attributes to query
-  if ( d->m_attributes.count() > 0 ) q += d->m_attributes.join(",");
+  if ( d->m_attributes.count() > 0 ) {
+    q += d->m_attributes.join(",");
+  }
 
   // set the scope
   q += '?';
@@ -220,22 +223,27 @@ void LdapUrl::updateQuery()
 
   // set the filter
   q += '?';
-  if ( d->m_filter != "(objectClass=*)" && !d->m_filter.isEmpty() )
+  if ( d->m_filter != "(objectClass=*)" && !d->m_filter.isEmpty() ) {
     q += d->m_filter;
+  }
 
   // set the extensions
   q += '?';
   for ( it = d->m_extensions.constBegin(); it != d->m_extensions.constEnd(); ++it ) {
-    if ( it.value().critical ) q += '!';
+    if ( it.value().critical ) {
+      q += '!';
+    }
     q += it.key();
-    if ( !it.value().value.isEmpty() )
+    if ( !it.value().value.isEmpty() ) {
       q += '=' + it.value().value;
+    }
     q += ',';
   }
-  while  ( q.endsWith("?") || q.endsWith(",") )
+  while  ( q.endsWith("?") || q.endsWith(",") ) {
     q.remove( q.length() - 1, 1 );
+  }
 
-  setQuery(q);
+  setQuery( q );
   kDebug(5700) << "LDAP URL updateQuery(): " << prettyUrl() << endl;
 }
 
@@ -245,11 +253,12 @@ void LdapUrl::parseQuery()
   QStringList extensions;
   QString q = query();
   // remove first ?
-  if (q.startsWith("?"))
-    q.remove(0,1);
+  if ( q.startsWith( "?" ) ) {
+    q.remove( 0, 1 );
+  }
 
   // split into a list
-  QStringList url_items = q.split('?');
+  QStringList url_items = q.split( '?' );
 
   d->m_attributes.clear();
   d->m_scope = Base;
@@ -258,13 +267,16 @@ void LdapUrl::parseQuery()
 
   int i = 0;
   for ( QStringList::Iterator it = url_items.begin(); it != url_items.end(); ++it, i++ ) {
-    switch (i) {
+    switch ( i ) {
       case 0:
         d->m_attributes = (*it).split( ',', QString::SkipEmptyParts );
         break;
       case 1:
-        if ( (*it) == "sub" ) d->m_scope = Sub; else
-        if ( (*it) == "one") d->m_scope = One;
+        if ( (*it) == "sub" ) {
+          d->m_scope = Sub;
+        } else if ( (*it) == "one") {
+          d->m_scope = One;
+        }
         break;
       case 2:
         d->m_filter = fromPercentEncoding( (*it).toLatin1() );
@@ -275,14 +287,14 @@ void LdapUrl::parseQuery()
     }
   }
 
-  QString name,value;
+  QString name, value;
   for ( QStringList::Iterator it = extensions.begin(); it != extensions.end(); ++it ) {
     ext.critical = false;
-    name = fromPercentEncoding( (*it).section('=',0,0).toLatin1() ).toLower();
-    value = fromPercentEncoding( (*it).section('=',1).toLatin1() );
+    name = fromPercentEncoding( (*it).section( '=', 0, 0 ).toLatin1() ).toLower();
+    value = fromPercentEncoding( (*it).section( '=', 1 ).toLatin1() );
     if ( name.startsWith("!") ) {
       ext.critical = true;
-      name.remove(0, 1);
+      name.remove( 0, 1 );
     }
     kDebug(5700) << "LdapUrl extensions name= " << name << " value: " << value << endl;
     ext.value = value.replace( "%2", "," );
