@@ -37,8 +37,69 @@ class LdapDN::LdapDNPrivate
         ~LdapDNPrivate()
         {}
 
+        bool isValidRDNString( const QString& rdn ) const;
+        QStringList splitOnNonEscapedChar( const QString& rdn, const QChar& ch ) const;
+
         QString m_dn;
 };
+
+
+bool LdapDN::LdapDNPrivate::isValidRDNString( const QString& rdn ) const
+{
+    kDebug() << "LdapDN::LdapDNPrivate::isValidRDNString(): Testing rdn: " << rdn << endl;
+
+    // If it is a muli-valued rdn, split it into its constituent parts
+    QStringList rdnParts = splitOnNonEscapedChar( rdn, QChar( '+' ) );
+    if ( rdnParts.size() > 1 )
+    {
+        for ( int i = 0; i < rdnParts.size(); i++ )
+        {
+            if ( !isValidRDNString( rdnParts.at( i ) ) )
+                return false;
+        }
+        return true;
+    }
+
+    // Split the rdn into the attribute name and value parts
+    QStringList components = rdn.split( "=" );
+
+    // We should have exactly two parts
+    if ( components.size() != 2 )
+        return false;
+
+    return true;
+}
+
+
+QStringList LdapDN::LdapDNPrivate::splitOnNonEscapedChar( const QString& str, const QChar& ch ) const
+{
+    QStringList strParts;
+    int index = 0;
+    int searchFrom = 0;
+    int strPartStartIndex = 0;
+    while ( ( index = str.indexOf( ch, searchFrom ) ) != -1 )
+    {
+        const QChar prev = str[std::max(0,index-1)];
+        if ( prev != QChar( '\\' ) )
+        {
+            // Found a component of a multi-valued RDN
+            //kDebug() << "Found " << ch << " at index " << index << endl;
+            QString tmp = str.mid( strPartStartIndex, index - strPartStartIndex );
+            //kDebug() << "Adding part: " << tmp << endl;
+            strParts.append( tmp );
+            strPartStartIndex = index + 1;
+        }
+
+        searchFrom = index + 1;
+    }
+
+    // Add on the part after the last found delimeter
+    QString tmp = str.mid( strPartStartIndex );
+    //kDebug() << "Adding part: " << tmp << endl;
+    strParts.append( tmp );
+
+    return strParts;
+}
 
 
 LdapDN::LdapDN()
@@ -98,7 +159,7 @@ QString LdapDN::toString() const
 
 QString LdapDN::toString( int depth ) const
 {
-    QStringList rdns = splitOnNonEscapedChar( d->m_dn, QChar( ',' ) );
+    QStringList rdns = d->splitOnNonEscapedChar( d->m_dn, QChar( ',' ) );
     if ( depth >= rdns.size() )
         return QString();
 
@@ -118,14 +179,14 @@ QString LdapDN::toString( int depth ) const
 QString LdapDN::rdnString() const
 {
     /** \TODO We should move this into the d pointer as we calculate rdns quite a lot */
-    QStringList rdns = splitOnNonEscapedChar( d->m_dn, QChar( ',' ) );
+    QStringList rdns = d->splitOnNonEscapedChar( d->m_dn, QChar( ',' ) );
     return rdns.at( 0 );
 }
 
 
 QString LdapDN::rdnString( int depth ) const
 {
-    QStringList rdns = splitOnNonEscapedChar( d->m_dn, QChar( ',' ) );
+    QStringList rdns = d->splitOnNonEscapedChar( d->m_dn, QChar( ',' ) );
     if ( depth >= rdns.size() )
         return QString();
     return rdns.at( rdns.size() - 1 - depth );
@@ -137,12 +198,12 @@ bool LdapDN::isValid() const
     kDebug() << "LdapDN::isValid(): Testing dn: " << d->m_dn << endl;
 
     // Break the string into rdn's
-    QStringList rdns = splitOnNonEscapedChar( d->m_dn, QChar( ',' ) );
+    QStringList rdns = d->splitOnNonEscapedChar( d->m_dn, QChar( ',' ) );
 
     // Test to see if each rdn is valid
     for ( int i = 0; i < rdns.size(); i++ )
     {
-        if ( !isValidRDNString( rdns.at( i ) ) )
+        if ( !d->isValidRDNString( rdns.at( i ) ) )
             return false;
     }
 
@@ -150,66 +211,8 @@ bool LdapDN::isValid() const
 }
 
 
-bool LdapDN::isValidRDNString( const QString& rdn ) const
-{
-    kDebug() << "LdapDN::isValidRDNString(): Testing rdn: " << rdn << endl;
-
-    // If it is a muli-valued rdn, split it into its constituent parts
-    QStringList rdnParts = splitOnNonEscapedChar( rdn, QChar( '+' ) );
-    if ( rdnParts.size() > 1 )
-    {
-        for ( int i = 0; i < rdnParts.size(); i++ )
-        {
-            if ( !isValidRDNString( rdnParts.at( i ) ) )
-                return false;
-        }
-        return true;
-    }
-
-    // Split the rdn into the attribute name and value parts
-    QStringList components = rdn.split( "=" );
-
-    // We should have exactly two parts
-    if ( components.size() != 2 )
-        return false;
-
-    return true;
-}
-
-
-QStringList LdapDN::splitOnNonEscapedChar( const QString& str, const QChar& ch ) const
-{
-    QStringList strParts;
-    int index = 0;
-    int searchFrom = 0;
-    int strPartStartIndex = 0;
-    while ( ( index = str.indexOf( ch, searchFrom ) ) != -1 )
-    {
-        const QChar prev = str[std::max(0,index-1)];
-        if ( prev != QChar( '\\' ) )
-        {
-            // Found a component of a multi-valued RDN
-            //kDebug() << "Found " << ch << " at index " << index << endl;
-            QString tmp = str.mid( strPartStartIndex, index - strPartStartIndex );
-            //kDebug() << "Adding part: " << tmp << endl;
-            strParts.append( tmp );
-            strPartStartIndex = index + 1;
-        }
-
-        searchFrom = index + 1;
-    }
-
-    // Add on the part after the last found delimeter
-    QString tmp = str.mid( strPartStartIndex );
-    //kDebug() << "Adding part: " << tmp << endl;
-    strParts.append( tmp );
-
-    return strParts;
-}
-
-
 int LdapDN::depth() const
 {
-    QStringList rdns = splitOnNonEscapedChar( d->m_dn, QChar( ',' ) );
+    QStringList rdns = d->splitOnNonEscapedChar( d->m_dn, QChar( ',' ) );
     return rdns.size();
 }

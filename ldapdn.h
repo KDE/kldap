@@ -49,7 +49,7 @@ class KLDAP_EXPORT LdapDN
         QString toString() const;
 
         /**
-         * \param levels The depth of the DN to return using a zero-based index.
+         * \param depth The depth of the DN to return using a zero-based index.
          * \returns A QString representing the DN levels deep in the directory.
          */
         QString toString( int depth ) const;
@@ -60,7 +60,7 @@ class KLDAP_EXPORT LdapDN
         QString rdnString() const;
 
         /**
-         * \param levels The depth of the RDN to return using a zero-based index.
+         * \param depth The depth of the RDN to return using a zero-based index.
          * \returns A QString representing the RDN levels deep in the directory.
          */
         QString rdnString( int depth ) const;
@@ -74,10 +74,6 @@ class KLDAP_EXPORT LdapDN
          * \returns The depth of this DN in the directory.
          */
         int depth() const;
-
-    private:
-        bool isValidRDNString( const QString& rdn ) const;
-        QStringList splitOnNonEscapedChar( const QString& rdn, const QChar& ch ) const;
 
     private:
         class LdapDNPrivate;
