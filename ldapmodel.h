@@ -23,9 +23,9 @@
 
 #include <QtCore/QAbstractItemModel>
 
-#include <kldap/ldapconnection.h>
-#include <kldap/ldapobject.h>
-#include <kldap/kldap.h>
+#include "ldapconnection.h"
+#include "ldapobject.h"
+#include "kldap.h"
 
 namespace KLDAP {
 
