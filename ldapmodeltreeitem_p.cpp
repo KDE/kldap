@@ -1,21 +1,21 @@
 /*
-    This file is part of libkldap.
-    Copyright (c) 2006 Sean Harmer <sh@theharmers.co.uk>
+  This file is part of libkldap.
+  Copyright (c) 2006 Sean Harmer <sh@theharmers.co.uk>
 
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Library General  Public
-    License as published by the Free Software Foundation; either
-    version 2 of the License, or (at your option) any later version.
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Library General  Public
+  License as published by the Free Software Foundation; either
+  version 2 of the License, or (at your option) any later version.
 
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Library General Public License for more details.
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Library General Public License for more details.
 
-    You should have received a copy of the GNU Library General Public License
-    along with this library; see the file COPYING.LIB.  If not, write to
-    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-    Boston, MA 02110-1301, USA.
+  You should have received a copy of the GNU Library General Public License
+  along with this library; see the file COPYING.LIB.  If not, write to
+  the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+  Boston, MA 02110-1301, USA.
 */
 
 #include "ldapmodeltreeitem_p.h"
@@ -24,84 +24,74 @@
 
 using namespace KLDAP;
 
-LdapModelTreeItem::LdapModelTreeItem( LdapModelTreeItem* parent, const LdapObject& data )
-    : m_childItems(),
-      m_parent( parent ),
-      m_itemData( data ),
-      m_isPopulated( false )
+LdapModelTreeItem::LdapModelTreeItem( LdapModelTreeItem *parent, const LdapObject &data )
+  : m_childItems(),
+    m_parent( parent ),
+    m_itemData( data ),
+    m_isPopulated( false )
 {
-    kDebug() << "LdapModelTreeItem::LdapModelTreeItem() : Object = " << data.toString() << endl;
-    if ( m_parent )
-        m_parent->appendChild( this );
+  kDebug() << "LdapModelTreeItem::LdapModelTreeItem() : Object = " << data.toString() << endl;
+  if ( m_parent ) {
+    m_parent->appendChild( this );
+  }
 }
-
 
 LdapModelTreeItem::~LdapModelTreeItem()
 {
-    qDeleteAll( m_childItems );
+  qDeleteAll( m_childItems );
 }
 
-
-void LdapModelTreeItem::appendChild( LdapModelTreeItem* pItem )
+void LdapModelTreeItem::appendChild( LdapModelTreeItem *pItem )
 {
-    m_childItems.append( pItem );
-    setPopulated( true );
+  m_childItems.append( pItem );
+  setPopulated( true );
 }
 
-
-LdapModelTreeItem* LdapModelTreeItem::child( int row )
+LdapModelTreeItem *LdapModelTreeItem::child( int row )
 {
-    return m_childItems.value( row );
+  return m_childItems.value( row );
 }
 
-
-LdapModelTreeItem* LdapModelTreeItem::parent()
+LdapModelTreeItem *LdapModelTreeItem::parent()
 {
-    return m_parent;
+  return m_parent;
 }
-
 
 int LdapModelTreeItem::childCount() const
 {
-    return m_childItems.count();
+  return m_childItems.count();
 }
-
 
 int LdapModelTreeItem::columnCount() const
 {
-    return 1;
+  return 1;
 }
 
-
-const LdapObject& LdapModelTreeItem::data() const
+const LdapObject &LdapModelTreeItem::data() const
 {
-    return m_itemData;
+  return m_itemData;
 }
-
 
 int LdapModelTreeItem::row() const
 {
-    if ( m_parent )
-        return m_parent->m_childItems.indexOf( const_cast<LdapModelTreeItem*>( this ) );
-    return 0;
+  if ( m_parent ) {
+    return m_parent->m_childItems.indexOf( const_cast<LdapModelTreeItem*>( this ) );
+  }
+  return 0;
 }
 
-
-LdapObject& LdapModelTreeItem::ldapObject()
+LdapObject &LdapModelTreeItem::ldapObject()
 {
-    return m_itemData;
+  return m_itemData;
 }
 
-
-const LdapObject& LdapModelTreeItem::ldapObject() const
+const LdapObject &LdapModelTreeItem::ldapObject() const
 {
-    return m_itemData;
+  return m_itemData;
 }
 
-
-void LdapModelTreeItem::setLdapObject( const LdapObject& object )
+void LdapModelTreeItem::setLdapObject( const LdapObject &object )
 {
-    kDebug() << "LdapModelTreeItem::setLdapObject() : Object = " << object.toString() << endl;
-    m_itemData = object;
+  kDebug() << "LdapModelTreeItem::setLdapObject() : Object = " << object.toString() << endl;
+  m_itemData = object;
 }
-
