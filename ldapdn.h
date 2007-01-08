@@ -26,6 +26,8 @@
 #include <QString>
 #include <QStringList>
 
+#include <kldap/kldap.h>
+
 namespace KLDAP {
 
 class KLDAP_EXPORT LdapDN
