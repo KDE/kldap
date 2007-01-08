@@ -1,17 +1,17 @@
 /*
   This file is part of libkldap.
   Copyright (c) 2004-2006 Szombathelyi György <gyurco@freemail.hu>
-    
+
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Library General  Public
   License as published by the Free Software Foundation; either
   version 2 of the License, or (at your option) any later version.
-            
+
   This library is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
   Library General Public License for more details.
-                    
+
   You should have received a copy of the GNU Library General Public License
   along with this library; see the file COPYING.LIB.  If not, write to
   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
@@ -45,13 +45,12 @@
 
 using namespace KLDAP;
 
-
-class LdapConnection::LdapConnectionPrivate 
+class LdapConnection::LdapConnectionPrivate
 {
   public:
     LdapServer mServer;
     QString mConnectionError;
-          
+
 #ifdef LDAP_FOUND
     LDAP *mLDAP;
 #else
@@ -78,7 +77,7 @@ LdapConnection::LdapConnection( const LdapServer &server )
   d->mLDAP = 0;
   setServer( server );
 }
-                  
+
 LdapConnection::~LdapConnection()
 {
   close();
@@ -116,9 +115,9 @@ QString LdapConnection::errorString( int code )
 }
 
 QString LdapConnection::connectionError() const
-{ 
-  return d->mConnectionError; 
-}      
+{
+  return d->mConnectionError;
+}
 
 #ifdef LDAP_FOUND
 int LdapConnection::getOption( int option, void *value ) const
@@ -215,12 +214,14 @@ static int kldap_sasl_interact( LDAP *, unsigned, void *defaults, void *in )
       }
     }
     int retval;
-    if ( (retval = data->proc( data->creds, data->data )) ) return retval;
+    if ( (retval = data->proc( data->creds, data->data )) ) {
+      return retval;
+    }
   }
 
   QString value;
-  
-  while( interact->id != SASL_CB_LIST_END ) {
+
+  while ( interact->id != SASL_CB_LIST_END ) {
     value = QString();
     switch( interact->id ) {
       case SASL_CB_GETREALM:
@@ -257,8 +258,10 @@ int LdapConnection::connect()
 {
   int ret;
   QString url;
-  if ( d->mLDAP ) close();
-  
+  if ( d->mLDAP ) {
+    close();
+  }
+
   int version = d->mServer.version();
 
   url = d->mServer.security() == LdapServer::SSL ? "ldaps" : "ldap";
@@ -274,9 +277,9 @@ int LdapConnection::connect()
   }
 
   kDebug() << "setting version to: " << version << endl;
-  if ( (setOption( LDAP_OPT_PROTOCOL_VERSION, &version )) != LDAP_OPT_SUCCESS ) {
+  if ( setOption( LDAP_OPT_PROTOCOL_VERSION, &version ) != LDAP_OPT_SUCCESS ) {
     ret = ldapErrorCode();
-      d->mConnectionError = i18n("Cannot set protocol version to %1.").arg(version);
+      d->mConnectionError = i18n("Cannot set protocol version to %1.").arg( version );
     close();
     return ret;
   }
@@ -291,7 +294,7 @@ int LdapConnection::connect()
       return ret;
     }
   }
-  
+
   kDebug() << "setting sizelimit to: " << d->mServer.sizeLimit() << endl;
   if ( d->mServer.sizeLimit() ) {
     if ( !setSizeLimit( d->mServer.sizeLimit() ) ) {
@@ -317,11 +320,13 @@ int LdapConnection::connect()
 int LdapConnection::bind( SASL_Callback_Proc *saslproc, void *data )
 {
   int ret;
-  
+
   if ( d->mServer.auth() == LdapServer::SASL ) {
 #ifdef SASL2_FOUND
     QString mech = d->mServer.mech();
-    if ( mech.isEmpty() ) mech = "DIGEST-MD5";
+    if ( mech.isEmpty() ) {
+      mech = "DIGEST-MD5";
+    }
 
     SASL_Data sasldata;
     sasldata.proc = saslproc;
@@ -331,7 +336,7 @@ int LdapConnection::bind( SASL_Callback_Proc *saslproc, void *data )
     sasldata.creds.authname = d->mServer.user();
     sasldata.creds.authzid = d->mServer.bindDn();
     sasldata.creds.password = d->mServer.password();
-    
+
     ret = ldap_sasl_interactive_bind_s( d->mLDAP, 0, mech.toLatin1(), 0, 0,
       LDAP_SASL_INTERACTIVE, &kldap_sasl_interact, &sasldata );
 #else
@@ -351,7 +356,9 @@ int LdapConnection::bind( SASL_Callback_Proc *saslproc, void *data )
 
 void LdapConnection::close()
 {
-  if ( d->mLDAP ) ldap_unbind_ext_s( d->mLDAP, 0, 0 );
+  if ( d->mLDAP ) {
+    ldap_unbind_ext_s( d->mLDAP, 0, 0 );
+  }
   d->mLDAP = 0;
   kDebug() << "connection closed!" << endl;
 }
@@ -422,6 +429,5 @@ void LdapConnection::close()
 {
   kError() << "No LDAP support..." << endl;
 }
-
 
 #endif
