@@ -1,17 +1,17 @@
 /*
   This file is part of libkldap.
   Copyright (c) 2004-2006 Szombathelyi György <gyurco@freemail.hu>
-    
+
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Library General  Public
   License as published by the Free Software Foundation; either
   version 2 of the License, or (at your option) any later version.
-            
+
   This library is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
   Library General Public License for more details.
-                    
+
   You should have received a copy of the GNU Library General Public License
   along with this library; see the file COPYING.LIB.  If not, write to
   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
@@ -25,7 +25,7 @@
 
 #include <kdebug.h>
 
-#include <kldap_config.h>
+#include "kldap_config.h"
 
 #include <cstdarg>
 
@@ -67,7 +67,7 @@ Ber::~Ber()
   delete d;
 }
 
-Ber::Ber( const Ber& that )
+Ber::Ber( const Ber &that )
   : d( new BerPrivate )
 {
   struct berval *bv;
@@ -77,9 +77,11 @@ Ber::Ber( const Ber& that )
   }
 }
 
-Ber& Ber::operator=( const Ber& that )
+Ber &Ber::operator=( const Ber &that )
 {
-  if ( this == &that ) return *this;
+  if ( this == &that ) {
+    return *this;
+  }
 
   struct berval *bv;
   if ( ber_flatten( that.d->mBer, &bv ) == 0 ) {
@@ -106,7 +108,7 @@ int Ber::printf( const QString &format, ... )
   va_list args;
   va_start ( args, format );
   fmt[1] = '\0';
-  
+
   int i = 0, ret = 0;
   while ( i < format.length() ) {
     fmt[0] = format[i].toLatin1();
@@ -114,7 +116,7 @@ int Ber::printf( const QString &format, ... )
     switch ( fmt[0] ) {
       case 'b':
       case 'e':
-      case 'i': 
+      case 'i':
         {
           ber_int_t v = va_arg( args, int );
           kDebug() << fmt << ": " << v << endl;
@@ -211,7 +213,9 @@ int Ber::printf( const QString &format, ... )
         ret = -1;
     }
     kDebug() << " ber format: " << fmt << " ret: " << ret << endl;
-    if ( ret == -1 ) break;
+    if ( ret == -1 ) {
+      break;
+    }
   }
   va_end( args );
   return ret;
@@ -223,7 +227,7 @@ int Ber::scanf( const QString &format, ... )
   va_list args;
   va_start ( args, format );
   fmt[1] = '\0';
-  
+
   int i = 0, ret = 0;
   while ( i < format.length() ) {
     fmt[0] = format[i].toLatin1();
@@ -232,7 +236,7 @@ int Ber::scanf( const QString &format, ... )
       case 'l':
       case 'b':
       case 'e':
-      case 'i': 
+      case 'i':
         {
           int *v = va_arg( args, int * );
           ret = ber_scanf( d->mBer, fmt, v );
@@ -246,7 +250,7 @@ int Ber::scanf( const QString &format, ... )
           char *c;
           ret = ber_scanf( d->mBer, fmt, &c, Bc );
           if ( ret != -1 ) {
-            *B = QByteArray( c, (*Bc+7)/8 );
+            *B = QByteArray( c, ( *Bc + 7 ) / 8 );
             ber_memfree( c );
           }
           break;
@@ -295,12 +299,12 @@ int Ber::scanf( const QString &format, ... )
           }
           break;
         }
-      
+
       case 's':
         {
           QByteArray *s = va_arg( args, QByteArray * );
           char buf[255];
-          ber_len_t l = sizeof(buf);
+          ber_len_t l = sizeof( buf );
           ret = ber_scanf( d->mBer, fmt, &buf, &l );
           if ( ret != -1 ) {
             *s = QByteArray( buf, l );
@@ -322,7 +326,7 @@ int Ber::scanf( const QString &format, ... )
           ret = ber_scanf( d->mBer, fmt, &c );
           if ( ret != -1 && c ) {
             c2 = c;
-            while (*c) {
+            while ( *c ) {
               v->append( QByteArray( *c ) );
               c++;
             }
@@ -337,7 +341,7 @@ int Ber::scanf( const QString &format, ... )
           ret = ber_scanf( d->mBer, fmt, &bv );
           if ( ret != -1 && bv ) {
             bv2 = bv;
-            while (*bv) {
+            while ( *bv ) {
               v->append( QByteArray( (*bv)->bv_val, (*bv)->bv_len ) );
               bv++;
             }
@@ -374,9 +378,11 @@ int Ber::scanf( const QString &format, ... )
         kWarning() << "Invalid BER format parameter: '" << fmt << "'" << endl;
         ret = -1;
     }
-    
-    if ( ret == -1 ) break;
-  
+
+    if ( ret == -1 ) {
+      break;
+    }
+
   }
   va_end( args );
   return ret;
@@ -420,9 +426,11 @@ Ber::Ber( const Ber&)
   kError() << "LDAP support not compiled" << endl;
 }
 
-Ber& Ber::operator=( const Ber& that )
+Ber &Ber::operator=( const Ber &that )
 {
-  if ( this == &that ) return *this;
+  if ( this == &that ) {
+    return *this;
+  }
   kError() << "LDAP support not compiled" << endl;
   return *this;
 }
