@@ -19,7 +19,7 @@
 */
 
 #include "ldapobject.h"
-#include <kldap/ldif.h>
+#include "ldif.h"
 
 using namespace KLDAP;
 
@@ -35,7 +35,7 @@ LdapObject::LdapObject()
   d->mDn = LdapDN();
 }
 
-LdapObject::LdapObject( const QString& dn )
+LdapObject::LdapObject( const QString &dn )
   : d( new LdapObjectPrivate )
 {
   d->mDn = LdapDN( dn );
@@ -46,19 +46,21 @@ LdapObject::~LdapObject()
   delete d;
 }
 
-LdapObject::LdapObject( const LdapObject& that )
+LdapObject::LdapObject( const LdapObject &that )
   : d( new LdapObjectPrivate )
 {
   *d = *that.d;
 }
 
-LdapObject& LdapObject::operator=( const LdapObject& that ) 
+LdapObject &LdapObject::operator=( const LdapObject &that )
 {
-  if ( this == &that ) return *this;
+  if ( this == &that ) {
+    return *this;
+  }
 
   *d = *that.d;
 
-  return *this; 
+  return *this;
 }
 
 void LdapObject::setDn( const LdapDN &dn )
@@ -66,14 +68,14 @@ void LdapObject::setDn( const LdapDN &dn )
   d->mDn = dn;
 }
 
-void LdapObject::setDn( const QString &dn ) 
-{ 
+void LdapObject::setDn( const QString &dn )
+{
   d->mDn = LdapDN( dn );
 }
 
-void LdapObject::setAttributes( const LdapAttrMap &attrs ) 
-{ 
-  d->mAttrs = attrs; 
+void LdapObject::setAttributes( const LdapAttrMap &attrs )
+{
+  d->mAttrs = attrs;
 }
 
 LdapDN LdapObject::dn() const
@@ -81,11 +83,11 @@ LdapDN LdapObject::dn() const
   return d->mDn;
 }
 
-const LdapAttrMap &LdapObject::attributes() const 
-{ 
-  return d->mAttrs; 
+const LdapAttrMap &LdapObject::attributes() const
+{
+  return d->mAttrs;
 }
-                                                
+
 QString LdapObject::toString() const
 {
   QString result = QString::fromLatin1( "dn: %1\n" ).arg( d->mDn.toString() );
@@ -104,15 +106,15 @@ void LdapObject::clear()
   d->mAttrs.clear();
 }
 
-void LdapObject::setValues( const QString &attributeName, const LdapAttrValue& values )
+void LdapObject::setValues( const QString &attributeName, const LdapAttrValue &values )
 {
   d->mAttrs[ attributeName ] = values;
-}      
+}
 
 void LdapObject::addValue( const QString &attributeName, const QByteArray &value )
 {
   d->mAttrs[ attributeName ].append( value );
-}     
+}
 
 LdapAttrValue LdapObject::values( const QString &attributeName ) const
 {
@@ -131,7 +133,7 @@ QByteArray LdapObject::value( const QString &attributeName ) const
     return QByteArray();
   }
 }
-                                       
+
 bool LdapObject::hasAttribute( const QString &attributeName ) const
 {
   return d->mAttrs.contains( attributeName );
