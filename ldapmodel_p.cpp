@@ -19,8 +19,8 @@
 */
 
 #include "ldapmodel_p.h"
-#include <kldap/ldapmodeltreeitem.h>
-#include <kldap/ldapsearch.h>
+#include "kldap/ldapmodeltreeitem_p.h"
+#include "kldap/ldapsearch.h"
 
 #include <kdebug.h>
 

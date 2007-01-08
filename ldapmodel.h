@@ -29,9 +29,6 @@
 
 namespace KLDAP {
 
-class LdapModelTreeItem;
-class LdapSearch;
-
 class KLDAP_EXPORT LdapModel : public QAbstractItemModel
 {
   Q_OBJECT

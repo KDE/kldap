@@ -22,8 +22,8 @@
 
 #include "ldapmodel.h"
 #include "ldapmodel_p.h"
-#include <kldap/ldapmodeltreeitem.h>
-#include <kldap/ldapsearch.h>
+#include "kldap/ldapmodeltreeitem_p.h"
+#include "kldap/ldapsearch.h"
 
 using namespace KLDAP;
 

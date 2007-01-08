@@ -18,7 +18,7 @@
     Boston, MA 02110-1301, USA.
 */
 
-#include "ldapmodeltreeitem.h"
+#include "ldapmodeltreeitem_p.h"
 
 #include <kdebug.h>
 

@@ -40,7 +40,7 @@ set(kldap_LIB_SRCS
    ldapsearch.cpp
    ldapconfigwidget.cpp
    ldapdn.cpp
-   ldapmodeltreeitem.cpp
+   ldapmodeltreeitem_p.cpp
    ldapmodel.cpp
    ldapmodel_p.cpp )
 
@@ -61,4 +61,4 @@ install(TARGETS kldap DESTINATION ${LIB_INSTALL_DIR})
 install( FILES ber.h kldap.h ldapdefs.h ldif.h ldapurl.h ldapserver.h ldapobject.h 
   ldapconnection.h ldapoperation.h 
   ldapconfigwidget.h ldapcontrol.h ldapsearch.h
-  ldapdn.h ldapmodel.h ldapmodeltreeitem.h DESTINATION ${INCLUDE_INSTALL_DIR}/kldap)
+  ldapdn.h ldapmodel.h DESTINATION ${INCLUDE_INSTALL_DIR}/kldap)
