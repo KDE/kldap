@@ -40,245 +40,245 @@ class KComboBox;
 class KLineEdit;
 
 namespace KLDAP {
-  
-  class LdapSearch;
 
-  /**
-    @brief LDAP Configuration widget
+class LdapSearch;
 
-    This class can be used to query the user for LDAP connection parameters.
-    It's KConfigXT compatible, using widget names starting with kcfg_
-  */
+/**
+  @brief LDAP Configuration widget
 
-  class KLDAP_EXPORT LdapConfigWidget : public QWidget
-  {
-    Q_OBJECT
-    Q_FLAGS(WinFlags)
-    Q_ENUMS(Security)
-    Q_ENUMS(Auth)
-    Q_PROPERTY( WinFlags features READ features WRITE setFeatures )
-    Q_PROPERTY( QString user READ user WRITE setUser )
-    Q_PROPERTY( QString bindDn READ bindDn WRITE setBindDn )
-    Q_PROPERTY( QString realm READ realm WRITE setRealm )
-    Q_PROPERTY( QString password READ password WRITE setPassword )
-    Q_PROPERTY( QString host READ host WRITE setHost )
-    Q_PROPERTY( int port READ port WRITE setPort )
-    Q_PROPERTY( int version READ version WRITE setVersion )
-    Q_PROPERTY( QString dn READ dn WRITE setDn )
-    Q_PROPERTY( QString filter READ filter WRITE setFilter )
-    Q_PROPERTY( QString mech READ mech WRITE setMech )
-    Q_PROPERTY( Security security READ security WRITE setSecurity )
-    Q_PROPERTY( Auth auth READ auth WRITE setAuth )
-    Q_PROPERTY( int sizeLimit READ sizeLimit WRITE setSizeLimit )
-    Q_PROPERTY( int timeLimit READ timeLimit WRITE setTimeLimit )
-    Q_PROPERTY( int pageSize READ pageSize WRITE setPageSize )
+  This class can be used to query the user for LDAP connection parameters.
+  It's KConfigXT compatible, using widget names starting with kcfg_
+*/
 
-    public:
+class KLDAP_EXPORT LdapConfigWidget : public QWidget
+{
+  Q_OBJECT
+  Q_FLAGS(WinFlags)
+  Q_ENUMS(Security)
+  Q_ENUMS(Auth)
+  Q_PROPERTY( WinFlags features READ features WRITE setFeatures )
+  Q_PROPERTY( QString user READ user WRITE setUser )
+  Q_PROPERTY( QString bindDn READ bindDn WRITE setBindDn )
+  Q_PROPERTY( QString realm READ realm WRITE setRealm )
+  Q_PROPERTY( QString password READ password WRITE setPassword )
+  Q_PROPERTY( QString host READ host WRITE setHost )
+  Q_PROPERTY( int port READ port WRITE setPort )
+  Q_PROPERTY( int version READ version WRITE setVersion )
+  Q_PROPERTY( QString dn READ dn WRITE setDn )
+  Q_PROPERTY( QString filter READ filter WRITE setFilter )
+  Q_PROPERTY( QString mech READ mech WRITE setMech )
+  Q_PROPERTY( Security security READ security WRITE setSecurity )
+  Q_PROPERTY( Auth auth READ auth WRITE setAuth )
+  Q_PROPERTY( int sizeLimit READ sizeLimit WRITE setSizeLimit )
+  Q_PROPERTY( int timeLimit READ timeLimit WRITE setTimeLimit )
+  Q_PROPERTY( int pageSize READ pageSize WRITE setPageSize )
 
-      enum WinFlag {
-        W_USER = 0x1,
-        W_BINDDN = 0x2,
-        W_REALM = 0x4,
-        W_PASS = 0x8,
-        W_HOST = 0x10,
-        W_PORT = 0x20,
-        W_VER = 0x40,
-        W_DN = 0x80,
-        W_FILTER = 0x100,
-        W_SECBOX = 0x200,
-        W_AUTHBOX = 0x400,
-        W_TIMELIMIT = 0x800,
-        W_SIZELIMIT = 0x1000,
-	W_PAGESIZE = 0x2000,
-        W_ALL = 0x2fff
-      };
-      
-      typedef enum { None, SSL, TLS } Security;
-      typedef enum { Anonymous, Simple, SASL } Auth;
+  public:
 
-      Q_DECLARE_FLAGS( WinFlags, WinFlag )
+    enum WinFlag {
+      W_USER = 0x1,
+      W_BINDDN = 0x2,
+      W_REALM = 0x4,
+      W_PASS = 0x8,
+      W_HOST = 0x10,
+      W_PORT = 0x20,
+      W_VER = 0x40,
+      W_DN = 0x80,
+      W_FILTER = 0x100,
+      W_SECBOX = 0x200,
+      W_AUTHBOX = 0x400,
+      W_TIMELIMIT = 0x800,
+      W_SIZELIMIT = 0x1000,
+      W_PAGESIZE = 0x2000,
+      W_ALL = 0x2fff
+    };
 
-      /** Constructs an empty configuration widget.
-       * You need to call setFlags() after this.
-       */
-      LdapConfigWidget( QWidget* parent = 0, Qt::WFlags fl = 0 );
-      /** Constructs a configuration widget */
-      LdapConfigWidget( WinFlags flags, QWidget* parent = 0,
-                        Qt::WFlags fl = 0 );
-      /** Destructs a configuration widget */
-      virtual ~LdapConfigWidget();
+    typedef enum { None, SSL, TLS } Security;
+    typedef enum { Anonymous, Simple, SASL } Auth;
 
-      /** Sets the user name. Kconfig widget name: kcfg_ldapuser */
-      void setUser( const QString &user );
-      /** Gets the user name. Kconfig widget name: kcfg_ldapuser */
-      QString user() const;
+    Q_DECLARE_FLAGS( WinFlags, WinFlag )
 
-      /** Sets the password. Kconfig widget name: kcfg_ldappassword */
-      void setPassword( const QString &password );
-      /** Gets the password. Kconfig widget name: kcfg_ldappassword */
-      QString password() const;
+    /** Constructs an empty configuration widget.
+     * You need to call setFlags() after this.
+     */
+    LdapConfigWidget( QWidget* parent = 0, Qt::WFlags fl = 0 );
+    /** Constructs a configuration widget */
+    explicit LdapConfigWidget( WinFlags flags, QWidget* parent = 0,
+                               Qt::WFlags fl = 0 );
+    /** Destructs a configuration widget */
+    virtual ~LdapConfigWidget();
 
-      /**
-       * Sets the bind dn.
-       * Kconfig widget name: kcfg_ldapbinddn
-       */
-      void setBindDn( const QString &binddn );
-      /** Gets the bind dn. Kconfig widget name: kcfg_ldapbinddn*/
-      QString bindDn() const;
+    /** Sets the user name. Kconfig widget name: kcfg_ldapuser */
+    void setUser( const QString &user );
+    /** Gets the user name. Kconfig widget name: kcfg_ldapuser */
+    QString user() const;
 
-      /** Sets the SASL realm. Kconfig widget name: kcfg_ldaprealm */
-      void setRealm( const QString &realm );
-      /** Gets the SASL realm. Kconfig widget name: kcfg_ldaprealm */
-      QString realm() const;
+    /** Sets the password. Kconfig widget name: kcfg_ldappassword */
+    void setPassword( const QString &password );
+    /** Gets the password. Kconfig widget name: kcfg_ldappassword */
+    QString password() const;
 
-      /** Sets the host name. Kconfig widget name: kcfg_ldaphost */
-      void setHost( const QString &host );
-      /** Gets the host name. Kconfig widget name: kcfg_ldaphost */
-      QString host() const;
+    /**
+     * Sets the bind dn.
+     * Kconfig widget name: kcfg_ldapbinddn
+     */
+    void setBindDn( const QString &binddn );
+    /** Gets the bind dn. Kconfig widget name: kcfg_ldapbinddn*/
+    QString bindDn() const;
 
-      /** Sets the LDAP port. Kconfig widget name: kcfg_ldapport */
-      void setPort( int port );
-      /** Gets the LDAP port. Kconfig widget name: kcfg_ldapport */
-      int port() const;
+    /** Sets the SASL realm. Kconfig widget name: kcfg_ldaprealm */
+    void setRealm( const QString &realm );
+    /** Gets the SASL realm. Kconfig widget name: kcfg_ldaprealm */
+    QString realm() const;
 
-      /** Sets the LDAP protocol version. Kconfig widget name: kcfg_ldapver */
-      void setVersion( int version );
-      /** Gets the LDAP protocol version. Kconfig widget name: kcfg_ldapver */
-      int version() const;
+    /** Sets the host name. Kconfig widget name: kcfg_ldaphost */
+    void setHost( const QString &host );
+    /** Gets the host name. Kconfig widget name: kcfg_ldaphost */
+    QString host() const;
 
-      /** Sets the LDAP Base DN. Kconfig widget name: kcfg_ldapdn */
-      void setDn( const QString &dn );
-      /** Gets the LDAP Base DN. Kconfig widget name: kcfg_ldapdn */
-      QString dn() const;
+    /** Sets the LDAP port. Kconfig widget name: kcfg_ldapport */
+    void setPort( int port );
+    /** Gets the LDAP port. Kconfig widget name: kcfg_ldapport */
+    int port() const;
 
-      /** Sets the LDAP Filter. Kconfig widget name: kcfg_ldapfilter */
-      void setFilter( const QString &filter );
-      /** Gets the LDAP Filter. Kconfig widget name: kcfg_ldapfilter */
-      QString filter() const;
+    /** Sets the LDAP protocol version. Kconfig widget name: kcfg_ldapver */
+    void setVersion( int version );
+    /** Gets the LDAP protocol version. Kconfig widget name: kcfg_ldapver */
+    int version() const;
 
-      /** Sets the SASL Mechanism. Kconfig widget name: kcfg_ldapsaslmech */
-      void setMech( const QString &mech );
-      /** Gets the SASL Mechanism. Kconfig widget name: kcfg_ldapsaslmech */
-      QString mech() const;
+    /** Sets the LDAP Base DN. Kconfig widget name: kcfg_ldapdn */
+    void setDn( const QString &dn );
+    /** Gets the LDAP Base DN. Kconfig widget name: kcfg_ldapdn */
+    QString dn() const;
 
-      /**
-       * Sets the security type (None, SSL, TLS).
-       * Kconfig widget names: kcfg_ldapnosec, kcfg_ldaptls, kcfg_ldapssl
-       */
-      void setSecurity( Security security );
-      /**
-       * Returns the security type.
-       * Kconfig widget names: kcfg_ldapnosec, kcfg_ldaptls, kcfg_ldapssl
-       */
-      Security security() const;
+    /** Sets the LDAP Filter. Kconfig widget name: kcfg_ldapfilter */
+    void setFilter( const QString &filter );
+    /** Gets the LDAP Filter. Kconfig widget name: kcfg_ldapfilter */
+    QString filter() const;
 
-      /**
-       * Sets the authentication type (Anonymous, Simple, SASL).
-       * Kconfig widget names: kcfg_ldapanon, kcfg_ldapsimple, kcfg_ldapsasl
-       */
-      void setAuth( Auth auth );
-      /**
-       * Returns the authentication type.
-       * Kconfig widget names: kcfg_ldapanon, kcfg_ldapsimple, kcfg_ldapsasl
-       */
-      Auth auth() const;
+    /** Sets the SASL Mechanism. Kconfig widget name: kcfg_ldapsaslmech */
+    void setMech( const QString &mech );
+    /** Gets the SASL Mechanism. Kconfig widget name: kcfg_ldapsaslmech */
+    QString mech() const;
 
-      /**
-       * Sets the size limit.
-       * KConfig widget name: kcfg_ldapsizelimit
-       */
-      void setSizeLimit( int sizelimit );
-      /**
-       * Returns the size limit.
-       * KConfig widget name: kcfg_ldapsizelimit
-       */
-      int sizeLimit() const;
+    /**
+     * Sets the security type (None, SSL, TLS).
+     * Kconfig widget names: kcfg_ldapnosec, kcfg_ldaptls, kcfg_ldapssl
+     */
+    void setSecurity( Security security );
+    /**
+     * Returns the security type.
+     * Kconfig widget names: kcfg_ldapnosec, kcfg_ldaptls, kcfg_ldapssl
+     */
+    Security security() const;
 
-      /**
-       * Sets the time limit.
-       * KConfig widget name: kcfg_ldaptimelimit
-       */
-      void setTimeLimit( int timelimit );
-      /**
-       * Returns the time limit.
-       * KConfig widget name: kcfg_ldaptimelimit
-       */
-      int timeLimit() const;
+    /**
+     * Sets the authentication type (Anonymous, Simple, SASL).
+     * Kconfig widget names: kcfg_ldapanon, kcfg_ldapsimple, kcfg_ldapsasl
+     */
+    void setAuth( Auth auth );
+    /**
+     * Returns the authentication type.
+     * Kconfig widget names: kcfg_ldapanon, kcfg_ldapsimple, kcfg_ldapsasl
+     */
+    Auth auth() const;
 
-      /**
-       * Sets the page size.
-       * KConfig widget name: kcfg_ldappagesize
-       */
-      void setPageSize( int pagesize );
-      /**
-       * Returns the page size.
-       * KConfig widget name: kcfg_ldappagesize
-       */
-      int pageSize() const;
+    /**
+     * Sets the size limit.
+     * KConfig widget name: kcfg_ldapsizelimit
+     */
+    void setSizeLimit( int sizelimit );
+    /**
+     * Returns the size limit.
+     * KConfig widget name: kcfg_ldapsizelimit
+     */
+    int sizeLimit() const;
 
-      WinFlags features() const;
-      void setFeatures( WinFlags features );
+    /**
+     * Sets the time limit.
+     * KConfig widget name: kcfg_ldaptimelimit
+     */
+    void setTimeLimit( int timelimit );
+    /**
+     * Returns the time limit.
+     * KConfig widget name: kcfg_ldaptimelimit
+     */
+    int timeLimit() const;
 
-      /**
-       * Returns a LDAP Url constructed from the settings given.
-       * Extensions are filled for use in the LDAP ioslave
-       */
-      LdapUrl url() const;
-      /**
-       * Set up the widget via an LDAP Url.
-       */
-      void setUrl( const LdapUrl &url );
+    /**
+     * Sets the page size.
+     * KConfig widget name: kcfg_ldappagesize
+     */
+    void setPageSize( int pagesize );
+    /**
+     * Returns the page size.
+     * KConfig widget name: kcfg_ldappagesize
+     */
+    int pageSize() const;
 
-      /**
-       * Returns an LdapServer object constructed from the settings given.
-       */
-      LdapServer server() const;
-      /**
-       * Set up the widget via an LdapServer object.
-       */
-      void setServer( const LdapServer &server );
+    WinFlags features() const;
+    void setFeatures( WinFlags features );
 
-    private Q_SLOTS:
-      void setLDAPPort();
-      void setLDAPSPort();
-      void setAnonymous( bool on );
-      void setSimple( bool on );
-      void setSASL( bool on );
-      void mQueryDNClicked();
-      void mQueryMechClicked();
-      void loadData( LdapSearch*, const LdapObject &object );
-      void loadResult( LdapSearch* );
-    private:
+    /**
+     * Returns a LDAP Url constructed from the settings given.
+     * Extensions are filled for use in the LDAP ioslave
+     */
+    LdapUrl url() const;
+    /**
+     * Set up the widget via an LDAP Url.
+     */
+    void setUrl( const LdapUrl &url );
 
-      WinFlags mFeatures;
-      QStringList mQResult;
-      QString mAttr;
+    /**
+     * Returns an LdapServer object constructed from the settings given.
+     */
+    LdapServer server() const;
+    /**
+     * Set up the widget via an LdapServer object.
+     */
+    void setServer( const LdapServer &server );
 
-      KLineEdit *mUser;
-      KLineEdit *mPassword;
-      KLineEdit *mHost;
-      QSpinBox  *mPort, *mVersion, *mSizeLimit, *mTimeLimit, *mPageSize;
-      KLineEdit *mDn, *mBindDn, *mRealm;
-      KLineEdit *mFilter;
-      QRadioButton *mAnonymous,*mSimple,*mSASL;
-      QCheckBox *mSubTree;
-      QPushButton *mEditButton;
-      QPushButton *mQueryMech;
-      QRadioButton *mSecNo,*mSecTLS,*mSecSSL;
-      KComboBox *mMech;
+  private Q_SLOTS:
+    void setLDAPPort();
+    void setLDAPSPort();
+    void setAnonymous( bool on );
+    void setSimple( bool on );
+    void setSASL( bool on );
+    void mQueryDNClicked();
+    void mQueryMechClicked();
+    void loadData( LdapSearch*, const LdapObject &object );
+    void loadResult( LdapSearch* );
 
-      bool mCancelled;
-      QProgressDialog *mProg;
+  private:
+    WinFlags mFeatures;
+    QStringList mQResult;
+    QString mAttr;
 
-      QGridLayout *mainLayout;
-      class LDAPConfigWidgetPrivate;
-      LDAPConfigWidgetPrivate *d;
+    KLineEdit *mUser;
+    KLineEdit *mPassword;
+    KLineEdit *mHost;
+    QSpinBox  *mPort, *mVersion, *mSizeLimit, *mTimeLimit, *mPageSize;
+    KLineEdit *mDn, *mBindDn, *mRealm;
+    KLineEdit *mFilter;
+    QRadioButton *mAnonymous,*mSimple,*mSASL;
+    QCheckBox *mSubTree;
+    QPushButton *mEditButton;
+    QPushButton *mQueryMech;
+    QRadioButton *mSecNo,*mSecTLS,*mSecSSL;
+    KComboBox *mMech;
 
-      void sendQuery();
-      void initWidget();
-  };
+    bool mCancelled;
+    QProgressDialog *mProg;
 
-  Q_DECLARE_OPERATORS_FOR_FLAGS(LdapConfigWidget::WinFlags)
+    QGridLayout *mainLayout;
+    class LDAPConfigWidgetPrivate;
+    LDAPConfigWidgetPrivate *d;
+
+    void sendQuery();
+    void initWidget();
+};
+
+Q_DECLARE_OPERATORS_FOR_FLAGS( LdapConfigWidget::WinFlags )
 
 }
 
