@@ -1,21 +1,21 @@
 /*
-    This file is part of libkldap.
-    Copyright (c) 2004-2006 Szombathelyi György <gyurco@freemail.hu>
+  This file is part of libkldap.
+  Copyright (c) 2004-2006 Szombathelyi György <gyurco@freemail.hu>
 
-    This library is free software; you can redistribute it and/or
-    modify it under the terms of the GNU Library General Public
-    License as published by the Free Software Foundation; either
-    version 2 of the License, or (at your option) any later version.
+  This library is free software; you can redistribute it and/or
+  modify it under the terms of the GNU Library General Public
+  License as published by the Free Software Foundation; either
+  version 2 of the License, or (at your option) any later version.
 
-    This library is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
-    Library General Public License for more details.
+  This library is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+  Library General Public License for more details.
 
-    You should have received a copy of the GNU Library General Public License
-    along with this library; see the file COPYING.LIB.  If not, write to
-    the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-    Boston, MA 02110-1301, USA.
+  You should have received a copy of the GNU Library General Public License
+  along with this library; see the file COPYING.LIB.  If not, write to
+  the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+  Boston, MA 02110-1301, USA.
 */
 
 #ifndef KLDAP_LDAPCONFIGWIDGET_H
@@ -24,11 +24,10 @@
 #include <QWidget>
 #include <QString>
 
-#include <kldap/ldapurl.h>
-#include <kldap/ldapserver.h>
-#include <kldap/ldapobject.h>
-
-#include <kldap/kldap.h>
+#include "ldapurl.h"
+#include "ldapserver.h"
+#include "ldapobject.h"
+#include "kldap.h"
 
 class QGridLayout;
 class QSpinBox;
@@ -53,9 +52,9 @@ class LdapSearch;
 class KLDAP_EXPORT LdapConfigWidget : public QWidget
 {
   Q_OBJECT
-  Q_FLAGS(WinFlags)
-  Q_ENUMS(Security)
-  Q_ENUMS(Auth)
+  Q_FLAGS( WinFlags )
+  Q_ENUMS( Security )
+  Q_ENUMS( Auth )
   Q_PROPERTY( WinFlags features READ features WRITE setFeatures )
   Q_PROPERTY( QString user READ user WRITE setUser )
   Q_PROPERTY( QString bindDn READ bindDn WRITE setBindDn )
@@ -93,17 +92,21 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
       W_ALL = 0x2fff
     };
 
-    typedef enum { None, SSL, TLS } Security;
-    typedef enum { Anonymous, Simple, SASL } Auth;
+    typedef enum {
+      None, SSL, TLS
+    } Security;
+    typedef enum {
+      Anonymous, Simple, SASL
+    } Auth;
 
     Q_DECLARE_FLAGS( WinFlags, WinFlag )
 
     /** Constructs an empty configuration widget.
      * You need to call setFlags() after this.
      */
-    LdapConfigWidget( QWidget* parent = 0, Qt::WFlags fl = 0 );
+    LdapConfigWidget( QWidget *parent = 0, Qt::WFlags fl = 0 );
     /** Constructs a configuration widget */
-    explicit LdapConfigWidget( WinFlags flags, QWidget* parent = 0,
+    explicit LdapConfigWidget( WinFlags flags, QWidget *parent = 0,
                                Qt::WFlags fl = 0 );
     /** Destructs a configuration widget */
     virtual ~LdapConfigWidget();
