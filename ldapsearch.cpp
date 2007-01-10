@@ -21,8 +21,8 @@
 #include "ldapsearch.h"
 #include "ldapdefs.h"
 
-#include "QtCore/QEventLoop"
-#include "QtCore/QTimer"
+#include <QtCore/QEventLoop>
+#include <QtCore/QTimer>
 
 #include <kdebug.h>
 
