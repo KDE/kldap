@@ -1,17 +1,17 @@
 /*
   This file is part of libkldap.
   Copyright (c) 2004-2006 Szombathelyi György <gyurco@freemail.hu>
-    
+
   This library is free software; you can redistribute it and/or
   modify it under the terms of the GNU Library General  Public
   License as published by the Free Software Foundation; either
   version 2 of the License, or (at your option) any later version.
-            
+
   This library is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
   Library General Public License for more details.
-                    
+
   You should have received a copy of the GNU Library General Public License
   along with this library; see the file COPYING.LIB.  If not, write to
   the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
@@ -27,19 +27,19 @@ using namespace KLDAP;
 class LdapServer::LdapServerPrivate
 {
   public:
-      QString mHost;
-      int mPort;
-      QString mBaseDn;
-      QString mUser;
-      QString mBindDn;
-      QString mRealm;
-      QString mPassword;
-      QString mMech;
-      QString mFilter;
-      int mTimeLimit, mSizeLimit, mVersion, mPageSize;
-      Security mSecurity;
-      Auth mAuth;
-      LdapUrl::Scope mScope;
+    QString mHost;
+    int mPort;
+    QString mBaseDn;
+    QString mUser;
+    QString mBindDn;
+    QString mRealm;
+    QString mPassword;
+    QString mMech;
+    QString mFilter;
+    int mTimeLimit, mSizeLimit, mVersion, mPageSize;
+    Security mSecurity;
+    Auth mAuth;
+    LdapUrl::Scope mScope;
 };
 
 LdapServer::LdapServer()
@@ -62,10 +62,11 @@ LdapServer::LdapServer( const LdapServer &that )
   *d = *that.d;
 }
 
-LdapServer& LdapServer::operator= (const LdapServer &that)
+LdapServer &LdapServer::operator= ( const LdapServer &that )
 {
-  if ( this == &that )
+  if ( this == &that ) {
     return *this;
+  }
 
   *d = *that.d;
 
@@ -253,32 +254,36 @@ void LdapServer::setUrl( const LdapUrl &url )
 
   d->mHost = url.host();
   int port = url.port();
-  if ( port <= 0 )
+  if ( port <= 0 ) {
     d->mPort = 389;
-  else
+  } else {
     d->mPort = port;
-
+  }
   d->mBaseDn = url.dn();
   d->mScope = url.scope();
-  
+
   d->mFilter = url.filter();
 
   d->mSecurity = None;
-  if ( url.protocol() == "ldaps" ) 
-    d->mSecurity = SSL; 
-  else if ( url.hasExtension("x-tls") )
+  if ( url.protocol() == "ldaps" ) {
+    d->mSecurity = SSL;
+  } else if ( url.hasExtension("x-tls") ) {
     d->mSecurity = TLS;
+  }
   kDebug() << "security: " << d->mSecurity << endl;
 
   d->mMech = d->mUser = d->mBindDn = QString();
   if ( url.hasExtension("x-sasl") ) {
     d->mAuth = SASL;
-    if ( url.hasExtension("x-mech") )
+    if ( url.hasExtension("x-mech") ) {
       d->mMech = url.extension( "x-mech", critical );
-    if ( url.hasExtension("x-realm") ) 
+    }
+    if ( url.hasExtension("x-realm") ) {
       d->mRealm = url.extension( "x-realm", critical );
-    if ( url.hasExtension("binddn") ) 
+    }
+    if ( url.hasExtension("binddn") ) {
       d->mBindDn = url.extension( "bindname", critical );
+    }
     d->mUser = url.user();
   } else if ( url.hasExtension( "bindname" ) ) {
     d->mAuth = Simple;
@@ -293,25 +298,29 @@ void LdapServer::setUrl( const LdapUrl &url )
     }
   }
   d->mPassword = url.password();
-  if ( url.hasExtension("x-version") ) 
+  if ( url.hasExtension("x-version") ) {
     d->mVersion = url.extension( "x-version", critical ).toInt();
-  else
+  } else {
     d->mVersion = 3;
+  }
 
-  if ( url.hasExtension("x-timelimit") ) 
+  if ( url.hasExtension("x-timelimit") ) {
     d->mTimeLimit = url.extension( "x-timelimit", critical ).toInt();
-  else
+  } else {
     d->mTimeLimit = 0;
+  }
 
-  if ( url.hasExtension("x-sizelimit") ) 
+  if ( url.hasExtension("x-sizelimit") ) {
     d->mSizeLimit = url.extension( "x-sizelimit", critical ).toInt();
-  else
+  } else {
     d->mSizeLimit = 0;
+  }
 
-  if ( url.hasExtension("x-pagesize") ) 
+  if ( url.hasExtension("x-pagesize") ) {
     d->mPageSize = url.extension( "x-pagesize", critical ).toInt();
-  else
+  } else {
     d->mPageSize = 0;
+  }
 }
 
 LdapUrl LdapServer::url() const
@@ -328,16 +337,30 @@ LdapUrl LdapServer::url() const
     url.setUser( d->mUser );
     url.setExtension( "bindname", d->mBindDn, true );
     url.setExtension( "x-sasl", QString() );
-    if ( !d->mMech.isEmpty() ) url.setExtension( "x-mech", d->mMech );
-    if ( !d->mRealm.isEmpty() ) url.setExtension( "x-realm", d->mRealm );
+    if ( !d->mMech.isEmpty() ) {
+      url.setExtension( "x-mech", d->mMech );
+    }
+    if ( !d->mRealm.isEmpty() ) {
+      url.setExtension( "x-realm", d->mRealm );
+    }
   } else {
     url.setUser( d->mBindDn );
   }
-  if ( d->mVersion == 2 ) url.setExtension( "x-version", d->mVersion );
-  if ( d->mTimeLimit != 0 ) url.setExtension( "x-timelimit", d->mTimeLimit );
-  if ( d->mSizeLimit != 0 ) url.setExtension( "x-sizelimit", d->mSizeLimit );
-  if ( d->mPageSize != 0 ) url.setExtension( "x-pagesize", d->mPageSize );
-  if ( d->mSecurity == TLS ) url.setExtension( "x-tls", 1, true );
+  if ( d->mVersion == 2 ) {
+    url.setExtension( "x-version", d->mVersion );
+  }
+  if ( d->mTimeLimit != 0 ) {
+    url.setExtension( "x-timelimit", d->mTimeLimit );
+  }
+  if ( d->mSizeLimit != 0 ) {
+    url.setExtension( "x-sizelimit", d->mSizeLimit );
+  }
+  if ( d->mPageSize != 0 ) {
+    url.setExtension( "x-pagesize", d->mPageSize );
+  }
+  if ( d->mSecurity == TLS ) {
+    url.setExtension( "x-tls", 1, true );
+  }
 
   return url;
 }
