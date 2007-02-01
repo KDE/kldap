@@ -104,7 +104,7 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
     /** Constructs an empty configuration widget.
      * You need to call setFlags() after this.
      */
-    LdapConfigWidget( QWidget *parent = 0, Qt::WFlags fl = 0 );
+    explicit LdapConfigWidget( QWidget *parent = 0, Qt::WFlags fl = 0 );
     /** Constructs a configuration widget */
     explicit LdapConfigWidget( WinFlags flags, QWidget *parent = 0,
                                Qt::WFlags fl = 0 );
