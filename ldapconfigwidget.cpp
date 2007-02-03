@@ -41,7 +41,7 @@
 using namespace KLDAP;
 
 LdapConfigWidget::LdapConfigWidget( QWidget *parent, Qt::WFlags fl )
-  : QWidget( parent, fl )
+  : QWidget( parent, fl ), d( 0 )
 {
   mProg = 0;
   mFeatures = W_ALL;
@@ -50,7 +50,7 @@ LdapConfigWidget::LdapConfigWidget( QWidget *parent, Qt::WFlags fl )
 
 LdapConfigWidget::LdapConfigWidget( LdapConfigWidget::WinFlags flags,
                                     QWidget *parent, Qt::WFlags fl )
-  : QWidget( parent, fl )
+  : QWidget( parent, fl ), d( 0 )
 {
   mFeatures = flags;
   mProg = 0;

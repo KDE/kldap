@@ -79,7 +79,7 @@ class KLDAP_EXPORT LdapDN
 
   private:
     class LdapDNPrivate;
-    LdapDNPrivate *d;
+    LdapDNPrivate *const d;
 };
 
 }

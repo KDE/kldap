@@ -275,7 +275,7 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
 
     QGridLayout *mainLayout;
     class LDAPConfigWidgetPrivate;
-    LDAPConfigWidgetPrivate *d;
+    LDAPConfigWidgetPrivate *const d;
 
     void sendQuery();
     void initWidget();

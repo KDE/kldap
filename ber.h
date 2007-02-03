@@ -121,7 +121,7 @@ class KLDAP_EXPORT Ber
 
   private:
     class BerPrivate;
-    BerPrivate* d;
+    BerPrivate *const d;
 };
 
 }
