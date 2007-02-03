@@ -408,11 +408,13 @@ unsigned int Ber::skipTag( int &size )
 #else
 
 Ber::Ber()
+ : d( new BerPrivate )
 {
   kError() << "LDAP support not compiled" << endl;
 }
 
 Ber::Ber( const QByteArray & )
+ : d( new BerPrivate )
 {
   kError() << "LDAP support not compiled" << endl;
 }
@@ -422,6 +424,7 @@ Ber::~Ber()
 }
 
 Ber::Ber( const Ber&)
+ : d( new BerPrivate )
 {
   kError() << "LDAP support not compiled" << endl;
 }
