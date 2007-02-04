@@ -43,7 +43,7 @@ class KLdapTest : public QObject
         void testLdapDN();
         void testLdapModel();
 
-    public slots:
+    public Q_SLOTS:
         void searchResult( LdapSearch* );
         void searchData( LdapSearch*, const LdapObject& );
 
