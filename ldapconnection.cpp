@@ -272,7 +272,7 @@ int LdapConnection::connect()
   kDebug() << "setting version to: " << version << endl;
   if ( setOption( LDAP_OPT_PROTOCOL_VERSION, &version ) != LDAP_OPT_SUCCESS ) {
     ret = ldapErrorCode();
-      d->mConnectionError = i18n("Cannot set protocol version to %1.").arg( version );
+      d->mConnectionError = i18n("Cannot set protocol version to %1.", version );
     close();
     return ret;
   }
