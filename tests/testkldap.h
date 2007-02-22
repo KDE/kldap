@@ -20,7 +20,7 @@
 #ifndef KLDAPTEST_H
 #define KLDAPTEST_H
 
-#include <qobject.h>
+#include <QtCore/QObject>
 #include <ldapmodel.h>
 #include <ldapobject.h>
 #include <ldapsearch.h>
