@@ -8,13 +8,13 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/.. ${KDE4_KIO_INCLUDES} )
 
 ########### next target ###############
 
-set(testkldap_SRCS testkldap.cpp ${kldap_LIB_SRCS})
+set(testkldap_SRCS testkldap.cpp )
 
 kde4_automoc(${testkldap_SRCS})
 
 kde4_add_executable(testkldap RUN_UNINSTALLED ${testkldap_SRCS})
 
-target_link_libraries(testkldap  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY})
+target_link_libraries(testkldap  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} kldap)
 
 add_test(kldap-testkldap ${EXECUTABLE_OUTPUT_PATH}/testkldap)
 
