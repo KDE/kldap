@@ -21,8 +21,8 @@
 #ifndef KLDAP_LDAPMODELTREEITEM_H
 #define KLDAP_LDAPMODELTREEITEM_H
 
-#include <QList>
-#include <QVariant>
+#include <QtCore/QList>
+#include <QtCore/QVariant>
 
 #include "ldapobject.h"
 #include "kldap.h"

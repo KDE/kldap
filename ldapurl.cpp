@@ -18,8 +18,8 @@
   Boston, MA 02110-1301, USA.
 */
 
-#include <QDir>
-#include <QStringList>
+#include <QtCore/QDir>
+#include <QtCore/QStringList>
 
 #include <kdebug.h>
 

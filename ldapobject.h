@@ -21,9 +21,9 @@
 #ifndef KLDAP_LDAPOBJECT_H
 #define KLDAP_LDAPOBJECT_H
 
-#include <QString>
-#include <QList>
-#include <QMap>
+#include <QtCore/QList>
+#include <QtCore/QMap>
+#include <QtCore/QString>
 
 #include "ldapdn.h"
 #include "kldap.h"

@@ -22,8 +22,6 @@
 
 #include <algorithm>
 
-#include <QStringList>
-
 #include <kdebug.h>
 
 using namespace KLDAP;

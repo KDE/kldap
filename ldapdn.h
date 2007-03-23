@@ -23,8 +23,7 @@
 
 #include "kldap.h"
 
-#include <QString>
-#include <QStringList>
+#include <QtCore/QStringList>
 
 #include <kldap/kldap.h>
 

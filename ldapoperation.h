@@ -21,16 +21,16 @@
 #ifndef KLDAP_LDAPOPERATION_H
 #define KLDAP_LDAPOPERATION_H
 
-#include <QString>
-#include <QList>
-#include <QByteArray>
+#include <QtCore/QByteArray>
+#include <QtCore/QList>
+#include <QtCore/QString>
 
-#include "ldapurl.h"
-#include "ldapobject.h"
-#include "ldapcontrol.h"
-#include "ldapserver.h"
-#include "ldapconnection.h"
 #include "kldap.h"
+#include "ldapconnection.h"
+#include "ldapcontrol.h"
+#include "ldapobject.h"
+#include "ldapserver.h"
+#include "ldapurl.h"
 
 namespace KLDAP {
 

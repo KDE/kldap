@@ -21,19 +21,19 @@
 #ifndef KLDAP_LDAPSEARCH_H
 #define KLDAP_LDAPSEARCH_H
 
-#include <QObject>
-#include <QString>
-#include <QList>
-#include <QByteArray>
-
-#include "ldapurl.h"
-#include "ldapobject.h"
-#include "ldapcontrol.h"
-#include "ldapserver.h"
-#include "ldapconnection.h"
-#include "ldapoperation.h"
+#include <QtCore/QByteArray>
+#include <QtCore/QList>
+#include <QtCore/QObject>
+#include <QtCore/QString>
 
 #include "kldap.h"
+
+#include "ldapconnection.h"
+#include "ldapcontrol.h"
+#include "ldapobject.h"
+#include "ldapoperation.h"
+#include "ldapserver.h"
+#include "ldapurl.h"
 
 namespace KLDAP {
 
@@ -118,18 +118,11 @@ class KLDAP_EXPORT LdapSearch : public QObject
      */
     void result( LdapSearch* );
 
-  private Q_SLOTS:
-    void result();
-
   private:
-    bool connect();
-    void closeConnection();
-    bool startSearch( const QString &base, LdapUrl::Scope scope,
-                      const QString &filter, const QStringList &attributes,
-                      int pagesize );
+    class Private;
+    Private *const d;
 
-    class LdapSearchPrivate;
-    LdapSearchPrivate *const d;
+    Q_PRIVATE_SLOT( d, void result() )
 
     Q_DISABLE_COPY( LdapSearch )
 };

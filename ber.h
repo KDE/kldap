@@ -53,7 +53,7 @@ class KLDAP_EXPORT Ber
     /**
      * Returns the Ber object as a flat QByteArray.
      */
-    QByteArray flatten();
+    QByteArray flatten() const;
 
     /**
      * Appends the data with the specified format to the Ber object.

@@ -21,22 +21,13 @@
 #ifndef KLDAP_LDAPCONFIGWIDGET_H
 #define KLDAP_LDAPCONFIGWIDGET_H
 
-#include <QWidget>
-#include <QString>
+#include <QtCore/QString>
+#include <QtGui/QWidget>
 
-#include "ldapurl.h"
-#include "ldapserver.h"
-#include "ldapobject.h"
 #include "kldap.h"
-
-class QGridLayout;
-class QSpinBox;
-class QPushButton;
-class QCheckBox;
-class QRadioButton;
-class QProgressDialog;
-class KComboBox;
-class KLineEdit;
+#include "ldapobject.h"
+#include "ldapserver.h"
+#include "ldapurl.h"
 
 namespace KLDAP {
 
@@ -241,44 +232,19 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
      */
     void setServer( const LdapServer &server );
 
-  private Q_SLOTS:
-    void setLDAPPort();
-    void setLDAPSPort();
-    void setAnonymous( bool on );
-    void setSimple( bool on );
-    void setSASL( bool on );
-    void mQueryDNClicked();
-    void mQueryMechClicked();
-    void loadData( LdapSearch*, const LdapObject &object );
-    void loadResult( LdapSearch* );
-
   private:
-    WinFlags mFeatures;
-    QStringList mQResult;
-    QString mAttr;
+    class Private;
+    Private *const d;
 
-    KLineEdit *mUser;
-    KLineEdit *mPassword;
-    KLineEdit *mHost;
-    QSpinBox  *mPort, *mVersion, *mSizeLimit, *mTimeLimit, *mPageSize;
-    KLineEdit *mDn, *mBindDn, *mRealm;
-    KLineEdit *mFilter;
-    QRadioButton *mAnonymous,*mSimple,*mSASL;
-    QCheckBox *mSubTree;
-    QPushButton *mEditButton;
-    QPushButton *mQueryMech;
-    QRadioButton *mSecNo,*mSecTLS,*mSecSSL;
-    KComboBox *mMech;
-
-    bool mCancelled;
-    QProgressDialog *mProg;
-
-    QGridLayout *mainLayout;
-    class LDAPConfigWidgetPrivate;
-    LDAPConfigWidgetPrivate *const d;
-
-    void sendQuery();
-    void initWidget();
+    Q_PRIVATE_SLOT( d, void setLDAPPort() )
+    Q_PRIVATE_SLOT( d, void setLDAPSPort() )
+    Q_PRIVATE_SLOT( d, void setAnonymous( bool ) )
+    Q_PRIVATE_SLOT( d, void setSimple( bool ) )
+    Q_PRIVATE_SLOT( d, void setSASL( bool ) )
+    Q_PRIVATE_SLOT( d, void queryDNClicked() )
+    Q_PRIVATE_SLOT( d, void queryMechClicked() )
+    Q_PRIVATE_SLOT( d, void loadData( LdapSearch*, const LdapObject& ) )
+    Q_PRIVATE_SLOT( d, void loadResult( LdapSearch* ) )
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS( LdapConfigWidget::WinFlags )
