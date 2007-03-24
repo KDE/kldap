@@ -438,7 +438,7 @@ Ber &Ber::operator=( const Ber &that )
   return *this;
 }
 
-QByteArray Ber::flatten()
+QByteArray Ber::flatten() const
 {
   kError() << "LDAP support not compiled" << endl;
   return QByteArray();
