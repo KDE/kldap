@@ -229,7 +229,7 @@ void LdapConfigWidget::Private::initWidget()
     //without host query doesn't make sense
     if ( mHost ) {
       QPushButton *dnquery = new QPushButton( i18n( "Query Server" ), mParent );
-      connect( dnquery, SIGNAL( clicked() ), mParent, SLOT( mQueryDNClicked() ) );
+      connect( dnquery, SIGNAL( clicked() ), mParent, SLOT( queryDNClicked() ) );
       mainLayout->addWidget( dnquery, row, 2, 1, 1 );
     }
     row++;
@@ -303,7 +303,7 @@ void LdapConfigWidget::Private::initWidget()
     if ( mHost ) {
       mQueryMech = new QPushButton( i18n( "Query Server" ), authbox );
       hbox->addWidget( mQueryMech );
-      connect( mQueryMech, SIGNAL( clicked() ), mParent, SLOT( mQueryMechClicked() ) );
+      connect( mQueryMech, SIGNAL( clicked() ), mParent, SLOT( queryMechClicked() ) );
     }
 
     mainLayout->addWidget( authbox, row, 0, 2, 4 );
