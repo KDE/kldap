@@ -79,7 +79,7 @@ void LdapSearch::Private::result()
           break;
         }
       }
-      kDebug() << " estimated size: " << estsize << endl;
+      kDebug(5322) << " estimated size: " << estsize << endl;
       if ( estsize != -1 && !cookie.isEmpty() ) {
         LdapControls ctrls, savedctrls;
         savedctrls = mOp.serverControls();
@@ -134,7 +134,7 @@ bool LdapSearch::Private::startSearch( const QString &base, LdapUrl::Scope scope
                                        const QString &filter,
                                        const QStringList &attributes, int pagesize )
 {
-  kDebug() << "search: base=" << base << " scope=" << scope << " filter=" << filter
+  kDebug(5322) << "search: base=" << base << " scope=" << scope << " filter=" << filter
     << " attributes=" << attributes << " pagesize=" << pagesize  << endl;
   mAbandoned = false;
   mError = 0;
@@ -160,7 +160,7 @@ bool LdapSearch::Private::startSearch( const QString &base, LdapUrl::Scope scope
   if ( mId == -1 ) {
     return false;
   }
-  kDebug() << "search::startSearch msg id=" << mId << endl;
+  kDebug(5322) << "search::startSearch msg id=" << mId << endl;
   QTimer::singleShot( 0, mParent, SLOT(result()) ); //maybe do this with threads?
   return true;
 }

@@ -126,7 +126,7 @@ QList<QByteArray> LdapOperation::referrals() const
 static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
                       const QByteArray &value )
 {
-  //  kDebug() << "type: " << mod_type << " attr: " << attr <<
+  //  kDebug(5322) << "type: " << mod_type << " attr: " << attr <<
   //    " value: " << QString::fromUtf8(value,value.size()) <<
   //    " size: " << value.size() << endl;
   LDAPMod **mods;
@@ -179,7 +179,7 @@ static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
       (BerValue**) malloc( sizeof( BerValue * ) * 2 );
     mods[ i ]->mod_vals.modv_bvals[ 0 ] = berval;
     mods[ i ]->mod_vals.modv_bvals[ 1 ] = 0;
-    kDebug() << "addModOp: new bervalue struct " << endl;
+    kDebug(5322) << "addModOp: new bervalue struct " << endl;
   } else {
     uint j = 0;
     while ( mods[ i ]->mod_vals.modv_bvals[ j ] != 0 ) {
@@ -195,7 +195,7 @@ static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
     }
     mods[ i ]->mod_vals.modv_bvals[ j ] = berval;
     mods[ i ]->mod_vals.modv_bvals[ j+1 ] = 0;
-    kDebug() << j << ". new bervalue " << endl;
+    kDebug(5322) << j << ". new bervalue " << endl;
   }
 }
 
@@ -207,7 +207,7 @@ static void addControlOp( LDAPControl ***pctrls, const QString &oid,
 
   ctrls = *pctrls;
 
-  kDebug() << "addControlOp: oid:'" << oid << "' val: '" << value << "'" << endl;
+  kDebug(5322) << "addControlOp: oid:'" << oid << "' val: '" << value << "'" << endl;
   int vallen = value.size();
   ctrl->ldctl_value.bv_len = vallen;
   if ( vallen ) {
@@ -296,7 +296,7 @@ int LdapOperation::search( const QString &base, LdapUrl::Scope scope,
     break;
   }
 
-  kDebug() << "asyncSearch() base=\"" << base << "\" scope=" << scope <<
+  kDebug(5322) << "asyncSearch() base=\"" << base << "\" scope=" << scope <<
     " filter=\"" << filter << "\" attrs=" << attributes << endl;
   int retval =
     ldap_search_ext( ld, base.toUtf8(), lscope,
@@ -756,7 +756,7 @@ int LdapOperation::result( int id )
     retval =
       ldap_parse_result( ld, msg, &errcodep, &matcheddn, &errmsg, &referralsp,
                          &serverctrls, 0 );
-    kDebug() << "rescode " << rescode << " retval: " << retval
+    kDebug(5322) << "rescode " << rescode << " retval: " << retval
              << " matcheddn: " << matcheddn << " errcode: "
              << errcodep << " errmsg: " << errmsg << endl;
     if ( retval != LDAP_SUCCESS ) {

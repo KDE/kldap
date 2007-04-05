@@ -146,7 +146,7 @@ QString LdapConnection::ldapErrorString() const
 bool LdapConnection::setSizeLimit( int sizelimit )
 {
   Q_ASSERT( d->mLDAP );
-  kDebug() << "sizelimit: " << sizelimit << endl;
+  kDebug(5322) << "sizelimit: " << sizelimit << endl;
   if ( setOption( LDAP_OPT_SIZELIMIT, &sizelimit ) != LDAP_OPT_SUCCESS ) {
     return false;
   }
@@ -166,7 +166,7 @@ int LdapConnection::sizeLimit() const
 bool LdapConnection::setTimeLimit( int timelimit )
 {
   Q_ASSERT( d->mLDAP );
-  kDebug() << "timelimit: " << timelimit << endl;
+  kDebug(5322) << "timelimit: " << timelimit << endl;
   if ( setOption( LDAP_OPT_TIMELIMIT, &timelimit ) != LDAP_OPT_SUCCESS ) {
     return false;
   }
@@ -219,19 +219,19 @@ static int kldap_sasl_interact( LDAP *, unsigned, void *defaults, void *in )
     switch( interact->id ) {
       case SASL_CB_GETREALM:
         value = data->creds.realm;
-        kDebug() << "SASL_REALM=" << value << endl;
+        kDebug(5322) << "SASL_REALM=" << value << endl;
         break;
       case SASL_CB_AUTHNAME:
         value = data->creds.authname;
-        kDebug() << "SASL_AUTHNAME=" << value << endl;
+        kDebug(5322) << "SASL_AUTHNAME=" << value << endl;
         break;
       case SASL_CB_PASS:
         value = data->creds.password;
-        kDebug() << "SASL_PASSWD=[hidden]" << endl;
+        kDebug(5322) << "SASL_PASSWD=[hidden]" << endl;
         break;
       case SASL_CB_USER:
         value = data->creds.authzid;
-        kDebug() << "SASL_AUTHZID=" << value << endl;
+        kDebug(5322) << "SASL_AUTHZID=" << value << endl;
         break;
     }
   }
@@ -262,14 +262,14 @@ int LdapConnection::connect()
   url += d->mServer.host();
   url += ':';
   url += QString::number( d->mServer.port() );
-  kDebug() << "ldap url: " << url << endl;
+  kDebug(5322) << "ldap url: " << url << endl;
   ret = ldap_initialize( &d->mLDAP, url.toLatin1() );
   if ( ret != LDAP_SUCCESS ) {
     d->mConnectionError = i18n("An error occurred during the connection initialization phase.");
     return ret;
   }
 
-  kDebug() << "setting version to: " << version << endl;
+  kDebug(5322) << "setting version to: " << version << endl;
   if ( setOption( LDAP_OPT_PROTOCOL_VERSION, &version ) != LDAP_OPT_SUCCESS ) {
     ret = ldapErrorCode();
       d->mConnectionError = i18n("Cannot set protocol version to %1.", version );
@@ -278,9 +278,9 @@ int LdapConnection::connect()
   }
 
   //FIXME: accessing to certificate handling would be good
-  kDebug() << "setting security to: " << d->mServer.security() << endl;
+  kDebug(5322) << "setting security to: " << d->mServer.security() << endl;
   if ( d->mServer.security() == LdapServer::TLS ) {
-    kDebug() << "start TLS" << endl;
+    kDebug(5322) << "start TLS" << endl;
     if ( ( ret = ldap_start_tls_s( d->mLDAP, NULL, NULL ) ) != LDAP_SUCCESS ) {
       close();
       d->mConnectionError = i18n("Cannot start TLS.");
@@ -288,7 +288,7 @@ int LdapConnection::connect()
     }
   }
 
-  kDebug() << "setting sizelimit to: " << d->mServer.sizeLimit() << endl;
+  kDebug(5322) << "setting sizelimit to: " << d->mServer.sizeLimit() << endl;
   if ( d->mServer.sizeLimit() ) {
     if ( !setSizeLimit( d->mServer.sizeLimit() ) ) {
       ret = ldapErrorCode();
@@ -298,7 +298,7 @@ int LdapConnection::connect()
     }
   }
 
-  kDebug() << "setting timelimit to: " << d->mServer.timeLimit() << endl;
+  kDebug(5322) << "setting timelimit to: " << d->mServer.timeLimit() << endl;
   if ( d->mServer.timeLimit() ) {
     if ( !setTimeLimit( d->mServer.timeLimit() ) ) {
       ret = ldapErrorCode();
@@ -341,7 +341,7 @@ int LdapConnection::bind( SASL_Callback_Proc *saslproc, void *data )
       bindname = d->mServer.bindDn();
       pass = d->mServer.password();
     }
-    kDebug() << "binding to server, bindname: " << bindname << " password: *****" << endl;
+    kDebug(5322) << "binding to server, bindname: " << bindname << " password: *****" << endl;
     ret = ldap_simple_bind_s( d->mLDAP, bindname.toUtf8(), pass.toUtf8() );
   }
   return ret;
@@ -353,7 +353,7 @@ void LdapConnection::close()
     ldap_unbind_ext_s( d->mLDAP, 0, 0 );
   }
   d->mLDAP = 0;
-  kDebug() << "connection closed!" << endl;
+  kDebug(5322) << "connection closed!" << endl;
 }
 #else //LDAP_FOUND
 

@@ -132,14 +132,14 @@ bool Ldif::splitLine( const QByteArray &line, QString &fieldname, QByteArray &va
   QByteArray tmp;
   int linelen;
 
-//  kDebug(5700) << "splitLine line: " << QString::fromUtf8(line) << endl;
+//  kDebug(5322) << "splitLine line: " << QString::fromUtf8(line) << endl;
 
   position = line.indexOf( ":" );
   if ( position == -1 ) {
     // strange: we did not find a fieldname
     fieldname = "";
     value = line.trimmed();
-//    kDebug(5700) << "value : " << value[0] << endl;
+//    kDebug(5322) << "value : " << value[0] << endl;
     return false;
   }
 
@@ -181,7 +181,7 @@ bool Ldif::splitControl( const QByteArray &line, QString &oid, bool &critical,
   critical = false;
   bool url = splitLine( line, tmp, value );
 
-  kDebug(5700) << "splitControl: value: " << QString::fromUtf8(value, value.size()) << endl;
+  kDebug(5322) << "splitControl: value: " << QString::fromUtf8(value, value.size()) << endl;
   if ( tmp.isEmpty() ) {
     tmp = QString::fromUtf8( value, value.size() );
     value.resize( 0 );
@@ -220,7 +220,7 @@ Ldif::ParseValue Ldif::processLine()
         retval = Err;
       }
     } else if ( attrLower == "dn" ) {
-      kDebug(5700) << "ldapentry dn: " << QString::fromUtf8( d->mValue, d->mValue.size() ) << endl;
+      kDebug(5322) << "ldapentry dn: " << QString::fromUtf8( d->mValue, d->mValue.size() ) << endl;
       d->mDn = QString::fromUtf8( d->mValue, d->mValue.size() );
       d->mModType = Mod_None;
       retval = NewEntry;
@@ -229,7 +229,7 @@ Ldif::ParseValue Ldif::processLine()
         retval = Err;
       } else {
         QString tmpval = QString::fromUtf8( d->mValue, d->mValue.size() );
-        kDebug(5700) << "changetype: " << tmpval << endl;
+        kDebug(5322) << "changetype: " << tmpval << endl;
         if ( tmpval == "add" ) {
           d->mEntryType = Entry_Add;
         } else if ( tmpval == "delete" ) {
@@ -269,7 +269,7 @@ Ldif::ParseValue Ldif::processLine()
     break;
   case Entry_Mod:
     if ( d->mModType == Mod_None ) {
-      kDebug(5700) << "kio_ldap: new modtype " << d->mAttr << endl;
+      kDebug(5322) << "kio_ldap: new modtype " << d->mAttr << endl;
       if ( d->mAttr.isEmpty() && d->mValue.size() == 0 ) {
         retval = EndEntry;
       } else if ( attrLower == "add" ) {

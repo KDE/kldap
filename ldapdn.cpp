@@ -43,7 +43,7 @@ class LdapDN::LdapDNPrivate
 
 bool LdapDN::LdapDNPrivate::isValidRDNString( const QString &rdn ) const
 {
-  kDebug() << "LdapDN::LdapDNPrivate::isValidRDNString(): Testing rdn: " << rdn << endl;
+  kDebug(5322) << "LdapDN::LdapDNPrivate::isValidRDNString(): Testing rdn: " << rdn << endl;
 
   // If it is a muli-valued rdn, split it into its constituent parts
   QStringList rdnParts = splitOnNonEscapedChar( rdn, QChar( '+' ) );
@@ -77,9 +77,9 @@ QStringList LdapDN::LdapDNPrivate::splitOnNonEscapedChar( const QString &str, co
     const QChar prev = str[std::max( 0, index - 1 )];
     if ( prev != QChar( '\\' ) ) {
       // Found a component of a multi-valued RDN
-      //kDebug() << "Found " << ch << " at index " << index << endl;
+      //kDebug(5322) << "Found " << ch << " at index " << index << endl;
       QString tmp = str.mid( strPartStartIndex, index - strPartStartIndex );
-      //kDebug() << "Adding part: " << tmp << endl;
+      //kDebug(5322) << "Adding part: " << tmp << endl;
       strParts.append( tmp );
       strPartStartIndex = index + 1;
     }
@@ -89,7 +89,7 @@ QStringList LdapDN::LdapDNPrivate::splitOnNonEscapedChar( const QString &str, co
 
   // Add on the part after the last found delimeter
   QString tmp = str.mid( strPartStartIndex );
-  //kDebug() << "Adding part: " << tmp << endl;
+  //kDebug(5322) << "Adding part: " << tmp << endl;
   strParts.append( tmp );
 
   return strParts;
@@ -154,7 +154,7 @@ QString LdapDN::toString( int depth ) const
   QString dn;
   for ( int i = depth; i >= 0; i-- ) {
     dn += rdns.at( rdns.size() - 1 - i ) + QString( "," );
-    kDebug() << "dn = " << dn << endl;
+    kDebug(5322) << "dn = " << dn << endl;
   }
   dn = dn.left( dn.length() - 1 ); // Strip off the extraneous comma
 
@@ -179,7 +179,7 @@ QString LdapDN::rdnString( int depth ) const
 
 bool LdapDN::isValid() const
 {
-  kDebug() << "LdapDN::isValid(): Testing dn: " << d->m_dn << endl;
+  kDebug(5322) << "LdapDN::isValid(): Testing dn: " << d->m_dn << endl;
 
   // Break the string into rdn's
   QStringList rdns = d->splitOnNonEscapedChar( d->m_dn, QChar( ',' ) );

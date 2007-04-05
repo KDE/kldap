@@ -102,11 +102,11 @@ QVariant LdapModel::data( const QModelIndex &index, int role ) const
   LdapModelTreeItem *item = static_cast<LdapModelTreeItem*>( index.internalPointer() );
 
   if ( role == Qt::DisplayRole ) {
-    kDebug() << "***** LdapModel::data(): rdn = " << item->data().dn().rdnString() << endl;
+    kDebug(5322) << "***** LdapModel::data(): rdn = " << item->data().dn().rdnString() << endl;
     return item->data().dn().rdnString();
   } else if ( role == Qt::ToolTipRole ) {
     /** \TODO Make the tooltips look nicer - perhaps themeable? */
-    kDebug() << "***** LdapModel::data(): Object = " << item->data().toString() << endl;
+    kDebug(5322) << "***** LdapModel::data(): Object = " << item->data().toString() << endl;
     return item->data().toString();
   }
 
@@ -145,7 +145,7 @@ int LdapModel::columnCount( const QModelIndex &parent ) const
 
 int LdapModel::rowCount( const QModelIndex &parent ) const
 {
-  kDebug() << "LdapModel::rowCount" << endl;
+  kDebug(5322) << "LdapModel::rowCount" << endl;
   if ( parent.column() > 0 ) {
     return 0;
   }
@@ -153,7 +153,7 @@ int LdapModel::rowCount( const QModelIndex &parent ) const
   const LdapModelTreeItem *item = parent.isValid()
                                   ? static_cast<const LdapModelTreeItem*>( parent.internalPointer() )
                                   : m_d->rootItem();
-  kDebug() << "Parent (" << item->ldapObject().dn().toString() << ") has " << item->childCount() << " children" << endl;
+  kDebug(5322) << "Parent (" << item->ldapObject().dn().toString() << ") has " << item->childCount() << " children" << endl;
   return item->childCount();
 }
 
@@ -177,14 +177,14 @@ bool LdapModel::canFetchMore( const QModelIndex &parent ) const
   const LdapModelTreeItem *item = parent.isValid()
                                   ? static_cast<const LdapModelTreeItem*>( parent.internalPointer() )
                                   : m_d->rootItem();
-  kDebug() << "LdapModel::canFetchMore() : " << !item->isPopulated() << endl;
+  kDebug(5322) << "LdapModel::canFetchMore() : " << !item->isPopulated() << endl;
   return !item->isPopulated();
 }
 
 void LdapModel::fetchMore( const QModelIndex &parent )
 {
   /** \TODO This should be altered to search for all attributes we can filter out those not required with a proxy model */
-  kDebug() << "LdapModel::fetchMore()" << endl;
+  kDebug(5322) << "LdapModel::fetchMore()" << endl;
 
   LdapModelTreeItem *parentItem = parent.isValid()
                                   ? static_cast<LdapModelTreeItem*>( parent.internalPointer() )
