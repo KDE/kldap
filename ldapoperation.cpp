@@ -931,7 +931,7 @@ int LdapOperation::exop_s( const QString &oid, const QByteArray &data )
   return -1;
 }
 
-int LdapOperation::result( int id )
+int LdapOperation::waitForResult( int id, int msecs )
 {
   kError() << "LDAP support not compiled" << endl;
   return -1;
