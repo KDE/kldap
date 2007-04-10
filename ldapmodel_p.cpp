@@ -70,7 +70,7 @@ bool LdapModel::LdapModelPrivate::search( const LdapDN &searchBase,
                                           const QStringList &attributes,
                                           int pagesize )
 {
-  return m_search->search( searchBase.toString(), scope, filter, attributes, pagesize );
+  return m_search->search( searchBase, scope, filter, attributes, pagesize );
 }
 
 void LdapModel::LdapModelPrivate::setSearchType( SearchType t, LdapModelTreeItem *item )
