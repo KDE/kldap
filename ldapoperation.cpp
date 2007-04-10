@@ -869,45 +869,45 @@ int LdapOperation::add_s( const LdapObject &object )
   return -1;
 }
 
-int LdapOperation::rename( const QString &dn, const QString &newRdn,
+int LdapOperation::rename( const LdapDN &dn, const QString &newRdn,
                            const QString &newSuperior, bool deleteold )
 {
   kError() << "LDAP support not compiled" << endl;
   return -1;
 }
 
-int LdapOperation::rename_s( const QString &dn, const QString &newRdn,
+int LdapOperation::rename_s( const LdapDN &dn, const QString &newRdn,
                              const QString &newSuperior, bool deleteold )
 {
   kError() << "LDAP support not compiled" << endl;
   return -1;
 }
 
-int LdapOperation::del( const QString &dn )
+int LdapOperation::del( const LdapDN &dn )
 {
   kError() << "LDAP support not compiled" << endl;
   return -1;
 }
 
-int LdapOperation::del_s( const QString &dn )
+int LdapOperation::del_s( const LdapDN &dn )
 {
   kError() << "LDAP support not compiled" << endl;
   return -1;
 }
 
-int LdapOperation::modify( const QString &dn, const ModOps &ops )
+int LdapOperation::modify( const LdapDN &dn, const ModOps &ops )
 {
   kError() << "LDAP support not compiled" << endl;
   return -1;
 }
 
-int LdapOperation::modify_s( const QString &dn, const ModOps &ops )
+int LdapOperation::modify_s( const LdapDN &dn, const ModOps &ops )
 {
   kError() << "LDAP support not compiled" << endl;
   return -1;
 }
 
-int LdapOperation::compare( const QString &dn, const QString &attr, const QByteArray &value )
+int LdapOperation::compare( const LdapDN &dn, const QString &attr, const QByteArray &value )
 {
   kError() << "LDAP support not compiled" << endl;
   return -1;
@@ -919,7 +919,7 @@ int LdapOperation::exop( const QString &oid, const QByteArray &data )
   return -1;
 }
 
-int LdapOperation::compare_s( const QString &dn, const QString &attr, const QByteArray &value )
+int LdapOperation::compare_s( const LdapDN &dn, const QString &attr, const QByteArray &value )
 {
   kError() << "LDAP support not compiled" << endl;
   return -1;
