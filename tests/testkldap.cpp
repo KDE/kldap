@@ -91,7 +91,7 @@ void KLdapTest::testLdapUrl()
 
     QCOMPARE( url.user(), QString::fromLatin1("cn=manager,dc=kde,dc=org") );
     QCOMPARE( url.password(), QString::fromLatin1("password") );
-    QCOMPARE( url.dn(), QString::fromLatin1("dc=kde,dc=org") );
+    QCOMPARE( url.dn(), LdapDN("dc=kde,dc=org") );
     QCOMPARE( url.scope(), LdapUrl::Sub );
     QCOMPARE( url.attributes().at(0), QString::fromLatin1("cn") );
     QCOMPARE( url.attributes().at(1), QString::fromLatin1("mail") );
