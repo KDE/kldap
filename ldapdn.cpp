@@ -199,3 +199,13 @@ int LdapDN::depth() const
   QStringList rdns = d->splitOnNonEscapedChar( d->m_dn, QChar( ',' ) );
   return rdns.size();
 }
+
+bool LdapDN::operator == ( const LdapDN& rhs ) const
+{
+  return d->m_dn == rhs.d->m_dn;
+}
+
+bool LdapDN::operator != ( const LdapDN& rhs ) const
+{
+  return d->m_dn != rhs.d->m_dn;
+}
