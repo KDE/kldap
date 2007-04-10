@@ -24,6 +24,7 @@
 #include <QtCore/QString>
 #include <QtCore/QByteArray>
 
+#include "ldapdn.h"
 #include "kldap.h"
 
 namespace KLDAP {
@@ -142,7 +143,7 @@ class KLDAP_EXPORT Ldif
     /**
      * Returns the Distinguished Name of the current entry.
      */
-    QString dn() const;
+    LdapDN dn() const;
 
     /**
      * Returns the new Relative Distinguished Name if modType() returned

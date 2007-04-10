@@ -29,7 +29,8 @@ class Ldif::LdifPrivate
   public:
     int mModType;
     bool mDelOldRdn, mUrl;
-    QString mDn, mAttr, mNewRdn, mNewSuperior, mOid;
+    LdapDN mDn;
+    QString mAttr, mNewRdn, mNewSuperior, mOid;
     QByteArray mLdif, mValue;
     EntryType mEntryType;
 
@@ -221,7 +222,7 @@ Ldif::ParseValue Ldif::processLine()
       }
     } else if ( attrLower == "dn" ) {
       kDebug(5322) << "ldapentry dn: " << QString::fromUtf8( d->mValue, d->mValue.size() ) << endl;
-      d->mDn = QString::fromUtf8( d->mValue, d->mValue.size() );
+      d->mDn = LdapDN( QString::fromUtf8( d->mValue, d->mValue.size() ) );
       d->mModType = Mod_None;
       retval = NewEntry;
     } else if ( attrLower == "changetype" ) {
@@ -377,7 +378,8 @@ void Ldif::startParsing()
   d->mDelOldRdn = false;
   d->mEntryType = Entry_None;
   d->mModType = Mod_None;
-  d->mDn = d->mNewRdn = d->mNewSuperior = QString();
+  d->mDn = LdapDN();
+  d->mNewRdn = d->mNewSuperior = QString();
   d->mLine = QByteArray();
   d->mIsNewLine = false;
   d->mIsComment = false;
@@ -400,7 +402,7 @@ int Ldif::modType() const
   return d->mModType;
 }
 
-QString Ldif::dn() const
+LdapDN Ldif::dn() const
 {
   return d->mDn;
 }

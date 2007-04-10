@@ -121,7 +121,7 @@ class KLDAP_EXPORT LdapOperation
      * the old dn if deleteold is true.
      * Returns a message id if successful, -1 if not.
      */
-    int rename( const QString &dn, const QString &newRdn,
+    int rename( const LdapDN &dn, const QString &newRdn,
                 const QString &newSuperior, bool deleteold = true );
     /**
      * Performs a modrdn operation on given DN, changing its RDN to newRdn,
@@ -129,35 +129,35 @@ class KLDAP_EXPORT LdapOperation
      * the old dn if deleteold is true. This is the synchronous version.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
      */
-    int rename_s( const QString &dn, const QString &newRdn,
+    int rename_s( const LdapDN &dn, const QString &newRdn,
                   const QString &newSuperior, bool deleteold = true );
     /**
      * Starts a delete operation on the given DN.
      * Returns a message id if successful, -1 if not.
      */
-    int del( const QString &dn );
+    int del( const LdapDN &dn );
     /**
      * Deletes the given DN. This is the synchronous version.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
      */
-    int del_s( const QString &dn );
+    int del_s( const LdapDN &dn );
     /**
      * Starts a modify operation on the given DN.
      * Returns a message id if successful, -1 if not.
      */
-    int modify( const QString &dn, const ModOps &ops );
+    int modify( const LdapDN &dn, const ModOps &ops );
     /**
      * Performs a modify operation on the given DN.
      * This is the synchronous version.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
      */
-    int modify_s( const QString &dn, const ModOps &ops );
+    int modify_s( const LdapDN &dn, const ModOps &ops );
     /**
      * Starts a compare operation on the given DN, compares the specified
      * attribute with the given value.
      * Returns a message id if successful, -1 if not.
      */
-    int compare( const QString &dn, const QString &attr, const QByteArray &value );
+    int compare( const LdapDN &dn, const QString &attr, const QByteArray &value );
     /**
      * Performs a compare operation on the given DN, compares the specified
      * attribute with the given value. This is the synchronous version.
@@ -165,7 +165,7 @@ class KLDAP_EXPORT LdapOperation
      * and KLDAP_COMPARE_FALSE if it does not. Otherwise, some error code
      * is returned.
      */
-    int compare_s( const QString &dn, const QString &attr, const QByteArray &value );
+    int compare_s( const LdapDN &dn, const QString &attr, const QByteArray &value );
     /**
      * Starts an extended operation specified with oid and data.
      * Returns a message id if successful, -1 if not.

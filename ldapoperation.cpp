@@ -509,7 +509,7 @@ int LdapOperation::add_s( const LdapObject &object )
   return retval;
 }
 
-int LdapOperation::rename( const QString &dn, const QString &newRdn,
+int LdapOperation::rename( const LdapDN &dn, const QString &newRdn,
                            const QString &newSuperior, bool deleteold )
 {
   Q_ASSERT( d->mConnection );
@@ -521,7 +521,7 @@ int LdapOperation::rename( const QString &dn, const QString &newRdn,
   createControls( &serverctrls, d->mServerCtrls );
   createControls( &serverctrls, d->mClientCtrls );
 
-  int retval = ldap_rename( ld, dn.toUtf8(), newRdn.toUtf8(),
+  int retval = ldap_rename( ld, dn.toString().toUtf8(), newRdn.toUtf8(),
                             newSuperior.isEmpty() ? (char *) 0 : newSuperior.toUtf8().data(),
                             deleteold, serverctrls, clientctrls, &msgid );
 
@@ -534,7 +534,7 @@ int LdapOperation::rename( const QString &dn, const QString &newRdn,
   return retval;
 }
 
-int LdapOperation::rename_s( const QString &dn, const QString &newRdn,
+int LdapOperation::rename_s( const LdapDN &dn, const QString &newRdn,
                              const QString &newSuperior, bool deleteold )
 {
   Q_ASSERT( d->mConnection );
@@ -544,7 +544,7 @@ int LdapOperation::rename_s( const QString &dn, const QString &newRdn,
   createControls( &serverctrls, d->mServerCtrls );
   createControls( &serverctrls, d->mClientCtrls );
 
-  int retval = ldap_rename_s( ld, dn.toUtf8(), newRdn.toUtf8(),
+  int retval = ldap_rename_s( ld, dn.toString().toUtf8(), newRdn.toUtf8(),
                               newSuperior.isEmpty() ? (char *) 0 : newSuperior.toUtf8().data(),
                               deleteold, serverctrls, clientctrls );
 
@@ -554,7 +554,7 @@ int LdapOperation::rename_s( const QString &dn, const QString &newRdn,
   return retval;
 }
 
-int LdapOperation::del( const QString &dn )
+int LdapOperation::del( const LdapDN &dn )
 {
   Q_ASSERT( d->mConnection );
   LDAP *ld = (LDAP*) d->mConnection->handle();
@@ -565,7 +565,7 @@ int LdapOperation::del( const QString &dn )
   createControls( &serverctrls, d->mServerCtrls );
   createControls( &serverctrls, d->mClientCtrls );
 
-  int retval = ldap_delete_ext( ld, dn.toUtf8(), serverctrls, clientctrls, &msgid );
+  int retval = ldap_delete_ext( ld, dn.toString().toUtf8(), serverctrls, clientctrls, &msgid );
 
   ldap_controls_free( serverctrls );
   ldap_controls_free( clientctrls );
@@ -576,7 +576,7 @@ int LdapOperation::del( const QString &dn )
   return retval;
 }
 
-int LdapOperation::del_s( const QString &dn )
+int LdapOperation::del_s( const LdapDN &dn )
 {
   Q_ASSERT( d->mConnection );
   LDAP *ld = (LDAP*) d->mConnection->handle();
@@ -585,7 +585,7 @@ int LdapOperation::del_s( const QString &dn )
   createControls( &serverctrls, d->mServerCtrls );
   createControls( &serverctrls, d->mClientCtrls );
 
-  int retval = ldap_delete_ext_s( ld, dn.toUtf8(), serverctrls, clientctrls );
+  int retval = ldap_delete_ext_s( ld, dn.toString().toUtf8(), serverctrls, clientctrls );
 
   ldap_controls_free( serverctrls );
   ldap_controls_free( clientctrls );
@@ -593,7 +593,7 @@ int LdapOperation::del_s( const QString &dn )
   return retval;
 }
 
-int LdapOperation::modify( const QString &dn, const ModOps &ops )
+int LdapOperation::modify( const LdapDN &dn, const ModOps &ops )
 {
   Q_ASSERT( d->mConnection );
   LDAP *ld = (LDAP*) d->mConnection->handle();
@@ -626,7 +626,7 @@ int LdapOperation::modify( const QString &dn, const ModOps &ops )
     }
   }
 
-  int retval = ldap_modify_ext( ld, dn.toUtf8(), lmod, serverctrls, clientctrls, &msgid );
+  int retval = ldap_modify_ext( ld, dn.toString().toUtf8(), lmod, serverctrls, clientctrls, &msgid );
 
   ldap_controls_free( serverctrls );
   ldap_controls_free( clientctrls );
@@ -637,7 +637,7 @@ int LdapOperation::modify( const QString &dn, const ModOps &ops )
   return retval;
 }
 
-int LdapOperation::modify_s( const QString &dn, const ModOps &ops )
+int LdapOperation::modify_s( const LdapDN &dn, const ModOps &ops )
 {
   Q_ASSERT( d->mConnection );
   LDAP *ld = (LDAP*) d->mConnection->handle();
@@ -669,7 +669,7 @@ int LdapOperation::modify_s( const QString &dn, const ModOps &ops )
     }
   }
 
-  int retval = ldap_modify_ext_s( ld, dn.toUtf8(), lmod, serverctrls, clientctrls );
+  int retval = ldap_modify_ext_s( ld, dn.toString().toUtf8(), lmod, serverctrls, clientctrls );
 
   ldap_controls_free( serverctrls );
   ldap_controls_free( clientctrls );
@@ -677,7 +677,7 @@ int LdapOperation::modify_s( const QString &dn, const ModOps &ops )
   return retval;
 }
 
-int LdapOperation::compare( const QString &dn, const QString &attr, const QByteArray &value )
+int LdapOperation::compare( const LdapDN &dn, const QString &attr, const QByteArray &value )
 {
   Q_ASSERT( d->mConnection );
   LDAP *ld = (LDAP*) d->mConnection->handle();
@@ -694,7 +694,7 @@ int LdapOperation::compare( const QString &dn, const QString &attr, const QByteA
   berval -> bv_len = vallen;
   memcpy( berval -> bv_val, value.data(), vallen );
 
-  int retval = ldap_compare_ext( ld, dn.toUtf8(), attr.toUtf8(), berval,
+  int retval = ldap_compare_ext( ld, dn.toString().toUtf8(), attr.toUtf8(), berval,
                                  serverctrls, clientctrls, &msgid );
 
   ber_bvfree( berval );
@@ -707,7 +707,7 @@ int LdapOperation::compare( const QString &dn, const QString &attr, const QByteA
   return retval;
 }
 
-int LdapOperation::compare_s( const QString &dn, const QString &attr, const QByteArray &value )
+int LdapOperation::compare_s( const LdapDN &dn, const QString &attr, const QByteArray &value )
 {
   Q_ASSERT( d->mConnection );
   LDAP *ld = (LDAP*) d->mConnection->handle();
@@ -723,7 +723,7 @@ int LdapOperation::compare_s( const QString &dn, const QString &attr, const QByt
   berval -> bv_len = vallen;
   memcpy( berval -> bv_val, value.data(), vallen );
 
-  int retval = ldap_compare_ext_s( ld, dn.toUtf8(), attr.toUtf8(), berval,
+  int retval = ldap_compare_ext_s( ld, dn.toString().toUtf8(), attr.toUtf8(), berval,
                                    serverctrls, clientctrls );
 
   ber_bvfree( berval );
