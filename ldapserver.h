@@ -24,6 +24,7 @@
 #include <QtCore/QString>
 
 #include "ldapurl.h"
+#include "ldapdn.h"
 #include "kldap.h"
 
 namespace KLDAP {
@@ -56,7 +57,7 @@ class KLDAP_EXPORT LdapServer
 
     QString host() const;
     int port() const;
-    QString baseDn() const;
+    LdapDN baseDn() const;
     QString user() const;
     QString bindDn() const;
     QString realm() const;
@@ -74,7 +75,7 @@ class KLDAP_EXPORT LdapServer
 
     void setHost( const QString &host );
     void setPort( int port );
-    void setBaseDn( const QString &baseDn );
+    void setBaseDn( const LdapDN &baseDn );
     void setUser( const QString &user );
     void setBindDn( const QString &bindDn );
     void setRealm( const QString &realm );

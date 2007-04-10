@@ -89,7 +89,7 @@ class KLDAP_EXPORT LdapSearch : public QObject
      * Starts a search operation if the LdapConnection object already set
      * in the constructor.
      */
-    bool search( const QString &base,
+    bool search( const LdapDN &base,
                  LdapUrl::Scope scope = LdapUrl::Sub,
                  const QString &filter = QString(),
                  const QStringList &attributes = QStringList(),

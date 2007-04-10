@@ -29,6 +29,7 @@
 #include "ldapconnection.h"
 #include "ldapcontrol.h"
 #include "ldapobject.h"
+#include "ldapdn.h"
 #include "ldapserver.h"
 #include "ldapurl.h"
 
@@ -102,7 +103,7 @@ class KLDAP_EXPORT LdapOperation
      * Starts a search operation with the given base DN, scope, filter and
      * result attributes. Returns a message id if successful, -1 if not.
      */
-    int search( const QString &base, LdapUrl::Scope scope,
+    int search( const LdapDN &base, LdapUrl::Scope scope,
                 const QString &filter, const QStringList &attrs );
     /**
      * Starts an addition operation.
@@ -180,14 +181,18 @@ class KLDAP_EXPORT LdapOperation
      * Abandons a long-running operation. Requires the message id.
      */
     int abandon( int id );
-
     /**
+     * Waits for up to \p msecs milliseconds for a result message from the LDAP
+     * server. If \p msecs is -1, then this function will block indefinitely.
+     * If \p msecs is 0, then this function will return immediately, that is it
+     * will perform a poll for a result message.
+     *
      * Returns the type of the result LDAP message (RES_XXX constants).
      * -1 if error occurred. Note! Return code -1 means that fetching the
      * message resulted in error, not the LDAP operation error. Call
      * connection().ldapErrorCode() to determine if the operation succeeded.
      */
-    int result( int id );
+    int waitForResult( int id, int msecs = 30000 );
     /**
      * Returns the result object if result() returned RES_SEARCH_ENTRY.
      */

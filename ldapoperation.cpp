@@ -31,10 +31,31 @@
 #include <lber.h>
 #endif
 
+#include <QTime>
+
 using namespace KLDAP;
+
+#ifdef LDAP_FOUND
+static void extractControls( LdapControls &ctrls, LDAPControl **pctrls );
+#endif // LDAP_FOUND
+
+/*
+   Returns the difference between msecs and elapsed. If msecs is -1,
+   however, -1 is returned.
+*/
+static int kldap_timeout_value( int msecs, int elapsed )
+{
+  if ( msecs == -1 )
+    return -1;
+
+  int timeout = msecs - elapsed;
+  return timeout < 0 ? 0 : timeout;
+}
 
 class LdapOperation::LdapOperationPrivate {
   public:
+  int processResult( int rescode, LDAPMessage *msg );
+
   LdapControls mClientCtrls, mServerCtrls, mControls;
   LdapObject mObject;
   QByteArray mExtOid, mExtData;
@@ -43,6 +64,111 @@ class LdapOperation::LdapOperationPrivate {
 
   LdapConnection *mConnection;
 };
+
+int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage *msg )
+{
+  //kDebug(5322) << "LdapOperation::LdapOperationPrivate::processResult()" << endl;
+  int retval;
+  LDAP *ld = (LDAP*) mConnection->handle();
+
+  switch ( rescode ) {
+    case RES_SEARCH_ENTRY:
+    {
+      //kDebug(5322) << "LdapOperation::LdapOperationPrivate::processResult():"
+      //             << "Found search entry" << endl;
+      mObject.clear();
+      LdapAttrMap attrs;
+      char *name;
+      struct berval **bvals;
+      BerElement     *entry;
+
+      char *dn = ldap_get_dn( ld, msg );
+      mObject.setDn( QString::fromUtf8( dn ) );
+      ldap_memfree( dn );
+
+      // iterate over the attributes
+      name = ldap_first_attribute( ld, msg, &entry );
+      while ( name != 0 ) {
+        // print the values
+        bvals = ldap_get_values_len( ld, msg, name );
+        LdapAttrValue values;
+        if ( bvals ) {
+          for ( int i = 0; bvals[i] != 0; i++ ) {
+            char *val = bvals[i]->bv_val;
+            unsigned long len = bvals[i]->bv_len;
+            values.append( QByteArray( val, len ) );
+          }
+          ldap_value_free_len( bvals );
+        }
+        attrs[ QString::fromLatin1( name ) ] = values;
+        // next attribute
+        name = ldap_next_attribute( ld, msg, entry );
+      }
+      ber_free( entry , 0 );
+      mObject.setAttributes( attrs );
+      break;
+    }
+    case RES_EXTENDED:
+    {
+      char *retoid;
+      struct berval *retdata;
+      retval = ldap_parse_extended_result( ld, msg, &retoid, &retdata, 0 );
+      if ( retval != LDAP_SUCCESS ) {
+        ldap_msgfree( msg );
+        return -1;
+      }
+      mExtOid = retoid ? QByteArray( retoid ) : QByteArray();
+      mExtData = retdata ? QByteArray( retdata->bv_val, retdata->bv_len ) : QByteArray();
+      ldap_memfree( retoid );
+      ber_bvfree( retdata );
+      break;
+    }
+    default:
+    {
+      LDAPControl **serverctrls = 0;
+      char *matcheddn = 0, *errmsg = 0;
+      char **referralsp;
+      int errcodep;
+      retval =
+          ldap_parse_result( ld, msg, &errcodep, &matcheddn, &errmsg, &referralsp,
+                             &serverctrls, 0 );
+      kDebug(5322) << "rescode " << rescode << " retval: " << retval
+                   << " matcheddn: " << matcheddn << " errcode: "
+                   << errcodep << " errmsg: " << errmsg << endl;
+      if ( retval != LDAP_SUCCESS ) {
+        ldap_msgfree( msg );
+        return -1;
+      }
+      mControls.clear();
+      if ( serverctrls ) {
+        extractControls( mControls, serverctrls );
+        ldap_controls_free( serverctrls );
+      }
+      mReferrals.clear();
+      if ( referralsp ) {
+        char **tmp = referralsp;
+        while ( *tmp ) {
+          mReferrals.append( QByteArray( *tmp ) );
+          tmp++;
+        }
+        ber_memvfree( (void **) referralsp );
+      }
+      mMatchedDn = QString();
+      if ( matcheddn ) {
+        mMatchedDn = QString::fromUtf8( matcheddn );
+        ldap_memfree( matcheddn );
+      }
+      if ( errmsg ) {
+        ldap_memfree( errmsg );
+      }
+    }
+  }
+
+  ldap_msgfree( msg );
+
+  return rescode;
+}
+
 
 LdapOperation::LdapOperation()
   : d( new LdapOperationPrivate )
@@ -261,7 +387,7 @@ static void extractControls( LdapControls &ctrls, LDAPControl **pctrls )
   }
 }
 
-int LdapOperation::search( const QString &base, LdapUrl::Scope scope,
+int LdapOperation::search( const LdapDN &base, LdapUrl::Scope scope,
                            const QString &filter, const QStringList &attributes )
 {
   Q_ASSERT( d->mConnection );
@@ -296,10 +422,10 @@ int LdapOperation::search( const QString &base, LdapUrl::Scope scope,
     break;
   }
 
-  kDebug(5322) << "asyncSearch() base=\"" << base << "\" scope=" << scope <<
+  kDebug(5322) << "asyncSearch() base=\"" << base.toString() << "\" scope=" << scope <<
     " filter=\"" << filter << "\" attrs=" << attributes << endl;
   int retval =
-    ldap_search_ext( ld, base.toUtf8(), lscope,
+    ldap_search_ext( ld, base.toString().toUtf8(), lscope,
                      filter.isEmpty() ? QByteArray("objectClass=*") : filter.toUtf8(),
                      attrs, 0, serverctrls, clientctrls, 0,
                      d->mConnection->sizeLimit(), &msgid );
@@ -684,117 +810,47 @@ int LdapOperation::abandon( int id )
   return retval;
 }
 
-int LdapOperation::result( int id )
+int LdapOperation::waitForResult( int id, int msecs )
 {
   Q_ASSERT( d->mConnection );
   LDAP *ld = (LDAP*) d->mConnection->handle();
 
   LDAPMessage *msg;
-  int rescode, retval;
+  int rescode;
 
-  rescode = ldap_result( ld, id, 0, NULL, &msg );
-  if ( rescode == -1 ) {
-    return -1;
-  }
+  QTime stopWatch;
+  stopWatch.start();
+  int attempt( 1 );
+  int timeout( 0 );
 
-  switch ( rescode ) {
-  case RES_SEARCH_ENTRY:
-  {
-    d->mObject.clear();
-    LdapAttrMap attrs;
-    char *name;
-    struct berval **bvals;
-    BerElement     *entry;
+  do {
+    // Calculate the timeout value to use and assign it to a timeval structure
+    // see man select (2) for details
+    timeout = kldap_timeout_value( msecs, stopWatch.elapsed() );
+    kDebug(5322) << "LdapOperation::waitForResult(" << id << ", " << msecs
+             << "): Waiting " << timeout / 1000.0
+             << " secs for result. Attempt #" << attempt++ << endl;
+    struct timeval tv;
+    tv.tv_sec = timeout / 1000;
+    tv.tv_usec = ( timeout % 1000 ) * 1000;
 
-    char *dn = ldap_get_dn( ld, msg );
-    d->mObject.setDn( QString::fromUtf8( dn ) );
-    ldap_memfree( dn );
+    // Wait for a result
+    rescode = ldap_result( ld, id, 0, timeout < 0 ? 0 : &tv, &msg );
 
-    // iterate over the attributes
-    name = ldap_first_attribute( ld, msg, &entry );
-    while ( name != 0 ) {
-      // print the values
-      bvals = ldap_get_values_len( ld, msg, name );
-      LdapAttrValue values;
-      if ( bvals ) {
-        for ( int i = 0; bvals[i] != 0; i++ ) {
-          char *val = bvals[i]->bv_val;
-          unsigned long len = bvals[i]->bv_len;
-          values.append( QByteArray( val, len ) );
-        }
-        ldap_value_free_len( bvals );
+    // Act on the return code
+    if ( rescode != -1 ) {
+      // Some kind of result is available for processing
+      if ( d->processResult( rescode, msg ) == -1 ) {
+        return -1;
       }
-      attrs[ QString::fromLatin1( name ) ] = values;
-      // next attribute
-      name = ldap_next_attribute( ld, msg, entry );
     }
-    ber_free( entry , 0 );
-    d->mObject.setAttributes( attrs );
-    break;
-  }
-  case RES_EXTENDED:
-  {
-    char *retoid;
-    struct berval *retdata;
-    retval = ldap_parse_extended_result( ld, msg, &retoid, &retdata, 0 );
-    if ( retval != LDAP_SUCCESS ) {
-      ldap_msgfree( msg );
-      return -1;
-    }
-    d->mExtOid = retoid ? QByteArray( retoid ) : QByteArray();
-    d->mExtData = retdata ? QByteArray( retdata->bv_val, retdata->bv_len ) : QByteArray();
-    ldap_memfree( retoid );
-    ber_bvfree( retdata );
-    break;
-  }
-  default:
-  {
-    LDAPControl **serverctrls = 0;
-    char *matcheddn = 0, *errmsg = 0;
-    char **referralsp;
-    int errcodep;
-    retval =
-      ldap_parse_result( ld, msg, &errcodep, &matcheddn, &errmsg, &referralsp,
-                         &serverctrls, 0 );
-    kDebug(5322) << "rescode " << rescode << " retval: " << retval
-             << " matcheddn: " << matcheddn << " errcode: "
-             << errcodep << " errmsg: " << errmsg << endl;
-    if ( retval != LDAP_SUCCESS ) {
-      ldap_msgfree( msg );
-      return -1;
-    }
-    d->mControls.clear();
-    if ( serverctrls ) {
-      extractControls( d->mControls, serverctrls );
-      ldap_controls_free( serverctrls );
-    }
-    d->mReferrals.clear();
-    if ( referralsp ) {
-      char **tmp = referralsp;
-      while ( *tmp ) {
-        d->mReferrals.append( QByteArray( *tmp ) );
-        tmp++;
-      }
-      ber_memvfree( (void **) referralsp );
-    }
-    d->mMatchedDn = QString();
-    if ( matcheddn ) {
-      d->mMatchedDn = QString::fromUtf8( matcheddn );
-      ldap_memfree( matcheddn );
-    }
-    if ( errmsg ) {
-      ldap_memfree( errmsg );
-    }
-  }
-  }
-
-  ldap_msgfree( msg );
+  } while ( rescode == -1 && ( msecs == -1 || stopWatch.elapsed() < msecs ) );
 
   return rescode;
 }
 
 #else
-int LdapOperation::search( const QString &base, LdapUrl::Scope scope,
+int LdapOperation::search( const LdapDN &base, LdapUrl::Scope scope,
                            const QString &filter, const QStringList &attributes )
 {
   kError() << "LDAP support not compiled" << endl;

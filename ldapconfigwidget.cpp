@@ -330,7 +330,7 @@ void LdapConfigWidget::Private::sendQuery()
   if ( mPort ) {
     _url.setPort( mPort->value() );
   }
-  _url.setDn( "" );
+  _url.setDn( LdapDN( "" ) );
   _url.setAttributes( QStringList( mAttr ) );
   _url.setScope( LdapUrl::Base );
   if ( mVersion ) {
@@ -558,7 +558,7 @@ LdapServer LdapConfigWidget::server() const
     _server.setPort( d->mPort->value() );
   }
   if ( d->mDn ) {
-    _server.setBaseDn( d->mDn->text() );
+    _server.setBaseDn( LdapDN( d->mDn->text() ) );
   }
   if ( d->mFilter ) {
     _server.setFilter( d->mFilter->text() );
@@ -717,16 +717,16 @@ int LdapConfigWidget::version() const
   return d->mVersion ? d->mVersion->value() : 3;
 }
 
-void LdapConfigWidget::setDn( const QString &dn )
+void LdapConfigWidget::setDn( const LdapDN &dn )
 {
   if ( d->mDn ) {
-    d->mDn->setText( dn );
+    d->mDn->setText( dn.toString() );
   }
 }
 
-QString LdapConfigWidget::dn() const
+LdapDN LdapConfigWidget::dn() const
 {
-  return d->mDn ? d->mDn->text() : QString();
+  return d->mDn ? LdapDN( d->mDn->text() ) : LdapDN();
 }
 
 void LdapConfigWidget::setFilter( const QString &filter )

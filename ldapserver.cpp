@@ -29,7 +29,7 @@ class LdapServer::LdapServerPrivate
   public:
     QString mHost;
     int mPort;
-    QString mBaseDn;
+    LdapDN mBaseDn;
     QString mUser;
     QString mBindDn;
     QString mRealm;
@@ -98,7 +98,7 @@ int LdapServer::port() const
   return d->mPort;
 }
 
-QString LdapServer::baseDn() const
+LdapDN LdapServer::baseDn() const
 {
   return d->mBaseDn;
 }
@@ -178,7 +178,7 @@ void LdapServer::setPort( int port )
   d->mPort = port;
 }
 
-void LdapServer::setBaseDn( const QString &baseDn )
+void LdapServer::setBaseDn( const LdapDN &baseDn )
 {
   d->mBaseDn = baseDn;
 }

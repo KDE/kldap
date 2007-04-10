@@ -82,9 +82,9 @@ LdapUrl::~LdapUrl()
   delete d;
 }
 
-void LdapUrl::setDn( const QString &dn )
+void LdapUrl::setDn( const LdapDN &dn )
 {
-  QString tmp = dn;
+  QString tmp = dn.toString();
   if ( !QDir::isRelativePath( tmp ) )
 #ifdef Q_WS_WIN
     tmp.remove( 0, 3 ); // e.g. "c:/"
@@ -94,7 +94,7 @@ void LdapUrl::setDn( const QString &dn )
   setPath( tmp );
 }
 
-QString LdapUrl::dn() const
+LdapDN LdapUrl::dn() const
 {
   QString tmp = path();
   if ( !QDir::isRelativePath( tmp ) )
@@ -103,7 +103,8 @@ QString LdapUrl::dn() const
 #else
     tmp.remove( 0, 1 );
 #endif
-  return tmp;
+  LdapDN tmpDN( tmp );
+  return tmpDN;
 }
 
 QStringList LdapUrl::attributes() const

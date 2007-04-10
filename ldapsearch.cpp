@@ -19,6 +19,7 @@
 */
 
 #include "ldapsearch.h"
+#include "ldapdn.h"
 #include "ldapdefs.h"
 
 #include <QtCore/QEventLoop>
@@ -39,7 +40,7 @@ class LdapSearch::Private
     void result();
     bool connect();
     void closeConnection();
-    bool startSearch( const QString &base, LdapUrl::Scope scope,
+    bool startSearch( const LdapDN &base, LdapUrl::Scope scope,
                       const QString &filter, const QStringList &attributes,
                       int pagesize );
 
@@ -48,7 +49,8 @@ class LdapSearch::Private
     LdapOperation mOp;
     bool mOwnConnection, mAbandoned;
     int mId, mPageSize;
-    QString mBase, mFilter;
+    LdapDN mBase;
+    QString mFilter;
     QStringList mAttributes;
     LdapUrl::Scope mScope;
 
@@ -62,7 +64,7 @@ void LdapSearch::Private::result()
     mOp.abandon( mId );
     return;
   }
-  int res = mOp.result( mId );
+  int res = mOp.waitForResult( mId, -1 );
   if ( res == -1 || mConn->ldapErrorCode() != KLDAP_SUCCESS ) {
     mError = mConn->ldapErrorCode();
     mErrorString = mConn->ldapErrorString();
@@ -130,11 +132,11 @@ void LdapSearch::Private::closeConnection()
   }
 }
 
-bool LdapSearch::Private::startSearch( const QString &base, LdapUrl::Scope scope,
+bool LdapSearch::Private::startSearch( const LdapDN &base, LdapUrl::Scope scope,
                                        const QString &filter,
                                        const QStringList &attributes, int pagesize )
 {
-  kDebug(5322) << "search: base=" << base << " scope=" << scope << " filter=" << filter
+  kDebug(5322) << "search: base=" << base.toString() << " scope=" << scope << " filter=" << filter
     << " attributes=" << attributes << " pagesize=" << pagesize  << endl;
   mAbandoned = false;
   mError = 0;
@@ -233,7 +235,7 @@ bool LdapSearch::search( const LdapUrl &url )
                          url.attributes(), pagesize );
 }
 
-bool LdapSearch::search( const QString &base, LdapUrl::Scope scope,
+bool LdapSearch::search( const LdapDN &base, LdapUrl::Scope scope,
                          const QString &filter, const QStringList &attributes,
                          int pagesize )
 {

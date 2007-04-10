@@ -24,6 +24,7 @@
 #include <QtCore/QString>
 #include <QtGui/QWidget>
 
+#include "ldapdn.h"
 #include "kldap.h"
 #include "ldapobject.h"
 #include "ldapserver.h"
@@ -54,7 +55,7 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
   Q_PROPERTY( QString host READ host WRITE setHost )
   Q_PROPERTY( int port READ port WRITE setPort )
   Q_PROPERTY( int version READ version WRITE setVersion )
-  Q_PROPERTY( QString dn READ dn WRITE setDn )
+  Q_PROPERTY( LdapDN dn READ dn WRITE setDn )
   Q_PROPERTY( QString filter READ filter WRITE setFilter )
   Q_PROPERTY( QString mech READ mech WRITE setMech )
   Q_PROPERTY( Security security READ security WRITE setSecurity )
@@ -141,9 +142,9 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
     int version() const;
 
     /** Sets the LDAP Base DN. Kconfig widget name: kcfg_ldapdn */
-    void setDn( const QString &dn );
+    void setDn( const LdapDN &dn );
     /** Gets the LDAP Base DN. Kconfig widget name: kcfg_ldapdn */
-    QString dn() const;
+    LdapDN dn() const;
 
     /** Sets the LDAP Filter. Kconfig widget name: kcfg_ldapfilter */
     void setFilter( const QString &filter );

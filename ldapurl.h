@@ -26,6 +26,7 @@
 
 #include <kurl.h>
 
+#include "ldapdn.h"
 #include "kldap.h"
 
 namespace KLDAP {
@@ -67,9 +68,9 @@ class KLDAP_EXPORT LdapUrl : public KUrl
      * Returns the dn part of the LDAP Url (same as path(), but slash removed
      * from the beginning).
      */
-    QString dn() const;
+    LdapDN dn() const;
     /** Sets the the dn part of the LDAP Url. */
-    void setDn( const QString &dn );
+    void setDn( const LdapDN &dn );
 
     /** Returns the attributes part of the LDAP Url */
     QStringList attributes() const;
