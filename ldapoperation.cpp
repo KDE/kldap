@@ -52,8 +52,9 @@ static int kldap_timeout_value( int msecs, int elapsed )
   return timeout < 0 ? 0 : timeout;
 }
 
-class LdapOperation::LdapOperationPrivate {
-  public:
+struct LDAPMessage;
+
+struct LdapOperation::LdapOperationPrivate {
   int processResult( int rescode, LDAPMessage *msg );
 
   LdapControls mClientCtrls, mServerCtrls, mControls;
@@ -64,6 +65,85 @@ class LdapOperation::LdapOperationPrivate {
 
   LdapConnection *mConnection;
 };
+
+LdapOperation::LdapOperation()
+  : d( new LdapOperationPrivate )
+{
+  d->mConnection = 0;
+}
+
+LdapOperation::LdapOperation( LdapConnection &conn )
+  : d( new LdapOperationPrivate )
+{
+  setConnection( conn );
+}
+
+LdapOperation::~LdapOperation()
+{
+  delete d;
+}
+
+void LdapOperation::setConnection( LdapConnection &conn )
+{
+  d->mConnection = &conn;
+}
+
+LdapConnection &LdapOperation::connection()
+{
+  return *d->mConnection;
+}
+
+void LdapOperation::setClientControls( const LdapControls &ctrls )
+{
+  d->mClientCtrls = ctrls;
+}
+
+void LdapOperation::setServerControls( const LdapControls &ctrls )
+{
+  d->mServerCtrls = ctrls;
+}
+
+const LdapControls &LdapOperation::clientControls() const
+{
+  return d->mClientCtrls;
+}
+
+const LdapControls &LdapOperation::serverControls() const
+{
+  return d->mServerCtrls;
+}
+
+const LdapObject &LdapOperation::object() const
+{
+  return d->mObject;
+}
+
+const LdapControls &LdapOperation::controls() const
+{
+  return d->mControls;
+}
+
+QByteArray LdapOperation::extendedOid() const
+{
+  return d->mExtOid;
+}
+
+QByteArray LdapOperation::extendedData() const
+{
+  return d->mExtData;
+}
+
+QString LdapOperation::matchedDn() const
+{
+  return d->mMatchedDn;
+}
+
+QList<QByteArray> LdapOperation::referrals() const
+{
+  return d->mReferrals;
+}
+
+#ifdef LDAP_FOUND
 
 int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage *msg )
 {
@@ -170,84 +250,7 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
 }
 
 
-LdapOperation::LdapOperation()
-  : d( new LdapOperationPrivate )
-{
-  d->mConnection = 0;
-}
 
-LdapOperation::LdapOperation( LdapConnection &conn )
-  : d( new LdapOperationPrivate )
-{
-  setConnection( conn );
-}
-
-LdapOperation::~LdapOperation()
-{
-  delete d;
-}
-
-void LdapOperation::setConnection( LdapConnection &conn )
-{
-  d->mConnection = &conn;
-}
-
-LdapConnection &LdapOperation::connection()
-{
-  return *d->mConnection;
-}
-
-void LdapOperation::setClientControls( const LdapControls &ctrls )
-{
-  d->mClientCtrls = ctrls;
-}
-
-void LdapOperation::setServerControls( const LdapControls &ctrls )
-{
-  d->mServerCtrls = ctrls;
-}
-
-const LdapControls &LdapOperation::clientControls() const
-{
-  return d->mClientCtrls;
-}
-
-const LdapControls &LdapOperation::serverControls() const
-{
-  return d->mServerCtrls;
-}
-
-const LdapObject &LdapOperation::object() const
-{
-  return d->mObject;
-}
-
-const LdapControls &LdapOperation::controls() const
-{
-  return d->mControls;
-}
-
-QByteArray LdapOperation::extendedOid() const
-{
-  return d->mExtOid;
-}
-
-QByteArray LdapOperation::extendedData() const
-{
-  return d->mExtData;
-}
-
-QString LdapOperation::matchedDn() const
-{
-  return d->mMatchedDn;
-}
-
-QList<QByteArray> LdapOperation::referrals() const
-{
-  return d->mReferrals;
-}
-
-#ifdef LDAP_FOUND
 
 static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
                       const QByteArray &value )
@@ -850,6 +853,7 @@ int LdapOperation::waitForResult( int id, int msecs )
 }
 
 #else
+
 int LdapOperation::search( const LdapDN &base, LdapUrl::Scope scope,
                            const QString &filter, const QStringList &attributes )
 {
