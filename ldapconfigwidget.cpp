@@ -343,10 +343,10 @@ void LdapConfigWidget::Private::sendQuery()
   kDebug(5322) << "sendQuery url: " << _url.prettyUrl() << endl;
 
   LdapSearch search;
-  connect( &search, SIGNAL( data( LdapSearch*, const LdapObject& ) ),
-           mParent, SLOT( loadData( LdapSearch*, const LdapObject& ) ) );
-  connect( &search, SIGNAL( result( LdapSearch* ) ),
-           mParent, SLOT( loadResult( LdapSearch* ) ) );
+  connect( &search, SIGNAL( data( KLDAP::LdapSearch*, const KLDAP::LdapObject& ) ),
+           mParent, SLOT( loadData( KLDAP::LdapSearch*, const KLDAP::LdapObject& ) ) );
+  connect( &search, SIGNAL( result( KLDAP::LdapSearch* ) ),
+           mParent, SLOT( loadResult( KLDAP::LdapSearch* ) ) );
 
   if ( !search.search( _url ) ) {
     return;

@@ -112,11 +112,11 @@ class KLDAP_EXPORT LdapSearch : public QObject
     /**
      * Emitted for each result object.
      */
-    void data( LdapSearch*, const LdapObject& );
+    void data( KLDAP::LdapSearch*, const KLDAP::LdapObject& );
     /**
      * Emitted when the searching finished.
      */
-    void result( LdapSearch* );
+    void result( KLDAP::LdapSearch* );
 
   private:
     class Private;

@@ -244,8 +244,8 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
     Q_PRIVATE_SLOT( d, void setSASL( bool ) )
     Q_PRIVATE_SLOT( d, void queryDNClicked() )
     Q_PRIVATE_SLOT( d, void queryMechClicked() )
-    Q_PRIVATE_SLOT( d, void loadData( LdapSearch*, const LdapObject& ) )
-    Q_PRIVATE_SLOT( d, void loadResult( LdapSearch* ) )
+    Q_PRIVATE_SLOT( d, void loadData( KLDAP::LdapSearch*, const KLDAP::LdapObject& ) )
+    Q_PRIVATE_SLOT( d, void loadResult( KLDAP::LdapSearch* ) )
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS( LdapConfigWidget::WinFlags )
