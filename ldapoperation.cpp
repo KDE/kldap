@@ -52,10 +52,10 @@ static int kldap_timeout_value( int msecs, int elapsed )
   return timeout < 0 ? 0 : timeout;
 }
 
-struct LDAPMessage;
-
 struct LdapOperation::LdapOperationPrivate {
+#ifdef LDAP_FOUND
   int processResult( int rescode, LDAPMessage *msg );
+#endif
 
   LdapControls mClientCtrls, mServerCtrls, mControls;
   LdapObject mObject;
