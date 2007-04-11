@@ -76,8 +76,8 @@ class LdapModel::LdapModelPrivate
 
     void createConnections();
     void populateRootToBaseDN();
-    void gotSearchResult( LdapSearch* );
-    void gotSearchData( LdapSearch*, const LdapObject&);
+    void gotSearchResult( KLDAP::LdapSearch* );
+    void gotSearchData( KLDAP::LdapSearch*, const KLDAP::LdapObject&);
 
   private:
     LdapModel *m_parent;

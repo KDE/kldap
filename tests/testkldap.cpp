@@ -126,10 +126,10 @@ void KLdapTest::testLdapSearch()
     LdapUrl url;
     url.setUrl( m_url );
     url.parseQuery();
-    connect( m_search, SIGNAL( result( LdapSearch* ) ),
-             this, SLOT( searchResult( LdapSearch* ) ) );
-    connect( m_search, SIGNAL( data( LdapSearch*, const LdapObject& ) ),
-             this, SLOT( searchData( LdapSearch*, const LdapObject& ) ) );
+    connect( m_search, SIGNAL( result( KLDAP::LdapSearch* ) ),
+             this, SLOT( searchResult( KLDAP::LdapSearch* ) ) );
+    connect( m_search, SIGNAL( data( KLDAP::LdapSearch*, const KLDAP::LdapObject& ) ),
+             this, SLOT( searchData( KLDAP::LdapSearch*, const KLDAP::LdapObject& ) ) );
     bool success = m_search->search( url );
     while( QCoreApplication::hasPendingEvents() )
         qApp->processEvents();
@@ -139,7 +139,7 @@ void KLdapTest::testLdapSearch()
     kDebug() << "Search found " << m_objects.size() << " matching entries" << endl;
 }
 
-void KLdapTest::searchResult( LdapSearch* search )
+void KLdapTest::searchResult( KLDAP::LdapSearch* search )
 {
     kDebug() << "KLdapTest::searchResult()" << endl;
     int err = search->error();
@@ -149,7 +149,7 @@ void KLdapTest::searchResult( LdapSearch* search )
 }
 
 
-void KLdapTest::searchData( LdapSearch* /*search*/, const LdapObject& obj )
+void KLdapTest::searchData( KLDAP::LdapSearch* /*search*/, const KLDAP::LdapObject& obj )
 {
     //kDebug() << "KLdapTest::searchData()" << endl;
     //kDebug() << "Object:" << endl << obj.toString() << endl;

@@ -93,10 +93,10 @@ void LdapModel::LdapModelPrivate::recreateRootItem()
 
 void LdapModel::LdapModelPrivate::createConnections()
 {
-  connect( search(), SIGNAL( result( LdapSearch* ) ),
-           m_parent, SLOT( gotSearchResult( LdapSearch* ) ) );
-  connect( search(), SIGNAL( data( LdapSearch*, const LdapObject& ) ),
-           m_parent, SLOT( gotSearchData( LdapSearch*, const LdapObject& ) ) );
+  connect( search(), SIGNAL( result( KLDAP::LdapSearch* ) ),
+           m_parent, SLOT( gotSearchResult( KLDAP::LdapSearch* ) ) );
+  connect( search(), SIGNAL( data( KLDAP::LdapSearch*, const KLDAP::LdapObject& ) ),
+           m_parent, SLOT( gotSearchData( KLDAP::LdapSearch*, const KLDAP::LdapObject& ) ) );
 }
 
 void LdapModel::LdapModelPrivate::populateRootToBaseDN()
@@ -117,7 +117,7 @@ void LdapModel::LdapModelPrivate::populateRootToBaseDN()
   search( baseDN(), LdapUrl::Base, QString(), QStringList() << "dn" << "objectClass" );
 }
 
-void LdapModel::LdapModelPrivate::gotSearchResult( LdapSearch* )
+void LdapModel::LdapModelPrivate::gotSearchResult( KLDAP::LdapSearch* )
 {
   kDebug(5322) << "LdapModel::LdapModelPrivate::gotSearchResult()" << endl;
 
@@ -202,7 +202,7 @@ void LdapModel::LdapModelPrivate::gotSearchResult( LdapSearch* )
   }
 }
 
-void LdapModel::LdapModelPrivate::gotSearchData( LdapSearch*, const LdapObject &obj )
+void LdapModel::LdapModelPrivate::gotSearchData( KLDAP::LdapSearch*, const KLDAP::LdapObject &obj )
 {
   kDebug(5322) << "LdapModel::LdapModelPrivate::gotSearchData()" << endl;
   //kDebug(5322) << "Object:" << endl << obj.toString() << endl;
