@@ -19,9 +19,10 @@
 */
 
 #include "ldapoperation.h"
+#include "kldap_config.h"
 
 #include <stdlib.h>
-#ifdef __FreeBSD__
+#ifdef HAVE_SYS_TIME_H
 #include <sys/time.h>
 #endif
 

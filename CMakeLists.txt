@@ -1,13 +1,14 @@
 project(kldap)
 
 
+
 macro_optional_find_package(Ldap)
 macro_log_feature(LDAP_FOUND "OpenLDAP" "LDAP (Lightweight Directory Access Protocol) libraries" "http://www.openldap.org" FALSE "" "Needed to provide LDAP functionality in KDE" )
 
 macro_optional_find_package(Sasl2)
 macro_log_feature(SASL2_FOUND "cyrus-sasl" "Cyrus SASL API" "http://asg.web.cmu.edu/sasl/sasl-library.html" FALSE "" "Needed to support authentication of logins" )
 
-
+check_include_files(sys/time.h    HAVE_SYS_TIME_H)
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kldap_config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/kldap_config.h )
 
 set(kldap_EXTRA_LIBS)
