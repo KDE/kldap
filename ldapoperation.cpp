@@ -21,6 +21,9 @@
 #include "ldapoperation.h"
 
 #include <stdlib.h>
+#ifdef __FreeBSD__
+#include <sys/time.h>
+#endif
 
 #include <kdebug.h>
 
