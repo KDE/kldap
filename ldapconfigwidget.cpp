@@ -23,12 +23,12 @@
 #include <QtGui/QGroupBox>
 #include <QtGui/QLabel>
 #include <QtGui/QLayout>
-#include <QtGui/QProgressDialog>
 #include <QtGui/QPushButton>
 #include <QtGui/QRadioButton>
 #include <QtGui/QSpinBox>
 
 #include <kacceleratormanager.h>
+#include <kprogressdialog.h>
 #include <kcombobox.h>
 #include <kdebug.h>
 #include <klocale.h>
@@ -80,7 +80,7 @@ class LdapConfigWidget::Private
     KComboBox *mMech;
 
     bool mCancelled;
-    QProgressDialog *mProg;
+    KProgressDialog *mProg;
 
     QGridLayout *mainLayout;
 };
@@ -352,14 +352,14 @@ void LdapConfigWidget::Private::sendQuery()
     return;
   }
 
-  if ( mProg == NULL ) {
-    mProg = new QProgressDialog( mParent );
+  if ( mProg ) {
+    mProg = new KProgressDialog( mParent );
     mProg->setWindowTitle( i18n("LDAP Query") );
     mProg->setModal( true );
   }
-  mProg->setLabelText( _url.prettyUrl() );
-  mProg->setRange( 0, 1 );
-  mProg->setValue( 0 );
+  mProg->setLabel( _url.prettyUrl() );
+  mProg->progressBar()->setRange( 0, 1 );
+  mProg->progressBar()->setValue( 0 );
   mProg->exec();
   if ( mCancelled ) {
     kDebug(5322) << "query canceled!" << endl;
@@ -394,7 +394,7 @@ void LdapConfigWidget::Private::queryDNClicked()
 void LdapConfigWidget::Private::loadData( LdapSearch*, const LdapObject &object )
 {
   kDebug(5322) << "loadData() object: " << object.toString() << endl;
-  mProg->setValue( mProg->value() + 1 );
+  mProg->progressBar()->setValue( mProg->progressBar()->value() + 1 );
   for ( LdapAttrMap::ConstIterator it = object.attributes().constBegin(); it != object.attributes().constEnd(); ++it ) {
     for ( LdapAttrValue::ConstIterator it2 = (*it).constBegin(); it2 != (*it).constEnd(); ++it2 ) {
       mQResult.push_back( QString::fromUtf8( *it2 ) );
