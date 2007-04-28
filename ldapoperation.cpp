@@ -56,7 +56,8 @@ static int kldap_timeout_value( int msecs, int elapsed )
   return timeout < 0 ? 0 : timeout;
 }
 
-struct LdapOperation::LdapOperationPrivate {
+class LdapOperation::LdapOperationPrivate {
+public:
 #ifdef LDAP_FOUND
   int processResult( int rescode, LDAPMessage *msg );
 #endif
