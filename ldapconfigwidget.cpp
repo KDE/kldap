@@ -357,7 +357,7 @@ void LdapConfigWidget::Private::sendQuery()
     mProg->setWindowTitle( i18n("LDAP Query") );
     mProg->setModal( true );
   }
-  mProg->setLabel( _url.prettyUrl() );
+  mProg->setLabelText( _url.prettyUrl() );
   mProg->progressBar()->setRange( 0, 1 );
   mProg->progressBar()->setValue( 0 );
   mProg->exec();
