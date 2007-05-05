@@ -352,7 +352,7 @@ void LdapConfigWidget::Private::sendQuery()
     return;
   }
 
-  if ( mProg ) {
+  if ( mProg == 0 ) {
     mProg = new KProgressDialog( mParent );
     mProg->setWindowTitle( i18n("LDAP Query") );
     mProg->setModal( true );
