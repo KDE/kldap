@@ -192,7 +192,7 @@ class KLDAP_EXPORT LdapOperation
      * message resulted in error, not the LDAP operation error. Call
      * connection().ldapErrorCode() to determine if the operation succeeded.
      */
-    int waitForResult( int id, int msecs = 30000 );
+    int waitForResult( int id, int msecs = -1 );
     /**
      * Returns the result object if result() returned RES_SEARCH_ENTRY.
      */
