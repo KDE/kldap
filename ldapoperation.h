@@ -188,9 +188,10 @@ class KLDAP_EXPORT LdapOperation
      * will perform a poll for a result message.
      *
      * Returns the type of the result LDAP message (RES_XXX constants).
-     * -1 if error occurred. Note! Return code -1 means that fetching the
-     * message resulted in error, not the LDAP operation error. Call
-     * connection().ldapErrorCode() to determine if the operation succeeded.
+     * -1 if error occurred, 0 if the timeout value elapsed. Note! 
+     * Return code -1 means that fetching the message resulted in error, 
+     * not the LDAP operation error. Call connection().ldapErrorCode() to 
+     * determine if the operation succeeded.
      */
     int waitForResult( int id, int msecs = -1 );
     /**

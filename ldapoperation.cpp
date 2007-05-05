@@ -844,17 +844,15 @@ int LdapOperation::waitForResult( int id, int msecs )
 
     // Wait for a result
     rescode = ldap_result( ld, id, 0, timeout < 0 ? 0 : &tv, &msg );
-
+    if ( rescode == -1 ) return -1;
     // Act on the return code
-    if ( rescode != -1 ) {
+    if ( rescode != 0 ) {
       // Some kind of result is available for processing
-      if ( d->processResult( rescode, msg ) == -1 ) {
-        return -1;
-      }
+      return d->processResult( rescode, msg );
     }
-  } while ( rescode == -1 && ( msecs == -1 || stopWatch.elapsed() < msecs ) );
+  } while ( msecs == -1 || stopWatch.elapsed() < msecs );
 
-  return rescode;
+  return 0; //timeout
 }
 
 #else

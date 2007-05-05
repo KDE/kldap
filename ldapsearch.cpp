@@ -29,6 +29,9 @@
 
 using namespace KLDAP;
 
+//blocking the GUI for xxx milliseconds
+#define LDAPSEARCH_BLOCKING_TIMEOUT 10
+
 class LdapSearch::Private
 {
   public:
@@ -64,13 +67,18 @@ void LdapSearch::Private::result()
     mOp.abandon( mId );
     return;
   }
-  int res = mOp.waitForResult( mId, -1 );
-  if ( res == -1 || mConn->ldapErrorCode() != KLDAP_SUCCESS ) {
+  int res = mOp.waitForResult( mId, LDAPSEARCH_BLOCKING_TIMEOUT );
+
+  kDebug(5322) << "LdapSearch::Private::result: " << res << endl;
+
+  if ( res != 0 && ( res == -1 || mConn->ldapErrorCode() != KLDAP_SUCCESS ) ) {
+    //error happened, but no timeout
     mError = mConn->ldapErrorCode();
     mErrorString = mConn->ldapErrorString();
     emit mParent->result( mParent );
     return;
   }
+
   if ( res == LdapOperation::RES_SEARCH_RESULT ) {
     if ( mPageSize ) {
       QByteArray cookie;
@@ -106,6 +114,7 @@ void LdapSearch::Private::result()
   if ( res == LdapOperation::RES_SEARCH_ENTRY ) {
     emit mParent->data( mParent, mOp.object() );
   }
+
   QTimer::singleShot( 0, mParent, SLOT(result()) );
 }
 
