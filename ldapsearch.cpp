@@ -113,11 +113,15 @@ bool LdapSearch::Private::connect()
 {
   int ret = mConn->connect();
   if ( ret != KLDAP_SUCCESS ) {
+    mError = ret;
+    mErrorString = mConn->connectionError();
     closeConnection();
     return false;
   }
   ret = mConn->bind();
   if ( ret != KLDAP_SUCCESS ) {
+    mError = mConn->ldapErrorCode();
+    mErrorString = mConn->ldapErrorString();
     closeConnection();
     return false;
   }
@@ -160,6 +164,8 @@ bool LdapSearch::Private::startSearch( const LdapDN &base, LdapUrl::Scope scope,
   }
 
   if ( mId == -1 ) {
+    mError = mConn->ldapErrorCode();
+    mErrorString = mConn->ldapErrorString();
     return false;
   }
   kDebug(5322) << "search::startSearch msg id=" << mId << endl;

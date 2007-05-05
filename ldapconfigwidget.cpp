@@ -349,6 +349,7 @@ void LdapConfigWidget::Private::sendQuery()
            mParent, SLOT( loadResult( KLDAP::LdapSearch* ) ) );
 
   if ( !search.search( _url ) ) {
+    KMessageBox::error( mParent, search.errorString() );
     return;
   }
 
