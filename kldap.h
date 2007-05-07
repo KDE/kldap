@@ -23,14 +23,14 @@
 
 #include <kdemacros.h>
 
-#if defined(_WIN32) || defined(_WIN64)
-#ifdef MAKE_KLDAP_LIB
-#define KLDAP_EXPORT KDE_EXPORT
-#else
-#define KLDAP_EXPORT KDE_IMPORT
-#endif
-#else
-#define KLDAP_EXPORT KDE_EXPORT
+#ifndef KLDAP_EXPORT
+# if defined(MAKE_KLDAP_LIB)
+   /* We are building this library */
+#  define KLDAP_EXPORT KDE_EXPORT
+# else
+   /* We are using this library */
+#  define KLDAP_EXPORT KDE_IMPORT
+# endif
 #endif
 
 #endif
