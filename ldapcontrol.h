@@ -23,6 +23,7 @@
 
 #include <QtCore/QString>
 #include <QtCore/QList>
+#include <QtCore/QSharedDataPointer>
 
 #include "kldap.h"
 
@@ -93,8 +94,8 @@ class KLDAP_EXPORT LdapControl
     static LdapControl createPageControl( int pagesize, const QByteArray &cookie = QByteArray() );
 
   private:
-    class LdapControlPrivate;
-    LdapControlPrivate *const d;
+    class Private;
+    QSharedDataPointer<Private> d;
 };
 
 typedef QList<LdapControl> LdapControls;

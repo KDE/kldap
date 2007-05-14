@@ -18,41 +18,56 @@
   Boston, MA 02110-1301, USA.
 */
 
+#include <QtCore/QSharedData>
+
 #include "ldapcontrol.h"
 
 #include "ber.h"
 
 using namespace KLDAP;
 
-class LdapControl::LdapControlPrivate {
+class LdapControl::Private : public QSharedData
+{
   public:
+    Private()
+    {
+    }
+
+    Private( const Private &other )
+      : QSharedData( other )
+    {
+      mOid = other.mOid;
+      mValue = other.mValue;
+      mCritical = other.mCritical;
+    }
+
     QString mOid;
     QByteArray mValue;
     bool mCritical;
 };
 
 LdapControl::LdapControl()
-  : d( new LdapControlPrivate )
+  : d( new Private )
 {
   setControl( QString(), QByteArray(), false );
 }
 
 LdapControl::LdapControl( QString &oid, QByteArray &value, bool critical )
-  : d( new LdapControlPrivate )
+  : d( new Private )
 {
   setControl( oid, value, critical );
 }
 
 LdapControl::LdapControl( const LdapControl &that )
-  : d( new LdapControlPrivate )
+  : d( that.d )
 {
   setControl( that.d->mOid, that.d->mValue, that.d->mCritical );
 }
 
 LdapControl &LdapControl::operator= ( const LdapControl &that )
 {
-  if ( this == &that ) {
-    return *this;
+  if ( this != &that ) {
+    d = that.d;
   }
 
   setControl( that.d->mOid, that.d->mValue, that.d->mCritical );
@@ -62,7 +77,6 @@ LdapControl &LdapControl::operator= ( const LdapControl &that )
 
 LdapControl::~LdapControl()
 {
-  delete d;
 }
 
 void LdapControl::setControl( const QString &oid, const QByteArray &value, bool critical )

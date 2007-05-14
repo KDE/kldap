@@ -28,14 +28,12 @@
 
 #include <kdebug.h>
 
-#include <kldap_config.h>
-
 #ifdef LDAP_FOUND
 #include <ldap.h>
 #include <lber.h>
 #endif
 
-#include <QTime>
+#include <QtCore/QTime>
 
 using namespace KLDAP;
 
@@ -108,22 +106,22 @@ void LdapOperation::setServerControls( const LdapControls &ctrls )
   d->mServerCtrls = ctrls;
 }
 
-const LdapControls &LdapOperation::clientControls() const
+LdapControls LdapOperation::clientControls() const
 {
   return d->mClientCtrls;
 }
 
-const LdapControls &LdapOperation::serverControls() const
+LdapControls LdapOperation::serverControls() const
 {
   return d->mServerCtrls;
 }
 
-const LdapObject &LdapOperation::object() const
+LdapObject LdapOperation::object() const
 {
   return d->mObject;
 }
 
-const LdapControls &LdapOperation::controls() const
+LdapControls LdapOperation::controls() const
 {
   return d->mControls;
 }

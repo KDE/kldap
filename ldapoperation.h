@@ -93,11 +93,11 @@ class KLDAP_EXPORT LdapOperation
     /**
      * Returns the client controls (which set by setClientControls()).
      */
-    const LdapControls &clientControls() const;
+    LdapControls clientControls() const;
     /**
      * Returns the server controls (which set by setServerControls()).
      */
-    const LdapControls &serverControls() const;
+    LdapControls serverControls() const;
 
     /**
      * Starts a search operation with the given base DN, scope, filter and
@@ -197,12 +197,12 @@ class KLDAP_EXPORT LdapOperation
     /**
      * Returns the result object if result() returned RES_SEARCH_ENTRY.
      */
-    const LdapObject &object() const;
+    LdapObject object() const;
     /**
      * Returns the server controls from the returned ldap message (grabbed
      * by result()).
      */
-    const LdapControls &controls() const;
+    LdapControls controls() const;
     /**
      * Returns the OID of the extended operation response (result
      * returned RES_EXTENDED).

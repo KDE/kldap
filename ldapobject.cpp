@@ -18,47 +18,56 @@
   Boston, MA 02110-1301, USA.
 */
 
+#include <QtCore/QSharedData>
+
 #include "ldapobject.h"
 #include "ldif.h"
 
 using namespace KLDAP;
 
-class LdapObject::LdapObjectPrivate {
+class LdapObject::Private : public QSharedData
+{
   public:
+    Private()
+    {
+    }
+
+    Private( const Private &other )
+      : QSharedData( other )
+    {
+      mDn = other.mDn;
+      mAttrs = other.mAttrs;
+    }
+
     LdapDN mDn;
     LdapAttrMap mAttrs;
 };
 
 LdapObject::LdapObject()
-  : d( new LdapObjectPrivate )
+  : d( new Private )
 {
-  d->mDn = LdapDN();
 }
 
 LdapObject::LdapObject( const QString &dn )
-  : d( new LdapObjectPrivate )
+  : d( new Private )
 {
   d->mDn = LdapDN( dn );
 }
 
 LdapObject::~LdapObject()
 {
-  delete d;
 }
 
 LdapObject::LdapObject( const LdapObject &that )
-  : d( new LdapObjectPrivate )
+  : d( that.d )
 {
-  *d = *that.d;
 }
 
 LdapObject &LdapObject::operator=( const LdapObject &that )
 {
-  if ( this == &that ) {
-    return *this;
+  if ( this != &that ) {
+    d = that.d;
   }
-
-  *d = *that.d;
 
   return *this;
 }

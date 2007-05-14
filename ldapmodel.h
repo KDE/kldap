@@ -54,8 +54,8 @@ class KLDAP_EXPORT LdapModel : public QAbstractItemModel
     class LdapModelPrivate;
     LdapModelPrivate *const m_d;
 
-    Q_PRIVATE_SLOT( m_d, void gotSearchResult( LdapSearch* ) )
-    Q_PRIVATE_SLOT( m_d, void gotSearchData( LdapSearch*, const LdapObject& ) )
+    Q_PRIVATE_SLOT( m_d, void gotSearchResult( KLDAP::LdapSearch* ) )
+    Q_PRIVATE_SLOT( m_d, void gotSearchData( KLDAP::LdapSearch*, const KLDAP::LdapObject& ) )
 };
 
 }

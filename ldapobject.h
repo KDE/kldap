@@ -23,6 +23,7 @@
 
 #include <QtCore/QList>
 #include <QtCore/QMap>
+#include <QtCore/QSharedDataPointer>
 #include <QtCore/QString>
 
 #include "ldapdn.h"
@@ -101,9 +102,8 @@ class KLDAP_EXPORT LdapObject
     bool hasAttribute( const QString &attributeName ) const;
 
   private:
-    class LdapObjectPrivate;
-    LdapObjectPrivate *const d;
-
+    class Private;
+    QSharedDataPointer<Private> d;
 };
 
 typedef QList<LdapObject> LdapObjects;
