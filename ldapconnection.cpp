@@ -32,8 +32,8 @@
 
 #ifdef LDAP_FOUND
 #define LDAP_DEPRECATED 1 //for ldap_simple_bind_s
-#include <ldap.h>
 #include <lber.h>
+#include <ldap.h>
 #endif
 
 using namespace KLDAP;

@@ -30,8 +30,8 @@
 #include <cstdarg>
 
 #ifdef LDAP_FOUND
-#include <ldap.h>
 #include <lber.h>
+#include <ldap.h>
 #endif
 
 using namespace KLDAP;

@@ -29,8 +29,8 @@
 #include <kdebug.h>
 
 #ifdef LDAP_FOUND
-#include <ldap.h>
 #include <lber.h>
+#include <ldap.h>
 #endif
 
 #include <QtCore/QTime>
