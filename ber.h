@@ -94,7 +94,7 @@ class KLDAP_EXPORT Ber
      *     is provided. This works across calls.
      *   </li>
      *   <li>
-     *     v,V,W  Several octet strings. A QList<QByteArray>* is supplied.
+     *     v,V  Several octet strings. A QList<QByteArray>* is supplied.
      *     Note that a construct like ’{v}’ is required to get an actual
      *     SEQUENCE OF octet strings. Also note that the 'v' format recognizes
      *     the QByteArray only to the first zero character, so it's not

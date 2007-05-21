@@ -30,8 +30,22 @@
 #include <cstdarg>
 
 #ifdef LDAP_FOUND
+
+#ifdef Q_OS_SOLARIS
+#define BC31 1
+#endif
+
 #include <lber.h>
 #include <ldap.h>
+
+#ifndef LBER_USE_DER
+#define LBER_USE_DER 1
+#endif
+
+#ifndef ber_memfree
+#define ber_memfree(x) ldap_memfree(x)
+#endif
+
 #endif
 
 using namespace KLDAP;
@@ -328,9 +342,10 @@ int Ber::scanf( const QString &format, ... )
             c2 = c;
             while ( *c ) {
               v->append( QByteArray( *c ) );
+              ber_memfree( *c );
               c++;
             }
-            ber_memvfree( (void**) c2 );
+            ber_memfree( c2 );
           }
           break;
         }
@@ -349,23 +364,6 @@ int Ber::scanf( const QString &format, ... )
           }
           break;
         }
-      case 'W':
-        {
-          QList<QByteArray> *W = va_arg( args, QList<QByteArray> * );
-          BerVarray bv;
-          ret = ber_scanf( d->mBer, fmt, &bv );
-          if ( ret != -1 && bv ) {
-            int j = 0;
-            while ( bv[j].bv_val ) {
-              W->append( QByteArray( bv[j].bv_val, bv[j].bv_len ) );
-              j++;
-            }
-//            ber_bvarray_free( bv );
-          }
-
-          break;
-        }
-//      case 'M': //This is so complicated, I'm lazy to implement. Use the 3 above instead.
       case 'x':
       case 'n':
       case '{':
