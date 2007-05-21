@@ -202,19 +202,6 @@ int Ber::printf( const QString &format, ... )
           ret = ber_printf( d->mBer, fmt, bv.data() );
           break;
         }
-      case 'W':
-        {
-          QList<QByteArray> *W = va_arg( args, QList<QByteArray> * );
-          QVarLengthArray<struct berval> bvs( W->count()+1 );
-          int j;
-          for ( j = 0; j < W->count(); j++ ) {
-            bvs[j].bv_val = (char*) W->at(j).data();
-            bvs[j].bv_len = W->at(j).size();
-          }
-          bvs[j].bv_val = 0;
-          ret = ber_printf( d->mBer, fmt, bvs.data() );
-          break;
-        }
       case 'n':
       case '{':
       case '}':
