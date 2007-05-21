@@ -232,9 +232,10 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
         char **tmp = referralsp;
         while ( *tmp ) {
           mReferrals.append( QByteArray( *tmp ) );
+          ldap_memfree( *tmp );
           tmp++;
         }
-        ber_memvfree( (void **) referralsp );
+        ldap_memfree( referralsp );
       }
       mMatchedDn = QString();
       if ( matcheddn ) {
