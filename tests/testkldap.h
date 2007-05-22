@@ -38,14 +38,15 @@ class KLdapTest : public QObject
         void cleanupTestCase();
 
         void testLdapUrl();
+        void testBer();
         void testLdapConnection();
         void testLdapSearch();
         void testLdapDN();
         void testLdapModel();
 
     public Q_SLOTS:
-        void searchResult( LdapSearch* );
-        void searchData( LdapSearch*, const LdapObject& );
+        void searchResult( KLDAP::LdapSearch* );
+        void searchData( KLDAP::LdapSearch*, const KLDAP::LdapObject& );
 
     private:
         QString m_url;

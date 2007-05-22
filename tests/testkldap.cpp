@@ -37,11 +37,6 @@
 #include <kdebug.h>
 #include <qtest_kde.h>
 
-#ifdef LDAP_FOUND
-#include <ldap.h>
-#include <lber.h>
-#endif
-
 QTEST_KDEMAIN( KLdapTest, NoGUI )
 
 void KLdapTest::initTestCase()
@@ -52,6 +47,9 @@ void KLdapTest::initTestCase()
        The specified server should not be a production server in case we break anything here.
        You have been warned!
     */
+    m_search=0;
+    m_model=0;
+
     QString filename( "testurl.txt" );
     QFile file( filename );
     if ( file.open( QIODevice::ReadOnly | QIODevice::Text ) )
@@ -60,8 +58,8 @@ void KLdapTest::initTestCase()
         stream >> m_url;
         file.close();
     }
-    else
-        QCOMPARE( 0, 1 );
+//    else
+//        QCOMPARE( 0, 1 );
 
     m_search = new LdapSearch;
 
@@ -69,6 +67,80 @@ void KLdapTest::initTestCase()
     m_model = new LdapModel( this );
 }
 
+void KLdapTest::testBer()
+{
+    Ber ber1,ber2,ber3,ber4,ber5,ber6,ber7;
+    Ber bber;
+    QByteArray flat;
+    
+    int ainteger;
+    QByteArray aoctetString1,aoctetString2,aoctetString3;
+    QList<QByteArray> alist1,alist2;
+
+    int binteger;
+    QByteArray boctetString1,boctetString2,boctetString3;
+    QList<QByteArray> blist1,blist2;
+    
+    aoctetString1="KDE";
+    aoctetString2="the";
+    aoctetString3="next generation";
+    
+    alist1.append(aoctetString1);
+    alist1.append(aoctetString2);
+
+    alist2.append(aoctetString2);
+    alist2.append(aoctetString3);
+    alist2.append(aoctetString1);
+    
+    ainteger=23543;
+
+    ber1.printf("i",ainteger);
+    ber2.printf("o",&aoctetString1);
+    ber3.printf("O",&aoctetString2);
+    ber4.printf("s",&aoctetString3);
+    ber5.printf("{v}",&alist1);
+    ber6.printf("{V}",&alist2);
+    ber7.printf("oi{v}O",&aoctetString1,ainteger,&alist2,&aoctetString2);
+
+    //test integer:
+    bber = ber1;
+    bber.scanf("i",&binteger);
+    QCOMPARE(ainteger, binteger);
+
+    //test octet strings:
+    bber = ber2;
+    bber.scanf("o",&boctetString1);
+    QCOMPARE(aoctetString1, boctetString1);
+    bber = ber3;
+    bber.scanf("o",&boctetString2);
+    QCOMPARE(aoctetString2, boctetString2);
+    bber = ber4;
+    bber.scanf("o",&boctetString3);
+    QCOMPARE(aoctetString3, boctetString3);
+    
+    //test sequence of octet strings:
+    bber = ber5;
+    bber.scanf("v",&blist1);
+    QCOMPARE(alist1,blist1);
+
+    bber = ber6;
+    bber.scanf("v",&blist2);
+    QCOMPARE(alist2,blist2);
+
+    //complex tests
+    boctetString1 = boctetString2 = boctetString3 = QByteArray();
+    binteger = 0;
+    blist1.clear();
+    blist2.clear();
+    
+    bber = ber7;
+    bber.scanf("oivO",&boctetString1,&binteger,&blist2,&boctetString2);
+    QCOMPARE(aoctetString1,boctetString1);
+    QCOMPARE(aoctetString2,boctetString2);
+    QCOMPARE(alist2,blist2);
+    QCOMPARE(ainteger,binteger);
+    
+}
 
 void KLdapTest::cleanupTestCase()
 {
