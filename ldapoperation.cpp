@@ -235,7 +235,7 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
           ldap_memfree( *tmp );
           tmp++;
         }
-        ldap_memfree( referralsp );
+        ldap_memfree( (char*) referralsp );
       }
       mMatchedDn = QString();
       if ( matcheddn ) {
