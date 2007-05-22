@@ -133,7 +133,6 @@ int Ber::printf( const QString &format, ... )
       case 'i':
         {
           ber_int_t v = va_arg( args, int );
-          kDebug(5322) << fmt << ": " << v << endl;
           ret = ber_printf( d->mBer, fmt, v );
           break;
         }
@@ -213,7 +212,7 @@ int Ber::printf( const QString &format, ... )
         kWarning() << "Invalid BER format parameter: '" << fmt << "'" << endl;
         ret = -1;
     }
-    kDebug(5322) << " ber format: " << fmt << " ret: " << ret << endl;
+    kDebug(5322) << "ber_printf format: " << fmt << " ret: " << ret << endl;
     if ( ret == -1 ) {
       break;
     }
@@ -364,6 +363,7 @@ int Ber::scanf( const QString &format, ... )
         ret = -1;
     }
 
+    kDebug(5322) << "ber_scanf format: " << fmt << " ret: " << ret << endl;
     if ( ret == -1 ) {
       break;
     }
