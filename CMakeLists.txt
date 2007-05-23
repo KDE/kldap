@@ -9,7 +9,6 @@ macro_optional_find_package(Sasl2)
 macro_log_feature(SASL2_FOUND "cyrus-sasl" "Cyrus SASL API" "http://asg.web.cmu.edu/sasl/sasl-library.html" FALSE "" "Needed to support authentication of logins" )
 
 check_include_files(sys/time.h    HAVE_SYS_TIME_H)
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kldap_config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/kldap_config.h )
 
 set(kldap_EXTRA_LIBS)
 set(kldap_EXTRA_INCLUDES)
@@ -17,12 +16,22 @@ set(kldap_EXTRA_INCLUDES)
 if (LDAP_FOUND)
 set(kldap_EXTRA_LIBS ${LDAP_LIBRARIES})
 set(klap_EXTRA_INCLUDES ${LDAP_INCLUDE_DIR})
+
+set(CMAKE_REQUIRED_INCLUDES lber.h ldap.h)
+set(CMAKE_REQUIRED_LIBRARIES ${LDAP_LIBRARIES})
+check_function_exists(ldap_start_tls_s HAVE_LDAP_START_TLS_S)
+check_function_exists(ldap_initialize HAVE_LDAP_INITIALIZE)
+check_function_exists(ber_memfree HAVE_BER_MEMFREE)
+
+
 endif (LDAP_FOUND)
 
 if (SASL2_FOUND)
 set(kldap_EXTRA_LIBS ${kldap_EXTRA_LIBS} ${SASL2_LIBRARIES} ${KDE4_KDECORE_LIBS})
 set(kldap_EXTRA_INCLUDES ${kldap_EXTRA_INCLUDES} ${SASL2_INCLUDE_DIR})
 endif (SASL2_FOUND)
+
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kldap_config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/kldap_config.h )
 
 add_subdirectory(tests)
 

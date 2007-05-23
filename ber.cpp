@@ -42,7 +42,7 @@
 #define LBER_USE_DER 1
 #endif
 
-#ifndef ber_memfree
+#ifndef HAVE_BER_MEMFREE
 #define ber_memfree(x) ldap_memfree(x)
 #endif
 

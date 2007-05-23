@@ -34,6 +34,11 @@
 #define LDAP_DEPRECATED 1 //for ldap_simple_bind_s
 #include <lber.h>
 #include <ldap.h>
+
+#ifndef LDAP_OPT_SUCCESS
+#define LDAP_OPT_SUCCESS 0
+#endif
+
 #endif
 
 using namespace KLDAP;
@@ -263,7 +268,12 @@ int LdapConnection::connect()
   url += ':';
   url += QString::number( d->mServer.port() );
   kDebug(5322) << "ldap url: " << url << endl;
+#ifdef HAVE_LDAP_INITIALIZE
   ret = ldap_initialize( &d->mLDAP, url.toLatin1() );
+#else
+  d->mLDAP = ldap_init( d->mServer.host().toLatin1().data(), d->mServer.port() );
+  if ( d->mLDAP == 0 ) ret = -1;
+#endif
   if ( ret != LDAP_SUCCESS ) {
     d->mConnectionError = i18n("An error occurred during the connection initialization phase.");
     return ret;
@@ -281,11 +291,17 @@ int LdapConnection::connect()
   kDebug(5322) << "setting security to: " << d->mServer.security() << endl;
   if ( d->mServer.security() == LdapServer::TLS ) {
     kDebug(5322) << "start TLS" << endl;
+#ifdef HAVE_LDAP_START_TLS_S
     if ( ( ret = ldap_start_tls_s( d->mLDAP, NULL, NULL ) ) != LDAP_SUCCESS ) {
       close();
       d->mConnectionError = i18n("Cannot start TLS.");
       return ret;
     }
+#else
+    close();
+    d->mConnectionError = i18n("TLS support not available in the LDAP client libraries.");
+    return -1;
+#endif
   }
 
   kDebug(5322) << "setting sizelimit to: " << d->mServer.sizeLimit() << endl;
@@ -342,7 +358,7 @@ int LdapConnection::bind( SASL_Callback_Proc *saslproc, void *data )
       pass = d->mServer.password();
     }
     kDebug(5322) << "binding to server, bindname: " << bindname << " password: *****" << endl;
-    ret = ldap_simple_bind_s( d->mLDAP, bindname.toUtf8(), pass.toUtf8() );
+    ret = ldap_simple_bind_s( d->mLDAP, bindname.toUtf8().data(), pass.toUtf8().data() );
   }
   return ret;
 }
@@ -350,7 +366,7 @@ int LdapConnection::bind( SASL_Callback_Proc *saslproc, void *data )
 void LdapConnection::close()
 {
   if ( d->mLDAP ) {
-    ldap_unbind_ext_s( d->mLDAP, 0, 0 );
+    ldap_unbind_ext( d->mLDAP, 0, 0 );
   }
   d->mLDAP = 0;
   kDebug(5322) << "connection closed!" << endl;
