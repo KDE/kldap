@@ -366,7 +366,11 @@ int LdapConnection::bind( SASL_Callback_Proc *saslproc, void *data )
 void LdapConnection::close()
 {
   if ( d->mLDAP ) {
+#ifdef HAVE_LDAP_UNBIND_EXT
     ldap_unbind_ext( d->mLDAP, 0, 0 );
+#else
+    ldap_unbind( d->mLDAP );
+#endif
   }
   d->mLDAP = 0;
   kDebug(5322) << "connection closed!" << endl;

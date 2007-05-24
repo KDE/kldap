@@ -22,6 +22,9 @@ set(CMAKE_REQUIRED_LIBRARIES ${LDAP_LIBRARIES})
 check_function_exists(ldap_start_tls_s HAVE_LDAP_START_TLS_S)
 check_function_exists(ldap_initialize HAVE_LDAP_INITIALIZE)
 check_function_exists(ber_memfree HAVE_BER_MEMFREE)
+check_function_exists(ldap_unbind_ext HAVE_LDAP_UNBIND_EXT)
+check_function_exists(ldap_extended_operation HAVE_LDAP_EXTENDED_OPERATION)
+check_function_exists(ldap_extended_operation_s HAVE_LDAP_EXTENDED_OPERATION_S)
 
 
 endif (LDAP_FOUND)
