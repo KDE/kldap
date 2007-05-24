@@ -432,8 +432,8 @@ int LdapOperation::search( const LdapDN &base, LdapUrl::Scope scope,
   kDebug(5322) << "asyncSearch() base=\"" << base.toString() << "\" scope=" << scope <<
     " filter=\"" << filter << "\" attrs=" << attributes << endl;
   int retval =
-    ldap_search_ext( ld, base.toString().toUtf8(), lscope,
-                     filter.isEmpty() ? QByteArray("objectClass=*") : filter.toUtf8(),
+    ldap_search_ext( ld, base.toString().toUtf8().data(), lscope,
+                     filter.isEmpty() ? QByteArray("objectClass=*").data() : filter.toUtf8().data(),
                      attrs, 0, serverctrls, clientctrls, 0,
                      d->mConnection->sizeLimit(), &msgid );
 
@@ -475,7 +475,7 @@ int LdapOperation::add( const LdapObject &object )
   }
 
   int retval =
-    ldap_add_ext( ld, object.dn().toString().toUtf8(), lmod, serverctrls,
+    ldap_add_ext( ld, object.dn().toString().toUtf8().data(), lmod, serverctrls,
                   clientctrls, &msgid );
 
   ldap_controls_free( serverctrls );
@@ -507,7 +507,7 @@ int LdapOperation::add_s( const LdapObject &object )
   }
 
   int retval =
-    ldap_add_ext_s( ld, object.dn().toString().toUtf8(), lmod, serverctrls,
+    ldap_add_ext_s( ld, object.dn().toString().toUtf8().data(), lmod, serverctrls,
                     clientctrls );
 
   ldap_controls_free( serverctrls );
@@ -528,7 +528,7 @@ int LdapOperation::rename( const LdapDN &dn, const QString &newRdn,
   createControls( &serverctrls, d->mServerCtrls );
   createControls( &serverctrls, d->mClientCtrls );
 
-  int retval = ldap_rename( ld, dn.toString().toUtf8(), newRdn.toUtf8(),
+  int retval = ldap_rename( ld, dn.toString().toUtf8().data(), newRdn.toUtf8(),
                             newSuperior.isEmpty() ? (char *) 0 : newSuperior.toUtf8().data(),
                             deleteold, serverctrls, clientctrls, &msgid );
 
@@ -551,7 +551,7 @@ int LdapOperation::rename_s( const LdapDN &dn, const QString &newRdn,
   createControls( &serverctrls, d->mServerCtrls );
   createControls( &serverctrls, d->mClientCtrls );
 
-  int retval = ldap_rename_s( ld, dn.toString().toUtf8(), newRdn.toUtf8(),
+  int retval = ldap_rename_s( ld, dn.toString().toUtf8().data(), newRdn.toUtf8(),
                               newSuperior.isEmpty() ? (char *) 0 : newSuperior.toUtf8().data(),
                               deleteold, serverctrls, clientctrls );
 
@@ -572,7 +572,7 @@ int LdapOperation::del( const LdapDN &dn )
   createControls( &serverctrls, d->mServerCtrls );
   createControls( &serverctrls, d->mClientCtrls );
 
-  int retval = ldap_delete_ext( ld, dn.toString().toUtf8(), serverctrls, clientctrls, &msgid );
+  int retval = ldap_delete_ext( ld, dn.toString().toUtf8().data(), serverctrls, clientctrls, &msgid );
 
   ldap_controls_free( serverctrls );
   ldap_controls_free( clientctrls );
@@ -592,7 +592,7 @@ int LdapOperation::del_s( const LdapDN &dn )
   createControls( &serverctrls, d->mServerCtrls );
   createControls( &serverctrls, d->mClientCtrls );
 
-  int retval = ldap_delete_ext_s( ld, dn.toString().toUtf8(), serverctrls, clientctrls );
+  int retval = ldap_delete_ext_s( ld, dn.toString().toUtf8().data(), serverctrls, clientctrls );
 
   ldap_controls_free( serverctrls );
   ldap_controls_free( clientctrls );
@@ -633,7 +633,7 @@ int LdapOperation::modify( const LdapDN &dn, const ModOps &ops )
     }
   }
 
-  int retval = ldap_modify_ext( ld, dn.toString().toUtf8(), lmod, serverctrls, clientctrls, &msgid );
+  int retval = ldap_modify_ext( ld, dn.toString().toUtf8().data(), lmod, serverctrls, clientctrls, &msgid );
 
   ldap_controls_free( serverctrls );
   ldap_controls_free( clientctrls );
@@ -676,7 +676,7 @@ int LdapOperation::modify_s( const LdapDN &dn, const ModOps &ops )
     }
   }
 
-  int retval = ldap_modify_ext_s( ld, dn.toString().toUtf8(), lmod, serverctrls, clientctrls );
+  int retval = ldap_modify_ext_s( ld, dn.toString().toUtf8().data(), lmod, serverctrls, clientctrls );
 
   ldap_controls_free( serverctrls );
   ldap_controls_free( clientctrls );
@@ -701,7 +701,7 @@ int LdapOperation::compare( const LdapDN &dn, const QString &attr, const QByteAr
   berval -> bv_len = vallen;
   memcpy( berval -> bv_val, value.data(), vallen );
 
-  int retval = ldap_compare_ext( ld, dn.toString().toUtf8(), attr.toUtf8(), berval,
+  int retval = ldap_compare_ext( ld, dn.toString().toUtf8().data(), attr.toUtf8().data(), berval,
                                  serverctrls, clientctrls, &msgid );
 
   ber_bvfree( berval );
@@ -730,7 +730,7 @@ int LdapOperation::compare_s( const LdapDN &dn, const QString &attr, const QByte
   berval -> bv_len = vallen;
   memcpy( berval -> bv_val, value.data(), vallen );
 
-  int retval = ldap_compare_ext_s( ld, dn.toString().toUtf8(), attr.toUtf8(), berval,
+  int retval = ldap_compare_ext_s( ld, dn.toString().toUtf8().data(), attr.toUtf8().data(), berval,
                                    serverctrls, clientctrls );
 
   ber_bvfree( berval );
@@ -757,7 +757,7 @@ int LdapOperation::exop( const QString &oid, const QByteArray &data )
   berval -> bv_len = vallen;
   memcpy( berval -> bv_val, data.data(), vallen );
 
-  int retval = ldap_extended_operation( ld, oid.toUtf8(), berval,
+  int retval = ldap_extended_operation( ld, oid.toUtf8().data(), berval,
                                         serverctrls, clientctrls, &msgid );
 
   ber_bvfree( berval );
@@ -788,7 +788,7 @@ int LdapOperation::exop_s( const QString &oid, const QByteArray &data )
   berval -> bv_len = vallen;
   memcpy( berval -> bv_val, data.data(), vallen );
 
-  int retval = ldap_extended_operation_s( ld, oid.toUtf8(), berval,
+  int retval = ldap_extended_operation_s( ld, oid.toUtf8().data(), berval,
                                           serverctrls, clientctrls, &retoid, &retdata );
 
   ber_bvfree( berval );
