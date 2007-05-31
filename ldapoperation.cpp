@@ -743,10 +743,7 @@ int LdapOperation::compare_s( const LdapDN &dn, const QString &attr, const QByte
 int LdapOperation::exop( const QString &oid, const QByteArray &data )
 {
   Q_ASSERT( d->mConnection );
-#ifndef HAVE_LDAP_EXTENDED_OPERATION
-  kError() << "Your LDAP client libraries don't support extended operations." << endl;
-  return -1;
-#else
+#ifdef HAVE_LDAP_EXTENDED_OPERATION && HAVE_LDAP_EXTENDED_OPERATION_PROTOTYPE
   LDAP *ld = (LDAP*) d->mConnection->handle();
   int msgid;
 
@@ -772,15 +769,15 @@ int LdapOperation::exop( const QString &oid, const QByteArray &data )
     retval = msgid;
   }
   return retval;
+#else
+  kError() << "Your LDAP client libraries don't support extended operations." << endl;
+  return -1;
 #endif
 }
 
 int LdapOperation::exop_s( const QString &oid, const QByteArray &data )
 {
-#ifndef HAVE_LDAP_EXTENDED_OPERATION_S
-  kError() << "Your LDAP client libraries don't support extended operations." << endl;
-  return -1;
-#else
+#ifdef HAVE_LDAP_EXTENDED_OPERATION_S && HAVE_LDAP_EXTENDED_OPERATION_S_PROTOTYPE
   Q_ASSERT( d->mConnection );
   LDAP *ld = (LDAP*) d->mConnection->handle();
   BerValue *retdata;
@@ -807,6 +804,9 @@ int LdapOperation::exop_s( const QString &oid, const QByteArray &data )
   ldap_controls_free( clientctrls );
 
   return retval;
+#else
+  kError() << "Your LDAP client libraries don't support extended operations." << endl;
+  return -1;
 #endif
 }
 
