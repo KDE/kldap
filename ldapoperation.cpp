@@ -743,7 +743,7 @@ int LdapOperation::compare_s( const LdapDN &dn, const QString &attr, const QByte
 int LdapOperation::exop( const QString &oid, const QByteArray &data )
 {
   Q_ASSERT( d->mConnection );
-#ifdef HAVE_LDAP_EXTENDED_OPERATION && HAVE_LDAP_EXTENDED_OPERATION_PROTOTYPE
+#if defined(HAVE_LDAP_EXTENDED_OPERATION) && defined(HAVE_LDAP_EXTENDED_OPERATION_PROTOTYPE)
   LDAP *ld = (LDAP*) d->mConnection->handle();
   int msgid;
 
@@ -777,7 +777,7 @@ int LdapOperation::exop( const QString &oid, const QByteArray &data )
 
 int LdapOperation::exop_s( const QString &oid, const QByteArray &data )
 {
-#ifdef HAVE_LDAP_EXTENDED_OPERATION_S && HAVE_LDAP_EXTENDED_OPERATION_S_PROTOTYPE
+#if defined(HAVE_LDAP_EXTENDED_OPERATION) && defined(HAVE_LDAP_EXTENDED_OPERATION_PROTOTYPE)
   Q_ASSERT( d->mConnection );
   LDAP *ld = (LDAP*) d->mConnection->handle();
   BerValue *retdata;
