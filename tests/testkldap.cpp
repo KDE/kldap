@@ -33,7 +33,6 @@
 #include "ldapsearch.h"
 #include "ber.h"
 
-#include "kldap.h"
 #include <kdebug.h>
 #include <qtest_kde.h>
 

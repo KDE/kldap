@@ -23,7 +23,7 @@
 
 #include <QtCore/QByteArray>
 
-#include "kldap.h"
+#include "kldap_export.h"
 
 namespace KLDAP {
 

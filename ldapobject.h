@@ -27,7 +27,7 @@
 #include <QtCore/QString>
 
 #include "ldapdn.h"
-#include "kldap.h"
+#include "kldap_export.h"
 
 namespace KLDAP {
 

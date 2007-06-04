@@ -21,11 +21,11 @@
 #ifndef KLDAP_LDAPDN_H
 #define KLDAP_LDAPDN_H
 
-#include "kldap.h"
+#include "kldap_export.h"
 
 #include <QtCore/QStringList>
 
-#include <kldap/kldap.h>
+#include <kldap/kldap_export.h>
 
 namespace KLDAP {
 

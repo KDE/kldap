@@ -25,7 +25,7 @@
 #include <QtCore/QList>
 #include <QtCore/QSharedDataPointer>
 
-#include "kldap.h"
+#include "kldap_export.h"
 
 namespace KLDAP {
 

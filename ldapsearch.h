@@ -26,7 +26,7 @@
 #include <QtCore/QObject>
 #include <QtCore/QString>
 
-#include "kldap.h"
+#include "kldap_export.h"
 
 #include "ldapconnection.h"
 #include "ldapcontrol.h"

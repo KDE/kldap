@@ -25,7 +25,7 @@
 
 #include "ldapurl.h"
 #include "ldapserver.h"
-#include "kldap.h"
+#include "kldap_export.h"
 
 namespace KLDAP {
 

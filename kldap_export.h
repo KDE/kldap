@@ -18,8 +18,8 @@
   Boston, MA 02110-1301, USA.
 */
 
-#ifndef KLDAP_H
-#define KLDAP_H
+#ifndef KLDAP_EXPORT_H
+#define KLDAP_EXPORT_H
 
 #include <kdemacros.h>
 

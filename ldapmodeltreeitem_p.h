@@ -25,7 +25,7 @@
 #include <QtCore/QVariant>
 
 #include "ldapobject.h"
-#include "kldap.h"
+#include "kldap_export.h"
 
 namespace KLDAP {
 

@@ -25,7 +25,7 @@
 #include <QtGui/QWidget>
 
 #include "ldapdn.h"
-#include "kldap.h"
+#include "kldap_export.h"
 #include "ldapobject.h"
 #include "ldapserver.h"
 #include "ldapurl.h"
