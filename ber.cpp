@@ -31,7 +31,7 @@
 
 #ifdef LDAP_FOUND
 
-#ifdef Q_OS_SOLARIS
+#ifdef Q_OS_SOLARIS //krazy:exclude=cpp
 #define BC31 1
 #endif
 
