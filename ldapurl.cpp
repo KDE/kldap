@@ -240,7 +240,7 @@ void LdapUrl::updateQuery()
     }
     q += ',';
   }
-  while  ( q.endsWith("?") || q.endsWith(",") ) {
+  while  ( q.endsWith( '?' ) || q.endsWith( ',' ) ) {
     q.remove( q.length() - 1, 1 );
   }
 
@@ -254,7 +254,7 @@ void LdapUrl::parseQuery()
   QStringList extensions;
   QString q = query();
   // remove first ?
-  if ( q.startsWith( "?" ) ) {
+  if ( q.startsWith( '?' ) ) {
     q.remove( 0, 1 );
   }
 
@@ -293,7 +293,7 @@ void LdapUrl::parseQuery()
     ext.critical = false;
     name = fromPercentEncoding( (*it).section( '=', 0, 0 ).toLatin1() ).toLower();
     value = fromPercentEncoding( (*it).section( '=', 1 ).toLatin1() );
-    if ( name.startsWith("!") ) {
+    if ( name.startsWith( '!' ) ) {
       ext.critical = true;
       name.remove( 0, 1 );
     }
