@@ -18,12 +18,12 @@
   Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QDir>
-#include <QtCore/QStringList>
+#include "ldapurl.h"
 
 #include <kdebug.h>
 
-#include "ldapurl.h"
+#include <QtCore/QDir>
+#include <QtCore/QStringList>
 
 using namespace KLDAP;
 

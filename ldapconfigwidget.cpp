@@ -18,14 +18,8 @@
   Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QObject>
-#include <QtGui/QCheckBox>
-#include <QtGui/QGroupBox>
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
-#include <QtGui/QPushButton>
-#include <QtGui/QRadioButton>
-#include <QtGui/QSpinBox>
+#include "ldapconfigwidget.h"
+#include "ldapsearch.h"
 
 #include <kacceleratormanager.h>
 #include <kprogressdialog.h>
@@ -35,8 +29,14 @@
 #include <klineedit.h>
 #include <kmessagebox.h>
 
-#include "ldapsearch.h"
-#include "ldapconfigwidget.h"
+#include <QtCore/QObject>
+#include <QtGui/QCheckBox>
+#include <QtGui/QGroupBox>
+#include <QtGui/QLabel>
+#include <QtGui/QLayout>
+#include <QtGui/QPushButton>
+#include <QtGui/QRadioButton>
+#include <QtGui/QSpinBox>
 
 using namespace KLDAP;
 

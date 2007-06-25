@@ -18,12 +18,12 @@
   Boston, MA 02110-1301, USA.
 */
 
-#include <kdebug.h>
-
 #include "ldapmodel.h"
 #include "ldapmodel_p.h"
 #include "ldapmodeltreeitem_p.h"
 #include "ldapsearch.h"
+
+#include <kdebug.h>
 
 using namespace KLDAP;
 

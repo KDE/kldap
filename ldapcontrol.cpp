@@ -18,11 +18,10 @@
   Boston, MA 02110-1301, USA.
 */
 
-#include <QtCore/QSharedData>
-
 #include "ldapcontrol.h"
-
 #include "ber.h"
+
+#include <QtCore/QSharedData>
 
 using namespace KLDAP;
 
