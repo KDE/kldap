@@ -29,11 +29,8 @@ using namespace KLDAP;
 class LdapDN::LdapDNPrivate
 {
   public:
-    LdapDNPrivate()
-      : m_dn()
-      {}
-    ~LdapDNPrivate()
-      {}
+    LdapDNPrivate() : m_dn() {}
+    ~LdapDNPrivate() {}
 
     bool isValidRDNString( const QString &rdn ) const;
     QStringList splitOnNonEscapedChar( const QString &rdn, const QChar &ch ) const;
@@ -67,7 +64,8 @@ bool LdapDN::LdapDNPrivate::isValidRDNString( const QString &rdn ) const
   return true;
 }
 
-QStringList LdapDN::LdapDNPrivate::splitOnNonEscapedChar( const QString &str, const QChar &ch ) const
+QStringList LdapDN::LdapDNPrivate::splitOnNonEscapedChar( const QString &str,
+                                                          const QChar &ch ) const
 {
   QStringList strParts;
   int index = 0;
@@ -200,12 +198,12 @@ int LdapDN::depth() const
   return rdns.size();
 }
 
-bool LdapDN::operator == ( const LdapDN& rhs ) const
+bool LdapDN::operator == ( const LdapDN &rhs ) const
 {
   return d->m_dn == rhs.d->m_dn;
 }
 
-bool LdapDN::operator != ( const LdapDN& rhs ) const
+bool LdapDN::operator != ( const LdapDN &rhs ) const
 {
   return d->m_dn != rhs.d->m_dn;
 }

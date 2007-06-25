@@ -56,8 +56,8 @@ class LdapConfigWidget::Private
     void setSASL( bool on );
     void queryDNClicked();
     void queryMechClicked();
-    void loadData( LdapSearch*, const LdapObject &object );
-    void loadResult( LdapSearch* );
+    void loadData( LdapSearch *search, const LdapObject &object );
+    void loadResult( LdapSearch *search );
     void sendQuery();
     void initWidget();
 
@@ -396,8 +396,10 @@ void LdapConfigWidget::Private::loadData( LdapSearch*, const LdapObject &object 
 {
   kDebug(5322) << "loadData() object: " << object.toString() << endl;
   mProg->progressBar()->setValue( mProg->progressBar()->value() + 1 );
-  for ( LdapAttrMap::ConstIterator it = object.attributes().constBegin(); it != object.attributes().constEnd(); ++it ) {
-    for ( LdapAttrValue::ConstIterator it2 = (*it).constBegin(); it2 != (*it).constEnd(); ++it2 ) {
+  for ( LdapAttrMap::ConstIterator it = object.attributes().constBegin();
+        it != object.attributes().constEnd(); ++it ) {
+    for ( LdapAttrValue::ConstIterator it2 = (*it).constBegin();
+          it2 != (*it).constEnd(); ++it2 ) {
       mQResult.push_back( QString::fromUtf8( *it2 ) );
     }
   }
@@ -494,9 +496,6 @@ void LdapConfigWidget::Private::setLDAPSPort()
 {
   mPort->setValue( 636 );
 }
-
-
-
 
 LdapConfigWidget::LdapConfigWidget( QWidget *parent, Qt::WFlags fl )
   : QWidget( parent, fl ), d( new Private( this ) )

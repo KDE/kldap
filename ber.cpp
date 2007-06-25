@@ -331,7 +331,7 @@ int Ber::scanf( const QString &format, ... )
               ber_memfree( *c );
               c++;
             }
-            ber_memfree( (char*) c2 );
+            ber_memfree( (char *) c2 );
           }
           break;
         }

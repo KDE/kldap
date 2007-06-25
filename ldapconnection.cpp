@@ -94,7 +94,7 @@ void LdapConnection::setServer( const LdapServer &server )
 
 void *LdapConnection::handle() const
 {
-  return (void*) d->mLDAP;
+  return (void *)d->mLDAP;
 }
 
 QString LdapConnection::errorString( int code )
@@ -191,7 +191,7 @@ int LdapConnection::timeLimit() const
 static int kldap_sasl_interact( LDAP *, unsigned, void *defaults, void *in )
 {
 #ifdef SASL2_FOUND
-  LdapConnection::SASL_Data *data = (LdapConnection::SASL_Data*) defaults;
+  LdapConnection::SASL_Data *data = (LdapConnection::SASL_Data *) defaults;
   sasl_interact_t *interact = ( sasl_interact_t * ) in;
 
   if ( data->proc ) {
@@ -272,7 +272,9 @@ int LdapConnection::connect()
   ret = ldap_initialize( &d->mLDAP, url.toLatin1() );
 #else
   d->mLDAP = ldap_init( d->mServer.host().toLatin1().data(), d->mServer.port() );
-  if ( d->mLDAP == 0 ) ret = -1;
+  if ( d->mLDAP == 0 ) {
+    ret = -1;
+  }
 #endif
   if ( ret != LDAP_SUCCESS ) {
     d->mConnectionError = i18n("An error occurred during the connection initialization phase.");
@@ -282,7 +284,7 @@ int LdapConnection::connect()
   kDebug(5322) << "setting version to: " << version << endl;
   if ( setOption( LDAP_OPT_PROTOCOL_VERSION, &version ) != LDAP_OPT_SUCCESS ) {
     ret = ldapErrorCode();
-      d->mConnectionError = i18n("Cannot set protocol version to %1.", version );
+    d->mConnectionError = i18n("Cannot set protocol version to %1.", version );
     close();
     return ret;
   }
@@ -427,7 +429,10 @@ int LdapConnection::timeLimit() const
 
 int LdapConnection::connect( )
 {
-  d->mConnectionError = i18n("LDAP support not compiled in. Please recompile libkldap with the OpenLDAP (or compatible) client libraries, or complain to your distribution packagers.");
+  d->mConnectionError =
+    i18n("LDAP support not compiled in. Please recompile libkldap with the "
+         "OpenLDAP (or compatible) client libraries, or complain to your "
+         "distribution packagers.");
   kError() << "No LDAP support..." << endl;
   return -1;
 }

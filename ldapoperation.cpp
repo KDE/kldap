@@ -47,8 +47,9 @@ static void extractControls( LdapControls &ctrls, LDAPControl **pctrls );
 */
 static int kldap_timeout_value( int msecs, int elapsed )
 {
-  if ( msecs == -1 )
+  if ( msecs == -1 ) {
     return -1;
+  }
 
   int timeout = msecs - elapsed;
   return timeout < 0 ? 0 : timeout;
@@ -235,7 +236,7 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
           ldap_memfree( *tmp );
           tmp++;
         }
-        ldap_memfree( (char*) referralsp );
+        ldap_memfree( (char *) referralsp );
       }
       mMatchedDn = QString();
       if ( matcheddn ) {
@@ -252,9 +253,6 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
 
   return rescode;
 }
-
-
-
 
 static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
                       const QByteArray &value )
@@ -302,14 +300,14 @@ static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
     return;
   }
   BerValue *berval;
-  berval = (BerValue*) malloc( sizeof( BerValue ) );
-  berval -> bv_val = (char*) malloc( vallen );
+  berval = (BerValue *) malloc( sizeof( BerValue ) );
+  berval -> bv_val = (char *) malloc( vallen );
   berval -> bv_len = vallen;
   memcpy( berval -> bv_val, value.data(), vallen );
 
   if ( mods[ i ] -> mod_vals.modv_bvals == 0 ) {
     mods[ i ]->mod_vals.modv_bvals =
-      (BerValue**) malloc( sizeof( BerValue * ) * 2 );
+      (BerValue **) malloc( sizeof( BerValue * ) * 2 );
     mods[ i ]->mod_vals.modv_bvals[ 0 ] = berval;
     mods[ i ]->mod_vals.modv_bvals[ 1 ] = 0;
     kDebug(5322) << "addModOp: new bervalue struct " << endl;
@@ -344,7 +342,7 @@ static void addControlOp( LDAPControl ***pctrls, const QString &oid,
   int vallen = value.size();
   ctrl->ldctl_value.bv_len = vallen;
   if ( vallen ) {
-    ctrl->ldctl_value.bv_val = (char*) malloc( vallen );
+    ctrl->ldctl_value.bv_val = (char *) malloc( vallen );
     memcpy( ctrl->ldctl_value.bv_val, value.data(), vallen );
   } else {
     ctrl->ldctl_value.bv_val = 0;
@@ -572,7 +570,8 @@ int LdapOperation::del( const LdapDN &dn )
   createControls( &serverctrls, d->mServerCtrls );
   createControls( &serverctrls, d->mClientCtrls );
 
-  int retval = ldap_delete_ext( ld, dn.toString().toUtf8().data(), serverctrls, clientctrls, &msgid );
+  int retval =
+    ldap_delete_ext( ld, dn.toString().toUtf8().data(), serverctrls, clientctrls, &msgid );
 
   ldap_controls_free( serverctrls );
   ldap_controls_free( clientctrls );
@@ -633,7 +632,8 @@ int LdapOperation::modify( const LdapDN &dn, const ModOps &ops )
     }
   }
 
-  int retval = ldap_modify_ext( ld, dn.toString().toUtf8().data(), lmod, serverctrls, clientctrls, &msgid );
+  int retval =
+    ldap_modify_ext( ld, dn.toString().toUtf8().data(), lmod, serverctrls, clientctrls, &msgid );
 
   ldap_controls_free( serverctrls );
   ldap_controls_free( clientctrls );
@@ -676,7 +676,8 @@ int LdapOperation::modify_s( const LdapDN &dn, const ModOps &ops )
     }
   }
 
-  int retval = ldap_modify_ext_s( ld, dn.toString().toUtf8().data(), lmod, serverctrls, clientctrls );
+  int retval =
+    ldap_modify_ext_s( ld, dn.toString().toUtf8().data(), lmod, serverctrls, clientctrls );
 
   ldap_controls_free( serverctrls );
   ldap_controls_free( clientctrls );
@@ -696,8 +697,8 @@ int LdapOperation::compare( const LdapDN &dn, const QString &attr, const QByteAr
 
   int vallen = value.size();
   BerValue *berval;
-  berval = (BerValue*) malloc( sizeof( BerValue ) );
-  berval -> bv_val = (char*) malloc( vallen );
+  berval = (BerValue *) malloc( sizeof( BerValue ) );
+  berval -> bv_val = (char *) malloc( vallen );
   berval -> bv_len = vallen;
   memcpy( berval -> bv_val, value.data(), vallen );
 
@@ -725,8 +726,8 @@ int LdapOperation::compare_s( const LdapDN &dn, const QString &attr, const QByte
 
   int vallen = value.size();
   BerValue *berval;
-  berval = (BerValue*) malloc( sizeof( BerValue ) );
-  berval -> bv_val = (char*) malloc( vallen );
+  berval = (BerValue *) malloc( sizeof( BerValue ) );
+  berval -> bv_val = (char *) malloc( vallen );
   berval -> bv_len = vallen;
   memcpy( berval -> bv_val, value.data(), vallen );
 
@@ -753,8 +754,8 @@ int LdapOperation::exop( const QString &oid, const QByteArray &data )
 
   int vallen = data.size();
   BerValue *berval;
-  berval = (BerValue*) malloc( sizeof( BerValue ) );
-  berval -> bv_val = (char*) malloc( vallen );
+  berval = (BerValue *) malloc( sizeof( BerValue ) );
+  berval -> bv_val = (char *) malloc( vallen );
   berval -> bv_len = vallen;
   memcpy( berval -> bv_val, data.data(), vallen );
 
@@ -789,8 +790,8 @@ int LdapOperation::exop_s( const QString &oid, const QByteArray &data )
 
   int vallen = data.size();
   BerValue *berval;
-  berval = (BerValue*) malloc( sizeof( BerValue ) );
-  berval -> bv_val = (char*) malloc( vallen );
+  berval = (BerValue *) malloc( sizeof( BerValue ) );
+  berval -> bv_val = (char *) malloc( vallen );
   berval -> bv_len = vallen;
   memcpy( berval -> bv_val, data.data(), vallen );
 
@@ -853,7 +854,9 @@ int LdapOperation::waitForResult( int id, int msecs )
 
     // Wait for a result
     rescode = ldap_result( ld, id, 0, timeout < 0 ? 0 : &tv, &msg );
-    if ( rescode == -1 ) return -1;
+    if ( rescode == -1 ) {
+      return -1;
+    }
     // Act on the return code
     if ( rescode != 0 ) {
       // Some kind of result is available for processing

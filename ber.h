@@ -47,8 +47,8 @@ class KLDAP_EXPORT Ber
      */
     virtual ~Ber();
 
-    Ber( const Ber& that );
-    Ber& operator=( const Ber& that );
+    Ber( const Ber &that );
+    Ber &operator=( const Ber &that );
 
     /**
      * Returns the Ber object as a flat QByteArray.

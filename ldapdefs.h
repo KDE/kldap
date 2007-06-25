@@ -111,13 +111,11 @@
 /* Assertion control (122) */
 #define KLDAP_ASSERTION_FAILED           0x7A
 
-
 /* Experimental result codes */
 #define KLDAP_E_ERROR(n) KLDAP_RANGE((n),0x1000,0x3FFF)
 
 /* LDAP Sync (4096) */
 #define KLDAP_SYNC_REFRESH_REQUIRED      0x1000
-
 
 /* Private Use result codes */
 #define KLDAP_X_ERROR(n) KLDAP_RANGE((n),0x4000,0xFFFF)
@@ -127,8 +125,6 @@
 
 /* for the LDAP No-Op control */
 #define KLDAP_X_NO_OPERATION             0x410e
-
-
 
 /** API Error Codes
  *
@@ -155,6 +151,5 @@
 #define KLDAP_MORE_RESULTS_TO_RETURN     (-15)   /* Obsolete */
 #define KLDAP_CLIENT_LOOP                (-16)
 #define KLDAP_REFERRAL_LIMIT_EXCEEDED    (-17)
-
 
 #endif //KLDAP_DEFS_H

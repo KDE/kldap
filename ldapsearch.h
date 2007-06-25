@@ -51,6 +51,7 @@ class KLDAP_EXPORT LdapSearch : public QObject
      * Constructs an LdapSearch object
      */
     LdapSearch();
+
     /**
      * Constructs an LdapConnection object with the given connection. If this
      * form of constructor used, then always this connection will be used
@@ -71,20 +72,24 @@ class KLDAP_EXPORT LdapSearch : public QObject
      * Sets the client controls which will sent with each operation.
      */
     void setClientControls( const LdapControls &ctrls );
+
     /**
      * Sets the server controls which will sent with each operation.
      */
     void setServerControls( const LdapControls &ctrls );
+
     /**
      * Starts a search operation on the LDAP server @param server,
      * returning the attributes specified with @param attributes.
      */
     bool search( const LdapServer &server,
                  const QStringList &attributes = QStringList() );
+
     /**
      * Starts a search operation on the given LDAP URL.
      */
     bool search( const LdapUrl &url );
+
     /**
      * Starts a search operation if the LdapConnection object already set
      * in the constructor.
@@ -99,10 +104,12 @@ class KLDAP_EXPORT LdapSearch : public QObject
      * Tries to abandon the search.
      */
     void abandon();
+
     /**
      * Returns the error code of the search operation (0 if no error).
      */
     int error() const;
+
     /**
      * Returns the error description of the search operation.
      */
@@ -112,11 +119,12 @@ class KLDAP_EXPORT LdapSearch : public QObject
     /**
      * Emitted for each result object.
      */
-    void data( KLDAP::LdapSearch*, const KLDAP::LdapObject& );
+    void data( KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj );
+
     /**
      * Emitted when the searching finished.
      */
-    void result( KLDAP::LdapSearch* );
+    void result( KLDAP::LdapSearch *search );
 
   private:
     class Private;

@@ -40,14 +40,12 @@ class Ldif::LdifPrivate
     QByteArray mLine;
 };
 
-Ldif::Ldif()
-  : d( new LdifPrivate )
+Ldif::Ldif() : d( new LdifPrivate )
 {
   startParsing();
 }
 
-Ldif::Ldif( const Ldif &that )
-  : d( new LdifPrivate )
+Ldif::Ldif( const Ldif &that ) : d( new LdifPrivate )
 {
   *d = *that.d;
 

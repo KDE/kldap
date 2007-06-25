@@ -134,7 +134,7 @@ class KLDAP_EXPORT LdapConnection
 
   private:
     class LdapConnectionPrivate;
-    LdapConnectionPrivate* const d;
+    LdapConnectionPrivate *const d;
 
     Q_DISABLE_COPY( LdapConnection )
 };

@@ -110,7 +110,8 @@ QVariant LdapModel::data( const QModelIndex &index, int role ) const
     return item->data().toString();
   }
 
-  /** \TODO Include support for nice decorative icons dependent upon the objectClass + other role data. */
+  /** \TODO Include support for nice decorative icons dependent upon
+      the objectClass + other role data. */
 
   return QVariant();
 }
@@ -118,7 +119,8 @@ QVariant LdapModel::data( const QModelIndex &index, int role ) const
 QVariant LdapModel::headerData( int /*section*/, Qt::Orientation orientation, int role ) const
 {
   if ( orientation == Qt::Horizontal && role == Qt::DisplayRole ) {
-    /** @TODO Hmm, what to do here? Override in proxymodels perhaps as could be "DN" or "Attribute". */
+    /** @TODO Hmm, what to do here? Override in proxymodels perhaps as
+        could be "DN" or "Attribute". */
     return QString( "Distinguished Name" );
   }
 
@@ -137,9 +139,8 @@ Qt::ItemFlags LdapModel::flags( const QModelIndex &index ) const
 
 int LdapModel::columnCount( const QModelIndex &parent ) const
 {
-  LdapModelTreeItem *parentItem = parent.isValid()
-                                  ? static_cast<LdapModelTreeItem*>( parent.internalPointer() )
-                                  : m_d->rootItem();
+  LdapModelTreeItem *parentItem =
+    parent.isValid() ? static_cast<LdapModelTreeItem*>( parent.internalPointer() ) : m_d->rootItem();
   return parentItem->columnCount();
 }
 
@@ -150,10 +151,10 @@ int LdapModel::rowCount( const QModelIndex &parent ) const
     return 0;
   }
 
-  const LdapModelTreeItem *item = parent.isValid()
-                                  ? static_cast<const LdapModelTreeItem*>( parent.internalPointer() )
-                                  : m_d->rootItem();
-  kDebug(5322) << "Parent (" << item->ldapObject().dn().toString() << ") has " << item->childCount() << " children" << endl;
+  const LdapModelTreeItem *item =
+    parent.isValid() ? static_cast<LdapModelTreeItem*>( parent.internalPointer() ) : m_d->rootItem();
+  kDebug(5322) << "Parent (" << item->ldapObject().dn().toString() << ") has "
+               << item->childCount() << " children" << endl;
   return item->childCount();
 }
 
@@ -163,9 +164,8 @@ bool LdapModel::hasChildren( const QModelIndex &parent ) const
   // always be drawn. However, once the user clicks on it, rowCount() will
   // get called and the view will not draw the expander if the item has no
   // children.
-  const LdapModelTreeItem *item = parent.isValid()
-                                  ? static_cast<const LdapModelTreeItem*>( parent.internalPointer() )
-                                  : m_d->rootItem();
+  const LdapModelTreeItem *item =
+    parent.isValid() ? static_cast<LdapModelTreeItem*>( parent.internalPointer() ) : m_d->rootItem();
   if ( !parent.isValid() || item->isPopulated() ) {
     return item->childCount() > 0;
   }
@@ -174,21 +174,20 @@ bool LdapModel::hasChildren( const QModelIndex &parent ) const
 
 bool LdapModel::canFetchMore( const QModelIndex &parent ) const
 {
-  const LdapModelTreeItem *item = parent.isValid()
-                                  ? static_cast<const LdapModelTreeItem*>( parent.internalPointer() )
-                                  : m_d->rootItem();
+  const LdapModelTreeItem *item =
+    parent.isValid() ? static_cast<LdapModelTreeItem*>( parent.internalPointer() ) : m_d->rootItem();
   kDebug(5322) << "LdapModel::canFetchMore() : " << !item->isPopulated() << endl;
   return !item->isPopulated();
 }
 
 void LdapModel::fetchMore( const QModelIndex &parent )
 {
-  /** \TODO This should be altered to search for all attributes we can filter out those not required with a proxy model */
+  /** @TODO This should be altered to search for all attributes we can
+      filter out those not required with a proxy model */
   kDebug(5322) << "LdapModel::fetchMore()" << endl;
 
-  LdapModelTreeItem *parentItem = parent.isValid()
-                                  ? static_cast<LdapModelTreeItem*>( parent.internalPointer() )
-                                  : m_d->rootItem();
+  LdapModelTreeItem *parentItem =
+    parent.isValid() ? static_cast<LdapModelTreeItem*>( parent.internalPointer() ) : m_d->rootItem();
 
   // Search for the immediate children of parentItem.
   m_d->searchResults().clear();

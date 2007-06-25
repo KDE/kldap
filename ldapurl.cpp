@@ -51,7 +51,7 @@ LdapUrl::LdapUrl( const KUrl &_url )
 {
   QString tmp = path();
   if ( !QDir::isRelativePath( tmp ) )
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN
     tmp.remove( 0, 3 ); // e.g. "c:/"
 #else
     tmp.remove( 0, 1 );
@@ -86,7 +86,7 @@ void LdapUrl::setDn( const LdapDN &dn )
 {
   QString tmp = dn.toString();
   if ( !QDir::isRelativePath( tmp ) )
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN
     tmp.remove( 0, 3 ); // e.g. "c:/"
 #else
     tmp.remove( 0, 1 );
@@ -98,7 +98,7 @@ LdapDN LdapUrl::dn() const
 {
   QString tmp = path();
   if ( !QDir::isRelativePath( tmp ) )
-#ifdef Q_WS_WIN
+#ifdef Q_OS_WIN
     tmp.remove( 0, 3 ); // e.g. "c:/"
 #else
     tmp.remove( 0, 1 );

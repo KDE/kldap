@@ -178,11 +178,11 @@ bool LdapSearch::Private::startSearch( const LdapDN &base, LdapUrl::Scope scope,
     return false;
   }
   kDebug(5322) << "search::startSearch msg id=" << mId << endl;
-  QTimer::singleShot( 0, mParent, SLOT(result()) ); //maybe do this with threads? - need thread-safe client libs!!!
+
+  QTimer::singleShot( 0, mParent, SLOT(result()) ); //maybe do this with threads?- need thread-safe client libs!!!
+
   return true;
 }
-
-
 
 LdapSearch::LdapSearch()
  : d( new Private( this ) )

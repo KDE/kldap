@@ -117,8 +117,9 @@ void LdapModel::LdapModelPrivate::populateRootToBaseDN()
   search( baseDN(), LdapUrl::Base, QString(), QStringList() << "dn" << "objectClass" );
 }
 
-void LdapModel::LdapModelPrivate::gotSearchResult( KLDAP::LdapSearch* )
+void LdapModel::LdapModelPrivate::gotSearchResult( KLDAP::LdapSearch *search )
 {
+  Q_UNUSED( search );
   kDebug(5322) << "LdapModel::LdapModelPrivate::gotSearchResult()" << endl;
 
   switch ( searchType() ) {
@@ -143,7 +144,8 @@ void LdapModel::LdapModelPrivate::gotSearchResult( KLDAP::LdapSearch* )
   }
   case LdapModelPrivate::BaseDN:
   {
-    kDebug(5322) << "Found details of the baseDN object. Creating objects down to this level." << endl;
+    kDebug(5322) << "Found details of the baseDN object. "
+                 << "Creating objects down to this level." << endl;
 
     // Get the baseDN LdapObject
     LdapObject baseDNObj = searchResults().at( 0 );
@@ -202,8 +204,9 @@ void LdapModel::LdapModelPrivate::gotSearchResult( KLDAP::LdapSearch* )
   }
 }
 
-void LdapModel::LdapModelPrivate::gotSearchData( KLDAP::LdapSearch*, const KLDAP::LdapObject &obj )
+void LdapModel::LdapModelPrivate::gotSearchData( KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj )
 {
+  Q_UNUSED( search );
   kDebug(5322) << "LdapModel::LdapModelPrivate::gotSearchData()" << endl;
   //kDebug(5322) << "Object:" << endl << obj.toString() << endl;
   searchResults().append( obj );
