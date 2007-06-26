@@ -37,14 +37,14 @@ class KLDAP_EXPORT LdapConnection
 {
   public:
 
-    typedef enum SASL_Fields {
+    enum SASL_Fields {
       SASL_Authname = 0x1,
       SASL_Authzid = 0x2,
       SASL_Realm = 0x4,
       SASL_Password = 0x8
     };
 
-    typedef struct SASL_Credentials {
+    struct SASL_Credentials {
       int fields;
       QString authname;
       QString authzid;
@@ -54,7 +54,7 @@ class KLDAP_EXPORT LdapConnection
 
     typedef int (SASL_Callback_Proc) ( SASL_Credentials &cred, void *data );
 
-    typedef struct SASL_Data {
+    struct SASL_Data {
       SASL_Callback_Proc *proc;
       void *data;
       SASL_Credentials creds;
