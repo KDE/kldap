@@ -21,19 +21,19 @@
 #include "ldapoperation.h"
 #include "kldap_config.h"
 
+#include <kdebug.h>
+
+#include <QtCore/QTime>
+
 #include <stdlib.h>
 #ifdef HAVE_SYS_TIME_H
 #include <sys/time.h>
 #endif
 
-#include <kdebug.h>
-
 #ifdef LDAP_FOUND
 #include <lber.h>
 #include <ldap.h>
 #endif
-
-#include <QtCore/QTime>
 
 using namespace KLDAP;
 

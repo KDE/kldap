@@ -55,8 +55,10 @@ class KLDAP_EXPORT LdapUrl : public KUrl
 
     /** Constructs an empty KLdapUrl. */
     LdapUrl();
+
     /** Constructs a KLdapUrl from a KUrl. */
     explicit LdapUrl( const KUrl &url );
+
     /** Constructs a KLdapUrl from a LdapUrl. */
     LdapUrl( const LdapUrl &that );
 

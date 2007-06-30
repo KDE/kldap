@@ -21,10 +21,6 @@
 #ifndef KLDAP_LDAPOPERATION_H
 #define KLDAP_LDAPOPERATION_H
 
-#include <QtCore/QByteArray>
-#include <QtCore/QList>
-#include <QtCore/QString>
-
 #include "kldap_export.h"
 #include "ldapconnection.h"
 #include "ldapcontrol.h"
@@ -32,6 +28,10 @@
 #include "ldapdn.h"
 #include "ldapserver.h"
 #include "ldapurl.h"
+
+#include <QtCore/QByteArray>
+#include <QtCore/QList>
+#include <QtCore/QString>
 
 namespace KLDAP {
 

@@ -19,12 +19,11 @@
 */
 
 #include "ldapconnection.h"
+#include "kldap_config.h" // SASL2_FOUND, LDAP_FOUND
 
 #include <stdlib.h>
 #include <klocale.h>
 #include <kdebug.h>
-
-#include <kldap_config.h> // SASL2_FOUND, LDAP_FOUND
 
 #ifdef SASL2_FOUND
 #include <sasl/sasl.h>

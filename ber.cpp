@@ -19,13 +19,12 @@
 */
 
 #include "ber.h"
-
-#include <QtCore/QList>
-#include <qvarlengtharray.h>
+#include "kldap_config.h"
 
 #include <kdebug.h>
 
-#include "kldap_config.h"
+#include <QtCore/QList>
+#include <qvarlengtharray.h>
 
 #include <cstdarg>
 
