@@ -18,8 +18,8 @@
   Boston, MA 02110-1301, USA.
 */
 
-#ifndef KLDAP_LDAPMODELTREEITEM_H
-#define KLDAP_LDAPMODELTREEITEM_H
+#ifndef KLDAP_LDAPMODELTREEITEM_P_H
+#define KLDAP_LDAPMODELTREEITEM_P_H
 
 #include <QtCore/QList>
 #include <QtCore/QVariant>
