@@ -56,6 +56,7 @@ LdapUrl::LdapUrl( const KUrl &_url )
 #else
     tmp.remove( 0, 1 );
 #endif
+  setPath( tmp );
   parseQuery();
 }
 
@@ -236,7 +237,7 @@ void LdapUrl::updateQuery()
     }
     q += it.key();
     if ( !it.value().value.isEmpty() ) {
-      q += '=' + it.value().value;
+      q += '=' + toPercentEncoding(it.value().value);
     }
     q += ',';
   }
