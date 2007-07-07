@@ -276,12 +276,12 @@ Ldif::ParseValue Ldif::processLine()
       } else if ( attrLower == "replace" ) {
         d->mModType = Mod_Replace;
         d->mAttr = QString::fromUtf8( d->mValue, d->mValue.size() );
-        d->mValue.resize( 0 );
+        d->mValue = QByteArray();
         retval = Item;
       } else if ( attrLower == "delete" ) {
         d->mModType = Mod_Del;
         d->mAttr = QString::fromUtf8( d->mValue, d->mValue.size() );
-        d->mValue.resize( 0 );
+        d->mValue = QByteArray();
         retval = Item;
       } else {
         retval = Err;
