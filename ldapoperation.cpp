@@ -255,7 +255,7 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
 }
 
 static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
-                      const QByteArray &value )
+                      const QByteArray *value = 0 )
 {
   //  kDebug(5322) << "type: " << mod_type << " attr: " << attr <<
   //    " value: " << QString::fromUtf8(value,value.size()) <<
@@ -295,22 +295,26 @@ static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
 
   *pmods = mods;
 
-  int vallen = value.size();
-  if ( vallen == 0 ) {
+  if ( value == 0 ) 
     return;
-  }
+    
+  int vallen = value->size();
   BerValue *berval;
   berval = (BerValue *) malloc( sizeof( BerValue ) );
-  berval -> bv_val = (char *) malloc( vallen );
   berval -> bv_len = vallen;
-  memcpy( berval -> bv_val, value.data(), vallen );
+  if ( vallen > 0 ) {
+    berval -> bv_val = (char *) malloc( vallen );
+    memcpy( berval -> bv_val, value->data(), vallen );
+  } else {
+    berval -> bv_val = 0;
+  }
 
   if ( mods[ i ] -> mod_vals.modv_bvals == 0 ) {
     mods[ i ]->mod_vals.modv_bvals =
       (BerValue **) malloc( sizeof( BerValue * ) * 2 );
     mods[ i ]->mod_vals.modv_bvals[ 0 ] = berval;
     mods[ i ]->mod_vals.modv_bvals[ 1 ] = 0;
-    kDebug(5322) << "addModOp: new bervalue struct " << endl;
+    kDebug(5322) << "addModOp: new bervalue struct " << attr << " " << value << endl;
   } else {
     uint j = 0;
     while ( mods[ i ]->mod_vals.modv_bvals[ j ] != 0 ) {
@@ -468,7 +472,7 @@ int LdapOperation::add( const LdapObject &object )
         it != object.attributes().end(); ++it ) {
     QString attr = it.key();
     for ( LdapAttrValue::ConstIterator it2 = (*it).begin(); it2 != (*it).end(); ++it2 ) {
-      addModOp( &lmod, 0, attr, *it2 );
+      addModOp( &lmod, 0, attr, &(*it2) );
     }
   }
 
@@ -500,12 +504,70 @@ int LdapOperation::add_s( const LdapObject &object )
         it != object.attributes().end(); ++it ) {
     QString attr = it.key();
     for ( LdapAttrValue::ConstIterator it2 = (*it).begin(); it2 != (*it).end(); ++it2 ) {
-      addModOp( &lmod, 0, attr, *it2 );
+      addModOp( &lmod, 0, attr, &(*it2) );
     }
   }
 
   int retval =
     ldap_add_ext_s( ld, object.dn().toString().toUtf8().data(), lmod, serverctrls,
+                    clientctrls );
+
+  ldap_controls_free( serverctrls );
+  ldap_controls_free( clientctrls );
+  ldap_mods_free( lmod, 1 );
+  return retval;
+}
+
+int LdapOperation::add( const LdapDN &dn, const ModOps &ops )
+{
+  Q_ASSERT( d->mConnection );
+  LDAP *ld = (LDAP*) d->mConnection->handle();
+
+  int msgid;
+  LDAPMod **lmod = 0;
+
+  LDAPControl **serverctrls = 0, **clientctrls = 0;
+  createControls( &serverctrls, d->mServerCtrls );
+  createControls( &serverctrls, d->mClientCtrls );
+
+  for ( int i = 0; i < ops.count(); ++i ) {
+    for ( int j = 0; j < ops[i].values.count(); ++j ) {
+      addModOp( &lmod, 0, ops[i].attr, &ops[i].values[j] );
+    }
+  }
+
+  int retval =
+    ldap_add_ext( ld, dn.toString().toUtf8().data(), lmod, serverctrls,
+                  clientctrls, &msgid );
+
+  ldap_controls_free( serverctrls );
+  ldap_controls_free( clientctrls );
+  ldap_mods_free( lmod, 1 );
+  if ( retval == 0 ) {
+    retval = msgid;
+  }
+  return retval;
+}
+
+int LdapOperation::add_s( const LdapDN &dn, const ModOps &ops )
+{
+  Q_ASSERT( d->mConnection );
+  LDAP *ld = (LDAP*) d->mConnection->handle();
+
+  LDAPMod **lmod = 0;
+
+  LDAPControl **serverctrls = 0, **clientctrls = 0;
+  createControls( &serverctrls, d->mServerCtrls );
+  createControls( &serverctrls, d->mClientCtrls );
+
+  for ( int i = 0; i < ops.count(); ++i ) {
+    for ( int j = 0; j < ops[i].values.count(); ++j ) {
+      addModOp( &lmod, 0, ops[i].attr, &ops[i].values[j] );
+    }
+  }
+  kDebug(5322) << "LdapOperation::add_s dn=" << dn.toString() << endl;
+  int retval =
+    ldap_add_ext_s( ld, dn.toString().toUtf8().data(), lmod, serverctrls,
                     clientctrls );
 
   ldap_controls_free( serverctrls );
@@ -627,8 +689,9 @@ int LdapOperation::modify( const LdapDN &dn, const ModOps &ops )
       mtype = LDAP_MOD_DELETE;
       break;
     }
+    addModOp( &lmod, mtype, ops[i].attr, 0 );
     for ( int j = 0; j < ops[i].values.count(); ++j ) {
-      addModOp( &lmod, mtype, ops[i].attr, ops[i].values[j] );
+      addModOp( &lmod, mtype, ops[i].attr, &ops[i].values[j] );
     }
   }
 
@@ -671,8 +734,9 @@ int LdapOperation::modify_s( const LdapDN &dn, const ModOps &ops )
       mtype = LDAP_MOD_DELETE;
       break;
     }
+    addModOp( &lmod, mtype, ops[i].attr, 0 );
     for ( int j = 0; j < ops[i].values.count(); ++j ) {
-      addModOp( &lmod, mtype, ops[i].attr, ops[i].values[j] );
+      addModOp( &lmod, mtype, ops[i].attr, &ops[i].values[j] );
     }
   }
 
@@ -888,6 +952,18 @@ int LdapOperation::add_s( const LdapObject &object )
   return -1;
 }
 
+int LdapOperation::add( const LdapDN &dn, const ModOps &ops )
+{
+  kError() << "LDAP support not compiled" << endl;
+  return -1;
+}
+
+int LdapOperation::add_s( const LdapDN &dn, const ModOps &ops )
+{
+  kError() << "LDAP support not compiled" << endl;
+  return -1;
+}
+                                
 int LdapOperation::rename( const LdapDN &dn, const QString &newRdn,
                            const QString &newSuperior, bool deleteold )
 {

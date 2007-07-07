@@ -116,6 +116,17 @@ class KLDAP_EXPORT LdapOperation
      */
     int add_s( const LdapObject &object );
     /**
+     * Starts an addition operation. This version accepts ModOps not LdapObject.
+     * Returns a message id if successful, -1 if not.
+     */
+    int add( const LdapDN &dn, const ModOps &ops );
+    /**
+     * Adds the specified object to the LDAP database. This version accepts ModOps not LdapObject.
+     * This is the synchronous version.
+     * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
+     */
+    int add_s( const LdapDN &dn, const ModOps &ops );
+    /**
      * Starts a modrdn operation on given DN, changing its RDN to newRdn,
      * changing its parent to newSuperior (if it's not empty), and deletes
      * the old dn if deleteold is true.
