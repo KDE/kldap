@@ -314,7 +314,7 @@ static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
       (BerValue **) malloc( sizeof( BerValue * ) * 2 );
     mods[ i ]->mod_vals.modv_bvals[ 0 ] = berval;
     mods[ i ]->mod_vals.modv_bvals[ 1 ] = 0;
-    kDebug(5322) << "addModOp: new bervalue struct " << attr << " " << value << endl;
+//    kDebug(5322) << "addModOp: new bervalue struct " << attr << " " << value << endl;
   } else {
     uint j = 0;
     while ( mods[ i ]->mod_vals.modv_bvals[ j ] != 0 ) {
