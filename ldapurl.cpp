@@ -226,7 +226,7 @@ void LdapUrl::updateQuery()
   // set the filter
   q += '?';
   if ( d->m_filter != "(objectClass=*)" && !d->m_filter.isEmpty() ) {
-    q += d->m_filter;
+    q += toPercentEncoding( d->m_filter );
   }
 
   // set the extensions
