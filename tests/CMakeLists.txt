@@ -7,7 +7,6 @@ include_directories( ${CMAKE_CURRENT_SOURCE_DIR}/.. ${KDE4_KIO_INCLUDES} )
 
 set(testkldap_SRCS testkldap.cpp )
 
-kde4_automoc(${testkldap_SRCS})
 
 kde4_add_unit_test(testkldap TESTNAME kldap-testkldap ${testkldap_SRCS})
 

@@ -59,7 +59,6 @@ set(kldap_LIB_SRCS
    ldapmodel.cpp
    ldapmodel_p.cpp )
 
-kde4_automoc(${kldap_LIB_SRCS})
 
 kde4_add_library(kldap SHARED ${kldap_LIB_SRCS})
 
