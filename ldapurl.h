@@ -71,38 +71,49 @@ class KLDAP_EXPORT LdapUrl : public KUrl
      * from the beginning).
      */
     LdapDN dn() const;
+
     /** Sets the the dn part of the LDAP Url. */
     void setDn( const LdapDN &dn );
 
     /** Returns the attributes part of the LDAP Url */
     QStringList attributes() const;
+
     /** Sets the attributes part of the LDAP Url */
     void setAttributes( const QStringList &attributes );
 
     /** Returns the scope part of the LDAP Url */
     Scope scope() const;
+
     /** Sets the scope part of the LDAP Url */
     void setScope( Scope scope );
 
     /** Returns the filter part of the LDAP Url */
     QString filter() const;
+
     /** Sets the filter part of the LDAP Url */
     void setFilter( const QString &filter );
 
     /** Returns if the specified extension exists in the LDAP Url */
     bool hasExtension( const QString &key ) const;
+
     /** Returns the specified extension */
     Extension extension( const QString &key ) const;
+
     /** Returns the specified extension */
     QString extension( const QString &key, bool &critical ) const;
+
     /** Sets the specified extension key with the value and criticality in ext */
     void setExtension( const QString &key, const Extension &ext );
+
     /** Sets the specified extension key with the value and criticality specified */
     void setExtension( const QString &key, const QString &value, bool critical = false );
+
     /** Sets the specified extension key with the value and criticality specified */
     void setExtension( const QString &key, int value, bool critical = false );
+
     /** Removes the specified extension */
     void removeExtension( const QString &key );
+
     /** Updates the query component from the attributes, scope, filter and extensions */
     void updateQuery();
 
