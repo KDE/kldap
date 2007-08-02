@@ -211,7 +211,7 @@ int Ber::printf( const QString &format, ... )
         kWarning() << "Invalid BER format parameter: '" << fmt << "'" << endl;
         ret = -1;
     }
-    kDebug(5322) << "ber_printf format: " << fmt << " ret: " << ret << endl;
+    kDebug(5322) << "ber_printf format:" << fmt << "ret:" << ret;
     if ( ret == -1 ) {
       break;
     }
@@ -362,7 +362,7 @@ int Ber::scanf( const QString &format, ... )
         ret = -1;
     }
 
-    kDebug(5322) << "ber_scanf format: " << fmt << " ret: " << ret << endl;
+    kDebug(5322) << "ber_scanf format:" << fmt << "ret:" << ret;
     if ( ret == -1 ) {
       break;
     }

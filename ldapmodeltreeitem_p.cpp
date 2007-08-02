@@ -30,7 +30,7 @@ LdapModelTreeItem::LdapModelTreeItem( LdapModelTreeItem *parent, const LdapObjec
     m_itemData( data ),
     m_isPopulated( false )
 {
-  kDebug(5322) << "LdapModelTreeItem::LdapModelTreeItem() : Object = " << data.toString() << endl;
+  kDebug(5322) << "LdapModelTreeItem::LdapModelTreeItem() : Object =" << data.toString();
   if ( m_parent ) {
     m_parent->appendChild( this );
   }
@@ -92,6 +92,6 @@ const LdapObject &LdapModelTreeItem::ldapObject() const
 
 void LdapModelTreeItem::setLdapObject( const LdapObject &object )
 {
-  kDebug(5322) << "LdapModelTreeItem::setLdapObject() : Object = " << object.toString() << endl;
+  kDebug(5322) << "LdapModelTreeItem::setLdapObject() : Object =" << object.toString();
   m_itemData = object;
 }

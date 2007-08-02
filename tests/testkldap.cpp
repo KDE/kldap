@@ -179,13 +179,13 @@ void KLdapTest::testLdapConnection()
   conn.setUrl( url );
   int ret;
   if ( (ret = conn.connect()) ) {
-    kDebug() << "Could not connect to LDAP server. Error was: " << conn.connectionError() << endl;
+    kDebug() << "Could not connect to LDAP server. Error was:" << conn.connectionError();
   }
   QCOMPARE( ret, 0 );
 
   // Now attempt to bind
   if ( (ret = conn.bind()) ) {
-    kDebug() << "Could not bind to server. Error was: " << conn.ldapErrorString() << endl;
+    kDebug() << "Could not bind to server. Error was:" << conn.ldapErrorString();
   }
   QCOMPARE( ret, 0 );
 }
@@ -207,15 +207,15 @@ void KLdapTest::testLdapSearch()
 
   QCOMPARE( success, true );
 
-  kDebug() << "Search found " << m_objects.size() << " matching entries" << endl;
+  kDebug() << "Search found" << m_objects.size() << "matching entries";
 }
 
 void KLdapTest::searchResult( KLDAP::LdapSearch *search )
 {
-  kDebug() << "KLdapTest::searchResult()" << endl;
+  kDebug() << "KLdapTest::searchResult()";
   int err = search->error();
   if ( err ) {
-    kDebug() << "Search returned the following error: " << search->errorString() << endl;
+    kDebug() << "Search returned the following error:" << search->errorString();
   }
   QCOMPARE( err, 0 );
 }
@@ -223,8 +223,9 @@ void KLdapTest::searchResult( KLDAP::LdapSearch *search )
 void KLdapTest::searchData( KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj )
 {
   Q_UNUSED( search );
-  //kDebug() << "KLdapTest::searchData()" << endl;
-  //kDebug() << "Object:" << endl << obj.toString() << endl;
+  //kDebug() << "KLdapTest::searchData()";
+  //kDebug() << "Object:";
+  //kDebug() << obj.toString();
   m_objects.append( obj );
 }
 
@@ -247,12 +248,12 @@ void KLdapTest::testLdapModel()
   conn.setUrl( url );
   int ret;
   if ( (ret = conn.connect()) ) {
-    kDebug() << "Could not connect to LDAP server. Error was: " << conn.connectionError() << endl;
+    kDebug() << "Could not connect to LDAP server. Error was:" << conn.connectionError();
   }
   QCOMPARE( ret, 0 );
 
   if ( (ret = conn.bind()) ) {
-    kDebug() << "Could not bind to server. Error was: " << conn.ldapErrorString() << endl;
+    kDebug() << "Could not bind to server. Error was:" << conn.ldapErrorString();
   }
   QCOMPARE( ret, 0 );
 
@@ -265,7 +266,7 @@ void KLdapTest::testLdapModel()
 
   QModelIndex rootIndex = QModelIndex();
   QVariant data = m_model->data( rootIndex, Qt::DisplayRole );
-  kDebug() << "Root Item Distinguished Name = " << data.toString() << endl;
+  kDebug() << "Root Item Distinguished Name =" << data.toString();
 
   QVERIFY( m_model->hasChildren( rootIndex ) == true );
   QVERIFY( m_model->canFetchMore( rootIndex ) == false );
@@ -338,31 +339,31 @@ Ber ber2 = ber;
 unsigned int a;
 int b;
 a = ber2.skipTag( b );
-kDebug() << "next tag: " << a << " size: " << b << endl;
+kDebug() << "next tag:" << a << "size:" << b;
 a = ber2.skipTag( b );
-kDebug() << "next tag: " << a << " size: " << b << endl;
+kDebug() << "next tag:" << a << "size:" << b;
 a = ber2.skipTag( b );
-kDebug() << "next tag: " << a << " size: " << b << endl;
+kDebug() << "next tag:" << a << "size:" << b;
 a = ber2.skipTag( b );
-kDebug() << "next tag: " << a << " size: " << b << endl;
+kDebug() << "next tag:" << a << "size:" << b;
 a = ber2.skipTag( b );
-kDebug() << "next tag: " << a << " size: " << b << endl;
+kDebug() << "next tag:" << a << "size:" << b;
 a = ber2.skipTag( b );
-kDebug() << "next tag: " << a << " size: " << b << endl;
+kDebug() << "next tag:" << a << "size:" << b;
 a = ber2.skipTag( b );
-kDebug() << "next tag: " << a << " size: " << b << endl;
+kDebug() << "next tag:" << a << "size:" << b;
 a = ber2.skipTag( b );
-kDebug() << "next tag: " << a << " size: " << b << endl;
+kDebug() << "next tag:" << a << "size:" << b;
 
 BerElement *_ber, *_ber2;
 _ber = ber_alloc_t( LBER_USE_DER );
 
 ber_len_t bl;
 ber_printf( _ber, "{i}", 5 );
-kDebug() << "native" << endl;
+kDebug() << "native";
 _ber2 = ber_dup( _ber );
 a = ber_skip_tag( _ber2, &bl );
-kDebug() << "next tag: " << a << " size: " << bl << endl;
+kDebug() << "next tag:" << a << "size:" << bl;
 //  ber_dump( _ber, 0 );
 
 //  ber2.scanf("{v}", &right5 );
@@ -381,38 +382,38 @@ kDebug() << "next tag: " << a << " size: " << bl << endl;
   server.setUrl( url );
   LdapConnection conn( server );
   int result = conn.connect();
-  kDebug() << "connect result " << result << " " << conn.errorString() << endl;
+  kDebug() << "connect result" << result << conn.errorString();
 
   LdapOperation op( conn );
   int msgid = op.search( "ou=People,dc=gyurco,dc=localdomain", LdapUrl::One, "", QStringList() );
-  kDebug() << "search msgid " << msgid << endl;
+  kDebug() << "search msgid" << msgid;
   result = op.result( msgid );
-  kDebug() << "error code " << conn.ldapErrorCode() << " str: " << conn.ldapErrorString() << endl;
+  kDebug() << "error code" << conn.ldapErrorCode() << "str:" << conn.ldapErrorString();
   while ( result == LdapOperation::RES_SEARCH_ENTRY ) {
-  kDebug() << op.object().toString() << endl;
+  kDebug() << op.object().toString();
   result = op.result( msgid );
   }
-  kDebug() << "error code " << conn.ldapErrorCode() << " str: " << conn.ldapErrorString() << endl;
+  kDebug() << "error code" << conn.ldapErrorCode() << "str: " << conn.ldapErrorString();
 
   msgid = op.del( "ou=People,dc=gyurco,dc=localdomain" );
-  kDebug() << "search msgid " << msgid << endl;
+  kDebug() << "search msgid" << msgid;
   result = op.result( msgid );
-  kDebug() << "error code " << conn.ldapErrorCode() << " str: " << conn.ldapErrorString() << endl;
+  kDebug() << "error code" << conn.ldapErrorCode() << "str: " << conn.ldapErrorString();
 
   msgid = op.compare( "ou=People,dc=gyurco,dc=localdomain", "objectClass", QByteArray("top") );
-  kDebug() << "search msgid " << msgid << endl;
+  kDebug() << "search msgid" << msgid;
   result = op.result( msgid );
-  kDebug() << "error code " << conn.ldapErrorCode() << " str: " << conn.ldapErrorString() << endl;
+  kDebug() << "error code" << conn.ldapErrorCode() << "str: " << conn.ldapErrorString();
 
   msgid = op.compare( "ou=People,dc=gyurco,dc=localdomain", "objectClass", QByteArray("inetOrgPerson") );
-  kDebug() << "search msgid " << msgid << endl;
+  kDebug() << "search msgid" << msgid;
   result = op.result( msgid );
-  kDebug() << "error code " << conn.ldapErrorCode() << " str: " << conn.ldapErrorString() << endl;
+  kDebug() << "error code" << conn.ldapErrorCode() << "str: " << conn.ldapErrorString();
 
   msgid = op.exop( "1.2.3.4.5.6.7.8", QByteArray("inetOrgPerson") );
-  kDebug() << "search msgid " << msgid << endl;
+  kDebug() << "search msgid" << msgid;
   result = op.result( msgid );
-  kDebug() << "error code " << conn.ldapErrorCode() << " str: " << conn.ldapErrorString() << endl;
+  kDebug() << "error code" << conn.ldapErrorCode() << "str: " << conn.ldapErrorString();
 */
 /*
   }

@@ -151,7 +151,7 @@ QList<QByteArray> LdapOperation::referrals() const
 
 int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage *msg )
 {
-  //kDebug(5322) << "LdapOperation::LdapOperationPrivate::processResult()" << endl;
+  //kDebug(5322) << "LdapOperation::LdapOperationPrivate::processResult()";
   int retval;
   LDAP *ld = (LDAP*) mConnection->handle();
 
@@ -159,7 +159,7 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
     case RES_SEARCH_ENTRY:
     {
       //kDebug(5322) << "LdapOperation::LdapOperationPrivate::processResult():"
-      //             << "Found search entry" << endl;
+      //             << "Found search entry";
       mObject.clear();
       LdapAttrMap attrs;
       char *name;
@@ -216,9 +216,9 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
       retval =
           ldap_parse_result( ld, msg, &errcodep, &matcheddn, &errmsg, &referralsp,
                              &serverctrls, 0 );
-      kDebug(5322) << "rescode " << rescode << " retval: " << retval
-                   << " matcheddn: " << matcheddn << " errcode: "
-                   << errcodep << " errmsg: " << errmsg << endl;
+      kDebug(5322) << "rescode" << rescode << "retval:" << retval
+                   << "matcheddn:" << matcheddn << "errcode:"
+                   << errcodep << "errmsg:" << errmsg;
       if ( retval != LDAP_SUCCESS ) {
         ldap_msgfree( msg );
         return -1;
@@ -257,9 +257,9 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
 static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
                       const QByteArray *value = 0 )
 {
-  //  kDebug(5322) << "type: " << mod_type << " attr: " << attr <<
-  //    " value: " << QString::fromUtf8(value,value.size()) <<
-  //    " size: " << value.size() << endl;
+  //  kDebug(5322) << "type:" << mod_type << "attr:" << attr <<
+  //    "value:" << QString::fromUtf8(value,value.size()) <<
+  //    "size:" << value.size();
   LDAPMod **mods;
 
   mods = *pmods;
@@ -314,7 +314,7 @@ static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
       (BerValue **) malloc( sizeof( BerValue * ) * 2 );
     mods[ i ]->mod_vals.modv_bvals[ 0 ] = berval;
     mods[ i ]->mod_vals.modv_bvals[ 1 ] = 0;
-//    kDebug(5322) << "addModOp: new bervalue struct " << attr << " " << value << endl;
+//    kDebug(5322) << "addModOp: new bervalue struct" << attr << value;
   } else {
     uint j = 0;
     while ( mods[ i ]->mod_vals.modv_bvals[ j ] != 0 ) {
@@ -330,7 +330,7 @@ static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
     }
     mods[ i ]->mod_vals.modv_bvals[ j ] = berval;
     mods[ i ]->mod_vals.modv_bvals[ j+1 ] = 0;
-    kDebug(5322) << j << ". new bervalue " << endl;
+    kDebug(5322) << j << ". new bervalue";
   }
 }
 
@@ -342,7 +342,7 @@ static void addControlOp( LDAPControl ***pctrls, const QString &oid,
 
   ctrls = *pctrls;
 
-  kDebug(5322) << "addControlOp: oid:'" << oid << "' val: '" << value << "'" << endl;
+  kDebug(5322) << "addControlOp: oid:'" << oid << "' val: '" << value << "'";
   int vallen = value.size();
   ctrl->ldctl_value.bv_len = vallen;
   if ( vallen ) {
@@ -432,7 +432,7 @@ int LdapOperation::search( const LdapDN &base, LdapUrl::Scope scope,
   }
 
   kDebug(5322) << "asyncSearch() base=\"" << base.toString() << "\" scope=" << scope <<
-    " filter=\"" << filter << "\" attrs=" << attributes << endl;
+    "filter=\"" << filter << "\" attrs=" << attributes;
   int retval =
     ldap_search_ext( ld, base.toString().toUtf8().data(), lscope,
                      filter.isEmpty() ? QByteArray("objectClass=*").data() : filter.toUtf8().data(),
@@ -565,7 +565,7 @@ int LdapOperation::add_s( const LdapDN &dn, const ModOps &ops )
       addModOp( &lmod, 0, ops[i].attr, &ops[i].values[j] );
     }
   }
-  kDebug(5322) << "LdapOperation::add_s dn=" << dn.toString() << endl;
+  kDebug(5322) << "LdapOperation::add_s dn=" << dn.toString();
   int retval =
     ldap_add_ext_s( ld, dn.toString().toUtf8().data(), lmod, serverctrls,
                     clientctrls );
@@ -909,9 +909,9 @@ int LdapOperation::waitForResult( int id, int msecs )
     // Calculate the timeout value to use and assign it to a timeval structure
     // see man select (2) for details
     timeout = kldap_timeout_value( msecs, stopWatch.elapsed() );
-    kDebug(5322) << "LdapOperation::waitForResult(" << id << ", " << msecs
-             << "): Waiting " << timeout / 1000.0
-             << " secs for result. Attempt #" << attempt++ << endl;
+    kDebug(5322) << "LdapOperation::waitForResult(" << id << "," << msecs
+             << "): Waiting" << timeout / 1000.0
+             << "secs for result. Attempt #" << attempt++;
     struct timeval tv;
     tv.tv_sec = timeout / 1000;
     tv.tv_usec = ( timeout % 1000 ) * 1000;

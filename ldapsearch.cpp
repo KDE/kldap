@@ -69,7 +69,7 @@ void LdapSearch::Private::result()
   }
   int res = mOp.waitForResult( mId, LDAPSEARCH_BLOCKING_TIMEOUT );
 
-  kDebug(5322) << "LdapSearch::Private::result: " << res << endl;
+  kDebug(5322) << "LdapSearch::Private::result:" << res;
 
   if ( res != 0 && ( res == -1 || mConn->ldapErrorCode() != KLDAP_SUCCESS ) ) {
     //error happened, but no timeout
@@ -89,7 +89,7 @@ void LdapSearch::Private::result()
           break;
         }
       }
-      kDebug(5322) << " estimated size: " << estsize << endl;
+      kDebug(5322) << " estimated size:" << estsize;
       if ( estsize != -1 && !cookie.isEmpty() ) {
         LdapControls ctrls, savedctrls;
         savedctrls = mOp.serverControls();
@@ -149,8 +149,8 @@ bool LdapSearch::Private::startSearch( const LdapDN &base, LdapUrl::Scope scope,
                                        const QString &filter,
                                        const QStringList &attributes, int pagesize )
 {
-  kDebug(5322) << "search: base=" << base.toString() << " scope=" << scope << " filter=" << filter
-    << " attributes=" << attributes << " pagesize=" << pagesize  << endl;
+  kDebug(5322) << "search: base=" << base.toString() << "scope=" << scope << "filter=" << filter
+    << "attributes=" << attributes << "pagesize=" << pagesize;
   mAbandoned = false;
   mError = 0;
   mErrorString = QString();
@@ -177,7 +177,7 @@ bool LdapSearch::Private::startSearch( const LdapDN &base, LdapUrl::Scope scope,
     mErrorString = mConn->ldapErrorString();
     return false;
   }
-  kDebug(5322) << "search::startSearch msg id=" << mId << endl;
+  kDebug(5322) << "search::startSearch msg id=" << mId;
 
   QTimer::singleShot( 0, mParent, SLOT(result()) ); //maybe do this with threads?- need thread-safe client libs!!!
 

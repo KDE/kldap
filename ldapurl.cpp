@@ -237,7 +237,7 @@ void LdapUrl::updateQuery()
   }
 
   setQuery( q );
-  kDebug(5322) << "LDAP URL updateQuery(): " << prettyUrl() << endl;
+  kDebug(5322) << "LDAP URL updateQuery():" << prettyUrl();
 }
 
 void LdapUrl::parseQuery()
@@ -289,7 +289,7 @@ void LdapUrl::parseQuery()
       ext.critical = true;
       name.remove( 0, 1 );
     }
-    kDebug(5322) << "LdapUrl extensions name= " << name << " value: " << value << endl;
+    kDebug(5322) << "LdapUrl extensions name=" << name << "value:" << value;
     ext.value = value.replace( "%2", "," );
     setExtension( name, ext );
   }
