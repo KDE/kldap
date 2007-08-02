@@ -279,7 +279,7 @@ static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
     if ( mods[ i ] == 0 ) {
       mods = (LDAPMod **)realloc( mods, ( i + 2 ) * sizeof( LDAPMod * ) );
       if ( mods == 0 ) {
-        kError() << "addModOp: realloc" << endl;
+        kError() << "addModOp: realloc";
         return;
       }
       mods[ i + 1 ] = 0;
@@ -324,7 +324,7 @@ static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
       (BerValue **) realloc( mods[ i ]->mod_vals.modv_bvals,
                              ( j + 2 ) * sizeof( BerValue * ) );
     if ( mods[ i ]->mod_vals.modv_bvals == 0 ) {
-      kError() << "addModOp: realloc" << endl;
+      kError() << "addModOp: realloc";
       free( berval );
       return;
     }
@@ -835,7 +835,7 @@ int LdapOperation::exop( const QString &oid, const QByteArray &data )
   }
   return retval;
 #else
-  kError() << "Your LDAP client libraries don't support extended operations." << endl;
+  kError() << "Your LDAP client libraries don't support extended operations.";
   return -1;
 #endif
 }
@@ -870,7 +870,7 @@ int LdapOperation::exop_s( const QString &oid, const QByteArray &data )
 
   return retval;
 #else
-  kError() << "Your LDAP client libraries don't support extended operations." << endl;
+  kError() << "Your LDAP client libraries don't support extended operations.";
   return -1;
 #endif
 }
@@ -936,105 +936,105 @@ int LdapOperation::waitForResult( int id, int msecs )
 int LdapOperation::search( const LdapDN &base, LdapUrl::Scope scope,
                            const QString &filter, const QStringList &attributes )
 {
-  kError() << "LDAP support not compiled" << endl;
+  kError() << "LDAP support not compiled";
   return -1;
 }
 
 int LdapOperation::add( const LdapObject &object )
 {
-  kError() << "LDAP support not compiled" << endl;
+  kError() << "LDAP support not compiled";
   return -1;
 }
 
 int LdapOperation::add_s( const LdapObject &object )
 {
-  kError() << "LDAP support not compiled" << endl;
+  kError() << "LDAP support not compiled";
   return -1;
 }
 
 int LdapOperation::add( const LdapDN &dn, const ModOps &ops )
 {
-  kError() << "LDAP support not compiled" << endl;
+  kError() << "LDAP support not compiled";
   return -1;
 }
 
 int LdapOperation::add_s( const LdapDN &dn, const ModOps &ops )
 {
-  kError() << "LDAP support not compiled" << endl;
+  kError() << "LDAP support not compiled";
   return -1;
 }
                                 
 int LdapOperation::rename( const LdapDN &dn, const QString &newRdn,
                            const QString &newSuperior, bool deleteold )
 {
-  kError() << "LDAP support not compiled" << endl;
+  kError() << "LDAP support not compiled";
   return -1;
 }
 
 int LdapOperation::rename_s( const LdapDN &dn, const QString &newRdn,
                              const QString &newSuperior, bool deleteold )
 {
-  kError() << "LDAP support not compiled" << endl;
+  kError() << "LDAP support not compiled";
   return -1;
 }
 
 int LdapOperation::del( const LdapDN &dn )
 {
-  kError() << "LDAP support not compiled" << endl;
+  kError() << "LDAP support not compiled";
   return -1;
 }
 
 int LdapOperation::del_s( const LdapDN &dn )
 {
-  kError() << "LDAP support not compiled" << endl;
+  kError() << "LDAP support not compiled";
   return -1;
 }
 
 int LdapOperation::modify( const LdapDN &dn, const ModOps &ops )
 {
-  kError() << "LDAP support not compiled" << endl;
+  kError() << "LDAP support not compiled";
   return -1;
 }
 
 int LdapOperation::modify_s( const LdapDN &dn, const ModOps &ops )
 {
-  kError() << "LDAP support not compiled" << endl;
+  kError() << "LDAP support not compiled";
   return -1;
 }
 
 int LdapOperation::compare( const LdapDN &dn, const QString &attr, const QByteArray &value )
 {
-  kError() << "LDAP support not compiled" << endl;
+  kError() << "LDAP support not compiled";
   return -1;
 }
 
 int LdapOperation::exop( const QString &oid, const QByteArray &data )
 {
-  kError() << "LDAP support not compiled" << endl;
+  kError() << "LDAP support not compiled";
   return -1;
 }
 
 int LdapOperation::compare_s( const LdapDN &dn, const QString &attr, const QByteArray &value )
 {
-  kError() << "LDAP support not compiled" << endl;
+  kError() << "LDAP support not compiled";
   return -1;
 }
 
 int LdapOperation::exop_s( const QString &oid, const QByteArray &data )
 {
-  kError() << "LDAP support not compiled" << endl;
+  kError() << "LDAP support not compiled";
   return -1;
 }
 
 int LdapOperation::waitForResult( int id, int msecs )
 {
-  kError() << "LDAP support not compiled" << endl;
+  kError() << "LDAP support not compiled";
   return -1;
 }
 
 int LdapOperation::abandon( int id )
 {
-  kError() << "LDAP support not compiled" << endl;
+  kError() << "LDAP support not compiled";
   return -1;
 }
 

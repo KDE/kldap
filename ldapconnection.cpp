@@ -380,49 +380,49 @@ void LdapConnection::close()
 
 int LdapConnection::getOption( int option, void *value ) const
 {
-  kError() << "No LDAP support..." << endl;
+  kError() << "No LDAP support...";
   return -1;
 }
 
 int LdapConnection::setOption( int option, void *value )
 {
-  kError() << "No LDAP support..." << endl;
+  kError() << "No LDAP support...";
   return -1;
 }
 
 int LdapConnection::ldapErrorCode() const
 {
-  kError() << "No LDAP support..." << endl;
+  kError() << "No LDAP support...";
   return -1;
 }
 
 QString LdapConnection::ldapErrorString() const
 {
-  kError() << "No LDAP support..." << endl;
+  kError() << "No LDAP support...";
   return QString();
 }
 
 bool LdapConnection::setSizeLimit( int sizelimit )
 {
-  kError() << "No LDAP support..." << endl;
+  kError() << "No LDAP support...";
   return false;
 }
 
 int LdapConnection::sizeLimit() const
 {
-  kError() << "No LDAP support..." << endl;
+  kError() << "No LDAP support...";
   return -1;
 }
 
 bool LdapConnection::setTimeLimit( int timelimit )
 {
-  kError() << "No LDAP support..." << endl;
+  kError() << "No LDAP support...";
   return false;
 }
 
 int LdapConnection::timeLimit() const
 {
-  kError() << "No LDAP support..." << endl;
+  kError() << "No LDAP support...";
   return -1;
 }
 
@@ -432,19 +432,19 @@ int LdapConnection::connect( )
     i18n("LDAP support not compiled in. Please recompile libkldap with the "
          "OpenLDAP (or compatible) client libraries, or complain to your "
          "distribution packagers.");
-  kError() << "No LDAP support..." << endl;
+  kError() << "No LDAP support...";
   return -1;
 }
 
 int LdapConnection::bind( SASL_Callback_Proc *saslproc, void *data )
 {
-  kError() << "No LDAP support..." << endl;
+  kError() << "No LDAP support...";
   return -1;
 }
 
 void LdapConnection::close()
 {
-  kError() << "No LDAP support..." << endl;
+  kError() << "No LDAP support...";
 }
 
 #endif
