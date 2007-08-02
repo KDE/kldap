@@ -393,27 +393,27 @@ kDebug() << "next tag:" << a << "size:" << bl;
   kDebug() << op.object().toString();
   result = op.result( msgid );
   }
-  kDebug() << "error code" << conn.ldapErrorCode() << "str: " << conn.ldapErrorString();
+  kDebug() << "error code" << conn.ldapErrorCode() << "str:" << conn.ldapErrorString();
 
   msgid = op.del( "ou=People,dc=gyurco,dc=localdomain" );
   kDebug() << "search msgid" << msgid;
   result = op.result( msgid );
-  kDebug() << "error code" << conn.ldapErrorCode() << "str: " << conn.ldapErrorString();
+  kDebug() << "error code" << conn.ldapErrorCode() << "str:" << conn.ldapErrorString();
 
   msgid = op.compare( "ou=People,dc=gyurco,dc=localdomain", "objectClass", QByteArray("top") );
   kDebug() << "search msgid" << msgid;
   result = op.result( msgid );
-  kDebug() << "error code" << conn.ldapErrorCode() << "str: " << conn.ldapErrorString();
+  kDebug() << "error code" << conn.ldapErrorCode() << "str:" << conn.ldapErrorString();
 
   msgid = op.compare( "ou=People,dc=gyurco,dc=localdomain", "objectClass", QByteArray("inetOrgPerson") );
   kDebug() << "search msgid" << msgid;
   result = op.result( msgid );
-  kDebug() << "error code" << conn.ldapErrorCode() << "str: " << conn.ldapErrorString();
+  kDebug() << "error code" << conn.ldapErrorCode() << "str:" << conn.ldapErrorString();
 
   msgid = op.exop( "1.2.3.4.5.6.7.8", QByteArray("inetOrgPerson") );
   kDebug() << "search msgid" << msgid;
   result = op.result( msgid );
-  kDebug() << "error code" << conn.ldapErrorCode() << "str: " << conn.ldapErrorString();
+  kDebug() << "error code" << conn.ldapErrorCode() << "str:" << conn.ldapErrorString();
 */
 /*
   }
