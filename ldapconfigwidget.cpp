@@ -47,6 +47,8 @@ class LdapConfigWidget::Private
       : mParent( parent ), mFeatures( W_ALL ), mProg( 0 )
     {
       mainLayout = new QGridLayout( mParent );
+      mainLayout->setMargin( 0 );
+      mainLayout->setSpacing( KDialog::spacingHint() );
     }
 
     void setLDAPPort();
