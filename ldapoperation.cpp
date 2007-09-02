@@ -362,7 +362,7 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds, SASL_Cal
 		sdata = QByteArray();
 	    }
 	}
-    } while ( !async && ret == LDAP_SASL_BIND_IN_PROGRESS );
+    } while ( !async && ret == KLDAP_SASL_BIND_IN_PROGRESS );
 #else
     kError() << "SASL authentication is not available (re-compile kldap with cyrus-sasl development).";
     return KLDAP_SASL_ERROR;
@@ -458,7 +458,7 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
     {
       struct berval *servercred;
       retval = ldap_parse_sasl_bind_result( ld, msg, &servercred, 0 );
-      if ( retval != LDAP_SUCCESS && retval != LDAP_SASL_BIND_IN_PROGRESS ) {
+      if ( retval != LDAP_SUCCESS && retval != KLDAP_SASL_BIND_IN_PROGRESS ) {
         kDebug(5322) << "RES_BIND error: " << retval;
         ldap_msgfree( msg );
         return -1;
