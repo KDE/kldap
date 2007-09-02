@@ -178,7 +178,9 @@ QByteArray LdapOperation::serverCred() const
 
 LdapOperation::LdapOperationPrivate::LdapOperationPrivate()
 {
+#ifdef SASL2_FOUND
   saslconn = 0;
+#endif
 }
 
 LdapOperation::LdapOperationPrivate::~LdapOperationPrivate()
