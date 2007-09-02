@@ -183,8 +183,9 @@ void KLdapTest::testLdapConnection()
   }
   QCOMPARE( ret, 0 );
 
+  LdapOperation op( conn );
   // Now attempt to bind
-  if ( (ret = conn.bind()) ) {
+  if ( (ret = op.bind_s()) ) {
     kDebug() << "Could not bind to server. Error was:" << conn.ldapErrorString();
   }
   QCOMPARE( ret, 0 );
@@ -252,7 +253,8 @@ void KLdapTest::testLdapModel()
   }
   QCOMPARE( ret, 0 );
 
-  if ( (ret = conn.bind()) ) {
+  LdapOperation op( conn );
+  if ( (ret = op.bind_s()) ) {
     kDebug() << "Could not bind to server. Error was:" << conn.ldapErrorString();
   }
   QCOMPARE( ret, 0 );
