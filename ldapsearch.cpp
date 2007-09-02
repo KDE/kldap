@@ -69,9 +69,11 @@ void LdapSearch::Private::result()
   }
   int res = mOp.waitForResult( mId, LDAPSEARCH_BLOCKING_TIMEOUT );
 
-  kDebug(5322) << "LdapSearch::Private::result:" << res;
+  kDebug(5322) << "LDAP result:" << res;
 
-  if ( res != 0 && ( res == -1 || mConn->ldapErrorCode() != KLDAP_SUCCESS ) ) {
+  if ( res != 0 && ( res == -1 || (
+    mConn->ldapErrorCode() != KLDAP_SUCCESS && 
+    mConn->ldapErrorCode() != KLDAP_SASL_BIND_IN_PROGRESS) ) ) {
     //error happened, but no timeout
     mError = mConn->ldapErrorCode();
     mErrorString = mConn->ldapErrorString();
@@ -79,6 +81,37 @@ void LdapSearch::Private::result()
     return;
   }
 
+  if ( res == LdapOperation::RES_BIND ) {
+
+    QByteArray servercc;
+    servercc = mOp.serverCred();
+    
+    kDebug(5322) << "LdapSearch RES_BIND";
+    if ( servercc.isEmpty() ) { //bind succeeded
+        kDebug(5322) << "bind succeeded";
+	LdapControls savedctrls = mOp.serverControls();
+	if ( mPageSize ) {
+	    LdapControls ctrls = savedctrls;
+	    ctrls.append( LdapControl::createPageControl( mPageSize ) );
+	    mOp.setServerControls( ctrls );
+	}
+
+	mId = mOp.search( mBase, mScope, mFilter, mAttributes );
+	mOp.setServerControls( savedctrls );
+    } else { //next bind step
+        kDebug(5322) << "bind next step";
+	mId = mOp.bind( servercc );
+    }
+    if ( mId == -1 ) {
+	mError = mConn->ldapErrorCode();
+	mErrorString = mConn->ldapErrorString();
+	emit mParent->result( mParent );
+	return;
+    }
+    QTimer::singleShot( 0, mParent, SLOT(result()) );
+    return;
+  }
+  
   if ( res == LdapOperation::RES_SEARCH_RESULT ) {
     if ( mPageSize ) {
       QByteArray cookie;
@@ -127,13 +160,6 @@ bool LdapSearch::Private::connect()
     closeConnection();
     return false;
   }
-  ret = mConn->bind();
-  if ( ret != KLDAP_SUCCESS ) {
-    mError = mConn->ldapErrorCode();
-    mErrorString = mConn->ldapErrorString();
-    closeConnection();
-    return false;
-  }
   return true;
 }
 
@@ -167,17 +193,13 @@ bool LdapSearch::Private::startSearch( const LdapDN &base, LdapUrl::Scope scope,
     mOp.setServerControls( ctrls );
   }
 
-  mId = mOp.search( base, scope, filter, attributes );
-  if ( pagesize ) {
-    mOp.setServerControls( savedctrls );
-  }
-
+  mId = mOp.bind();
   if ( mId == -1 ) {
     mError = mConn->ldapErrorCode();
     mErrorString = mConn->ldapErrorString();
     return false;
   }
-  kDebug(5322) << "search::startSearch msg id=" << mId;
+  kDebug(5322) << "startSearch msg id=" << mId;
 
   QTimer::singleShot( 0, mParent, SLOT(result()) ); //maybe do this with threads?- need thread-safe client libs!!!
 

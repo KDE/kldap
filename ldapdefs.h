@@ -152,4 +152,10 @@
 #define KLDAP_CLIENT_LOOP                (-16)
 #define KLDAP_REFERRAL_LIMIT_EXCEEDED    (-17)
 
+/*
+ * KLDAP Specific
+ */
+ 
+#define KLDAP_SASL_ERROR	-0xff
+
 #endif //KLDAP_DEFS_H

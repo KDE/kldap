@@ -69,6 +69,29 @@ class KLDAP_EXPORT LdapOperation
 
     typedef QList<ModOp> ModOps;
 
+    enum SASL_Fields {
+      SASL_Authname = 0x1,
+      SASL_Authzid = 0x2,
+      SASL_Realm = 0x4,
+      SASL_Password = 0x8
+    };
+
+    struct SASL_Credentials {
+      int fields;
+      QString authname;
+      QString authzid;
+      QString realm;
+      QString password;
+    };
+
+    typedef int (SASL_Callback_Proc) ( SASL_Credentials &cred, void *data );
+
+    struct SASL_Data {
+      SASL_Callback_Proc *proc;
+      void *data;
+      SASL_Credentials creds;
+    };
+
     LdapOperation();
     LdapOperation( LdapConnection &conn );
     virtual ~LdapOperation();
@@ -98,6 +121,19 @@ class KLDAP_EXPORT LdapOperation
      * Returns the server controls (which set by setServerControls()).
      */
     LdapControls serverControls() const;
+
+    /**
+     * Binds to the server which specified in the connection object. 
+     * Can do simple or SASL bind. Returns a message id if successful, negative value if not.
+     */
+    int bind( const QByteArray &creds = QByteArray(), SASL_Callback_Proc *saslproc = NULL, void *data = NULL );
+  
+    /**
+     * Binds to the server which specified in the connection object. 
+     * Can do simple or SASL bind. This is the synchronous version.
+     * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
+     */
+    int bind_s( SASL_Callback_Proc *saslproc = NULL, void *data = NULL );
 
     /**
      * Starts a search operation with the given base DN, scope, filter and
@@ -235,6 +271,11 @@ class KLDAP_EXPORT LdapOperation
      * (if any).
      */
     QList<QByteArray> referrals() const;
+    /**
+     * Returns the server response for a bind request (result
+     * returned RES_BIND).
+     */
+    QByteArray serverCred() const;
 
   private:
     class LdapOperationPrivate;

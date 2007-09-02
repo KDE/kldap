@@ -30,10 +30,28 @@
 #include <sys/time.h>
 #endif
 
+#ifdef SASL2_FOUND
+#include <sasl/sasl.h>
+static sasl_callback_t callbacks[] = {
+    { SASL_CB_ECHOPROMPT, NULL, NULL },
+    { SASL_CB_NOECHOPROMPT, NULL, NULL },
+    { SASL_CB_GETREALM, NULL, NULL },
+    { SASL_CB_USER, NULL, NULL },
+    { SASL_CB_AUTHNAME, NULL, NULL },
+    { SASL_CB_PASS, NULL, NULL },
+    { SASL_CB_CANON_USER, NULL, NULL },
+    { SASL_CB_LIST_END, NULL, NULL }
+};
+
+static bool ldapoperation_sasl_initialized = false;
+#endif
+
 #ifdef LDAP_FOUND
 #include <lber.h>
 #include <ldap.h>
 #endif
+
+#include "ldapdefs.h"
 
 using namespace KLDAP;
 
@@ -57,13 +75,19 @@ static int kldap_timeout_value( int msecs, int elapsed )
 
 class LdapOperation::LdapOperationPrivate {
 public:
+  LdapOperationPrivate();
+  ~LdapOperationPrivate();
 #ifdef LDAP_FOUND
   int processResult( int rescode, LDAPMessage *msg );
+  int bind( const QByteArray &creds, SASL_Callback_Proc *saslproc, void *data, bool async );
 #endif
-
+#ifdef SASL2_FOUND
+  sasl_conn_t *saslconn;
+#endif
   LdapControls mClientCtrls, mServerCtrls, mControls;
   LdapObject mObject;
   QByteArray mExtOid, mExtData;
+  QByteArray mServerCred;
   QString mMatchedDn;
   QList<QByteArray> mReferrals;
 
@@ -147,7 +171,227 @@ QList<QByteArray> LdapOperation::referrals() const
   return d->mReferrals;
 }
 
+QByteArray LdapOperation::serverCred() const
+{
+  return d->mServerCred;
+}
+
+LdapOperation::LdapOperationPrivate::LdapOperationPrivate()
+{
+  saslconn = 0;
+}
+
+LdapOperation::LdapOperationPrivate::~LdapOperationPrivate()
+{
+#ifdef SASL2_FOUND
+  if ( saslconn ) sasl_dispose( &saslconn );
+#endif
+}
+
 #ifdef LDAP_FOUND
+
+#ifdef SASL2_FOUND
+static int kldap_sasl_interact( sasl_interact_t *interact, LdapOperation::SASL_Data *data )
+{
+  if ( data->proc ) {
+    for ( ; interact->id != SASL_CB_LIST_END; interact++ ) {
+      switch ( interact->id ) {
+        case SASL_CB_GETREALM:
+          data->creds.fields |= LdapOperation::SASL_Realm;
+          break;
+        case SASL_CB_AUTHNAME:
+          data->creds.fields |= LdapOperation::SASL_Authname;
+          break;
+        case SASL_CB_PASS:
+          data->creds.fields |= LdapOperation::SASL_Password;
+          break;
+        case SASL_CB_USER:
+          data->creds.fields |= LdapOperation::SASL_Authzid;
+          break;
+      }
+    }
+    int retval;
+    if ( (retval = data->proc( data->creds, data->data )) ) {
+      return retval;
+    }
+  }
+
+  QString value;
+
+  while ( interact->id != SASL_CB_LIST_END ) {
+    value = QString();
+    switch( interact->id ) {
+      case SASL_CB_GETREALM:
+        value = data->creds.realm;
+        kDebug(5322) << "SASL_REALM=" << value << endl;
+        break;
+      case SASL_CB_AUTHNAME:
+        value = data->creds.authname;
+        kDebug(5322) << "SASL_AUTHNAME=" << value << endl;
+        break;
+      case SASL_CB_PASS:
+        value = data->creds.password;
+        kDebug(5322) << "SASL_PASSWD=[hidden]" << endl;
+        break;
+      case SASL_CB_USER:
+        value = data->creds.authzid;
+        kDebug(5322) << "SASL_AUTHZID=" << value << endl;
+        break;
+    }
+    if ( value.isEmpty() ) {
+	interact->result = NULL;
+	interact->len = 0;
+    } else {
+	interact->result = strdup( value.toUtf8() );
+	interact->len = strlen( (const char *) interact->result );
+    }
+    interact++;
+  }
+  return LDAP_SUCCESS;
+}
+#endif
+
+int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds, SASL_Callback_Proc *saslproc, void *data, bool async )
+{
+  Q_ASSERT( mConnection );
+  LDAP *ld = (LDAP*) mConnection->handle();
+  LdapServer server;
+  server = mConnection->server();
+
+  int ret;
+
+  if ( server.auth() == LdapServer::SASL ) {
+#ifdef SASL2_FOUND
+    sasl_interact_t *client_interact = NULL;
+    const char *out = NULL;
+    uint outlen;
+    const char *mechusing = NULL;
+    struct berval ccred, *scred;
+    int saslresult;
+    QByteArray sdata = creds;
+
+    QString mech = server.mech();
+    if ( mech.isEmpty() ) {
+      mech = "DIGEST-MD5";
+    }
+
+    SASL_Data sasldata;
+    sasldata.proc = saslproc;
+    sasldata.data = data;
+    sasldata.creds.fields = 0;
+    sasldata.creds.realm = server.realm();
+    sasldata.creds.authname = server.user();
+    sasldata.creds.authzid = server.bindDn();
+    sasldata.creds.password = server.password();
+
+    if ( !ldapoperation_sasl_initialized ) {
+	sasl_client_init(NULL);
+	ldapoperation_sasl_initialized = true;
+    }
+
+    do {
+	if ( sdata.isEmpty() ) {
+	    kDebug(5322) << "sasl_client_new";
+    	    if ( saslconn ) {
+    		sasl_dispose( &saslconn );
+    		saslconn = 0;
+    	    }
+    	    saslresult = sasl_client_new( "ldap", server.host().toLatin1(), 
+		0, 0, callbacks, 0, &saslconn );
+	    if ( saslresult != SASL_OK ) {
+		return KLDAP_SASL_ERROR;
+    	    }
+	    kDebug(5322) << "sasl_client_new result" << saslresult;
+	    do {
+    		saslresult = sasl_client_start(saslconn, mech.toLatin1(),
+    		    &client_interact, &out, &outlen, &mechusing);
+                      
+		if ( saslresult == SASL_INTERACT )
+		    if ( kldap_sasl_interact( client_interact, &sasldata ) != LDAP_SUCCESS ) {
+            		sasl_dispose( &saslconn );
+            		saslconn = 0;
+            		return KLDAP_SASL_ERROR;
+        	    };
+		kDebug(5322) << "sasl_client_start mech: " << mech << " result: " << saslresult;
+    	    } while ( saslresult == SASL_INTERACT );
+	    if ( saslresult != SASL_CONTINUE && saslresult != SASL_OK ) {
+		sasl_dispose( &saslconn );
+		saslconn = 0;
+		return KLDAP_SASL_ERROR;
+	    }
+	    
+	} else {
+	    kDebug(5322) << "sasl_client_step";
+	    do {
+		saslresult = sasl_client_step(saslconn, sdata.data(), sdata.size(),
+		    &client_interact, &out, &outlen);
+		if ( saslresult == SASL_INTERACT )
+		    if ( kldap_sasl_interact( client_interact, &sasldata ) != LDAP_SUCCESS ) {
+            		sasl_dispose( &saslconn );
+            		saslconn = 0;
+            		return KLDAP_SASL_ERROR;
+        	    };
+    	    } while ( saslresult == SASL_INTERACT );
+  	    kDebug(5322) << "sasl_client_step result" << saslresult;
+	    if ( saslresult != SASL_CONTINUE && saslresult != SASL_OK ) {
+		sasl_dispose( &saslconn );
+		saslconn = 0;
+		return KLDAP_SASL_ERROR;
+	    }
+	}
+    
+	ccred.bv_val = (char*) out;
+	ccred.bv_len = outlen;
+    
+	if ( async ) {
+	    kDebug(5322) << "ldap_sasl_bind";
+	    int msgid;
+	    ret = ldap_sasl_bind( ld, server.bindDn().toUtf8().data(), mech.toLatin1(), 
+		&ccred, 0, 0, &msgid );
+	    kDebug(5322) << "ldap_sasl_bind msgid" << ret;
+	} else {
+	    kDebug(5322) << "ldap_sasl_bind_s";
+	    ret = ldap_sasl_bind_s( ld, server.bindDn().toUtf8().data(), mech.toLatin1(), 
+		&ccred, 0, 0, &scred );
+	    kDebug(5322) << "ldap_sasl_bind_s ret" << ret;
+	    if ( scred ) {
+		sdata = QByteArray( scred->bv_val, scred->bv_len );
+	    } else {
+		sdata = QByteArray();
+	    }
+	}
+    } while ( !async && ret == LDAP_SASL_BIND_IN_PROGRESS );
+#else
+    kError() << "SASL authentication is not available (re-compile kldap with cyrus-sasl development).";
+    return KLDAP_SASL_ERROR;
+#endif
+  } else { //simple auth
+    QByteArray bindname,pass;
+    struct berval ccred;
+    if ( server.auth() == LdapServer::Simple ) {
+      bindname = server.bindDn().toUtf8();
+      pass = server.password().toUtf8();
+    }
+    ccred.bv_val = pass.data();
+    ccred.bv_len = pass.size();
+    kDebug(5322) << "binding to server, bindname: " << bindname << " password: *****";
+    
+    if ( async ) {
+	kDebug() << "ldap_sasl_bind (simple)";
+	int msgid;
+	ret = ldap_sasl_bind( ld, bindname.data(), 0, &ccred, 0, 0, &msgid );
+//	ret = ldap_simple_bind( ld, bindname.data(),pass.data() );
+	if ( ret == 0 ) {
+	    ret = msgid;
+	}
+    } else {
+	kDebug() << "ldap_sasl_bind_s (simple)";
+	ret = ldap_sasl_bind_s( ld, bindname.data(), 0, &ccred, 0, 0, 0 );
+//	ret = ldap_simple_bind_s( ld, bindname.data(), pass.data() );
+    }
+  }
+  return ret;
+}
 
 int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage *msg )
 {
@@ -155,6 +399,7 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
   int retval;
   LDAP *ld = (LDAP*) mConnection->handle();
 
+  kDebug(5322) << "processResult() rescode: " << rescode;
   switch ( rescode ) {
     case RES_SEARCH_ENTRY:
     {
@@ -205,6 +450,20 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
       mExtData = retdata ? QByteArray( retdata->bv_val, retdata->bv_len ) : QByteArray();
       ldap_memfree( retoid );
       ber_bvfree( retdata );
+      break;
+    }
+    case RES_BIND:
+    {
+      struct berval *servercred;
+      retval = ldap_parse_sasl_bind_result( ld, msg, &servercred, 0 );
+      if ( retval != LDAP_SUCCESS && retval != LDAP_SASL_BIND_IN_PROGRESS ) {
+        kDebug(5322) << "RES_BIND error: " << retval;
+        ldap_msgfree( msg );
+        return -1;
+      }
+      kDebug(5322) << "RES_BIND rescode" << rescode << "retval:" << retval;
+      mServerCred = servercred ? QByteArray( servercred->bv_val, servercred->bv_len ) : QByteArray();
+      ber_bvfree( servercred );
       break;
     }
     default:
@@ -297,7 +556,7 @@ static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
 
   if ( value == 0 ) 
     return;
-    
+
   int vallen = value->size();
   BerValue *berval;
   berval = (BerValue *) malloc( sizeof( BerValue ) );
@@ -394,6 +653,16 @@ static void extractControls( LdapControls &ctrls, LDAPControl **pctrls )
     ctrls.append( control );
     i++;
   }
+}
+
+int LdapOperation::bind( const QByteArray &creds, SASL_Callback_Proc *saslproc, void *data )
+{
+  return d->bind( creds, saslproc, data, true );
+}
+
+int LdapOperation::bind_s( SASL_Callback_Proc *saslproc, void *data )
+{
+  return d->bind( QByteArray(), saslproc, data, false );
 }
 
 int LdapOperation::search( const LdapDN &base, LdapUrl::Scope scope,
@@ -909,9 +1178,9 @@ int LdapOperation::waitForResult( int id, int msecs )
     // Calculate the timeout value to use and assign it to a timeval structure
     // see man select (2) for details
     timeout = kldap_timeout_value( msecs, stopWatch.elapsed() );
-    kDebug(5322) << "LdapOperation::waitForResult(" << id << "," << msecs
-             << "): Waiting" << timeout / 1000.0
-             << "secs for result. Attempt #" << attempt++;
+    kDebug(5322) << "(" << id << "," << msecs
+             << "): Waiting" << timeout 
+             << "msecs for result. Attempt #" << attempt++;
     struct timeval tv;
     tv.tv_sec = timeout / 1000;
     tv.tv_usec = ( timeout % 1000 ) * 1000;
@@ -932,6 +1201,18 @@ int LdapOperation::waitForResult( int id, int msecs )
 }
 
 #else
+
+int LdapOperation::bind( const QByteArray &creds, SASL_Callback_Proc *saslproc, void *data )
+{
+  kError() << "LDAP support not compiled";
+  return -1;
+}
+
+int LdapOperation::bind_s( SASL_Callback_Proc *saslproc, void *data )
+{
+  kError() << "LDAP support not compiled";
+  return -1;
+}
 
 int LdapOperation::search( const LdapDN &base, LdapUrl::Scope scope,
                            const QString &filter, const QStringList &attributes )

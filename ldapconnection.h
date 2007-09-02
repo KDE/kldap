@@ -44,22 +44,6 @@ class KLDAP_EXPORT LdapConnection
       SASL_Password = 0x8
     };
 
-    struct SASL_Credentials {
-      int fields;
-      QString authname;
-      QString authzid;
-      QString realm;
-      QString password;
-    };
-
-    typedef int (SASL_Callback_Proc) ( SASL_Credentials &cred, void *data );
-
-    struct SASL_Data {
-      SASL_Callback_Proc *proc;
-      void *data;
-      SASL_Credentials creds;
-    };
-
     /** Constructs an LdapConnection object */
     LdapConnection();
     /** Constructs an LdapConnection with the parameters given in url */
@@ -75,13 +59,19 @@ class KLDAP_EXPORT LdapConnection
      */
     void setUrl( const LdapUrl &url );
     /**
+     * Returns the connection parameters which was specified with an LDAP Url or a 
+     * LdapServer structure.
+     */
+    const LdapServer &server() const;
+    /**
      * Sets the connection parameters via the specified server structure. After
      * this, you need to call connect() to connect with the new parameters.
      */
     void setServer( const LdapServer &server );
+
     /**
-     * Connects to the specified LDAP server with the appropriate SSL/TLS
-     * setting. Also sets sizelimit and timelimit.
+     * Sets up the connection parameters with creating a handle to the LDAP server.
+     * Also sets sizelimit and timelimit and starts TLS if it is requested.
      * Returns 0 if successful, else returns an LDAP error code, and an error
      * string which is available via connectionError().
      */
@@ -90,13 +80,6 @@ class KLDAP_EXPORT LdapConnection
      * Returns a translated error string if connect() failed.
      */
     QString connectionError() const;
-    /**
-     * Binds to the LDAP server (authenticates), via simple/SASL method.
-     * Returns 0 if successful, -0xff if the specified authentication method
-     * is not available (the SASL library was not present during compiling),
-     * an LDAP error code if other error occurred.
-     */
-    int bind( SASL_Callback_Proc *saslproc = 0, void *data = 0 );
     /**
      *  Closes the LDAP connection.
      */
