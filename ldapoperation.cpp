@@ -249,7 +249,7 @@ static int kldap_sasl_interact( sasl_interact_t *interact, LdapOperation::SASL_D
     }
     interact++;
   }
-  return LDAP_SUCCESS;
+  return KLDAP_SUCCESS;
 }
 #endif
 
@@ -309,7 +309,7 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds, SASL_Cal
     		    &client_interact, &out, &outlen, &mechusing);
                       
 		if ( saslresult == SASL_INTERACT )
-		    if ( kldap_sasl_interact( client_interact, &sasldata ) != LDAP_SUCCESS ) {
+		    if ( kldap_sasl_interact( client_interact, &sasldata ) != KLDAP_SUCCESS ) {
             		sasl_dispose( &saslconn );
             		saslconn = 0;
             		return KLDAP_SASL_ERROR;
@@ -328,7 +328,7 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds, SASL_Cal
 		saslresult = sasl_client_step(saslconn, sdata.data(), sdata.size(),
 		    &client_interact, &out, &outlen);
 		if ( saslresult == SASL_INTERACT )
-		    if ( kldap_sasl_interact( client_interact, &sasldata ) != LDAP_SUCCESS ) {
+		    if ( kldap_sasl_interact( client_interact, &sasldata ) != KLDAP_SUCCESS ) {
             		sasl_dispose( &saslconn );
             		saslconn = 0;
             		return KLDAP_SASL_ERROR;
@@ -444,7 +444,7 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
       char *retoid;
       struct berval *retdata;
       retval = ldap_parse_extended_result( ld, msg, &retoid, &retdata, 0 );
-      if ( retval != LDAP_SUCCESS ) {
+      if ( retval != KLDAP_SUCCESS ) {
         ldap_msgfree( msg );
         return -1;
       }
@@ -458,7 +458,7 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
     {
       struct berval *servercred;
       retval = ldap_parse_sasl_bind_result( ld, msg, &servercred, 0 );
-      if ( retval != LDAP_SUCCESS && retval != KLDAP_SASL_BIND_IN_PROGRESS ) {
+      if ( retval != KLDAP_SUCCESS && retval != KLDAP_SASL_BIND_IN_PROGRESS ) {
         kDebug(5322) << "RES_BIND error: " << retval;
         ldap_msgfree( msg );
         return -1;
@@ -480,7 +480,7 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
       kDebug(5322) << "rescode" << rescode << "retval:" << retval
                    << "matcheddn:" << matcheddn << "errcode:"
                    << errcodep << "errmsg:" << errmsg;
-      if ( retval != LDAP_SUCCESS ) {
+      if ( retval != KLDAP_SUCCESS ) {
         ldap_msgfree( msg );
         return -1;
       }
