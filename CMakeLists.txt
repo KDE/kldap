@@ -5,8 +5,9 @@ include(CheckSymbolExists)
 macro_optional_find_package(Ldap)
 macro_log_feature(LDAP_FOUND "OpenLDAP" "LDAP (Lightweight Directory Access Protocol) libraries" "http://www.openldap.org" FALSE "" "Needed to provide LDAP functionality in KDE" )
 
-macro_optional_find_package(Sasl2)
-macro_log_feature(SASL2_FOUND "cyrus-sasl" "Cyrus SASL API" "http://asg.web.cmu.edu/sasl/sasl-library.html" FALSE "" "Needed to support authentication of logins" )
+#look for Sasl2 in the top-level CMakeLists.txt file now
+#macro_optional_find_package(Sasl2)
+#macro_log_feature(SASL2_FOUND "cyrus-sasl" "Cyrus SASL API" "http://asg.web.cmu.edu/sasl/sasl-library.html" FALSE "" "Needed to support authentication of logins" )
 
 check_include_files(sys/time.h    HAVE_SYS_TIME_H)
 
