@@ -405,6 +405,7 @@ Ber::Ber( const QByteArray & )
 
 Ber::~Ber()
 {
+  delete d;
 }
 
 Ber::Ber( const Ber&)
