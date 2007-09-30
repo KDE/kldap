@@ -281,7 +281,7 @@ void LdapServer::setUrl( const LdapUrl &url )
     if ( url.hasExtension("x-realm") ) {
       d->mRealm = url.extension( "x-realm", critical );
     }
-    if ( url.hasExtension("binddn") ) {
+    if ( url.hasExtension("bindname") ) {
       d->mBindDn = url.extension( "bindname", critical );
     }
     d->mUser = url.user();
