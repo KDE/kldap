@@ -69,7 +69,7 @@ class LdapConnection::LdapConnectionPrivate
 #ifdef SASL2_FOUND
   sasl_conn_t *mSASLconn;
 #else
-  void *mSASLconn
+  void *mSASLconn;
 #endif
   
 };
@@ -160,7 +160,7 @@ QString LdapConnection::saslErrorString() const
 #else
   return i18n("SASL support is not available...Please recompile libkldap with the "
     "Cyrus-SASL (or compatible) client libraries, or complain to your "
-    "distribution packagers.")
+    "distribution packagers.");
 #endif
 }
 
