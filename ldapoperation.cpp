@@ -306,6 +306,9 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds, SASL_Cal
 	    int msgid;
 	    ret = ldap_sasl_bind( ld, server.bindDn().toUtf8().data(), mech.toLatin1(), 
 		&ccred, 0, 0, &msgid );
+	    if ( ret == 0 ) {
+	      ret = msgid;
+	    }
 	    kDebug(5322) << "ldap_sasl_bind msgid" << ret;
 	} else {
 	    kDebug(5322) << "ldap_sasl_bind_s";
