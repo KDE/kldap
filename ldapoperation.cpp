@@ -276,7 +276,7 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds, SASL_Cal
 		    if ( kldap_sasl_interact( client_interact, &sasldata ) != KLDAP_SUCCESS ) {
             		return KLDAP_SASL_ERROR;
         	    };
-		kDebug(5322) << "sasl_client_start mech: " << mechusing << " outlen " << outlen << " creds " << out << " result: " << saslresult;
+		kDebug(5322) << "sasl_client_start mech: " << mechusing << " outlen " << outlen << " result: " << saslresult;
     	    } while ( saslresult == SASL_INTERACT );
 	    if ( saslresult != SASL_CONTINUE && saslresult != SASL_OK ) {
 		return KLDAP_SASL_ERROR;
