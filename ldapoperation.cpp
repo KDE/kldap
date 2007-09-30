@@ -32,18 +32,6 @@
 
 #ifdef SASL2_FOUND
 #include <sasl/sasl.h>
-static sasl_callback_t callbacks[] = {
-    { SASL_CB_ECHOPROMPT, NULL, NULL },
-    { SASL_CB_NOECHOPROMPT, NULL, NULL },
-    { SASL_CB_GETREALM, NULL, NULL },
-    { SASL_CB_USER, NULL, NULL },
-    { SASL_CB_AUTHNAME, NULL, NULL },
-    { SASL_CB_PASS, NULL, NULL },
-    { SASL_CB_CANON_USER, NULL, NULL },
-    { SASL_CB_LIST_END, NULL, NULL }
-};
-
-static bool ldapoperation_sasl_initialized = false;
 #endif
 
 #ifdef LDAP_FOUND
@@ -80,9 +68,6 @@ public:
 #ifdef LDAP_FOUND
   int processResult( int rescode, LDAPMessage *msg );
   int bind( const QByteArray &creds, SASL_Callback_Proc *saslproc, void *data, bool async );
-#endif
-#ifdef SASL2_FOUND
-  sasl_conn_t *saslconn;
 #endif
   LdapControls mClientCtrls, mServerCtrls, mControls;
   LdapObject mObject;
@@ -178,16 +163,10 @@ QByteArray LdapOperation::serverCred() const
 
 LdapOperation::LdapOperationPrivate::LdapOperationPrivate()
 {
-#ifdef SASL2_FOUND
-  saslconn = 0;
-#endif
 }
 
 LdapOperation::LdapOperationPrivate::~LdapOperationPrivate()
 {
-#ifdef SASL2_FOUND
-  if ( saslconn ) sasl_dispose( &saslconn );
-#endif
 }
 
 #ifdef LDAP_FOUND
@@ -264,6 +243,7 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds, SASL_Cal
 
   if ( server.auth() == LdapServer::SASL ) {
 #ifdef SASL2_FOUND
+    sasl_conn_t *saslconn = (sasl_conn_t*) mConnection->saslHandle();
     sasl_interact_t *client_interact = NULL;
     const char *out = NULL;
     uint outlen;
@@ -286,39 +266,19 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds, SASL_Cal
     sasldata.creds.authzid = server.bindDn();
     sasldata.creds.password = server.password();
 
-    if ( !ldapoperation_sasl_initialized ) {
-	sasl_client_init(NULL);
-	ldapoperation_sasl_initialized = true;
-    }
-
     do {
 	if ( sdata.isEmpty() ) {
-	    kDebug(5322) << "sasl_client_new";
-    	    if ( saslconn ) {
-    		sasl_dispose( &saslconn );
-    		saslconn = 0;
-    	    }
-    	    saslresult = sasl_client_new( "ldap", server.host().toLatin1(), 
-		0, 0, callbacks, 0, &saslconn );
-	    if ( saslresult != SASL_OK ) {
-		return KLDAP_SASL_ERROR;
-    	    }
-	    kDebug(5322) << "sasl_client_new result" << saslresult;
 	    do {
     		saslresult = sasl_client_start(saslconn, mech.toLatin1(),
     		    &client_interact, &out, &outlen, &mechusing);
                       
 		if ( saslresult == SASL_INTERACT )
 		    if ( kldap_sasl_interact( client_interact, &sasldata ) != KLDAP_SUCCESS ) {
-            		sasl_dispose( &saslconn );
-            		saslconn = 0;
             		return KLDAP_SASL_ERROR;
         	    };
-		kDebug(5322) << "sasl_client_start mech: " << mech << " result: " << saslresult;
+		kDebug(5322) << "sasl_client_start mech: " << mechusing << " outlen " << outlen << " creds " << out << " result: " << saslresult;
     	    } while ( saslresult == SASL_INTERACT );
 	    if ( saslresult != SASL_CONTINUE && saslresult != SASL_OK ) {
-		sasl_dispose( &saslconn );
-		saslconn = 0;
 		return KLDAP_SASL_ERROR;
 	    }
 	    
@@ -329,15 +289,11 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds, SASL_Cal
 		    &client_interact, &out, &outlen);
 		if ( saslresult == SASL_INTERACT )
 		    if ( kldap_sasl_interact( client_interact, &sasldata ) != KLDAP_SUCCESS ) {
-            		sasl_dispose( &saslconn );
-            		saslconn = 0;
             		return KLDAP_SASL_ERROR;
         	    };
     	    } while ( saslresult == SASL_INTERACT );
   	    kDebug(5322) << "sasl_client_step result" << saslresult;
 	    if ( saslresult != SASL_CONTINUE && saslresult != SASL_OK ) {
-		sasl_dispose( &saslconn );
-		saslconn = 0;
 		return KLDAP_SASL_ERROR;
 	    }
 	}

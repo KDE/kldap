@@ -87,7 +87,7 @@ void LdapSearch::Private::result()
     servercc = mOp.serverCred();
     
     kDebug(5322) << "LdapSearch RES_BIND";
-    if ( servercc.isEmpty() ) { //bind succeeded
+    if ( mConn->ldapErrorCode() == KLDAP_SUCCESS ) { //bind succeeded
         kDebug(5322) << "bind succeeded";
 	LdapControls savedctrls = mOp.serverControls();
 	if ( mPageSize ) {
@@ -194,9 +194,14 @@ bool LdapSearch::Private::startSearch( const LdapDN &base, LdapUrl::Scope scope,
   }
 
   mId = mOp.bind();
-  if ( mId == -1 ) {
-    mError = mConn->ldapErrorCode();
-    mErrorString = mConn->ldapErrorString();
+  if ( mId < 0 ) {
+    if ( mId == KLDAP_SASL_ERROR ) {
+      mError = mId;
+      mErrorString = mConn->saslErrorString();
+    } else {
+      mError = mConn->ldapErrorCode();
+      mErrorString = mConn->ldapErrorString();
+    }
     return false;
   }
   kDebug(5322) << "startSearch msg id=" << mId;

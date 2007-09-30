@@ -108,6 +108,9 @@ class KLDAP_EXPORT LdapConnection
     QString ldapErrorString() const;
     /** Returns a translated error code from the specified LDAP error code */
     static QString errorString( int code );
+    
+    /** Returns the SASL error string from the last SASL operation */
+    QString saslErrorString() const;
 
     /**
      * Returns the opaqe client-library specific LDAP object.
@@ -115,6 +118,12 @@ class KLDAP_EXPORT LdapConnection
      */
     void *handle() const;
 
+    /**
+     * Returns the opaqe sasl-library specific SASL object.
+     * Avoid its usage if you can.
+     */
+    void *saslHandle() const;
+    
   private:
     class LdapConnectionPrivate;
     LdapConnectionPrivate *const d;

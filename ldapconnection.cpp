@@ -18,8 +18,9 @@
   Boston, MA 02110-1301, USA.
 */
 
-#include "ldapconnection.h"
 #include "kldap_config.h" // SASL2_FOUND, LDAP_FOUND
+#include "ldapconnection.h"
+#include "ldapdefs.h"
 
 #include <stdlib.h>
 #include <klocale.h>
@@ -27,8 +28,20 @@
 
 #ifdef SASL2_FOUND
 #include <sasl/sasl.h>
-#endif
+static sasl_callback_t callbacks[] = {
+  { SASL_CB_ECHOPROMPT, NULL, NULL },
+  { SASL_CB_NOECHOPROMPT, NULL, NULL },
+  { SASL_CB_GETREALM, NULL, NULL },
+  { SASL_CB_USER, NULL, NULL },
+  { SASL_CB_AUTHNAME, NULL, NULL },
+  { SASL_CB_PASS, NULL, NULL },
+  { SASL_CB_CANON_USER, NULL, NULL },
+  { SASL_CB_LIST_END, NULL, NULL }
+};
 
+static bool ldapoperation_sasl_initialized = false;
+#endif
+                                
 #ifdef LDAP_FOUND
 #include <lber.h>
 #include <ldap.h>
@@ -44,6 +57,7 @@ using namespace KLDAP;
 class LdapConnection::LdapConnectionPrivate
 {
   public:
+    LdapConnectionPrivate();
     LdapServer mServer;
     QString mConnectionError;
 
@@ -52,7 +66,24 @@ class LdapConnection::LdapConnectionPrivate
 #else
     void *mLDAP;
 #endif
+#ifdef SASL2_FOUND
+  sasl_conn_t *mSASLconn;
+#else
+  void *mSASLconn
+#endif
+  
 };
+
+LdapConnection::LdapConnectionPrivate::LdapConnectionPrivate()
+{
+  mSASLconn = 0;
+#ifdef SASL2_FOUND
+  if ( !ldapoperation_sasl_initialized ) {
+    sasl_client_init(NULL);
+    ldapoperation_sasl_initialized = true;
+  }
+#endif
+}
 
 LdapConnection::LdapConnection()
   : d( new LdapConnectionPrivate )
@@ -100,6 +131,11 @@ void *LdapConnection::handle() const
   return (void *)d->mLDAP;
 }
 
+void *LdapConnection::saslHandle() const
+{
+  return (void *)d->mSASLconn;
+}
+
 QString LdapConnection::errorString( int code )
 {
   //No translated error messages yet
@@ -112,6 +148,19 @@ QString LdapConnection::errorString( int code )
   }
 #else
   return i18n("No LDAP Support...");
+#endif
+}
+
+QString LdapConnection::saslErrorString() const
+{
+#ifdef SASL2_FOUND
+  const char *str;
+  str = sasl_errdetail( d->mSASLconn );
+  return QString::fromLocal8Bit( str );
+#else
+  return i18n("SASL support is not available...Please recompile libkldap with the "
+    "Cyrus-SASL (or compatible) client libraries, or complain to your "
+    "distribution packagers.")
 #endif
 }
 
@@ -264,6 +313,17 @@ int LdapConnection::connect()
       return ret;
     }
   }
+
+#ifdef SASL2_FOUND
+  kDebug(5322) << "initializing SASL client";
+  int saslresult = sasl_client_new( "ldap", d->mServer.host().toLatin1(),
+        0, 0, callbacks, 0, &d->mSASLconn );
+  if ( saslresult != SASL_OK ) {
+    d->mConnectionError = i18n("Cannot initialize the SASL client.");
+    return KLDAP_SASL_ERROR;
+  }
+#endif
+
   return 0;
 }
 
@@ -277,6 +337,12 @@ void LdapConnection::close()
 #endif
   }
   d->mLDAP = 0;
+#ifdef SASL2_FOUND
+  if ( d->mSASLconn ) {
+    sasl_dispose( &d->mSASLconn );
+    d->mSASLconn = 0;
+  }
+#endif
   kDebug(5322) << "connection closed!";
 }
 #else //LDAP_FOUND
