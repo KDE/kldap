@@ -36,7 +36,7 @@ class LdapServer::LdapServerPrivate
     QString mPassword;
     QString mMech;
     QString mFilter;
-    int mTimeLimit, mSizeLimit, mVersion, mPageSize;
+    int mTimeLimit, mSizeLimit, mVersion, mPageSize, mTimeout;
     Security mSecurity;
     Auth mAuth;
     LdapUrl::Scope mScope;
@@ -85,6 +85,7 @@ void LdapServer::clear()
   d->mSecurity = None;
   d->mAuth = Anonymous;
   d->mVersion = 3;
+  d->mTimeout = 0;
   d->mSizeLimit = d->mTimeLimit = d->mPageSize = 0;
 }
 
@@ -168,6 +169,11 @@ QString LdapServer::mech() const
   return d->mMech;
 }
 
+int LdapServer::timeout() const
+{
+  return d->mTimeout;
+}
+
 void LdapServer::setHost( const QString &host )
 {
   d->mHost = host;
@@ -248,6 +254,11 @@ void LdapServer::setMech( const QString &mech )
   d->mMech = mech;
 }
 
+void LdapServer::setTimeout( int timeout )
+{
+  d->mTimeout = timeout;
+}
+
 void LdapServer::setUrl( const LdapUrl &url )
 {
   bool critical;
@@ -304,6 +315,12 @@ void LdapServer::setUrl( const LdapUrl &url )
     d->mVersion = 3;
   }
 
+  if ( url.hasExtension("x-timeout") ) {
+    d->mTimeout = url.extension( "x-timeout", critical ).toInt();
+  } else {
+    d->mTimeout = 0;
+  }
+
   if ( url.hasExtension("x-timelimit") ) {
     d->mTimeLimit = url.extension( "x-timelimit", critical ).toInt();
   } else {
@@ -348,6 +365,9 @@ LdapUrl LdapServer::url() const
   }
   if ( d->mVersion == 2 ) {
     url.setExtension( "x-version", d->mVersion );
+  }
+  if ( d->mTimeout ) {
+    url.setExtension( "x-timeout", d->mTimeout );
   }
   if ( d->mTimeLimit != 0 ) {
     url.setExtension( "x-timelimit", d->mTimeLimit );

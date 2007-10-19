@@ -66,6 +66,7 @@ class KLDAP_EXPORT LdapServer
     Security security() const;
     Auth auth() const;
     QString mech() const;
+    int timeout() const;
 
     LdapUrl::Scope scope() const;
     int timeLimit() const;
@@ -84,6 +85,7 @@ class KLDAP_EXPORT LdapServer
     void setSecurity( Security security );
     void setAuth( Auth auth );
     void setMech( const QString &mech );
+    void setTimeout( int timeout );
 
     void setScope( LdapUrl::Scope scope );
     void setTimeLimit( int timelimit );
@@ -96,7 +98,7 @@ class KLDAP_EXPORT LdapServer
      * The URL extensions which are supported:
      * Standard: bindname
      * KLDAP extensions: x-tls, x-version, x-sasl, x-mech, x-realm,
-     * x-sizelimit, x-timelimit, x-pagesize
+     * x-sizelimit, x-timelimit, x-pagesize, x-timeout
      */
     LdapUrl url() const;
     /**
