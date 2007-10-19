@@ -177,25 +177,28 @@ void LdapModel::LdapModelPrivate::gotSearchResult( KLDAP::LdapSearch *search )
   {
     kDebug(5322) << "Found" << searchResults().size() << "child objects";
 
-    // Create an index for the soon-to-be-a-parent item
-    LdapModelTreeItem *parentItem = searchItem();
-    int r = parentItem->row();
-    QModelIndex parentIndex = m_parent->createIndex( r, 0, parentItem );
+    if ( searchResults().size() != 0 )
+    {
+      // Create an index for the soon-to-be-a-parent item
+      LdapModelTreeItem *parentItem = searchItem();
+      int r = parentItem->row();
+      QModelIndex parentIndex = m_parent->createIndex( r, 0, parentItem );
 
-    m_parent->beginInsertRows( parentIndex, 0, searchResults().size() );
-    for ( int i = 0; i < searchResults().size(); i++ ) {
-      LdapObject itemData = searchResults().at( i );
-      LdapModelTreeItem *item = new LdapModelTreeItem( parentItem, itemData );
-      if ( !item ) {
-        kDebug(5322) << "Could not create LdapModelTreeItem";
+      m_parent->beginInsertRows( parentIndex, 0, searchResults().size() );
+      for ( int i = 0; i < searchResults().size(); i++ ) {
+        LdapObject itemData = searchResults().at( i );
+        LdapModelTreeItem *item = new LdapModelTreeItem( parentItem, itemData );
+        if ( !item ) {
+            kDebug(5322) << "Could not create LdapModelTreeItem";
+        }
       }
+
+      m_parent->endInsertRows();
+      emit m_parent->layoutChanged();
     }
 
     // Flag that we are no longer searching
     setSearchType( LdapModelPrivate::NotSearching );
-
-    m_parent->endInsertRows();
-    emit m_parent->layoutChanged();
 
     break;
   }
