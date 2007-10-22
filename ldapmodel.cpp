@@ -134,7 +134,7 @@ Qt::ItemFlags LdapModel::flags( const QModelIndex &index ) const
     return Qt::ItemIsEnabled;
   }
 
-  return static_cast<Qt::ItemFlags>(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  return Qt::ItemFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
 }
 
 int LdapModel::columnCount( const QModelIndex &parent ) const
