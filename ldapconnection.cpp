@@ -249,6 +249,7 @@ int LdapConnection::connect()
   }
 
   int version = d->mServer.version();
+  int timeout = d->mServer.timeout();
 
   url = d->mServer.security() == LdapServer::SSL ? "ldaps" : "ldap";
   url += "://";
@@ -276,6 +277,19 @@ int LdapConnection::connect()
     close();
     return ret;
   }
+
+#if defined(LDAP_OPT_TIMEOUT)
+  kDebug(5322) << "setting timeout to:" << timeout;
+
+  if ( timeout ) {
+    if ( setOption( LDAP_OPT_TIMEOUT, &timeout ) != LDAP_OPT_SUCCESS ) {
+      ret = ldapErrorCode();
+      d->mConnectionError = i18n("Cannot set timeout to %1 seconds.", timeout );
+      close();
+      return ret;
+    }
+  }
+#endif
 
   //FIXME: accessing to certificate handling would be good
   kDebug(5322) << "setting security to:" << d->mServer.security();
