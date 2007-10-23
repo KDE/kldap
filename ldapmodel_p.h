@@ -28,7 +28,7 @@
 
 namespace KLDAP {
 
-class LdapModelTreeItem;
+class LdapModelDNNode;
 class LdapSearch;
 
 /**
@@ -57,7 +57,7 @@ class LdapModel::LdapModelPrivate
                  const QStringList &attributes = QStringList(),
                  int pagesize = 0 );
 
-    LdapModelTreeItem *rootItem() { return m_root; }
+    LdapModelDNNode *rootNode() { return m_root; }
     LdapSearch *search() { return m_search; }
 
     LdapObjects &searchResults() { return m_searchResultObjects; }
@@ -69,10 +69,10 @@ class LdapModel::LdapModelPrivate
     LdapDN &baseDN() { return m_baseDN; }
     const LdapDN &baseDN() const { return m_baseDN; }
 
-    void setSearchType( SearchType t, LdapModelTreeItem *item = 0 );
+    void setSearchType( SearchType t, LdapModelDNNode *item = 0 );
 
     SearchType searchType() { return m_searchType; }
-    LdapModelTreeItem *searchItem() { return m_searchItem; }
+    LdapModelDNNode *searchItem() { return m_searchItem; }
 
     void createConnections();
     void populateRootToBaseDN();
@@ -81,12 +81,12 @@ class LdapModel::LdapModelPrivate
 
   private:
     LdapModel *m_parent;
-    LdapModelTreeItem *m_root;
+    LdapModelDNNode *m_root;
     LdapSearch *m_search;
     LdapObjects m_searchResultObjects;
     LdapDN m_baseDN;
     SearchType m_searchType;
-    LdapModelTreeItem *m_searchItem;
+    LdapModelDNNode *m_searchItem;
 };
 
 }
