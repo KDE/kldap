@@ -21,7 +21,7 @@
 #ifndef KLDAP_LDAPSTRUCTUREPROXYMODEL_H
 #define KLDAP_LDAPSTRUCTUREPROXYMODEL_H
 
-#include <QSortFilterProxyModel>
+#include <QtGui/QSortFilterProxyModel>
 
 #include "kldap_export.h"
 
