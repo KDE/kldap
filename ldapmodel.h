@@ -181,7 +181,7 @@ class KLDAP_EXPORT LdapModel : public QAbstractItemModel
      */
     bool hasChildrenOfType( const QModelIndex &parent, LdapDataType type ) const;
 
-  public slots:
+  public Q_SLOTS:
     /**
      * Reimplemented from QAbstractItemModel::revert(). This is a placeholder for when
      * LdapModel beomes writeable. This implementation does nothing.
@@ -193,7 +193,7 @@ class KLDAP_EXPORT LdapModel : public QAbstractItemModel
      */
     virtual bool submit();
 
-  signals:
+  Q_SIGNALS:
     /**
      * The ready() signal is emitted when the model is ready for use by other components.
      * When the model is first created and a connection is set, the model queries the
