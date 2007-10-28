@@ -338,7 +338,7 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds, SASL_Cal
     kDebug(5322) << "binding to server, bindname: " << bindname << " password: *****";
     
     if ( async ) {
-	kDebug() << "ldap_sasl_bind (simple)";
+	kDebug(5322) << "ldap_sasl_bind (simple)";
 	int msgid;
 	ret = ldap_sasl_bind( ld, bindname.data(), 0, &ccred, 0, 0, &msgid );
 //	ret = ldap_simple_bind( ld, bindname.data(),pass.data() );
@@ -346,7 +346,7 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds, SASL_Cal
 	    ret = msgid;
 	}
     } else {
-	kDebug() << "ldap_sasl_bind_s (simple)";
+	kDebug(5322) << "ldap_sasl_bind_s (simple)";
 	ret = ldap_sasl_bind_s( ld, bindname.data(), 0, &ccred, 0, 0, 0 );
 //	ret = ldap_simple_bind_s( ld, bindname.data(), pass.data() );
     }
