@@ -391,6 +391,8 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
           ldap_value_free_len( bvals );
         }
         attrs[ QString::fromLatin1( name ) ] = values;
+        ldap_memfree( name );
+        
         // next attribute
         name = ldap_next_attribute( ld, msg, entry );
       }
