@@ -20,10 +20,11 @@
 
 #include "ldapmodel.h"
 #include "ldapmodel_p.h"
-#include "ldapmodeltreeitem_p.h"
+#include "ldapmodelnode_p.h"
 #include "ldapsearch.h"
 
 #include <kdebug.h>
+#include <klocale.h>
 
 using namespace KLDAP;
 
@@ -60,37 +61,38 @@ void LdapModel::setConnection( LdapConnection &connection )
   m_d->populateRootToBaseDN();
 }
 
-QModelIndex LdapModel::index( int row, int col, const QModelIndex &parent ) const
-{
-  LdapModelTreeItem *parentItem;
-  if ( !parent.isValid() ) {
-    parentItem = m_d->rootItem();
-  } else {
-    parentItem = static_cast<LdapModelTreeItem*>( parent.internalPointer() );
-  }
-
-  LdapModelTreeItem *childItem = parentItem->child( row );
-  if ( childItem ) {
-    return createIndex( row, col, childItem );
-  } else {
-    return QModelIndex();
-  }
-}
-
 QModelIndex LdapModel::parent( const QModelIndex &child ) const
 {
   if ( !child.isValid() ) {
     return QModelIndex();
   }
 
-  LdapModelTreeItem *childItem = static_cast<LdapModelTreeItem*>( child.internalPointer() );
-  LdapModelTreeItem *parentItem = childItem->parent();
+  LdapModelNode *childItem = static_cast<LdapModelNode*>( child.internalPointer() );
+  LdapModelDNNode *parentItem = childItem->parent();
 
-  if ( parentItem == m_d->rootItem() ) {
+  if ( parentItem == m_d->rootNode() ) {
     return QModelIndex();
   }
 
   return createIndex( parentItem->row(), 0, parentItem );
+}
+
+QModelIndex LdapModel::index( int row, int col, const QModelIndex &parent ) const
+{
+  // Retrieve a pointer to the parent item
+  LdapModelDNNode *parentItem;
+  if ( !parent.isValid() ) {
+    parentItem = m_d->rootNode();
+  } else {
+    parentItem = static_cast<LdapModelDNNode*>( parent.internalPointer() );
+  }
+
+  LdapModelNode *childItem = parentItem->child( row );
+  if ( childItem ) {
+    return createIndex( row, col, childItem );
+  }
+  kDebug(5322) << "Could not create valid index for row =" << row << ", col =" << col;
+  return QModelIndex();
 }
 
 QVariant LdapModel::data( const QModelIndex &index, int role ) const
@@ -99,29 +101,54 @@ QVariant LdapModel::data( const QModelIndex &index, int role ) const
     return QVariant();
   }
 
-  LdapModelTreeItem *item = static_cast<LdapModelTreeItem*>( index.internalPointer() );
-
   if ( role == Qt::DisplayRole ) {
-    kDebug(5322) << "***** LdapModel::data(): rdn =" << item->data().dn().rdnString();
-    return item->data().dn().rdnString();
-  } else if ( role == Qt::ToolTipRole ) {
-    /** \TODO Make the tooltips look nicer - perhaps themeable? */
-    kDebug(5322) << "***** LdapModel::data(): Object =" << item->data().toString();
-    return item->data().toString();
+    // This is what gets displayed by the view delegates.
+    LdapModelNode *node = static_cast<LdapModelNode*>( index.internalPointer() );
+    if ( node->nodeType() == LdapModelNode::DN ) {
+      LdapModelDNNode* dn = static_cast<LdapModelDNNode*>( node );
+      if ( index.column() == 0 ) {
+        return dn->dn().rdnString();
+      } else {
+        return QVariant();
+      }
+    } else {
+      LdapModelAttrNode* attr = static_cast<LdapModelAttrNode*>( node );
+      if ( index.column() == 0 ) {
+        return QVariant( attr->attributeName() );
+      } else {
+        return QVariant( QString( attr->attributeData().constData() ) );
+      }
+    }
+  } else if ( role == NodeTypeRole ) {
+    LdapModelNode* node = static_cast<LdapModelNode*>( index.internalPointer() );
+    return QVariant( int( node->nodeType() ) );
   }
 
-  /** \TODO Include support for nice decorative icons dependent upon
+  /** \todo Include support for nice decorative icons dependent upon
       the objectClass + other role data. */
+  /** \todo Include support for other roles as needed */
 
   return QVariant();
 }
 
-QVariant LdapModel::headerData( int /*section*/, Qt::Orientation orientation, int role ) const
+bool LdapModel::setData( const QModelIndex &index,
+                         const QVariant &value,
+                         int role )
+{
+  Q_UNUSED( index );
+  Q_UNUSED( value );
+  Q_UNUSED( role );
+  return false;
+}
+
+QVariant LdapModel::headerData( int section, Qt::Orientation orientation, int role ) const
 {
   if ( orientation == Qt::Horizontal && role == Qt::DisplayRole ) {
-    /** @TODO Hmm, what to do here? Override in proxymodels perhaps as
-        could be "DN" or "Attribute". */
-    return QString( "Distinguished Name" );
+    if ( section == 0 ) {
+      return QString( i18n( "Attribute" ) );
+    } else {
+      return QString( i18n( "Value" ) );
+    }
   }
 
   return QVariant();
@@ -139,62 +166,153 @@ Qt::ItemFlags LdapModel::flags( const QModelIndex &index ) const
 
 int LdapModel::columnCount( const QModelIndex &parent ) const
 {
-  LdapModelTreeItem *parentItem =
-    parent.isValid() ? static_cast<LdapModelTreeItem*>( parent.internalPointer() ) : m_d->rootItem();
-  return parentItem->columnCount();
+  LdapModelDNNode *parentNode =
+    parent.isValid() ? static_cast<LdapModelDNNode*>( parent.internalPointer() ) : m_d->rootNode();
+  return parentNode->columnCount();
 }
 
 int LdapModel::rowCount( const QModelIndex &parent ) const
 {
-  kDebug(5322) << "LdapModel::rowCount";
   if ( parent.column() > 0 ) {
     return 0;
   }
 
-  const LdapModelTreeItem *item =
-    parent.isValid() ? static_cast<LdapModelTreeItem*>( parent.internalPointer() ) : m_d->rootItem();
-  kDebug(5322) << "Parent (" << item->ldapObject().dn().toString() << ") has"
-               << item->childCount() << "children";
-  return item->childCount();
+  const LdapModelDNNode *parentNode =
+    parent.isValid() ? static_cast<LdapModelDNNode*>( parent.internalPointer() ) : m_d->rootNode();
+  return parentNode->childCount();
 }
 
 bool LdapModel::hasChildren( const QModelIndex &parent ) const
 {
-  // We always return true. This means that the branch expansion symbol will
-  // always be drawn. However, once the user clicks on it, rowCount() will
-  // get called and the view will not draw the expander if the item has no
-  // children.
-  const LdapModelTreeItem *item =
-    parent.isValid() ? static_cast<LdapModelTreeItem*>( parent.internalPointer() ) : m_d->rootItem();
-  if ( !parent.isValid() || item->isPopulated() ) {
-    return item->childCount() > 0;
+  // We return true unless the item has been populated and we are able to do a definitive test
+  const LdapModelNode *node = parent.isValid()
+    ? static_cast<const LdapModelNode*>( parent.internalPointer() )
+    : m_d->rootNode();
+
+  if ( node->nodeType() != LdapModelNode::DN )
+    return false;
+
+  const LdapModelDNNode* parentNode = static_cast<const LdapModelDNNode*>( node );
+  if ( !parent.isValid() || parentNode->isPopulated() ) {
+    return parentNode->childCount() > 0;
   }
   return true;
 }
 
 bool LdapModel::canFetchMore( const QModelIndex &parent ) const
 {
-  const LdapModelTreeItem *item =
-    parent.isValid() ? static_cast<LdapModelTreeItem*>( parent.internalPointer() ) : m_d->rootItem();
-  kDebug(5322) << "LdapModel::canFetchMore() :" << !item->isPopulated();
-  return !item->isPopulated();
+  const LdapModelDNNode *parentNode =
+    parent.isValid() ? static_cast<LdapModelDNNode*>( parent.internalPointer() ) : m_d->rootNode();
+  return !parentNode->isPopulated();
 }
 
 void LdapModel::fetchMore( const QModelIndex &parent )
 {
-  /** @TODO This should be altered to search for all attributes we can
-      filter out those not required with a proxy model */
-  kDebug(5322) << "LdapModel::fetchMore()";
-
-  LdapModelTreeItem *parentItem =
-    parent.isValid() ? static_cast<LdapModelTreeItem*>( parent.internalPointer() ) : m_d->rootItem();
+  LdapModelDNNode *parentNode =
+    parent.isValid() ? static_cast<LdapModelDNNode*>( parent.internalPointer() ) : m_d->rootNode();
 
   // Search for the immediate children of parentItem.
   m_d->searchResults().clear();
-  m_d->setSearchType( LdapModelPrivate::ChildObjects, parentItem );
-  m_d->search( parentItem->data().dn(), LdapUrl::One, QString(),
-               QStringList() << "dn" << "objectClass" );
-  parentItem->setPopulated( true );
+  m_d->setSearchType( LdapModelPrivate::ChildObjects, parentNode );
+  m_d->search( parentNode->dn(),  // DN to search from
+               LdapUrl::One,      // What to search
+               QString() );       // Attributes to retrieve
+  parentNode->setPopulated( true );
+}
+
+bool LdapModel::insertRows( int row, int count,
+                            const QModelIndex &parent )
+{
+  Q_UNUSED( row );
+  Q_UNUSED( count );
+  Q_UNUSED( parent );
+  return false;
+}
+
+bool LdapModel::removeRows( int row, int count,
+                            const QModelIndex &parent )
+{
+  Q_UNUSED( row );
+  Q_UNUSED( count );
+  Q_UNUSED( parent );
+  return false;
+}
+
+void LdapModel::sort( int column, Qt::SortOrder order )
+{
+  Q_UNUSED( column );
+  Q_UNUSED( order );
+}
+
+Qt::DropActions LdapModel::supportedDropActions() const
+{
+  return Qt::MoveAction;
+}
+
+QMimeData *LdapModel::mimeData( const QModelIndexList &indexes ) const
+{
+  Q_UNUSED( indexes );
+  return 0;
+}
+
+bool LdapModel::dropMimeData( const QMimeData *data, Qt::DropAction action,
+                              int row, int column, const QModelIndex &parent )
+{
+  /** \todo Implement drag and drop for LdapModel */
+  Q_UNUSED( data );
+  Q_UNUSED( action );
+  Q_UNUSED( row );
+  Q_UNUSED( column );
+  Q_UNUSED( parent );
+  return false;
+}
+
+bool LdapModel::hasChildrenOfType( const QModelIndex &parent, LdapDataType type ) const
+{
+  // Map from LdapDataType to our internal NodeType
+  LdapModelNode::NodeType nodeType;
+  switch ( type ) {
+    case Attribute:
+      nodeType = LdapModelNode::Attr;
+      break;
+
+    case DistinguishedName:
+    default:
+      nodeType = LdapModelNode::DN;
+      break;
+  }
+
+  const LdapModelNode *node = parent.isValid()
+    ? static_cast<const LdapModelNode*>( parent.internalPointer() )
+    : m_d->rootNode();
+
+  const LdapModelDNNode* parentNode = static_cast<const LdapModelDNNode*>( node );
+  if ( !parent.isValid() || parentNode->isPopulated() ) {
+    // Check to see if the parent has any children of the specified type
+    const QList<LdapModelNode*>& children = parentNode->children();
+    foreach ( LdapModelNode *child, children ) {
+      if ( child->nodeType() == nodeType ) {
+        return true;
+      }
+    }
+
+    // Either there are no children or only children of a different type
+    return false;
+  }
+
+  // If the node is not populated or is the root node (invalid), then return
+  // true to be on the safe side.
+  return true;
+}
+
+void LdapModel::revert()
+{
+
+}
+
+bool LdapModel::submit()
+{
+  return false;
 }
 
 #include "ldapmodel.moc"

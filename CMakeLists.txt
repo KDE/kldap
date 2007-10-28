@@ -44,7 +44,7 @@ add_subdirectory(tests)
 ########### next target ###############
 
 
-set(kldap_LIB_SRCS 
+set(kldap_LIB_SRCS
    ber.cpp
    ldif.cpp
    ldapurl.cpp
@@ -56,9 +56,11 @@ set(kldap_LIB_SRCS
    ldapsearch.cpp
    ldapconfigwidget.cpp
    ldapdn.cpp
-   ldapmodeltreeitem_p.cpp
+   ldapmodelnode_p.cpp
    ldapmodel.cpp
-   ldapmodel_p.cpp )
+   ldapmodel_p.cpp
+   ldapstructureproxymodel.cpp
+   ldapattributeproxymodel.cpp)
 
 
 kde4_add_library(kldap SHARED ${kldap_LIB_SRCS})
@@ -68,7 +70,7 @@ include_directories( ${kldap_EXTRA_INCLUDES} )
 target_link_libraries(kldap ${KDE4_KIO_LIBS} ${kldap_EXTRA_LIBS} )
 
 set_target_properties(kldap PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
-install(TARGETS kldap 
+install(TARGETS kldap
     RUNTIME DESTINATION ${BIN_INSTALL_DIR}
     LIBRARY DESTINATION ${LIB_INSTALL_DIR}
     ARCHIVE DESTINATION ${LIB_INSTALL_DIR}
@@ -76,7 +78,8 @@ install(TARGETS kldap
 
 ########### install files ###############
 
-install( FILES ber.h kldap_export.h ldapdefs.h ldif.h ldapurl.h ldapserver.h ldapobject.h 
-  ldapconnection.h ldapoperation.h 
+install( FILES ber.h kldap_export.h ldapdefs.h ldif.h ldapurl.h ldapserver.h ldapobject.h
+  ldapconnection.h ldapoperation.h
   ldapconfigwidget.h ldapcontrol.h ldapsearch.h
-  ldapdn.h ldapmodel.h DESTINATION ${INCLUDE_INSTALL_DIR}/kldap)
+  ldapdn.h ldapmodel.h ldapstructureproxymodel.h ldapattributeproxymodel.h
+  DESTINATION ${INCLUDE_INSTALL_DIR}/kldap)
