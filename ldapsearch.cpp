@@ -45,7 +45,7 @@ class LdapSearch::Private
     void closeConnection();
     bool startSearch( const LdapDN &base, LdapUrl::Scope scope,
                       const QString &filter, const QStringList &attributes,
-                      int pagesize );
+                      int pagesize, int count );
 
     LdapSearch *mParent;
     LdapConnection *mConn;
@@ -59,6 +59,8 @@ class LdapSearch::Private
 
     QString mErrorString;
     int mError;
+    int mCount,mMaxCount;
+    bool mFinished;
 };
 
 void LdapSearch::Private::result()
@@ -81,6 +83,7 @@ void LdapSearch::Private::result()
     return;
   }
 
+  //binding
   if ( res == LdapOperation::RES_BIND ) {
 
     QByteArray servercc;
@@ -102,16 +105,22 @@ void LdapSearch::Private::result()
         kDebug(5322) << "bind next step";
 	mId = mOp.bind( servercc );
     }
-    if ( mId == -1 ) {
-	mError = mConn->ldapErrorCode();
-	mErrorString = mConn->ldapErrorString();
-	emit mParent->result( mParent );
-	return;
+    if ( mId < 0 ) {
+      if ( mId == KLDAP_SASL_ERROR ) {
+        mError = mId;
+        mErrorString = mConn->saslErrorString();
+      } else {
+        mError = mConn->ldapErrorCode();
+        mErrorString = mConn->ldapErrorString();
+      }
+      emit mParent->result( mParent );
+      return;
     }
     QTimer::singleShot( 0, mParent, SLOT(result()) );
     return;
   }
   
+  //End of entries
   if ( res == LdapOperation::RES_SEARCH_RESULT ) {
     if ( mPageSize ) {
       QByteArray cookie;
@@ -137,18 +146,31 @@ void LdapSearch::Private::result()
           emit mParent->result( mParent );
           return;
         }
+        //continue with the next page
         QTimer::singleShot( 0, mParent, SLOT(result()) );
         return;
       }
     }
+    mFinished = true;
     emit mParent->result( mParent );
     return;
   }
+
+  //Found an entry
   if ( res == LdapOperation::RES_SEARCH_ENTRY ) {
     emit mParent->data( mParent, mOp.object() );
+    mCount++;
   }
 
-  QTimer::singleShot( 0, mParent, SLOT(result()) );
+  //If not reached the requested entries, continue
+  if ( mMaxCount <= 0 || mCount < mMaxCount ) {
+    QTimer::singleShot( 0, mParent, SLOT(result()) );
+  }
+  //If reached the requested entries, indicate it
+  if ( mMaxCount > 0 && mCount == mMaxCount ) {
+    kDebug(5322) << mCount << " entries reached";
+    emit mParent->result( mParent );
+  }
 }
 
 bool LdapSearch::Private::connect()
@@ -171,9 +193,10 @@ void LdapSearch::Private::closeConnection()
   }
 }
 
+//This starts the real job
 bool LdapSearch::Private::startSearch( const LdapDN &base, LdapUrl::Scope scope,
                                        const QString &filter,
-                                       const QStringList &attributes, int pagesize )
+                                       const QStringList &attributes, int pagesize, int count )
 {
   kDebug(5322) << "search: base=" << base.toString() << "scope=" << scope << "filter=" << filter
     << "attributes=" << attributes << "pagesize=" << pagesize;
@@ -186,6 +209,10 @@ bool LdapSearch::Private::startSearch( const LdapDN &base, LdapUrl::Scope scope,
   mScope = scope;
   mFilter = filter;
   mAttributes = attributes;
+  mMaxCount = count;
+  mCount = 0;
+  mFinished = false;
+  
   LdapControls savedctrls = mOp.serverControls();
   if ( pagesize ) {
     LdapControls ctrls = savedctrls;
@@ -210,6 +237,8 @@ bool LdapSearch::Private::startSearch( const LdapDN &base, LdapUrl::Scope scope,
 
   return true;
 }
+
+///////////////////////////////////////////////
 
 LdapSearch::LdapSearch()
  : d( new Private( this ) )
@@ -249,7 +278,7 @@ void LdapSearch::setServerControls( const LdapControls &ctrls )
 }
 
 bool LdapSearch::search( const LdapServer &server,
-                         const QStringList &attributes )
+                         const QStringList &attributes, int count )
 {
   if ( d->mOwnConnection ) {
     d->closeConnection();
@@ -259,10 +288,10 @@ bool LdapSearch::search( const LdapServer &server,
     }
   }
   return d->startSearch( server.baseDn(), server.scope(), server.filter(),
-                         attributes, server.pageSize() );
+                         attributes, server.pageSize(), count );
 }
 
-bool LdapSearch::search( const LdapUrl &url )
+bool LdapSearch::search( const LdapUrl &url, int count )
 {
   if ( d->mOwnConnection ) {
     d->closeConnection();
@@ -274,15 +303,27 @@ bool LdapSearch::search( const LdapUrl &url )
   bool critical;
   int pagesize = url.extension( QLatin1String("x-pagesize"), critical ).toInt();
   return d->startSearch( url.dn(), url.scope(), url.filter(),
-                         url.attributes(), pagesize );
+                         url.attributes(), pagesize, count );
 }
 
 bool LdapSearch::search( const LdapDN &base, LdapUrl::Scope scope,
                          const QString &filter, const QStringList &attributes,
-                         int pagesize )
+                         int pagesize, int count )
 {
   Q_ASSERT( !d->mOwnConnection );
-  return d->startSearch( base, scope, filter, attributes, pagesize );
+  return d->startSearch( base, scope, filter, attributes, pagesize, count );
+}
+
+void LdapSearch::continueSearch()
+{
+  Q_ASSERT( !d->mFinished );
+  d->mCount = 0;
+  QTimer::singleShot( 0, this, SLOT(result()) );
+}
+
+bool LdapSearch::isFinished()
+{
+  return d->mFinished;
 }
 
 void LdapSearch::abandon()
