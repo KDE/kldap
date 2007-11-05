@@ -81,14 +81,16 @@ class KLDAP_EXPORT LdapSearch : public QObject
     /**
      * Starts a search operation on the LDAP server @param server,
      * returning the attributes specified with @param attributes.
+     * @param count means how many entries to list. If it's >0, then result() will 
+     * emitted when the number of entries reached, but with isFinished() set to false.
      */
     bool search( const LdapServer &server,
-                 const QStringList &attributes = QStringList() );
+                 const QStringList &attributes = QStringList(), int count = 0 );
 
     /**
      * Starts a search operation on the given LDAP URL.
      */
-    bool search( const LdapUrl &url );
+    bool search( const LdapUrl &url, int count = 0 );
 
     /**
      * Starts a search operation if the LdapConnection object already set
@@ -98,8 +100,17 @@ class KLDAP_EXPORT LdapSearch : public QObject
                  LdapUrl::Scope scope = LdapUrl::Sub,
                  const QString &filter = QString(),
                  const QStringList &attributes = QStringList(),
-                 int pagesize = 0 );
+                 int pagesize = 0, int count = 0 );
 
+
+    /**
+     * Continues the search (if you set count to non-zero in search(), and isFinished() is false)
+     */
+    void continueSearch();
+    /**
+     * Returns true if the search is finished else returns false.
+     */
+    bool isFinished();
     /**
      * Tries to abandon the search.
      */
