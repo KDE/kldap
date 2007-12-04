@@ -106,7 +106,7 @@ class KLDAP_EXPORT LdapConnection
     int ldapErrorCode() const;
     /** Returns the LDAP error string from the last operation */
     QString ldapErrorString() const;
-    /** Returns a translated error code from the specified LDAP error code */
+    /** Returns a translated error message from the specified LDAP error code */
     static QString errorString( int code );
     
     /** Returns the SASL error string from the last SASL operation */
