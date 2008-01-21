@@ -167,7 +167,8 @@ void LdapModel::LdapModelPrivate::gotSearchResult( KLDAP::LdapSearch *search )
     }
 
     // Store the search result
-    item->setLdapObject( baseDNObj );
+    if ( item )
+      item->setLdapObject( baseDNObj );
 
     // Flag that we are no longer searching
     setSearchType( LdapModelPrivate::NotSearching );
