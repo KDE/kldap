@@ -187,7 +187,7 @@ void LdapConfigWidget::Private::initWidget()
     mSizeLimit->setObjectName("kcfg_ldapsizelimit" );
     mSizeLimit->setSizePolicy( QSizePolicy( QSizePolicy::Maximum, QSizePolicy::Preferred ) );
     mSizeLimit->setValue( 0 );
-    mSizeLimit->setSpecialValueText( i18n("Default") );
+    mSizeLimit->setSpecialValueText( i18nc( "default ldap size limit", "Default" ) );
     mainLayout->addWidget( label, row, col );
     mainLayout->addWidget( mSizeLimit, row, col+1 );
     col += 2;
@@ -200,8 +200,8 @@ void LdapConfigWidget::Private::initWidget()
     mTimeLimit->setObjectName("kcfg_ldaptimelimit" );
     mTimeLimit->setSizePolicy( QSizePolicy( QSizePolicy::Maximum, QSizePolicy::Preferred ) );
     mTimeLimit->setValue( 0 );
-    mTimeLimit->setSuffix( i18n(" sec") );
-    mTimeLimit->setSpecialValueText( i18n("Default") );
+    mTimeLimit->setSuffix( i18n( " sec" ) );
+    mTimeLimit->setSpecialValueText( i18nc( "default ldap time limit", "Default" ) );
     mainLayout->addWidget( label, row, col );
     mainLayout->addWidget( mTimeLimit, row, col+1 );
   }
@@ -251,13 +251,13 @@ void LdapConfigWidget::Private::initWidget()
     QGroupBox *btgroup = new QGroupBox( i18n( "Security" ), mParent );
     QHBoxLayout *hbox = new QHBoxLayout;
     btgroup->setLayout( hbox );
-    mSecNo = new QRadioButton( i18n( "No" ), btgroup);
+    mSecNo = new QRadioButton( i18nc( "@option:radio set no security", "No" ), btgroup);
     mSecNo->setObjectName( "kcfg_ldapnosec" );
     hbox->addWidget( mSecNo );
-    mSecTLS = new QRadioButton( i18n( "TLS" ), btgroup);
+    mSecTLS = new QRadioButton( i18nc( "@option:radio use TLS security", "TLS" ), btgroup);
     mSecTLS->setObjectName( "kcfg_ldaptls" );
     hbox->addWidget( mSecTLS );
-    mSecSSL = new QRadioButton( i18n( "SSL" ), btgroup);
+    mSecSSL = new QRadioButton( i18nc( "@option:radio use SSL security", "SSL" ), btgroup);
     mSecSSL->setObjectName("kcfg_ldapssl" );
     hbox->addWidget( mSecSSL );
     mainLayout->addWidget( btgroup, row, 0, 1, 4 );
@@ -279,13 +279,13 @@ void LdapConfigWidget::Private::initWidget()
     QHBoxLayout *hbox = new QHBoxLayout;
     vbox->addLayout( hbox );
 
-    mAnonymous = new QRadioButton( i18n( "Anonymous" ), authbox);
+    mAnonymous = new QRadioButton( i18nc( "@option:radio anonymous authentication", "Anonymous" ), authbox);
     mAnonymous->setObjectName("kcfg_ldapanon" );
     hbox->addWidget( mAnonymous );
-    mSimple = new QRadioButton( i18n( "Simple" ), authbox);
+    mSimple = new QRadioButton( i18nc( "@option:radio simple authentication", "Simple" ), authbox);
     mSimple->setObjectName( "kcfg_ldapsimple" );
     hbox->addWidget( mSimple );
-    mSASL = new QRadioButton( i18n( "SASL" ), authbox);
+    mSASL = new QRadioButton( i18nc( "@option:radio SASL authentication", "SASL" ), authbox);
     mSASL->setObjectName("kcfg_ldapsasl" );
     hbox->addWidget( mSASL );
 
