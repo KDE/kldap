@@ -213,7 +213,7 @@ void KLdapTest::testLdapSearch()
 
 void KLdapTest::searchResult( KLDAP::LdapSearch *search )
 {
-  kDebug() << "KLdapTest::searchResult()";
+  kDebug();
   int err = search->error();
   if ( err ) {
     kDebug() << "Search returned the following error:" << search->errorString();
@@ -224,7 +224,7 @@ void KLdapTest::searchResult( KLDAP::LdapSearch *search )
 void KLdapTest::searchData( KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj )
 {
   Q_UNUSED( search );
-  //kDebug() << "KLdapTest::searchData()";
+  //kDebug();
   //kDebug() << "Object:";
   //kDebug() << obj.toString();
   m_objects.append( obj );

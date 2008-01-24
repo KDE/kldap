@@ -281,7 +281,7 @@ void LdapServer::setUrl( const LdapUrl &url )
   } else if ( url.hasExtension( "x-tls" ) ) {
     d->mSecurity = TLS;
   }
-  kDebug(5322) << "security:" << d->mSecurity;
+  kDebug() << "security:" << d->mSecurity;
 
   d->mMech = d->mUser = d->mBindDn = QString();
   if ( url.hasExtension( "x-sasl" ) ) {

@@ -2,6 +2,8 @@ project(kldap)
 include(CheckFunctionExists)
 include(CheckSymbolExists)
 
+add_definitions( -DKDE_DEFAULT_DEBUG_AREA=5322 )
+
 macro_optional_find_package(Ldap)
 macro_log_feature(LDAP_FOUND "OpenLDAP" "LDAP (Lightweight Directory Access Protocol) libraries" "http://www.openldap.org" FALSE "" "Needed to provide LDAP functionality in KDE" )
 

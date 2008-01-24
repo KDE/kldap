@@ -205,19 +205,19 @@ static int kldap_sasl_interact( sasl_interact_t *interact, LdapOperation::SASL_D
     switch( interact->id ) {
     case SASL_CB_GETREALM:
       value = data->creds.realm;
-      kDebug(5322) << "SASL_REALM=" << value << endl;
+      kDebug() << "SASL_REALM=" << value;
       break;
     case SASL_CB_AUTHNAME:
       value = data->creds.authname;
-      kDebug(5322) << "SASL_AUTHNAME=" << value << endl;
+      kDebug() << "SASL_AUTHNAME=" << value;
       break;
     case SASL_CB_PASS:
       value = data->creds.password;
-      kDebug(5322) << "SASL_PASSWD=[hidden]" << endl;
+      kDebug() << "SASL_PASSWD=[hidden]";
       break;
     case SASL_CB_USER:
       value = data->creds.authzid;
-      kDebug(5322) << "SASL_AUTHZID=" << value << endl;
+      kDebug() << "SASL_AUTHZID=" << value;
       break;
     }
     if ( value.isEmpty() ) {
@@ -280,16 +280,16 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds,
               return KLDAP_SASL_ERROR;
             }
           }
-          kDebug(5322) << "sasl_client_start mech: "
-                       << mechusing << " outlen " << outlen
-                       << " result: " << saslresult;
+          kDebug() << "sasl_client_start mech: "
+                   << mechusing << " outlen " << outlen
+                   << " result: " << saslresult;
         } while ( saslresult == SASL_INTERACT );
         if ( saslresult != SASL_CONTINUE && saslresult != SASL_OK ) {
           return KLDAP_SASL_ERROR;
         }
 
       } else {
-        kDebug(5322) << "sasl_client_step";
+        kDebug() << "sasl_client_step";
         do {
           saslresult = sasl_client_step( saslconn, sdata.data(), sdata.size(),
                                          &client_interact, &out, &outlen );
@@ -299,7 +299,7 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds,
             }
           }
         } while ( saslresult == SASL_INTERACT );
-        kDebug(5322) << "sasl_client_step result" << saslresult;
+        kDebug() << "sasl_client_step result" << saslresult;
         if ( saslresult != SASL_CONTINUE && saslresult != SASL_OK ) {
           return KLDAP_SASL_ERROR;
         }
@@ -309,7 +309,7 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds,
       ccred.bv_len = outlen;
 
       if ( async ) {
-        kDebug(5322) << "ldap_sasl_bind";
+        kDebug() << "ldap_sasl_bind";
         int msgid;
         ret =
           ldap_sasl_bind( ld, server.bindDn().toUtf8().data(), mech.toLatin1(),
@@ -317,13 +317,13 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds,
         if ( ret == 0 ) {
           ret = msgid;
         }
-        kDebug(5322) << "ldap_sasl_bind msgid" << ret;
+        kDebug() << "ldap_sasl_bind msgid" << ret;
       } else {
-        kDebug(5322) << "ldap_sasl_bind_s";
+        kDebug() << "ldap_sasl_bind_s";
         ret =
           ldap_sasl_bind_s( ld, server.bindDn().toUtf8().data(), mech.toLatin1(),
                             &ccred, 0, 0, &scred );
-        kDebug(5322) << "ldap_sasl_bind_s ret" << ret;
+        kDebug() << "ldap_sasl_bind_s ret" << ret;
         if ( scred ) {
           sdata = QByteArray( scred->bv_val, scred->bv_len );
         } else {
@@ -345,10 +345,10 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds,
     }
     ccred.bv_val = pass.data();
     ccred.bv_len = pass.size();
-    kDebug(5322) << "binding to server, bindname: " << bindname << " password: *****";
+    kDebug() << "binding to server, bindname: " << bindname << " password: *****";
 
     if ( async ) {
-      kDebug(5322) << "ldap_sasl_bind (simple)";
+      kDebug() << "ldap_sasl_bind (simple)";
       int msgid;
       ret = ldap_sasl_bind( ld, bindname.data(), 0, &ccred, 0, 0, &msgid );
 //    ret = ldap_simple_bind( ld, bindname.data(),pass.data() );
@@ -356,7 +356,7 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds,
         ret = msgid;
       }
     } else {
-      kDebug(5322) << "ldap_sasl_bind_s (simple)";
+      kDebug() << "ldap_sasl_bind_s (simple)";
       ret = ldap_sasl_bind_s( ld, bindname.data(), 0, &ccred, 0, 0, 0 );
 //    ret = ldap_simple_bind_s( ld, bindname.data(), pass.data() );
     }
@@ -366,16 +366,15 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds,
 
 int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage *msg )
 {
-  //kDebug(5322) << "LdapOperation::LdapOperationPrivate::processResult()";
+  //kDebug();
   int retval;
   LDAP *ld = (LDAP*) mConnection->handle();
 
-  kDebug(5322) << "processResult() rescode: " << rescode;
+  kDebug() << "rescode: " << rescode;
   switch ( rescode ) {
   case RES_SEARCH_ENTRY:
   {
-    //kDebug(5322) << "LdapOperation::LdapOperationPrivate::processResult():"
-    //             << "Found search entry";
+    //kDebug() << "Found search entry";
     mObject.clear();
     LdapAttrMap attrs;
     char *name;
@@ -430,11 +429,11 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
     struct berval *servercred;
     retval = ldap_parse_sasl_bind_result( ld, msg, &servercred, 0 );
     if ( retval != KLDAP_SUCCESS && retval != KLDAP_SASL_BIND_IN_PROGRESS ) {
-      kDebug(5322) << "RES_BIND error: " << retval;
+      kDebug() << "RES_BIND error: " << retval;
       ldap_msgfree( msg );
       return -1;
     }
-    kDebug(5322) << "RES_BIND rescode" << rescode << "retval:" << retval;
+    kDebug() << "RES_BIND rescode" << rescode << "retval:" << retval;
     mServerCred = servercred ? QByteArray( servercred->bv_val, servercred->bv_len ) : QByteArray();
     ber_bvfree( servercred );
     break;
@@ -448,7 +447,7 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
     retval =
       ldap_parse_result( ld, msg, &errcodep, &matcheddn, &errmsg, &referralsp,
                          &serverctrls, 0 );
-    kDebug(5322) << "rescode" << rescode << "retval:" << retval
+    kDebug() << "rescode" << rescode << "retval:" << retval
                  << "matcheddn:" << matcheddn << "errcode:"
                  << errcodep << "errmsg:" << errmsg;
     if ( retval != KLDAP_SUCCESS ) {
@@ -489,7 +488,7 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
 static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
                       const QByteArray *value = 0 )
 {
-  //  kDebug(5322) << "type:" << mod_type << "attr:" << attr <<
+  //  kDebug() << "type:" << mod_type << "attr:" << attr <<
   //    "value:" << QString::fromUtf8(value,value.size()) <<
   //    "size:" << value.size();
   LDAPMod **mods;
@@ -547,7 +546,7 @@ static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
       (BerValue **) malloc( sizeof( BerValue * ) * 2 );
     mods[ i ]->mod_vals.modv_bvals[ 0 ] = berval;
     mods[ i ]->mod_vals.modv_bvals[ 1 ] = 0;
-//    kDebug(5322) << "addModOp: new bervalue struct" << attr << value;
+//    kDebug() << "new bervalue struct" << attr << value;
   } else {
     uint j = 0;
     while ( mods[ i ]->mod_vals.modv_bvals[ j ] != 0 ) {
@@ -563,7 +562,7 @@ static void addModOp( LDAPMod ***pmods, int mod_type, const QString &attr,
     }
     mods[ i ]->mod_vals.modv_bvals[ j ] = berval;
     mods[ i ]->mod_vals.modv_bvals[ j+1 ] = 0;
-    kDebug(5322) << j << ". new bervalue";
+    kDebug() << j << ". new bervalue";
   }
 }
 
@@ -575,7 +574,7 @@ static void addControlOp( LDAPControl ***pctrls, const QString &oid,
 
   ctrls = *pctrls;
 
-  kDebug(5322) << "addControlOp: oid:'" << oid << "' val: '" << value << "'";
+  kDebug() << "oid:'" << oid << "' val: '" << value << "'";
   int vallen = value.size();
   ctrl->ldctl_value.bv_len = vallen;
   if ( vallen ) {
@@ -674,10 +673,10 @@ int LdapOperation::search( const LdapDN &base, LdapUrl::Scope scope,
     break;
   }
 
-  kDebug(5322) << "asyncSearch() base=\"" << base.toString()
-               << "\" scope=" << scope
-               << "filter=\"" << filter
-               << "\" attrs=" << attributes;
+  kDebug() << "asyncSearch() base=\"" << base.toString()
+           << "\" scope=" << scope
+           << "filter=\"" << filter
+           << "\" attrs=" << attributes;
   int retval =
     ldap_search_ext( ld, base.toString().toUtf8().data(), lscope,
                      filter.isEmpty() ? QByteArray( "objectClass=*" ).data() :
@@ -811,7 +810,7 @@ int LdapOperation::add_s( const LdapDN &dn, const ModOps &ops )
       addModOp( &lmod, 0, ops[i].attr, &ops[i].values[j] );
     }
   }
-  kDebug(5322) << "LdapOperation::add_s dn=" << dn.toString();
+  kDebug() << dn.toString();
   int retval =
     ldap_add_ext_s( ld, dn.toString().toUtf8().data(), lmod, serverctrls,
                     clientctrls );
@@ -1155,7 +1154,7 @@ int LdapOperation::waitForResult( int id, int msecs )
     // Calculate the timeout value to use and assign it to a timeval structure
     // see man select (2) for details
     timeout = kldap_timeout_value( msecs, stopWatch.elapsed() );
-    kDebug(5322) << "(" << id << "," << msecs
+    kDebug() << "(" << id << "," << msecs
              << "): Waiting" << timeout
              << "msecs for result. Attempt #" << attempt++;
     struct timeval tv;

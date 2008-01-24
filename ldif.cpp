@@ -131,14 +131,14 @@ bool Ldif::splitLine( const QByteArray &line, QString &fieldname, QByteArray &va
   QByteArray tmp;
   int linelen;
 
-//  kDebug(5322) << "splitLine line:" << QString::fromUtf8(line);
+//  kDebug() << "line:" << QString::fromUtf8(line);
 
   position = line.indexOf( ":" );
   if ( position == -1 ) {
     // strange: we did not find a fieldname
     fieldname = "";
     value = line.trimmed();
-//    kDebug(5322) << "value :" << value[0];
+//    kDebug() << "value :" << value[0];
     return false;
   }
 
@@ -180,7 +180,7 @@ bool Ldif::splitControl( const QByteArray &line, QString &oid, bool &critical,
   critical = false;
   bool url = splitLine( line, tmp, value );
 
-  kDebug(5322) << "splitControl: value:" << QString::fromUtf8( value, value.size() );
+  kDebug() << "value:" << QString::fromUtf8( value, value.size() );
   if ( tmp.isEmpty() ) {
     tmp = QString::fromUtf8( value, value.size() );
     value.resize( 0 );
@@ -219,7 +219,7 @@ Ldif::ParseValue Ldif::processLine()
         retval = Err;
       }
     } else if ( attrLower == "dn" ) {
-      kDebug(5322) << "ldapentry dn:" << QString::fromUtf8( d->mValue, d->mValue.size() );
+      kDebug() << "ldapentry dn:" << QString::fromUtf8( d->mValue, d->mValue.size() );
       d->mDn = LdapDN( QString::fromUtf8( d->mValue, d->mValue.size() ) );
       d->mModType = Mod_None;
       retval = NewEntry;
@@ -228,7 +228,7 @@ Ldif::ParseValue Ldif::processLine()
         retval = Err;
       } else {
         QString tmpval = QString::fromUtf8( d->mValue, d->mValue.size() );
-        kDebug(5322) << "changetype:" << tmpval;
+        kDebug() << "changetype:" << tmpval;
         if ( tmpval == "add" ) {
           d->mEntryType = Entry_Add;
         } else if ( tmpval == "delete" ) {
@@ -268,7 +268,7 @@ Ldif::ParseValue Ldif::processLine()
     break;
   case Entry_Mod:
     if ( d->mModType == Mod_None ) {
-      kDebug(5322) << "kio_ldap: new modtype" << d->mAttr;
+      kDebug() << "new modtype" << d->mAttr;
       if ( d->mAttr.isEmpty() && d->mValue.size() == 0 ) {
         retval = EndEntry;
       } else if ( attrLower == "add" ) {
