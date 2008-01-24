@@ -59,8 +59,8 @@ class KLDAP_EXPORT LdapConnection
      */
     void setUrl( const LdapUrl &url );
     /**
-     * Returns the connection parameters which was specified with an LDAP Url or a 
-     * LdapServer structure.
+     * Returns the connection parameters which was specified with an LDAP Url
+     * or a LdapServer structure.
      */
     const LdapServer &server() const;
     /**
@@ -108,7 +108,7 @@ class KLDAP_EXPORT LdapConnection
     QString ldapErrorString() const;
     /** Returns a translated error message from the specified LDAP error code */
     static QString errorString( int code );
-    
+
     /** Returns the SASL error string from the last SASL operation */
     QString saslErrorString() const;
 
@@ -123,7 +123,7 @@ class KLDAP_EXPORT LdapConnection
      * Avoid its usage if you can.
      */
     void *saslHandle() const;
-    
+
   private:
     class LdapConnectionPrivate;
     LdapConnectionPrivate *const d;

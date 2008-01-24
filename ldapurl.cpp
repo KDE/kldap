@@ -197,21 +197,21 @@ void LdapUrl::updateQuery()
 
   // set the attributes to query
   if ( d->m_attributes.count() > 0 ) {
-    q += d->m_attributes.join(",");
+    q += d->m_attributes.join( "," );
   }
 
   // set the scope
   q += '?';
   switch( d->m_scope ) {
-    case Sub:
-      q += "sub";
-      break;
-    case One:
-      q += "one";
-      break;
-    case Base:
-      q += "base";
-      break;
+  case Sub:
+    q += "sub";
+    break;
+  case One:
+    q += "one";
+    break;
+  case Base:
+    q += "base";
+    break;
   }
 
   // set the filter
@@ -228,7 +228,7 @@ void LdapUrl::updateQuery()
     }
     q += it.key();
     if ( !it.value().value.isEmpty() ) {
-      q += '=' + toPercentEncoding(it.value().value);
+      q += '=' + toPercentEncoding( it.value().value );
     }
     q += ',';
   }
@@ -267,7 +267,7 @@ void LdapUrl::parseQuery()
       case 1:
         if ( (*it) == "sub" ) {
           d->m_scope = Sub;
-        } else if ( (*it) == "one") {
+        } else if ( (*it) == "one" ) {
           d->m_scope = One;
         }
         break;

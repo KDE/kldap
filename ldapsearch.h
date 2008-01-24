@@ -81,8 +81,9 @@ class KLDAP_EXPORT LdapSearch : public QObject
     /**
      * Starts a search operation on the LDAP server @param server,
      * returning the attributes specified with @param attributes.
-     * @param count means how many entries to list. If it's >0, then result() will 
-     * emitted when the number of entries reached, but with isFinished() set to false.
+     * @param count means how many entries to list. If it's >0, then result()
+     * will be emitted when the number of entries is reached, but with
+     * isFinished() set to false.
      */
     bool search( const LdapServer &server,
                  const QStringList &attributes = QStringList(), int count = 0 );
@@ -101,7 +102,6 @@ class KLDAP_EXPORT LdapSearch : public QObject
                  const QString &filter = QString(),
                  const QStringList &attributes = QStringList(),
                  int pagesize = 0, int count = 0 );
-
 
     /**
      * Continues the search (if you set count to non-zero in search(), and isFinished() is false)

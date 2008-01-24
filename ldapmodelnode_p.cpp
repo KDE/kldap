@@ -51,7 +51,6 @@ int LdapModelNode::row() const
   return 0;
 }
 
-
 //
 // LdapModelDNNode imlpementation
 //
@@ -103,7 +102,7 @@ void LdapModelDNNode::setLdapObject( const LdapObject &object )
   for ( LdapAttrMap::ConstIterator it = attrs.begin(); it != attrs.end(); ++it ) {
     QString attr = it.key();
     for ( LdapAttrValue::ConstIterator it2 = (*it).begin(); it2 != (*it).end(); ++it2 ) {
-      LdapModelNode* node = new LdapModelAttrNode( this, attr, *it2 );
+      LdapModelNode *node = new LdapModelAttrNode( this, attr, *it2 );
       Q_UNUSED( node );
     }
   }
@@ -111,7 +110,6 @@ void LdapModelDNNode::setLdapObject( const LdapObject &object )
   // Reset the populated flag so that we don't stop the model querying for children
   setPopulated( populated );
 }
-
 
 //
 // LdapModelAttrNode imlpementation

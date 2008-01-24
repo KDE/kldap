@@ -17,8 +17,8 @@
   Boston, MA 02110-1301, USA.
 */
 
-#ifndef KLDAPTEST_H
-#define KLDAPTEST_H
+#ifndef TESTKLDAP_H
+#define TESTKLDAP_H
 
 #include <QtCore/QObject>
 #include <ldapmodel.h>

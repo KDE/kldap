@@ -42,7 +42,7 @@ class KLDAP_EXPORT LdapStructureProxyModel : public QSortFilterProxyModel
     virtual bool setData( const QModelIndex &index,
                           const QVariant &value,
                           int role = Qt::EditRole );
-    virtual bool filterAcceptsRow( int sourceRow, const QModelIndex& sourceParent ) const;
+    virtual bool filterAcceptsRow( int sourceRow, const QModelIndex &sourceParent ) const;
     virtual QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
     virtual int columnCount( const QModelIndex &parent ) const;
     virtual Qt::ItemFlags flags( const QModelIndex &index ) const;

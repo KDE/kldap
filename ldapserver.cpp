@@ -278,21 +278,21 @@ void LdapServer::setUrl( const LdapUrl &url )
   d->mSecurity = None;
   if ( url.protocol() == "ldaps" ) {
     d->mSecurity = SSL;
-  } else if ( url.hasExtension("x-tls") ) {
+  } else if ( url.hasExtension( "x-tls" ) ) {
     d->mSecurity = TLS;
   }
   kDebug(5322) << "security:" << d->mSecurity;
 
   d->mMech = d->mUser = d->mBindDn = QString();
-  if ( url.hasExtension("x-sasl") ) {
+  if ( url.hasExtension( "x-sasl" ) ) {
     d->mAuth = SASL;
-    if ( url.hasExtension("x-mech") ) {
+    if ( url.hasExtension( "x-mech" ) ) {
       d->mMech = url.extension( "x-mech", critical );
     }
-    if ( url.hasExtension("x-realm") ) {
+    if ( url.hasExtension( "x-realm" ) ) {
       d->mRealm = url.extension( "x-realm", critical );
     }
-    if ( url.hasExtension("bindname") ) {
+    if ( url.hasExtension( "bindname" ) ) {
       d->mBindDn = url.extension( "bindname", critical );
     }
     d->mUser = url.user();
@@ -309,31 +309,31 @@ void LdapServer::setUrl( const LdapUrl &url )
     }
   }
   d->mPassword = url.password();
-  if ( url.hasExtension("x-version") ) {
+  if ( url.hasExtension( "x-version" ) ) {
     d->mVersion = url.extension( "x-version", critical ).toInt();
   } else {
     d->mVersion = 3;
   }
 
-  if ( url.hasExtension("x-timeout") ) {
+  if ( url.hasExtension( "x-timeout" ) ) {
     d->mTimeout = url.extension( "x-timeout", critical ).toInt();
   } else {
     d->mTimeout = 0;
   }
 
-  if ( url.hasExtension("x-timelimit") ) {
+  if ( url.hasExtension( "x-timelimit" ) ) {
     d->mTimeLimit = url.extension( "x-timelimit", critical ).toInt();
   } else {
     d->mTimeLimit = 0;
   }
 
-  if ( url.hasExtension("x-sizelimit") ) {
+  if ( url.hasExtension( "x-sizelimit" ) ) {
     d->mSizeLimit = url.extension( "x-sizelimit", critical ).toInt();
   } else {
     d->mSizeLimit = 0;
   }
 
-  if ( url.hasExtension("x-pagesize") ) {
+  if ( url.hasExtension( "x-pagesize" ) ) {
     d->mPageSize = url.extension( "x-pagesize", critical ).toInt();
   } else {
     d->mPageSize = 0;

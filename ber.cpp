@@ -49,7 +49,8 @@
 
 using namespace KLDAP;
 
-class Ber::BerPrivate {
+class Ber::BerPrivate
+{
   public:
 #ifdef LDAP_FOUND
     BerElement *mBer;
@@ -408,7 +409,7 @@ Ber::~Ber()
   delete d;
 }
 
-Ber::Ber( const Ber&)
+Ber::Ber( const Ber & )
  : d( new BerPrivate )
 {
   kError() << "LDAP support not compiled";

@@ -18,9 +18,9 @@
   Boston, MA 02110-1301, USA.
 */
 
-#include "kldap_config.h" // SASL2_FOUND, LDAP_FOUND
 #include "ldapconnection.h"
 #include "ldapdefs.h"
+#include "kldap_config.h" // SASL2_FOUND, LDAP_FOUND
 
 #include <stdlib.h>
 #include <klocale.h>
@@ -41,7 +41,7 @@ static sasl_callback_t callbacks[] = {
 
 static bool ldapoperation_sasl_initialized = false;
 #endif
-                                
+
 #ifdef LDAP_FOUND
 #include <lber.h>
 #include <ldap.h>
@@ -71,7 +71,7 @@ class LdapConnection::LdapConnectionPrivate
 #else
   void *mSASLconn;
 #endif
-  
+
 };
 
 LdapConnection::LdapConnectionPrivate::LdapConnectionPrivate()
@@ -142,12 +142,13 @@ QString LdapConnection::errorString( int code )
 #ifdef LDAP_FOUND
   return QString::fromUtf8( ldap_err2string( code ) );
   switch ( code ) {
-    case LDAP_OPERATIONS_ERROR: return i18n("LDAP Operations error");
+  case LDAP_OPERATIONS_ERROR:
+    return i18n( "LDAP Operations error" );
     //FIXME:
     /* add the LDAP error codes */
   }
 #else
-  return i18n("No LDAP Support...");
+  return i18n( "No LDAP Support..." );
 #endif
 }
 
@@ -158,9 +159,9 @@ QString LdapConnection::saslErrorString() const
   str = sasl_errdetail( d->mSASLconn );
   return QString::fromLocal8Bit( str );
 #else
-  return i18n("SASL support is not available...Please recompile libkldap with the "
-    "Cyrus-SASL (or compatible) client libraries, or complain to your "
-    "distribution packagers.");
+  return i18n( "SASL support is not available...Please recompile libkldap with the "
+               "Cyrus-SASL (or compatible) client libraries, or complain to your "
+               "distribution packagers." );
 #endif
 }
 
@@ -266,14 +267,14 @@ int LdapConnection::connect()
   }
 #endif
   if ( ret != LDAP_SUCCESS ) {
-    d->mConnectionError = i18n("An error occurred during the connection initialization phase.");
+    d->mConnectionError = i18n( "An error occurred during the connection initialization phase." );
     return ret;
   }
 
   kDebug(5322) << "setting version to:" << version;
   if ( setOption( LDAP_OPT_PROTOCOL_VERSION, &version ) != LDAP_OPT_SUCCESS ) {
     ret = ldapErrorCode();
-    d->mConnectionError = i18n("Cannot set protocol version to %1.", version );
+    d->mConnectionError = i18n( "Cannot set protocol version to %1.", version );
     close();
     return ret;
   }
@@ -284,7 +285,7 @@ int LdapConnection::connect()
   if ( timeout ) {
     if ( setOption( LDAP_OPT_TIMEOUT, &timeout ) != LDAP_OPT_SUCCESS ) {
       ret = ldapErrorCode();
-      d->mConnectionError = i18n("Cannot set timeout to %1 seconds.", timeout );
+      d->mConnectionError = i18n( "Cannot set timeout to %1 seconds.", timeout );
       close();
       return ret;
     }
@@ -303,7 +304,7 @@ int LdapConnection::connect()
     }
 #else
     close();
-    d->mConnectionError = i18n("TLS support not available in the LDAP client libraries.");
+    d->mConnectionError = i18n( "TLS support not available in the LDAP client libraries." );
     return -1;
 #endif
   }
@@ -313,7 +314,7 @@ int LdapConnection::connect()
     if ( !setSizeLimit( d->mServer.sizeLimit() ) ) {
       ret = ldapErrorCode();
       close();
-      d->mConnectionError = i18n("Cannot set size limit.");
+      d->mConnectionError = i18n( "Cannot set size limit." );
       return ret;
     }
   }
@@ -323,7 +324,7 @@ int LdapConnection::connect()
     if ( !setTimeLimit( d->mServer.timeLimit() ) ) {
       ret = ldapErrorCode();
       close();
-      d->mConnectionError = i18n("Cannot set time limit.");
+      d->mConnectionError = i18n( "Cannot set time limit." );
       return ret;
     }
   }
@@ -333,7 +334,7 @@ int LdapConnection::connect()
   int saslresult = sasl_client_new( "ldap", d->mServer.host().toLatin1(),
         0, 0, callbacks, 0, &d->mSASLconn );
   if ( saslresult != SASL_OK ) {
-    d->mConnectionError = i18n("Cannot initialize the SASL client.");
+    d->mConnectionError = i18n( "Cannot initialize the SASL client." );
     return KLDAP_SASL_ERROR;
   }
 #endif
@@ -412,9 +413,9 @@ int LdapConnection::timeLimit() const
 int LdapConnection::connect( )
 {
   d->mConnectionError =
-    i18n("LDAP support not compiled in. Please recompile libkldap with the "
-         "OpenLDAP (or compatible) client libraries, or complain to your "
-         "distribution packagers.");
+    i18n( "LDAP support not compiled in. Please recompile libkldap with the "
+          "OpenLDAP (or compatible) client libraries, or complain to your "
+          "distribution packagers." );
   kError() << "No LDAP support...";
   return -1;
 }

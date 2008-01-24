@@ -167,8 +167,9 @@ void LdapModel::LdapModelPrivate::gotSearchResult( KLDAP::LdapSearch *search )
     }
 
     // Store the search result
-    if ( item )
+    if ( item ) {
       item->setLdapObject( baseDNObj );
+    }
 
     // Flag that we are no longer searching
     setSearchType( LdapModelPrivate::NotSearching );
@@ -183,8 +184,7 @@ void LdapModel::LdapModelPrivate::gotSearchResult( KLDAP::LdapSearch *search )
   {
     //kDebug(5322) << "Found" << searchResults().size() << "child objects";
 
-    if ( searchResults().size() != 0 )
-    {
+    if ( searchResults().size() != 0 ) {
       // Create an index for the soon-to-be-a-parent item
       LdapModelDNNode *parentNode = searchItem();
       int r = parentNode->row();
@@ -211,7 +211,8 @@ void LdapModel::LdapModelPrivate::gotSearchResult( KLDAP::LdapSearch *search )
   }
 }
 
-void LdapModel::LdapModelPrivate::gotSearchData( KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj )
+void LdapModel::LdapModelPrivate::gotSearchData( KLDAP::LdapSearch *search,
+                                                 const KLDAP::LdapObject &obj )
 {
   Q_UNUSED( search );
   //kDebug(5322) << "LdapModel::LdapModelPrivate::gotSearchData()";

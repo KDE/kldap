@@ -59,7 +59,7 @@ class LdapSearch::Private
 
     QString mErrorString;
     int mError;
-    int mCount,mMaxCount;
+    int mCount, mMaxCount;
     bool mFinished;
 };
 
@@ -73,9 +73,10 @@ void LdapSearch::Private::result()
 
   kDebug(5322) << "LDAP result:" << res;
 
-  if ( res != 0 && ( res == -1 || (
-    mConn->ldapErrorCode() != KLDAP_SUCCESS && 
-    mConn->ldapErrorCode() != KLDAP_SASL_BIND_IN_PROGRESS) ) ) {
+  if ( res != 0 &&
+       ( res == -1 ||
+         ( mConn->ldapErrorCode() != KLDAP_SUCCESS &&
+           mConn->ldapErrorCode() != KLDAP_SASL_BIND_IN_PROGRESS ) ) ) {
     //error happened, but no timeout
     mError = mConn->ldapErrorCode();
     mErrorString = mConn->ldapErrorString();
@@ -88,22 +89,22 @@ void LdapSearch::Private::result()
 
     QByteArray servercc;
     servercc = mOp.serverCred();
-    
+
     kDebug(5322) << "LdapSearch RES_BIND";
     if ( mConn->ldapErrorCode() == KLDAP_SUCCESS ) { //bind succeeded
-        kDebug(5322) << "bind succeeded";
-	LdapControls savedctrls = mOp.serverControls();
-	if ( mPageSize ) {
-	    LdapControls ctrls = savedctrls;
-	    ctrls.append( LdapControl::createPageControl( mPageSize ) );
-	    mOp.setServerControls( ctrls );
-	}
+      kDebug(5322) << "bind succeeded";
+      LdapControls savedctrls = mOp.serverControls();
+      if ( mPageSize ) {
+        LdapControls ctrls = savedctrls;
+        ctrls.append( LdapControl::createPageControl( mPageSize ) );
+        mOp.setServerControls( ctrls );
+      }
 
-	mId = mOp.search( mBase, mScope, mFilter, mAttributes );
-	mOp.setServerControls( savedctrls );
+      mId = mOp.search( mBase, mScope, mFilter, mAttributes );
+      mOp.setServerControls( savedctrls );
     } else { //next bind step
-        kDebug(5322) << "bind next step";
-	mId = mOp.bind( servercc );
+      kDebug(5322) << "bind next step";
+      mId = mOp.bind( servercc );
     }
     if ( mId < 0 ) {
       if ( mId == KLDAP_SASL_ERROR ) {
@@ -119,7 +120,7 @@ void LdapSearch::Private::result()
     QTimer::singleShot( 0, mParent, SLOT(result()) );
     return;
   }
-  
+
   //End of entries
   if ( res == LdapOperation::RES_SEARCH_RESULT ) {
     if ( mPageSize ) {
@@ -212,7 +213,7 @@ bool LdapSearch::Private::startSearch( const LdapDN &base, LdapUrl::Scope scope,
   mMaxCount = count;
   mCount = 0;
   mFinished = false;
-  
+
   LdapControls savedctrls = mOp.serverControls();
   if ( pagesize ) {
     LdapControls ctrls = savedctrls;
@@ -233,7 +234,8 @@ bool LdapSearch::Private::startSearch( const LdapDN &base, LdapUrl::Scope scope,
   }
   kDebug(5322) << "startSearch msg id=" << mId;
 
-  QTimer::singleShot( 0, mParent, SLOT(result()) ); //maybe do this with threads?- need thread-safe client libs!!!
+   //maybe do this with threads?- need thread-safe client libs!!!
+  QTimer::singleShot( 0, mParent, SLOT(result()) );
 
   return true;
 }
@@ -301,7 +303,7 @@ bool LdapSearch::search( const LdapUrl &url, int count )
     }
   }
   bool critical;
-  int pagesize = url.extension( QLatin1String("x-pagesize"), critical ).toInt();
+  int pagesize = url.extension( QLatin1String( "x-pagesize" ), critical ).toInt();
   return d->startSearch( url.dn(), url.scope(), url.filter(),
                          url.attributes(), pagesize, count );
 }

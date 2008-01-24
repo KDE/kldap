@@ -80,7 +80,9 @@ LdapControl::~LdapControl()
 
 void LdapControl::setControl( const QString &oid, const QByteArray &value, bool critical )
 {
-  d->mOid = oid; d->mValue = value; d->mCritical = critical;
+  d->mOid = oid;
+  d->mValue = value;
+  d->mCritical = critical;
 }
 
 QString LdapControl::oid() const

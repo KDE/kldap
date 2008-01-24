@@ -70,19 +70,20 @@ bool LdapStructureProxyModel::setData( const QModelIndex &index,
 }
 
 bool LdapStructureProxyModel::filterAcceptsRow( int sourceRow,
-                                                const QModelIndex& sourceParent ) const
+                                                const QModelIndex &sourceParent ) const
 {
   QModelIndex idx = sourceModel()->index( sourceRow, 0, sourceParent );
   LdapModelNode::NodeType nodeType =
     static_cast<LdapModelNode::NodeType>(
       sourceModel()->data( idx, LdapModel::NodeTypeRole ).toUInt() );
-  return ( nodeType == LdapModelNode::DN );
+  return nodeType == LdapModelNode::DN;
 }
 
-QVariant LdapStructureProxyModel::headerData( int /*section*/,
+QVariant LdapStructureProxyModel::headerData( int section,
                                               Qt::Orientation orientation,
                                               int role ) const
 {
+  Q_UNUSED( section );
   if ( orientation == Qt::Horizontal && role == Qt::DisplayRole ) {
     return QString( i18n( "Distinguished Name" ) );
   }

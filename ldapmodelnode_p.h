@@ -18,8 +18,8 @@
   Boston, MA 02110-1301, USA.
 */
 
-#ifndef KLDAP_LDAPMODELTREEITEM_P_H
-#define KLDAP_LDAPMODELTREEITEM_P_H
+#ifndef KLDAP_LDAPMODELNODE_P_H
+#define KLDAP_LDAPMODELNODE_P_H
 
 #include <QByteArray>
 #include <QString>
@@ -62,7 +62,6 @@ class LdapModelNode
     bool m_isPopulated;
 };
 
-
 /**
  * @internal
  */
@@ -73,12 +72,14 @@ class LdapModelDNNode : public LdapModelNode
                               const LdapDN &dn = LdapDN() );
     ~LdapModelDNNode();
 
-    LdapModelNode::NodeType nodeType() const { return LdapModelNode::DN; }
+    LdapModelNode::NodeType nodeType() const
+    { return LdapModelNode::DN; }
 
     void appendChild( LdapModelNode *pItem );
     LdapModelNode *child( int row );
     int childCount() const { return m_childItems.size(); }
-    const QList<LdapModelNode*>& children() const { return m_childItems; }
+    const QList<LdapModelNode*>& children() const
+    { return m_childItems; }
 
     const LdapDN &dn() const { return m_dn; }
 
@@ -95,7 +96,6 @@ class LdapModelDNNode : public LdapModelNode
     LdapDN m_dn;
 };
 
-
 /**
  * @internal
  */
@@ -107,7 +107,8 @@ class LdapModelAttrNode : public LdapModelNode
                                 const QByteArray &attrData = QByteArray() );
     ~LdapModelAttrNode();
 
-    LdapModelNode::NodeType nodeType() const { return LdapModelNode::Attr; }
+    LdapModelNode::NodeType nodeType() const
+    { return LdapModelNode::Attr; }
 
     const QString &attributeName() { return m_attrName; }
     const QByteArray &attributeData() { return m_attrData; }

@@ -70,13 +70,13 @@ bool LdapAttributeProxyModel::setData( const QModelIndex &index,
 }
 
 bool LdapAttributeProxyModel::filterAcceptsRow( int sourceRow,
-                                                const QModelIndex& sourceParent ) const
+                                                const QModelIndex &sourceParent ) const
 {
   QModelIndex idx = sourceModel()->index( sourceRow, 0, sourceParent );
   LdapModelNode::NodeType nodeType =
     static_cast<LdapModelNode::NodeType>(
       sourceModel()->data( idx, LdapModel::NodeTypeRole ).toUInt() );
-  return ( nodeType == LdapModelNode::Attr );
+  return nodeType == LdapModelNode::Attr;
 }
 
 QVariant LdapAttributeProxyModel::headerData( int section,

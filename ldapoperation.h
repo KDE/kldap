@@ -123,13 +123,14 @@ class KLDAP_EXPORT LdapOperation
     LdapControls serverControls() const;
 
     /**
-     * Binds to the server which specified in the connection object. 
+     * Binds to the server which specified in the connection object.
      * Can do simple or SASL bind. Returns a message id if successful, negative value if not.
      */
-    int bind( const QByteArray &creds = QByteArray(), SASL_Callback_Proc *saslproc = NULL, void *data = NULL );
-  
+    int bind( const QByteArray &creds = QByteArray(),
+              SASL_Callback_Proc *saslproc = NULL, void *data = NULL );
+
     /**
-     * Binds to the server which specified in the connection object. 
+     * Binds to the server which specified in the connection object.
      * Can do simple or SASL bind. This is the synchronous version.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
      */

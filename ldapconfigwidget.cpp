@@ -123,7 +123,7 @@ void LdapConfigWidget::Private::initWidget()
   if ( mFeatures & W_REALM ) {
     label = new QLabel( i18n( "Realm:" ), mParent );
     mRealm = new KLineEdit( mParent );
-    mRealm->setObjectName("kcfg_ldaprealm" );
+    mRealm->setObjectName( "kcfg_ldaprealm" );
 
     mainLayout->addWidget( label, row, 0 );
     mainLayout->addWidget( mRealm, row, 1, 1, 3 );
@@ -156,7 +156,7 @@ void LdapConfigWidget::Private::initWidget()
     label = new QLabel( i18n( "Port:" ), mParent );
     mPort = new QSpinBox( mParent );
     mPort->setRange( 0, 65535 );
-    mPort->setObjectName("kcfg_ldapport" );
+    mPort->setObjectName( "kcfg_ldapport" );
     mPort->setSizePolicy( QSizePolicy( QSizePolicy::Maximum, QSizePolicy::Preferred ) );
     mPort->setValue( 389 );
 
@@ -184,7 +184,7 @@ void LdapConfigWidget::Private::initWidget()
     label = new QLabel( i18n( "Size limit:" ), mParent );
     mSizeLimit = new QSpinBox( mParent );
     mSizeLimit->setRange( 0, 9999999 );
-    mSizeLimit->setObjectName("kcfg_ldapsizelimit" );
+    mSizeLimit->setObjectName( "kcfg_ldapsizelimit" );
     mSizeLimit->setSizePolicy( QSizePolicy( QSizePolicy::Maximum, QSizePolicy::Preferred ) );
     mSizeLimit->setValue( 0 );
     mSizeLimit->setSpecialValueText( i18nc( "default ldap size limit", "Default" ) );
@@ -197,7 +197,7 @@ void LdapConfigWidget::Private::initWidget()
     label = new QLabel( i18n( "Time limit:" ), mParent );
     mTimeLimit = new QSpinBox( mParent );
     mTimeLimit->setRange( 0, 9999999 );
-    mTimeLimit->setObjectName("kcfg_ldaptimelimit" );
+    mTimeLimit->setObjectName( "kcfg_ldaptimelimit" );
     mTimeLimit->setSizePolicy( QSizePolicy( QSizePolicy::Maximum, QSizePolicy::Preferred ) );
     mTimeLimit->setValue( 0 );
     mTimeLimit->setSuffix( i18n( " sec" ) );
@@ -213,10 +213,10 @@ void LdapConfigWidget::Private::initWidget()
     label = new QLabel( i18n( "Page size:" ), mParent );
     mPageSize = new QSpinBox( mParent );
     mPageSize->setRange( 0, 9999999 );
-    mPageSize->setObjectName("kcfg_ldappagesize" );
+    mPageSize->setObjectName( "kcfg_ldappagesize" );
     mPageSize->setSizePolicy( QSizePolicy( QSizePolicy::Maximum, QSizePolicy::Preferred ) );
     mPageSize->setValue( 0 );
-    mPageSize->setSpecialValueText( i18n("No paging") );
+    mPageSize->setSpecialValueText( i18n( "No paging" ) );
     mainLayout->addWidget( label, row, 0 );
     mainLayout->addWidget( mPageSize, row++, 1 );
   }
@@ -224,7 +224,7 @@ void LdapConfigWidget::Private::initWidget()
   if ( mFeatures & W_DN ) {
     label = new QLabel( i18nc( "Distinguished Name", "DN:" ), mParent );
     mDn = new KLineEdit( mParent );
-    mDn->setObjectName("kcfg_ldapdn" );
+    mDn->setObjectName( "kcfg_ldapdn" );
 
     mainLayout->addWidget( label, row, 0 );
     mainLayout->addWidget( mDn, row, 1, 1, 1 );
@@ -240,7 +240,7 @@ void LdapConfigWidget::Private::initWidget()
   if ( mFeatures & W_FILTER ) {
     label = new QLabel( i18n( "Filter:" ), mParent );
     mFilter = new KLineEdit( mParent );
-    mFilter->setObjectName("kcfg_ldapfilter" );
+    mFilter->setObjectName( "kcfg_ldapfilter" );
 
     mainLayout->addWidget( label, row, 0 );
     mainLayout->addWidget( mFilter, row, 1, 1, 3 );
@@ -251,14 +251,14 @@ void LdapConfigWidget::Private::initWidget()
     QGroupBox *btgroup = new QGroupBox( i18n( "Security" ), mParent );
     QHBoxLayout *hbox = new QHBoxLayout;
     btgroup->setLayout( hbox );
-    mSecNo = new QRadioButton( i18nc( "@option:radio set no security", "No" ), btgroup);
+    mSecNo = new QRadioButton( i18nc( "@option:radio set no security", "No" ), btgroup );
     mSecNo->setObjectName( "kcfg_ldapnosec" );
     hbox->addWidget( mSecNo );
-    mSecTLS = new QRadioButton( i18nc( "@option:radio use TLS security", "TLS" ), btgroup);
+    mSecTLS = new QRadioButton( i18nc( "@option:radio use TLS security", "TLS" ), btgroup );
     mSecTLS->setObjectName( "kcfg_ldaptls" );
     hbox->addWidget( mSecTLS );
-    mSecSSL = new QRadioButton( i18nc( "@option:radio use SSL security", "SSL" ), btgroup);
-    mSecSSL->setObjectName("kcfg_ldapssl" );
+    mSecSSL = new QRadioButton( i18nc( "@option:radio use SSL security", "SSL" ), btgroup );
+    mSecSSL->setObjectName( "kcfg_ldapssl" );
     hbox->addWidget( mSecSSL );
     mainLayout->addWidget( btgroup, row, 0, 1, 4 );
 
@@ -279,14 +279,17 @@ void LdapConfigWidget::Private::initWidget()
     QHBoxLayout *hbox = new QHBoxLayout;
     vbox->addLayout( hbox );
 
-    mAnonymous = new QRadioButton( i18nc( "@option:radio anonymous authentication", "Anonymous" ), authbox);
-    mAnonymous->setObjectName("kcfg_ldapanon" );
+    mAnonymous =
+      new QRadioButton( i18nc( "@option:radio anonymous authentication", "Anonymous" ), authbox );
+    mAnonymous->setObjectName( "kcfg_ldapanon" );
     hbox->addWidget( mAnonymous );
-    mSimple = new QRadioButton( i18nc( "@option:radio simple authentication", "Simple" ), authbox);
+    mSimple =
+      new QRadioButton( i18nc( "@option:radio simple authentication", "Simple" ), authbox );
     mSimple->setObjectName( "kcfg_ldapsimple" );
     hbox->addWidget( mSimple );
-    mSASL = new QRadioButton( i18nc( "@option:radio SASL authentication", "SASL" ), authbox);
-    mSASL->setObjectName("kcfg_ldapsasl" );
+    mSASL =
+      new QRadioButton( i18nc( "@option:radio SASL authentication", "SASL" ), authbox );
+    mSASL->setObjectName( "kcfg_ldapsasl" );
     hbox->addWidget( mSASL );
 
     hbox = new QHBoxLayout;
@@ -357,7 +360,7 @@ void LdapConfigWidget::Private::sendQuery()
 
   if ( mProg == 0 ) {
     mProg = new KProgressDialog( mParent );
-    mProg->setWindowTitle( i18n("LDAP Query") );
+    mProg->setWindowTitle( i18n( "LDAP Query" ) );
     mProg->setModal( true );
   }
   mProg->setLabelText( _url.prettyUrl() );
@@ -394,7 +397,7 @@ void LdapConfigWidget::Private::queryDNClicked()
   }
 }
 
-void LdapConfigWidget::Private::loadData( LdapSearch*, const LdapObject &object )
+void LdapConfigWidget::Private::loadData( LdapSearch *, const LdapObject &object )
 {
   kDebug(5322) << "loadData() object:" << object.toString();
   mProg->progressBar()->setValue( mProg->progressBar()->value() + 1 );

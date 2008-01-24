@@ -178,14 +178,14 @@ void KLdapTest::testLdapConnection()
   LdapConnection conn;
   conn.setUrl( url );
   int ret;
-  if ( (ret = conn.connect()) ) {
+  if ( ( ret = conn.connect() ) ) {
     kDebug() << "Could not connect to LDAP server. Error was:" << conn.connectionError();
   }
   QCOMPARE( ret, 0 );
 
   LdapOperation op( conn );
   // Now attempt to bind
-  if ( (ret = op.bind_s()) ) {
+  if ( ( ret = op.bind_s() ) ) {
     kDebug() << "Could not bind to server. Error was:" << conn.ldapErrorString();
   }
   QCOMPARE( ret, 0 );
@@ -248,13 +248,13 @@ void KLdapTest::testLdapModel()
   LdapConnection conn;
   conn.setUrl( url );
   int ret;
-  if ( (ret = conn.connect()) ) {
+  if ( ( ret = conn.connect() ) ) {
     kDebug() << "Could not connect to LDAP server. Error was:" << conn.connectionError();
   }
   QCOMPARE( ret, 0 );
 
   LdapOperation op( conn );
-  if ( (ret = op.bind_s()) ) {
+  if ( ( ret = op.bind_s() ) ) {
     kDebug() << "Could not bind to server. Error was:" << conn.ldapErrorString();
   }
   QCOMPARE( ret, 0 );

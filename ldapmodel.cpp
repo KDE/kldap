@@ -161,7 +161,7 @@ Qt::ItemFlags LdapModel::flags( const QModelIndex &index ) const
     return Qt::ItemIsEnabled;
   }
 
-  return Qt::ItemFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable);
+  return Qt::ItemFlags( Qt::ItemIsEnabled | Qt::ItemIsSelectable );
 }
 
 int LdapModel::columnCount( const QModelIndex &parent ) const
@@ -185,12 +185,13 @@ int LdapModel::rowCount( const QModelIndex &parent ) const
 bool LdapModel::hasChildren( const QModelIndex &parent ) const
 {
   // We return true unless the item has been populated and we are able to do a definitive test
-  const LdapModelNode *node = parent.isValid()
-    ? static_cast<const LdapModelNode*>( parent.internalPointer() )
-    : m_d->rootNode();
+  const LdapModelNode *node = parent.isValid() ?
+                              static_cast<const LdapModelNode*>( parent.internalPointer() ) :
+                              m_d->rootNode();
 
-  if ( node->nodeType() != LdapModelNode::DN )
+  if ( node->nodeType() != LdapModelNode::DN ) {
     return false;
+  }
 
   const LdapModelDNNode* parentNode = static_cast<const LdapModelDNNode*>( node );
   if ( !parent.isValid() || parentNode->isPopulated() ) {
@@ -282,9 +283,9 @@ bool LdapModel::hasChildrenOfType( const QModelIndex &parent, LdapDataType type 
       break;
   }
 
-  const LdapModelNode *node = parent.isValid()
-    ? static_cast<const LdapModelNode*>( parent.internalPointer() )
-    : m_d->rootNode();
+  const LdapModelNode *node = parent.isValid() ?
+                              static_cast<const LdapModelNode*>( parent.internalPointer() ) :
+                              m_d->rootNode();
 
   const LdapModelDNNode* parentNode = static_cast<const LdapModelDNNode*>( node );
   if ( !parent.isValid() || parentNode->isPopulated() ) {

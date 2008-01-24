@@ -109,7 +109,7 @@ QByteArray Ldif::assembleLine( const QString &fieldname,
     }
 
     if ( linelen > 0 ) {
-      i = (uint)(fieldname.length()+2) > linelen ? fieldname.length()+2 : linelen;
+      i = (uint)( fieldname.length() + 2 ) > linelen ? fieldname.length()+2 : linelen;
       while ( i < result.length() ) {
         result.insert( i, "\n " );
         i += linelen+2;
@@ -180,7 +180,7 @@ bool Ldif::splitControl( const QByteArray &line, QString &oid, bool &critical,
   critical = false;
   bool url = splitLine( line, tmp, value );
 
-  kDebug(5322) << "splitControl: value:" << QString::fromUtf8(value, value.size());
+  kDebug(5322) << "splitControl: value:" << QString::fromUtf8( value, value.size() );
   if ( tmp.isEmpty() ) {
     tmp = QString::fromUtf8( value, value.size() );
     value.resize( 0 );
