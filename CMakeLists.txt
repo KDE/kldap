@@ -17,26 +17,26 @@ set(kldap_EXTRA_LIBS)
 set(kldap_EXTRA_INCLUDES)
 
 if (LDAP_FOUND)
-set(kldap_EXTRA_LIBS ${LDAP_LIBRARIES})
-set(kldap_EXTRA_INCLUDES ${LDAP_INCLUDE_DIR})
+   set(kldap_EXTRA_LIBS ${LDAP_LIBRARIES})
+   set(kldap_EXTRA_INCLUDES ${LDAP_INCLUDE_DIR})
 
-set(CMAKE_REQUIRED_INCLUDES lber.h ldap.h)
-set(CMAKE_REQUIRED_LIBRARIES ${LDAP_LIBRARIES})
-check_function_exists(ldap_start_tls_s HAVE_LDAP_START_TLS_S)
-check_function_exists(ldap_initialize HAVE_LDAP_INITIALIZE)
-check_function_exists(ber_memfree HAVE_BER_MEMFREE)
-check_function_exists(ldap_unbind_ext HAVE_LDAP_UNBIND_EXT)
-check_function_exists(ldap_extended_operation HAVE_LDAP_EXTENDED_OPERATION)
-check_function_exists(ldap_extended_operation_s HAVE_LDAP_EXTENDED_OPERATION_S)
-check_symbol_exists(ldap_extended_operation ldap.h HAVE_LDAP_EXTENDED_OPERATION_PROTOTYPE)
-check_symbol_exists(ldap_extended_operation_s ldap.h HAVE_LDAP_EXTENDED_OPERATION_S_PROTOTYPE)
+   set(CMAKE_REQUIRED_INCLUDES lber.h ldap.h)
+   set(CMAKE_REQUIRED_LIBRARIES ${LDAP_LIBRARIES})
+   check_function_exists(ldap_start_tls_s HAVE_LDAP_START_TLS_S)
+   check_function_exists(ldap_initialize HAVE_LDAP_INITIALIZE)
+   check_function_exists(ber_memfree HAVE_BER_MEMFREE)
+   check_function_exists(ldap_unbind_ext HAVE_LDAP_UNBIND_EXT)
+   check_function_exists(ldap_extended_operation HAVE_LDAP_EXTENDED_OPERATION)
+   check_function_exists(ldap_extended_operation_s HAVE_LDAP_EXTENDED_OPERATION_S)
+   check_symbol_exists(ldap_extended_operation ldap.h HAVE_LDAP_EXTENDED_OPERATION_PROTOTYPE)
+   check_symbol_exists(ldap_extended_operation_s ldap.h HAVE_LDAP_EXTENDED_OPERATION_S_PROTOTYPE)
 
 
 endif (LDAP_FOUND)
 
 if (SASL2_FOUND)
-set(kldap_EXTRA_LIBS ${kldap_EXTRA_LIBS} ${SASL2_LIBRARIES} ${KDE4_KDECORE_LIBS})
-set(kldap_EXTRA_INCLUDES ${kldap_EXTRA_INCLUDES} ${SASL2_INCLUDE_DIR})
+   set(kldap_EXTRA_LIBS ${kldap_EXTRA_LIBS} ${SASL2_LIBRARIES} ${KDE4_KDECORE_LIBS})
+   set(kldap_EXTRA_INCLUDES ${kldap_EXTRA_INCLUDES} ${SASL2_INCLUDE_DIR})
 endif (SASL2_FOUND)
 
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kldap_config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/kldap_config.h )
@@ -80,4 +80,4 @@ install( FILES ber.h kldap_export.h ldapdefs.h ldif.h ldapurl.h ldapserver.h lda
   ldapconnection.h ldapoperation.h
   ldapconfigwidget.h ldapcontrol.h ldapsearch.h
   ldapdn.h ldapmodel.h ldapstructureproxymodel.h ldapattributeproxymodel.h
-  DESTINATION ${INCLUDE_INSTALL_DIR}/kldap)
+  DESTINATION ${INCLUDE_INSTALL_DIR}/kldap COMPONENT Devel)
