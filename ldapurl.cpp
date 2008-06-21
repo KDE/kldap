@@ -22,7 +22,6 @@
 
 #include <kdebug.h>
 
-#include <QtCore/QDir>
 #include <QtCore/QStringList>
 
 using namespace KLDAP;
@@ -50,8 +49,8 @@ LdapUrl::LdapUrl( const KUrl &_url )
   : KUrl( _url ), d( new LdapUrlPrivate )
 {
   QString tmp = path();
-  if ( !QDir::isRelativePath( tmp ) ) {
-    tmp.remove( 0, QDir::rootPath().length() );
+  if ( tmp.startsWith('/') ) {
+	  tmp = tmp.mid( 1 );
   }
   setPath( tmp );
   parseQuery();
@@ -83,8 +82,8 @@ LdapUrl::~LdapUrl()
 void LdapUrl::setDn( const LdapDN &dn )
 {
   QString tmp = dn.toString();
-  if ( !QDir::isRelativePath( tmp ) ) {
-    tmp.remove( 0, QDir::rootPath().length() );
+  if ( tmp.startsWith('/') ) {
+	  tmp = tmp.mid( 1 );
   }
   setPath( tmp );
 }
@@ -92,8 +91,8 @@ void LdapUrl::setDn( const LdapDN &dn )
 LdapDN LdapUrl::dn() const
 {
   QString tmp = path();
-  if ( !QDir::isRelativePath( tmp ) ) {
-    tmp.remove( 0, QDir::rootPath().length() );
+   if ( tmp.startsWith('/') ) {
+	  tmp = tmp.mid( 1 );
   }
   LdapDN tmpDN( tmp );
   return tmpDN;
