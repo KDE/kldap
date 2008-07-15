@@ -201,7 +201,7 @@ static int kldap_sasl_interact( sasl_interact_t *interact, LdapOperation::SASL_D
   QString value;
 
   while ( interact->id != SASL_CB_LIST_END ) {
-    value = QString();
+    value.clear();
     switch( interact->id ) {
     case SASL_CB_GETREALM:
       value = data->creds.realm;
@@ -469,7 +469,7 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
       }
       ldap_memfree( (char *) referralsp );
     }
-    mMatchedDn = QString();
+    mMatchedDn.clear();
     if ( matcheddn ) {
       mMatchedDn = QString::fromUtf8( matcheddn );
       ldap_memfree( matcheddn );
