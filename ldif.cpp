@@ -377,7 +377,8 @@ void Ldif::startParsing()
   d->mEntryType = Entry_None;
   d->mModType = Mod_None;
   d->mDn = LdapDN();
-  d->mNewRdn = d->mNewSuperior = QString();
+  d->mNewRdn.clear();
+  d->mNewSuperior.clear();
   d->mLine = QByteArray();
   d->mIsNewLine = false;
   d->mIsComment = false;

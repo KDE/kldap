@@ -204,7 +204,7 @@ bool LdapSearch::Private::startSearch( const LdapDN &base, LdapUrl::Scope scope,
            << "pagesize=" << pagesize;
   mAbandoned = false;
   mError = 0;
-  mErrorString = QString();
+  mErrorString.clear();
   mOp.setConnection( *mConn );
   mPageSize = pagesize;
   mBase = base;

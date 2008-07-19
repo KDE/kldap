@@ -81,7 +81,11 @@ LdapServer::~LdapServer()
 void LdapServer::clear()
 {
   d->mPort = 389;
-  d->mHost = d->mUser = d->mBindDn = d->mMech = d->mPassword = QString();
+  d->mHost.clear();
+  d->mUser.clear();
+  d->mBindDn.clear();
+  d->mMech.clear();
+  d->mPassword.clear();
   d->mSecurity = None;
   d->mAuth = Anonymous;
   d->mVersion = 3;
@@ -283,7 +287,9 @@ void LdapServer::setUrl( const LdapUrl &url )
   }
   kDebug() << "security:" << d->mSecurity;
 
-  d->mMech = d->mUser = d->mBindDn = QString();
+  d->mMech.clear();
+  d->mUser.clear();
+  d->mBindDn.clear();
   if ( url.hasExtension( "x-sasl" ) ) {
     d->mAuth = SASL;
     if ( url.hasExtension( "x-mech" ) ) {
