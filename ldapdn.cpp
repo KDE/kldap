@@ -54,7 +54,7 @@ bool LdapDN::LdapDNPrivate::isValidRDNString( const QString &rdn ) const
   }
 
   // Split the rdn into the attribute name and value parts
-  QStringList components = rdn.split( "=" );
+  QStringList components = rdn.split( '=' );
 
   // We should have exactly two parts
   if ( components.size() != 2 ) {
