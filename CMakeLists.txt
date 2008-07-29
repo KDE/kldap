@@ -35,7 +35,7 @@ if (LDAP_FOUND)
 endif (LDAP_FOUND)
 
 if (SASL2_FOUND)
-   set(kldap_EXTRA_LIBS ${kldap_EXTRA_LIBS} ${SASL2_LIBRARIES} ${KDE4_KDECORE_LIBS})
+   set(kldap_EXTRA_LIBS ${kldap_EXTRA_LIBS} ${SASL2_LIBRARIES})
    set(kldap_EXTRA_INCLUDES ${kldap_EXTRA_INCLUDES} ${SASL2_INCLUDE_DIR})
 endif (SASL2_FOUND)
 
@@ -69,7 +69,7 @@ kde4_add_library(kldap SHARED ${kldap_LIB_SRCS})
 
 include_directories( ${kldap_EXTRA_INCLUDES} )
 
-target_link_libraries(kldap ${KDE4_KIO_LIBS} ${kldap_EXTRA_LIBS} )
+target_link_libraries(kldap ${KDE4_KIO_LIBS} ${KDE4_KDECORE_LIBS} ${kldap_EXTRA_LIBS} )
 
 set_target_properties(kldap PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 install(TARGETS kldap ${INSTALL_TARGETS_DEFAULT_ARGS})
