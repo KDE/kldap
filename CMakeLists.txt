@@ -69,7 +69,7 @@ kde4_add_library(kldap SHARED ${kldap_LIB_SRCS})
 
 include_directories( ${kldap_EXTRA_INCLUDES} )
 
-target_link_libraries(kldap ${KDE4_KIO_LIBS} ${KDE4_KDEUI_LIBS} ${KDE4_KDECORE_LIBS} ${kldap_EXTRA_LIBS} )
+target_link_libraries(kldap ${KDE4_KIO_LIBS} ${KDE4_KDECORE_LIBS} ${kldap_EXTRA_LIBS} )
 
 set_target_properties(kldap PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 install(TARGETS kldap ${INSTALL_TARGETS_DEFAULT_ARGS})
