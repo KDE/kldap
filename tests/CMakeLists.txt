@@ -11,7 +11,7 @@ set(testkldap_SRCS testkldap.cpp )
 
 kde4_add_unit_test(testkldap TESTNAME kldap-testkldap ${testkldap_SRCS})
 
-target_link_libraries(testkldap  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} kldap)
+target_link_libraries(testkldap  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} ${QT_QTGUI_LIBRARY} kldap)
 
 
 endif(LDAP_FOUND)
