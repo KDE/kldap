@@ -258,7 +258,7 @@ void LdapUrl::parseQuery()
   d->m_extensions.clear();
 
   int i = 0;
-  for ( QStringList::Iterator it = url_items.begin(); it != url_items.end(); ++it, i++ ) {
+  for ( QStringList::const_iterator it = url_items.begin(); it != url_items.end(); ++it, i++ ) {
     switch ( i ) {
       case 0:
         d->m_attributes = (*it).split( ',', QString::SkipEmptyParts );
@@ -280,7 +280,7 @@ void LdapUrl::parseQuery()
   }
 
   QString name, value;
-  for ( QStringList::Iterator it = extensions.begin(); it != extensions.end(); ++it ) {
+  for ( QStringList::const_iterator it = extensions.begin(); it != extensions.end(); ++it ) {
     ext.critical = false;
     name = fromPercentEncoding( (*it).section( '=', 0, 0 ).toLatin1() ).toLower();
     value = fromPercentEncoding( (*it).section( '=', 1 ).toLatin1() );
