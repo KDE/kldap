@@ -72,7 +72,7 @@ class KLDAP_EXPORT LdapUrl : public KUrl
      */
     LdapDN dn() const;
 
-    /** Sets the the dn part of the LDAP Url. */
+    /** Sets the dn part of the LDAP Url. */
     void setDn( const LdapDN &dn );
 
     /** Returns the attributes part of the LDAP Url */
