@@ -75,7 +75,6 @@ QByteArray Ldif::assembleLine( const QString &fieldname,
   bool safe = false;
   bool isDn;
   QByteArray result;
-  int i;
 
   if ( url ) {
     result = fieldname.toUtf8() + ":< " + value;
@@ -87,7 +86,7 @@ QByteArray Ldif::assembleLine( const QString &fieldname,
 
     //SAFE-CHAR
     if ( safe ) {
-      for ( i=1; i < value.size(); i++ ) {
+      for ( int i=1; i < value.size(); i++ ) {
         //allow utf-8 in Distinguished Names
         if ( ( isDn && value[i] == 0 ) ||
              ( !isDn && value[i] <= 0 ) ||
@@ -109,7 +108,7 @@ QByteArray Ldif::assembleLine( const QString &fieldname,
     }
 
     if ( linelen > 0 ) {
-      i = (uint)( fieldname.length() + 2 ) > linelen ? fieldname.length()+2 : linelen;
+      int i = (uint)( fieldname.length() + 2 ) > linelen ? fieldname.length() + 2 : linelen;
       while ( i < result.length() ) {
         result.insert( i, "\n " );
         i += linelen+2;
