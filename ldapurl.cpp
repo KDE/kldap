@@ -140,7 +140,7 @@ LdapUrl::Extension LdapUrl::extension( const QString &key ) const
 {
   QMap<QString, Extension>::const_iterator it;
 
-  it = d->m_extensions.find( key );
+  it = d->m_extensions.constFind( key );
   if ( it != d->m_extensions.constEnd() ) {
     return (*it);
   } else {
@@ -258,7 +258,7 @@ void LdapUrl::parseQuery()
   d->m_extensions.clear();
 
   int i = 0;
-  for ( QStringList::const_iterator it = url_items.begin(); it != url_items.end(); ++it, i++ ) {
+  for ( QStringList::const_iterator it = url_items.constBegin(); it != url_items.constEnd(); ++it, i++ ) {
     switch ( i ) {
       case 0:
         d->m_attributes = (*it).split( ',', QString::SkipEmptyParts );
@@ -280,7 +280,7 @@ void LdapUrl::parseQuery()
   }
 
   QString name, value;
-  for ( QStringList::const_iterator it = extensions.begin(); it != extensions.end(); ++it ) {
+  for ( QStringList::const_iterator it = extensions.constBegin(); it != extensions.constEnd(); ++it ) {
     ext.critical = false;
     name = fromPercentEncoding( (*it).section( '=', 0, 0 ).toLatin1() ).toLower();
     value = fromPercentEncoding( (*it).section( '=', 1 ).toLatin1() );
