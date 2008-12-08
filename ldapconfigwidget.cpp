@@ -494,12 +494,14 @@ void LdapConfigWidget::Private::setSASL( bool on )
 
 void LdapConfigWidget::Private::setLDAPPort()
 {
-  mPort->setValue( 389 );
+  if ( mPort )
+    mPort->setValue( 389 );
 }
 
 void LdapConfigWidget::Private::setLDAPSPort()
 {
-  mPort->setValue( 636 );
+  if ( mPort )
+    mPort->setValue( 636 );
 }
 
 LdapConfigWidget::LdapConfigWidget( QWidget *parent, Qt::WFlags fl )
