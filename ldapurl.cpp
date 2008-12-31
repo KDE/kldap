@@ -258,29 +258,31 @@ void LdapUrl::parseQuery()
   d->m_extensions.clear();
 
   int i = 0;
-  for ( QStringList::const_iterator it = url_items.constBegin(); it != url_items.constEnd(); ++it, i++ ) {
+  for ( QStringList::const_iterator it=url_items.constBegin();
+        it != url_items.constEnd(); ++it, i++ ) {
     switch ( i ) {
-      case 0:
-        d->m_attributes = (*it).split( ',', QString::SkipEmptyParts );
-        break;
-      case 1:
-        if ( (*it) == "sub" ) {
-          d->m_scope = Sub;
-        } else if ( (*it) == "one" ) {
-          d->m_scope = One;
-        }
-        break;
-      case 2:
-        d->m_filter = fromPercentEncoding( (*it).toLatin1() );
-        break;
-      case 3:
-        extensions = (*it).split( ',', QString::SkipEmptyParts );
-        break;
+    case 0:
+      d->m_attributes = (*it).split( ',', QString::SkipEmptyParts );
+      break;
+    case 1:
+      if ( (*it) == "sub" ) {
+        d->m_scope = Sub;
+      } else if ( (*it) == "one" ) {
+        d->m_scope = One;
+      }
+      break;
+    case 2:
+      d->m_filter = fromPercentEncoding( (*it).toLatin1() );
+      break;
+    case 3:
+      extensions = (*it).split( ',', QString::SkipEmptyParts );
+      break;
     }
   }
 
   QString name, value;
-  for ( QStringList::const_iterator it = extensions.constBegin(); it != extensions.constEnd(); ++it ) {
+  for ( QStringList::const_iterator it=extensions.constBegin();
+        it != extensions.constEnd(); ++it ) {
     ext.critical = false;
     name = fromPercentEncoding( (*it).section( '=', 0, 0 ).toLatin1() ).toLower();
     value = fromPercentEncoding( (*it).section( '=', 1 ).toLatin1() );
