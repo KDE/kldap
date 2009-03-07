@@ -285,7 +285,7 @@ int LdapConnection::connect()
   if ( timeout ) {
     if ( setOption( LDAP_OPT_TIMEOUT, &timeout ) != LDAP_OPT_SUCCESS ) {
       ret = ldapErrorCode();
-      d->mConnectionError = i18n( "Cannot set timeout to %1 seconds.", timeout );
+      d->mConnectionError = i18np( "Cannot set timeout to %1 second.", "Cannot set timeout to %1 seconds.", timeout );
       close();
       return ret;
     }
