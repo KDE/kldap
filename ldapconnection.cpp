@@ -159,7 +159,7 @@ QString LdapConnection::saslErrorString() const
   str = sasl_errdetail( d->mSASLconn );
   return QString::fromLocal8Bit( str );
 #else
-  return i18n( "SASL support is not available...Please recompile libkldap with the "
+  return i18n( "SASL support is not available. Please recompile libkldap with the "
                "Cyrus-SASL (or compatible) client libraries, or complain to your "
                "distribution packagers." );
 #endif
