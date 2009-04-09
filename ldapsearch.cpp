@@ -26,7 +26,7 @@
 #include <QtCore/QTimer>
 
 #include <kdebug.h>
-
+#include <KLocale>
 using namespace KLDAP;
 
 //blocking the GUI for xxx milliseconds
@@ -230,6 +230,9 @@ bool LdapSearch::Private::startSearch( const LdapDN &base, LdapUrl::Scope scope,
     } else {
       mError = mConn->ldapErrorCode();
       mErrorString = mConn->ldapErrorString();
+      if ( mError == -1 && mErrorString.isEmpty()) {
+        mErrorString = i18n( "Can not access to server. Reconfigure it please." );
+      }
     }
     return false;
   }
