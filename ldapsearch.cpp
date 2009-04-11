@@ -231,7 +231,7 @@ bool LdapSearch::Private::startSearch( const LdapDN &base, LdapUrl::Scope scope,
       mError = mConn->ldapErrorCode();
       mErrorString = mConn->ldapErrorString();
       if ( mError == -1 && mErrorString.isEmpty()) {
-        mErrorString = i18n( "Can not access to server. Reconfigure it please." );
+        mErrorString = i18n( "Cannot access to server. Please reconfigure it." );
       }
     }
     return false;
