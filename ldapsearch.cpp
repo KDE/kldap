@@ -230,7 +230,7 @@ bool LdapSearch::Private::startSearch( const LdapDN &base, LdapUrl::Scope scope,
     } else {
       mError = mConn->ldapErrorCode();
       mErrorString = mConn->ldapErrorString();
-      if ( mError == -1 && mErrorString.isEmpty()) {
+      if ( mError == -1 && mErrorString.isEmpty() ) {
         mErrorString = i18n( "Cannot access to server. Please reconfigure it." );
       }
     }
