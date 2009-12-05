@@ -192,7 +192,7 @@ void LdapUrl::updateQuery()
 {
   Extension ext;
   QMap<QString, Extension>::const_iterator it;
-  QString q = "?";
+  QString q( '?' );
 
   // set the attributes to query
   if ( d->m_attributes.count() > 0 ) {
