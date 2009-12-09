@@ -29,25 +29,63 @@
 
 namespace KLDAP {
 
-/** This class holds various parameters about an LDAP server,
- * and the LDAP query parameters.
+/**
+ * @short A class that contains LDAP server connection settings.
+ *
+ * This class holds various parameters that are needed to connect
+ * to an LDAP server.
  */
 class KLDAP_EXPORT LdapServer
 {
   public:
+    /**
+     * Creates an empty LDAP server object.
+     */
     LdapServer();
+
+    /**
+     * Creates a new LDAP server object.
+     *
+     * @param url The LDAP url of the server.
+     */
     LdapServer( const LdapUrl &url );
 
-    LdapServer( const LdapServer &that );
-    LdapServer &operator= ( const LdapServer &that );
+    /**
+     * Creates a new LDAP server object from an @p other object.
+     */
+    LdapServer( const LdapServer &other );
 
+    /**
+     * Overwrites the values of the LDAP server object with
+     * the values from an @p other object.
+     */
+    LdapServer &operator=( const LdapServer &other );
+
+    /**
+     * Destroys the LDAP server object.
+     */
     virtual ~LdapServer();
 
-    typedef enum {
-      None, TLS, SSL
+    /**
+     * Describes the encryption settings that can be used
+     * for the LDAP connection.
+     */
+    typedef enum
+    {
+      None, ///< Do not use any encryption.
+      TLS,  ///< Use TLS encryption.
+      SSL   ///< Use SSL encryption.
     } Security;
-    typedef enum {
-      Anonymous, Simple, SASL
+
+    /**
+     * Describes the authentication method that can be used
+     * for the LDAP connection.
+     */
+    typedef enum
+    {
+      Anonymous,  ///< Do no authentication.
+      Simple,     ///< Authenticate via login and password.
+      SASL        ///< Azthenticate with the SASL framework.
     } Auth;
 
     /**
@@ -55,43 +93,184 @@ class KLDAP_EXPORT LdapServer
      */
     void clear();
 
-    QString host() const;
-    int port() const;
-    LdapDN baseDn() const;
-    QString user() const;
-    QString bindDn() const;
-    QString realm() const;
-    QString password() const;
-    int version() const;
-    Security security() const;
-    Auth auth() const;
-    QString mech() const;
-    int timeout() const;
-
-    LdapUrl::Scope scope() const;
-    int timeLimit() const;
-    int sizeLimit() const;
-    int pageSize() const;
-    QString filter() const;
-
+    /**
+     * Sets the host of the LDAP connection.
+     */
     void setHost( const QString &host );
+
+    /**
+     * Returns the host of the LDAP connection.
+     */
+    QString host() const;
+
+    /**
+     * Sets the port of the LDAP connection.
+     * If not port is set, 389 is used as default.
+     */
     void setPort( int port );
+
+    /**
+     * Returns the port of the LDAP connection.
+     */
+    int port() const;
+
+    /**
+     * Sets the @p baseDn of the LDAP connection.
+     */
     void setBaseDn( const LdapDN &baseDn );
+
+    /**
+     * Returns the baseDn of the LDAP connection.
+     */
+    LdapDN baseDn() const;
+
+    /**
+     * Sets the @p user of the LDAP connection.
+     */
     void setUser( const QString &user );
+
+    /**
+     * Returns the user of the LDAP connection.
+     */
+    QString user() const;
+
+    /**
+     * Sets the @p bindDn of the LDAP connection.
+     */
     void setBindDn( const QString &bindDn );
+
+    /**
+     * Returns the bindDn of the LDAP connection.
+     */
+    QString bindDn() const;
+
+    /**
+     * Sets the @p realm of the LDAP connection.
+     */
     void setRealm( const QString &realm );
+
+    /**
+     * Returns the realm of the LDAP connection.
+     */
+    QString realm() const;
+
+    /**
+     * Sets the @p password of the LDAP connection.
+     */
     void setPassword( const QString &password );
+
+    /**
+     * Returns the password of the LDAP connection.
+     */
+    QString password() const;
+
+    /**
+     * Sets the protocol @p version of the LDAP connection.
+     * If no version is set, 3 is used as default.
+     */
     void setVersion( int version );
-    void setSecurity( Security security );
-    void setAuth( Auth auth );
+
+    /**
+     * Returns the protocol version of the LDAP connection.
+     */
+    int version() const;
+
+    /**
+     * Sets the security @p mode of the LDAP connection.
+     * If no security is set, None is used as default.
+     */
+    void setSecurity( Security mode );
+
+    /**
+     * Returns the security mode of the LDAP connection.
+     */
+    Security security() const;
+
+    /**
+     * Sets the @p authentication method of the LDAP connection.
+     * If no authentication method is set, Anonymous is used as default.
+     */
+    void setAuth( Auth authentication );
+
+    /**
+     * Returns the authentication method of the LDAP connection.
+     */
+    Auth auth() const;
+
+    /**
+     * Sets the @p mech of the LDAP connection.
+     */
     void setMech( const QString &mech );
+
+    /**
+     * Returns the mech of the LDAP connection.
+     */
+    QString mech() const;
+
+    /**
+     * Sets the @p timeout of the LDAP connection.
+     */
     void setTimeout( int timeout );
 
+    /**
+     * Returns the timeout of the LDAP connection.
+     */
+    int timeout() const;
+
+    /**
+     * Sets the search @p scope of the LDAP connection.
+     */
     void setScope( LdapUrl::Scope scope );
-    void setTimeLimit( int timelimit );
+
+    /**
+     * Returns the search scope of the LDAP connection.
+     */
+    LdapUrl::Scope scope() const;
+
+    /**
+     * Sets the time @p limit of the LDAP connection.
+     */
+    void setTimeLimit( int limit );
+
+    /**
+     * Returns the time limit of the LDAP connection.
+     */
+    int timeLimit() const;
+
+    /**
+     * Sets the size @p limit of the LDAP connection.
+     */
     void setSizeLimit( int sizelimit );
-    void setPageSize( int pagesize );
+
+    /**
+     * Returns the size limit of the LDAP connection.
+     */
+    int sizeLimit() const;
+
+    /**
+     * Sets the page @p size of the LDAP connection.
+     */
+    void setPageSize( int size );
+
+    /**
+     * Returns the page size of the LDAP connection.
+     */
+    int pageSize() const;
+
+    /**
+     * Sets the @p filter string of the LDAP connection.
+     */
     void setFilter( const QString &filter );
+
+    /**
+     * Returns the filter string of the LDAP connection.
+     */
+    QString filter() const;
+
+    /**
+     * Sets the server parameters from an RFC2255 compliant LDAP @p url.
+     */
+    void setUrl( const LdapUrl &url );
 
     /**
      * Returns the server parameters as an RFC2255 compliant LDAP Url.
@@ -101,10 +280,6 @@ class KLDAP_EXPORT LdapServer
      * x-sizelimit, x-timelimit, x-pagesize, x-timeout
      */
     LdapUrl url() const;
-    /**
-     * Sets the server parameters from an RFC2255 compliant LDAP Url.
-     */
-    void setUrl( const LdapUrl &url );
 
   private:
     class LdapServerPrivate;
