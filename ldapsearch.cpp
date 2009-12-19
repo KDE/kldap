@@ -96,7 +96,7 @@ void LdapSearch::Private::result()
       LdapControls savedctrls = mOp.serverControls();
       if ( mPageSize ) {
         LdapControls ctrls = savedctrls;
-        ctrls.append( LdapControl::createPageControl( mPageSize ) );
+        LdapControl::insert( ctrls, LdapControl::createPageControl( mPageSize ) );
         mOp.setServerControls( ctrls );
       }
 
@@ -137,7 +137,7 @@ void LdapSearch::Private::result()
         LdapControls ctrls, savedctrls;
         savedctrls = mOp.serverControls();
         ctrls = savedctrls;
-        ctrls.append( LdapControl::createPageControl( mPageSize, cookie ) );
+        LdapControl::insert( ctrls, LdapControl::createPageControl ( mPageSize, cookie ) );
         mOp.setServerControls( ctrls );
         mId = mOp.search( mBase, mScope, mFilter, mAttributes );
         mOp.setServerControls( savedctrls );
@@ -199,7 +199,7 @@ bool LdapSearch::Private::startSearch( const LdapDN &base, LdapUrl::Scope scope,
                                        const QString &filter,
                                        const QStringList &attributes, int pagesize, int count )
 {
-  kDebug() << "search: base=" << base.toString() << "scope=" << scope
+  kDebug() << "search: base=" << base.toString() << "scope=" << (int)scope
            << "filter=" << filter << "attributes=" << attributes
            << "pagesize=" << pagesize;
   mAbandoned = false;
@@ -218,7 +218,8 @@ bool LdapSearch::Private::startSearch( const LdapDN &base, LdapUrl::Scope scope,
   LdapControls savedctrls = mOp.serverControls();
   if ( pagesize ) {
     LdapControls ctrls = savedctrls;
-    ctrls.append( LdapControl::createPageControl( pagesize ) );
+    mConn->setOption( 0x0008, NULL ); // Disable referals or paging won't work
+    LdapControl::insert( ctrls, LdapControl::createPageControl( pagesize ) );
     mOp.setServerControls( ctrls );
   }
 
