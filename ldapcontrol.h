@@ -29,6 +29,9 @@
 
 namespace KLDAP {
 
+class LdapControl;
+typedef QList<LdapControl> LdapControls;
+
 /**
   @brief
   This class represents an LDAP Control
@@ -89,16 +92,22 @@ class KLDAP_EXPORT LdapControl
      */
     int parsePageControl( QByteArray &cookie ) const;
     /**
-     * Creates a pageing search control.
+     * Creates a paging search control.
      */
     static LdapControl createPageControl( int pagesize, const QByteArray &cookie = QByteArray() );
+
+    /**
+     * Inserts a unique control against a list of controls.
+     * If the control already exists in the list is is updated, otherwise
+     * it is appended to the list.
+     * @since 4.4
+     */
+    static void insert( LdapControls &list, const LdapControl &ctrl );
 
   private:
     class Private;
     QSharedDataPointer<Private> d;
 };
-
-typedef QList<LdapControl> LdapControls;
 
 }
 

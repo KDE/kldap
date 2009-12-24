@@ -409,6 +409,10 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
     mObject.setAttributes( attrs );
     break;
   }
+  case RES_SEARCH_REFERENCE:
+    // Will only get this if following references is disabled. ignore it
+    rescode = 0;
+    break;
   case RES_EXTENDED:
   {
     char *retoid;
@@ -674,7 +678,7 @@ int LdapOperation::search( const LdapDN &base, LdapUrl::Scope scope,
   }
 
   kDebug() << "asyncSearch() base=\"" << base.toString()
-           << "\" scope=" << scope
+           << "\" scope=" << (int)scope
            << "filter=\"" << filter
            << "\" attrs=" << attributes;
   int retval =
