@@ -181,7 +181,6 @@ void KLdapTest::testLdapConnection()
   if ( ( ret = conn.connect() ) ) {
     kDebug() << "Could not connect to LDAP server. Error was:" << conn.connectionError();
   }
-  QEXPECT_FAIL("", "Will fail since no server is available for testing", Continue);
   QCOMPARE( ret, 0 );
 
   LdapOperation op( conn );
