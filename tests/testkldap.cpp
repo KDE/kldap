@@ -188,6 +188,7 @@ void KLdapTest::testLdapConnection()
   if ( ( ret = op.bind_s() ) ) {
     kDebug() << "Could not bind to server. Error was:" << conn.ldapErrorString();
   }
+  QEXPECT_FAIL("", "Will fail since no server is available for testing", Abort);
   QCOMPARE( ret, 0 );
 }
 
@@ -206,6 +207,7 @@ void KLdapTest::testLdapSearch()
     qApp->processEvents();
   }
 
+  QEXPECT_FAIL("", "Will fail since no server is available for testing", Abort);
   QCOMPARE( success, true );
 
   kDebug() << "Search found" << m_objects.size() << "matching entries";
@@ -257,6 +259,7 @@ void KLdapTest::testLdapModel()
   if ( ( ret = op.bind_s() ) ) {
     kDebug() << "Could not bind to server. Error was:" << conn.ldapErrorString();
   }
+  QEXPECT_FAIL("", "Will fail since no server is available for testing", Abort);
   QCOMPARE( ret, 0 );
 
   // Let's use this connection with the model
