@@ -448,14 +448,14 @@ unsigned int Ber::peekTag( int &size )
 {
   Q_UNUSED( size );
   kError() << "LDAP support not compiled";
-  return -1;
+  return 0;
 }
 
 unsigned int Ber::skipTag( int &size )
 {
   Q_UNUSED( size );
   kError() << "LDAP support not compiled";
-  return -1;
+  return 0;
 }
 
 #endif
