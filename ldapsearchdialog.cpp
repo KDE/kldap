@@ -43,6 +43,8 @@
 #include <kcmultidialog.h>
 #include <kdialogbuttonbox.h>
 #include <kldap/ldapclient.h>
+#include <kldap/ldapobject.h>
+#include <kldap/ldapserver.h>
 #include <klineedit.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -530,13 +532,13 @@ void LdapSearchDialog::Private::restoreSettings()
   qDeleteAll( mLdapClientList) ;
   mLdapClientList.clear();
 
-  KConfig kabConfig( "kaddressbookrc" );
-  KConfigGroup kabGroup( &kabConfig, "LDAPSearch" );
-  mSearchType->setCurrentIndex( kabGroup.readEntry( "SearchType", 0 ) );
+  KConfig* config = KLDAP::LdapClientSearch::config();
+
+  KConfigGroup searchGroup( config, "LDAPSearch" );
+  mSearchType->setCurrentIndex( searchGroup.readEntry( "SearchType", 0 ) );
 
   // then read the config file and register all selected
   // server in the list
-  KConfig* config = KLDAP::LdapClientSearch::config();
   KConfigGroup group( config, "LDAP" );
   mNumHosts = group.readEntry( "NumSelectedHosts", 0 );
   if ( !mNumHosts ) {
@@ -553,7 +555,7 @@ void LdapSearchDialog::Private::restoreSettings()
       for ( QMap<QString, QString>::ConstIterator it = adrbookattr2ldap().constBegin(); it != adrbookattr2ldap().constEnd(); ++it )
         attrs << *it;
 
-      ldapClient->setAttrs( attrs );
+      ldapClient->setAttributes( attrs );
 
       q->connect( ldapClient, SIGNAL( result( const KLDAP::LdapClient&, const KLDAP::LdapObject& ) ),
                   q, SLOT( slotAddResult( const KLDAP::LdapClient&, const KLDAP::LdapObject& ) ) );
@@ -571,8 +573,8 @@ void LdapSearchDialog::Private::restoreSettings()
 
 void LdapSearchDialog::Private::saveSettings()
 {
-  KConfig config( "kaddressbookrc" );
-  KConfigGroup group( &config, "LDAPSearch" );
+  KConfig* config = KLDAP::LdapClientSearch::config();
+  KConfigGroup group( config, "LDAPSearch" );
   group.writeEntry( "SearchType", mSearchType->currentIndex() );
   group.sync();
 }

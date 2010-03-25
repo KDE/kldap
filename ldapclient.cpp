@@ -22,6 +22,8 @@
 
 #include "ldapclient.h"
 
+#include <kldap/ldapobject.h>
+#include <kldap/ldapserver.h>
 #include <kldap/ldapurl.h>
 #include <kldap/ldif.h>
 
@@ -32,36 +34,96 @@
 #include <KDirWatch>
 #include <KProtocolInfo>
 #include <KStandardDirs>
+#include <kio/job.h>
 
-#include <QFile>
-#include <QImage>
-#include <QLabel>
-#include <QPixmap>
-#include <QTextStream>
+#include <QtCore/QPointer>
+#include <QtCore/QTimer>
 
 using namespace KLDAP;
 
 K_GLOBAL_STATIC_WITH_ARGS(KConfig, s_config, ("kldaprc", KConfig::NoGlobals) )
 
-LdapClient::LdapClient( int clientNumber, QObject* parent, const char* name )
-  : QObject( parent ), mJob( 0 ), mActive( false )
+class LdapClient::Private
 {
-//  d = new LdapClientPrivate;
-  setObjectName(name);
-  mClientNumber = clientNumber;
-  mCompletionWeight = 50 - mClientNumber;
+  public:
+    Private( LdapClient *qq )
+      : q( qq ),
+        mJob( 0 ),
+        mActive( false )
+    {
+    }
+
+    ~Private()
+    {
+      q->cancelQuery();
+    }
+
+    void startParseLDIF();
+    void parseLDIF( const QByteArray& data );
+    void endParseLDIF();
+    void finishCurrentObject();
+
+    void slotData( KIO::Job*, const QByteArray &data );
+    void slotInfoMessage( KJob*, const QString &info, const QString& );
+    void slotDone();
+
+    LdapClient *q;
+
+    KLDAP::LdapServer mServer;
+    QString mScope;
+    QStringList mAttrs;
+
+    QPointer<KIO::SimpleJob> mJob;
+    bool mActive;
+
+    KLDAP::LdapObject mCurrentObject;
+    KLDAP::Ldif mLdif;
+    int mClientNumber;
+    int mCompletionWeight;
+};
+
+LdapClient::LdapClient( int clientNumber, QObject* parent, const char* name )
+  : QObject( parent ), d( new Private( this ) )
+{
+  setObjectName( name );
+  d->mClientNumber = clientNumber;
+  d->mCompletionWeight = 50 - d->mClientNumber;
 }
 
 LdapClient::~LdapClient()
 {
-  cancelQuery();
-//  delete d; d = 0;
+  delete d;
 }
 
-void LdapClient::setAttrs( const QStringList& attrs )
+bool LdapClient::isActive() const
 {
-  mAttrs = attrs;
-  mAttrs << "objectClass"; // via objectClass we detect distribution lists
+  return d->mActive;
+}
+
+void LdapClient::setServer( const KLDAP::LdapServer &server )
+{
+  d->mServer = server;
+}
+
+const KLDAP::LdapServer& LdapClient::server() const
+{
+  return d->mServer;
+}
+
+void LdapClient::setAttributes( const QStringList& attrs )
+{
+  d->mAttrs = attrs;
+  d->mAttrs << "objectClass"; // via objectClass we detect distribution lists
+}
+
+QStringList LdapClient::attributes() const
+{
+  return d->mAttrs;
+}
+
+void LdapClient::setScope( const QString scope )
+{
+  d->mScope = scope;
 }
 
 void LdapClient::startQuery( const QString& filter )
@@ -69,67 +131,67 @@ void LdapClient::startQuery( const QString& filter )
   cancelQuery();
   KLDAP::LdapUrl url;
 
-  url = mServer.url();
+  url = d->mServer.url();
 
-  url.setAttributes( mAttrs );
-  url.setScope( mScope == "one" ? KLDAP::LdapUrl::One : KLDAP::LdapUrl::Sub );
+  url.setAttributes( d->mAttrs );
+  url.setScope( d->mScope == "one" ? KLDAP::LdapUrl::One : KLDAP::LdapUrl::Sub );
   url.setFilter( '('+filter+')' );
 
   kDebug(5300) <<"LdapClient: Doing query:" << url.prettyUrl();
 
-  startParseLDIF();
-  mActive = true;
-  mJob = KIO::get( url, KIO::NoReload, KIO::HideProgressInfo );
-  connect( mJob, SIGNAL( data( KIO::Job*, const QByteArray& ) ),
+  d->startParseLDIF();
+  d->mActive = true;
+  d->mJob = KIO::get( url, KIO::NoReload, KIO::HideProgressInfo );
+  connect( d->mJob, SIGNAL( data( KIO::Job*, const QByteArray& ) ),
            this, SLOT( slotData( KIO::Job*, const QByteArray& ) ) );
-  connect( mJob, SIGNAL( infoMessage( KJob*, const QString&, const QString& ) ),
+  connect( d->mJob, SIGNAL( infoMessage( KJob*, const QString&, const QString& ) ),
            this, SLOT( slotInfoMessage( KJob*, const QString&, const QString& ) ) );
-  connect( mJob, SIGNAL( result( KJob* ) ),
+  connect( d->mJob, SIGNAL( result( KJob* ) ),
            this, SLOT( slotDone() ) );
 }
 
 void LdapClient::cancelQuery()
 {
-  if ( mJob ) {
-    mJob->kill();
-    mJob = 0;
+  if ( d->mJob ) {
+    d->mJob->kill();
+    d->mJob = 0;
   }
 
-  mActive = false;
+  d->mActive = false;
 }
 
-void LdapClient::slotData( KIO::Job*, const QByteArray& data )
+void LdapClient::Private::slotData( KIO::Job*, const QByteArray& data )
 {
   parseLDIF( data );
 }
 
-void LdapClient::slotInfoMessage( KJob*, const QString &, const QString& )
+void LdapClient::Private::slotInfoMessage( KJob*, const QString &, const QString& )
 {
   //qDebug("Job said \"%s\"", info.toLatin1());
 }
 
-void LdapClient::slotDone()
+void LdapClient::Private::slotDone()
 {
   endParseLDIF();
   mActive = false;
   int err = mJob->error();
   if ( err && err != KIO::ERR_USER_CANCELED ) {
-    emit error( mJob->errorString() );
+    emit q->error( mJob->errorString() );
   }
-  emit done();
+  emit q->done();
 }
 
-void LdapClient::startParseLDIF()
+void LdapClient::Private::startParseLDIF()
 {
   mCurrentObject.clear();
   mLdif.startParsing();
 }
 
-void LdapClient::endParseLDIF()
+void LdapClient::Private::endParseLDIF()
 {
 }
 
-void LdapClient::finishCurrentObject()
+void LdapClient::Private::finishCurrentObject()
 {
   mCurrentObject.setDn( mLdif.dn() );
   KLDAP::LdapAttrValue objectclasses;
@@ -175,11 +237,11 @@ void LdapClient::finishCurrentObject()
       }
     }
   }
-  emit result( *this, mCurrentObject );
+  emit q->result( *q, mCurrentObject );
   mCurrentObject.clear();
 }
 
-void LdapClient::parseLDIF( const QByteArray& data )
+void LdapClient::Private::parseLDIF( const QByteArray& data )
 {
   //kDebug(5300) <<"LdapClient::parseLDIF(" << QCString(data.data(), data.size()+1) <<" )";
   if ( data.size() ) {
@@ -211,17 +273,17 @@ void LdapClient::parseLDIF( const QByteArray& data )
 
 int LdapClient::clientNumber() const
 {
-  return mClientNumber;
+  return d->mClientNumber;
 }
 
 int LdapClient::completionWeight() const
 {
-  return mCompletionWeight;
+  return d->mCompletionWeight;
 }
 
 void LdapClient::setCompletionWeight( int weight )
 {
-  mCompletionWeight = weight;
+  d->mCompletionWeight = weight;
 }
 
 void LdapClientSearch::readConfig( KLDAP::LdapServer &server, const KConfigGroup &config, int j, bool active )
@@ -316,20 +378,59 @@ KConfig* LdapClientSearch::config()
 }
 
 
-LdapClientSearch::LdapClientSearch()
-    : mActiveClients( 0 ), mNoLDAPLookup( false )
+class LdapClientSearch::Private
+{
+  public:
+    Private( LdapClientSearch *qq )
+      : q( qq ), mActiveClients( 0 ), mNoLDAPLookup( false )
+    {
+    }
+
+    struct ResultObject {
+      const LdapClient *client;
+      KLDAP::LdapObject object;
+    };
+
+    void readWeighForClient( LdapClient *client, const KConfigGroup &config, int clientNumber );
+    void readConfig();
+    void finish();
+    void makeSearchData( QStringList& ret, LdapResultList& resList );
+
+    void slotLDAPResult( const KLDAP::LdapClient& client, const KLDAP::LdapObject& );
+    void slotLDAPError( const QString& );
+    void slotLDAPDone();
+    void slotDataTimer();
+    void slotFileChanged( const QString& );
+
+    LdapClientSearch *q;
+    QList< LdapClient* > mClients;
+    QString mSearchText;
+    QTimer mDataTimer;
+    int mActiveClients;
+    bool mNoLDAPLookup;
+    QList< ResultObject > mResults;
+    QString mConfigFile;
+};
+
+LdapClientSearch::LdapClientSearch( QObject *parent )
+  : QObject( parent ), d( new Private( this ) )
 {
   if ( !KProtocolInfo::isKnownProtocol( KUrl("ldap://localhost") ) ) {
-    mNoLDAPLookup = true;
+    d->mNoLDAPLookup = true;
     return;
   }
 
-  readConfig();
+  d->readConfig();
   connect(KDirWatch::self(), SIGNAL(dirty (const QString&)),this,
           SLOT(slotFileChanged(const QString&)));
 }
 
-void LdapClientSearch::readWeighForClient( LdapClient *client, const KConfigGroup &config, int clientNumber )
+LdapClientSearch::~LdapClientSearch()
+{
+  delete d;
+}
+
+void LdapClientSearch::Private::readWeighForClient( LdapClient *client, const KConfigGroup &config, int clientNumber )
 {
   const int completionWeight = config.readEntry( QString( "SelectedCompletionWeight%1" ).arg( clientNumber ), -1 );
   if ( completionWeight != -1 )
@@ -339,14 +440,19 @@ void LdapClientSearch::readWeighForClient( LdapClient *client, const KConfigGrou
 void LdapClientSearch::updateCompletionWeights()
 {
   KConfigGroup config(KLDAP::LdapClientSearch::config(), "LDAP" );
-  for ( int i = 0; i < mClients.size(); i++ ) {
-    readWeighForClient( mClients[i], config, i );
+  for ( int i = 0; i < d->mClients.size(); i++ ) {
+    d->readWeighForClient( d->mClients[i], config, i );
   }
 }
 
-void LdapClientSearch::readConfig()
+QList< LdapClient* > LdapClientSearch::clients() const
 {
-  cancelSearch();
+  return d->mClients;
+}
+
+void LdapClientSearch::Private::readConfig()
+{
+  q->cancelSearch();
   QList< LdapClient* >::Iterator it;
   for ( it = mClients.begin(); it != mClients.end(); ++it )
     delete *it;
@@ -359,9 +465,9 @@ void LdapClientSearch::readConfig()
     mNoLDAPLookup = true;
   } else {
     for ( int j = 0; j < numHosts; j++ ) {
-      LdapClient* ldapClient = new LdapClient( j, this );
+      LdapClient* ldapClient = new LdapClient( j, q );
       KLDAP::LdapServer server;
-      readConfig( server, config, j, true );
+      q->readConfig( server, config, j, true );
       if ( !server.host().isEmpty() ) mNoLDAPLookup = false;
       ldapClient->setServer( server );
 
@@ -369,25 +475,25 @@ void LdapClientSearch::readConfig()
 
       QStringList attrs;
       attrs << "cn" << "mail" << "givenname" << "sn";
-      ldapClient->setAttrs( attrs );
+      ldapClient->setAttributes( attrs );
 
-      connect( ldapClient, SIGNAL( result( const KLDAP::LdapClient&, const KLDAP::LdapObject& ) ),
-               this, SLOT( slotLDAPResult( const KLDAP::LdapClient&, const KLDAP::LdapObject& ) ) );
-      connect( ldapClient, SIGNAL( done() ),
-               this, SLOT( slotLDAPDone() ) );
-      connect( ldapClient, SIGNAL( error( const QString& ) ),
-               this, SLOT( slotLDAPError( const QString& ) ) );
+      q->connect( ldapClient, SIGNAL( result( const KLDAP::LdapClient&, const KLDAP::LdapObject& ) ),
+                  q, SLOT( slotLDAPResult( const KLDAP::LdapClient&, const KLDAP::LdapObject& ) ) );
+      q->connect( ldapClient, SIGNAL( done() ),
+                  q, SLOT( slotLDAPDone() ) );
+      q->connect( ldapClient, SIGNAL( error( const QString& ) ),
+                  q, SLOT( slotLDAPError( const QString& ) ) );
 
       mClients.append( ldapClient );
     }
 
-    connect( &mDataTimer, SIGNAL( timeout() ), SLOT( slotDataTimer() ) );
+    q->connect( &mDataTimer, SIGNAL( timeout() ), SLOT( slotDataTimer() ) );
   }
   mConfigFile = KStandardDirs::locateLocal( "config", "kldaprc" );
   KDirWatch::self()->addFile( mConfigFile );
 }
 
-void LdapClientSearch::slotFileChanged( const QString& file )
+void LdapClientSearch::Private::slotFileChanged( const QString& file )
 {
   if ( file == mConfigFile )
     readConfig();
@@ -395,7 +501,7 @@ void LdapClientSearch::slotFileChanged( const QString& file )
 
 void LdapClientSearch::startSearch( const QString& txt )
 {
-  if ( mNoLDAPLookup )
+  if ( d->mNoLDAPLookup )
     return;
 
   cancelSearch();
@@ -406,11 +512,11 @@ void LdapClientSearch::startSearch( const QString& txt )
     ++pos;
     int pos2 = txt.indexOf( '\"', pos );
     if( pos2 >= 0 )
-        mSearchText = txt.mid( pos , pos2 - pos );
+        d->mSearchText = txt.mid( pos , pos2 - pos );
     else
-        mSearchText = txt.mid( pos );
+        d->mSearchText = txt.mid( pos );
   } else
-    mSearchText = txt;
+    d->mSearchText = txt;
 
   /* The reasoning behind this filter is:
    * If it's a person, or a distlist, show it, even if it doesn't have an email address.
@@ -419,27 +525,27 @@ void LdapClientSearch::startSearch( const QString& txt )
    * person entries without an email address to show up, while still not showing things
    * like structural entries in the ldap tree. */
   QString filter = QString( "&(|(objectclass=person)(objectclass=groupOfNames)(mail=*))(|(cn=%1*)(mail=%2*)(mail=*@%3*)(givenName=%4*)(sn=%5*))" )
-      .arg( mSearchText ).arg( mSearchText ).arg( mSearchText ).arg( mSearchText ).arg( mSearchText );
+      .arg( d->mSearchText ).arg( d->mSearchText ).arg( d->mSearchText ).arg( d->mSearchText ).arg( d->mSearchText );
 
   QList< LdapClient* >::Iterator it;
-  for ( it = mClients.begin(); it != mClients.end(); ++it ) {
+  for ( it = d->mClients.begin(); it != d->mClients.end(); ++it ) {
     (*it)->startQuery( filter );
     kDebug(5300) <<"LdapClientSearch::startSearch()" << filter;
-    ++mActiveClients;
+    d->mActiveClients++;
   }
 }
 
 void LdapClientSearch::cancelSearch()
 {
   QList< LdapClient* >::Iterator it;
-  for ( it = mClients.begin(); it != mClients.end(); ++it )
+  for ( it = d->mClients.begin(); it != d->mClients.end(); ++it )
     (*it)->cancelQuery();
 
-  mActiveClients = 0;
-  mResults.clear();
+  d->mActiveClients = 0;
+  d->mResults.clear();
 }
 
-void LdapClientSearch::slotLDAPResult( const LdapClient &client, const KLDAP::LdapObject& obj )
+void LdapClientSearch::Private::slotLDAPResult( const LdapClient &client, const KLDAP::LdapObject& obj )
 {
   ResultObject result;
   result.client = &client;
@@ -453,12 +559,12 @@ void LdapClientSearch::slotLDAPResult( const LdapClient &client, const KLDAP::Ld
   }
 }
 
-void LdapClientSearch::slotLDAPError( const QString& )
+void LdapClientSearch::Private::slotLDAPError( const QString& )
 {
   slotLDAPDone();
 }
 
-void LdapClientSearch::slotLDAPDone()
+void LdapClientSearch::Private::slotLDAPDone()
 {
   if ( --mActiveClients > 0 )
     return;
@@ -466,26 +572,26 @@ void LdapClientSearch::slotLDAPDone()
   finish();
 }
 
-void LdapClientSearch::slotDataTimer()
+void LdapClientSearch::Private::slotDataTimer()
 {
   QStringList lst;
   LdapResultList reslist;
   makeSearchData( lst, reslist );
   if ( !lst.isEmpty() )
-    emit searchData( lst );
+    emit q->searchData( lst );
   if ( !reslist.isEmpty() )
-    emit searchData( reslist );
+    emit q->searchData( reslist );
 }
 
-void LdapClientSearch::finish()
+void LdapClientSearch::Private::finish()
 {
   mDataTimer.stop();
 
   slotDataTimer(); // emit final bunch of data
-  emit searchDone();
+  emit q->searchDone();
 }
 
-void LdapClientSearch::makeSearchData( QStringList& ret, LdapResultList& resList )
+void LdapClientSearch::Private::makeSearchData( QStringList& ret, LdapResultList& resList )
 {
   QString search_text_upper = mSearchText.toUpper();
 
@@ -590,7 +696,7 @@ void LdapClientSearch::makeSearchData( QStringList& ret, LdapResultList& resList
 
 bool LdapClientSearch::isAvailable() const
 {
-  return !mNoLDAPLookup;
+  return !d->mNoLDAPLookup;
 }
 
 

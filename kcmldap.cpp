@@ -45,6 +45,7 @@
 #include <kvbox.h>
 
 #include "ldapclient.h"
+#include "ldapserver.h"
 
 #include "addhostdialog_p.h"
 

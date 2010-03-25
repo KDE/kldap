@@ -21,6 +21,7 @@
 #include <kapplication.h>
 #include <kdebug.h>
 #include <kcmdlineargs.h>
+#include <kldap/ldapobject.h>
 
 #include <QEventLoop>
 
@@ -91,7 +92,7 @@ void TestLDAPClient::testIntevation()
   attrs << "l" << "Company" << "co" << "department" << "description" << "mail" << "facsimileTelephoneNumber" << "cn" << "homePhone" << "mobile" << "o" << "pager" << "postalAddress" << "st" << "street" << "title" << "uid" << "telephoneNumber" << "postalCode" << "objectClass";
   // the list from ldapclient.cpp
   //attrs << "cn" << "mail" << "givenname" << "sn" << "objectClass";
-  mClient->setAttrs( attrs );
+  mClient->setAttributes( attrs );
 
   // Taken from LdapSearch
   //QString mSearchText = QString::fromUtf8( "Till" );

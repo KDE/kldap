@@ -23,23 +23,21 @@
 
 #include "kldap_export.h"
 
-#include <kldap/ldif.h>
-#include <kldap/ldapobject.h>
-#include <kldap/ldapserver.h>
-
-#include <kio/job.h>
-
-#include <QObject>
-#include <QString>
-#include <QStringList>
-#include <QPointer>
-#include <QTimer>
+#include <QtCore/QObject>
+#include <QtCore/QStringList>
 
 class KConfig;
 class KConfigGroup;
+class KJob;
 
 namespace KLDAP {
 
+class LdapObject;
+class LdapServer;
+
+/**
+ * @since 4.5
+ */
 class KLDAP_EXPORT LdapClient : public QObject
 {
   Q_OBJECT
@@ -49,19 +47,38 @@ class KLDAP_EXPORT LdapClient : public QObject
     virtual ~LdapClient();
 
     /*! returns true if there is a query running */
-    bool isActive() const { return mActive; }
+    bool isActive() const;
 
     int clientNumber() const;
     int completionWeight() const;
     void setCompletionWeight( int );
 
-    const KLDAP::LdapServer& server() const { return mServer; }
-    void setServer( const KLDAP::LdapServer &server ) { mServer = server; }
+    const KLDAP::LdapServer& server() const;
+    void setServer( const KLDAP::LdapServer &server );
+
+    /*! Set the attributes that should be
+     * returned, or an empty list if
+     * all attributes are wanted
+     */
+    void setAttributes( const QStringList& attrs );
+
     /*! Return the attributes that should be
      * returned, or an empty list if
      * all attributes are wanted
      */
-    QStringList attrs() const { return mAttrs; }
+    QStringList attributes() const;
+
+    void setScope( const QString scope );
+
+    /*!
+     * Start the query with filter filter
+     */
+    void startQuery( const QString& filter );
+
+    /*!
+     * Abort a running query
+     */
+    void cancelQuery();
 
   Q_SIGNALS:
     /*! Emitted when the query is done */
@@ -75,58 +92,23 @@ class KLDAP_EXPORT LdapClient : public QObject
      */
     void result( const KLDAP::LdapClient &client, const KLDAP::LdapObject& );
 
-  public Q_SLOTS: // why are those slots?
-    /*! Set the attributes that should be
-     * returned, or an empty list if
-     * all attributes are wanted
-     */
-    void setAttrs( const QStringList& attrs );
-
-    void setScope( const QString scope ) { mScope = scope; }
-
-    /*!
-     * Start the query with filter filter
-     */
-    void startQuery( const QString& filter );
-
-    /*!
-     * Abort a running query
-     */
-    void cancelQuery();
-
-  protected Q_SLOTS:
-    void slotData( KIO::Job*, const QByteArray &data );
-    void slotInfoMessage( KJob*, const QString &info, const QString& );
-    void slotDone();
-
-  protected:
-    void startParseLDIF();
-    void parseLDIF( const QByteArray& data );
-    void endParseLDIF();
-    void finishCurrentObject();
-
-    KLDAP::LdapServer mServer;
-    QString mScope;
-    QStringList mAttrs;
-
-    QPointer<KIO::SimpleJob> mJob;
-    bool mActive;
-
-    KLDAP::LdapObject mCurrentObject;
-
   private:
-    KLDAP::Ldif mLdif;
-    int mClientNumber;
-    int mCompletionWeight;
+    //@cond PRIVATE
+    class Private;
+    Private* const d;
 
-//    class LdapClientPrivate;
-//    LdapClientPrivate* d;
+    Q_PRIVATE_SLOT( d, void slotData( KIO::Job*, const QByteArray& ) )
+    Q_PRIVATE_SLOT( d, void slotInfoMessage( KJob*, const QString&, const QString& ) )
+    Q_PRIVATE_SLOT( d, void slotDone() )
+    //@endcond
 };
 
 /**
  * Structure describing one result returned by a LDAP query
+ * @since 4.5
  */
-struct LdapResult {
+struct LdapResult
+{
   QString name;     ///< full name
   QStringList email;    ///< emails
   int clientNumber; ///< for sorting in a ldap-only lookup
@@ -134,13 +116,17 @@ struct LdapResult {
 };
 typedef QList<LdapResult> LdapResultList;
 
-
+/**
+ * @since 4.5
+ */
 class KLDAP_EXPORT LdapClientSearch : public QObject
 {
   Q_OBJECT
 
   public:
-    LdapClientSearch();
+    explicit LdapClientSearch( QObject *parent = 0 );
+
+    ~LdapClientSearch();
 
     static KConfig *config();
     static void readConfig( KLDAP::LdapServer &server, const KConfigGroup &config, int num, bool active );
@@ -151,7 +137,7 @@ class KLDAP_EXPORT LdapClientSearch : public QObject
     bool isAvailable() const;
     void updateCompletionWeights();
 
-    QList< LdapClient* > clients() const { return mClients; }
+    QList<LdapClient*> clients() const;
 
   Q_SIGNALS:
     /// Results, assembled as "Full Name <email>"
@@ -162,34 +148,17 @@ class KLDAP_EXPORT LdapClientSearch : public QObject
     void searchData( const KLDAP::LdapResultList& );
     void searchDone();
 
-  private Q_SLOTS:
-    void slotLDAPResult( const KLDAP::LdapClient& client, const KLDAP::LdapObject& );
-    void slotLDAPError( const QString& );
-    void slotLDAPDone();
-    void slotDataTimer();
-    void slotFileChanged( const QString& );
-
   private:
+    //@cond PRIVATE
+    class Private;
+    Private* const d;
 
-    struct ResultObject {
-      const LdapClient *client;
-      KLDAP::LdapObject object;
-    };
-
-    void readWeighForClient( LdapClient *client, const KConfigGroup &config, int clientNumber );
-    void readConfig();
-    void finish();
-    void makeSearchData( QStringList& ret, LdapResultList& resList );
-    QList< LdapClient* > mClients;
-    QString mSearchText;
-    QTimer mDataTimer;
-    int mActiveClients;
-    bool mNoLDAPLookup;
-    QList< ResultObject > mResults;
-    QString mConfigFile;
-
-  private:
-    class LdapSearchPrivate* d;
+    Q_PRIVATE_SLOT( d, void slotLDAPResult( const KLDAP::LdapClient&, const KLDAP::LdapObject& ) )
+    Q_PRIVATE_SLOT( d, void slotLDAPError( const QString& ) )
+    Q_PRIVATE_SLOT( d, void slotLDAPDone() )
+    Q_PRIVATE_SLOT( d, void slotDataTimer() )
+    Q_PRIVATE_SLOT( d, void slotFileChanged( const QString& ) )
+    //@endcond
 };
 
 }
