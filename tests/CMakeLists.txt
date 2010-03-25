@@ -16,3 +16,10 @@ target_link_libraries(testkldap  ${KDE4_KDECORE_LIBS} ${QT_QTTEST_LIBRARY} ${QT_
 
 endif(LDAP_FOUND)
 
+########### next target ###############
+
+set(testldapclient_SRCS testldapclient.cpp )
+
+kde4_add_executable(testldapclient TEST ${testldapclient_SRCS})
+
+target_link_libraries(testldapclient kdepim ${KDE4_KDEUI_LIBS} kldap)
