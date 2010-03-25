@@ -547,7 +547,7 @@ void LdapSearchDialog::Private::restoreSettings()
     mIsConfigured = true;
     for ( int j = 0; j < mNumHosts; ++j ) {
       KLDAP::LdapServer ldapServer;
-      KLDAP::LdapClient* ldapClient = new KLDAP::LdapClient( 0, q, "ldapclient" );
+      KLDAP::LdapClient* ldapClient = new KLDAP::LdapClient( 0, q );
       KLDAP::LdapClientSearch::readConfig( ldapServer, group, j, true );
       ldapClient->setServer( ldapServer );
       QStringList attrs;

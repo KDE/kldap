@@ -36,6 +36,8 @@ class LdapObject;
 class LdapServer;
 
 /**
+ * @short An object that represents a configured LDAP server.
+ *
  * @since 4.5
  */
 class KLDAP_EXPORT LdapClient : public QObject
@@ -43,52 +45,102 @@ class KLDAP_EXPORT LdapClient : public QObject
   Q_OBJECT
 
   public:
-    explicit LdapClient( int clientNumber, QObject* parent = 0, const char* name = 0 );
+    /**
+     * Creates a new ldap client.
+     *
+     * @param clientNumber The unique number of this client.
+     * @param parent The parent object.
+     */
+    explicit LdapClient( int clientNumber, QObject* parent = 0 );
+
+    /**
+     * Destroys the ldap client.
+     */
     virtual ~LdapClient();
 
-    /*! returns true if there is a query running */
+    /**
+     * Returns the number of this client.
+     */
+    int clientNumber() const;
+
+    /**
+     * Returns whether this client is currently running
+     * a search query.
+     */
     bool isActive() const;
 
-    int clientNumber() const;
-    int completionWeight() const;
-    void setCompletionWeight( int );
+    /**
+     * Sets the completion @p weight of this client.
+     *
+     * This value will be used to sort the results of this
+     * client when used for auto completion.
+     */
+    void setCompletionWeight( int weight );
 
-    const KLDAP::LdapServer& server() const;
+    /**
+     * Returns the completion weight of this client.
+     */
+    int completionWeight() const;
+
+    /**
+     * Sets the LDAP @p server information that shall be
+     * used by this client.
+     */
     void setServer( const KLDAP::LdapServer &server );
 
-    /*! Set the attributes that should be
-     * returned, or an empty list if
-     * all attributes are wanted
+    /**
+     * Returns the ldap server information that are used
+     * by this client.
      */
-    void setAttributes( const QStringList& attrs );
+    const KLDAP::LdapServer& server() const;
 
-    /*! Return the attributes that should be
-     * returned, or an empty list if
-     * all attributes are wanted
+    /**
+     * Sets the LDAP @p attributes that should be returned
+     * in the query result.
+     *
+     * Pass an empty list to include all available attributes.
+     */
+    void setAttributes( const QStringList& attributes );
+
+    /**
+     * Returns the LDAP attributes that should be returned
+     * in the query result.
      */
     QStringList attributes() const;
 
+    /**
+     * Sets the @p scope of the LDAP query.
+     *
+     * Valid values are 'one' or 'sub'.
+     */
     void setScope( const QString scope );
 
-    /*!
-     * Start the query with filter filter
+    /**
+     * Starts the query with the given @p filter.
      */
     void startQuery( const QString& filter );
 
-    /*!
-     * Abort a running query
+    /**
+     * Cancels a running query.
      */
     void cancelQuery();
 
   Q_SIGNALS:
-    /*! Emitted when the query is done */
+    /**
+     * This signal is emitted when the query has finished.
+     */
     void done();
 
-    /*! Emitted in case of error */
-    void error( const QString& );
+    /**
+     * This signal is emitted in case of an error.
+     *
+     * @param message A message that describes the error.
+     */
+    void error( const QString &message );
 
-    /*! Emitted once for each object returned
-     * from the query
+    /**
+     * This signal is emitted once for each object that is
+     * returned from the query
      */
     void result( const KLDAP::LdapClient &client, const KLDAP::LdapObject& );
 
@@ -129,8 +181,8 @@ class KLDAP_EXPORT LdapClientSearch : public QObject
     ~LdapClientSearch();
 
     static KConfig *config();
-    static void readConfig( KLDAP::LdapServer &server, const KConfigGroup &config, int num, bool active );
-    static void writeConfig( const KLDAP::LdapServer &server, KConfigGroup &config, int j, bool active );
+    static void readConfig( KLDAP::LdapServer &server, const KConfigGroup &config, int clientNumber, bool active );
+    static void writeConfig( const KLDAP::LdapServer &server, KConfigGroup &config, int clientNumber, bool active );
 
     void startSearch( const QString& txt );
     void cancelSearch();

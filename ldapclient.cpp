@@ -82,10 +82,9 @@ class LdapClient::Private
     int mCompletionWeight;
 };
 
-LdapClient::LdapClient( int clientNumber, QObject* parent, const char* name )
+LdapClient::LdapClient( int clientNumber, QObject* parent )
   : QObject( parent ), d( new Private( this ) )
 {
-  setObjectName( name );
   d->mClientNumber = clientNumber;
   d->mCompletionWeight = 50 - d->mClientNumber;
 }
