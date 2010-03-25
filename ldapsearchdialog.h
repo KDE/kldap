@@ -27,31 +27,57 @@
 
 #include <kabc/addressee.h>
 #include <kdialog.h>
-#include <kldap/ldapclient.h>
 
-#include <QtGui/QCloseEvent>
-
-class KComboBox;
-class KLineEdit;
-
-class QCheckBox;
-class QPushButton;
-class QTableView;
-class ContactListModel;
+class QCloseEvent;
 
 namespace KLDAP {
 
+class LdapClient;
+class LdapObject;
+
+/**
+ * @short A dialog to search contacts in a LDAP directory.
+ *
+ * This dialog allows the user to search for contacts inside
+ * a LDAP directory.
+ *
+ * @author Steffen Hansen <hansen@kde.org>
+ * @since 4.5
+ */
 class KLDAP_EXPORT LdapSearchDialog : public KDialog
 {
   Q_OBJECT
 
   public:
+    /**
+     * Creates a new ldap search dialog.
+     *
+     * @param parent The parent widget.
+     */
     LdapSearchDialog( QWidget* parent = 0 );
+
+    /**
+     * Destroys the ldap search dialog.
+     */
     ~LdapSearchDialog();
 
+    /**
+     * Sets the @p text in the search line edit.
+     */
+    void setSearchText( const QString &text );
+
+    /**
+     * Returns a list of contacts that have been selected
+     * in the LDAP search.
+     */
     KABC::Addressee::List selectedContacts() const;
 
-    QString selectedEMails() const { return QString(); }
+  Q_SIGNALS:
+    /**
+     * This signal is emitted whenever the user clicked the
+     * 'Add Selected' button.
+     */
+    void contactsAdded();
 
   protected Q_SLOTS:
     virtual void slotUser1();
@@ -60,40 +86,21 @@ class KLDAP_EXPORT LdapSearchDialog : public KDialog
   protected:
     virtual void closeEvent( QCloseEvent* );
 
-  private Q_SLOTS:
-    void slotAddResult( const KLDAP::LdapClient &client, const KLDAP::LdapObject& obj );
-    void slotSetScope( bool rec );
-    void slotStartSearch();
-    void slotStopSearch();
-    void slotSearchDone();
-    void slotError( const QString& );
-    void slotSelectAll();
-    void slotUnselectAll();
-    void slotSelectionChanged();
-
   private:
-    void saveSettings();
-    void restoreSettings();
-    void cancelQuery();
-
-    QString makeFilter( const QString& query, const QString& attr, bool startsWith ) const;
-
-    int mNumHosts;
-    QList<KLDAP::LdapClient*> mLdapClientList;
-    bool mIsConfigured;
-    KABC::Addressee::List mSelectedContacts;
-
-    KComboBox* mFilterCombo;
-    KComboBox* mSearchType;
-    KLineEdit* mSearchEdit;
-
-    QCheckBox* mRecursiveCheckbox;
-    QTableView* mResultView;
-    QPushButton* mSearchButton;
-    ContactListModel* mModel;
-
+    //@cond PRIVATE
     class Private;
     Private* const d;
+
+    Q_PRIVATE_SLOT( d, void slotAddResult( const KLDAP::LdapClient&, const KLDAP::LdapObject& ) )
+    Q_PRIVATE_SLOT( d, void slotSetScope( bool ) )
+    Q_PRIVATE_SLOT( d, void slotStartSearch() )
+    Q_PRIVATE_SLOT( d, void slotStopSearch() )
+    Q_PRIVATE_SLOT( d, void slotSearchDone() )
+    Q_PRIVATE_SLOT( d, void slotError( const QString& ) )
+    Q_PRIVATE_SLOT( d, void slotSelectAll() )
+    Q_PRIVATE_SLOT( d, void slotUnselectAll() )
+    Q_PRIVATE_SLOT( d, void slotSelectionChanged() )
+    //@endcond
 };
 
 }

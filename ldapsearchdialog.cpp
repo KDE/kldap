@@ -42,6 +42,7 @@
 #include <kconfiggroup.h>
 #include <kcmultidialog.h>
 #include <kdialogbuttonbox.h>
+#include <kldap/ldapclient.h>
 #include <klineedit.h>
 #include <klocale.h>
 #include <kmessagebox.h>
@@ -102,6 +103,40 @@ static QMap<QString, QString>& adrbookattr2ldap()
     keys[ i18n( "User ID" ) ] = "uid";
   }
   return keys;
+}
+
+static QString makeFilter( const QString& query, const QString& attr, bool startsWith )
+{
+  /* The reasoning behind this filter is:
+   * If it's a person, or a distlist, show it, even if it doesn't have an email address.
+   * If it's not a person, or a distlist, only show it if it has an email attribute.
+   * This allows both resource accounts with an email address which are not a person and
+   * person entries without an email address to show up, while still not showing things
+   * like structural entries in the ldap tree. */
+  QString result( "&(|(objectclass=person)(objectclass=groupofnames)(mail=*))(" );
+  if( query.isEmpty() )
+    // Return a filter that matches everything
+    return result + "|(cn=*)(sn=*)" + ')';
+
+  if ( attr == i18nc( "Search attribute: Name of contact", "Name" ) ) {
+    result += startsWith ? "|(cn=%1*)(sn=%2*)" : "|(cn=*%1*)(sn=*%2*)";
+    result = result.arg( query ).arg( query );
+  } else {
+    result += (startsWith ? "%1=%2*" : "%1=*%2*");
+    if ( attr == i18nc( "Search attribute: Email of the contact", "Email" ) ) {
+      result = result.arg( "mail" ).arg( query );
+    } else if ( attr == i18n( "Home Number" ) ) {
+      result = result.arg( "homePhone" ).arg( query );
+    } else if ( attr == i18n( "Work Number" ) ) {
+      result = result.arg( "telephoneNumber" ).arg( query );
+    } else {
+      // Error?
+      result.clear();
+      return result;
+    }
+  }
+  result += ')';
+  return result;
 }
 
 static KABC::Addressee convertLdapAttributesToAddressee( const KLDAP::LdapAttrMap& attrs )
@@ -169,7 +204,6 @@ static KABC::Addressee convertLdapAttributesToAddressee( const KLDAP::LdapAttrMa
 
   return addr;
 }
-
 
 class ContactListModel : public QAbstractTableModel
 {
@@ -313,13 +347,7 @@ class ContactListModel : public QAbstractTableModel
     QStringList mServerList;
 };
 
-class LdapSearchDialog::Private
-{
-  public:
-    static QList< QPair<KLDAP::LdapAttrMap, QString> > selectedItems( QAbstractItemView * );
-};
-
-QList< QPair<KLDAP::LdapAttrMap, QString> > LdapSearchDialog::Private::selectedItems( QAbstractItemView* view )
+static QList< QPair<KLDAP::LdapAttrMap, QString> > selectedItems( QAbstractItemView *view )
 {
   QList< QPair<KLDAP::LdapAttrMap, QString> > contacts;
 
@@ -332,10 +360,52 @@ QList< QPair<KLDAP::LdapAttrMap, QString> > LdapSearchDialog::Private::selectedI
   return contacts;
 }
 
+
+class LdapSearchDialog::Private
+{
+  public:
+    Private( LdapSearchDialog *qq )
+      : q( qq ),
+        mNumHosts( 0 ),
+        mIsConfigured( false ),
+        mModel( 0 )
+    {
+    }
+
+    void saveSettings();
+    void restoreSettings();
+    void cancelQuery();
+
+    void slotAddResult( const KLDAP::LdapClient&, const KLDAP::LdapObject& );
+    void slotSetScope( bool );
+    void slotStartSearch();
+    void slotStopSearch();
+    void slotSearchDone();
+    void slotError( const QString& );
+    void slotSelectAll();
+    void slotUnselectAll();
+    void slotSelectionChanged();
+
+    LdapSearchDialog *q;
+    int mNumHosts;
+    QList<KLDAP::LdapClient*> mLdapClientList;
+    bool mIsConfigured;
+    KABC::Addressee::List mSelectedContacts;
+
+    KComboBox* mFilterCombo;
+    KComboBox* mSearchType;
+    KLineEdit* mSearchEdit;
+
+    QCheckBox* mRecursiveCheckbox;
+    QTableView* mResultView;
+    QPushButton* mSearchButton;
+    ContactListModel* mModel;
+
+};
+
+
 LdapSearchDialog::LdapSearchDialog( QWidget* parent )
-  : KDialog( parent ),
-    mModel( 0 ),
-    d( new Private )
+  : KDialog( parent ), d( new Private( this ) )
 {
   setCaption( i18n( "Import Contacts from LDAP" ) );
   setButtons( Help | User1 | User2 | Cancel );
@@ -359,50 +429,50 @@ LdapSearchDialog::LdapSearchDialog( QWidget* parent )
   QLabel *label = new QLabel( i18n( "Search for:" ), groupBox );
   boxLayout->addWidget( label, 0, 0 );
 
-  mSearchEdit = new KLineEdit( groupBox );
-  boxLayout->addWidget( mSearchEdit, 0, 1 );
-  label->setBuddy( mSearchEdit );
+  d->mSearchEdit = new KLineEdit( groupBox );
+  boxLayout->addWidget( d->mSearchEdit, 0, 1 );
+  label->setBuddy( d->mSearchEdit );
 
   label = new QLabel( i18nc( "In LDAP attribute", "in" ), groupBox );
   boxLayout->addWidget( label, 0, 2 );
 
-  mFilterCombo = new KComboBox( groupBox );
-  mFilterCombo->addItem( i18nc( "@item:inlistbox Name of the contact", "Name" ) );
-  mFilterCombo->addItem( i18nc( "@item:inlistbox email address of the contact", "Email" ) );
-  mFilterCombo->addItem( i18nc( "@item:inlistbox", "Home Number" ) );
-  mFilterCombo->addItem( i18nc( "@item:inlistbox", "Work Number" ) );
-  boxLayout->addWidget( mFilterCombo, 0, 3 );
+  d->mFilterCombo = new KComboBox( groupBox );
+  d->mFilterCombo->addItem( i18nc( "@item:inlistbox Name of the contact", "Name" ) );
+  d->mFilterCombo->addItem( i18nc( "@item:inlistbox email address of the contact", "Email" ) );
+  d->mFilterCombo->addItem( i18nc( "@item:inlistbox", "Home Number" ) );
+  d->mFilterCombo->addItem( i18nc( "@item:inlistbox", "Work Number" ) );
+  boxLayout->addWidget( d->mFilterCombo, 0, 3 );
 
   QSize buttonSize;
-  mSearchButton = new QPushButton( i18n( "Stop" ), groupBox );
-  buttonSize = mSearchButton->sizeHint();
-  mSearchButton->setText( i18nc( "@action:button Start searching", "&Search" ) );
-  if ( buttonSize.width() < mSearchButton->sizeHint().width() )
-    buttonSize = mSearchButton->sizeHint();
-  mSearchButton->setFixedWidth( buttonSize.width() );
+  d->mSearchButton = new QPushButton( i18n( "Stop" ), groupBox );
+  buttonSize = d->mSearchButton->sizeHint();
+  d->mSearchButton->setText( i18nc( "@action:button Start searching", "&Search" ) );
+  if ( buttonSize.width() < d->mSearchButton->sizeHint().width() )
+    buttonSize = d->mSearchButton->sizeHint();
+  d->mSearchButton->setFixedWidth( buttonSize.width() );
 
-  mSearchButton->setDefault( true );
-  boxLayout->addWidget( mSearchButton, 0, 4 );
+  d->mSearchButton->setDefault( true );
+  boxLayout->addWidget( d->mSearchButton, 0, 4 );
 
-  mRecursiveCheckbox = new QCheckBox( i18n( "Recursive search" ), groupBox  );
-  mRecursiveCheckbox->setChecked( true );
-  boxLayout->addWidget( mRecursiveCheckbox, 1, 0, 1, 5 );
+  d->mRecursiveCheckbox = new QCheckBox( i18n( "Recursive search" ), groupBox  );
+  d->mRecursiveCheckbox->setChecked( true );
+  boxLayout->addWidget( d->mRecursiveCheckbox, 1, 0, 1, 5 );
 
-  mSearchType = new KComboBox( groupBox );
-  mSearchType->addItem( i18n( "Contains" ) );
-  mSearchType->addItem( i18n( "Starts With" ) );
-  boxLayout->addWidget( mSearchType, 1, 3, 1, 2 );
+  d->mSearchType = new KComboBox( groupBox );
+  d->mSearchType->addItem( i18n( "Contains" ) );
+  d->mSearchType->addItem( i18n( "Starts With" ) );
+  boxLayout->addWidget( d->mSearchType, 1, 3, 1, 2 );
 
   topLayout->addWidget( groupBox );
 
-  mResultView = new QTableView( page );
-  mResultView->setSelectionMode( QTableView::MultiSelection );
-  mResultView->setSelectionBehavior( QTableView::SelectRows );
-  mModel = new ContactListModel( mResultView );
-  mResultView->setModel( mModel );
-  mResultView->verticalHeader()->hide();
-  connect( mResultView, SIGNAL( clicked( const QModelIndex& ) ), SLOT( slotSelectionChanged() ) );
-  topLayout->addWidget( mResultView );
+  d->mResultView = new QTableView( page );
+  d->mResultView->setSelectionMode( QTableView::MultiSelection );
+  d->mResultView->setSelectionBehavior( QTableView::SelectRows );
+  d->mModel = new ContactListModel( d->mResultView );
+  d->mResultView->setModel( d->mModel );
+  d->mResultView->verticalHeader()->hide();
+  connect( d->mResultView, SIGNAL( clicked( const QModelIndex& ) ), SLOT( slotSelectionChanged() ) );
+  topLayout->addWidget( d->mResultView );
 
   KDialogButtonBox *buttons = new KDialogButtonBox( page, Qt::Horizontal );
   buttons->addButton( i18n( "Select All" ), QDialogButtonBox::ActionRole, this, SLOT( slotSelectAll() ) );
@@ -412,44 +482,46 @@ LdapSearchDialog::LdapSearchDialog( QWidget* parent )
 
   resize( QSize( 600, 400).expandedTo( minimumSizeHint() ) );
 
-  setButtonText( User1, i18n( "Import Selected" ) );
+  setButtonText( User1, i18n( "Add Selected" ) );
   setButtonText( User2, i18n( "Configure LDAP Servers..." ) );
 
-  mNumHosts = 0;
-  mIsConfigured = false;
-
-  connect( mRecursiveCheckbox, SIGNAL( toggled( bool ) ),
+  connect( d->mRecursiveCheckbox, SIGNAL( toggled( bool ) ),
            this, SLOT( slotSetScope( bool ) ) );
-  connect( mSearchButton, SIGNAL( clicked() ),
+  connect( d->mSearchButton, SIGNAL( clicked() ),
            this, SLOT( slotStartSearch() ) );
 
-  setTabOrder( mSearchEdit, mFilterCombo );
-  setTabOrder( mFilterCombo, mSearchButton );
-  mSearchEdit->setFocus();
+  setTabOrder( d->mSearchEdit, d->mFilterCombo );
+  setTabOrder( d->mFilterCombo, d->mSearchButton );
+  d->mSearchEdit->setFocus();
 
   connect( this, SIGNAL( user1Clicked() ), this, SLOT( slotUser1() ) );
   connect( this, SIGNAL( user2Clicked() ), this, SLOT( slotUser2() ) );
-  slotSelectionChanged();
-  restoreSettings();
+  d->slotSelectionChanged();
+  d->restoreSettings();
 }
 
 LdapSearchDialog::~LdapSearchDialog()
 {
-  saveSettings();
+  d->saveSettings();
   delete d;
+}
+
+void LdapSearchDialog::setSearchText( const QString &text )
+{
+  d->mSearchEdit->setText( text );
 }
 
 KABC::Addressee::List LdapSearchDialog::selectedContacts() const
 {
-  return mSelectedContacts;
+  return d->mSelectedContacts;
 }
 
-void LdapSearchDialog::slotSelectionChanged()
+void LdapSearchDialog::Private::slotSelectionChanged()
 {
-  enableButton( KDialog::User1, mResultView->selectionModel()->hasSelection() );
+  q->enableButton( KDialog::User1, mResultView->selectionModel()->hasSelection() );
 }
 
-void LdapSearchDialog::restoreSettings()
+void LdapSearchDialog::Private::restoreSettings()
 {
   // Create one KLDAP::LdapClient per selected server and configure it.
 
@@ -473,7 +545,7 @@ void LdapSearchDialog::restoreSettings()
     mIsConfigured = true;
     for ( int j = 0; j < mNumHosts; ++j ) {
       KLDAP::LdapServer ldapServer;
-      KLDAP::LdapClient* ldapClient = new KLDAP::LdapClient( 0, this, "ldapclient" );
+      KLDAP::LdapClient* ldapClient = new KLDAP::LdapClient( 0, q, "ldapclient" );
       KLDAP::LdapClientSearch::readConfig( ldapServer, group, j, true );
       ldapClient->setServer( ldapServer );
       QStringList attrs;
@@ -483,12 +555,12 @@ void LdapSearchDialog::restoreSettings()
 
       ldapClient->setAttrs( attrs );
 
-      connect( ldapClient, SIGNAL( result( const KLDAP::LdapClient&, const KLDAP::LdapObject& ) ),
-               this, SLOT( slotAddResult( const KLDAP::LdapClient&, const KLDAP::LdapObject& ) ) );
-      connect( ldapClient, SIGNAL( done() ),
-               this, SLOT( slotSearchDone() ) );
-      connect( ldapClient, SIGNAL( error( const QString& ) ),
-               this, SLOT( slotError( const QString& ) ) );
+      q->connect( ldapClient, SIGNAL( result( const KLDAP::LdapClient&, const KLDAP::LdapObject& ) ),
+                  q, SLOT( slotAddResult( const KLDAP::LdapClient&, const KLDAP::LdapObject& ) ) );
+      q->connect( ldapClient, SIGNAL( done() ),
+                  q, SLOT( slotSearchDone() ) );
+      q->connect( ldapClient, SIGNAL( error( const QString& ) ),
+                  q, SLOT( slotError( const QString& ) ) );
 
       mLdapClientList.append( ldapClient );
     }
@@ -497,7 +569,7 @@ void LdapSearchDialog::restoreSettings()
   }
 }
 
-void LdapSearchDialog::saveSettings()
+void LdapSearchDialog::Private::saveSettings()
 {
   KConfig config( "kaddressbookrc" );
   KConfigGroup group( &config, "LDAPSearch" );
@@ -505,19 +577,19 @@ void LdapSearchDialog::saveSettings()
   group.sync();
 }
 
-void LdapSearchDialog::cancelQuery()
+void LdapSearchDialog::Private::cancelQuery()
 {
   Q_FOREACH( KLDAP::LdapClient* client , mLdapClientList ) {
     client->cancelQuery();
   }
 }
 
-void LdapSearchDialog::slotAddResult( const KLDAP::LdapClient &client, const KLDAP::LdapObject& obj )
+void LdapSearchDialog::Private::slotAddResult( const KLDAP::LdapClient &client, const KLDAP::LdapObject& obj )
 {
   mModel->addContact( obj.attributes(), client.server().host() );
 }
 
-void LdapSearchDialog::slotSetScope( bool rec )
+void LdapSearchDialog::Private::slotSetScope( bool rec )
 {
     Q_FOREACH( KLDAP::LdapClient* client , mLdapClientList ) {
     if ( rec )
@@ -527,58 +599,23 @@ void LdapSearchDialog::slotSetScope( bool rec )
   }
 }
 
-QString LdapSearchDialog::makeFilter( const QString& query, const QString& attr,
-                                      bool startsWith ) const
-{
-  /* The reasoning behind this filter is:
-   * If it's a person, or a distlist, show it, even if it doesn't have an email address.
-   * If it's not a person, or a distlist, only show it if it has an email attribute.
-   * This allows both resource accounts with an email address which are not a person and
-   * person entries without an email address to show up, while still not showing things
-   * like structural entries in the ldap tree. */
-  QString result( "&(|(objectclass=person)(objectclass=groupofnames)(mail=*))(" );
-  if( query.isEmpty() )
-    // Return a filter that matches everything
-    return result + "|(cn=*)(sn=*)" + ')';
-
-  if ( attr == i18nc( "Search attribute: Name of contact", "Name" ) ) {
-    result += startsWith ? "|(cn=%1*)(sn=%2*)" : "|(cn=*%1*)(sn=*%2*)";
-    result = result.arg( query ).arg( query );
-  } else {
-    result += (startsWith ? "%1=%2*" : "%1=*%2*");
-    if ( attr == i18nc( "Search attribute: Email of the contact", "Email" ) ) {
-      result = result.arg( "mail" ).arg( query );
-    } else if ( attr == i18n( "Home Number" ) ) {
-      result = result.arg( "homePhone" ).arg( query );
-    } else if ( attr == i18n( "Work Number" ) ) {
-      result = result.arg( "telephoneNumber" ).arg( query );
-    } else {
-      // Error?
-      result.clear();
-      return result;
-    }
-  }
-  result += ')';
-  return result;
-}
-
-void LdapSearchDialog::slotStartSearch()
+void LdapSearchDialog::Private::slotStartSearch()
 {
   cancelQuery();
 
   if ( !mIsConfigured ) {
-    KMessageBox::error( this, i18n( "You must select a LDAP server before searching." ) );
-    slotUser2();
+    KMessageBox::error( q, i18n( "You must select a LDAP server before searching." ) );
+    q->slotUser2();
     return;
   }
 
   QApplication::setOverrideCursor( Qt::WaitCursor );
   mSearchButton->setText( i18n( "Stop" ) );
 
-  disconnect( mSearchButton, SIGNAL( clicked() ),
-              this, SLOT( slotStartSearch() ) );
-  connect( mSearchButton, SIGNAL( clicked() ),
-           this, SLOT( slotStopSearch() ) );
+  q->disconnect( mSearchButton, SIGNAL( clicked() ),
+                 q, SLOT( slotStartSearch() ) );
+  q->connect( mSearchButton, SIGNAL( clicked() ),
+              q, SLOT( slotStopSearch() ) );
 
   bool startsWith = (mSearchType->currentIndex() == 1);
 
@@ -592,13 +629,13 @@ void LdapSearchDialog::slotStartSearch()
   saveSettings();
 }
 
-void LdapSearchDialog::slotStopSearch()
+void LdapSearchDialog::Private::slotStopSearch()
 {
   cancelQuery();
   slotSearchDone();
 }
 
-void LdapSearchDialog::slotSearchDone()
+void LdapSearchDialog::Private::slotSearchDone()
 {
   // If there are no more active clients, we are done.
   Q_FOREACH( KLDAP::LdapClient* client , mLdapClientList ) {
@@ -606,33 +643,33 @@ void LdapSearchDialog::slotSearchDone()
       return;
   }
 
-  disconnect( mSearchButton, SIGNAL( clicked() ),
-              this, SLOT( slotStopSearch() ) );
-  connect( mSearchButton, SIGNAL( clicked() ),
-           this, SLOT( slotStartSearch() ) );
+  q->disconnect( mSearchButton, SIGNAL( clicked() ),
+                 q, SLOT( slotStopSearch() ) );
+  q->connect( mSearchButton, SIGNAL( clicked() ),
+              q, SLOT( slotStartSearch() ) );
 
   mSearchButton->setText( i18nc( "@action:button Start searching", "&Search" ) );
   QApplication::restoreOverrideCursor();
 }
 
-void LdapSearchDialog::slotError( const QString& error )
+void LdapSearchDialog::Private::slotError( const QString& error )
 {
   QApplication::restoreOverrideCursor();
-  KMessageBox::error( this, error );
+  KMessageBox::error( q, error );
 }
 
 void LdapSearchDialog::closeEvent( QCloseEvent* e )
 {
-  slotStopSearch();
+  d->slotStopSearch();
   e->accept();
 }
 
-void LdapSearchDialog::slotUnselectAll()
+void LdapSearchDialog::Private::slotUnselectAll()
 {
   mResultView->clearSelection();
 }
 
-void LdapSearchDialog::slotSelectAll()
+void LdapSearchDialog::Private::slotSelectAll()
 {
   mResultView->selectAll();
 }
@@ -641,23 +678,25 @@ void LdapSearchDialog::slotUser1()
 {
   // Import selected items
 
-  mSelectedContacts.clear();
+  d->mSelectedContacts.clear();
 
-  const QList< QPair<KLDAP::LdapAttrMap, QString> >& selectedItems = d->selectedItems( mResultView );
+  const QList< QPair<KLDAP::LdapAttrMap, QString> >& items = selectedItems( d->mResultView );
 
-  if ( !selectedItems.isEmpty() ) {
+  if ( !items.isEmpty() ) {
     const QDateTime now = QDateTime::currentDateTime();
 
-    for ( int i = 0; i < selectedItems.count(); ++i ) {
-      KABC::Addressee contact = convertLdapAttributesToAddressee( selectedItems.at( i ).first );
+    for ( int i = 0; i < items.count(); ++i ) {
+      KABC::Addressee contact = convertLdapAttributesToAddressee( items.at( i ).first );
 
       // set a comment where the contact came from
       contact.setNote( i18nc( "arguments are host name, datetime", "Imported from LDAP directory %1 on %2",
-                              selectedItems.at( i ).second, KGlobal::locale()->formatDateTime( now ) ) );
+                              items.at( i ).second, KGlobal::locale()->formatDateTime( now ) ) );
 
-      mSelectedContacts.append( contact );
+      d->mSelectedContacts.append( contact );
     }
   }
+
+  emit contactsAdded();
 
   accept();
 }
@@ -671,7 +710,7 @@ void LdapSearchDialog::slotUser2()
   dialog.addModule( "kcmldap.desktop" );
 
   if ( dialog.exec() )
-    restoreSettings();
+    d->restoreSettings();
 }
 
 #include "ldapsearchdialog.moc"
