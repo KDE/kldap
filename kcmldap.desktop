@@ -10,5 +10,11 @@ X-KDE-CfgDlgHierarchy=KAddressBook
 X-KDE-Weight=200
 
 Name=LDAP Server Settings
+Name[pt]=Configuração do Servidor de LDAP
+Name[sv]=LDAP-serverinställningar
+Name[uk]=Параметри серверів LDAP
 Comment=Configure the available LDAP servers
+Comment[pt]=Configurar os servidores de LDAP disponíveis
+Comment[sv]=Anpassa tillgängliga LDAP-servrar
+Comment[uk]=Налаштування доступних серверів LDAP
 X-KDE-Keywords=kaddressbook, configure, settings, LDAP
