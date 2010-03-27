@@ -606,7 +606,7 @@ void LdapSearchDialog::Private::slotStartSearch()
   cancelQuery();
 
   if ( !mIsConfigured ) {
-    KMessageBox::error( q, i18n( "You must select a LDAP server before searching." ) );
+    KMessageBox::error( q, i18n( "You must select an LDAP server before searching." ) );
     q->slotUser2();
     return;
   }
