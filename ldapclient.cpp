@@ -393,7 +393,7 @@ class LdapClientSearch::Private
     void readWeighForClient( LdapClient *client, const KConfigGroup &config, int clientNumber );
     void readConfig();
     void finish();
-    void makeSearchData( QStringList& ret, LdapResultList& resList );
+    void makeSearchData( QStringList& ret, LdapResult::List& resList );
 
     void slotLDAPResult( const KLDAP::LdapClient& client, const KLDAP::LdapObject& );
     void slotLDAPError( const QString& );
@@ -574,7 +574,7 @@ void LdapClientSearch::Private::slotLDAPDone()
 void LdapClientSearch::Private::slotDataTimer()
 {
   QStringList lst;
-  LdapResultList reslist;
+  LdapResult::List reslist;
   makeSearchData( lst, reslist );
   if ( !lst.isEmpty() )
     emit q->searchData( lst );
@@ -590,7 +590,7 @@ void LdapClientSearch::Private::finish()
   emit q->searchDone();
 }
 
-void LdapClientSearch::Private::makeSearchData( QStringList& ret, LdapResultList& resList )
+void LdapClientSearch::Private::makeSearchData( QStringList& ret, LdapResult::List& resList )
 {
   QString search_text_upper = mSearchText.toUpper();
 

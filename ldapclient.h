@@ -38,6 +38,10 @@ class LdapServer;
 /**
  * @short An object that represents a configured LDAP server.
  *
+ * This class represents a client that to an LDAP server that
+ * can be used for LDAP lookups. Every client is identified by
+ * a unique numeric id.
+ *
  * @since 4.5
  */
 class KLDAP_EXPORT LdapClient : public QObject
@@ -156,17 +160,22 @@ class KLDAP_EXPORT LdapClient : public QObject
 };
 
 /**
- * Structure describing one result returned by a LDAP query
+ * Describes the result returned by an LdapClientSearch query.
+ *
  * @since 4.5
  */
 struct LdapResult
 {
-  QString name;     ///< full name
-  QStringList email;    ///< emails
-  int clientNumber; ///< for sorting in a ldap-only lookup
-  int completionWeight; ///< for sorting in a completion list
+  /**
+   * A list of LdapResult objects.
+   */
+  typedef QList<LdapResult> List;
+
+  QString name;         ///< The full name of the contact.
+  QStringList email;    ///< The list of emails of the contact.
+  int clientNumber;     ///< The client the contact comes from (used for sorting in a ldap-only lookup).
+  int completionWeight; ///< The weight of the contact (used for sorting in a completion list).
 };
-typedef QList<LdapResult> LdapResultList;
 
 /**
  * @since 4.5
@@ -176,28 +185,87 @@ class KLDAP_EXPORT LdapClientSearch : public QObject
   Q_OBJECT
 
   public:
+    /**
+     * Creates a new ldap client search object.
+     *
+     * @param parent The parent object.
+     */
     explicit LdapClientSearch( QObject *parent = 0 );
 
+    /**
+     * Destroys the ldap client search object.
+     */
     ~LdapClientSearch();
 
+    /**
+     * Returns the global config object, which stores the LdapClient configurations.
+     */
     static KConfig *config();
-    static void readConfig( KLDAP::LdapServer &server, const KConfigGroup &config, int clientNumber, bool active );
-    static void writeConfig( const KLDAP::LdapServer &server, KConfigGroup &config, int clientNumber, bool active );
 
-    void startSearch( const QString& txt );
+    /**
+     * Reads the LDAP @p server settings from the given config @p group for the given LDAP @p clientNumber.
+     *
+     * @param active Defines whether the active settings shall be read.
+     */
+    static void readConfig( KLDAP::LdapServer &server, const KConfigGroup &group, int clientNumber, bool active );
+
+    /**
+     * Writes the LDAP @p server settings to the given config @p group for the given LDAP @p clientNumber.
+     *
+     * @param active Defines whether the active settings shall be written.
+     */
+    static void writeConfig( const KLDAP::LdapServer &server, KConfigGroup &group, int clientNumber, bool active );
+
+    /**
+     * Starts the LDAP search on all configured LDAP clients with the given search @p query.
+     */
+    void startSearch( const QString &query );
+
+    /**
+     * Cancels the currently running search query.
+     */
     void cancelSearch();
+
+    /**
+     * Returns whether LDAP search is possible at all.
+     *
+     * @note This method can return @c false if either no LDAP is configured
+     *       or the system does not support the KIO LDAP protocol.
+     */
     bool isAvailable() const;
+
+    /**
+     * Updates the completion weights for the configured LDAP clients from
+     * the configuration file.
+     */
     void updateCompletionWeights();
 
+    /**
+     * Returns the list of configured LDAP clients.
+     */
     QList<LdapClient*> clients() const;
 
   Q_SIGNALS:
-    /// Results, assembled as "Full Name <email>"
-    /// (This signal can be emitted many times)
-    void searchData( const QStringList& );
-    /// Another form for the results, with separate fields
-    /// (This signal can be emitted many times)
-    void searchData( const KLDAP::LdapResultList& );
+    /**
+     * This signal is emitted whenever new contacts have been found
+     * during the lookup.
+     *
+     * @param results The contacts in the form "Full Name <email>"
+     */
+    void searchData( const QStringList &results );
+
+    /**
+     * This signal is emitted whenever new contacts have been found
+     * during the lookup.
+     *
+     * @param results The list of found contacts.
+     */
+    void searchData( const KLDAP::LdapResult::List &results );
+
+    /**
+     * This signal is emitted whenever the lookup is complete or the
+     * user has canceled the query.
+     */
     void searchDone();
 
   private:
