@@ -155,7 +155,8 @@ void KLdapTest::testLdapUrl()
   LdapUrl url;
   bool critical;
 
-  url.setUrl( "ldap://cn=manager,dc=kde,dc=org:password@localhost:3999/dc=kde,dc=org?cn,mail?sub?(objectClass=*)?x-dir=base" );
+  url.setUrl( "ldap://cn=manager,dc=kde,dc=org:password@localhost:3999/"
+              "dc=kde,dc=org?cn,mail?sub?(objectClass=*)?x-dir=base" );
   url.parseQuery();
 
   QCOMPARE( url.user(), QString::fromLatin1( "cn=manager,dc=kde,dc=org" ) );
@@ -188,7 +189,7 @@ void KLdapTest::testLdapConnection()
   if ( ( ret = op.bind_s() ) ) {
     kDebug() << "Could not bind to server. Error was:" << conn.ldapErrorString();
   }
-  QEXPECT_FAIL("", "Will fail since no server is available for testing", Abort);
+  QEXPECT_FAIL( "", "Will fail since no server is available for testing", Abort );
   QCOMPARE( ret, 0 );
 }
 
@@ -207,7 +208,7 @@ void KLdapTest::testLdapSearch()
     qApp->processEvents();
   }
 
-  QEXPECT_FAIL("", "Will fail since no server is available for testing", Abort);
+  QEXPECT_FAIL( "", "Will fail since no server is available for testing", Abort );
   QCOMPARE( success, true );
 
   kDebug() << "Search found" << m_objects.size() << "matching entries";
@@ -259,7 +260,7 @@ void KLdapTest::testLdapModel()
   if ( ( ret = op.bind_s() ) ) {
     kDebug() << "Could not bind to server. Error was:" << conn.ldapErrorString();
   }
-  QEXPECT_FAIL("", "Will fail since no server is available for testing", Abort);
+  QEXPECT_FAIL( "", "Will fail since no server is available for testing", Abort );
   QCOMPARE( ret, 0 );
 
   // Let's use this connection with the model
@@ -283,7 +284,8 @@ void KLdapTest::testLdapModel()
   LdapUrl url;
   bool critical;
 
-  url.setUrl("ldap://cn=manager,dc=kde,dc=org:password@localhost:3999/dc=kde,dc=org?cn,mail?sub?(objectClass=*)?x-dir=base");
+  url.setUrl("ldap://cn=manager,dc=kde,dc=org:password@localhost:3999"
+             "/dc=kde,dc=org?cn,mail?sub?(objectClass=*)?x-dir=base");
   url.parseQuery();
 
   QCOMPARE( url.user(), QString::fromLatin1("cn=manager,dc=kde,dc=org") );
@@ -301,8 +303,10 @@ void KLdapTest::testLdapModel()
   QCOMPARE( url.dn(), QString::fromLatin1("ou=People,dc=kde,dc=org") );
 
   LdapServer server;
-//  url.setUrl("ldaps://cn=manager,dc=kde,dc=org:passwor@localhost:3999/dc=kde,dc=org????x-timelimt=5,x-sizelimit=6,x=pagesize=7,binddn=cn=apple,ou=berry");
-url.setUrl("ldaps://cn=manager,dc=kde,dc=org:password@localhost:3999/dc=kde,dc=org??base??x-timelimit=5");
+//  url.setUrl("ldaps://cn=manager,dc=kde,dc=org:passwor@localhost:3999/"
+               "dc=kde,dc=org????x-timelimt=5,x-sizelimit=6,x=pagesize=7,binddn=cn=apple,ou=berry");
+url.setUrl("ldaps://cn=manager,dc=kde,dc=org:password@localhost:3999/"
+           "dc=kde,dc=org??base??x-timelimit=5");
 url.parseQuery();
 server.setUrl( url );
 QCOMPARE( url.query(), QString::fromLatin1("??base??x-timelimit=5") );
@@ -410,7 +414,8 @@ kDebug() << "next tag:" << a << "size:" << bl;
   result = op.result( msgid );
   kDebug() << "error code" << conn.ldapErrorCode() << "str:" << conn.ldapErrorString();
 
-  msgid = op.compare( "ou=People,dc=gyurco,dc=localdomain", "objectClass", QByteArray("inetOrgPerson") );
+  msgid = op.compare( "ou=People,dc=gyurco,dc=localdomain", "objectClass",
+                      QByteArray("inetOrgPerson") );
   kDebug() << "search msgid" << msgid;
   result = op.result( msgid );
   kDebug() << "error code" << conn.ldapErrorCode() << "str:" << conn.ldapErrorString();

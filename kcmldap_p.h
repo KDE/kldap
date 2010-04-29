@@ -34,7 +34,7 @@ class KCMLdap : public KCModule
   Q_OBJECT
 
   public:
-    explicit KCMLdap( QWidget* parent, const QVariantList &args );
+    explicit KCMLdap( QWidget *parent, const QVariantList &args );
     ~KCMLdap();
 
     virtual void load();

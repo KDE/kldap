@@ -55,7 +55,7 @@ class KLDAP_EXPORT LdapClient : public QObject
      * @param clientNumber The unique number of this client.
      * @param parent The parent object.
      */
-    explicit LdapClient( int clientNumber, QObject* parent = 0 );
+    explicit LdapClient( int clientNumber, QObject *parent = 0 );
 
     /**
      * Destroys the ldap client.
@@ -104,7 +104,7 @@ class KLDAP_EXPORT LdapClient : public QObject
      *
      * Pass an empty list to include all available attributes.
      */
-    void setAttributes( const QStringList& attributes );
+    void setAttributes( const QStringList &attributes );
 
     /**
      * Returns the LDAP attributes that should be returned
@@ -122,7 +122,7 @@ class KLDAP_EXPORT LdapClient : public QObject
     /**
      * Starts the query with the given @p filter.
      */
-    void startQuery( const QString& filter );
+    void startQuery( const QString &filter );
 
     /**
      * Cancels a running query.
@@ -203,18 +203,22 @@ class KLDAP_EXPORT LdapClientSearch : public QObject
     static KConfig *config();
 
     /**
-     * Reads the LDAP @p server settings from the given config @p group for the given LDAP @p clientNumber.
+     * Reads the LDAP @p server settings from the given config @p group for the
+     * given LDAP @p clientNumber.
      *
      * @param active Defines whether the active settings shall be read.
      */
-    static void readConfig( KLDAP::LdapServer &server, const KConfigGroup &group, int clientNumber, bool active );
+    static void readConfig( KLDAP::LdapServer &server, const KConfigGroup &group,
+                            int clientNumber, bool active );
 
     /**
-     * Writes the LDAP @p server settings to the given config @p group for the given LDAP @p clientNumber.
+     * Writes the LDAP @p server settings to the given config @p group for the
+     * given LDAP @p clientNumber.
      *
      * @param active Defines whether the active settings shall be written.
      */
-    static void writeConfig( const KLDAP::LdapServer &server, KConfigGroup &group, int clientNumber, bool active );
+    static void writeConfig( const KLDAP::LdapServer &server, KConfigGroup &group,
+                             int clientNumber, bool active );
 
     /**
      * Starts the LDAP search on all configured LDAP clients with the given search @p query.

@@ -54,7 +54,7 @@ class KLDAP_EXPORT LdapSearchDialog : public KDialog
      *
      * @param parent The parent widget.
      */
-    LdapSearchDialog( QWidget* parent = 0 );
+    LdapSearchDialog( QWidget *parent = 0 );
 
     /**
      * Destroys the ldap search dialog.

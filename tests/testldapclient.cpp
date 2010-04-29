@@ -28,17 +28,17 @@
 #include <assert.h>
 #include <stdlib.h>
 
-int main(int argc, char *argv[])
+int main( int argc, char *argv[] )
 {
   // KApplication::disableAutoDcopRegistration();
-  KCmdLineArgs::init(argc,argv,"testldapclient", 0, KLocalizedString(), 0, KLocalizedString());
+  KCmdLineArgs::init( argc, argv, "testldapclient", 0, KLocalizedString(), 0, KLocalizedString() );
   KApplication app;
 
   TestLDAPClient test;
   test.setup();
   test.runAll();
   test.cleanup();
-  kDebug() <<"All tests OK.";
+  kDebug() << "All tests OK.";
   return 0;
 }
 
@@ -51,20 +51,24 @@ void TestLDAPClient::runAll()
   testIntevation();
 }
 
-bool TestLDAPClient::check(const QString& txt, QString a, QString b)
+bool TestLDAPClient::check( const QString &txt, QString a, QString b )
 {
-  if (a.isEmpty())
+  if ( a.isEmpty() ) {
     a.clear();
-  if (b.isEmpty())
-    b.clear();
-  if (a == b) {
-    kDebug() << txt <<" : checking '" << a <<"' against expected value '" << b <<"'..." <<"ok";
   }
-  else {
+
+  if ( b.isEmpty() ) {
+    b.clear();
+  }
+
+  if ( a == b ) {
+    kDebug() << txt <<" : checking '" << a <<"' against expected value '" << b <<"'..." <<"ok";
+  } else {
     kDebug() << txt <<" : checking '" << a <<"' against expected value '" << b <<"'..." <<"KO !";
     cleanup();
-    exit(1);
+    exit( 1 );
   }
+
   return true;
 }
 
@@ -89,19 +93,26 @@ void TestLDAPClient::testIntevation()
 
   // Same list as in kaddressbook's ldapsearchdialog
   QStringList attrs;
-  attrs << "l" << "Company" << "co" << "department" << "description" << "mail" << "facsimileTelephoneNumber" << "cn" << "homePhone" << "mobile" << "o" << "pager" << "postalAddress" << "st" << "street" << "title" << "uid" << "telephoneNumber" << "postalCode" << "objectClass";
+  attrs << "l" << "Company" << "co" << "department" << "description" << "mail"
+        << "facsimileTelephoneNumber" << "cn" << "homePhone" << "mobile" << "o"
+        << "pager" << "postalAddress" << "st" << "street"
+        << "title" << "uid" << "telephoneNumber" << "postalCode" << "objectClass";
   // the list from ldapclient.cpp
   //attrs << "cn" << "mail" << "givenname" << "sn" << "objectClass";
   mClient->setAttributes( attrs );
 
   // Taken from LdapSearch
-  //QString mSearchText = QString::fromUtf8( "Till" );
-  //QString filter = QString( "&(|(objectclass=person)(objectclass=groupOfNames)(mail=*))(|(cn=%1*)(mail=%2*)(givenName=%3*)(sn=%4*))" )
-  //                 .arg( mSearchText ).arg( mSearchText ).arg( mSearchText ).arg( mSearchText );
+  /*
+    QString mSearchText = QString::fromUtf8( "Till" );
+    QString filter = QString( "&(|(objectclass=person)(objectclass=groupOfNames)(mail=*))"
+                              "(|(cn=%1*)(mail=%2*)(givenName=%3*)(sn=%4*))" )
+                     .arg( mSearchText ).arg( mSearchText ).arg( mSearchText ).arg( mSearchText );
+   */
 
   // For some reason a fromUtf8 broke the search for me (no results).
   // But this certainly looks fishy, it might break on non-utf8 systems.
-  QString filter = "&(|(objectclass=person)(objectclass=groupofnames)(mail=*))(|(cn=*Ägypten MDK*)(sn=*Ägypten MDK*))";
+  QString filter = "&(|(objectclass=person)(objectclass=groupofnames)(mail=*))"
+                   "(|(cn=*Ägypten MDK*)(sn=*Ägypten MDK*))";
 
   connect( mClient, SIGNAL( result( const LdapClient&, const KLDAP::LdapObject& ) ),
            this, SLOT( slotLDAPResult( const LdapClient&, const KLDAP::LdapObject& ) ) );
@@ -112,42 +123,48 @@ void TestLDAPClient::testIntevation()
   mClient->startQuery( filter );
 
   QEventLoop eventLoop;
-  connect(this, SIGNAL(leaveModality()),
-          &eventLoop, SLOT(quit()));
-  eventLoop.exec(QEventLoop::ExcludeUserInputEvents);
+  connect( this, SIGNAL( leaveModality() ),
+           &eventLoop, SLOT( quit() ) );
+  eventLoop.exec( QEventLoop::ExcludeUserInputEvents );
 
-  delete mClient; mClient = 0;
+  delete mClient;
+  mClient = 0;
 }
 
 // from kaddressbook... ugly though...
 static QString asUtf8( const QByteArray &val )
 {
-  if ( val.isEmpty() )
+  if ( val.isEmpty() ) {
     return QString();
+  }
 
   const char *data = val.data();
 
   //QString::fromUtf8() bug workaround
-  if ( data[ val.size() - 1 ] == '\0' )
+  if ( data[ val.size() - 1 ] == '\0' ) {
     return QString::fromUtf8( data, val.size() - 1 );
-  else
+  } else {
     return QString::fromUtf8( data, val.size() );
+  }
 }
 
-static QString join( const KLDAP::LdapAttrValue& lst, const QString& sep )
+static QString join( const KLDAP::LdapAttrValue &lst, const QString &sep )
 {
   QString res;
   bool already = false;
   for ( KLDAP::LdapAttrValue::ConstIterator it = lst.begin(); it != lst.end(); ++it ) {
-    if ( already )
+    if ( already ) {
       res += sep;
+    }
+
     already = true;
     res += asUtf8( *it );
   }
+
   return res;
 }
 
-void TestLDAPClient::slotLDAPResult( const LdapClient&, const KLDAP::LdapObject& obj )
+void TestLDAPClient::slotLDAPResult( const LdapClient&, const KLDAP::LdapObject &obj )
 {
   QString cn = join( obj.attributes()[ "cn" ], ", " );
   kDebug() <<" cn:" << cn;

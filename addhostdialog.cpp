@@ -30,7 +30,7 @@
 #include <klineedit.h>
 #include <klocale.h>
 
-AddHostDialog::AddHostDialog( KLDAP::LdapServer *server, QWidget* parent )
+AddHostDialog::AddHostDialog( KLDAP::LdapServer *server, QWidget *parent )
   : KDialog( parent )
 {
   setCaption( i18n( "Add Host" ) );
@@ -99,7 +99,7 @@ AddHostDialog::AddHostDialog( KLDAP::LdapServer *server, QWidget* parent )
   mCfg->setMech( mServer->mech() );
 
   KAcceleratorManager::manage( this );
-  connect(this,SIGNAL(okClicked()),SLOT(slotOk()));
+  connect( this, SIGNAL( okClicked() ), SLOT( slotOk() ) );
 }
 
 AddHostDialog::~AddHostDialog()

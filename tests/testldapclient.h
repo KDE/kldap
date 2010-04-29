@@ -23,7 +23,6 @@
 
 #include "../ldapclient.h"
 
-
 namespace KLDAP {
 class LdapClient;
 class LdapObject;
@@ -35,7 +34,7 @@ class TestLDAPClient : public QObject
 {
     Q_OBJECT
 
-public:
+  public:
     TestLDAPClient() {}
     void setup();
     void runAll();
@@ -44,16 +43,16 @@ public:
     // tests
     void testIntevation();
 
-Q_SIGNALS:
+  Q_SIGNALS:
     void leaveModality();
 
-private Q_SLOTS:
+  private Q_SLOTS:
     void slotLDAPResult( const LdapClient&, const KLDAP::LdapObject& );
     void slotLDAPError( const QString& );
     void slotLDAPDone();
 
-private:
-    bool check(const QString& txt, QString a, QString b);
+  private:
+    bool check( const QString&, QString, QString );
 
     LdapClient* mClient;
 };
