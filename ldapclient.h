@@ -97,7 +97,7 @@ class KLDAP_EXPORT LdapClient : public QObject
      * Returns the ldap server information that are used
      * by this client.
      */
-    const KLDAP::LdapServer& server() const;
+    const KLDAP::LdapServer server() const;
 
     /**
      * Sets the LDAP @p attributes that should be returned

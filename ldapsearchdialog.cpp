@@ -823,7 +823,7 @@ void LdapSearchDialog::slotUser2()
   dialog.setCaption( i18n( "Configure the Address Book LDAP Settings" ) );
   dialog.addModule( "kcmldap.desktop" );
 
-  if ( dialog.exec() ) {
+  if ( dialog.exec() ) { //krazy:exclude=crashy
     d->restoreSettings();
   }
 }

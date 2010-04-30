@@ -105,7 +105,7 @@ void LdapClient::setServer( const KLDAP::LdapServer &server )
   d->mServer = server;
 }
 
-const KLDAP::LdapServer& LdapClient::server() const
+const KLDAP::LdapServer LdapClient::server() const
 {
   return d->mServer;
 }
