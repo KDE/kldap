@@ -77,7 +77,7 @@ include_directories(
     ${kldap_EXTRA_INCLUDES} 
 )
 
-target_link_libraries(kldap ${KDE4_KIO_LIBS} ${KDE4_KUTILS_LIBS} ${KDE4_KDECORE_LIBS} ${kldap_EXTRA_LIBS} kabc )
+target_link_libraries(kldap ${KDE4_KIO_LIBS} ${KDE4_KCMUTILS_LIBS} ${KDE4_KDECORE_LIBS} ${kldap_EXTRA_LIBS} kabc )
 
 set_target_properties(kldap PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 install(TARGETS kldap EXPORT kdepimlibsLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
