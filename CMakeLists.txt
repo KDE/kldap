@@ -54,10 +54,8 @@ set(kldap_LIB_SRCS
    ldapobject.cpp
    ldapconnection.cpp
    ldapoperation.cpp
-   ldapclient.cpp
    ldapcontrol.cpp
    ldapsearch.cpp
-   ldapsearchdialog.cpp
    ldapconfigwidget.cpp
    ldapdn.cpp
    ldapmodelnode_p.cpp
@@ -82,25 +80,10 @@ target_link_libraries(kldap ${KDE4_KIO_LIBS} ${KDE4_KCMUTILS_LIBS} ${KDE4_KDECOR
 set_target_properties(kldap PROPERTIES VERSION ${GENERIC_LIB_VERSION} SOVERSION ${GENERIC_LIB_SOVERSION})
 install(TARGETS kldap EXPORT kdepimlibsLibraryTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
 
-########### next target ###############
-
-set( kcm_ldap_SRCS
-     addhostdialog.cpp
-     kcmldap.cpp
-)
-
-kde4_add_plugin(kcm_ldap ${kcm_ldap_SRCS})
-
-target_link_libraries(kcm_ldap ${KDE4_KDECORE_LIBS} ${KDE4_KDEUI_LIBS} kldap)
-
-install(TARGETS kcm_ldap DESTINATION ${PLUGIN_INSTALL_DIR})
-
 ########### install files ###############
 
 install( FILES ber.h kldap_export.h ldapdefs.h ldif.h ldapurl.h ldapserver.h ldapobject.h
-  ldapconnection.h ldapoperation.h ldapclient.h
-  ldapconfigwidget.h ldapcontrol.h ldapsearch.h ldapsearchdialog.h
+  ldapconnection.h ldapoperation.h
+  ldapconfigwidget.h ldapcontrol.h ldapsearch.h
   ldapdn.h ldapmodel.h ldapstructureproxymodel.h ldapattributeproxymodel.h
   DESTINATION ${INCLUDE_INSTALL_DIR}/kldap COMPONENT Devel)
-
-install(FILES kcmldap.desktop DESTINATION ${SERVICES_INSTALL_DIR})
