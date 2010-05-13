@@ -19,6 +19,7 @@
  * Boston, MA 02110-1301, USA.
  */
 
+//AK_REVIEW: move back to libkdepim, not ready yet
 #ifndef KLDAP_LDAPCLIENT_H
 #define KLDAP_LDAPCLIENT_H
 

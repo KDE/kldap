@@ -20,7 +20,7 @@
  * the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
  * Boston, MA 02110-1301, USA.
  */
-
+//AK_REVIEW: move back to libkdepim, not ready yet
 #ifndef KLDAP_LDAPSEARCHDIALOG_H
 #define KLDAP_LDAPSEARCHDIALOG_H
 
