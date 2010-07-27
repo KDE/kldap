@@ -24,7 +24,10 @@
 #include <kdemacros.h>
 
 #ifndef KLDAP_EXPORT
-# if defined(MAKE_KLDAP_LIB)
+# if defined(KDEPIM_STATIC_LIBS)
+   /* No export/import for static libraries */
+#  define KLDAP_EXPORT
+# elif defined(MAKE_KLDAP_LIB)
    /* We are building this library */
 #  define KLDAP_EXPORT KDE_EXPORT
 # else

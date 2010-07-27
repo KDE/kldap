@@ -65,7 +65,7 @@ set(kldap_LIB_SRCS
    ldapattributeproxymodel.cpp)
 
 
-kde4_add_library(kldap SHARED ${kldap_LIB_SRCS})
+kde4_add_library(kldap ${LIBRARY_TYPE} ${kldap_LIB_SRCS})
 
 include_directories(
     ${CMAKE_CURRENT_SOURCE_DIR}
