@@ -5,11 +5,11 @@ include(CheckSymbolExists)
 add_definitions( -DKDE_DEFAULT_DEBUG_AREA=5322 )
 
 macro_optional_find_package(Ldap)
-macro_log_feature(LDAP_FOUND "OpenLDAP" "LDAP (Lightweight Directory Access Protocol) libraries" "http://www.openldap.org" FALSE "" "STRONGLY RECOMMENDED: Needed to provide LDAP functionality in KDE" )
+macro_log_feature(LDAP_FOUND "OpenLDAP" "LDAP support" "http://www.openldap.org" FALSE "" "STRONGLY RECOMMENDED: Without this, the KLDAP library will be useless" )
 
 #look for Sasl2 in the top-level CMakeLists.txt file now
 #macro_optional_find_package(Sasl2)
-#macro_log_feature(SASL2_FOUND "cyrus-sasl" "Cyrus SASL API" "http://asg.web.cmu.edu/sasl/sasl-library.html" FALSE "" "Needed to support authentication of logins" )
+#macro_log_feature(SASL2_FOUND "cyrus-sasl" "Support for authentication over LDAP" "http://asg.web.cmu.edu/sasl/sasl-library.html" FALSE "" "" )
 
 check_include_files(sys/time.h    HAVE_SYS_TIME_H)
 
