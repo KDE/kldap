@@ -264,6 +264,8 @@ int LdapConnection::connect()
   d->mLDAP = ldap_init( d->mServer.host().toLatin1().data(), d->mServer.port() );
   if ( d->mLDAP == 0 ) {
     ret = -1;
+  } else {
+    ret = LDAP_SUCCESS;
   }
 #endif
   if ( ret != LDAP_SUCCESS ) {
