@@ -35,9 +35,13 @@
 #endif
 
 #ifdef LDAP_FOUND
-#include <lber.h>
-#include <ldap.h>
-#endif
+# ifndef HAVE_WINLDAP_H
+#  include <lber.h>
+#  include <ldap.h>
+# else
+#  include <w32-ldap-help.h>
+# endif // HAVE_WINLDAP_H
+#endif // LDAP_FOUND
 
 #include "ldapdefs.h"
 
@@ -245,7 +249,7 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds,
   int ret;
 
   if ( server.auth() == LdapServer::SASL ) {
-#ifdef SASL2_FOUND
+#if defined( SASL2_FOUND ) && !defined( HAVE_WINLDAP_H )
     sasl_conn_t *saslconn = (sasl_conn_t *)mConnection->saslHandle();
     sasl_interact_t *client_interact = NULL;
     const char *out = NULL;
@@ -333,7 +337,7 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds,
     } while ( !async && ret == KLDAP_SASL_BIND_IN_PROGRESS );
 #else
     kError() << "SASL authentication is not available "
-             << "(re-compile kldap with cyrus-sasl development).";
+             << "(re-compile kldap with cyrus-sasl and OpenLDAP development).";
     return KLDAP_SASL_ERROR;
 #endif
   } else { //simple auth
@@ -350,15 +354,21 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds,
     if ( async ) {
       kDebug() << "ldap_sasl_bind (simple)";
       int msgid;
+#ifndef HAVE_WINLDAP_H
       ret = ldap_sasl_bind( ld, bindname.data(), 0, &ccred, 0, 0, &msgid );
-//    ret = ldap_simple_bind( ld, bindname.data(),pass.data() );
+#else
+      ret = ldap_simple_bind( ld, bindname.data(),pass.data() );
+#endif
       if ( ret == 0 ) {
         ret = msgid;
       }
     } else {
       kDebug() << "ldap_sasl_bind_s (simple)";
+#ifndef HAVE_WINLDAP_H
       ret = ldap_sasl_bind_s( ld, bindname.data(), 0, &ccred, 0, 0, 0 );
-//    ret = ldap_simple_bind_s( ld, bindname.data(), pass.data() );
+#else
+      ret = ldap_simple_bind_s( ld, bindname.data(), pass.data() );
+#endif
     }
   }
   return ret;
@@ -430,16 +440,25 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
   }
   case RES_BIND:
   {
-    struct berval *servercred;
+    struct berval *servercred = 0;
+#ifndef HAVE_WINLDAP_H
+    // FIXME: Error handling Winldap does not have ldap_parse_sasl_bind_result
     retval = ldap_parse_sasl_bind_result( ld, msg, &servercred, 0 );
+#else
+    retval = KLDAP_SUCCESS;
+#endif
     if ( retval != KLDAP_SUCCESS && retval != KLDAP_SASL_BIND_IN_PROGRESS ) {
       kDebug() << "RES_BIND error: " << retval;
       ldap_msgfree( msg );
       return -1;
     }
     kDebug() << "RES_BIND rescode" << rescode << "retval:" << retval;
-    mServerCred = servercred ? QByteArray( servercred->bv_val, servercred->bv_len ) : QByteArray();
-    ber_bvfree( servercred );
+    if ( servercred ) {
+      mServerCred = QByteArray( servercred->bv_val, servercred->bv_len );
+      ber_bvfree( servercred );
+    } else {
+      mServerCred = QByteArray();
+    }
     break;
   }
   default:

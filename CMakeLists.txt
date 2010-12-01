@@ -3,13 +3,15 @@ include(CheckFunctionExists)
 include(CheckSymbolExists)
 
 add_definitions( -DKDE_DEFAULT_DEBUG_AREA=5322 )
-
 macro_optional_find_package(Ldap)
-macro_log_feature(LDAP_FOUND "OpenLDAP" "LDAP support" "http://www.openldap.org" FALSE "" "STRONGLY RECOMMENDED: Without this, the KLDAP library will be useless" )
-
+if (NOT WINCE) #FIXME enable for win32
+    macro_log_feature(LDAP_FOUND "OpenLDAP" "LDAP (Lightweight Directory Access Protocol) libraries" "http://www.openldap.org" FALSE "" "STRONGLY RECOMMENDED: Needed to provide LDAP functionality in KDE" )
+else (NOT WINCE)
+    macro_log_feature(LDAP_FOUND "OpenLDAP" "LDAP (Lightweight Directory Access Protocol) libraries" "http://www.openldap.org" FALSE "" "Used for additional LDAP Features on Windows Systems\nSystem LDAP used as fallback for KDE" )
+endif(NOT WINCE)
 #look for Sasl2 in the top-level CMakeLists.txt file now
 #macro_optional_find_package(Sasl2)
-#macro_log_feature(SASL2_FOUND "cyrus-sasl" "Support for authentication over LDAP" "http://asg.web.cmu.edu/sasl/sasl-library.html" FALSE "" "" )
+#macro_log_feature(SASL2_FOUND "cyrus-sasl" "Cyrus SASL API" "http://asg.web.cmu.edu/sasl/sasl-library.html" FALSE "" "Needed to support authentication of logins" )
 
 check_include_files(sys/time.h    HAVE_SYS_TIME_H)
 
@@ -19,7 +21,7 @@ set(kldap_EXTRA_INCLUDES)
 if (LDAP_FOUND)
    set(kldap_EXTRA_LIBS ${LDAP_LIBRARIES})
    set(kldap_EXTRA_INCLUDES ${LDAP_INCLUDE_DIR})
-
+   set(HAVE_LDAP_H)
    set(CMAKE_REQUIRED_INCLUDES lber.h ldap.h)
    set(CMAKE_REQUIRED_LIBRARIES ${LDAP_LIBRARIES})
    check_function_exists(ldap_start_tls_s HAVE_LDAP_START_TLS_S)
@@ -30,8 +32,23 @@ if (LDAP_FOUND)
    check_function_exists(ldap_extended_operation_s HAVE_LDAP_EXTENDED_OPERATION_S)
    check_symbol_exists(ldap_extended_operation ldap.h HAVE_LDAP_EXTENDED_OPERATION_PROTOTYPE)
    check_symbol_exists(ldap_extended_operation_s ldap.h HAVE_LDAP_EXTENDED_OPERATION_S_PROTOTYPE)
-
-
+else (LDAP_FOUND)
+   if (WINCE)
+      set(LDAP_FOUND TRUE)
+      set(HAVE_WINLDAP_H TRUE)
+      set(CMAKE_REQUIRED_INCLUDES winldap.h w32-ldap-help.h)
+      set(CMAKE_REQUIRED_LIBRARIES wldap32)
+      set(kldap_EXTRA_LIBS ${kldap_EXTRA_LIBS} wldap32)
+      # Checks left in for compatibilty
+      check_function_exists(ldap_start_tls_s HAVE_LDAP_START_TLS_S)
+      check_function_exists(ldap_initialize HAVE_LDAP_INITIALIZE)
+      check_function_exists(ber_memfree HAVE_BER_MEMFREE)
+      check_function_exists(ldap_unbind_ext HAVE_LDAP_UNBIND_EXT)
+      check_function_exists(ldap_extended_operation HAVE_LDAP_EXTENDED_OPERATION)
+      check_function_exists(ldap_extended_operation_s HAVE_LDAP_EXTENDED_OPERATION_S)
+      check_symbol_exists(ldap_extended_operation winldap.h HAVE_LDAP_EXTENDED_OPERATION_PROTOTYPE)
+      check_symbol_exists(ldap_extended_operation_s winldap.h HAVE_LDAP_EXTENDED_OPERATION_S_PROTOTYPE)
+   endif (WINCE)
 endif (LDAP_FOUND)
 
 if (SASL2_FOUND)

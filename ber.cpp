@@ -34,15 +34,23 @@
 #define BC31 1
 #endif
 
+#ifndef HAVE_WINLDAP_H
 #include <lber.h>
 #include <ldap.h>
+#else
+#include <w32-ldap-help.h>
+#endif
 
 #ifndef LBER_USE_DER
 #define LBER_USE_DER 1
 #endif
 
 #ifndef HAVE_BER_MEMFREE
-#define ber_memfree(x) ldap_memfree(x)
+# ifndef HAVE_WINLDAP_H
+#  define ber_memfree(x) ldap_memfree(x)
+# else
+#  define ber_memfree(x) win_ldap_memfree(x)
+# endif
 #endif
 
 #endif

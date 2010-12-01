@@ -43,8 +43,12 @@ static bool ldapoperation_sasl_initialized = false;
 #endif
 
 #ifdef LDAP_FOUND
-#include <lber.h>
-#include <ldap.h>
+# ifndef HAVE_WINLDAP_H
+#  include <lber.h>
+#  include <ldap.h>
+#else
+# include <w32-ldap-help.h>
+#endif // HAVE_WINLDAP_H
 
 #ifndef LDAP_OPT_SUCCESS
 #define LDAP_OPT_SUCCESS 0
