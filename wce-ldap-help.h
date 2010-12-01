@@ -22,8 +22,8 @@
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA
  */
-#ifndef WINCELDAP_H
-#define WINCELDAP_H
+#ifndef WCE_LDAP_HELP_H
+#define WCE_LDAP_HELP_H
 ULONG map_error( int );
 
 /* A set of helper functions to convert LDAP data structures
@@ -1245,4 +1245,4 @@ my_win_ldap_get_values_lenA (LDAP *ld, LDAPMessage *msg, const char *attr)
   return ret;
 }
 #endif /*_WIN32_WCE*/
-#endif // WINCELDAP_H
+#endif // WCE_LDAP_HELP_H
