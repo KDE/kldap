@@ -353,15 +353,15 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds,
 
     if ( async ) {
       kDebug() << "ldap_sasl_bind (simple)";
-      int msgid;
 #ifndef HAVE_WINLDAP_H
+      int msgid = 0;
       ret = ldap_sasl_bind( ld, bindname.data(), 0, &ccred, 0, 0, &msgid );
-#else
-      ret = ldap_simple_bind( ld, bindname.data(),pass.data() );
-#endif
       if ( ret == 0 ) {
         ret = msgid;
       }
+#else
+      ret = ldap_simple_bind( ld, bindname.data(),pass.data() );
+#endif
     } else {
       kDebug() << "ldap_sasl_bind_s (simple)";
 #ifndef HAVE_WINLDAP_H
