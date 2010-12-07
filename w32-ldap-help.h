@@ -123,7 +123,7 @@ typedef ULONG ber_len_t;
   my_win_ldap_get_dnA((a),(b))
 # define win_ldap_parse_extended_result(a, b, c, d, e ) \
   my_win_ldap_parse_extended_resultA((a), (b), (c), (d), (e))
-# define win_ldap_memfree(a) strfreeA(a)
+# define win_ldap_memfree(a) free(a)
 # define win_ldap_controls_free(a)              \
   my_win_ldap_controls_freeA((a))
 # define win_ldap_mods_free(a, b)               \
