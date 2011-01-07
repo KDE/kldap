@@ -140,13 +140,8 @@ void KLdapTest::testBer()
 
 void KLdapTest::cleanupTestCase()
 {
-  if ( m_search ) {
-    delete m_search;
-  }
-
-  if ( m_model ) {
-    delete m_model;
-  }
+  delete m_search;
+  delete m_model;
 }
 
 void KLdapTest::testLdapUrl()
