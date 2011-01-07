@@ -50,13 +50,9 @@ LdapModel::LdapModelPrivate::LdapModelPrivate( LdapModel *parent, LdapConnection
 
 LdapModel::LdapModelPrivate::~LdapModelPrivate()
 {
-  if ( m_root ) {
-    delete m_root;
-  }
+  delete m_root;
 
-  if ( m_search ) {
-    delete m_search;
-  }
+  delete m_search;
 }
 
 void LdapModel::LdapModelPrivate::setConnection( LdapConnection &connection )
@@ -83,10 +79,7 @@ void LdapModel::LdapModelPrivate::setSearchType( SearchType t, LdapModelDNNode *
 void LdapModel::LdapModelPrivate::recreateRootItem()
 {
   //kDebug();
-  if ( m_root ) {
-    delete m_root;
-    m_root = 0;
-  }
+  delete m_root;
   m_root = new LdapModelDNNode;
   //kDebug() << "&m_root =" << &m_root;
 }
