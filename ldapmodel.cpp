@@ -25,6 +25,9 @@
 
 #include <kdebug.h>
 #include <klocale.h>
+#include <kglobal.h>
+
+static const KCatalogLoader loader("libkldap");
 
 using namespace KLDAP;
 
