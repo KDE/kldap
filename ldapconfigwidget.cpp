@@ -230,7 +230,7 @@ void LdapConfigWidget::Private::initWidget()
     //without host query doesn't make sense
     if ( mHost ) {
       QPushButton *dnquery = new QPushButton( i18n( "Query Server" ), mParent );
-      connect( dnquery, SIGNAL( clicked() ), mParent, SLOT( queryDNClicked() ) );
+      connect( dnquery, SIGNAL(clicked()), mParent, SLOT(queryDNClicked()) );
       mainLayout->addWidget( dnquery, row, 2, 1, 1 );
     }
     row++;
@@ -261,9 +261,9 @@ void LdapConfigWidget::Private::initWidget()
     hbox->addWidget( mSecSSL );
     mainLayout->addWidget( btgroup, row, 0, 1, 4 );
 
-    connect( mSecNo, SIGNAL( clicked() ), mParent, SLOT( setLDAPPort() ) );
-    connect( mSecTLS, SIGNAL( clicked() ), mParent, SLOT( setLDAPPort() ) );
-    connect( mSecSSL, SIGNAL( clicked() ), mParent, SLOT( setLDAPSPort( ) ) );
+    connect( mSecNo, SIGNAL(clicked()), mParent, SLOT(setLDAPPort()) );
+    connect( mSecTLS, SIGNAL(clicked()), mParent, SLOT(setLDAPPort()) );
+    connect( mSecSSL, SIGNAL(clicked()), mParent, SLOT(setLDAPSPort()) );
 
     mSecNo->setChecked( true );
     row++;
@@ -307,14 +307,14 @@ void LdapConfigWidget::Private::initWidget()
     if ( mHost ) {
       mQueryMech = new QPushButton( i18n( "Query Server" ), authbox );
       hbox->addWidget( mQueryMech );
-      connect( mQueryMech, SIGNAL( clicked() ), mParent, SLOT( queryMechClicked() ) );
+      connect( mQueryMech, SIGNAL(clicked()), mParent, SLOT(queryMechClicked()) );
     }
 
     mainLayout->addWidget( authbox, row, 0, 2, 4 );
 
-    connect( mAnonymous, SIGNAL( toggled( bool ) ), mParent, SLOT( setAnonymous( bool ) ) );
-    connect( mSimple, SIGNAL( toggled( bool ) ), mParent, SLOT( setSimple( bool ) ) );
-    connect( mSASL, SIGNAL( toggled( bool ) ), mParent, SLOT( setSASL( bool ) ) );
+    connect( mAnonymous, SIGNAL(toggled(bool)), mParent, SLOT(setAnonymous(bool)) );
+    connect( mSimple, SIGNAL(toggled(bool)), mParent, SLOT(setSimple(bool)) );
+    connect( mSASL, SIGNAL(toggled(bool)), mParent, SLOT(setSASL(bool)) );
 
     mAnonymous->setChecked( true );
   }
@@ -347,10 +347,10 @@ void LdapConfigWidget::Private::sendQuery()
   kDebug() << "sendQuery url:" << _url.prettyUrl();
 
   LdapSearch search;
-  connect( &search, SIGNAL( data( KLDAP::LdapSearch*, const KLDAP::LdapObject& ) ),
-           mParent, SLOT( loadData( KLDAP::LdapSearch*, const KLDAP::LdapObject& ) ) );
-  connect( &search, SIGNAL( result( KLDAP::LdapSearch* ) ),
-           mParent, SLOT( loadResult( KLDAP::LdapSearch* ) ) );
+  connect( &search, SIGNAL(data(KLDAP::LdapSearch*,KLDAP::LdapObject)),
+           mParent, SLOT(loadData(KLDAP::LdapSearch*,KLDAP::LdapObject)) );
+  connect( &search, SIGNAL(result(KLDAP::LdapSearch*)),
+           mParent, SLOT(loadResult(KLDAP::LdapSearch*)) );
 
   if ( !search.search( _url ) ) {
     KMessageBox::error( mParent, search.errorString() );
