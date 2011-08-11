@@ -1,6 +1,7 @@
+//krazy:excludeall=style,copyright to maintain the original look of the derived code.
 /*
  * winceldap - LDAP helper functions for Windows CE
- * Copyright 2010 Andre Heinecke
+ * Copyright 2010 Andre Heinecke <aheinecke@intevation.de>
  *
  * Derived from:
  *
@@ -434,8 +435,8 @@ static inline LDAPControlW *controlAtoW( LDAPControlA *control )
     }
 
     controlW->ldctl_oid = strAtoW( control->ldctl_oid );
-    controlW->ldctl_value.bv_len = len; 
-    controlW->ldctl_value.bv_val = val; 
+    controlW->ldctl_value.bv_len = len;
+    controlW->ldctl_value.bv_val = val;
     controlW->ldctl_iscritical = control->ldctl_iscritical;
 
     return controlW;
@@ -462,7 +463,7 @@ static inline LDAPControlA *controlWtoA( LDAPControlW *control )
     }
 
     controlA->ldctl_oid = strWtoA( control->ldctl_oid );
-    controlA->ldctl_value.bv_len = len; 
+    controlA->ldctl_value.bv_len = len;
     controlA->ldctl_value.bv_val = val;
     controlA->ldctl_iscritical = control->ldctl_iscritical;
 
@@ -490,8 +491,8 @@ static inline LDAPControl *controlWtoU( LDAPControlW *control )
     }
 
     controlU->ldctl_oid = strWtoU( control->ldctl_oid );
-    controlU->ldctl_value.bv_len = len; 
-    controlU->ldctl_value.bv_val = val; 
+    controlU->ldctl_value.bv_len = len;
+    controlU->ldctl_value.bv_val = val;
     controlU->ldctl_iscritical = control->ldctl_iscritical;
 
     return controlU;
@@ -518,10 +519,10 @@ static inline LDAPControlW *controlUtoW( LDAPControl *control )
     }
 
     controlW->ldctl_oid = strUtoW( control->ldctl_oid );
-    controlW->ldctl_value.bv_len = len; 
-    controlW->ldctl_value.bv_val = val; 
+    controlW->ldctl_value.bv_len = len;
+    controlW->ldctl_value.bv_val = val;
     controlW->ldctl_iscritical = control->ldctl_iscritical;
- 
+
     return controlW;
 }
 
@@ -694,7 +695,7 @@ static inline void controlarrayfreeU( LDAPControl **controlarray )
     }
 }
 
-#ifdef _WIN32_WCE
+#ifdef _WIN32_WCE //krazy:exclude=cpp allow as this is a non-Qt source file
 static inline ULONG my_win_ldap_compare_ext_sA( LDAP *ld, PCHAR dn, PCHAR attr, PCHAR value,
     struct berval *data, PLDAPControlA *serverctrls, PLDAPControlA *clientctrls )
 {
