@@ -360,7 +360,7 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds,
         ret = msgid;
       }
 #else
-      ret = ldap_simple_bind( ld, bindname.data(),pass.data() );
+      ret = ldap_simple_bind( ld, bindname.data(), pass.data() );
 #endif
     } else {
       kDebug() << "ldap_sasl_bind_s (simple)";
