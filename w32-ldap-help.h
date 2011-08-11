@@ -1,3 +1,4 @@
+//krazy:excludeall=style
 /* w32-ldap-help.h - Map utf8 based API into a wchar_t API.
 
   Copyright (c) 2010 Andre Heinecke <aheinecke@intevation.de>
@@ -36,7 +37,7 @@
  * From the openldap manpage:
  * ber_len_t  is an unsigned integer of at least 32 bits used to represent
  * a length.  It is commonly equivalent to a size_t.   ber_slen_t  is  the
- *  signed variant to ber_len_t. 
+ *  signed variant to ber_len_t.
  */
 typedef ULONG ber_len_t;
 
@@ -44,7 +45,7 @@ typedef ULONG ber_len_t;
 #define timeval l_timeval
 #endif
 
-#ifdef _WIN32_WCE
+#ifdef _WIN32_WCE //krazy:exclude=cpp allow as this is a non-Qt source file
 #include "wce-ldap-help.h"
 #endif
 
@@ -97,12 +98,12 @@ typedef ULONG ber_len_t;
 
 // Use the functions that are available on the platform
 // or redirect to wrapper functions
-#ifdef _WIN32_WCE
+#ifdef _WIN32_WCE //krazy:exclude=cpp allow as this is a non-Qt source file
 # define win_ldap_init(a,b)                      \
   my_win_ldap_initA ((a), (b))
 # define win_ldap_simple_bind_s(a,b,c)           \
   my_win_ldap_simple_bind_sA ((a),(b),(c))
-/* Contrary to documentation the sasl_bind functions 
+/* Contrary to documentation the sasl_bind functions
  * are not availabe for wince
 
 # define win_ldap_sasl_bind(a, b, c, d, e, f, g) \
@@ -139,13 +140,13 @@ typedef ULONG ber_len_t;
 #define win_ldap_rename_ext( a,  b,  c,  d,  e,  f,  g,  h  ) \
   ldap_rename_extA((a), (b), (c), (d), (e), (f), (g), ( ( ulong * ) h) )
 #define win_ldap_delete_ext( a,  b,  c,  d,  e  ) \
-  ldap_delete_extA((a), (b), (c), (d), ( ( ulong* ) e) )
+  ldap_delete_extA((a), (b), (c), (d), ( ( ulong * ) e) )
 #define win_ldap_modify_ext(  a,  b,  c,  d,  e,  f  ) \
   ldap_modify_extA( (a), (b), (c), (d), (e), ( ( ulong * ) f) )
 #define win_ldap_modify_ext_s(  a,  b,  c,  d,  e ) \
-  ldap_modify_ext_sA( (a), (b), (c), (d),  (e) )
+  ldap_modify_ext_sA( (a), (b), (c), (d), (e) )
 # define win_ldap_compare_ext(a, b, c, d, e, f, g) \
-  my_win_ldap_compare_extA((a), (b), (c), NULL, (d), (e), (f), ( ( ulong* ) g))
+  my_win_ldap_compare_extA((a), (b), (c), NULL, (d), (e), (f), ( ( ulong * ) g))
 #define win_ldap_compare_ext_s(a, b, c, d, e, f) \
   my_win_ldap_compare_ext_sA( (a), (b), (c), NULL, (d), (e), (f) )
 #define win_ldap_abandon_ext(a, b, c, d) \
