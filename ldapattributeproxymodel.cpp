@@ -85,9 +85,9 @@ QVariant LdapAttributeProxyModel::headerData( int section,
 {
   if ( orientation == Qt::Horizontal && role == Qt::DisplayRole ) {
     if ( section == 0 ) {
-      return QVariant( QString( i18n( "Attribute" ) ) );
+      return QVariant( i18n( "Attribute" ) );
     } else if ( section == 1 ) {
-      return QVariant( QString( i18n( "Value" ) ) );
+      return QVariant( i18n( "Value" ) );
     }
   }
 

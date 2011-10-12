@@ -126,7 +126,8 @@ void LdapSearch::Private::result()
     if ( mPageSize ) {
       QByteArray cookie;
       int estsize = -1;
-      for ( int i = 0; i < mOp.controls().count(); ++i ) {
+      const int numberOfControls( mOp.controls().count() );
+      for ( int i = 0; i < numberOfControls; ++i ) {
         estsize = mOp.controls()[i].parsePageControl( cookie );
         if ( estsize != -1 ) {
           break;

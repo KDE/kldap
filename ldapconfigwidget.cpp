@@ -400,10 +400,12 @@ void LdapConfigWidget::Private::loadData( LdapSearch *, const LdapObject &object
 {
   kDebug() << "object:" << object.toString();
   mProg->progressBar()->setValue( mProg->progressBar()->value() + 1 );
+  LdapAttrMap::ConstIterator end( object.attributes().constEnd() );
   for ( LdapAttrMap::ConstIterator it = object.attributes().constBegin();
-        it != object.attributes().constEnd(); ++it ) {
+        it != end; ++it ) {
+    LdapAttrValue::ConstIterator end2( (*it).constEnd() );
     for ( LdapAttrValue::ConstIterator it2 = (*it).constBegin();
-          it2 != (*it).constEnd(); ++it2 ) {
+          it2 != end2; ++it2 ) {
       mQResult.push_back( QString::fromUtf8( *it2 ) );
     }
   }
@@ -874,8 +876,8 @@ void LdapConfigWidget::setFeatures( LdapConfigWidget::WinFlags features )
   // First delete all the child widgets.
   // FIXME: I hope it's correct
   QList<QObject*> ch = children();
-
-  for ( int i = 0; i < ch.count(); ++i ) {
+  const int numberOfChild( ch.count() );
+  for ( int i = 0; i < numberOfChild; ++i ) {
     QWidget *widget = dynamic_cast<QWidget*>( ch[ i ] );
     if ( widget && widget->parent() == this ) {
       delete ( widget );

@@ -98,10 +98,11 @@ void LdapModelDNNode::setLdapObject( const LdapObject &object )
     Q_UNUSED( node );
   }
   */
-
-  for ( LdapAttrMap::ConstIterator it = attrs.begin(); it != attrs.end(); ++it ) {
-    QString attr = it.key();
-    for ( LdapAttrValue::ConstIterator it2 = (*it).begin(); it2 != (*it).end(); ++it2 ) {
+  LdapAttrMap::ConstIterator end( attrs.constEnd() );
+  for ( LdapAttrMap::ConstIterator it = attrs.constBegin(); it != end; ++it ) {
+    const QString attr = it.key();
+    LdapAttrValue::ConstIterator end2( (*it).constEnd() );
+    for ( LdapAttrValue::ConstIterator it2 = (*it).constBegin(); it2 != end2; ++it2 ) {
       LdapModelNode *node = new LdapModelAttrNode( this, attr, *it2 );
       Q_UNUSED( node );
     }

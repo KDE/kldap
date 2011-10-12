@@ -213,37 +213,37 @@ Ldif::ParseValue Ldif::processLine()
 
   switch ( d->mEntryType ) {
   case Entry_None:
-    if ( attrLower == "version" ) {
+    if ( attrLower == QLatin1String( "version" ) ) {
       if ( !d->mDn.isEmpty() ) {
         retval = Err;
       }
-    } else if ( attrLower == "dn" ) {
+    } else if ( attrLower == QLatin1String( "dn" ) ) {
       kDebug() << "ldapentry dn:" << QString::fromUtf8( d->mValue, d->mValue.size() );
       d->mDn = LdapDN( QString::fromUtf8( d->mValue, d->mValue.size() ) );
       d->mModType = Mod_None;
       retval = NewEntry;
-    } else if ( attrLower == "changetype" ) {
+    } else if ( attrLower == QLatin1String( "changetype" ) ) {
       if ( d->mDn.isEmpty() ) {
         retval = Err;
       } else {
         QString tmpval = QString::fromUtf8( d->mValue, d->mValue.size() );
         kDebug() << "changetype:" << tmpval;
-        if ( tmpval == "add" ) {
+        if ( tmpval == QLatin1String( "add" ) ) {
           d->mEntryType = Entry_Add;
-        } else if ( tmpval == "delete" ) {
+        } else if ( tmpval == QLatin1String( "delete" ) ) {
           d->mEntryType = Entry_Del;
-        } else if ( tmpval == "modrdn" || tmpval == "moddn" ) {
-          d->mNewRdn = "";
-          d->mNewSuperior = "";
+        } else if ( tmpval == QLatin1String( "modrdn" ) || tmpval == QLatin1String( "moddn" ) ) {
+          d->mNewRdn.clear();
+          d->mNewSuperior.clear();
           d->mDelOldRdn = true;
           d->mEntryType = Entry_Modrdn;
-        } else if ( tmpval == "modify" ) {
+        } else if ( tmpval == QLatin1String( "modify" ) ) {
           d->mEntryType = Entry_Mod;
         } else {
           retval = Err;
         }
       }
-    } else if ( attrLower == "control" ) {
+    } else if ( attrLower == QLatin1String( "control" ) ) {
       d->mUrl = splitControl( d->mValue, d->mOid, d->mCritical, d->mValue );
       retval = Control;
     } else if ( !d->mAttr.isEmpty() && d->mValue.size() > 0 ) {
@@ -270,14 +270,14 @@ Ldif::ParseValue Ldif::processLine()
       kDebug() << "new modtype" << d->mAttr;
       if ( d->mAttr.isEmpty() && d->mValue.size() == 0 ) {
         retval = EndEntry;
-      } else if ( attrLower == "add" ) {
+      } else if ( attrLower == QLatin1String( "add" ) ) {
         d->mModType = Mod_Add;
-      } else if ( attrLower == "replace" ) {
+      } else if ( attrLower == QLatin1String( "replace" ) ) {
         d->mModType = Mod_Replace;
         d->mAttr = QString::fromUtf8( d->mValue, d->mValue.size() );
         d->mValue = QByteArray();
         retval = Item;
-      } else if ( attrLower == "delete" ) {
+      } else if ( attrLower == QLatin1String( "delete" ) ) {
         d->mModType = Mod_Del;
         d->mAttr = QString::fromUtf8( d->mValue, d->mValue.size() );
         d->mValue = QByteArray();
@@ -302,11 +302,11 @@ Ldif::ParseValue Ldif::processLine()
   case Entry_Modrdn:
     if ( d->mAttr.isEmpty() && d->mValue.size() == 0 ) {
       retval = EndEntry;
-    } else if ( attrLower == "newrdn" ) {
+    } else if ( attrLower == QLatin1String( "newrdn" ) ) {
       d->mNewRdn = QString::fromUtf8( d->mValue, d->mValue.size() );
-    } else if ( attrLower == "newsuperior" ) {
+    } else if ( attrLower == QLatin1String( "newsuperior" ) ) {
       d->mNewSuperior = QString::fromUtf8( d->mValue, d->mValue.size() );
-    } else if ( attrLower == "deleteoldrdn" ) {
+    } else if ( attrLower == QLatin1String( "deleteoldrdn" ) ) {
       if ( d->mValue.size() > 0 && d->mValue[0] == '0' ) {
         d->mDelOldRdn = false;
       } else if ( d->mValue.size() > 0 && d->mValue[0] == '1' ) {

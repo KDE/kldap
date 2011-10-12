@@ -148,9 +148,9 @@ QVariant LdapModel::headerData( int section, Qt::Orientation orientation, int ro
 {
   if ( orientation == Qt::Horizontal && role == Qt::DisplayRole ) {
     if ( section == 0 ) {
-      return QString( i18n( "Attribute" ) );
+      return i18n( "Attribute" );
     } else {
-      return QString( i18n( "Value" ) );
+      return i18n( "Value" );
     }
   }
 

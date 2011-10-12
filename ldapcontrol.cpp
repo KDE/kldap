@@ -145,7 +145,7 @@ void LdapControl::insert( LdapControls &list, const LdapControl &ctrl )
 {
   LdapControls::iterator it;
   LdapControls::iterator endit = list.end();
-  QString oid = ctrl.oid();
+  const QString oid = ctrl.oid();
 
   for ( it = list.begin(); it != endit; ++it ) {
     if ( it->oid() == oid ) {

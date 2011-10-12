@@ -85,7 +85,7 @@ QVariant LdapStructureProxyModel::headerData( int section,
 {
   Q_UNUSED( section );
   if ( orientation == Qt::Horizontal && role == Qt::DisplayRole ) {
-    return QString( i18n( "Distinguished Name" ) );
+    return i18n( "Distinguished Name" );
   }
 
   return QVariant();
