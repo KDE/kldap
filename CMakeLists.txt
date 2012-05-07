@@ -8,7 +8,7 @@ macro_optional_find_package(Ldap)
 if(NOT WINCE) #FIXME enable for win32
   macro_log_feature(LDAP_FOUND "OpenLDAP" "LDAP (Lightweight Directory Access Protocol) libraries" "http://www.openldap.org" FALSE "" "STRONGLY RECOMMENDED: Needed to provide LDAP functionality in KDE")
 else()
-  macro_log_feature(LDAP_FOUND "OpenLDAP" "LDAP (Lightweight Directory Access Protocol) libraries" "http://www.openldap.org" FALSE "" "Used for additional LDAP Features on Windows Systems\nSystem LDAP used as fallback for KDE")
+  macro_log_feature(LDAP_FOUND "OpenLDAP" "LDAP (Lightweight Directory Access Protocol) libraries" "http://www.openldap.org" FALSE "" "Used for additional LDAP Features on Windows Systems (System LDAP used as fallback for KDE)")
 endif()
 
 check_include_files(sys/time.h HAVE_SYS_TIME_H)
