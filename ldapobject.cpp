@@ -103,8 +103,8 @@ QString LdapObject::toString() const
   LdapAttrMap::ConstIterator end( d->mAttrs.constEnd() );
   for ( LdapAttrMap::ConstIterator it = d->mAttrs.constBegin(); it != end; ++it ) {
     const QString attr = it.key();
-    LdapAttrValue::ConstIterator end2( (*it).constEnd() );
-    for ( LdapAttrValue::ConstIterator it2 = (*it).constBegin(); it2 != end2; ++it2 ) {
+    LdapAttrValue::ConstIterator end2( ( *it ).constEnd() );
+    for ( LdapAttrValue::ConstIterator it2 = ( *it ).constBegin(); it2 != end2; ++it2 ) {
       result += QString::fromUtf8( Ldif::assembleLine( attr, *it2, 76 ) ) + '\n';
     }
   }

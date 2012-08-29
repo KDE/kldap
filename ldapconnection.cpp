@@ -83,7 +83,7 @@ LdapConnection::LdapConnectionPrivate::LdapConnectionPrivate()
   mSASLconn = 0;
 #ifdef SASL2_FOUND
   if ( !ldapoperation_sasl_initialized ) {
-    sasl_client_init(NULL);
+    sasl_client_init( NULL );
     ldapoperation_sasl_initialized = true;
   }
 #endif

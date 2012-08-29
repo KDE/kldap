@@ -156,6 +156,6 @@
  * KLDAP Specific
  */
 
-#define KLDAP_SASL_ERROR	-0xff
+#define KLDAP_SASL_ERROR                 -0xff
 
 #endif //KLDAP_DEFS_H

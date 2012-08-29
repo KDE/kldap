@@ -70,8 +70,7 @@ class KLDAP_EXPORT LdapServer
      * Describes the encryption settings that can be used
      * for the LDAP connection.
      */
-    typedef enum
-    {
+    typedef enum {
       None, ///< Do not use any encryption.
       TLS,  ///< Use TLS encryption.
       SSL   ///< Use SSL encryption.
@@ -81,8 +80,7 @@ class KLDAP_EXPORT LdapServer
      * Describes the authentication method that can be used
      * for the LDAP connection.
      */
-    typedef enum
-    {
+    typedef enum {
       Anonymous,  ///< Do no authentication.
       Simple,     ///< Authenticate via login and password.
       SASL        ///< Azthenticate with the SASL framework.

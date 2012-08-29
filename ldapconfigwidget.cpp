@@ -403,8 +403,8 @@ void LdapConfigWidget::Private::loadData( LdapSearch *, const LdapObject &object
   LdapAttrMap::ConstIterator end( object.attributes().constEnd() );
   for ( LdapAttrMap::ConstIterator it = object.attributes().constBegin();
         it != end; ++it ) {
-    LdapAttrValue::ConstIterator end2( (*it).constEnd() );
-    for ( LdapAttrValue::ConstIterator it2 = (*it).constBegin();
+    LdapAttrValue::ConstIterator end2( ( *it ).constEnd() );
+    for ( LdapAttrValue::ConstIterator it2 = ( *it ).constBegin();
           it2 != end2; ++it2 ) {
       mQResult.push_back( QString::fromUtf8( *it2 ) );
     }

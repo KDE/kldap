@@ -206,7 +206,7 @@ static int kldap_sasl_interact( sasl_interact_t *interact, LdapOperation::SASL_D
 
   while ( interact->id != SASL_CB_LIST_END ) {
     value.clear();
-    switch( interact->id ) {
+    switch ( interact->id ) {
     case SASL_CB_GETREALM:
       value = data->creds.realm;
       kDebug() << "SASL_REALM=" << value;
@@ -242,7 +242,7 @@ int LdapOperation::LdapOperationPrivate::bind( const QByteArray &creds,
                                                void *data, bool async )
 {
   Q_ASSERT( mConnection );
-  LDAP *ld = (LDAP*) mConnection->handle();
+  LDAP *ld = (LDAP *) mConnection->handle();
   LdapServer server;
   server = mConnection->server();
 
@@ -378,7 +378,7 @@ int LdapOperation::LdapOperationPrivate::processResult( int rescode, LDAPMessage
 {
   //kDebug();
   int retval;
-  LDAP *ld = (LDAP*) mConnection->handle();
+  LDAP *ld = (LDAP *) mConnection->handle();
 
   kDebug() << "rescode: " << rescode;
   switch ( rescode ) {
@@ -665,7 +665,7 @@ int LdapOperation::search( const LdapDN &base, LdapUrl::Scope scope,
                            const QString &filter, const QStringList &attributes )
 {
   Q_ASSERT( d->mConnection );
-  LDAP *ld = (LDAP*) d->mConnection->handle();
+  LDAP *ld = (LDAP *) d->mConnection->handle();
 
   char **attrs = 0;
   int msgid;
@@ -678,7 +678,7 @@ int LdapOperation::search( const LdapDN &base, LdapUrl::Scope scope,
   if ( count > 0 ) {
     attrs = static_cast<char**>( malloc( ( count + 1 ) * sizeof( char * ) ) );
     for ( int i=0; i<count; i++ ) {
-      attrs[i] = strdup( attributes.at(i).toUtf8() );
+      attrs[i] = strdup( attributes.at( i ).toUtf8() );
     }
     attrs[count] = 0;
   }
@@ -727,7 +727,7 @@ int LdapOperation::search( const LdapDN &base, LdapUrl::Scope scope,
 int LdapOperation::add( const LdapObject &object )
 {
   Q_ASSERT( d->mConnection );
-  LDAP *ld = (LDAP*) d->mConnection->handle();
+  LDAP *ld = (LDAP *) d->mConnection->handle();
 
   int msgid;
   LDAPMod **lmod = 0;
@@ -739,8 +739,8 @@ int LdapOperation::add( const LdapObject &object )
   for ( LdapAttrMap::ConstIterator it = object.attributes().begin();
         it != object.attributes().end(); ++it ) {
     QString attr = it.key();
-    for ( LdapAttrValue::ConstIterator it2 = (*it).begin(); it2 != (*it).end(); ++it2 ) {
-      addModOp( &lmod, 0, attr, &(*it2) );
+    for ( LdapAttrValue::ConstIterator it2 = ( *it ).begin(); it2 != (*it).end(); ++it2 ) {
+      addModOp( &lmod, 0, attr, &( *it2 ) );
     }
   }
 
@@ -760,7 +760,7 @@ int LdapOperation::add( const LdapObject &object )
 int LdapOperation::add_s( const LdapObject &object )
 {
   Q_ASSERT( d->mConnection );
-  LDAP *ld = (LDAP*) d->mConnection->handle();
+  LDAP *ld = (LDAP *) d->mConnection->handle();
 
   LDAPMod **lmod = 0;
 
@@ -771,8 +771,8 @@ int LdapOperation::add_s( const LdapObject &object )
   for ( LdapAttrMap::ConstIterator it = object.attributes().begin();
         it != object.attributes().end(); ++it ) {
     QString attr = it.key();
-    for ( LdapAttrValue::ConstIterator it2 = (*it).begin(); it2 != (*it).end(); ++it2 ) {
-      addModOp( &lmod, 0, attr, &(*it2) );
+    for ( LdapAttrValue::ConstIterator it2 = ( *it ).begin(); it2 != (*it).end(); ++it2 ) {
+      addModOp( &lmod, 0, attr, &( *it2 ) );
     }
   }
 
@@ -789,7 +789,7 @@ int LdapOperation::add_s( const LdapObject &object )
 int LdapOperation::add( const LdapDN &dn, const ModOps &ops )
 {
   Q_ASSERT( d->mConnection );
-  LDAP *ld = (LDAP*) d->mConnection->handle();
+  LDAP *ld = (LDAP *) d->mConnection->handle();
 
   int msgid;
   LDAPMod **lmod = 0;
@@ -820,7 +820,7 @@ int LdapOperation::add( const LdapDN &dn, const ModOps &ops )
 int LdapOperation::add_s( const LdapDN &dn, const ModOps &ops )
 {
   Q_ASSERT( d->mConnection );
-  LDAP *ld = (LDAP*) d->mConnection->handle();
+  LDAP *ld = (LDAP *) d->mConnection->handle();
 
   LDAPMod **lmod = 0;
 
@@ -848,7 +848,7 @@ int LdapOperation::rename( const LdapDN &dn, const QString &newRdn,
                            const QString &newSuperior, bool deleteold )
 {
   Q_ASSERT( d->mConnection );
-  LDAP *ld = (LDAP*) d->mConnection->handle();
+  LDAP *ld = (LDAP *) d->mConnection->handle();
 
   int msgid;
 
@@ -873,7 +873,7 @@ int LdapOperation::rename_s( const LdapDN &dn, const QString &newRdn,
                              const QString &newSuperior, bool deleteold )
 {
   Q_ASSERT( d->mConnection );
-  LDAP *ld = (LDAP*) d->mConnection->handle();
+  LDAP *ld = (LDAP *) d->mConnection->handle();
 
   LDAPControl **serverctrls = 0, **clientctrls = 0;
   createControls( &serverctrls, d->mServerCtrls );
@@ -892,7 +892,7 @@ int LdapOperation::rename_s( const LdapDN &dn, const QString &newRdn,
 int LdapOperation::del( const LdapDN &dn )
 {
   Q_ASSERT( d->mConnection );
-  LDAP *ld = (LDAP*) d->mConnection->handle();
+  LDAP *ld = (LDAP *) d->mConnection->handle();
 
   int msgid;
 
@@ -915,7 +915,7 @@ int LdapOperation::del( const LdapDN &dn )
 int LdapOperation::del_s( const LdapDN &dn )
 {
   Q_ASSERT( d->mConnection );
-  LDAP *ld = (LDAP*) d->mConnection->handle();
+  LDAP *ld = (LDAP *) d->mConnection->handle();
 
   LDAPControl **serverctrls = 0, **clientctrls = 0;
   createControls( &serverctrls, d->mServerCtrls );
@@ -978,7 +978,7 @@ int LdapOperation::modify( const LdapDN &dn, const ModOps &ops )
 int LdapOperation::modify_s( const LdapDN &dn, const ModOps &ops )
 {
   Q_ASSERT( d->mConnection );
-  LDAP *ld = (LDAP*) d->mConnection->handle();
+  LDAP *ld = (LDAP *) d->mConnection->handle();
 
   LDAPMod **lmod = 0;
 
@@ -1020,7 +1020,7 @@ int LdapOperation::modify_s( const LdapDN &dn, const ModOps &ops )
 int LdapOperation::compare( const LdapDN &dn, const QString &attr, const QByteArray &value )
 {
   Q_ASSERT( d->mConnection );
-  LDAP *ld = (LDAP*) d->mConnection->handle();
+  LDAP *ld = (LDAP *) d->mConnection->handle();
   int msgid;
 
   LDAPControl **serverctrls = 0, **clientctrls = 0;
@@ -1050,7 +1050,7 @@ int LdapOperation::compare( const LdapDN &dn, const QString &attr, const QByteAr
 int LdapOperation::compare_s( const LdapDN &dn, const QString &attr, const QByteArray &value )
 {
   Q_ASSERT( d->mConnection );
-  LDAP *ld = (LDAP*) d->mConnection->handle();
+  LDAP *ld = (LDAP *) d->mConnection->handle();
 
   LDAPControl **serverctrls = 0, **clientctrls = 0;
   createControls( &serverctrls, d->mServerCtrls );
@@ -1077,7 +1077,7 @@ int LdapOperation::exop( const QString &oid, const QByteArray &data )
 {
   Q_ASSERT( d->mConnection );
 #if defined(HAVE_LDAP_EXTENDED_OPERATION) && defined(HAVE_LDAP_EXTENDED_OPERATION_PROTOTYPE)
-  LDAP *ld = (LDAP*) d->mConnection->handle();
+  LDAP *ld = (LDAP *) d->mConnection->handle();
   int msgid;
 
   LDAPControl **serverctrls = 0, **clientctrls = 0;
@@ -1112,7 +1112,7 @@ int LdapOperation::exop_s( const QString &oid, const QByteArray &data )
 {
 #if defined(HAVE_LDAP_EXTENDED_OPERATION) && defined(HAVE_LDAP_EXTENDED_OPERATION_PROTOTYPE)
   Q_ASSERT( d->mConnection );
-  LDAP *ld = (LDAP*) d->mConnection->handle();
+  LDAP *ld = (LDAP *) d->mConnection->handle();
   BerValue *retdata;
   char *retoid;
 
@@ -1146,7 +1146,7 @@ int LdapOperation::exop_s( const QString &oid, const QByteArray &data )
 int LdapOperation::abandon( int id )
 {
   Q_ASSERT( d->mConnection );
-  LDAP *ld = (LDAP*) d->mConnection->handle();
+  LDAP *ld = (LDAP *) d->mConnection->handle();
 
   LDAPControl **serverctrls = 0, **clientctrls = 0;
   createControls( &serverctrls, d->mServerCtrls );
@@ -1163,7 +1163,7 @@ int LdapOperation::abandon( int id )
 int LdapOperation::waitForResult( int id, int msecs )
 {
   Q_ASSERT( d->mConnection );
-  LDAP *ld = (LDAP*) d->mConnection->handle();
+  LDAP *ld = (LDAP *) d->mConnection->handle();
 
   LDAPMessage *msg;
   int rescode;
