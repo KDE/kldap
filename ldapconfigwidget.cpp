@@ -30,13 +30,13 @@
 #include <kmessagebox.h>
 
 #include <QtCore/QObject>
-#include <QtGui/QCheckBox>
-#include <QtGui/QGroupBox>
-#include <QtGui/QLabel>
-#include <QtGui/QLayout>
-#include <QtGui/QPushButton>
-#include <QtGui/QRadioButton>
-#include <QtGui/QSpinBox>
+#include <QCheckBox>
+#include <QGroupBox>
+#include <QLabel>
+#include <QLayout>
+#include <QPushButton>
+#include <QRadioButton>
+#include <QSpinBox>
 
 using namespace KLDAP;
 

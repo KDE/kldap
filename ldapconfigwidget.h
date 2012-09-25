@@ -22,7 +22,7 @@
 #define KLDAP_LDAPCONFIGWIDGET_H
 
 #include <QtCore/QString>
-#include <QtGui/QWidget>
+#include <QWidget>
 
 #include "ldapdn.h"
 #include "kldap_export.h"
