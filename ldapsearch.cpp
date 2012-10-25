@@ -349,4 +349,4 @@ QString LdapSearch::errorString() const
   return d->mErrorString;
 }
 
-#include "ldapsearch.moc"
+#include "moc_ldapsearch.cpp"

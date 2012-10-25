@@ -168,4 +168,3 @@ bool LdapStructureProxyModel::dropMimeData( const QMimeData *data, Qt::DropActio
   return false;
 }
 
-#include "ldapstructureproxymodel.moc"

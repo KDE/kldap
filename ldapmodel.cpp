@@ -319,4 +319,4 @@ bool LdapModel::submit()
   return false;
 }
 
-#include "ldapmodel.moc"
+#include "moc_ldapmodel.cpp"

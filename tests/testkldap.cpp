@@ -20,7 +20,6 @@
 */
 
 #include "testkldap.h"
-#include "testkldap.moc"
 
 #include "ldif.h"
 #include "ldapdn.h"

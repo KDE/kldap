@@ -170,4 +170,3 @@ bool LdapAttributeProxyModel::dropMimeData( const QMimeData *data, Qt::DropActio
   return false;
 }
 
-#include "ldapattributeproxymodel.moc"

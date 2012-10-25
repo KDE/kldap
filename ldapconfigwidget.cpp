@@ -888,4 +888,4 @@ void LdapConfigWidget::setFeatures( LdapConfigWidget::WinFlags features )
   d->initWidget();
 }
 
-#include "ldapconfigwidget.moc"
+#include "moc_ldapconfigwidget.cpp"
