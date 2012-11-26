@@ -265,7 +265,7 @@ void LdapServer::setTimeout( int timeout )
 
 void LdapServer::setUrl( const LdapUrl &url )
 {
-  bool critical;
+  bool critical = true;
 
   d->mHost = url.host();
   int port = url.port();

@@ -308,7 +308,7 @@ bool LdapSearch::search( const LdapUrl &url, int count )
       return false;
     }
   }
-  bool critical;
+  bool critical = true;
   int pagesize = url.extension( QLatin1String( "x-pagesize" ), critical ).toInt();
   return d->startSearch( url.dn(), url.scope(), url.filter(),
                          url.attributes(), pagesize, count );
