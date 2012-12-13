@@ -507,13 +507,13 @@ void LdapConfigWidget::Private::setLDAPSPort()
   }
 }
 
-LdapConfigWidget::LdapConfigWidget( QWidget *parent, Qt::WFlags fl )
+LdapConfigWidget::LdapConfigWidget( QWidget *parent, Qt::WindowFlags fl )
   : QWidget( parent, fl ), d( new Private( this ) )
 {
 }
 
 LdapConfigWidget::LdapConfigWidget( LdapConfigWidget::WinFlags flags,
-                                    QWidget *parent, Qt::WFlags fl )
+                                    QWidget *parent, Qt::WindowFlags fl )
   : QWidget( parent, fl ), d( new Private( this ) )
 {
   d->mFeatures = flags;
