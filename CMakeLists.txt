@@ -4,11 +4,11 @@ include(CheckSymbolExists)
 
 add_definitions(-DKDE_DEFAULT_DEBUG_AREA=5322)
 
-find_package(LDAP)
+find_package(Ldap)
 if(NOT WINCE) #FIXME enable for win32
-  set_package_properties(LDAP PROPERTIES DESCRIPTION "LDAP (Lightweight Directory Access Protocol) libraries" URL "http://www.openldap.org" TYPE RECOMMENDED PURPOSE "Needed to provide LDAP functionality in KDE")
+  set_package_properties(Ldap PROPERTIES DESCRIPTION "LDAP (Lightweight Directory Access Protocol) libraries" URL "http://www.openldap.org" TYPE RECOMMENDED PURPOSE "Needed to provide LDAP functionality in KDE")
 else()
-  set_package_properties(LDAP PROPERTIES DESCRIPTION "LDAP (Lightweight Directory Access Protocol) libraries" URL "http://www.openldap.org" TYPE OPTIONAL PURPOSE "Needed to provide LDAP functionality in KDE")
+  set_package_properties(Ldap PROPERTIES DESCRIPTION "LDAP (Lightweight Directory Access Protocol) libraries" URL "http://www.openldap.org" TYPE OPTIONAL PURPOSE "Needed to provide LDAP functionality in KDE")
 endif()
 
 check_include_files(sys/time.h HAVE_SYS_TIME_H)
