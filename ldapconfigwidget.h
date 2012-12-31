@@ -103,12 +103,16 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
     /** Destructs a configuration widget */
     virtual ~LdapConfigWidget();
 
-    /** Sets the user name. Kconfig widget name: kcfg_ldapuser */
+    /** Sets the user name. Kconfig widget name: kcfg_ldapuser
+     *  @param user the user name to set
+     */
     void setUser( const QString &user );
     /** Gets the user name. Kconfig widget name: kcfg_ldapuser */
     QString user() const;
 
-    /** Sets the password. Kconfig widget name: kcfg_ldappassword */
+    /** Sets the password. Kconfig widget name: kcfg_ldappassword
+     *  @param password the password to set
+     */
     void setPassword( const QString &password );
     /** Gets the password. Kconfig widget name: kcfg_ldappassword */
     QString password() const;
@@ -116,42 +120,57 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
     /**
      * Sets the bind dn.
      * Kconfig widget name: kcfg_ldapbinddn
+     * @param binddn the LDAP Bind DN to set
      */
     void setBindDn( const QString &binddn );
     /** Gets the bind dn. Kconfig widget name: kcfg_ldapbinddn*/
     QString bindDn() const;
 
-    /** Sets the SASL realm. Kconfig widget name: kcfg_ldaprealm */
+    /** Sets the SASL realm. Kconfig widget name: kcfg_ldaprealm
+     *  @param realm the SASL realm to set
+     */
     void setRealm( const QString &realm );
     /** Gets the SASL realm. Kconfig widget name: kcfg_ldaprealm */
     QString realm() const;
 
-    /** Sets the host name. Kconfig widget name: kcfg_ldaphost */
+    /** Sets the host name. Kconfig widget name: kcfg_ldaphost
+     *  @param host the LDAP host to set
+     */
     void setHost( const QString &host );
     /** Gets the host name. Kconfig widget name: kcfg_ldaphost */
     QString host() const;
 
-    /** Sets the LDAP port. Kconfig widget name: kcfg_ldapport */
+    /** Sets the LDAP port. Kconfig widget name: kcfg_ldapport 
+     *  @param port the LDAP port to set
+     */
     void setPort( int port );
     /** Gets the LDAP port. Kconfig widget name: kcfg_ldapport */
     int port() const;
 
-    /** Sets the LDAP protocol version. Kconfig widget name: kcfg_ldapver */
+    /** Sets the LDAP protocol version. Kconfig widget name: kcfg_ldapver
+     *  @param version the LDAP protocol version to set
+     */
     void setVersion( int version );
     /** Gets the LDAP protocol version. Kconfig widget name: kcfg_ldapver */
     int version() const;
 
-    /** Sets the LDAP Base DN. Kconfig widget name: kcfg_ldapdn */
+    /** Sets the LDAP Base DN. Kconfig widget name: kcfg_ldapdn
+     *  @param dn the LDAP Base DN to set
+     */
     void setDn( const LdapDN &dn );
     /** Gets the LDAP Base DN. Kconfig widget name: kcfg_ldapdn */
     LdapDN dn() const;
 
-    /** Sets the LDAP Filter. Kconfig widget name: kcfg_ldapfilter */
+    /** Sets the LDAP Filter. Kconfig widget name: kcfg_ldapfilter
+     *  @param filter the LDAP Filter to set
+     */
     void setFilter( const QString &filter );
     /** Gets the LDAP Filter. Kconfig widget name: kcfg_ldapfilter */
     QString filter() const;
 
-    /** Sets the SASL Mechanism. Kconfig widget name: kcfg_ldapsaslmech */
+    /** Sets the SASL Mechanism. Kconfig widget name: kcfg_ldapsaslmech
+     *  @param mech the SASL Mechanism to set
+     */
     void setMech( const QString &mech );
     /** Gets the SASL Mechanism. Kconfig widget name: kcfg_ldapsaslmech */
     QString mech() const;
@@ -159,6 +178,7 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
     /**
      * Sets the security type (None, SSL, TLS).
      * Kconfig widget names: kcfg_ldapnosec, kcfg_ldaptls, kcfg_ldapssl
+     * @param security the security type to set
      */
     void setSecurity( Security security );
     /**
@@ -170,6 +190,7 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
     /**
      * Sets the authentication type (Anonymous, Simple, SASL).
      * Kconfig widget names: kcfg_ldapanon, kcfg_ldapsimple, kcfg_ldapsasl
+     * @param auth the authentication type to set
      */
     void setAuth( Auth auth );
     /**
@@ -181,6 +202,7 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
     /**
      * Sets the size limit.
      * KConfig widget name: kcfg_ldapsizelimit
+     * @param sizelimit the size limit to set
      */
     void setSizeLimit( int sizelimit );
     /**
@@ -192,6 +214,7 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
     /**
      * Sets the time limit.
      * KConfig widget name: kcfg_ldaptimelimit
+     * @param timelimit the time limit to set
      */
     void setTimeLimit( int timelimit );
     /**
@@ -203,6 +226,7 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
     /**
      * Sets the page size.
      * KConfig widget name: kcfg_ldappagesize
+     * @param pagesize the page size to set
      */
     void setPageSize( int pagesize );
     /**
@@ -221,6 +245,7 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
     LdapUrl url() const;
     /**
      * Set up the widget via an LDAP Url.
+     * @param url the LDAP Url to set
      */
     void setUrl( const LdapUrl &url );
 
@@ -230,6 +255,7 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
     LdapServer server() const;
     /**
      * Set up the widget via an LdapServer object.
+     * @param server the LdapServer object to set
      */
     void setServer( const LdapServer &server );
 
