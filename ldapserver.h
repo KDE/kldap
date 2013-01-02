@@ -104,6 +104,7 @@ class KLDAP_EXPORT LdapServer
     /**
      * Sets the port of the LDAP connection.
      * If not port is set, 389 is used as default.
+     * @param port the LDAP port connection to set
      */
     void setPort( int port );
 
@@ -165,6 +166,7 @@ class KLDAP_EXPORT LdapServer
     /**
      * Sets the protocol @p version of the LDAP connection.
      * If no version is set, 3 is used as default.
+     * @param version the protocol version to set
      */
     void setVersion( int version );
 
@@ -176,6 +178,7 @@ class KLDAP_EXPORT LdapServer
     /**
      * Sets the security @p mode of the LDAP connection.
      * If no security is set, None is used as default.
+     * @param mode the security mode to set
      */
     void setSecurity( Security mode );
 
@@ -187,6 +190,7 @@ class KLDAP_EXPORT LdapServer
     /**
      * Sets the @p authentication method of the LDAP connection.
      * If no authentication method is set, Anonymous is used as default.
+     * @param authentication the authentication method to set
      */
     void setAuth( Auth authentication );
 

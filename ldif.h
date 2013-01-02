@@ -121,6 +121,7 @@ class KLDAP_EXPORT Ldif
     /**
      * Sets a chunk of Ldif. Call before startParsing(), or if nextItem()
      * returned MoreData.
+     * @param ldif the Ldif chunk to set
      */
     void setLdif( const QByteArray &ldif );
 

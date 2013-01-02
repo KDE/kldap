@@ -56,7 +56,7 @@ class KLDAP_EXPORT LdapModel : public QAbstractItemModel
      * Constructs an LdapModel. You should set a connection for the model to use with
      * setConnection(). Clients of this class should connect a slot to the ready() signal
      * before setting this model onto a view.
-     *
+     * @param parent the parent QObject
      * \see setConnection()
      * \see ready()
      */
@@ -64,7 +64,8 @@ class KLDAP_EXPORT LdapModel : public QAbstractItemModel
     /**
      * Constructs an LdapModel. Clients of this class should connect a slot to the ready()
      * signal before setting this model onto a view.
-     *
+     * @param connection the Ldap connection to use in model construction
+     * @param parent the parent QObject
      * \see setConnection()
      * \see ready()
      */
@@ -73,7 +74,7 @@ class KLDAP_EXPORT LdapModel : public QAbstractItemModel
 
     /**
      * Set the connection that the model should use.
-     *
+     * @param connection the model connection to set
      * \see LdapConnection
      * \see LdapUrl
      */

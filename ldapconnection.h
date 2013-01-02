@@ -56,6 +56,7 @@ class KLDAP_EXPORT LdapConnection
     /**
      * Sets the connection parameters via the specified url. After this,
      * you need to call connect() to connect with the new parameters.
+     * @param url the URL containing the connection parameters
      */
     void setUrl( const LdapUrl &url );
     /**
@@ -66,6 +67,7 @@ class KLDAP_EXPORT LdapConnection
     /**
      * Sets the connection parameters via the specified server structure. After
      * this, you need to call connect() to connect with the new parameters.
+     * @param server the server object containing the connection parameters
      */
     void setServer( const LdapServer &server );
 
@@ -85,18 +87,25 @@ class KLDAP_EXPORT LdapConnection
      */
     void close();
 
-    /** Sets the size limit for the connection. */
+    /** Sets the size limit for the connection.
+     *  @param sizelimit the connection size limit to set
+     */
     bool setSizeLimit( int sizelimit );
     /** Returns the current size limit. */
     int sizeLimit() const;
 
-    /** Sets the time limit for the connection. */
+    /** Sets the time limit for the connection.
+     *  @param timelimit the connection time limit to set
+     */
     bool setTimeLimit( int timelimit );
     /** Returns the current time limit. */
     int timeLimit() const;
 
     /** Gets an option from the connection. The option value can be client
-      * library specific, so avoid this function if possible */
+      * library specific, so avoid this function if possible
+      * @param option the connection option to return
+      * @param value the value of option to get
+      */
     int getOption( int option, void *value ) const;
     /** Sets an option in the connection. The option value can be client
       * library specific, so avoid this function if possible */

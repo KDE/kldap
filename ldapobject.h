@@ -72,11 +72,15 @@ class KLDAP_EXPORT LdapObject
     /**
      * Sets the given attribute values. If the given attribute not exists,
      * then it's created, if exists, it's overwritten.
+     * @param attributeName the attribute name for which to set values
+     * @param values the values of attribute to set
      */
     void setValues( const QString &attributeName, const LdapAttrValue &values );
     /**
      * Adds the given value to the specified attribute. If the given attribute
      * not exists, then it's created.
+     * @param attributeName the attribute for which to add a value
+     * @param value the attribute  value to add
      */
     void addValue( const QString &attributeName, const QByteArray &value );
     /**

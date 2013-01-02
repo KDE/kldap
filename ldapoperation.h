@@ -99,6 +99,7 @@ class KLDAP_EXPORT LdapOperation
     /**
      * Sets the connection object. Without living connection object,
      * LDAP operations are not possible.
+     * @param the connection object to set
      */
     void setConnection( LdapConnection &conn );
     /**
@@ -145,22 +146,28 @@ class KLDAP_EXPORT LdapOperation
     /**
      * Starts an addition operation.
      * Returns a message id if successful, -1 if not.
+     * @param object the additional operation to start
      */
     int add( const LdapObject &object );
     /**
      * Adds the specified object to the LDAP database.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
+     * @param object the object to add to LDAP database
      */
     int add_s( const LdapObject &object );
     /**
      * Starts an addition operation. This version accepts ModOps not LdapObject.
      * Returns a message id if successful, -1 if not.
+     * @param dn the LdapDN operation to start
+     * @param ops the ModOps operation to start
      */
     int add( const LdapDN &dn, const ModOps &ops );
     /**
      * Adds the specified object to the LDAP database. This version accepts ModOps not LdapObject.
      * This is the synchronous version.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
+     * @param dn the LdapDN object to add
+     * @param ops the ModOps object to add
      */
     int add_s( const LdapDN &dn, const ModOps &ops );
     /**
@@ -187,11 +194,13 @@ class KLDAP_EXPORT LdapOperation
     /**
      * Deletes the given DN. This is the synchronous version.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
+     * @param dn the dn to delete
      */
     int del_s( const LdapDN &dn );
     /**
      * Starts a modify operation on the given DN.
      * Returns a message id if successful, -1 if not.
+     * @param dn the DN to start modify operation on
      */
     int modify( const LdapDN &dn, const ModOps &ops );
     /**

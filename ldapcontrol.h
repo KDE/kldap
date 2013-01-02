@@ -89,6 +89,7 @@ class KLDAP_EXPORT LdapControl
      * Puts the server's cookie into @p cookie, and returns the estimated
      * result set size. If the OID is not the page control's OID, or the
      * value cannot be decoded, returns -1.
+     * @param cookie the cookie to hold server's cookie
      */
     int parsePageControl( QByteArray &cookie ) const;
     /**
@@ -100,6 +101,8 @@ class KLDAP_EXPORT LdapControl
      * Inserts a unique control against a list of controls.
      * If the control already exists in the list is is updated, otherwise
      * it is appended to the list.
+     * @param list the current list of controls
+     * @param ctrl the control to insert
      * @since 4.4
      */
     static void insert( LdapControls &list, const LdapControl &ctrl );

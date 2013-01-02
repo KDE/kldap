@@ -56,6 +56,7 @@ class KLDAP_EXPORT LdapSearch : public QObject
      * Constructs an LdapConnection object with the given connection. If this
      * form of constructor used, then always this connection will be used
      * regardless of the LDAP Url or LdapServer object passed to search().
+     * @param connection the connection used to construct LdapConnection object
      */
     explicit LdapSearch( LdapConnection &connection );
 

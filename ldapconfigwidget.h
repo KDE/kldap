@@ -95,6 +95,8 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
 
     /** Constructs an empty configuration widget.
      * You need to call setFlags() after this.
+     * @param parent the QWidget parent
+     * @param fl the window flags to set
      */
     explicit LdapConfigWidget( QWidget *parent = 0, Qt::WindowFlags fl = 0 );
     /** Constructs a configuration widget */
@@ -184,6 +186,7 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
     /**
      * Returns the security type.
      * Kconfig widget names: kcfg_ldapnosec, kcfg_ldaptls, kcfg_ldapssl
+     * @param security the security type to set
      */
     Security security() const;
 
@@ -196,6 +199,7 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
     /**
      * Returns the authentication type.
      * Kconfig widget names: kcfg_ldapanon, kcfg_ldapsimple, kcfg_ldapsasl
+     * @param auth the authentication type to set
      */
     Auth auth() const;
 
