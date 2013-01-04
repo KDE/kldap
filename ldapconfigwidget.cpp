@@ -603,14 +603,17 @@ void LdapConfigWidget::setServer( const LdapServer &server )
     if ( d->mSecSSL ) {
       d->mSecSSL->setChecked( true );
     }
+    break;
   case LdapServer::TLS:
     if ( d->mSecTLS ) {
       d->mSecTLS->setChecked( true );
     }
+    break;
   case LdapServer::None:
     if ( d->mSecNo ) {
       d->mSecNo->setChecked( true );
     }
+    break;
   }
 
   switch ( server.auth() ) {
@@ -618,14 +621,17 @@ void LdapConfigWidget::setServer( const LdapServer &server )
     if ( d->mAnonymous ) {
       d->mAnonymous->setChecked( true );
     }
+    break;
   case LdapServer::Simple:
     if ( d->mSimple ) {
       d->mSimple->setChecked( true );
     }
+    break;
   case LdapServer::SASL:
     if ( d->mSASL ) {
       d->mSASL->setChecked( true );
     }
+    break;
   }
 
   setUser( server.user() );
