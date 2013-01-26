@@ -30,6 +30,7 @@ class LdapControl::Private : public QSharedData
   public:
     Private()
     {
+      mCritical = false;
     }
 
     Private( const Private &other )
