@@ -23,7 +23,7 @@
 #include "kldap_config.h" // SASL2_FOUND, LDAP_FOUND
 
 #include <stdlib.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kdebug.h>
 
 #ifdef SASL2_FOUND

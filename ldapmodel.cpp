@@ -24,7 +24,7 @@
 #include "ldapsearch.h"
 
 #include <kdebug.h>
-#include <klocale.h>
+#include <klocalizedstring.h>
 #include <kglobal.h>
 
 static const KCatalogLoader loader( "libkldap" );

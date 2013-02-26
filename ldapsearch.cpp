@@ -26,7 +26,7 @@
 #include <QtCore/QTimer>
 
 #include <kdebug.h>
-#include <KLocale>
+#include <KLocalizedString>
 using namespace KLDAP;
 
 //blocking the GUI for xxx milliseconds
