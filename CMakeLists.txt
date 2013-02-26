@@ -94,6 +94,7 @@ target_link_libraries(kldap
   ${KDE4_KCMUTILS_LIBS}
   ${KDE4_KDECORE_LIBS}
   ${kldap_EXTRA_LIBS}
+  ${KDE4_KDE4SUPPORT_LIBS}
   kabc
 )
 
