@@ -3,6 +3,9 @@ include(CheckFunctionExists)
 include(CheckSymbolExists)
 
 add_definitions(-DKDE_DEFAULT_DEBUG_AREA=5322)
+add_definitions( -DQT_NO_CAST_FROM_ASCII )
+add_definitions( -DQT_NO_CAST_TO_ASCII )
+
 
 find_package(Ldap)
 if(NOT WINCE) #FIXME enable for win32

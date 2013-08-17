@@ -49,7 +49,7 @@ LdapUrl::LdapUrl( const KUrl &_url )
   : KUrl( _url ), d( new LdapUrlPrivate )
 {
   QString tmp = path();
-  if ( tmp.startsWith( '/' ) ) {
+  if ( tmp.startsWith( QLatin1Char('/') ) ) {
     tmp = tmp.mid( 1 );
   }
   setPath( tmp );
@@ -82,7 +82,7 @@ LdapUrl::~LdapUrl()
 void LdapUrl::setDn( const LdapDN &dn )
 {
   QString tmp = dn.toString();
-  if ( tmp.startsWith( '/' ) ) {
+  if ( tmp.startsWith( QLatin1Char('/') ) ) {
     tmp = tmp.mid( 1 );
   }
   setPath( tmp );
@@ -91,7 +91,7 @@ void LdapUrl::setDn( const LdapDN &dn )
 LdapDN LdapUrl::dn() const
 {
   QString tmp = path();
-  if ( tmp.startsWith( '/' ) ) {
+  if ( tmp.startsWith( QLatin1Char('/') ) ) {
     tmp = tmp.mid( 1 );
   }
   LdapDN tmpDN( tmp );
@@ -145,7 +145,7 @@ LdapUrl::Extension LdapUrl::extension( const QString &key ) const
     return ( *it );
   } else {
     Extension ext;
-    ext.value = "";
+    ext.value = QLatin1String("");
     ext.critical = false;
     return ext;
   }
@@ -190,48 +190,47 @@ void LdapUrl::removeExtension( const QString &key )
 
 void LdapUrl::updateQuery()
 {
-  Extension ext;
   QMap<QString, Extension>::const_iterator it;
-  QString q( '?' );
+  QString q( QLatin1Char('?') );
 
   // set the attributes to query
-  if ( d->m_attributes.count() > 0 ) {
-    q += d->m_attributes.join( "," );
+  if ( !d->m_attributes.isEmpty() ) {
+    q += d->m_attributes.join( QLatin1String(",") );
   }
 
   // set the scope
-  q += '?';
+  q += QLatin1Char('?');
   switch ( d->m_scope ) {
   case Sub:
-    q += "sub";
+    q += QLatin1String("sub");
     break;
   case One:
-    q += "one";
+    q += QLatin1String("one");
     break;
   case Base:
-    q += "base";
+    q += QLatin1String("base");
     break;
   }
 
   // set the filter
-  q += '?';
-  if ( d->m_filter != "(objectClass=*)" && !d->m_filter.isEmpty() ) {
-    q += toPercentEncoding( d->m_filter );
+  q += QLatin1Char('?');
+  if ( d->m_filter != QLatin1String("(objectClass=*)") && !d->m_filter.isEmpty() ) {
+    q += QLatin1String(toPercentEncoding( d->m_filter ));
   }
 
   // set the extensions
-  q += '?';
+  q += QLatin1Char('?');
   for ( it = d->m_extensions.constBegin(); it != d->m_extensions.constEnd(); ++it ) {
     if ( it.value().critical ) {
-      q += '!';
+      q += QLatin1Char('!');
     }
     q += it.key();
     if ( !it.value().value.isEmpty() ) {
-      q += '=' + toPercentEncoding( it.value().value );
+      q += QLatin1Char('=') + QLatin1String(toPercentEncoding( it.value().value ));
     }
-    q += ',';
+    q += QLatin1Char(',');
   }
-  while  ( q.endsWith( '?' ) || q.endsWith( ',' ) ) {
+  while  ( q.endsWith( QLatin1Char('?') ) || q.endsWith( QLatin1Char(',') ) ) {
     q.remove( q.length() - 1, 1 );
   }
 
@@ -245,16 +244,16 @@ void LdapUrl::parseQuery()
   QStringList extensions;
   QString q = query();
   // remove first ?
-  if ( q.startsWith( '?' ) ) {
+  if ( q.startsWith( QLatin1Char('?') ) ) {
     q.remove( 0, 1 );
   }
 
   // split into a list
-  QStringList url_items = q.split( '?' );
+  QStringList url_items = q.split( QLatin1Char('?') );
 
   d->m_attributes.clear();
   d->m_scope = Base;
-  d->m_filter = "(objectClass=*)";
+  d->m_filter = QLatin1String("(objectClass=*)");
   d->m_extensions.clear();
 
   int i = 0;
@@ -263,7 +262,7 @@ void LdapUrl::parseQuery()
         it != end; ++it, i++ ) {
     switch ( i ) {
     case 0:
-      d->m_attributes = ( *it ).split( ',', QString::SkipEmptyParts );
+      d->m_attributes = ( *it ).split( QLatin1Char(','), QString::SkipEmptyParts );
       break;
     case 1:
       if ( ( *it ) == QLatin1String( "sub" ) ) {
@@ -276,7 +275,7 @@ void LdapUrl::parseQuery()
       d->m_filter = fromPercentEncoding( ( *it ).toLatin1() );
       break;
     case 3:
-      extensions = ( *it ).split( ',', QString::SkipEmptyParts );
+      extensions = ( *it ).split( QLatin1Char(','), QString::SkipEmptyParts );
       break;
     }
   }
@@ -286,14 +285,14 @@ void LdapUrl::parseQuery()
   for ( QStringList::const_iterator it=extensions.constBegin();
         it != end2; ++it ) {
     ext.critical = false;
-    name = fromPercentEncoding( ( *it ).section( '=', 0, 0 ).toLatin1() ).toLower();
-    value = fromPercentEncoding( ( *it ).section( '=', 1 ).toLatin1() );
-    if ( name.startsWith( '!' ) ) {
+    name = fromPercentEncoding( ( *it ).section( QLatin1Char('='), 0, 0 ).toLatin1() ).toLower();
+    value = fromPercentEncoding( ( *it ).section( QLatin1Char('='), 1 ).toLatin1() );
+    if ( name.startsWith( QLatin1Char('!') ) ) {
       ext.critical = true;
       name.remove( 0, 1 );
     }
     kDebug() << "LdapUrl extensions name=" << name << "value:" << value;
-    ext.value = value.replace( "%2", "," );
+    ext.value = value.replace( QLatin1String("%2"), QLatin1String(",") );
     setExtension( name, ext );
   }
 }

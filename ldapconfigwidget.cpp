@@ -102,7 +102,7 @@ void LdapConfigWidget::Private::initWidget()
   if ( mFeatures & W_USER ) {
     label = new QLabel( i18n( "User:" ), mParent );
     mUser = new KLineEdit( mParent );
-    mUser->setObjectName( "kcfg_ldapuser" );
+    mUser->setObjectName( QLatin1String("kcfg_ldapuser") );
 
     mainLayout->addWidget( label, row, 0 );
     mainLayout->addWidget( mUser, row, 1, 1, 3 );
@@ -112,7 +112,7 @@ void LdapConfigWidget::Private::initWidget()
   if ( mFeatures & W_BINDDN ) {
     label = new QLabel( i18n( "Bind DN:" ), mParent );
     mBindDn = new KLineEdit( mParent );
-    mBindDn->setObjectName( "kcfg_ldapbinddn" );
+    mBindDn->setObjectName( QLatin1String("kcfg_ldapbinddn") );
 
     mainLayout->addWidget( label, row, 0 );
     mainLayout->addWidget( mBindDn, row, 1, 1, 3 );
@@ -122,7 +122,7 @@ void LdapConfigWidget::Private::initWidget()
   if ( mFeatures & W_REALM ) {
     label = new QLabel( i18n( "Realm:" ), mParent );
     mRealm = new KLineEdit( mParent );
-    mRealm->setObjectName( "kcfg_ldaprealm" );
+    mRealm->setObjectName( QLatin1String("kcfg_ldaprealm") );
 
     mainLayout->addWidget( label, row, 0 );
     mainLayout->addWidget( mRealm, row, 1, 1, 3 );
@@ -132,7 +132,7 @@ void LdapConfigWidget::Private::initWidget()
   if ( mFeatures & W_PASS ) {
     label = new QLabel( i18n( "Password:" ), mParent );
     mPassword = new KLineEdit( mParent );
-    mPassword->setObjectName( "kcfg_ldappassword" );
+    mPassword->setObjectName( QLatin1String("kcfg_ldappassword") );
     mPassword->setEchoMode( KLineEdit::Password );
 
     mainLayout->addWidget( label, row, 0 );
@@ -143,7 +143,7 @@ void LdapConfigWidget::Private::initWidget()
   if ( mFeatures & W_HOST ) {
     label = new QLabel( i18n( "Host:" ), mParent );
     mHost = new KLineEdit( mParent );
-    mHost->setObjectName( "kcfg_ldaphost" );
+    mHost->setObjectName( QLatin1String("kcfg_ldaphost") );
 
     mainLayout->addWidget( label, row, 0 );
     mainLayout->addWidget( mHost, row, 1, 1, 3 );
@@ -155,7 +155,7 @@ void LdapConfigWidget::Private::initWidget()
     label = new QLabel( i18n( "Port:" ), mParent );
     mPort = new QSpinBox( mParent );
     mPort->setRange( 0, 65535 );
-    mPort->setObjectName( "kcfg_ldapport" );
+    mPort->setObjectName( QLatin1String("kcfg_ldapport") );
     mPort->setSizePolicy( QSizePolicy( QSizePolicy::Maximum, QSizePolicy::Preferred ) );
     mPort->setValue( 389 );
 
@@ -168,7 +168,7 @@ void LdapConfigWidget::Private::initWidget()
     label = new QLabel( i18n( "LDAP version:" ), mParent );
     mVersion = new QSpinBox( mParent );
     mVersion->setRange( 2, 3 );
-    mVersion->setObjectName( "kcfg_ldapver" );
+    mVersion->setObjectName( QLatin1String("kcfg_ldapver") );
     mVersion->setSizePolicy( QSizePolicy( QSizePolicy::Maximum, QSizePolicy::Preferred ) );
     mVersion->setValue( 3 );
     mainLayout->addWidget( label, row, col );
@@ -183,7 +183,7 @@ void LdapConfigWidget::Private::initWidget()
     label = new QLabel( i18n( "Size limit:" ), mParent );
     mSizeLimit = new QSpinBox( mParent );
     mSizeLimit->setRange( 0, 9999999 );
-    mSizeLimit->setObjectName( "kcfg_ldapsizelimit" );
+    mSizeLimit->setObjectName( QLatin1String("kcfg_ldapsizelimit") );
     mSizeLimit->setSizePolicy( QSizePolicy( QSizePolicy::Maximum, QSizePolicy::Preferred ) );
     mSizeLimit->setValue( 0 );
     mSizeLimit->setSpecialValueText( i18nc( "default ldap size limit", "Default" ) );
@@ -196,7 +196,7 @@ void LdapConfigWidget::Private::initWidget()
     label = new QLabel( i18n( "Time limit:" ), mParent );
     mTimeLimit = new QSpinBox( mParent );
     mTimeLimit->setRange( 0, 9999999 );
-    mTimeLimit->setObjectName( "kcfg_ldaptimelimit" );
+    mTimeLimit->setObjectName( QLatin1String("kcfg_ldaptimelimit") );
     mTimeLimit->setSizePolicy( QSizePolicy( QSizePolicy::Maximum, QSizePolicy::Preferred ) );
     mTimeLimit->setValue( 0 );
     mTimeLimit->setSuffix( i18n( " sec" ) );
@@ -212,7 +212,7 @@ void LdapConfigWidget::Private::initWidget()
     label = new QLabel( i18n( "Page size:" ), mParent );
     mPageSize = new QSpinBox( mParent );
     mPageSize->setRange( 0, 9999999 );
-    mPageSize->setObjectName( "kcfg_ldappagesize" );
+    mPageSize->setObjectName( QLatin1String("kcfg_ldappagesize") );
     mPageSize->setSizePolicy( QSizePolicy( QSizePolicy::Maximum, QSizePolicy::Preferred ) );
     mPageSize->setValue( 0 );
     mPageSize->setSpecialValueText( i18n( "No paging" ) );
@@ -223,7 +223,7 @@ void LdapConfigWidget::Private::initWidget()
   if ( mFeatures & W_DN ) {
     label = new QLabel( i18nc( "Distinguished Name", "DN:" ), mParent );
     mDn = new KLineEdit( mParent );
-    mDn->setObjectName( "kcfg_ldapdn" );
+    mDn->setObjectName( QLatin1String("kcfg_ldapdn") );
 
     mainLayout->addWidget( label, row, 0 );
     mainLayout->addWidget( mDn, row, 1, 1, 1 );
@@ -239,7 +239,7 @@ void LdapConfigWidget::Private::initWidget()
   if ( mFeatures & W_FILTER ) {
     label = new QLabel( i18n( "Filter:" ), mParent );
     mFilter = new KLineEdit( mParent );
-    mFilter->setObjectName( "kcfg_ldapfilter" );
+    mFilter->setObjectName( QLatin1String("kcfg_ldapfilter") );
 
     mainLayout->addWidget( label, row, 0 );
     mainLayout->addWidget( mFilter, row, 1, 1, 3 );
@@ -251,13 +251,13 @@ void LdapConfigWidget::Private::initWidget()
     QHBoxLayout *hbox = new QHBoxLayout;
     btgroup->setLayout( hbox );
     mSecNo = new QRadioButton( i18nc( "@option:radio set no security", "No" ), btgroup );
-    mSecNo->setObjectName( "kcfg_ldapnosec" );
+    mSecNo->setObjectName( QLatin1String("kcfg_ldapnosec") );
     hbox->addWidget( mSecNo );
     mSecTLS = new QRadioButton( i18nc( "@option:radio use TLS security", "TLS" ), btgroup );
-    mSecTLS->setObjectName( "kcfg_ldaptls" );
+    mSecTLS->setObjectName( QLatin1String("kcfg_ldaptls") );
     hbox->addWidget( mSecTLS );
     mSecSSL = new QRadioButton( i18nc( "@option:radio use SSL security", "SSL" ), btgroup );
-    mSecSSL->setObjectName( "kcfg_ldapssl" );
+    mSecSSL->setObjectName( QLatin1String("kcfg_ldapssl") );
     hbox->addWidget( mSecSSL );
     mainLayout->addWidget( btgroup, row, 0, 1, 4 );
 
@@ -280,15 +280,15 @@ void LdapConfigWidget::Private::initWidget()
 
     mAnonymous =
       new QRadioButton( i18nc( "@option:radio anonymous authentication", "Anonymous" ), authbox );
-    mAnonymous->setObjectName( "kcfg_ldapanon" );
+    mAnonymous->setObjectName( QLatin1String("kcfg_ldapanon") );
     hbox->addWidget( mAnonymous );
     mSimple =
       new QRadioButton( i18nc( "@option:radio simple authentication", "Simple" ), authbox );
-    mSimple->setObjectName( "kcfg_ldapsimple" );
+    mSimple->setObjectName( QLatin1String("kcfg_ldapsimple") );
     hbox->addWidget( mSimple );
     mSASL =
       new QRadioButton( i18nc( "@option:radio SASL authentication", "SASL" ), authbox );
-    mSASL->setObjectName( "kcfg_ldapsasl" );
+    mSASL->setObjectName( QLatin1String("kcfg_ldapsasl") );
     hbox->addWidget( mSASL );
 
     hbox = new QHBoxLayout;
@@ -296,11 +296,11 @@ void LdapConfigWidget::Private::initWidget()
     label = new QLabel( i18n( "SASL mechanism:" ), authbox );
     hbox->addWidget( label );
     mMech = new KComboBox( false, authbox );
-    mMech->setObjectName( "kcfg_ldapsaslmech" );
+    mMech->setObjectName( QLatin1String("kcfg_ldapsaslmech") );
     mMech->setEditable( true );
-    mMech->addItem( "DIGEST-MD5" );
-    mMech->addItem( "GSSAPI" );
-    mMech->addItem( "PLAIN" );
+    mMech->addItem( QLatin1String("DIGEST-MD5") );
+    mMech->addItem( QLatin1String("GSSAPI") );
+    mMech->addItem( QLatin1String("PLAIN") );
     hbox->addWidget( mMech );
 
     //without host query doesn't make sense
@@ -327,21 +327,21 @@ void LdapConfigWidget::Private::sendQuery()
   mQResult.clear();
   mCancelled = true;
 
-  _url.setProtocol( ( mSecSSL && mSecSSL->isChecked() ) ? "ldaps" : "ldap" );
+  _url.setProtocol( ( mSecSSL && mSecSSL->isChecked() ) ? QLatin1String("ldaps") : QLatin1String("ldap") );
   if ( mHost ) {
     _url.setHost( mHost->text() );
   }
   if ( mPort ) {
     _url.setPort( mPort->value() );
   }
-  _url.setDn( LdapDN( "" ) );
+  _url.setDn( LdapDN( QLatin1String("") ) );
   _url.setAttributes( QStringList( mAttr ) );
   _url.setScope( LdapUrl::Base );
   if ( mVersion ) {
-    _url.setExtension( "x-ver", QString::number( mVersion->value() ) );
+    _url.setExtension( QLatin1String("x-ver"), QString::number( mVersion->value() ) );
   }
   if ( mSecTLS && mSecTLS->isChecked() ) {
-    _url.setExtension( "x-tls", "" );
+    _url.setExtension( QLatin1String("x-tls"), QLatin1String("") );
   }
 
   kDebug() << "sendQuery url:" << _url.prettyUrl();
@@ -378,7 +378,7 @@ void LdapConfigWidget::Private::sendQuery()
 
 void LdapConfigWidget::Private::queryMechClicked()
 {
-  mAttr = "supportedsaslmechanisms";
+  mAttr = QLatin1String("supportedsaslmechanisms");
   sendQuery();
   if ( !mQResult.isEmpty() ) {
     mQResult.sort();
@@ -389,7 +389,7 @@ void LdapConfigWidget::Private::queryMechClicked()
 
 void LdapConfigWidget::Private::queryDNClicked()
 {
-  mAttr = "namingcontexts";
+  mAttr = QLatin1String("namingcontexts");
   sendQuery();
   if ( !mQResult.isEmpty() ) {
     mDn->setText( mQResult.first() );

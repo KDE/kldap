@@ -105,7 +105,7 @@ QString LdapObject::toString() const
     const QString attr = it.key();
     LdapAttrValue::ConstIterator end2( ( *it ).constEnd() );
     for ( LdapAttrValue::ConstIterator it2 = ( *it ).constBegin(); it2 != end2; ++it2 ) {
-      result += QString::fromUtf8( Ldif::assembleLine( attr, *it2, 76 ) ) + '\n';
+      result += QString::fromUtf8( Ldif::assembleLine( attr, *it2, 76 ) ) + QLatin1Char('\n');
     }
   }
   return result;

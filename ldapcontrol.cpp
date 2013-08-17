@@ -118,13 +118,13 @@ void LdapControl::setCritical( bool critical )
 
 int LdapControl::parsePageControl( QByteArray &cookie ) const
 {
-  if ( d->mOid != "1.2.840.113556.1.4.319" ) {
+  if ( d->mOid != QLatin1String("1.2.840.113556.1.4.319") ) {
     return -1;
   }
 
   Ber ber( d->mValue );
   int size;
-  if ( ber.scanf( "{iO}", &size, &cookie ) == -1 ) {
+  if ( ber.scanf( QLatin1String("{iO}"), &size, &cookie ) == -1 ) {
     return -1;
   } else {
     return size;
@@ -136,8 +136,8 @@ LdapControl LdapControl::createPageControl( int pagesize, const QByteArray &cook
   LdapControl control;
   Ber ber;
 
-  ber.printf( "{iO}", pagesize, &cookie );
-  control.setOid( "1.2.840.113556.1.4.319" );
+  ber.printf( QLatin1String("{iO}"), pagesize, &cookie );
+  control.setOid( QLatin1String("1.2.840.113556.1.4.319") );
   control.setValue( ber.flatten() );
   return control;
 }
