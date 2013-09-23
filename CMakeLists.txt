@@ -83,6 +83,7 @@ set(kldap_LIB_SRCS
 )
 
 kde4_add_library(kldap ${LIBRARY_TYPE} ${kldap_LIB_SRCS})
+generate_export_header(kldap)
 
 include_directories(
   ${CMAKE_CURRENT_SOURCE_DIR}
@@ -110,7 +111,7 @@ install(TARGETS kldap EXPORT kdepimlibsLibraryTargets ${INSTALL_TARGETS_DEFAULT_
 
 install(FILES
   ber.h
-  kldap_export.h
+  ${CMAKE_CURRENT_BINARY_DIR}/kldap_export.h
   ldapattributeproxymodel.h
   ldapconfigwidget.h
   ldapconnection.h
