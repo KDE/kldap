@@ -82,7 +82,7 @@ set(kldap_LIB_SRCS
   ldapattributeproxymodel.cpp
 )
 
-kde4_add_library(kldap ${LIBRARY_TYPE} ${kldap_LIB_SRCS})
+add_library(kldap ${LIBRARY_TYPE} ${kldap_LIB_SRCS})
 generate_export_header(kldap)
 
 include_directories(
