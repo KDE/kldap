@@ -93,6 +93,7 @@ include_directories(
   ${kldap_EXTRA_INCLUDES}
 )
 
+# TODO KF5: we only need KDEUI here, remove KCM, KIO and KABC
 target_link_libraries(kldap
   ${KDE4_KIO_LIBS}
   ${KDE4_KCMUTILS_LIBS}

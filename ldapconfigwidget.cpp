@@ -21,7 +21,6 @@
 #include "ldapconfigwidget.h"
 #include "ldapsearch.h"
 
-#include <kacceleratormanager.h>
 #include <kprogressdialog.h>
 #include <kcombobox.h>
 #include <kdebug.h>
