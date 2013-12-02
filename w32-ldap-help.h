@@ -45,10 +45,6 @@ typedef ULONG ber_len_t;
 #define timeval l_timeval
 #endif
 
-#ifdef _WIN32_WCE //krazy:exclude=cpp allow as this is a non-Qt source file
-#include "wce-ldap-help.h"
-#endif
-
 /* Redirect used ldap functions to functions with win_ prefix
  * to further redirect those depending on the Windows Flavour */
 //#define ldap_err2string(a) win_ldap_err2string(a)
@@ -98,60 +94,7 @@ typedef ULONG ber_len_t;
 
 // Use the functions that are available on the platform
 // or redirect to wrapper functions
-#ifdef _WIN32_WCE //krazy:exclude=cpp allow as this is a non-Qt source file
-# define win_ldap_init(a,b)                      \
-  my_win_ldap_initA ((a), (b))
-# define win_ldap_simple_bind_s(a,b,c)           \
-  my_win_ldap_simple_bind_sA ((a),(b),(c))
-/* Contrary to documentation the sasl_bind functions
- * are not availabe for wince
 
-# define win_ldap_sasl_bind(a, b, c, d, e, f, g) \
-  ldap_sasl_bindA(a, b, c, d, e, f, g)
-# define win_ldap_sasl_bind_result ( a, b, c, d, e ) \
-  my_win_ldap_sasl_bind_result (((a), (b), (c), (d), (e))
-# define win_ldap_sasl_bind_s(a, b, c, d, e, f, g) \
-  ldap_sasl_bind_s(a, b, c, d, e, f, g)*/
-# define win_ldap_search_st(a,b,c,d,e,f,g,h)     \
-  my_win_ldap_search_stA ((a), (b), (c), (d), (e), (f), (g), (h))
-# define win_ldap_first_attribute(a,b,c)         \
-  my_win_ldap_first_attributeA ((a),(b),(c))
-# define win_ldap_next_attribute(a,b,c)          \
-  my_win_ldap_next_attributeA ((a),(b),(c))
-# define win_ldap_get_values_len(a,b,c)          \
-  my_win_ldap_get_values_lenA ((a),(b),(c))
-# define win_ldap_get_dn(a,b)                    \
-  my_win_ldap_get_dnA((a),(b))
-# define win_ldap_parse_extended_result(a, b, c, d, e ) \
-  my_win_ldap_parse_extended_resultA((a), (b), (c), (d), (e))
-# define win_ldap_memfree(a) free(a)
-# define win_ldap_controls_free(a)              \
-  my_win_ldap_controls_freeA((a))
-# define win_ldap_mods_free(a, b)               \
-  my_win_ldap_mods_freeA((a), (b))
-# define win_ldap_parse_result(a, b, c, d, e, f, g, h ) \
-  my_win_ldap_parse_resultA((a), (b), ((ulong *) c), (d), (e), (f), (g), (h))
-# define win_ldap_search_ext(a, b, c, d, e, f, g, h, i, j, k) \
-  my_win_ldap_search_extA((a), (b), (c), (d), (e), (f), (g), (h), (i), (j), (k))
-# define win_ldap_add_ext_s(a, b, c, d, e) \
-  my_win_ldap_add_ext_sA((a), (b), (c), (d), (e))
-# define win_ldap_add_ext(a, b, c, d, e, f) \
-  my_win_ldap_add_extA((a), (b), (c), (d), (e), ( (ulong * ) f))
-#define win_ldap_rename_ext( a,  b,  c,  d,  e,  f,  g,  h  ) \
-  ldap_rename_extA((a), (b), (c), (d), (e), (f), (g), ( ( ulong * ) h) )
-#define win_ldap_delete_ext( a,  b,  c,  d,  e  ) \
-  ldap_delete_extA((a), (b), (c), (d), ( ( ulong * ) e) )
-#define win_ldap_modify_ext(  a,  b,  c,  d,  e,  f  ) \
-  ldap_modify_extA( (a), (b), (c), (d), (e), ( ( ulong * ) f) )
-#define win_ldap_modify_ext_s(  a,  b,  c,  d,  e ) \
-  ldap_modify_ext_sA( (a), (b), (c), (d), (e) )
-# define win_ldap_compare_ext(a, b, c, d, e, f, g) \
-  my_win_ldap_compare_extA((a), (b), (c), NULL, (d), (e), (f), ( ( ulong * ) g))
-#define win_ldap_compare_ext_s(a, b, c, d, e, f) \
-  my_win_ldap_compare_ext_sA( (a), (b), (c), NULL, (d), (e), (f) )
-#define win_ldap_abandon_ext(a, b, c, d) \
-  ldap_abandon((a), (b))
-#else
 /* Windows offers ASCII variants of most LDAP functions
  * we only have to ensure that those are used */
 # define LDAPControl LDAPControlA
@@ -186,5 +129,4 @@ typedef ULONG ber_len_t;
   ldap_modify_ext_sW((a), (b), (c), (d), (e))
 # define win_ldap_compare_ext_s(a, b, c, d, e, f ) \
   ldap_compare_ext_sA((a), (b), (c), (d), (e), (f))
-#endif /*_WIN32_WCE*/
 #endif /*W32_LDAP_HELP_H*/

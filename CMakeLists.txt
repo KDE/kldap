@@ -8,11 +8,7 @@ add_definitions( -DQT_NO_CAST_TO_ASCII )
 
 
 find_package(Ldap)
-if(NOT WINCE) #FIXME enable for win32
-  set_package_properties(Ldap PROPERTIES DESCRIPTION "LDAP (Lightweight Directory Access Protocol) libraries" URL "http://www.openldap.org" TYPE RECOMMENDED PURPOSE "Needed to provide LDAP functionality in KDE")
-else()
-  set_package_properties(Ldap PROPERTIES DESCRIPTION "LDAP (Lightweight Directory Access Protocol) libraries" URL "http://www.openldap.org" TYPE OPTIONAL PURPOSE "Needed to provide LDAP functionality in KDE")
-endif()
+set_package_properties(Ldap PROPERTIES DESCRIPTION "LDAP (Lightweight Directory Access Protocol) libraries" URL "http://www.openldap.org" TYPE RECOMMENDED PURPOSE "Needed to provide LDAP functionality in KDE")
 
 check_include_files(sys/time.h HAVE_SYS_TIME_H)
 
@@ -33,23 +29,6 @@ if(LDAP_FOUND)
   check_function_exists(ldap_extended_operation_s HAVE_LDAP_EXTENDED_OPERATION_S)
   check_symbol_exists(ldap_extended_operation ldap.h HAVE_LDAP_EXTENDED_OPERATION_PROTOTYPE)
   check_symbol_exists(ldap_extended_operation_s ldap.h HAVE_LDAP_EXTENDED_OPERATION_S_PROTOTYPE)
-else()
-  if(WINCE)
-    set(LDAP_FOUND TRUE)
-    set(HAVE_WINLDAP_H TRUE)
-    set(CMAKE_REQUIRED_INCLUDES winldap.h w32-ldap-help.h)
-    set(CMAKE_REQUIRED_LIBRARIES wldap32)
-    set(kldap_EXTRA_LIBS ${kldap_EXTRA_LIBS} wldap32)
-    # Checks left in for compatibility
-    check_function_exists(ldap_start_tls_s HAVE_LDAP_START_TLS_S)
-    check_function_exists(ldap_initialize HAVE_LDAP_INITIALIZE)
-    check_function_exists(ber_memfree HAVE_BER_MEMFREE)
-    check_function_exists(ldap_unbind_ext HAVE_LDAP_UNBIND_EXT)
-    check_function_exists(ldap_extended_operation HAVE_LDAP_EXTENDED_OPERATION)
-    check_function_exists(ldap_extended_operation_s HAVE_LDAP_EXTENDED_OPERATION_S)
-    check_symbol_exists(ldap_extended_operation winldap.h HAVE_LDAP_EXTENDED_OPERATION_PROTOTYPE)
-    check_symbol_exists(ldap_extended_operation_s winldap.h HAVE_LDAP_EXTENDED_OPERATION_S_PROTOTYPE)
-  endif()
 endif()
 
 if(SASL2_FOUND)
