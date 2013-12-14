@@ -2,6 +2,8 @@ project(kldap)
 include(CheckFunctionExists)
 include(CheckSymbolExists)
 
+find_package(KF5 NO_MODULE REQUIRED COMPONENTS CoreAddons KIO KCMUtils KDE4Support)
+
 add_definitions(-DKDE_DEFAULT_DEBUG_AREA=5322)
 
 find_package(Ldap)
@@ -90,11 +92,11 @@ include_directories(
 )
 
 target_link_libraries(kldap
-  ${KDE4_KIO_LIBS}
-  ${KDE4_KCMUTILS_LIBS}
-  ${KDE4_KDECORE_LIBS}
+  KF5::CoreAddons
+  KF5::KIOCore
+  KF5::KDE4Support
+  KF5::KCMUtils
   ${kldap_EXTRA_LIBS}
-  ${KDE4_KDE4SUPPORT_LIBS}
   kabc
 )
 
