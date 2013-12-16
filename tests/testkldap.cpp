@@ -47,7 +47,7 @@ void KLdapTest::initTestCase()
   m_search=0;
   m_model=0;
 
-  QString filename( "testurl.txt" );
+  QString filename( QLatin1String("testurl.txt") );
   QFile file( filename );
   if ( file.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
     QTextStream stream( &file );
@@ -90,37 +90,37 @@ void KLdapTest::testBer()
 
   ainteger = 23543;
 
-  ber1.printf( "i", ainteger );
-  ber2.printf( "o", &aoctetString1 );
-  ber3.printf( "O", &aoctetString2 );
-  ber4.printf( "s", &aoctetString3 );
-  ber5.printf( "{v}", &alist1 );
-  ber6.printf( "{V}", &alist2 );
-  ber7.printf( "oi{v}O", &aoctetString1, ainteger, &alist2, &aoctetString2 );
+  ber1.printf( QLatin1String("i"), ainteger );
+  ber2.printf( QLatin1String("o"), &aoctetString1 );
+  ber3.printf( QLatin1String("O"), &aoctetString2 );
+  ber4.printf( QLatin1String("s"), &aoctetString3 );
+  ber5.printf( QLatin1String("{v}"), &alist1 );
+  ber6.printf( QLatin1String("{V}"), &alist2 );
+  ber7.printf( QLatin1String("oi{v}O"), &aoctetString1, ainteger, &alist2, &aoctetString2 );
 
   //test integer:
   bber = ber1;
-  bber.scanf( "i", &binteger );
+  bber.scanf( QLatin1String("i"), &binteger );
   QCOMPARE( ainteger, binteger );
 
   //test octet strings:
   bber = ber2;
-  bber.scanf( "o", &boctetString1 );
+  bber.scanf( QLatin1String("o"), &boctetString1 );
   QCOMPARE( aoctetString1, boctetString1 );
   bber = ber3;
-  bber.scanf( "o", &boctetString2 );
+  bber.scanf( QLatin1String("o"), &boctetString2 );
   QCOMPARE( aoctetString2, boctetString2 );
   bber = ber4;
-  bber.scanf( "o", &boctetString3 );
+  bber.scanf( QLatin1String("o"), &boctetString3 );
   QCOMPARE( aoctetString3, boctetString3 );
 
   //test sequence of octet strings:
   bber = ber5;
-  bber.scanf( "v", &blist1 );
+  bber.scanf( QLatin1String("v"), &blist1 );
   QCOMPARE( alist1, blist1 );
 
   bber = ber6;
-  bber.scanf( "v", &blist2 );
+  bber.scanf( QLatin1String("v"), &blist2 );
   QCOMPARE( alist2, blist2 );
 
   //complex tests
@@ -130,7 +130,7 @@ void KLdapTest::testBer()
   blist2.clear();
 
   bber = ber7;
-  bber.scanf( "oivO", &boctetString1, &binteger, &blist2, &boctetString2 );
+  bber.scanf( QLatin1String("oivO"), &boctetString1, &binteger, &blist2, &boctetString2 );
   QCOMPARE( aoctetString1, boctetString1 );
   QCOMPARE( aoctetString2, boctetString2 );
   QCOMPARE( alist2, blist2 );
@@ -149,13 +149,13 @@ void KLdapTest::testLdapUrl()
   LdapUrl url;
   bool critical;
 
-  url.setUrl( "ldap://cn=manager,dc=kde,dc=org:password@localhost:3999/"
-              "dc=kde,dc=org?cn,mail?sub?(objectClass=*)?x-dir=base" );
+  url.setUrl( QLatin1String("ldap://cn=manager,dc=kde,dc=org:password@localhost:3999/"
+              "dc=kde,dc=org?cn,mail?sub?(objectClass=*)?x-dir=base") );
   url.parseQuery();
 
   QCOMPARE( url.user(), QString::fromLatin1( "cn=manager,dc=kde,dc=org" ) );
   QCOMPARE( url.password(), QString::fromLatin1( "password" ) );
-  QCOMPARE( url.dn(), LdapDN( "dc=kde,dc=org" ) );
+  QCOMPARE( url.dn(), LdapDN( QLatin1String("dc=kde,dc=org") ) );
   QCOMPARE( url.scope(), LdapUrl::Sub );
   QCOMPARE( url.attributes().at( 0 ), QString::fromLatin1( "cn" ) );
   QCOMPARE( url.attributes().at( 1 ), QString::fromLatin1( "mail" ) );
@@ -229,10 +229,10 @@ void KLdapTest::searchData( KLDAP::LdapSearch *search, const KLDAP::LdapObject &
 
 void KLdapTest::testLdapDN()
 {
-  QString strDN( "uid=Test\\+Person+ou=accounts\\,outgoing,dc=kde,dc=org" );
+  QString strDN( QLatin1String("uid=Test\\+Person+ou=accounts\\,outgoing,dc=kde,dc=org") );
   LdapDN dn( strDN );
   QCOMPARE( dn.isValid(), true );
-  QCOMPARE( dn.rdnString(), QString( "uid=Test\\+Person+ou=accounts\\,outgoing" ) );
+  QCOMPARE( dn.rdnString(), QLatin1String( "uid=Test\\+Person+ou=accounts\\,outgoing" ) );
 }
 
 void KLdapTest::testLdapModel()

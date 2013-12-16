@@ -79,7 +79,7 @@ QByteArray Ldif::assembleLine( const QString &fieldname,
   if ( url ) {
     result = fieldname.toUtf8() + ":< " + value;
   } else {
-    isDn = fieldname.toLower() == "dn";
+    isDn = fieldname.toLower() == QLatin1String("dn");
     //SAFE-INIT-CHAR
     if ( value.size() > 0 && value[0] > 0 && value[0] != '\n' &&
          value[0] != '\r' && value[0] != ':' && value[0] != '<' ) safe = true;
@@ -135,7 +135,7 @@ bool Ldif::splitLine( const QByteArray &line, QString &fieldname, QByteArray &va
   position = line.indexOf( ":" );
   if ( position == -1 ) {
     // strange: we did not find a fieldname
-    fieldname = "";
+    fieldname = QLatin1String("");
     value = line.trimmed();
 //    kDebug() << "value :" << value[0];
     return false;
@@ -287,7 +287,7 @@ Ldif::ParseValue Ldif::processLine()
       }
     } else {
       if ( d->mAttr.isEmpty() ) {
-        if ( QString::fromUtf8( d->mValue, d->mValue.size() ) == "-" ) {
+        if ( QString::fromUtf8( d->mValue, d->mValue.size() ) == QLatin1String("-") ) {
           d->mModType = Mod_None;
         } else if ( d->mValue.size() == 0 ) {
           retval = EndEntry;

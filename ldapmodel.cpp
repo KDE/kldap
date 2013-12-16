@@ -27,7 +27,7 @@
 #include <klocalizedstring.h>
 #include <kglobal.h>
 
-static const KCatalogLoader loader( "libkldap" );
+static const KCatalogLoader loader( QLatin1String("libkldap") );
 
 using namespace KLDAP;
 
@@ -119,7 +119,7 @@ QVariant LdapModel::data( const QModelIndex &index, int role ) const
       if ( index.column() == 0 ) {
         return QVariant( attr->attributeName() );
       } else {
-        return QVariant( QString( attr->attributeData().constData() ) );
+        return QVariant( QLatin1String( attr->attributeData().constData() ) );
       }
     }
   } else if ( role == NodeTypeRole ) {
