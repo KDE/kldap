@@ -263,6 +263,12 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
      */
     void setServer( const LdapServer &server );
 
+Q_SIGNALS:
+    /**
+     * @since 4.13
+     */
+    void hostNameChanged(const QString &);
+
   private:
     class Private;
     Private *const d;
