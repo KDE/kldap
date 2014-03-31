@@ -71,17 +71,17 @@ bool LdapModel::LdapModelPrivate::search( const LdapDN &searchBase,
 
 void LdapModel::LdapModelPrivate::setSearchType( SearchType t, LdapModelDNNode *item )
 {
-  //kDebug() << "item =" << item;
+  //qDebug() << "item =" << item;
   m_searchType = t;
   m_searchItem = item;
 }
 
 void LdapModel::LdapModelPrivate::recreateRootItem()
 {
-  //kDebug();
+  //qDebug();
   delete m_root;
   m_root = new LdapModelDNNode;
-  //kDebug() << "&m_root =" << &m_root;
+  //qDebug() << "&m_root =" << &m_root;
 }
 
 void LdapModel::LdapModelPrivate::createConnections()
@@ -94,18 +94,18 @@ void LdapModel::LdapModelPrivate::createConnections()
 
 void LdapModel::LdapModelPrivate::populateRootToBaseDN()
 {
-  //kDebug();
+  //qDebug();
 
   if ( baseDN().isEmpty() ) {
     // Query the server for the base DN
-    //kDebug() << "Searching for the baseDN";
+    //qDebug() << "Searching for the baseDN";
     setSearchType( LdapModelPrivate::NamingContexts, rootNode() );
     search( LdapDN(), LdapUrl::Base, QString(), QStringList() << QLatin1String("namingContexts" ));
     return;
   }
 
   // Start a search for the details of the baseDN object
-  //kDebug() << "Searching for attributes of the baseDN";
+  //qDebug() << "Searching for attributes of the baseDN";
   searchResults().clear();
   setSearchType( LdapModelPrivate::BaseDN, rootNode() );
   search( baseDN(), LdapUrl::Base, QString(), QStringList() << QLatin1String("dn") << QLatin1String("objectClass") );
@@ -114,7 +114,7 @@ void LdapModel::LdapModelPrivate::populateRootToBaseDN()
 void LdapModel::LdapModelPrivate::gotSearchResult( KLDAP::LdapSearch *search )
 {
   Q_UNUSED( search );
-  kDebug();
+  qDebug();
 
   switch ( searchType() ) {
   case LdapModelPrivate::NamingContexts:
@@ -124,7 +124,7 @@ void LdapModel::LdapModelPrivate::gotSearchResult( KLDAP::LdapSearch *search )
     if ( !searchResults().isEmpty() &&
          searchResults().at( 0 ).hasAttribute( QLatin1String("namingContexts") ) ) {
       baseDN = QLatin1String(searchResults().at( 0 ).value( QLatin1String("namingContexts") ));
-      //kDebug() << "Found baseDN =" << baseDN;
+      //qDebug() << "Found baseDN =" << baseDN;
     }
     setBaseDN( LdapDN( baseDN ) );
 
@@ -138,7 +138,7 @@ void LdapModel::LdapModelPrivate::gotSearchResult( KLDAP::LdapSearch *search )
   }
   case LdapModelPrivate::BaseDN:
   {
-    //kDebug() << "Found details of the baseDN object."
+    //qDebug() << "Found details of the baseDN object."
     //         << "Creating objects down to this level.";
 
     // Get the baseDN LdapObject
@@ -152,7 +152,7 @@ void LdapModel::LdapModelPrivate::gotSearchResult( KLDAP::LdapSearch *search )
     LdapModelDNNode *item = 0;
     for ( int i = 0; i < depth; ++i ) {
       QString dn = baseDN().toString( i );
-      kDebug() << "Creating item for DN :" << dn;
+      qDebug() << "Creating item for DN :" << dn;
 
       //LdapObject obj( dn );
       item = new LdapModelDNNode( parent, LdapDN( dn ) );
@@ -175,7 +175,7 @@ void LdapModel::LdapModelPrivate::gotSearchResult( KLDAP::LdapSearch *search )
   }
   case LdapModelPrivate::ChildObjects:
   {
-    //kDebug() << "Found" << searchResults().size() << "child objects";
+    //qDebug() << "Found" << searchResults().size() << "child objects";
 
     if ( searchResults().size() != 0 ) {
       // Create an index for the soon-to-be-a-parent item
@@ -208,8 +208,8 @@ void LdapModel::LdapModelPrivate::gotSearchData( KLDAP::LdapSearch *search,
                                                  const KLDAP::LdapObject &obj )
 {
   Q_UNUSED( search );
-  //kDebug();
-  //kDebug() << "Object:";
-  //kDebug() << obj.toString();
+  //qDebug();
+  //qDebug() << "Object:";
+  //qDebug() << obj.toString();
   searchResults().append( obj );
 }

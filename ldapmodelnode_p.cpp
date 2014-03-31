@@ -61,7 +61,7 @@ LdapModelDNNode::LdapModelDNNode( LdapModelDNNode *parent,
     m_childItems(),
     m_dn( dn )
 {
-  kDebug() << "Creating DN =" << m_dn.toString();
+  qDebug() << "Creating DN =" << m_dn.toString();
 }
 
 LdapModelDNNode::~LdapModelDNNode()
@@ -123,7 +123,7 @@ LdapModelAttrNode::LdapModelAttrNode( LdapModelDNNode *parent,
     m_attrName( attrName ),
     m_attrData( attrData )
 {
-  kDebug() << "Creating Name =" << m_attrName << " Data =" << m_attrData;
+  qDebug() << "Creating Name =" << m_attrName << " Data =" << m_attrData;
 }
 
 LdapModelAttrNode::~LdapModelAttrNode()

@@ -343,7 +343,7 @@ void LdapConfigWidget::Private::sendQuery()
     _url.setExtension( QLatin1String("x-tls"), QLatin1String("") );
   }
 
-  kDebug() << "sendQuery url:" << _url.prettyUrl();
+  qDebug() << "sendQuery url:" << _url.prettyUrl();
 
   LdapSearch search;
   connect( &search, SIGNAL(data(KLDAP::LdapSearch*,KLDAP::LdapObject)),
@@ -366,7 +366,7 @@ void LdapConfigWidget::Private::sendQuery()
   mProg->progressBar()->setValue( 0 );
   mProg->exec();
   if ( mCancelled ) {
-    kDebug() << "query canceled!";
+    qDebug() << "query canceled!";
     search.abandon();
   } else {
     if ( search.error() ) {
@@ -397,7 +397,7 @@ void LdapConfigWidget::Private::queryDNClicked()
 
 void LdapConfigWidget::Private::loadData( LdapSearch *, const LdapObject &object )
 {
-  kDebug() << "object:" << object.toString();
+  qDebug() << "object:" << object.toString();
   mProg->progressBar()->setValue( mProg->progressBar()->value() + 1 );
   LdapAttrMap::ConstIterator end( object.attributes().constEnd() );
   for ( LdapAttrMap::ConstIterator it = object.attributes().constBegin();

@@ -285,7 +285,7 @@ void LdapServer::setUrl( const LdapUrl &url )
   } else if ( url.hasExtension( QLatin1String("x-tls") ) ) {
     d->mSecurity = TLS;
   }
-  kDebug() << "security:" << d->mSecurity;
+  qDebug() << "security:" << d->mSecurity;
 
   d->mMech.clear();
   d->mUser.clear();

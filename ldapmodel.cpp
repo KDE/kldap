@@ -94,7 +94,7 @@ QModelIndex LdapModel::index( int row, int col, const QModelIndex &parent ) cons
   if ( childItem ) {
     return createIndex( row, col, childItem );
   }
-  kDebug() << "Could not create valid index for row =" << row << ", col =" << col;
+  qDebug() << "Could not create valid index for row =" << row << ", col =" << col;
   return QModelIndex();
 }
 

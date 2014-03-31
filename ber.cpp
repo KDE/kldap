@@ -217,10 +217,10 @@ int Ber::printf( const QString &format, ... )
         ret = ber_printf( d->mBer, fmt );
         break;
       default:
-        kWarning() << "Invalid BER format parameter: '" << fmt << "'";
+        qWarning() << "Invalid BER format parameter: '" << fmt << "'";
         ret = -1;
     }
-    kDebug() << "ber_printf format:" << fmt << "ret:" << ret;
+    qDebug() << "ber_printf format:" << fmt << "ret:" << ret;
     if ( ret == -1 ) {
       break;
     }
@@ -367,11 +367,11 @@ int Ber::scanf( const QString &format, ... )
         ret = ber_scanf( d->mBer, fmt );
         break;
       default:
-        kWarning() << "Invalid BER format parameter: '" << fmt << "'";
+        qWarning() << "Invalid BER format parameter: '" << fmt << "'";
         ret = -1;
     }
 
-    kDebug() << "ber_scanf format:" << fmt << "ret:" << ret;
+    qDebug() << "ber_scanf format:" << fmt << "ret:" << ret;
     if ( ret == -1 ) {
       break;
     }
@@ -403,13 +403,13 @@ unsigned int Ber::skipTag( int &size )
 Ber::Ber()
  : d( new BerPrivate )
 {
-  kError() << "LDAP support not compiled";
+  qCritical() << "LDAP support not compiled";
 }
 
 Ber::Ber( const QByteArray & )
  : d( new BerPrivate )
 {
-  kError() << "LDAP support not compiled";
+  qCritical() << "LDAP support not compiled";
 }
 
 Ber::~Ber()
@@ -420,7 +420,7 @@ Ber::~Ber()
 Ber::Ber( const Ber & )
  : d( new BerPrivate )
 {
-  kError() << "LDAP support not compiled";
+  qCritical() << "LDAP support not compiled";
 }
 
 Ber &Ber::operator=( const Ber &that )
@@ -428,41 +428,41 @@ Ber &Ber::operator=( const Ber &that )
   if ( this == &that ) {
     return *this;
   }
-  kError() << "LDAP support not compiled";
+  qCritical() << "LDAP support not compiled";
   return *this;
 }
 
 QByteArray Ber::flatten() const
 {
-  kError() << "LDAP support not compiled";
+  qCritical() << "LDAP support not compiled";
   return QByteArray();
 }
 
 int Ber::printf( const QString &format, ... )
 {
   Q_UNUSED( format );
-  kError() << "LDAP support not compiled";
+  qCritical() << "LDAP support not compiled";
   return -1;
 }
 
 int Ber::scanf( const QString &format, ... )
 {
   Q_UNUSED( format );
-  kError() << "LDAP support not compiled";
+  qCritical() << "LDAP support not compiled";
   return -1;
 }
 
 unsigned int Ber::peekTag( int &size )
 {
   Q_UNUSED( size );
-  kError() << "LDAP support not compiled";
+  qCritical() << "LDAP support not compiled";
   return 0;
 }
 
 unsigned int Ber::skipTag( int &size )
 {
   Q_UNUSED( size );
-  kError() << "LDAP support not compiled";
+  qCritical() << "LDAP support not compiled";
   return 0;
 }
 

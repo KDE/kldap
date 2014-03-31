@@ -235,7 +235,7 @@ void LdapUrl::updateQuery()
   }
 
   setQuery( q );
-  kDebug() << "LDAP URL updateQuery():" << prettyUrl();
+  qDebug() << "LDAP URL updateQuery():" << prettyUrl();
 }
 
 void LdapUrl::parseQuery()
@@ -291,7 +291,7 @@ void LdapUrl::parseQuery()
       ext.critical = true;
       name.remove( 0, 1 );
     }
-    kDebug() << "LdapUrl extensions name=" << name << "value:" << value;
+    qDebug() << "LdapUrl extensions name=" << name << "value:" << value;
     ext.value = value.replace( QLatin1String("%2"), QLatin1String(",") );
     setExtension( name, ext );
   }
