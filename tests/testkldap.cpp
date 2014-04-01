@@ -31,7 +31,7 @@
 #include "ldapsearch.h"
 #include "ber.h"
 
-#include <kdebug.h>
+#include <qdebug.h>
 #include <qtest_kde.h>
 
 QTEST_KDEMAIN( KLdapTest, NoGUI )
