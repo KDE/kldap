@@ -24,7 +24,7 @@
 
 #include <stdlib.h>
 #include <klocalizedstring.h>
-#include <qdebug.h>
+#include <kdebug.h>
 
 #ifdef SASL2_FOUND
 #include <sasl/sasl.h>

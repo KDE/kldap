@@ -22,7 +22,7 @@
 #include "ldapmodel.h"
 #include "ldapmodelnode_p.h"
 
-#include <qdebug.h>
+#include <kdebug.h>
 #include <klocalizedstring.h>
 
 using namespace KLDAP;

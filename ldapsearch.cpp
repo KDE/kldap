@@ -25,7 +25,7 @@
 #include <QtCore/QEventLoop>
 #include <QtCore/QTimer>
 
-#include <qdebug.h>
+#include <kdebug.h>
 #include <KLocalizedString>
 using namespace KLDAP;
 

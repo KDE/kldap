@@ -23,7 +23,7 @@
 #include "ldapmodelnode_p.h"
 #include "ldapsearch.h"
 
-#include <qdebug.h>
+#include <kdebug.h>
 #include <klocalizedstring.h>
 #include <kglobal.h>
 

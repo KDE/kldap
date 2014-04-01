@@ -22,7 +22,7 @@
 
 #include <algorithm>
 
-#include <qdebug.h>
+#include <kdebug.h>
 
 using namespace KLDAP;
 

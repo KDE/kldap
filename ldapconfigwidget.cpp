@@ -23,7 +23,7 @@
 
 #include <kprogressdialog.h>
 #include <kcombobox.h>
-#include <qdebug.h>
+#include <kdebug.h>
 #include <klocalizedstring.h>
 #include <klineedit.h>
 #include <kmessagebox.h>

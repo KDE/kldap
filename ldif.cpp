@@ -20,7 +20,7 @@
 
 #include "ldif.h"
 
-#include <qdebug.h>
+#include <kdebug.h>
 
 using namespace KLDAP;
 
