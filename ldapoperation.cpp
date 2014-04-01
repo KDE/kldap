@@ -21,7 +21,7 @@
 #include "ldapoperation.h"
 #include "kldap_config.h"
 
-#include <kdebug.h>
+#include <qdebug.h>
 
 #include <QtCore/QTime>
 

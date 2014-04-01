@@ -20,7 +20,7 @@
 
 #include "ldapmodelnode_p.h"
 
-#include <kdebug.h>
+#include <qdebug.h>
 
 using namespace KLDAP;
 
