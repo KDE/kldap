@@ -25,7 +25,6 @@
 
 #include <QtCore/QStringList>
 
-#include <kldap/kldap_export.h>
 
 namespace KLDAP {
 
