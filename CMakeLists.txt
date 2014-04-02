@@ -74,7 +74,7 @@ install(FILES
 ########### Targets ###########
 add_subdirectory(cmake)
 add_subdirectory(src)
-#add_subdirectory(tests)
+add_subdirectory(autotests)
 
 if ("${CMAKE_BINARY_DIR}" STREQUAL "${KLdap_BINARY_DIR}")
   feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
