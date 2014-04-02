@@ -1,0 +1,24 @@
+@PACKAGE_INIT@
+
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}")
+
+find_dependency(KF5KIO "@KF5_VERSION@")
+find_dependency(KF5KCMUtils "@KF5_VERSION@")
+find_dependency(KF5KDE4Support "@KF5_VERSION@")
+find_dependency(KF5Abc "@KF5_VERSION@")
+find_dependency(Ldap)
+find_dependency(Sasl2)
+
+set_package_properties(Ldap PROPERTIES
+  DESCRIPTION "LDAP (Lightweight Directory Access Protocol) libraries"
+  URL "http://www.openldap.org"
+  PURPOSE "Needed to provide LDAP functionality in KDE"
+)
+
+set_package_properties(Sasl2 PROPERTIES
+                             DESCRIPTION "The Cyrus-sasl library"
+                             URL "http://www.cyrussasl.org"
+                             TYPE OPTIONAL
+)
+
+include("${CMAKE_CURRENT_LIST_DIR}/KF5LdapTargets.cmake")

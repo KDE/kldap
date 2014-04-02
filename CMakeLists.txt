@@ -32,7 +32,50 @@ find_package(KF5KCMUtils ${KF5_VERSION} CONFIG REQUIRED)
 find_package(KF5KDE4Support ${KF5_VERSION} CONFIG REQUIRED)
 find_package(KF5Abc ${KF5_VERSION} CONFIG REQUIRED)
 
-add_definitions(-DKDE_DEFAULT_DEBUG_AREA=5322)
+find_package(Ldap)
+set_package_properties(Ldap PROPERTIES
+  DESCRIPTION "LDAP (Lightweight Directory Access Protocol) libraries"
+  URL "http://www.openldap.org"
+  TYPE RECOMMENDED
+  PURPOSE "Needed to provide LDAP functionality in KDE"
+)
 
+find_package(Sasl2)
+set_package_properties(Sasl2 PROPERTIES
+                             DESCRIPTION "The Cyrus-sasl library"
+                             URL "http://www.cyrussasl.org"
+                             TYPE OPTIONAL
+)
+
+########### CMake Config Files ###########
+set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5KLdap")
+
+ecm_configure_package_config_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/KF5KLdapConfig.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/KF5KLdapConfig.cmake"
+  INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
+)
+
+install(FILES
+  "${CMAKE_CURRENT_BINARY_DIR}/KF5KLdapConfig.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/KF5KLdapConfigVersion.cmake"
+  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  COMPONENT Devel
+)
+
+install(EXPORT KF5KLdapTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF5KLdapTargets.cmake NAMESPACE KF5::)
+
+install(FILES
+   ${CMAKE_CURRENT_BINARY_DIR}/kldap_version.h
+   DESTINATION ${INCLUDE_INSTALL_DIR}
+   COMPONENT Devel
+)
+
+########### Targets ###########
+add_subdirectory(cmake)
 add_subdirectory(src)
-add_subdirectory(tests)
+#add_subdirectory(tests)
+
+if ("${CMAKE_BINARY_DIR}" STREQUAL "${KLdap_BINARY_DIR}")
+  feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+endif()
