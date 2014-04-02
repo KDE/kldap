@@ -66,12 +66,12 @@ class LdapConfigWidget::Private
     QStringList mQResult;
     QString mAttr;
 
-    KLineEdit *mUser;
-    KLineEdit *mPassword;
-    KLineEdit *mHost;
+    QLineEdit *mUser;
+    QLineEdit *mPassword;
+    QLineEdit *mHost;
     QSpinBox  *mPort, *mVersion, *mSizeLimit, *mTimeLimit, *mPageSize;
-    KLineEdit *mDn, *mBindDn, *mRealm;
-    KLineEdit *mFilter;
+    QLineEdit *mDn, *mBindDn, *mRealm;
+    QLineEdit *mFilter;
     QRadioButton *mAnonymous,*mSimple,*mSASL;
     QCheckBox *mSubTree;
     QPushButton *mEditButton;
@@ -100,7 +100,7 @@ void LdapConfigWidget::Private::initWidget()
 
   if ( mFeatures & W_USER ) {
     label = new QLabel( i18n( "User:" ), mParent );
-    mUser = new KLineEdit( mParent );
+    mUser = new QLineEdit( mParent );
     mUser->setObjectName( QLatin1String("kcfg_ldapuser") );
 
     mainLayout->addWidget( label, row, 0 );
@@ -110,7 +110,7 @@ void LdapConfigWidget::Private::initWidget()
 
   if ( mFeatures & W_BINDDN ) {
     label = new QLabel( i18n( "Bind DN:" ), mParent );
-    mBindDn = new KLineEdit( mParent );
+    mBindDn = new QLineEdit( mParent );
     mBindDn->setObjectName( QLatin1String("kcfg_ldapbinddn") );
 
     mainLayout->addWidget( label, row, 0 );
@@ -120,7 +120,7 @@ void LdapConfigWidget::Private::initWidget()
 
   if ( mFeatures & W_REALM ) {
     label = new QLabel( i18n( "Realm:" ), mParent );
-    mRealm = new KLineEdit( mParent );
+    mRealm = new QLineEdit( mParent );
     mRealm->setObjectName( QLatin1String("kcfg_ldaprealm") );
 
     mainLayout->addWidget( label, row, 0 );
@@ -130,9 +130,9 @@ void LdapConfigWidget::Private::initWidget()
 
   if ( mFeatures & W_PASS ) {
     label = new QLabel( i18n( "Password:" ), mParent );
-    mPassword = new KLineEdit( mParent );
+    mPassword = new QLineEdit( mParent );
     mPassword->setObjectName( QLatin1String("kcfg_ldappassword") );
-    mPassword->setEchoMode( KLineEdit::Password );
+    mPassword->setEchoMode( QLineEdit::Password );
 
     mainLayout->addWidget( label, row, 0 );
     mainLayout->addWidget( mPassword, row, 1, 1, 3 );
@@ -141,7 +141,7 @@ void LdapConfigWidget::Private::initWidget()
 
   if ( mFeatures & W_HOST ) {
     label = new QLabel( i18n( "Host:" ), mParent );
-    mHost = new KLineEdit( mParent );
+    mHost = new QLineEdit( mParent );
     mHost->setObjectName( QLatin1String("kcfg_ldaphost") );
     mParent->connect(mHost, SIGNAL(textChanged(QString)), SIGNAL(hostNameChanged(QString)));
     mainLayout->addWidget( label, row, 0 );
@@ -221,7 +221,7 @@ void LdapConfigWidget::Private::initWidget()
 
   if ( mFeatures & W_DN ) {
     label = new QLabel( i18nc( "Distinguished Name", "DN:" ), mParent );
-    mDn = new KLineEdit( mParent );
+    mDn = new QLineEdit( mParent );
     mDn->setObjectName( QLatin1String("kcfg_ldapdn") );
 
     mainLayout->addWidget( label, row, 0 );
@@ -237,7 +237,7 @@ void LdapConfigWidget::Private::initWidget()
 
   if ( mFeatures & W_FILTER ) {
     label = new QLabel( i18n( "Filter:" ), mParent );
-    mFilter = new KLineEdit( mParent );
+    mFilter = new QLineEdit( mParent );
     mFilter->setObjectName( QLatin1String("kcfg_ldapfilter") );
 
     mainLayout->addWidget( label, row, 0 );
