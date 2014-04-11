@@ -61,10 +61,10 @@ add_library(KF5::KLdap ALIAS KF5KLdap)
 target_link_libraries(KF5KLdap
   KF5::CoreAddons
   KF5::KIOCore
-  KF5::KDE4Support
+  KF5::KDELibs4Support
   KF5::KCMUtils
   ${kldap_EXTRA_LIBS}
-  KF5::KAbc
+  KF5::Abc
 )
 
 target_include_directories(KF5KLdap INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/kldap>")
