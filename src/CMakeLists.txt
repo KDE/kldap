@@ -60,11 +60,8 @@ add_library(KF5::KLdap ALIAS KF5KLdap)
 # TODO KF5: we only need KDEUI here, remove KCM, KIO and KABC
 target_link_libraries(KF5KLdap
   KF5::CoreAddons
-  KF5::KIOCore
   KF5::KDELibs4Support
-  KF5::KCMUtils
   ${kldap_EXTRA_LIBS}
-  KF5::Abc
 )
 
 target_include_directories(KF5KLdap INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/kldap>")
