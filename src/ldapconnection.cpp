@@ -263,7 +263,7 @@ int LdapConnection::connect()
   url += QString::number( d->mServer.port() );
   qDebug() << "ldap url:" << url;
 #ifdef HAVE_LDAP_INITIALIZE
-  ret = ldap_initialize( &d->mLDAP, url.toLatin1() );
+  ret = ldap_initialize( &d->mLDAP, url.toLatin1().constData() );
 #else
   d->mLDAP = ldap_init( d->mServer.host().toLatin1().data(), d->mServer.port() );
   if ( d->mLDAP == 0 ) {
