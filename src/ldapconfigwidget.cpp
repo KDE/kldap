@@ -21,7 +21,7 @@
 #include "ldapconfigwidget.h"
 #include "ldapsearch.h"
 
-#include <kprogressdialog.h>
+#include <qprogressdialog.h>
 #include <kcombobox.h>
 #include <qdebug.h>
 #include <klocalizedstring.h>
@@ -80,7 +80,7 @@ class LdapConfigWidget::Private
     KComboBox *mMech;
 
     bool mCancelled;
-    KProgressDialog *mProg;
+    QProgressDialog *mProg;
 
     QGridLayout *mainLayout;
 };
@@ -357,13 +357,14 @@ void LdapConfigWidget::Private::sendQuery()
   }
 
   if ( mProg == 0 ) {
-    mProg = new KProgressDialog( mParent );
+    mProg = new QProgressDialog( mParent );
     mProg->setWindowTitle( i18n( "LDAP Query" ) );
     mProg->setModal( true );
   }
   mProg->setLabelText( _url.prettyUrl() );
-  mProg->progressBar()->setRange( 0, 1 );
-  mProg->progressBar()->setValue( 0 );
+  mProg->setMaximum(1);
+  mProg->setMinimum( 0 );
+  mProg->setValue( 0 );
   mProg->exec();
   if ( mCancelled ) {
     qDebug() << "query canceled!";
@@ -398,7 +399,7 @@ void LdapConfigWidget::Private::queryDNClicked()
 void LdapConfigWidget::Private::loadData( LdapSearch *, const LdapObject &object )
 {
   qDebug() << "object:" << object.toString();
-  mProg->progressBar()->setValue( mProg->progressBar()->value() + 1 );
+  mProg->setValue( mProg->value() + 1 );
   LdapAttrMap::ConstIterator end( object.attributes().constEnd() );
   for ( LdapAttrMap::ConstIterator it = object.attributes().constBegin();
         it != end; ++it ) {
