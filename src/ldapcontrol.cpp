@@ -52,7 +52,7 @@ LdapControl::LdapControl()
   setControl( QString(), QByteArray(), false );
 }
 
-LdapControl::LdapControl( QString &oid, QByteArray &value, bool critical )
+LdapControl::LdapControl( const QString &oid, const QByteArray &value, bool critical )
   : d( new Private )
 {
   setControl( oid, value, critical );

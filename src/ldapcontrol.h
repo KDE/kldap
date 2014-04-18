@@ -46,7 +46,7 @@ class KLDAP_EXPORT LdapControl
     /**
      * Creates a control with the given OID, value and criticality.
      */
-    LdapControl( QString &oid, QByteArray &value, bool critical = false );
+    LdapControl( const QString &oid, const QByteArray &value, bool critical = false );
 
     LdapControl( const LdapControl &that );
     LdapControl &operator= ( const LdapControl &that );
