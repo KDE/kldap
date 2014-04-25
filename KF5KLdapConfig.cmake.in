@@ -6,14 +6,14 @@ find_dependency(KF5KIO "@KF5_VERSION@")
 find_dependency(KF5KCMUtils "@KF5_VERSION@")
 find_dependency(KF5KDELibs4Support "@KF5_VERSION@")
 find_dependency(KF5Abc "@KF5_VERSION@")
-find_dependency(Ldap)
+#find_dependency(Ldap)
 find_dependency(Sasl2)
 
-set_package_properties(Ldap PROPERTIES
-  DESCRIPTION "LDAP (Lightweight Directory Access Protocol) libraries"
-  URL "http://www.openldap.org"
-  PURPOSE "Needed to provide LDAP functionality in KDE"
-)
+#set_package_properties(Ldap PROPERTIES
+#  DESCRIPTION "LDAP (Lightweight Directory Access Protocol) libraries"
+#  URL "http://www.openldap.org"
+#  PURPOSE "Needed to provide LDAP functionality in KDE"
+#)
 
 set_package_properties(Sasl2 PROPERTIES
                              DESCRIPTION "The Cyrus-sasl library"
