@@ -76,7 +76,7 @@ endif()
 set_target_properties(KF5Ldap PROPERTIES
     VERSION ${KLDAP_VERSION_STRING}
     SOVERSION ${KLDAP_SOVERSION}
-    EXPORT_NAME KLdap
+    EXPORT_NAME Ldap
 )
 
 
