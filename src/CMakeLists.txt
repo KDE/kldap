@@ -51,36 +51,36 @@ set(kldap_LIB_SRCS
   ldapattributeproxymodel.cpp
 )
 
-add_library(KF5KLdap ${kldap_LIB_SRCS})
+add_library(KF5Ldap ${kldap_LIB_SRCS})
 
-generate_export_header(KF5KLdap BASE_NAME kldap)
+generate_export_header(KF5Ldap BASE_NAME kldap)
 
-add_library(KF5::KLdap ALIAS KF5KLdap)
+add_library(KF5::Ldap ALIAS KF5Ldap)
 
 # TODO KF5: we only need KDEUI here, remove KCM, KIO and KABC
-target_link_libraries(KF5KLdap
+target_link_libraries(KF5Ldap
   KF5::CoreAddons
   KF5::KDELibs4Support
   ${kldap_EXTRA_LIBS}
 )
 
-target_include_directories(KF5KLdap INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KLDAP>")
-target_include_directories(KF5KLdap PUBLIC "$<BUILD_INTERFACE:${KLdap_SOURCE_DIR}/src;${KLdap_BINARY_DIR}/src>")
+target_include_directories(KF5Ldap INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KLDAP>")
+target_include_directories(KF5Ldap PUBLIC "$<BUILD_INTERFACE:${KLdap_SOURCE_DIR}/src;${KLdap_BINARY_DIR}/src>")
 if(LDAP_FOUND)
-  target_include_directories(KF5KLdap INTERFACE "$<INSTALL_INTERFACE:${LDAP_INCLUDE_DIR}>")
+  target_include_directories(KF5Ldap INTERFACE "$<INSTALL_INTERFACE:${LDAP_INCLUDE_DIR}>")
 endif()
 if(Sasl2_FOUND)
-  target_include_directories(KF5KLdap INTERFACE "$<INSTALL_INTERFACE:${Sasl2_INCLUDE_DIRS}>")
+  target_include_directories(KF5Ldap INTERFACE "$<INSTALL_INTERFACE:${Sasl2_INCLUDE_DIRS}>")
 endif()
 
-set_target_properties(KF5KLdap PROPERTIES
+set_target_properties(KF5Ldap PROPERTIES
     VERSION ${KLDAP_VERSION_STRING}
     SOVERSION ${KLDAP_SOVERSION}
     EXPORT_NAME KLdap
 )
 
 
-install(TARGETS KF5KLdap EXPORT KF5KLdapTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KF5Ldap EXPORT KF5LdapTargets ${INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 

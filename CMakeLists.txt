@@ -22,7 +22,7 @@ set(KF5_VERSION "4.98.0")
 
 ecm_setup_version(${KF5_VERSION} VARIABLE_PREFIX KLDAP
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kldap_version.h"
-                        PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5KLdapConfigVersion.cmake"
+                        PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5LdapConfigVersion.cmake"
                         SOVERSION 5
 )
 
@@ -52,22 +52,22 @@ set_package_properties(Sasl2 PROPERTIES
 )
 
 ########### CMake Config Files ###########
-set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5KLdap")
+set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5Ldap")
 
 ecm_configure_package_config_file(
-  "${CMAKE_CURRENT_SOURCE_DIR}/KF5KLdapConfig.cmake.in"
-  "${CMAKE_CURRENT_BINARY_DIR}/KF5KLdapConfig.cmake"
+  "${CMAKE_CURRENT_SOURCE_DIR}/KF5LdapConfig.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/KF5LdapConfig.cmake"
   INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
 )
 
 install(FILES
-  "${CMAKE_CURRENT_BINARY_DIR}/KF5KLdapConfig.cmake"
-  "${CMAKE_CURRENT_BINARY_DIR}/KF5KLdapConfigVersion.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/KF5LdapConfig.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/KF5LdapConfigVersion.cmake"
   DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
   COMPONENT Devel
 )
 
-install(EXPORT KF5KLdapTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF5KLdapTargets.cmake NAMESPACE KF5::)
+install(EXPORT KF5LdapTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF5LdapTargets.cmake NAMESPACE KF5::)
 
 install(FILES
    ${CMAKE_CURRENT_BINARY_DIR}/kldap_version.h
