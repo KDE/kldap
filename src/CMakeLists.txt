@@ -64,7 +64,7 @@ target_link_libraries(KF5KLdap
   ${kldap_EXTRA_LIBS}
 )
 
-target_include_directories(KF5KLdap INTERFACE "$<INSTALL_INTERFACE:${INCLUDE_INSTALL_DIR}/kldap>")
+target_include_directories(KF5KLdap INTERFACE "$<INSTALL_INTERFACE:${KF5_INCLUDE_INSTALL_DIR}/KLDAP>")
 target_include_directories(KF5KLdap PUBLIC "$<BUILD_INTERFACE:${KLdap_SOURCE_DIR}/src;${KLdap_BINARY_DIR}/src>")
 if(LDAP_FOUND)
   target_include_directories(KF5KLdap INTERFACE "$<INSTALL_INTERFACE:${LDAP_INCLUDE_DIR}>")
@@ -107,13 +107,10 @@ ecm_generate_headers(KLdap_CamelCase_HEADERS
 
 install(FILES
     ${KLdap_CamelCase_HEADERS}
-    DESTINATION ${INCLUDE_INSTALL_DIR}/KLDAP
+    ${CMAKE_CURRENT_BINARY_DIR}/kldap_export.h
+    ${KLdap_HEADERS}
+    ldapdefs.h
+    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KLDAP
     COMPONENT Devel
 )
 
-install(FILES
-  ${CMAKE_CURRENT_BINARY_DIR}/kldap_export.h
-  ${KLdap_HEADERS}
-  ldapdefs.h
-  DESTINATION ${INCLUDE_INSTALL_DIR}/kldap COMPONENT Devel
-)
