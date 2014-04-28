@@ -102,7 +102,6 @@ ecm_generate_headers(KLdap_CamelCase_HEADERS
   Ldif
 
   REQUIRED_HEADERS KLdap_HEADERS
-  PREFIX KLdap
 )
 
 install(FILES
