@@ -1,46 +1,47 @@
 # - Try to find the LDAP client libraries
 # Once done this will define
 #
-#  LDAP_FOUND - system has libldap
-#  LDAP_INCLUDE_DIR - the ldap include directory
-#  LDAP_LIBRARIES - libldap + liblber (if found) library
-#  LBER_LIBRARIES - liblber library
-
-if(LDAP_INCLUDE_DIR AND LDAP_LIBRARIES)
-    # Already in cache, be silent
-    set(Ldap_FIND_QUIETLY TRUE)
-endif()
+#  Ldap_FOUND - system has libldap
+#  Ldap_INCLUDE_DIRS - the ldap include directory
+#  Ldap_LIBRARIES - libldap + liblber (if found) library
 
 
-FIND_PATH(LDAP_INCLUDE_DIR ldap.h)
+find_path(Ldap_INCLUDE_DIRS ldap.h)
 
 if(APPLE)
-   FIND_LIBRARY(LDAP_LIBRARIES NAMES LDAP
-   	PATHS
-   	/System/Library/Frameworks
-   	/Library/Frameworks
+   find_library(Ldap_LIBRARIES NAMES LDAP
+      PATHS
+      /System/Library/Frameworks
+      /Library/Frameworks
    )
-else(APPLE)
-   FIND_LIBRARY(LDAP_LIBRARIES NAMES ldap)
-   
-   FIND_LIBRARY(LBER_LIBRARIES NAMES lber)
+else()
+   find_library(Ldap_LIBRARIES NAMES ldap)
+   find_library(Lber_LIBRARIES NAMES lber)
 endif()
 
-if(LDAP_INCLUDE_DIR AND LDAP_LIBRARIES)
-   set(LDAP_FOUND TRUE)
-   if(LBER_LIBRARIES)
-     set(LDAP_LIBRARIES ${LDAP_LIBRARIES} ${LBER_LIBRARIES})
-   endif()
+if(Ldap_LIBRARIES AND Lber_LIBRARIES)
+  set(Ldap_LIBRARIES "${Ldap_LIBRARIES} ${Lber_LIBRARIES}")
 endif()
 
-if(LDAP_FOUND)
-   if(NOT Ldap_FIND_QUIETLY)
-      message(STATUS "Found ldap: ${LDAP_LIBRARIES}")
-   endif()
-else(LDAP_FOUND)
-   if (Ldap_FIND_REQUIRED)
-        message(FATAL_ERROR "Could NOT find ldap")
-   endif()
+if(EXISTS ${Ldap_INCLUDE_DIRS}/ldap_features.h)
+  file(READ ${Ldap_INCLUDE_DIRS}/ldap_features.h LDAP_FEATURES_H_CONTENT)
+  string(REGEX MATCH "#define LDAP_VENDOR_VERSION_MAJOR[ ]+[0-9]+" _LDAP_VERSION_MAJOR_MATCH ${LDAP_FEATURES_H_CONTENT})
+  string(REGEX MATCH "#define LDAP_VENDOR_VERSION_MINOR[ ]+[0-9]+" _LDAP_VERSION_MINOR_MATCH ${LDAP_FEATURES_H_CONTENT})
+  string(REGEX MATCH "#define LDAP_VENDOR_VERSION_PATCH[ ]+[0-9]+" _LDAP_VERSION_PATCH_MATCH ${LDAP_FEATURES_H_CONTENT})
+
+  string(REGEX REPLACE ".*_MAJOR[ ]+(.*)" "\\1" LDAP_VERSION_MAJOR ${_LDAP_VERSION_MAJOR_MATCH})
+  string(REGEX REPLACE ".*_MINOR[ ]+(.*)" "\\1" LDAP_VERSION_MINOR ${_LDAP_VERSION_MINOR_MATCH})
+  string(REGEX REPLACE ".*_PATCH[ ]+(.*)" "\\1" LDAP_VERSION_PATCH ${_LDAP_VERSION_PATCH_MATCH})
+
+  set(Ldap_VERSION "${LDAP_VERSION_MAJOR}.${LDAP_VERSION_MINOR}.${LDAP_VERSION_PATCH}")
 endif()
 
-MARK_AS_ADVANCED(LDAP_INCLUDE_DIR LDAP_LIBRARIES LBER_LIBRARIES)
+include(FindPackageHandleStandardArgs)
+
+find_package_handle_standard_args(Ldap
+    FOUND_VAR Ldap_FOUND
+    REQUIRED_VARS Ldap_LIBRARIES Ldap_INCLUDE_DIRS
+    VERSION_VAR Ldap_VERSION
+)
+
+mark_as_advanced(Ldap_INCLUDE_DIRS Ldap_LIBRARIES Lber_LIBRARIES Ldap_VERSION)
