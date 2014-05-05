@@ -100,7 +100,7 @@ ecm_generate_headers(KLdap_CamelCase_HEADERS
   LdapStructureProxyModel
   LdapUrl
   Ldif
-
+  PREFIX KLDAP
   REQUIRED_HEADERS KLdap_HEADERS
 )
 
@@ -109,7 +109,7 @@ install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/kldap_export.h
     ${KLdap_HEADERS}
     ldapdefs.h
-    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KLDAP
+    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KLDAP/kldap
     COMPONENT Devel
 )
 
