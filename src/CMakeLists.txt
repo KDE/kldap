@@ -97,6 +97,7 @@ ecm_generate_headers(KLdap_CamelCase_HEADERS
   LdapOperation
   LdapSearch
   LdapServer
+  LdapDefs
   LdapStructureProxyModel
   LdapUrl
   Ldif
