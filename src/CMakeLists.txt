@@ -57,7 +57,6 @@ generate_export_header(KF5Ldap BASE_NAME kldap)
 
 add_library(KF5::Ldap ALIAS KF5Ldap)
 
-# TODO KF5: we only need KDEUI here, remove KCM, KIO and KABC
 target_link_libraries(KF5Ldap
   KF5::CoreAddons
   KF5::KDELibs4Support
@@ -119,4 +118,7 @@ install(FILES
     DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KLDAP/KLDAP/
     COMPONENT Devel
 )
+
+ecm_generate_pri_file(BASE_NAME Ldap LIB_NAME KF5Ldap DEPS "CoreAddons KDELibs4Support" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KF5_INCLUDE_INSTALL_DIR}/KLDAP/)
+install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
 
