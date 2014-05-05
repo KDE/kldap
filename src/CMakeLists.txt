@@ -114,3 +114,9 @@ install(FILES
     COMPONENT Devel
 )
 
+install(FILES
+    ${KLdap_CamelCase_HEADERS}
+    DESTINATION ${KF5_INCLUDE_INSTALL_DIR}/KLDAP/KLDAP/
+    COMPONENT Devel
+)
+
