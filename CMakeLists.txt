@@ -51,6 +51,8 @@ set_package_properties(Sasl2 PROPERTIES
                              TYPE OPTIONAL
 )
 
+add_definitions(-DTRANSLATION_DOMAIN=\"libkldap\")
+
 ########### CMake Config Files ###########
 set(CMAKECONFIG_INSTALL_DIR "${CMAKECONFIG_INSTALL_PREFIX}/KF5Ldap")
 
