@@ -1,14 +1,9 @@
-include(ECMMarkAsTest)
+include(ECMAddTests)
 
 find_package(Qt5Test CONFIG REQUIRED)
 
-if(LDAP_FOUND)
+if(Ldap_FOUND)
 
 ########### next target ###############
-
-  set(testkldap_SRCS testkldap.cpp)
-  add_executable(testkldap ${testkldap_SRCS})
-  add_test(testkldap testkldap)
-  ecm_mark_as_test(testkldap)
-  target_link_libraries(testkldap KF5Ldap Qt5::Test)
+  ecm_add_tests(testkldap.cpp NAME_PREFIX "kldap-" LINK_LIBRARIES KF5Ldap Qt5::Test)
 endif()
