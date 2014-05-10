@@ -27,8 +27,6 @@
 #include <klocalizedstring.h>
 #include <kglobal.h>
 
-static const KCatalogLoader loader( QLatin1String("libkldap") );
-
 using namespace KLDAP;
 
 LdapModel::LdapModel( QObject *parent )
