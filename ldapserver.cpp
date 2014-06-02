@@ -352,12 +352,12 @@ LdapUrl LdapServer::url() const
   url.setProtocol( d->mSecurity == SSL ? QLatin1String("ldaps") : QLatin1String("ldap") );
   url.setPort( d->mPort );
   url.setHost( d->mHost );
-  url.setPassword( d->mPassword );
   url.setDn( d->mBaseDn );
   url.setFilter( d->mFilter );
   url.setScope( d->mScope );
   if ( d->mAuth == SASL ) {
     url.setUser( d->mUser );
+    url.setPassword( d->mPassword );
     url.setExtension( QLatin1String("bindname"), d->mBindDn, true );
     url.setExtension( QLatin1String("x-sasl"), QString() );
     if ( !d->mMech.isEmpty() ) {
@@ -366,8 +366,9 @@ LdapUrl LdapServer::url() const
     if ( !d->mRealm.isEmpty() ) {
       url.setExtension( QLatin1String("x-realm"), d->mRealm );
     }
-  } else {
+  } else if (d->mAuth == Simple ) {
     url.setUser( d->mBindDn );
+    url.setPassword( d->mPassword );
   }
   if ( d->mVersion == 2 ) {
     url.setExtension( QLatin1String("x-version"), d->mVersion );
