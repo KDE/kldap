@@ -370,7 +370,11 @@ void LdapConfigWidget::Private::sendQuery()
     search.abandon();
   } else {
     if ( search.error() ) {
-      KMessageBox::error( mParent, search.errorString() );
+      if ( search.errorString().isEmpty() ) {
+        KMessageBox::error( mParent, i18nc( "%1 is a url to ldap server", "Unknown error connecting %1", _url.prettyUrl() ) );
+      } else {
+        KMessageBox::error( mParent, search.errorString() );
+      }
     }
   }
 }
