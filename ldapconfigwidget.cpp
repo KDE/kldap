@@ -321,27 +321,20 @@ void LdapConfigWidget::Private::initWidget()
 
 void LdapConfigWidget::Private::sendQuery()
 {
-  LdapUrl _url;
+  LdapServer _server( mParent->server() );
 
   mQResult.clear();
   mCancelled = true;
 
-  _url.setProtocol( ( mSecSSL && mSecSSL->isChecked() ) ? QLatin1String("ldaps") : QLatin1String("ldap") );
-  if ( mHost ) {
-    _url.setHost( mHost->text() );
+  if ( mAttr == QLatin1String("supportedsaslmechanisms") ) {
+    _server.setAuth( LdapServer::Anonymous );
   }
-  if ( mPort ) {
-    _url.setPort( mPort->value() );
-  }
+
+  LdapUrl _url( _server.url() );
+
   _url.setDn( LdapDN( QLatin1String("") ) );
   _url.setAttributes( QStringList( mAttr ) );
   _url.setScope( LdapUrl::Base );
-  if ( mVersion ) {
-    _url.setExtension( QLatin1String("x-ver"), QString::number( mVersion->value() ) );
-  }
-  if ( mSecTLS && mSecTLS->isChecked() ) {
-    _url.setExtension( QLatin1String("x-tls"), QLatin1String("") );
-  }
 
   kDebug() << "sendQuery url:" << _url.prettyUrl();
 
