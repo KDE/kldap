@@ -58,8 +58,10 @@ generate_export_header(KF5Ldap BASE_NAME kldap)
 add_library(KF5::Ldap ALIAS KF5Ldap)
 
 target_link_libraries(KF5Ldap
+PUBLIC
   KF5::CoreAddons
   KF5::KDELibs4Support
+PRIVATE
   ${kldap_EXTRA_LIBS}
 )
 
