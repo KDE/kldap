@@ -32,10 +32,10 @@
 #include <QCheckBox>
 #include <QGroupBox>
 #include <QLabel>
-#include <QLayout>
 #include <QPushButton>
 #include <QRadioButton>
 #include <QSpinBox>
+#include <QGridLayout>
 
 using namespace KLDAP;
 
