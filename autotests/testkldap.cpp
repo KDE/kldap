@@ -32,9 +32,9 @@
 #include "ber.h"
 
 #include <qdebug.h>
-#include <qtest_kde.h>
+#include <qtest.h>
 
-QTEST_KDEMAIN( KLdapTest, NoGUI )
+QTEST_MAIN( KLdapTest )
 
 void KLdapTest::initTestCase()
 {
