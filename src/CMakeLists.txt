@@ -60,8 +60,11 @@ add_library(KF5::Ldap ALIAS KF5Ldap)
 target_link_libraries(KF5Ldap
 PUBLIC
   KF5::CoreAddons
-  KF5::KDELibs4Support
 PRIVATE
+  KF5::Completion
+  Qt5::Widgets
+  KF5::I18n
+  KF5::WidgetsAddons
   ${kldap_EXTRA_LIBS}
 )
 
@@ -120,6 +123,6 @@ install(FILES
     COMPONENT Devel
 )
 
-ecm_generate_pri_file(BASE_NAME Ldap LIB_NAME KF5Ldap DEPS "CoreAddons KDELibs4Support" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KF5_INCLUDE_INSTALL_DIR}/KLDAP/)
+ecm_generate_pri_file(BASE_NAME Ldap LIB_NAME KF5Ldap DEPS "CoreAddons" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KF5_INCLUDE_INSTALL_DIR}/KLDAP/)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
 

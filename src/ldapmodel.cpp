@@ -25,7 +25,6 @@
 
 #include <qdebug.h>
 #include <klocalizedstring.h>
-#include <kglobal.h>
 
 using namespace KLDAP;
 

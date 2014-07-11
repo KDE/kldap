@@ -33,7 +33,7 @@
 
 #include <qdebug.h>
 #include <qtest.h>
-
+#include <QFile>
 QTEST_MAIN( KLdapTest )
 
 void KLdapTest::initTestCase()
