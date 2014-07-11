@@ -20,7 +20,7 @@ else()
 endif()
 
 if(Ldap_LIBRARIES AND Lber_LIBRARIES)
-  set(Ldap_LIBRARIES "${Ldap_LIBRARIES} ${Lber_LIBRARIES}")
+  set(Ldap_LIBRARIES ${Ldap_LIBRARIES} ${Lber_LIBRARIES})
 endif()
 
 if(EXISTS ${Ldap_INCLUDE_DIRS}/ldap_features.h)
