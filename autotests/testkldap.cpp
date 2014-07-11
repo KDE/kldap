@@ -153,7 +153,7 @@ void KLdapTest::testLdapUrl()
               "dc=kde,dc=org?cn,mail?sub?(objectClass=*)?x-dir=base") );
   url.parseQuery();
 
-  QCOMPARE( url.user(), QString::fromLatin1( "cn=manager,dc=kde,dc=org" ) );
+  QCOMPARE( url.userName(), QString::fromLatin1( "cn=manager,dc=kde,dc=org" ) );
   QCOMPARE( url.password(), QString::fromLatin1( "password" ) );
   QCOMPARE( url.dn(), LdapDN( QLatin1String("dc=kde,dc=org") ) );
   QCOMPARE( url.scope(), LdapUrl::Sub );

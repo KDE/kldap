@@ -336,7 +336,7 @@ void LdapConfigWidget::Private::sendQuery()
   _url.setAttributes( QStringList( mAttr ) );
   _url.setScope( LdapUrl::Base );
 
-  qDebug() << "sendQuery url:" << _url.prettyUrl();
+  qDebug() << "sendQuery url:" << _url.toDisplayString();
 
   LdapSearch search;
   connect( &search, SIGNAL(data(KLDAP::LdapSearch*,KLDAP::LdapObject)),
@@ -354,7 +354,7 @@ void LdapConfigWidget::Private::sendQuery()
     mProg->setWindowTitle( i18n( "LDAP Query" ) );
     mProg->setModal( true );
   }
-  mProg->setLabelText( _url.prettyUrl() );
+  mProg->setLabelText( _url.toDisplayString() );
   mProg->setMaximum(1);
   mProg->setMinimum( 0 );
   mProg->setValue( 0 );
@@ -365,7 +365,7 @@ void LdapConfigWidget::Private::sendQuery()
   } else {
     if ( search.error() ) {
       if ( search.errorString().isEmpty() ) {
-        KMessageBox::error( mParent, i18nc( "%1 is a url to ldap server", "Unknown error connecting %1", _url.prettyUrl() ) );
+        KMessageBox::error( mParent, i18nc( "%1 is a url to ldap server", "Unknown error connecting %1", _url.toDisplayString() ) );
       } else {
         KMessageBox::error( mParent, search.errorString() );
       }

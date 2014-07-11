@@ -24,7 +24,7 @@
 #include <QtCore/QMap>
 #include <QtCore/QStringList>
 
-#include <kurl.h>
+#include <QUrl>
 
 #include "ldapdn.h"
 #include "kldap_export.h"
@@ -39,7 +39,7 @@ namespace KLDAP {
  * ldap[s]://[user[:password]@]hostname[:port]["/" [dn ["?" [attributes]
  * ["?" [scope] ["?" [filter] ["?" extensions]]]]]]
  */
-class KLDAP_EXPORT LdapUrl : public KUrl
+class KLDAP_EXPORT LdapUrl : public QUrl
 {
   public:
 
@@ -69,7 +69,7 @@ class KLDAP_EXPORT LdapUrl : public KUrl
     /**
      * Constructs a LDAP url from a KUrl @p url.
      */
-    explicit LdapUrl( const KUrl &url );
+    explicit LdapUrl( const QUrl &url );
 
     /**
      * Constructs a LDAP url from an other url.

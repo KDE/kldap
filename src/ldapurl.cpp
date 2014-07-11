@@ -45,8 +45,8 @@ LdapUrl::LdapUrl()
 {
 }
 
-LdapUrl::LdapUrl( const KUrl &_url )
-  : KUrl( _url ), d( new LdapUrlPrivate )
+LdapUrl::LdapUrl( const QUrl &_url )
+  : QUrl( _url ), d( new LdapUrlPrivate )
 {
   QString tmp = path();
   if ( tmp.startsWith( QLatin1Char('/') ) ) {
@@ -57,7 +57,7 @@ LdapUrl::LdapUrl( const KUrl &_url )
 }
 
 LdapUrl::LdapUrl( const LdapUrl &that )
-  : KUrl( that ), d( new LdapUrlPrivate )
+  : QUrl( that ), d( new LdapUrlPrivate )
 {
   *d = *that.d;
 }
@@ -68,7 +68,7 @@ LdapUrl &LdapUrl::operator=( const LdapUrl &that )
     return *this;
   }
 
-  KUrl::operator=( that );
+  QUrl::operator=( that );
   *d = *that.d;
 
   return *this;
@@ -235,7 +235,7 @@ void LdapUrl::updateQuery()
   }
 
   setQuery( q );
-  qDebug() << "LDAP URL updateQuery():" << prettyUrl();
+  qDebug() << "LDAP URL updateQuery():" << toDisplayString();
 }
 
 void LdapUrl::parseQuery()

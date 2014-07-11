@@ -280,7 +280,7 @@ void LdapServer::setUrl( const LdapUrl &url )
   d->mFilter = url.filter();
 
   d->mSecurity = None;
-  if ( url.protocol() == QLatin1String("ldaps") ) {
+  if ( url.scheme() == QLatin1String("ldaps") ) {
     d->mSecurity = SSL;
   } else if ( url.hasExtension( QLatin1String("x-tls") ) ) {
     d->mSecurity = TLS;
@@ -301,12 +301,12 @@ void LdapServer::setUrl( const LdapUrl &url )
     if ( url.hasExtension( QLatin1String("bindname") ) ) {
       d->mBindDn = url.extension( QLatin1String("bindname"), critical );
     }
-    d->mUser = url.user();
+    d->mUser = url.userName();
   } else if ( url.hasExtension( QLatin1String("bindname") ) ) {
     d->mAuth = Simple;
     d->mBindDn = url.extension( QLatin1String("bindname"), critical );
   } else {
-    QString user = url.user();
+    QString user = url.userName();
     if ( user.isEmpty() ) {
       d->mAuth = Anonymous;
     } else {
@@ -349,14 +349,14 @@ void LdapServer::setUrl( const LdapUrl &url )
 LdapUrl LdapServer::url() const
 {
   LdapUrl url;
-  url.setProtocol( d->mSecurity == SSL ? QLatin1String("ldaps") : QLatin1String("ldap") );
+  url.setScheme( d->mSecurity == SSL ? QLatin1String("ldaps") : QLatin1String("ldap") );
   url.setPort( d->mPort );
   url.setHost( d->mHost );
   url.setDn( d->mBaseDn );
   url.setFilter( d->mFilter );
   url.setScope( d->mScope );
   if ( d->mAuth == SASL ) {
-    url.setUser( d->mUser );
+    url.setUserName( d->mUser );
     url.setPassword( d->mPassword );
     url.setExtension( QLatin1String("bindname"), d->mBindDn, true );
     url.setExtension( QLatin1String("x-sasl"), QString() );
@@ -367,7 +367,7 @@ LdapUrl LdapServer::url() const
       url.setExtension( QLatin1String("x-realm"), d->mRealm );
     }
   } else if (d->mAuth == Simple ) {
-    url.setUser( d->mBindDn );
+    url.setUserName( d->mBindDn );
     url.setPassword( d->mPassword );
   }
   if ( d->mVersion == 2 ) {
