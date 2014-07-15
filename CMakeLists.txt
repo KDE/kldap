@@ -60,6 +60,7 @@ if (Sasl2_FOUND)
    set(SASL2_FOUND 1)
 endif()
 
+add_definitions("-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_TO_ASCII")
 add_definitions(-DTRANSLATION_DOMAIN=\"libkldap5\")
 
 ########### CMake Config Files ###########
