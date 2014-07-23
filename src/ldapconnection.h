@@ -27,7 +27,8 @@
 #include "ldapserver.h"
 #include "kldap_export.h"
 
-namespace KLDAP {
+namespace KLDAP
+{
 
 /**
  * @brief
@@ -35,21 +36,21 @@ namespace KLDAP {
  */
 class KLDAP_EXPORT LdapConnection
 {
-  public:
+public:
 
     enum SASL_Fields {
-      SASL_Authname = 0x1,
-      SASL_Authzid = 0x2,
-      SASL_Realm = 0x4,
-      SASL_Password = 0x8
+        SASL_Authname = 0x1,
+        SASL_Authzid = 0x2,
+        SASL_Realm = 0x4,
+        SASL_Password = 0x8
     };
 
     /** Constructs an LdapConnection object */
     LdapConnection();
     /** Constructs an LdapConnection with the parameters given in url */
-    explicit LdapConnection( const LdapUrl &url );
+    explicit LdapConnection(const LdapUrl &url);
     /** Constructs an LdapConnection with the parameters given in server */
-    explicit LdapConnection( const LdapServer &server );
+    explicit LdapConnection(const LdapServer &server);
 
     virtual ~LdapConnection();
 
@@ -58,7 +59,7 @@ class KLDAP_EXPORT LdapConnection
      * you need to call connect() to connect with the new parameters.
      * @param url the URL containing the connection parameters
      */
-    void setUrl( const LdapUrl &url );
+    void setUrl(const LdapUrl &url);
     /**
      * Returns the connection parameters which was specified with an LDAP Url
      * or a LdapServer structure.
@@ -69,7 +70,7 @@ class KLDAP_EXPORT LdapConnection
      * this, you need to call connect() to connect with the new parameters.
      * @param server the server object containing the connection parameters
      */
-    void setServer( const LdapServer &server );
+    void setServer(const LdapServer &server);
 
     /**
      * Sets up the connection parameters with creating a handle to the LDAP server.
@@ -90,14 +91,14 @@ class KLDAP_EXPORT LdapConnection
     /** Sets the size limit for the connection.
      *  @param sizelimit the connection size limit to set
      */
-    bool setSizeLimit( int sizelimit );
+    bool setSizeLimit(int sizelimit);
     /** Returns the current size limit. */
     int sizeLimit() const;
 
     /** Sets the time limit for the connection.
      *  @param timelimit the connection time limit to set
      */
-    bool setTimeLimit( int timelimit );
+    bool setTimeLimit(int timelimit);
     /** Returns the current time limit. */
     int timeLimit() const;
 
@@ -106,17 +107,17 @@ class KLDAP_EXPORT LdapConnection
       * @param option the connection option to return
       * @param value the value of option to get
       */
-    int getOption( int option, void *value ) const;
+    int getOption(int option, void *value) const;
     /** Sets an option in the connection. The option value can be client
       * library specific, so avoid this function if possible */
-    int setOption( int option, void *value );
+    int setOption(int option, void *value);
 
     /** Returns the LDAP error code from the last operation */
     int ldapErrorCode() const;
     /** Returns the LDAP error string from the last operation */
     QString ldapErrorString() const;
     /** Returns a translated error message from the specified LDAP error code */
-    static QString errorString( int code );
+    static QString errorString(int code);
 
     /** Returns the SASL error string from the last SASL operation */
     QString saslErrorString() const;
@@ -133,11 +134,11 @@ class KLDAP_EXPORT LdapConnection
      */
     void *saslHandle() const;
 
-  private:
+private:
     class LdapConnectionPrivate;
     LdapConnectionPrivate *const d;
 
-    Q_DISABLE_COPY( LdapConnection )
+    Q_DISABLE_COPY(LdapConnection)
 };
 
 }

@@ -25,15 +25,16 @@
 
 #include "kldap_export.h"
 
-namespace KLDAP {
+namespace KLDAP
+{
 
-  /**
-   * This class allows encoding and decoding Qt structures using Basic
-   * Encoding Rules.
-   */
+/**
+ * This class allows encoding and decoding Qt structures using Basic
+ * Encoding Rules.
+ */
 class KLDAP_EXPORT Ber
 {
-  public:
+public:
     /**
      * Constructs a Ber object.
      */
@@ -41,14 +42,14 @@ class KLDAP_EXPORT Ber
     /**
      * Constructs a Ber object from the value.
      */
-    explicit Ber( const QByteArray &value );
+    explicit Ber(const QByteArray &value);
     /**
      * Destroys the Ber object.
      */
     virtual ~Ber();
 
-    Ber( const Ber &that );
-    Ber &operator=( const Ber &that );
+    Ber(const Ber &that);
+    Ber &operator=(const Ber &that);
 
     /**
      * Returns the Ber object as a flat QByteArray.
@@ -114,12 +115,12 @@ class KLDAP_EXPORT Ber
      *   </li>
      * </ul>
      */
-    int printf( const QString &format, ... );
-    int scanf( const QString &format, ... );
-    unsigned int peekTag( int &size );
-    unsigned int skipTag( int &size );
+    int printf(const QString &format, ...);
+    int scanf(const QString &format, ...);
+    unsigned int peekTag(int &size);
+    unsigned int skipTag(int &size);
 
-  private:
+private:
     class BerPrivate;
     BerPrivate *const d;
 };

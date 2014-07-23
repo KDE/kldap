@@ -27,7 +27,8 @@
 #include "ldapdn.h"
 #include "kldap_export.h"
 
-namespace KLDAP {
+namespace KLDAP
+{
 
 /**
  * Ldif
@@ -39,24 +40,24 @@ namespace KLDAP {
 
 class KLDAP_EXPORT Ldif
 {
-  public:
+public:
 
     typedef enum {
-      None, NewEntry, EndEntry, Item, Control, Err, MoreData
+        None, NewEntry, EndEntry, Item, Control, Err, MoreData
     } ParseValue;
 
     typedef enum {
-      Entry_None, Entry_Add, Entry_Del, Entry_Mod, Entry_Modrdn
+        Entry_None, Entry_Add, Entry_Del, Entry_Mod, Entry_Modrdn
     } EntryType;
 
     typedef enum {
-      Mod_None, Mod_Add, Mod_Replace, Mod_Del
+        Mod_None, Mod_Add, Mod_Replace, Mod_Del
     } ModType;
 
     Ldif();
 
-    Ldif( const Ldif &that );
-    Ldif &operator=( const Ldif &that );
+    Ldif(const Ldif &that);
+    Ldif &operator=(const Ldif &that);
 
     virtual ~Ldif();
 
@@ -68,23 +69,23 @@ class KLDAP_EXPORT Ldif
      * @param linelen Maximum length of the lines in the result.
      * @param url If true, encode value as url ( use :< ).
      */
-    static QByteArray assembleLine( const QString &fieldname,
-                                    const QByteArray &value, uint linelen=0,
-                                    bool url=false );
+    static QByteArray assembleLine(const QString &fieldname,
+                                   const QByteArray &value, uint linelen = 0,
+                                   bool url = false);
     /**
      * This is the same as the above function, the only difference that
      * this accepts QString as the value.
      */
-    static QByteArray assembleLine( const QString &fieldname,
-                                    const QString &value, uint linelen=0,
-                                    bool url=false );
+    static QByteArray assembleLine(const QString &fieldname,
+                                   const QString &value, uint linelen = 0,
+                                   bool url = false);
 
     /**
      * Splits one line from an Ldif file to attribute and value components.
      * @return true if value is an URL, false otherwise
      */
-    static bool splitLine( const QByteArray &line, QString &fieldname,
-                           QByteArray &value );
+    static bool splitLine(const QByteArray &line, QString &fieldname,
+                          QByteArray &value);
 
     /**
      * Splits a control specification (without the "control:" directive)
@@ -93,8 +94,8 @@ class KLDAP_EXPORT Ldif
      * @param critical will contain the criticality of control
      * @param value is the control value
      */
-    static bool splitControl( const QByteArray &line, QString &oid,
-                              bool &critical, QByteArray &value );
+    static bool splitControl(const QByteArray &line, QString &oid,
+                             bool &critical, QByteArray &value);
 
     /**
      * Starts the parsing of a new Ldif
@@ -123,7 +124,7 @@ class KLDAP_EXPORT Ldif
      * returned MoreData.
      * @param ldif the Ldif chunk to set
      */
-    void setLdif( const QByteArray &ldif );
+    void setLdif(const QByteArray &ldif);
 
     /**
      * Indicates the end of the Ldif file/stream. Call if nextItem() returned
@@ -192,7 +193,7 @@ class KLDAP_EXPORT Ldif
      */
     uint lineNumber() const;
 
-  private:
+private:
     class LdifPrivate;
     LdifPrivate *const d;
 };

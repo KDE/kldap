@@ -27,16 +27,16 @@ using namespace KLDAP;
 
 class LdapObject::Private : public QSharedData
 {
-  public:
+public:
     Private()
     {
     }
 
-    Private( const Private &other )
-      : QSharedData( other )
+    Private(const Private &other)
+        : QSharedData(other)
     {
-      mDn = other.mDn;
-      mAttrs = other.mAttrs;
+        mDn = other.mDn;
+        mAttrs = other.mAttrs;
     }
 
     LdapDN mDn;
@@ -44,108 +44,108 @@ class LdapObject::Private : public QSharedData
 };
 
 LdapObject::LdapObject()
-  : d( new Private )
+    : d(new Private)
 {
 }
 
-LdapObject::LdapObject( const QString &dn )
-  : d( new Private )
+LdapObject::LdapObject(const QString &dn)
+    : d(new Private)
 {
-  d->mDn = LdapDN( dn );
+    d->mDn = LdapDN(dn);
 }
 
 LdapObject::~LdapObject()
 {
 }
 
-LdapObject::LdapObject( const LdapObject &that )
-  : d( that.d )
+LdapObject::LdapObject(const LdapObject &that)
+    : d(that.d)
 {
 }
 
-LdapObject &LdapObject::operator=( const LdapObject &that )
+LdapObject &LdapObject::operator=(const LdapObject &that)
 {
-  if ( this != &that ) {
-    d = that.d;
-  }
+    if (this != &that) {
+        d = that.d;
+    }
 
-  return *this;
+    return *this;
 }
 
-void LdapObject::setDn( const LdapDN &dn )
+void LdapObject::setDn(const LdapDN &dn)
 {
-  d->mDn = dn;
+    d->mDn = dn;
 }
 
-void LdapObject::setDn( const QString &dn )
+void LdapObject::setDn(const QString &dn)
 {
-  d->mDn = LdapDN( dn );
+    d->mDn = LdapDN(dn);
 }
 
-void LdapObject::setAttributes( const LdapAttrMap &attrs )
+void LdapObject::setAttributes(const LdapAttrMap &attrs)
 {
-  d->mAttrs = attrs;
+    d->mAttrs = attrs;
 }
 
 LdapDN LdapObject::dn() const
 {
-  return d->mDn;
+    return d->mDn;
 }
 
 const LdapAttrMap &LdapObject::attributes() const
 {
-  return d->mAttrs;
+    return d->mAttrs;
 }
 
 QString LdapObject::toString() const
 {
-  QString result = QString::fromLatin1( "dn: %1\n" ).arg( d->mDn.toString() );
-  LdapAttrMap::ConstIterator end( d->mAttrs.constEnd() );
-  for ( LdapAttrMap::ConstIterator it = d->mAttrs.constBegin(); it != end; ++it ) {
-    const QString attr = it.key();
-    LdapAttrValue::ConstIterator end2( ( *it ).constEnd() );
-    for ( LdapAttrValue::ConstIterator it2 = ( *it ).constBegin(); it2 != end2; ++it2 ) {
-      result += QString::fromUtf8( Ldif::assembleLine( attr, *it2, 76 ) ) + QLatin1Char('\n');
+    QString result = QString::fromLatin1("dn: %1\n").arg(d->mDn.toString());
+    LdapAttrMap::ConstIterator end(d->mAttrs.constEnd());
+    for (LdapAttrMap::ConstIterator it = d->mAttrs.constBegin(); it != end; ++it) {
+        const QString attr = it.key();
+        LdapAttrValue::ConstIterator end2((*it).constEnd());
+        for (LdapAttrValue::ConstIterator it2 = (*it).constBegin(); it2 != end2; ++it2) {
+            result += QString::fromUtf8(Ldif::assembleLine(attr, *it2, 76)) + QLatin1Char('\n');
+        }
     }
-  }
-  return result;
+    return result;
 }
 
 void LdapObject::clear()
 {
-  d->mDn.clear();
-  d->mAttrs.clear();
+    d->mDn.clear();
+    d->mAttrs.clear();
 }
 
-void LdapObject::setValues( const QString &attributeName, const LdapAttrValue &values )
+void LdapObject::setValues(const QString &attributeName, const LdapAttrValue &values)
 {
-  d->mAttrs[ attributeName ] = values;
+    d->mAttrs[ attributeName ] = values;
 }
 
-void LdapObject::addValue( const QString &attributeName, const QByteArray &value )
+void LdapObject::addValue(const QString &attributeName, const QByteArray &value)
 {
-  d->mAttrs[ attributeName ].append( value );
+    d->mAttrs[ attributeName ].append(value);
 }
 
-LdapAttrValue LdapObject::values( const QString &attributeName ) const
+LdapAttrValue LdapObject::values(const QString &attributeName) const
 {
-  if ( hasAttribute( attributeName ) ) {
-    return d->mAttrs.value( attributeName );
-  } else {
-    return LdapAttrValue();
-  }
+    if (hasAttribute(attributeName)) {
+        return d->mAttrs.value(attributeName);
+    } else {
+        return LdapAttrValue();
+    }
 }
 
-QByteArray LdapObject::value( const QString &attributeName ) const
+QByteArray LdapObject::value(const QString &attributeName) const
 {
-  if ( hasAttribute( attributeName ) ) {
-    return d->mAttrs.value( attributeName ).first();
-  } else {
-    return QByteArray();
-  }
+    if (hasAttribute(attributeName)) {
+        return d->mAttrs.value(attributeName).first();
+    } else {
+        return QByteArray();
+    }
 }
 
-bool LdapObject::hasAttribute( const QString &attributeName ) const
+bool LdapObject::hasAttribute(const QString &attributeName) const
 {
-  return d->mAttrs.contains( attributeName );
+    return d->mAttrs.contains(attributeName);
 }

@@ -25,17 +25,17 @@
 
 #include <QtCore/QStringList>
 
-
-namespace KLDAP {
+namespace KLDAP
+{
 
 class KLDAP_EXPORT LdapDN
 {
-  public:
+public:
     explicit LdapDN();
-    explicit LdapDN( const QString &dn );
+    explicit LdapDN(const QString &dn);
 
-    LdapDN( const LdapDN &that );
-    LdapDN &operator=( const LdapDN &that );
+    LdapDN(const LdapDN &that);
+    LdapDN &operator=(const LdapDN &that);
 
     ~LdapDN();
 
@@ -52,7 +52,7 @@ class KLDAP_EXPORT LdapDN
      * \param depth The depth of the DN to return using a zero-based index.
      * \returns A QString representing the DN levels deep in the directory.
      */
-    QString toString( int depth ) const;
+    QString toString(int depth) const;
 
     /**
      * \returns A QString representing the RDN of this DN.
@@ -63,7 +63,7 @@ class KLDAP_EXPORT LdapDN
      * \param depth The depth of the RDN to return using a zero-based index.
      * \returns A QString representing the RDN levels deep in the directory.
      */
-    QString rdnString( int depth ) const;
+    QString rdnString(int depth) const;
 
     /**
      * \returns True if this is a valid DN, false otherwise.
@@ -75,11 +75,11 @@ class KLDAP_EXPORT LdapDN
      */
     int depth() const;
 
-    bool operator == ( const LdapDN &rhs ) const;
+    bool operator == (const LdapDN &rhs) const;
 
-    bool operator != ( const LdapDN &rhs ) const;
+    bool operator != (const LdapDN &rhs) const;
 
-  private:
+private:
     class LdapDNPrivate;
     LdapDNPrivate *const d;
 };

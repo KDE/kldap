@@ -29,8 +29,8 @@ using namespace KLDAP;
 
 class KLdapTest : public QObject
 {
-  Q_OBJECT
-  private Q_SLOTS:
+    Q_OBJECT
+private Q_SLOTS:
     //void testKLdap();
 
     void initTestCase();
@@ -43,11 +43,11 @@ class KLdapTest : public QObject
     void testLdapDN();
     void testLdapModel();
 
-  public Q_SLOTS:
-    void searchResult( KLDAP::LdapSearch *search );
-    void searchData( KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj );
+public Q_SLOTS:
+    void searchResult(KLDAP::LdapSearch *search);
+    void searchData(KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj);
 
-  private:
+private:
     QString m_url;
     LdapSearch *m_search;
     LdapObjects m_objects;

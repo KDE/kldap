@@ -27,18 +27,18 @@ using namespace KLDAP;
 
 class LdapControl::Private : public QSharedData
 {
-  public:
+public:
     Private()
     {
-      mCritical = false;
+        mCritical = false;
     }
 
-    Private( const Private &other )
-      : QSharedData( other )
+    Private(const Private &other)
+        : QSharedData(other)
     {
-      mOid = other.mOid;
-      mValue = other.mValue;
-      mCritical = other.mCritical;
+        mOid = other.mOid;
+        mValue = other.mValue;
+        mCritical = other.mCritical;
     }
 
     QString mOid;
@@ -47,112 +47,112 @@ class LdapControl::Private : public QSharedData
 };
 
 LdapControl::LdapControl()
-  : d( new Private )
+    : d(new Private)
 {
-  setControl( QString(), QByteArray(), false );
+    setControl(QString(), QByteArray(), false);
 }
 
-LdapControl::LdapControl( const QString &oid, const QByteArray &value, bool critical )
-  : d( new Private )
+LdapControl::LdapControl(const QString &oid, const QByteArray &value, bool critical)
+    : d(new Private)
 {
-  setControl( oid, value, critical );
+    setControl(oid, value, critical);
 }
 
-LdapControl::LdapControl( const LdapControl &that )
-  : d( that.d )
+LdapControl::LdapControl(const LdapControl &that)
+    : d(that.d)
 {
-  setControl( that.d->mOid, that.d->mValue, that.d->mCritical );
+    setControl(that.d->mOid, that.d->mValue, that.d->mCritical);
 }
 
-LdapControl &LdapControl::operator= ( const LdapControl &that )
+LdapControl &LdapControl::operator= (const LdapControl &that)
 {
-  if ( this != &that ) {
-    d = that.d;
-  }
+    if (this != &that) {
+        d = that.d;
+    }
 
-  setControl( that.d->mOid, that.d->mValue, that.d->mCritical );
+    setControl(that.d->mOid, that.d->mValue, that.d->mCritical);
 
-  return *this;
+    return *this;
 }
 
 LdapControl::~LdapControl()
 {
 }
 
-void LdapControl::setControl( const QString &oid, const QByteArray &value, bool critical )
+void LdapControl::setControl(const QString &oid, const QByteArray &value, bool critical)
 {
-  d->mOid = oid;
-  d->mValue = value;
-  d->mCritical = critical;
+    d->mOid = oid;
+    d->mValue = value;
+    d->mCritical = critical;
 }
 
 QString LdapControl::oid() const
 {
-  return d->mOid;
+    return d->mOid;
 }
 
 QByteArray LdapControl::value() const
 {
-  return d->mValue;
+    return d->mValue;
 }
 
 bool LdapControl::critical() const
 {
-  return d->mCritical;
+    return d->mCritical;
 }
 
-void LdapControl::setOid( const QString &oid )
+void LdapControl::setOid(const QString &oid)
 {
-  d->mOid = oid;
+    d->mOid = oid;
 }
 
-void LdapControl::setValue( const QByteArray &value )
+void LdapControl::setValue(const QByteArray &value)
 {
-  d->mValue = value;
+    d->mValue = value;
 }
 
-void LdapControl::setCritical( bool critical )
+void LdapControl::setCritical(bool critical)
 {
-  d->mCritical = critical;
+    d->mCritical = critical;
 }
 
-int LdapControl::parsePageControl( QByteArray &cookie ) const
+int LdapControl::parsePageControl(QByteArray &cookie) const
 {
-  if ( d->mOid != QLatin1String("1.2.840.113556.1.4.319") ) {
-    return -1;
-  }
-
-  Ber ber( d->mValue );
-  int size;
-  if ( ber.scanf( QLatin1String("{iO}"), &size, &cookie ) == -1 ) {
-    return -1;
-  } else {
-    return size;
-  }
-}
-
-LdapControl LdapControl::createPageControl( int pagesize, const QByteArray &cookie )
-{
-  LdapControl control;
-  Ber ber;
-
-  ber.printf( QLatin1String("{iO}"), pagesize, &cookie );
-  control.setOid( QLatin1String("1.2.840.113556.1.4.319") );
-  control.setValue( ber.flatten() );
-  return control;
-}
-
-void LdapControl::insert( LdapControls &list, const LdapControl &ctrl )
-{
-  LdapControls::iterator it;
-  LdapControls::iterator endit = list.end();
-  const QString oid = ctrl.oid();
-
-  for ( it = list.begin(); it != endit; ++it ) {
-    if ( it->oid() == oid ) {
-      *it = ctrl;
-      return;
+    if (d->mOid != QLatin1String("1.2.840.113556.1.4.319")) {
+        return -1;
     }
-  }
-  list.append( ctrl );
+
+    Ber ber(d->mValue);
+    int size;
+    if (ber.scanf(QLatin1String("{iO}"), &size, &cookie) == -1) {
+        return -1;
+    } else {
+        return size;
+    }
+}
+
+LdapControl LdapControl::createPageControl(int pagesize, const QByteArray &cookie)
+{
+    LdapControl control;
+    Ber ber;
+
+    ber.printf(QLatin1String("{iO}"), pagesize, &cookie);
+    control.setOid(QLatin1String("1.2.840.113556.1.4.319"));
+    control.setValue(ber.flatten());
+    return control;
+}
+
+void LdapControl::insert(LdapControls &list, const LdapControl &ctrl)
+{
+    LdapControls::iterator it;
+    LdapControls::iterator endit = list.end();
+    const QString oid = ctrl.oid();
+
+    for (it = list.begin(); it != endit; ++it) {
+        if (it->oid() == oid) {
+            *it = ctrl;
+            return;
+        }
+    }
+    list.append(ctrl);
 }

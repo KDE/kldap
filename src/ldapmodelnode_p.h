@@ -30,7 +30,8 @@
 #include "ldapobject.h"
 #include "kldap_export.h"
 
-namespace KLDAP {
+namespace KLDAP
+{
 
 class LdapModelDNNode;
 
@@ -39,25 +40,34 @@ class LdapModelDNNode;
  */
 class LdapModelNode
 {
-  public:
-    explicit LdapModelNode( LdapModelDNNode *parent = 0 );
+public:
+    explicit LdapModelNode(LdapModelDNNode *parent = 0);
     virtual ~LdapModelNode();
 
     enum NodeType {
-      DN,
-      Attr
+        DN,
+        Attr
     };
 
     virtual NodeType nodeType() const = 0;
 
     LdapModelDNNode *parent();
-    int columnCount() const { return 2; }
+    int columnCount() const
+    {
+        return 2;
+    }
     int row() const;
 
-    void setPopulated( bool b ) { m_isPopulated = b; }
-    bool isPopulated() const { return m_isPopulated; }
+    void setPopulated(bool b)
+    {
+        m_isPopulated = b;
+    }
+    bool isPopulated() const
+    {
+        return m_isPopulated;
+    }
 
-  private:
+private:
     LdapModelDNNode *m_parent;
     bool m_isPopulated;
 };
@@ -67,21 +77,31 @@ class LdapModelNode
  */
 class LdapModelDNNode : public LdapModelNode
 {
-  public:
-    explicit LdapModelDNNode( LdapModelDNNode *parent = 0,
-                              const LdapDN &dn = LdapDN() );
+public:
+    explicit LdapModelDNNode(LdapModelDNNode *parent = 0,
+                             const LdapDN &dn = LdapDN());
     ~LdapModelDNNode();
 
     LdapModelNode::NodeType nodeType() const
-    { return LdapModelNode::DN; }
+    {
+        return LdapModelNode::DN;
+    }
 
-    void appendChild( LdapModelNode *pItem );
-    LdapModelNode *child( int row );
-    int childCount() const { return m_childItems.size(); }
-    const QList<LdapModelNode*>& children() const
-    { return m_childItems; }
+    void appendChild(LdapModelNode *pItem);
+    LdapModelNode *child(int row);
+    int childCount() const
+    {
+        return m_childItems.size();
+    }
+    const QList<LdapModelNode *> &children() const
+    {
+        return m_childItems;
+    }
 
-    const LdapDN &dn() const { return m_dn; }
+    const LdapDN &dn() const
+    {
+        return m_dn;
+    }
 
     /**
      * Creates child LdapModelAttrNode object to store \p object's attributes
@@ -89,10 +109,10 @@ class LdapModelDNNode : public LdapModelNode
      *
      * \param The LdapObject to store in this node.
      */
-    void setLdapObject( const LdapObject &object );
+    void setLdapObject(const LdapObject &object);
 
-  private:
-    QList<LdapModelNode*> m_childItems;
+private:
+    QList<LdapModelNode *> m_childItems;
     LdapDN m_dn;
 };
 
@@ -101,19 +121,27 @@ class LdapModelDNNode : public LdapModelNode
  */
 class LdapModelAttrNode : public LdapModelNode
 {
-  public:
-    explicit LdapModelAttrNode( LdapModelDNNode *parent = 0,
-                                const QString &attrName = QString(),
-                                const QByteArray &attrData = QByteArray() );
+public:
+    explicit LdapModelAttrNode(LdapModelDNNode *parent = 0,
+                               const QString &attrName = QString(),
+                               const QByteArray &attrData = QByteArray());
     ~LdapModelAttrNode();
 
     LdapModelNode::NodeType nodeType() const
-    { return LdapModelNode::Attr; }
+    {
+        return LdapModelNode::Attr;
+    }
 
-    const QString &attributeName() { return m_attrName; }
-    const QByteArray &attributeData() { return m_attrData; }
+    const QString &attributeName()
+    {
+        return m_attrName;
+    }
+    const QByteArray &attributeData()
+    {
+        return m_attrData;
+    }
 
-  private:
+private:
     QString m_attrName;
     QByteArray m_attrData;
 };

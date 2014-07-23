@@ -25,49 +25,50 @@
 
 #include "kldap_export.h"
 
-namespace KLDAP {
+namespace KLDAP
+{
 
 class KLDAP_EXPORT LdapAttributeProxyModel : public QSortFilterProxyModel
 {
-  Q_OBJECT
-  public:
-    explicit LdapAttributeProxyModel( QObject *parent = 0 );
+    Q_OBJECT
+public:
+    explicit LdapAttributeProxyModel(QObject *parent = 0);
     ~LdapAttributeProxyModel();
 
-    virtual QVariant data( const QModelIndex &index, int role ) const;
+    virtual QVariant data(const QModelIndex &index, int role) const;
     /**
      * Reimplemented from QAbstractItemModel::setData(). This is a placeholder for when
      * LdapAttributeProxyModel beomes writeable and always returns false.
      */
-    virtual bool setData( const QModelIndex &index,
-                          const QVariant &value,
-                          int role = Qt::EditRole );
-    virtual bool filterAcceptsRow( int sourceRow, const QModelIndex &sourceParent ) const;
-    virtual QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
-    virtual int columnCount( const QModelIndex &parent ) const;
-    virtual Qt::ItemFlags flags( const QModelIndex &index ) const;
-    virtual bool hasChildren( const QModelIndex &parent ) const;
+    virtual bool setData(const QModelIndex &index,
+                         const QVariant &value,
+                         int role = Qt::EditRole);
+    virtual bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const;
+    virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const;
+    virtual int columnCount(const QModelIndex &parent) const;
+    virtual Qt::ItemFlags flags(const QModelIndex &index) const;
+    virtual bool hasChildren(const QModelIndex &parent) const;
 
-    virtual QModelIndex mapFromSource ( const QModelIndex & sourceIndex ) const;
-    virtual QModelIndex mapToSource ( const QModelIndex & proxyIndex ) const;
+    virtual QModelIndex mapFromSource(const QModelIndex &sourceIndex) const;
+    virtual QModelIndex mapToSource(const QModelIndex &proxyIndex) const;
 
     /**
      * Reimplemented from QAbstractItemModel::insertRows(). This is a placeholder for when
      * LdapAttributeProxyModel beomes writeable and always returns false.
      */
-    virtual bool insertRows( int row, int count,
-                             const QModelIndex &parent = QModelIndex() );
+    virtual bool insertRows(int row, int count,
+                            const QModelIndex &parent = QModelIndex());
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). This is a placeholder for when
      * LdapAttributeProxyModel beomes writeable and always returns false.
      */
-    virtual bool removeRows( int row, int count,
-                             const QModelIndex &parent = QModelIndex() );
+    virtual bool removeRows(int row, int count,
+                            const QModelIndex &parent = QModelIndex());
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). The default implementation
      * does nothing.
      */
-    virtual void sort( int column, Qt::SortOrder order = Qt::AscendingOrder );
+    virtual void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
 
     //
     // Drag and drop support
@@ -81,15 +82,15 @@ class KLDAP_EXPORT LdapAttributeProxyModel : public QSortFilterProxyModel
      * Reimplemented from QAbstractItemModel::mimedata(). This is a placeholder for when
      * LdapAttributeProxyModel beomes writeable and always returns 0.
      */
-    virtual QMimeData *mimeData( const QModelIndexList &indexes ) const;
+    virtual QMimeData *mimeData(const QModelIndexList &indexes) const;
     /**
      * Reimplemented from QAbstractItemModel::dropMimedata(). This is a placeholder for when
      * LdapAttributeProxyModel beomes writeable and always returns false.
      */
-    virtual bool dropMimeData( const QMimeData *data, Qt::DropAction action,
-                               int row, int column, const QModelIndex &parent );
+    virtual bool dropMimeData(const QMimeData *data, Qt::DropAction action,
+                              int row, int column, const QModelIndex &parent);
 
-  private:
+private:
     class LdapAttributeProxyModelPrivate;
     LdapAttributeProxyModelPrivate *const m_d;
 };

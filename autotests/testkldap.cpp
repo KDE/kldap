@@ -34,242 +34,242 @@
 #include <qdebug.h>
 #include <qtest.h>
 #include <QFile>
-QTEST_MAIN( KLdapTest )
+QTEST_MAIN(KLdapTest)
 
 void KLdapTest::initTestCase()
 {
-  /*
-    Read in the connection details of an LDAP server to use for testing.
-    You should copy the file testurl.txt.tmpl to testurl.txt and specify a url in this file.
-    The specified server should not be a production server in case we break anything here.
-    You have been warned!
-  */
-  m_search=0;
-  m_model=0;
+    /*
+      Read in the connection details of an LDAP server to use for testing.
+      You should copy the file testurl.txt.tmpl to testurl.txt and specify a url in this file.
+      The specified server should not be a production server in case we break anything here.
+      You have been warned!
+    */
+    m_search = 0;
+    m_model = 0;
 
-  QString filename( QLatin1String("testurl.txt") );
-  QFile file( filename );
-  if ( file.open( QIODevice::ReadOnly | QIODevice::Text ) ) {
-    QTextStream stream( &file );
-    stream >> m_url;
-    file.close();
-  }
+    QString filename(QLatin1String("testurl.txt"));
+    QFile file(filename);
+    if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        QTextStream stream(&file);
+        stream >> m_url;
+        file.close();
+    }
 //    else
 //        QCOMPARE( 0, 1 );
 
-  m_search = new LdapSearch;
+    m_search = new LdapSearch;
 
-  /* Let's also create an LdapModel object */
-  m_model = new LdapModel( this );
+    /* Let's also create an LdapModel object */
+    m_model = new LdapModel(this);
 }
 
 void KLdapTest::testBer()
 {
-  Ber ber1, ber2, ber3, ber4, ber5, ber6, ber7;
-  Ber bber;
-  QByteArray flat;
+    Ber ber1, ber2, ber3, ber4, ber5, ber6, ber7;
+    Ber bber;
+    QByteArray flat;
 
-  int ainteger;
-  QByteArray aoctetString1, aoctetString2, aoctetString3;
-  QList<QByteArray> alist1, alist2;
+    int ainteger;
+    QByteArray aoctetString1, aoctetString2, aoctetString3;
+    QList<QByteArray> alist1, alist2;
 
-  int binteger;
-  QByteArray boctetString1, boctetString2, boctetString3;
-  QList<QByteArray> blist1, blist2;
+    int binteger;
+    QByteArray boctetString1, boctetString2, boctetString3;
+    QList<QByteArray> blist1, blist2;
 
-  aoctetString1 = "KDE";
-  aoctetString2 = "the";
-  aoctetString3 = "next generation";
+    aoctetString1 = "KDE";
+    aoctetString2 = "the";
+    aoctetString3 = "next generation";
 
-  alist1.append( aoctetString1 );
-  alist1.append( aoctetString2 );
+    alist1.append(aoctetString1);
+    alist1.append(aoctetString2);
 
-  alist2.append( aoctetString2 );
-  alist2.append( aoctetString3 );
-  alist2.append( aoctetString1 );
+    alist2.append(aoctetString2);
+    alist2.append(aoctetString3);
+    alist2.append(aoctetString1);
 
-  ainteger = 23543;
+    ainteger = 23543;
 
-  ber1.printf( QLatin1String("i"), ainteger );
-  ber2.printf( QLatin1String("o"), &aoctetString1 );
-  ber3.printf( QLatin1String("O"), &aoctetString2 );
-  ber4.printf( QLatin1String("s"), &aoctetString3 );
-  ber5.printf( QLatin1String("{v}"), &alist1 );
-  ber6.printf( QLatin1String("{V}"), &alist2 );
-  ber7.printf( QLatin1String("oi{v}O"), &aoctetString1, ainteger, &alist2, &aoctetString2 );
+    ber1.printf(QLatin1String("i"), ainteger);
+    ber2.printf(QLatin1String("o"), &aoctetString1);
+    ber3.printf(QLatin1String("O"), &aoctetString2);
+    ber4.printf(QLatin1String("s"), &aoctetString3);
+    ber5.printf(QLatin1String("{v}"), &alist1);
+    ber6.printf(QLatin1String("{V}"), &alist2);
+    ber7.printf(QLatin1String("oi{v}O"), &aoctetString1, ainteger, &alist2, &aoctetString2);
 
-  //test integer:
-  bber = ber1;
-  bber.scanf( QLatin1String("i"), &binteger );
-  QCOMPARE( ainteger, binteger );
+    //test integer:
+    bber = ber1;
+    bber.scanf(QLatin1String("i"), &binteger);
+    QCOMPARE(ainteger, binteger);
 
-  //test octet strings:
-  bber = ber2;
-  bber.scanf( QLatin1String("o"), &boctetString1 );
-  QCOMPARE( aoctetString1, boctetString1 );
-  bber = ber3;
-  bber.scanf( QLatin1String("o"), &boctetString2 );
-  QCOMPARE( aoctetString2, boctetString2 );
-  bber = ber4;
-  bber.scanf( QLatin1String("o"), &boctetString3 );
-  QCOMPARE( aoctetString3, boctetString3 );
+    //test octet strings:
+    bber = ber2;
+    bber.scanf(QLatin1String("o"), &boctetString1);
+    QCOMPARE(aoctetString1, boctetString1);
+    bber = ber3;
+    bber.scanf(QLatin1String("o"), &boctetString2);
+    QCOMPARE(aoctetString2, boctetString2);
+    bber = ber4;
+    bber.scanf(QLatin1String("o"), &boctetString3);
+    QCOMPARE(aoctetString3, boctetString3);
 
-  //test sequence of octet strings:
-  bber = ber5;
-  bber.scanf( QLatin1String("v"), &blist1 );
-  QCOMPARE( alist1, blist1 );
+    //test sequence of octet strings:
+    bber = ber5;
+    bber.scanf(QLatin1String("v"), &blist1);
+    QCOMPARE(alist1, blist1);
 
-  bber = ber6;
-  bber.scanf( QLatin1String("v"), &blist2 );
-  QCOMPARE( alist2, blist2 );
+    bber = ber6;
+    bber.scanf(QLatin1String("v"), &blist2);
+    QCOMPARE(alist2, blist2);
 
-  //complex tests
-  boctetString1 = boctetString2 = boctetString3 = QByteArray();
-  binteger = 0;
-  blist1.clear();
-  blist2.clear();
+    //complex tests
+    boctetString1 = boctetString2 = boctetString3 = QByteArray();
+    binteger = 0;
+    blist1.clear();
+    blist2.clear();
 
-  bber = ber7;
-  bber.scanf( QLatin1String("oivO"), &boctetString1, &binteger, &blist2, &boctetString2 );
-  QCOMPARE( aoctetString1, boctetString1 );
-  QCOMPARE( aoctetString2, boctetString2 );
-  QCOMPARE( alist2, blist2 );
-  QCOMPARE( ainteger, binteger );
+    bber = ber7;
+    bber.scanf(QLatin1String("oivO"), &boctetString1, &binteger, &blist2, &boctetString2);
+    QCOMPARE(aoctetString1, boctetString1);
+    QCOMPARE(aoctetString2, boctetString2);
+    QCOMPARE(alist2, blist2);
+    QCOMPARE(ainteger, binteger);
 }
 
 void KLdapTest::cleanupTestCase()
 {
-  delete m_search;
-  delete m_model;
+    delete m_search;
+    delete m_model;
 }
 
 void KLdapTest::testLdapUrl()
 {
-  // Test LdapUrl using some hardwired values so that we know what to compare to
-  LdapUrl url;
-  bool critical;
+    // Test LdapUrl using some hardwired values so that we know what to compare to
+    LdapUrl url;
+    bool critical;
 
-  url.setUrl( QLatin1String("ldap://cn=manager,dc=kde,dc=org:password@localhost:3999/"
-              "dc=kde,dc=org?cn,mail?sub?(objectClass=*)?x-dir=base") );
-  url.parseQuery();
+    url.setUrl(QLatin1String("ldap://cn=manager,dc=kde,dc=org:password@localhost:3999/"
+                             "dc=kde,dc=org?cn,mail?sub?(objectClass=*)?x-dir=base"));
+    url.parseQuery();
 
-  QCOMPARE( url.userName(), QString::fromLatin1( "cn=manager,dc=kde,dc=org" ) );
-  QCOMPARE( url.password(), QString::fromLatin1( "password" ) );
-  QCOMPARE( url.dn(), LdapDN( QLatin1String("dc=kde,dc=org") ) );
-  QCOMPARE( url.scope(), LdapUrl::Sub );
-  QCOMPARE( url.attributes().at( 0 ), QString::fromLatin1( "cn" ) );
-  QCOMPARE( url.attributes().at( 1 ), QString::fromLatin1( "mail" ) );
-  QCOMPARE( url.filter(), QString::fromLatin1( "(objectClass=*)" ) );
-  QCOMPARE( url.extension( QString::fromLatin1( "x-dir" ), critical ),
-            QString::fromLatin1( "base" ) );
+    QCOMPARE(url.userName(), QString::fromLatin1("cn=manager,dc=kde,dc=org"));
+    QCOMPARE(url.password(), QString::fromLatin1("password"));
+    QCOMPARE(url.dn(), LdapDN(QLatin1String("dc=kde,dc=org")));
+    QCOMPARE(url.scope(), LdapUrl::Sub);
+    QCOMPARE(url.attributes().at(0), QString::fromLatin1("cn"));
+    QCOMPARE(url.attributes().at(1), QString::fromLatin1("mail"));
+    QCOMPARE(url.filter(), QString::fromLatin1("(objectClass=*)"));
+    QCOMPARE(url.extension(QString::fromLatin1("x-dir"), critical),
+             QString::fromLatin1("base"));
 }
 
 void KLdapTest::testLdapConnection()
 {
-  // Try to connect using an LdapUrl (read in from testurl.txt).
-  LdapUrl url;
-  url.setUrl( m_url );
+    // Try to connect using an LdapUrl (read in from testurl.txt).
+    LdapUrl url;
+    url.setUrl(m_url);
 
-  LdapConnection conn;
-  conn.setUrl( url );
-  int ret;
-  if ( ( ret = conn.connect() ) ) {
-    qDebug() << "Could not connect to LDAP server. Error was:" << conn.connectionError();
-  }
-  QCOMPARE( ret, 0 );
+    LdapConnection conn;
+    conn.setUrl(url);
+    int ret;
+    if ((ret = conn.connect())) {
+        qDebug() << "Could not connect to LDAP server. Error was:" << conn.connectionError();
+    }
+    QCOMPARE(ret, 0);
 
-  LdapOperation op( conn );
-  // Now attempt to bind
-  if ( ( ret = op.bind_s() ) ) {
-    qDebug() << "Could not bind to server. Error was:" << conn.ldapErrorString();
-  }
-  QEXPECT_FAIL( "", "Will fail since no server is available for testing", Abort );
-  QCOMPARE( ret, 0 );
+    LdapOperation op(conn);
+    // Now attempt to bind
+    if ((ret = op.bind_s())) {
+        qDebug() << "Could not bind to server. Error was:" << conn.ldapErrorString();
+    }
+    QEXPECT_FAIL("", "Will fail since no server is available for testing", Abort);
+    QCOMPARE(ret, 0);
 }
 
 void KLdapTest::testLdapSearch()
 {
-  // Lets try a search using the specified url
-  LdapUrl url;
-  url.setUrl( m_url );
-  url.parseQuery();
-  connect( m_search, SIGNAL(result(KLDAP::LdapSearch*)),
-           this, SLOT(searchResult(KLDAP::LdapSearch*)) );
-  connect( m_search, SIGNAL(data(KLDAP::LdapSearch*,KLDAP::LdapObject)),
-           this, SLOT(searchData(KLDAP::LdapSearch*,KLDAP::LdapObject)) );
-  bool success = m_search->search( url );
-  while ( QCoreApplication::hasPendingEvents() ) {
-    qApp->processEvents();
-  }
+    // Lets try a search using the specified url
+    LdapUrl url;
+    url.setUrl(m_url);
+    url.parseQuery();
+    connect(m_search, SIGNAL(result(KLDAP::LdapSearch *)),
+            this, SLOT(searchResult(KLDAP::LdapSearch *)));
+    connect(m_search, SIGNAL(data(KLDAP::LdapSearch *, KLDAP::LdapObject)),
+            this, SLOT(searchData(KLDAP::LdapSearch *, KLDAP::LdapObject)));
+    bool success = m_search->search(url);
+    while (QCoreApplication::hasPendingEvents()) {
+        qApp->processEvents();
+    }
 
-  QEXPECT_FAIL( "", "Will fail since no server is available for testing", Abort );
-  QCOMPARE( success, true );
+    QEXPECT_FAIL("", "Will fail since no server is available for testing", Abort);
+    QCOMPARE(success, true);
 
-  qDebug() << "Search found" << m_objects.size() << "matching entries";
+    qDebug() << "Search found" << m_objects.size() << "matching entries";
 }
 
-void KLdapTest::searchResult( KLDAP::LdapSearch *search )
+void KLdapTest::searchResult(KLDAP::LdapSearch *search)
 {
-  qDebug();
-  int err = search->error();
-  if ( err ) {
-    qDebug() << "Search returned the following error:" << search->errorString();
-  }
-  QCOMPARE( err, 0 );
+    qDebug();
+    int err = search->error();
+    if (err) {
+        qDebug() << "Search returned the following error:" << search->errorString();
+    }
+    QCOMPARE(err, 0);
 }
 
-void KLdapTest::searchData( KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj )
+void KLdapTest::searchData(KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj)
 {
-  Q_UNUSED( search );
-  //qDebug();
-  //qDebug() << "Object:";
-  //qDebug() << obj.toString();
-  m_objects.append( obj );
+    Q_UNUSED(search);
+    //qDebug();
+    //qDebug() << "Object:";
+    //qDebug() << obj.toString();
+    m_objects.append(obj);
 }
 
 void KLdapTest::testLdapDN()
 {
-  QString strDN( QLatin1String("uid=Test\\+Person+ou=accounts\\,outgoing,dc=kde,dc=org") );
-  LdapDN dn( strDN );
-  QCOMPARE( dn.isValid(), true );
-  QCOMPARE( dn.rdnString(), QLatin1String( "uid=Test\\+Person+ou=accounts\\,outgoing" ) );
+    QString strDN(QLatin1String("uid=Test\\+Person+ou=accounts\\,outgoing,dc=kde,dc=org"));
+    LdapDN dn(strDN);
+    QCOMPARE(dn.isValid(), true);
+    QCOMPARE(dn.rdnString(), QLatin1String("uid=Test\\+Person+ou=accounts\\,outgoing"));
 }
 
 void KLdapTest::testLdapModel()
 {
-  // Use the user-supplied testing url
-  LdapUrl url;
-  url.setUrl( m_url );
+    // Use the user-supplied testing url
+    LdapUrl url;
+    url.setUrl(m_url);
 
-  // Create a connection to use and bind with it
-  LdapConnection conn;
-  conn.setUrl( url );
-  int ret;
-  if ( ( ret = conn.connect() ) ) {
-    qDebug() << "Could not connect to LDAP server. Error was:" << conn.connectionError();
-  }
-  QCOMPARE( ret, 0 );
+    // Create a connection to use and bind with it
+    LdapConnection conn;
+    conn.setUrl(url);
+    int ret;
+    if ((ret = conn.connect())) {
+        qDebug() << "Could not connect to LDAP server. Error was:" << conn.connectionError();
+    }
+    QCOMPARE(ret, 0);
 
-  LdapOperation op( conn );
-  if ( ( ret = op.bind_s() ) ) {
-    qDebug() << "Could not bind to server. Error was:" << conn.ldapErrorString();
-  }
-  QEXPECT_FAIL( "", "Will fail since no server is available for testing", Abort );
-  QCOMPARE( ret, 0 );
+    LdapOperation op(conn);
+    if ((ret = op.bind_s())) {
+        qDebug() << "Could not bind to server. Error was:" << conn.ldapErrorString();
+    }
+    QEXPECT_FAIL("", "Will fail since no server is available for testing", Abort);
+    QCOMPARE(ret, 0);
 
-  // Let's use this connection with the model
-  m_model->setConnection( conn );
+    // Let's use this connection with the model
+    m_model->setConnection(conn);
 
-  while ( QCoreApplication::hasPendingEvents() ) {
-    qApp->processEvents();
-  }
+    while (QCoreApplication::hasPendingEvents()) {
+        qApp->processEvents();
+    }
 
-  QModelIndex rootIndex = QModelIndex();
-  QVariant data = m_model->data( rootIndex, Qt::DisplayRole );
-  qDebug() << "Root Item Distinguished Name =" << data.toString();
+    QModelIndex rootIndex = QModelIndex();
+    QVariant data = m_model->data(rootIndex, Qt::DisplayRole);
+    qDebug() << "Root Item Distinguished Name =" << data.toString();
 
-  QVERIFY( m_model->hasChildren( rootIndex ) == true );
-  QVERIFY( m_model->canFetchMore( rootIndex ) == false );
+    QVERIFY(m_model->hasChildren(rootIndex) == true);
+    QVERIFY(m_model->canFetchMore(rootIndex) == false);
 }
 
 /*

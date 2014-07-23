@@ -27,7 +27,8 @@
 
 #include "kldap_export.h"
 
-namespace KLDAP {
+namespace KLDAP
+{
 
 class LdapControl;
 typedef QList<LdapControl> LdapControls;
@@ -38,7 +39,7 @@ typedef QList<LdapControl> LdapControls;
 */
 class KLDAP_EXPORT LdapControl
 {
-  public:
+public:
     /**
      * Creates an empty control.
      */
@@ -46,10 +47,10 @@ class KLDAP_EXPORT LdapControl
     /**
      * Creates a control with the given OID, value and criticality.
      */
-    LdapControl( const QString &oid, const QByteArray &value, bool critical = false );
+    LdapControl(const QString &oid, const QByteArray &value, bool critical = false);
 
-    LdapControl( const LdapControl &that );
-    LdapControl &operator= ( const LdapControl &that );
+    LdapControl(const LdapControl &that);
+    LdapControl &operator= (const LdapControl &that);
     /**
      * Destroys the control object.
      */
@@ -57,20 +58,20 @@ class KLDAP_EXPORT LdapControl
     /**
      * Sets the control's OID, value and criticality.
      */
-    void setControl( const QString &oid, const QByteArray &value,
-                     bool critical = false );
+    void setControl(const QString &oid, const QByteArray &value,
+                    bool critical = false);
     /**
      * Sets the control's OID.
      */
-    void setOid( const QString &oid );
+    void setOid(const QString &oid);
     /**
      * Sets the control's value.
      */
-    void setValue( const QByteArray &value );
+    void setValue(const QByteArray &value);
     /**
      * Sets the control's criticality.
      */
-    void setCritical( bool critical );
+    void setCritical(bool critical);
     /**
      * Returns the control's OID.
      */
@@ -91,11 +92,11 @@ class KLDAP_EXPORT LdapControl
      * value cannot be decoded, returns -1.
      * @param cookie the cookie to hold server's cookie
      */
-    int parsePageControl( QByteArray &cookie ) const;
+    int parsePageControl(QByteArray &cookie) const;
     /**
      * Creates a paging search control.
      */
-    static LdapControl createPageControl( int pagesize, const QByteArray &cookie = QByteArray() );
+    static LdapControl createPageControl(int pagesize, const QByteArray &cookie = QByteArray());
 
     /**
      * Inserts a unique control against a list of controls.
@@ -105,9 +106,9 @@ class KLDAP_EXPORT LdapControl
      * @param ctrl the control to insert
      * @since 4.4
      */
-    static void insert( LdapControls &list, const LdapControl &ctrl );
+    static void insert(LdapControls &list, const LdapControl &ctrl);
 
-  private:
+private:
     class Private;
     QSharedDataPointer<Private> d;
 };

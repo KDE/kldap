@@ -29,7 +29,8 @@
 #include "ldapdn.h"
 #include "kldap_export.h"
 
-namespace KLDAP {
+namespace KLDAP
+{
 
 /**
  * @short A special url class for LDAP.
@@ -41,24 +42,24 @@ namespace KLDAP {
  */
 class KLDAP_EXPORT LdapUrl : public QUrl
 {
-  public:
+public:
 
     /**
      * A class holding the extension name and state whether
      * the extension is critical.
      */
     typedef struct {
-      QString value;
-      bool critical;
+        QString value;
+        bool critical;
     } Extension;
 
     /**
      * Describes the scope of the LDAP url.
      */
     typedef enum {
-      Base,  ///< Only the same level as the url.
-      One,   ///< The level of the url and the one below.
-      Sub    ///< All levels below the url's level.
+        Base,  ///< Only the same level as the url.
+        One,   ///< The level of the url and the one below.
+        Sub    ///< All levels below the url's level.
     } Scope;
 
     /**
@@ -69,18 +70,18 @@ class KLDAP_EXPORT LdapUrl : public QUrl
     /**
      * Constructs a LDAP url from a KUrl @p url.
      */
-    explicit LdapUrl( const QUrl &url );
+    explicit LdapUrl(const QUrl &url);
 
     /**
      * Constructs a LDAP url from an other url.
      */
-    LdapUrl( const LdapUrl &other );
+    LdapUrl(const LdapUrl &other);
 
     /**
      * Overwrites the values of the LDAP url with values
      * from an @p other url.
      */
-    LdapUrl &operator=( const LdapUrl &other );
+    LdapUrl &operator=(const LdapUrl &other);
 
     /**
      * Destroys the LDAP url.
@@ -90,7 +91,7 @@ class KLDAP_EXPORT LdapUrl : public QUrl
     /**
      * Sets the @p dn part of the LDAP url.
      */
-    void setDn( const LdapDN &dn );
+    void setDn(const LdapDN &dn);
 
     /**
      * Returns the dn part of the LDAP url.
@@ -101,7 +102,7 @@ class KLDAP_EXPORT LdapUrl : public QUrl
     /**
      * Sets the @p attributes part of the LDAP url.
      */
-    void setAttributes( const QStringList &attributes );
+    void setAttributes(const QStringList &attributes);
 
     /**
      * Returns the attributes part of the LDAP url.
@@ -111,7 +112,7 @@ class KLDAP_EXPORT LdapUrl : public QUrl
     /**
      * Sets the scope part of the LDAP url.
      */
-    void setScope( Scope scope );
+    void setScope(Scope scope);
 
     /**
      * Returns the scope part of the LDAP url.
@@ -121,7 +122,7 @@ class KLDAP_EXPORT LdapUrl : public QUrl
     /**
      * Sets the filter part of the LDAP url.
      */
-    void setFilter( const QString &filter );
+    void setFilter(const QString &filter);
 
     /**
      * Returns the filter part of the LDAP url.
@@ -131,37 +132,37 @@ class KLDAP_EXPORT LdapUrl : public QUrl
     /**
      * Returns whether the specified @p extension exists in the LDAP url.
      */
-    bool hasExtension( const QString &extension ) const;
+    bool hasExtension(const QString &extension) const;
 
     /**
      * Returns the specified @p extension.
      */
-    Extension extension( const QString &extension ) const;
+    Extension extension(const QString &extension) const;
 
     /**
      * Returns the specified @p extension.
      */
-    QString extension( const QString &extension, bool &critical ) const;
+    QString extension(const QString &extension, bool &critical) const;
 
     /**
      * Sets the specified extension @p key with the value and criticality in @p extension.
      */
-    void setExtension( const QString &key, const Extension &extension );
+    void setExtension(const QString &key, const Extension &extension);
 
     /**
      * Sets the specified extension @p key with the @p value and criticality specified.
      */
-    void setExtension( const QString &key, const QString &value, bool critical = false );
+    void setExtension(const QString &key, const QString &value, bool critical = false);
 
     /**
      * Sets the specified extension @p key with the @p value and criticality specified.
      */
-    void setExtension( const QString &key, int value, bool critical = false );
+    void setExtension(const QString &key, int value, bool critical = false);
 
     /**
      * Removes the specified @p extension.
      */
-    void removeExtension( const QString &extension );
+    void removeExtension(const QString &extension);
 
     /**
      * Updates the query component from the attributes, scope, filter and extensions.
@@ -174,7 +175,7 @@ class KLDAP_EXPORT LdapUrl : public QUrl
      */
     void parseQuery();
 
-  private:
+private:
     class LdapUrlPrivate;
     LdapUrlPrivate *const d;
 };

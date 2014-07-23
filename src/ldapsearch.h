@@ -35,7 +35,8 @@
 #include "ldapserver.h"
 #include "ldapurl.h"
 
-namespace KLDAP {
+namespace KLDAP
+{
 
 /**
  * @brief
@@ -44,9 +45,9 @@ namespace KLDAP {
  */
 class KLDAP_EXPORT LdapSearch : public QObject
 {
-  Q_OBJECT
+    Q_OBJECT
 
-  public:
+public:
     /**
      * Constructs an LdapSearch object
      */
@@ -58,7 +59,7 @@ class KLDAP_EXPORT LdapSearch : public QObject
      * regardless of the LDAP Url or LdapServer object passed to search().
      * @param connection the connection used to construct LdapConnection object
      */
-    explicit LdapSearch( LdapConnection &connection );
+    explicit LdapSearch(LdapConnection &connection);
 
     virtual ~LdapSearch();
 
@@ -67,17 +68,17 @@ class KLDAP_EXPORT LdapSearch : public QObject
      * onwards, regardless of the LDAP Url or LdapServer object passed to
      * search().
      */
-    void setConnection( LdapConnection &connection );
+    void setConnection(LdapConnection &connection);
 
     /**
      * Sets the client controls which will sent with each operation.
      */
-    void setClientControls( const LdapControls &ctrls );
+    void setClientControls(const LdapControls &ctrls);
 
     /**
      * Sets the server controls which will sent with each operation.
      */
-    void setServerControls( const LdapControls &ctrls );
+    void setServerControls(const LdapControls &ctrls);
 
     /**
      * Starts a search operation on the LDAP server @param server,
@@ -86,23 +87,23 @@ class KLDAP_EXPORT LdapSearch : public QObject
      * will be emitted when the number of entries is reached, but with
      * isFinished() set to false.
      */
-    bool search( const LdapServer &server,
-                 const QStringList &attributes = QStringList(), int count = 0 );
+    bool search(const LdapServer &server,
+                const QStringList &attributes = QStringList(), int count = 0);
 
     /**
      * Starts a search operation on the given LDAP URL.
      */
-    bool search( const LdapUrl &url, int count = 0 );
+    bool search(const LdapUrl &url, int count = 0);
 
     /**
      * Starts a search operation if the LdapConnection object already set
      * in the constructor.
      */
-    bool search( const LdapDN &base,
-                 LdapUrl::Scope scope = LdapUrl::Sub,
-                 const QString &filter = QString(),
-                 const QStringList &attributes = QStringList(),
-                 int pagesize = 0, int count = 0 );
+    bool search(const LdapDN &base,
+                LdapUrl::Scope scope = LdapUrl::Sub,
+                const QString &filter = QString(),
+                const QStringList &attributes = QStringList(),
+                int pagesize = 0, int count = 0);
 
     /**
      * Continues the search (if you set count to non-zero in search(), and isFinished() is false)
@@ -127,24 +128,24 @@ class KLDAP_EXPORT LdapSearch : public QObject
      */
     QString errorString() const;
 
-  Q_SIGNALS:
+Q_SIGNALS:
     /**
      * Emitted for each result object.
      */
-    void data( KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj );
+    void data(KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj);
 
     /**
      * Emitted when the searching finished.
      */
-    void result( KLDAP::LdapSearch *search );
+    void result(KLDAP::LdapSearch *search);
 
-  private:
+private:
     class Private;
     Private *const d;
 
-    Q_PRIVATE_SLOT( d, void result() )
+    Q_PRIVATE_SLOT(d, void result())
 
-    Q_DISABLE_COPY( LdapSearch )
+    Q_DISABLE_COPY(LdapSearch)
 };
 
 }

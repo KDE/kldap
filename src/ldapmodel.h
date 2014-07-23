@@ -27,7 +27,8 @@
 #include "ldapobject.h"
 #include "kldap_export.h"
 
-namespace KLDAP {
+namespace KLDAP
+{
 
 /**
  * A ModelView interface to an LDAP tree. At present the model is read only. Editing is
@@ -41,15 +42,15 @@ namespace KLDAP {
  */
 class KLDAP_EXPORT LdapModel : public QAbstractItemModel
 {
-  Q_OBJECT
-  public:
+    Q_OBJECT
+public:
     enum Roles {
-      NodeTypeRole = Qt::UserRole + 1
+        NodeTypeRole = Qt::UserRole + 1
     };
 
     enum LdapDataType {
-      DistinguishedName = 0,
-      Attribute
+        DistinguishedName = 0,
+        Attribute
     };
 
     /**
@@ -60,7 +61,7 @@ class KLDAP_EXPORT LdapModel : public QAbstractItemModel
      * \see setConnection()
      * \see ready()
      */
-    explicit LdapModel( QObject *parent = 0 );
+    explicit LdapModel(QObject *parent = 0);
     /**
      * Constructs an LdapModel. Clients of this class should connect a slot to the ready()
      * signal before setting this model onto a view.
@@ -69,7 +70,7 @@ class KLDAP_EXPORT LdapModel : public QAbstractItemModel
      * \see setConnection()
      * \see ready()
      */
-    explicit LdapModel( LdapConnection &connection, QObject *parent = 0 );
+    explicit LdapModel(LdapConnection &connection, QObject *parent = 0);
     virtual ~LdapModel();
 
     /**
@@ -78,7 +79,7 @@ class KLDAP_EXPORT LdapModel : public QAbstractItemModel
      * \see LdapConnection
      * \see LdapUrl
      */
-    void setConnection( LdapConnection &connection );
+    void setConnection(LdapConnection &connection);
 
     //
     // Implement the usual QAbstractItemModel interface
@@ -86,67 +87,67 @@ class KLDAP_EXPORT LdapModel : public QAbstractItemModel
     /**
      * Reimplemented from QAbstractItemModel::index().
      */
-    virtual QModelIndex index( int row, int col, const QModelIndex &parent ) const;
+    virtual QModelIndex index(int row, int col, const QModelIndex &parent) const;
     /**
      * Reimplemented from QAbstractItemModel::parent().
      */
-    virtual QModelIndex parent( const QModelIndex &child ) const;
+    virtual QModelIndex parent(const QModelIndex &child) const;
     /**
      * Reimplemented from QAbstractItemModel::data().
      */
-    virtual QVariant data( const QModelIndex &index, int role ) const;
+    virtual QVariant data(const QModelIndex &index, int role) const;
     /**
      * Reimplemented from QAbstractItemModel::setData(). This is a placeholder for when
      * LdapModel beomes writeable and always returns false.
      */
-    virtual bool setData( const QModelIndex &index,
-                          const QVariant &value,
-                          int role = Qt::EditRole );
+    virtual bool setData(const QModelIndex &index,
+                         const QVariant &value,
+                         int role = Qt::EditRole);
     /**
      * Reimplemented from QAbstractItemModel::headerData().
      */
-    virtual QVariant headerData( int section, Qt::Orientation orientation, int role ) const;
+    virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const;
     /**
      * Reimplemented from QAbstractItemModel::flags().
      */
-    virtual Qt::ItemFlags flags( const QModelIndex &index ) const;
+    virtual Qt::ItemFlags flags(const QModelIndex &index) const;
     /**
      * Reimplemented from QAbstractItemModel::columnCount().
      */
-    virtual int columnCount( const QModelIndex &parent ) const;
+    virtual int columnCount(const QModelIndex &parent) const;
     /**
      * Reimplemented from QAbstractItemModel::rowCount().
      */
-    virtual int rowCount( const QModelIndex &parent ) const;
+    virtual int rowCount(const QModelIndex &parent) const;
     /**
      * Reimplemented from QAbstractItemModel::hasChildren().
      */
-    virtual bool hasChildren( const QModelIndex &parent ) const;
+    virtual bool hasChildren(const QModelIndex &parent) const;
     /**
      * Reimplemented from QAbstractItemModel::canFetchMore().
      */
-    virtual bool canFetchMore( const QModelIndex &parent ) const;
+    virtual bool canFetchMore(const QModelIndex &parent) const;
     /**
      * Reimplemented from QAbstractItemModel::fetchMore().
      */
-    virtual void fetchMore( const QModelIndex &parent );
+    virtual void fetchMore(const QModelIndex &parent);
     /**
      * Reimplemented from QAbstractItemModel::insertRows(). This is a placeholder for when
      * LdapModel beomes writeable and always returns false.
      */
-    virtual bool insertRows( int row, int count,
-                             const QModelIndex &parent = QModelIndex() );
+    virtual bool insertRows(int row, int count,
+                            const QModelIndex &parent = QModelIndex());
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). This is a placeholder for when
      * LdapModel beomes writeable and always returns false.
      */
-    virtual bool removeRows( int row, int count,
-                             const QModelIndex &parent = QModelIndex() );
+    virtual bool removeRows(int row, int count,
+                            const QModelIndex &parent = QModelIndex());
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). The default implementation
      * does nothing.
      */
-    virtual void sort( int column, Qt::SortOrder order = Qt::AscendingOrder );
+    virtual void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
 
     //
     // Drag and drop support
@@ -160,13 +161,13 @@ class KLDAP_EXPORT LdapModel : public QAbstractItemModel
      * Reimplemented from QAbstractItemModel::mimedata(). This is a placeholder for when
      * LdapModel beomes writeable and always returns 0.
      */
-    virtual QMimeData *mimeData( const QModelIndexList &indexes ) const;
+    virtual QMimeData *mimeData(const QModelIndexList &indexes) const;
     /**
      * Reimplemented from QAbstractItemModel::dropMimedata(). This is a placeholder for when
      * LdapModel beomes writeable and always returns false.
      */
-    virtual bool dropMimeData( const QMimeData *data, Qt::DropAction action,
-                               int row, int column, const QModelIndex &parent );
+    virtual bool dropMimeData(const QMimeData *data, Qt::DropAction action,
+                              int row, int column, const QModelIndex &parent);
 
     //
     // Other public utility functions
@@ -180,9 +181,9 @@ class KLDAP_EXPORT LdapModel : public QAbstractItemModel
      * \param parent Index to the item to query.
      * \param type The type of child item to search for.
      */
-    bool hasChildrenOfType( const QModelIndex &parent, LdapDataType type ) const;
+    bool hasChildrenOfType(const QModelIndex &parent, LdapDataType type) const;
 
-  public Q_SLOTS:
+public Q_SLOTS:
     /**
      * Reimplemented from QAbstractItemModel::revert(). This is a placeholder for when
      * LdapModel beomes writeable. This implementation does nothing.
@@ -194,7 +195,7 @@ class KLDAP_EXPORT LdapModel : public QAbstractItemModel
      */
     virtual bool submit();
 
-  Q_SIGNALS:
+Q_SIGNALS:
     /**
      * The ready() signal is emitted when the model is ready for use by other components.
      * When the model is first created and a connection is set, the model queries the
@@ -204,12 +205,12 @@ class KLDAP_EXPORT LdapModel : public QAbstractItemModel
      */
     void ready();
 
-  private:
+private:
     class LdapModelPrivate;
     LdapModelPrivate *const m_d;
 
-    Q_PRIVATE_SLOT( m_d, void gotSearchResult( KLDAP::LdapSearch* ) )
-    Q_PRIVATE_SLOT( m_d, void gotSearchData( KLDAP::LdapSearch*, const KLDAP::LdapObject& ) )
+    Q_PRIVATE_SLOT(m_d, void gotSearchResult(KLDAP::LdapSearch *))
+    Q_PRIVATE_SLOT(m_d, void gotSearchData(KLDAP::LdapSearch *, const KLDAP::LdapObject &))
 };
 
 }

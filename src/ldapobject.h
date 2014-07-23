@@ -29,10 +29,11 @@
 #include "ldapdn.h"
 #include "kldap_export.h"
 
-namespace KLDAP {
+namespace KLDAP
+{
 
 typedef QList<QByteArray> LdapAttrValue;
-typedef QMap<QString,LdapAttrValue > LdapAttrMap;
+typedef QMap<QString, LdapAttrValue > LdapAttrMap;
 
 /**
  * @brief
@@ -40,13 +41,13 @@ typedef QMap<QString,LdapAttrValue > LdapAttrMap;
 */
 class KLDAP_EXPORT LdapObject
 {
-  public:
+public:
     LdapObject();
-    explicit LdapObject( const QString &dn );
+    explicit LdapObject(const QString &dn);
     virtual ~LdapObject();
 
-    LdapObject( const LdapObject &that );
-    LdapObject &operator=( const LdapObject &that );
+    LdapObject(const LdapObject &that);
+    LdapObject &operator=(const LdapObject &that);
 
     /**
      * Returns the text presentation (LDIF format) of the object.
@@ -60,29 +61,29 @@ class KLDAP_EXPORT LdapObject
     /**
      * Sets the Distinguished Name of the object.
      */
-    void setDn( const LdapDN &dn );
+    void setDn(const LdapDN &dn);
     /**
      * Sets the Distinguished Name of the object.
      */
-    void setDn( const QString &dn );
+    void setDn(const QString &dn);
     /**
      * Sets the attributes and attribute values of the object.
      */
-    void setAttributes( const LdapAttrMap &attrs );
+    void setAttributes(const LdapAttrMap &attrs);
     /**
      * Sets the given attribute values. If the given attribute not exists,
      * then it's created, if exists, it's overwritten.
      * @param attributeName the attribute name for which to set values
      * @param values the values of attribute to set
      */
-    void setValues( const QString &attributeName, const LdapAttrValue &values );
+    void setValues(const QString &attributeName, const LdapAttrValue &values);
     /**
      * Adds the given value to the specified attribute. If the given attribute
      * not exists, then it's created.
      * @param attributeName the attribute for which to add a value
      * @param value the attribute  value to add
      */
-    void addValue( const QString &attributeName, const QByteArray &value );
+    void addValue(const QString &attributeName, const QByteArray &value);
     /**
      * Return the Distinguished Name of the object.
      */
@@ -94,18 +95,18 @@ class KLDAP_EXPORT LdapObject
     /**
      * Returns all values of the attribute with the given name.
      */
-    LdapAttrValue values( const QString &attributeName ) const;
+    LdapAttrValue values(const QString &attributeName) const;
     /**
      * Returns the first value of the attribute with the given name
      * or an empty byte array if the attribute does not exists.
      */
-    QByteArray value( const QString &attributeName ) const;
+    QByteArray value(const QString &attributeName) const;
     /**
      * Returns true if the given attributethe exists, false otherwise.
      */
-    bool hasAttribute( const QString &attributeName ) const;
+    bool hasAttribute(const QString &attributeName) const;
 
-  private:
+private:
     class Private;
     QSharedDataPointer<Private> d;
 };

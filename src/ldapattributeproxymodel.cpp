@@ -29,7 +29,7 @@ using namespace KLDAP;
 
 class LdapAttributeProxyModel::LdapAttributeProxyModelPrivate
 {
-  public:
+public:
     LdapAttributeProxyModelPrivate();
 
 };
@@ -39,134 +39,134 @@ LdapAttributeProxyModel::LdapAttributeProxyModelPrivate::LdapAttributeProxyModel
 
 }
 
-LdapAttributeProxyModel::LdapAttributeProxyModel( QObject *parent )
-  : QSortFilterProxyModel( parent ),
-    m_d( new LdapAttributeProxyModelPrivate() )
+LdapAttributeProxyModel::LdapAttributeProxyModel(QObject *parent)
+    : QSortFilterProxyModel(parent),
+      m_d(new LdapAttributeProxyModelPrivate())
 {
 
 }
 
 LdapAttributeProxyModel::~LdapAttributeProxyModel()
 {
-  delete m_d;
+    delete m_d;
 }
 
-QVariant LdapAttributeProxyModel::data( const QModelIndex &index,
-                                        int role ) const
+QVariant LdapAttributeProxyModel::data(const QModelIndex &index,
+                                       int role) const
 {
-  // Included just in case we decide to do any special presentation of the data
-  // at some other point throughout the 4.x series.
-  return sourceModel()->data( mapToSource( index ), role );
+    // Included just in case we decide to do any special presentation of the data
+    // at some other point throughout the 4.x series.
+    return sourceModel()->data(mapToSource(index), role);
 }
 
-bool LdapAttributeProxyModel::setData( const QModelIndex &index,
-                                       const QVariant &value,
-                                       int role )
+bool LdapAttributeProxyModel::setData(const QModelIndex &index,
+                                      const QVariant &value,
+                                      int role)
 {
-  Q_UNUSED( index );
-  Q_UNUSED( value );
-  Q_UNUSED( role );
-  return false;
+    Q_UNUSED(index);
+    Q_UNUSED(value);
+    Q_UNUSED(role);
+    return false;
 }
 
-bool LdapAttributeProxyModel::filterAcceptsRow( int sourceRow,
-                                                const QModelIndex &sourceParent ) const
+bool LdapAttributeProxyModel::filterAcceptsRow(int sourceRow,
+        const QModelIndex &sourceParent) const
 {
-  QModelIndex idx = sourceModel()->index( sourceRow, 0, sourceParent );
-  LdapModelNode::NodeType nodeType =
-    static_cast<LdapModelNode::NodeType>(
-      sourceModel()->data( idx, LdapModel::NodeTypeRole ).toUInt() );
-  return nodeType == LdapModelNode::Attr;
+    QModelIndex idx = sourceModel()->index(sourceRow, 0, sourceParent);
+    LdapModelNode::NodeType nodeType =
+        static_cast<LdapModelNode::NodeType>(
+            sourceModel()->data(idx, LdapModel::NodeTypeRole).toUInt());
+    return nodeType == LdapModelNode::Attr;
 }
 
-QVariant LdapAttributeProxyModel::headerData( int section,
-                                              Qt::Orientation orientation,
-                                              int role ) const
+QVariant LdapAttributeProxyModel::headerData(int section,
+        Qt::Orientation orientation,
+        int role) const
 {
-  if ( orientation == Qt::Horizontal && role == Qt::DisplayRole ) {
-    if ( section == 0 ) {
-      return QVariant( i18n( "Attribute" ) );
-    } else if ( section == 1 ) {
-      return QVariant( i18n( "Value" ) );
+    if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
+        if (section == 0) {
+            return QVariant(i18n("Attribute"));
+        } else if (section == 1) {
+            return QVariant(i18n("Value"));
+        }
     }
-  }
 
-  return QVariant();
+    return QVariant();
 }
 
-int LdapAttributeProxyModel::columnCount( const QModelIndex &/*parent*/ ) const
+int LdapAttributeProxyModel::columnCount(const QModelIndex &/*parent*/) const
 {
-  return 2;
+    return 2;
 }
 
-Qt::ItemFlags LdapAttributeProxyModel::flags( const QModelIndex &index ) const
+Qt::ItemFlags LdapAttributeProxyModel::flags(const QModelIndex &index) const
 {
-  // Included so as not to break BC in case we wish to use this later in 4.x
-  return sourceModel()->flags( mapToSource( index ) );
+    // Included so as not to break BC in case we wish to use this later in 4.x
+    return sourceModel()->flags(mapToSource(index));
 }
 
-bool LdapAttributeProxyModel::hasChildren( const QModelIndex &parent ) const
+bool LdapAttributeProxyModel::hasChildren(const QModelIndex &parent) const
 {
-  // We need to handle this carefully bacause of the filtering out of attributes
-  // and the lazy population approach.
-  LdapModel *model = static_cast<LdapModel*>( sourceModel() );
-  return model->hasChildrenOfType( mapToSource( parent ), LdapModel::Attribute );
+    // We need to handle this carefully bacause of the filtering out of attributes
+    // and the lazy population approach.
+    LdapModel *model = static_cast<LdapModel *>(sourceModel());
+    return model->hasChildrenOfType(mapToSource(parent), LdapModel::Attribute);
 }
 
-QModelIndex LdapAttributeProxyModel::mapFromSource( const QModelIndex &sourceIndex ) const
+QModelIndex LdapAttributeProxyModel::mapFromSource(const QModelIndex &sourceIndex) const
 {
-  return QSortFilterProxyModel::mapFromSource( sourceIndex );
+    return QSortFilterProxyModel::mapFromSource(sourceIndex);
 }
 
-QModelIndex LdapAttributeProxyModel::mapToSource( const QModelIndex &proxyIndex ) const
+QModelIndex LdapAttributeProxyModel::mapToSource(const QModelIndex &proxyIndex) const
 {
-  return QSortFilterProxyModel::mapToSource( proxyIndex );
+    return QSortFilterProxyModel::mapToSource(proxyIndex);
 }
 
-bool LdapAttributeProxyModel::insertRows( int row, int count,
-                                          const QModelIndex &parent )
+bool LdapAttributeProxyModel::insertRows(int row, int count,
+        const QModelIndex &parent)
 {
-  Q_UNUSED( row );
-  Q_UNUSED( count );
-  Q_UNUSED( parent );
-  return false;
+    Q_UNUSED(row);
+    Q_UNUSED(count);
+    Q_UNUSED(parent);
+    return false;
 }
 
-bool LdapAttributeProxyModel::removeRows( int row, int count,
-                                          const QModelIndex &parent )
+bool LdapAttributeProxyModel::removeRows(int row, int count,
+        const QModelIndex &parent)
 {
-  Q_UNUSED( row );
-  Q_UNUSED( count );
-  Q_UNUSED( parent );
-  return false;
+    Q_UNUSED(row);
+    Q_UNUSED(count);
+    Q_UNUSED(parent);
+    return false;
 }
 
-void LdapAttributeProxyModel::sort( int column, Qt::SortOrder order )
+void LdapAttributeProxyModel::sort(int column, Qt::SortOrder order)
 {
-  Q_UNUSED( column );
-  Q_UNUSED( order );
+    Q_UNUSED(column);
+    Q_UNUSED(order);
 }
 
 Qt::DropActions LdapAttributeProxyModel::supportedDropActions() const
 {
-  return Qt::MoveAction;
+    return Qt::MoveAction;
 }
 
-QMimeData *LdapAttributeProxyModel::mimeData( const QModelIndexList &indexes ) const
+QMimeData *LdapAttributeProxyModel::mimeData(const QModelIndexList &indexes) const
 {
-  Q_UNUSED( indexes );
-  return 0;
+    Q_UNUSED(indexes);
+    return 0;
 }
 
-bool LdapAttributeProxyModel::dropMimeData( const QMimeData *data, Qt::DropAction action,
-                                            int row, int column, const QModelIndex &parent )
+bool LdapAttributeProxyModel::dropMimeData(const QMimeData *data, Qt::DropAction action,
+        int row, int column, const QModelIndex &parent)
 {
-  /** \todo Implement drag and drop for LdapModel */
-  Q_UNUSED( data );
-  Q_UNUSED( action );
-  Q_UNUSED( row );
-  Q_UNUSED( column );
-  Q_UNUSED( parent );
-  return false;
+    /** \todo Implement drag and drop for LdapModel */
+    Q_UNUSED(data);
+    Q_UNUSED(action);
+    Q_UNUSED(row);
+    Q_UNUSED(column);
+    Q_UNUSED(parent);
+    return false;
 }
 

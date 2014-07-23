@@ -24,13 +24,13 @@
 
 using namespace KLDAP;
 
-LdapModelNode::LdapModelNode( LdapModelDNNode *parent )
-  : m_parent( parent ),
-    m_isPopulated( false )
+LdapModelNode::LdapModelNode(LdapModelDNNode *parent)
+    : m_parent(parent),
+      m_isPopulated(false)
 {
-  if ( m_parent ) {
-    m_parent->appendChild( this );
-  }
+    if (m_parent) {
+        m_parent->appendChild(this);
+    }
 }
 
 LdapModelNode::~LdapModelNode()
@@ -40,90 +40,90 @@ LdapModelNode::~LdapModelNode()
 
 LdapModelDNNode *LdapModelNode::parent()
 {
-  return m_parent;
+    return m_parent;
 }
 
 int LdapModelNode::row() const
 {
-  if ( m_parent ) {
-    return m_parent->children().indexOf( const_cast<LdapModelNode*>( this ) );
-  }
-  return 0;
+    if (m_parent) {
+        return m_parent->children().indexOf(const_cast<LdapModelNode *>(this));
+    }
+    return 0;
 }
 
 //
 // LdapModelDNNode imlpementation
 //
 
-LdapModelDNNode::LdapModelDNNode( LdapModelDNNode *parent,
-                                  const LdapDN &dn )
-  : LdapModelNode( parent ),
-    m_childItems(),
-    m_dn( dn )
+LdapModelDNNode::LdapModelDNNode(LdapModelDNNode *parent,
+                                 const LdapDN &dn)
+    : LdapModelNode(parent),
+      m_childItems(),
+      m_dn(dn)
 {
-  qDebug() << "Creating DN =" << m_dn.toString();
+    qDebug() << "Creating DN =" << m_dn.toString();
 }
 
 LdapModelDNNode::~LdapModelDNNode()
 {
-  qDeleteAll( m_childItems );
+    qDeleteAll(m_childItems);
 }
 
-void LdapModelDNNode::appendChild( LdapModelNode *pItem )
+void LdapModelDNNode::appendChild(LdapModelNode *pItem)
 {
-  m_childItems.append( pItem );
-  setPopulated( true );
+    m_childItems.append(pItem);
+    setPopulated(true);
 }
 
-LdapModelNode *LdapModelDNNode::child( int row )
+LdapModelNode *LdapModelDNNode::child(int row)
 {
-  return m_childItems.value( row );
+    return m_childItems.value(row);
 }
 
-void LdapModelDNNode::setLdapObject( const LdapObject &object )
+void LdapModelDNNode::setLdapObject(const LdapObject &object)
 {
-  // Remember whether this item is populated or not
-  bool populated = isPopulated();
+    // Remember whether this item is populated or not
+    bool populated = isPopulated();
 
-  const LdapAttrMap &attrs = object.attributes();
-  /*
-  int attributeCount = 0;
-  for ( LdapAttrMap::ConstIterator it = attrs.begin(); it != attrs.end(); ++it ) {
-    attributeCount += (*it).size();
-  }
+    const LdapAttrMap &attrs = object.attributes();
+    /*
+    int attributeCount = 0;
+    for ( LdapAttrMap::ConstIterator it = attrs.begin(); it != attrs.end(); ++it ) {
+      attributeCount += (*it).size();
+    }
 
-  for ( int i = 0; i < attributeCount; i++ )
-  {
-    LdapModelNode* node = new LdapModelAttrNode( this, QString::number( i ) );
-    Q_UNUSED( node );
-  }
-  */
-  LdapAttrMap::ConstIterator end( attrs.constEnd() );
-  for ( LdapAttrMap::ConstIterator it = attrs.constBegin(); it != end; ++it ) {
-    const QString attr = it.key();
-    LdapAttrValue::ConstIterator end2( ( *it ).constEnd() );
-    for ( LdapAttrValue::ConstIterator it2 = ( *it ).constBegin(); it2 != end2; ++it2 ) {
-      LdapModelNode *node = new LdapModelAttrNode( this, attr, *it2 );
+    for ( int i = 0; i < attributeCount; i++ )
+    {
+      LdapModelNode* node = new LdapModelAttrNode( this, QString::number( i ) );
       Q_UNUSED( node );
     }
-  }
+    */
+    LdapAttrMap::ConstIterator end(attrs.constEnd());
+    for (LdapAttrMap::ConstIterator it = attrs.constBegin(); it != end; ++it) {
+        const QString attr = it.key();
+        LdapAttrValue::ConstIterator end2((*it).constEnd());
+        for (LdapAttrValue::ConstIterator it2 = (*it).constBegin(); it2 != end2; ++it2) {
+            LdapModelNode *node = new LdapModelAttrNode(this, attr, *it2);
+            Q_UNUSED(node);
+        }
+    }
 
-  // Reset the populated flag so that we don't stop the model querying for children
-  setPopulated( populated );
+    // Reset the populated flag so that we don't stop the model querying for children
+    setPopulated(populated);
 }
 
 //
 // LdapModelAttrNode imlpementation
 //
 
-LdapModelAttrNode::LdapModelAttrNode( LdapModelDNNode *parent,
-                                      const QString &attrName,
-                                      const QByteArray &attrData )
-  : LdapModelNode( parent ),
-    m_attrName( attrName ),
-    m_attrData( attrData )
+LdapModelAttrNode::LdapModelAttrNode(LdapModelDNNode *parent,
+                                     const QString &attrName,
+                                     const QByteArray &attrData)
+    : LdapModelNode(parent),
+      m_attrName(attrName),
+      m_attrData(attrData)
 {
-  qDebug() << "Creating Name =" << m_attrName << " Data =" << m_attrData;
+    qDebug() << "Creating Name =" << m_attrName << " Data =" << m_attrData;
 }
 
 LdapModelAttrNode::~LdapModelAttrNode()

@@ -26,7 +26,8 @@
 #include "ldapmodel.h"
 #include "ldapobject.h"
 
-namespace KLDAP {
+namespace KLDAP
+{
 
 class LdapModelDNNode;
 class LdapSearch;
@@ -36,50 +37,77 @@ class LdapSearch;
  */
 class LdapModel::LdapModelPrivate
 {
-  public:
+public:
     enum SearchType {
-      NotSearching = 0,
-      NamingContexts,
-      BaseDN,
-      ChildObjects
+        NotSearching = 0,
+        NamingContexts,
+        BaseDN,
+        ChildObjects
     };
 
-    explicit LdapModelPrivate( LdapModel *parent );
-    explicit LdapModelPrivate( LdapModel *parent, LdapConnection &connection );
+    explicit LdapModelPrivate(LdapModel *parent);
+    explicit LdapModelPrivate(LdapModel *parent, LdapConnection &connection);
 
     ~LdapModelPrivate();
 
-    void setConnection( LdapConnection &connection );
+    void setConnection(LdapConnection &connection);
 
-    bool search( const LdapDN &searchBase,
-                 LdapUrl::Scope scope = LdapUrl::Sub,
-                 const QString &filter = QString(),
-                 const QStringList &attributes = QStringList(),
-                 int pagesize = 0 );
+    bool search(const LdapDN &searchBase,
+                LdapUrl::Scope scope = LdapUrl::Sub,
+                const QString &filter = QString(),
+                const QStringList &attributes = QStringList(),
+                int pagesize = 0);
 
-    LdapModelDNNode *rootNode() { return m_root; }
-    LdapSearch *search() { return m_search; }
+    LdapModelDNNode *rootNode()
+    {
+        return m_root;
+    }
+    LdapSearch *search()
+    {
+        return m_search;
+    }
 
-    LdapObjects &searchResults() { return m_searchResultObjects; }
-    const LdapObjects &searchResults() const { return m_searchResultObjects; }
+    LdapObjects &searchResults()
+    {
+        return m_searchResultObjects;
+    }
+    const LdapObjects &searchResults() const
+    {
+        return m_searchResultObjects;
+    }
 
     void recreateRootItem();
 
-    void setBaseDN( const LdapDN &baseDN ) { m_baseDN = baseDN; }
-    LdapDN &baseDN() { return m_baseDN; }
-    const LdapDN &baseDN() const { return m_baseDN; }
+    void setBaseDN(const LdapDN &baseDN)
+    {
+        m_baseDN = baseDN;
+    }
+    LdapDN &baseDN()
+    {
+        return m_baseDN;
+    }
+    const LdapDN &baseDN() const
+    {
+        return m_baseDN;
+    }
 
-    void setSearchType( SearchType t, LdapModelDNNode *item = 0 );
+    void setSearchType(SearchType t, LdapModelDNNode *item = 0);
 
-    SearchType searchType() { return m_searchType; }
-    LdapModelDNNode *searchItem() { return m_searchItem; }
+    SearchType searchType()
+    {
+        return m_searchType;
+    }
+    LdapModelDNNode *searchItem()
+    {
+        return m_searchItem;
+    }
 
     void createConnections();
     void populateRootToBaseDN();
-    void gotSearchResult( KLDAP::LdapSearch *search );
-    void gotSearchData( KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj );
+    void gotSearchResult(KLDAP::LdapSearch *search);
+    void gotSearchData(KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj);
 
-  private:
+private:
     LdapModel *m_parent;
     LdapModelDNNode *m_root;
     LdapSearch *m_search;

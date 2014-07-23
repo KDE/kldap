@@ -33,7 +33,8 @@
 #include <QtCore/QList>
 #include <QtCore/QString>
 
-namespace KLDAP {
+namespace KLDAP
+{
 
 /**
  * @brief
@@ -42,58 +43,58 @@ namespace KLDAP {
  */
 class KLDAP_EXPORT LdapOperation
 {
-  public:
+public:
     typedef enum {
-      Mod_None, Mod_Add, Mod_Replace, Mod_Del
+        Mod_None, Mod_Add, Mod_Replace, Mod_Del
     } ModType;
 
     typedef enum {
-      RES_BIND = 0x61,
-      RES_SEARCH_ENTRY = 0x64,
-      RES_SEARCH_REFERENCE = 0x73,
-      RES_SEARCH_RESULT = 0x65,
-      RES_MODIFY = 0x67,
-      RES_ADD = 0x69,
-      RES_DELETE = 0x69,
-      RES_MODDN = 0x6d,
-      RES_COMPARE = 0x6f,
-      RES_EXTENDED = 0x78,
-      RES_EXTENDED_PARTIAL = 0x79
+        RES_BIND = 0x61,
+        RES_SEARCH_ENTRY = 0x64,
+        RES_SEARCH_REFERENCE = 0x73,
+        RES_SEARCH_RESULT = 0x65,
+        RES_MODIFY = 0x67,
+        RES_ADD = 0x69,
+        RES_DELETE = 0x69,
+        RES_MODDN = 0x6d,
+        RES_COMPARE = 0x6f,
+        RES_EXTENDED = 0x78,
+        RES_EXTENDED_PARTIAL = 0x79
     } ResultType;
 
     typedef struct {
-      ModType type;
-      QString attr;
-      QList<QByteArray> values;
+        ModType type;
+        QString attr;
+        QList<QByteArray> values;
     } ModOp ;
 
     typedef QList<ModOp> ModOps;
 
     enum SASL_Fields {
-      SASL_Authname = 0x1,
-      SASL_Authzid = 0x2,
-      SASL_Realm = 0x4,
-      SASL_Password = 0x8
+        SASL_Authname = 0x1,
+        SASL_Authzid = 0x2,
+        SASL_Realm = 0x4,
+        SASL_Password = 0x8
     };
 
     struct SASL_Credentials {
-      int fields;
-      QString authname;
-      QString authzid;
-      QString realm;
-      QString password;
+        int fields;
+        QString authname;
+        QString authzid;
+        QString realm;
+        QString password;
     };
 
-    typedef int (SASL_Callback_Proc) ( SASL_Credentials &cred, void *data );
+    typedef int (SASL_Callback_Proc)(SASL_Credentials &cred, void *data);
 
     struct SASL_Data {
-      SASL_Callback_Proc *proc;
-      void *data;
-      SASL_Credentials creds;
+        SASL_Callback_Proc *proc;
+        void *data;
+        SASL_Credentials creds;
     };
 
     LdapOperation();
-    LdapOperation( LdapConnection &conn );
+    LdapOperation(LdapConnection &conn);
     virtual ~LdapOperation();
 
     /**
@@ -101,7 +102,7 @@ class KLDAP_EXPORT LdapOperation
      * LDAP operations are not possible.
      * @param the connection object to set
      */
-    void setConnection( LdapConnection &conn );
+    void setConnection(LdapConnection &conn);
     /**
      * Returns the connection object.
      */
@@ -109,11 +110,11 @@ class KLDAP_EXPORT LdapOperation
     /**
      * Sets the client controls which will sent with each operation.
      */
-    void setClientControls( const LdapControls &ctrls );
+    void setClientControls(const LdapControls &ctrls);
     /**
      * Sets the server controls which will sent with each operation.
      */
-    void setServerControls( const LdapControls &ctrls );
+    void setServerControls(const LdapControls &ctrls);
     /**
      * Returns the client controls (which set by setClientControls()).
      */
@@ -127,41 +128,41 @@ class KLDAP_EXPORT LdapOperation
      * Binds to the server which specified in the connection object.
      * Can do simple or SASL bind. Returns a message id if successful, negative value if not.
      */
-    int bind( const QByteArray &creds = QByteArray(),
-              SASL_Callback_Proc *saslproc = NULL, void *data = NULL );
+    int bind(const QByteArray &creds = QByteArray(),
+             SASL_Callback_Proc *saslproc = NULL, void *data = NULL);
 
     /**
      * Binds to the server which specified in the connection object.
      * Can do simple or SASL bind. This is the synchronous version.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
      */
-    int bind_s( SASL_Callback_Proc *saslproc = NULL, void *data = NULL );
+    int bind_s(SASL_Callback_Proc *saslproc = NULL, void *data = NULL);
 
     /**
      * Starts a search operation with the given base DN, scope, filter and
      * result attributes. Returns a message id if successful, -1 if not.
      */
-    int search( const LdapDN &base, LdapUrl::Scope scope,
-                const QString &filter, const QStringList &attrs );
+    int search(const LdapDN &base, LdapUrl::Scope scope,
+               const QString &filter, const QStringList &attrs);
     /**
      * Starts an addition operation.
      * Returns a message id if successful, -1 if not.
      * @param object the additional operation to start
      */
-    int add( const LdapObject &object );
+    int add(const LdapObject &object);
     /**
      * Adds the specified object to the LDAP database.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
      * @param object the object to add to LDAP database
      */
-    int add_s( const LdapObject &object );
+    int add_s(const LdapObject &object);
     /**
      * Starts an addition operation. This version accepts ModOps not LdapObject.
      * Returns a message id if successful, -1 if not.
      * @param dn the LdapDN operation to start
      * @param ops the ModOps operation to start
      */
-    int add( const LdapDN &dn, const ModOps &ops );
+    int add(const LdapDN &dn, const ModOps &ops);
     /**
      * Adds the specified object to the LDAP database. This version accepts ModOps not LdapObject.
      * This is the synchronous version.
@@ -169,52 +170,52 @@ class KLDAP_EXPORT LdapOperation
      * @param dn the LdapDN object to add
      * @param ops the ModOps object to add
      */
-    int add_s( const LdapDN &dn, const ModOps &ops );
+    int add_s(const LdapDN &dn, const ModOps &ops);
     /**
      * Starts a modrdn operation on given DN, changing its RDN to newRdn,
      * changing its parent to newSuperior (if it's not empty), and deletes
      * the old dn if deleteold is true.
      * Returns a message id if successful, -1 if not.
      */
-    int rename( const LdapDN &dn, const QString &newRdn,
-                const QString &newSuperior, bool deleteold = true );
+    int rename(const LdapDN &dn, const QString &newRdn,
+               const QString &newSuperior, bool deleteold = true);
     /**
      * Performs a modrdn operation on given DN, changing its RDN to newRdn,
      * changing its parent to newSuperior (if it's not empty), and deletes
      * the old dn if deleteold is true. This is the synchronous version.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
      */
-    int rename_s( const LdapDN &dn, const QString &newRdn,
-                  const QString &newSuperior, bool deleteold = true );
+    int rename_s(const LdapDN &dn, const QString &newRdn,
+                 const QString &newSuperior, bool deleteold = true);
     /**
      * Starts a delete operation on the given DN.
      * Returns a message id if successful, -1 if not.
      */
-    int del( const LdapDN &dn );
+    int del(const LdapDN &dn);
     /**
      * Deletes the given DN. This is the synchronous version.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
      * @param dn the dn to delete
      */
-    int del_s( const LdapDN &dn );
+    int del_s(const LdapDN &dn);
     /**
      * Starts a modify operation on the given DN.
      * Returns a message id if successful, -1 if not.
      * @param dn the DN to start modify operation on
      */
-    int modify( const LdapDN &dn, const ModOps &ops );
+    int modify(const LdapDN &dn, const ModOps &ops);
     /**
      * Performs a modify operation on the given DN.
      * This is the synchronous version.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
      */
-    int modify_s( const LdapDN &dn, const ModOps &ops );
+    int modify_s(const LdapDN &dn, const ModOps &ops);
     /**
      * Starts a compare operation on the given DN, compares the specified
      * attribute with the given value.
      * Returns a message id if successful, -1 if not.
      */
-    int compare( const LdapDN &dn, const QString &attr, const QByteArray &value );
+    int compare(const LdapDN &dn, const QString &attr, const QByteArray &value);
     /**
      * Performs a compare operation on the given DN, compares the specified
      * attribute with the given value. This is the synchronous version.
@@ -222,22 +223,22 @@ class KLDAP_EXPORT LdapOperation
      * and KLDAP_COMPARE_FALSE if it does not. Otherwise, some error code
      * is returned.
      */
-    int compare_s( const LdapDN &dn, const QString &attr, const QByteArray &value );
+    int compare_s(const LdapDN &dn, const QString &attr, const QByteArray &value);
     /**
      * Starts an extended operation specified with oid and data.
      * Returns a message id if successful, -1 if not.
      */
-    int exop( const QString &oid, const QByteArray &data );
+    int exop(const QString &oid, const QByteArray &data);
     /**
      * Performs an extended operation specified with oid and data.
      * This is the synchronous version.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
      */
-    int exop_s( const QString &oid, const QByteArray &data );
+    int exop_s(const QString &oid, const QByteArray &data);
     /**
      * Abandons a long-running operation. Requires the message id.
      */
-    int abandon( int id );
+    int abandon(int id);
     /**
      * Waits for up to \p msecs milliseconds for a result message from the LDAP
      * server. If \p msecs is -1, then this function will block indefinitely.
@@ -250,7 +251,7 @@ class KLDAP_EXPORT LdapOperation
      * not the LDAP operation error. Call connection().ldapErrorCode() to
      * determine if the operation succeeded.
      */
-    int waitForResult( int id, int msecs = -1 );
+    int waitForResult(int id, int msecs = -1);
     /**
      * Returns the result object if result() returned RES_SEARCH_ENTRY.
      */
@@ -287,11 +288,11 @@ class KLDAP_EXPORT LdapOperation
      */
     QByteArray serverCred() const;
 
-  private:
+private:
     class LdapOperationPrivate;
     LdapOperationPrivate *const d;
 
-    Q_DISABLE_COPY( LdapOperation )
+    Q_DISABLE_COPY(LdapOperation)
 };
 
 }
