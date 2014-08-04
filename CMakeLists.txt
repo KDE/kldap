@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 2.8.12)
 
-project(kldap)
+project(KLdap)
 
 # ECM setup
 find_package(ECM 1.1.0 CONFIG REQUIRED)
-set(CMAKE_MODULE_PATH ${kldap_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
+set(CMAKE_MODULE_PATH ${KLdap_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
 
 include(GenerateExportHeader)
 include(ECMGenerateHeaders)
@@ -32,7 +32,7 @@ find_package(KF5KIO ${KF5_VERSION} CONFIG REQUIRED)
 find_package(KF5KCMUtils ${KF5_VERSION} CONFIG REQUIRED)
 find_package(KF5KDELibs4Support ${KF5_VERSION} CONFIG REQUIRED)
 
-if(${CMAKE_SOURCE_DIR} STREQUAL ${kldap_SOURCE_DIR})
+if(${CMAKE_SOURCE_DIR} STREQUAL ${KLdap_SOURCE_DIR})
   find_package(KF5Abc ${KDEPIMLIBS_VERSION} CONFIG REQUIRED)
 endif()
 
@@ -92,6 +92,6 @@ add_subdirectory(cmake)
 add_subdirectory(src)
 add_subdirectory(autotests)
 
-if ("${CMAKE_BINARY_DIR}" STREQUAL "${kldap_BINARY_DIR}")
+if ("${CMAKE_BINARY_DIR}" STREQUAL "${KLdap_BINARY_DIR}")
   feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
 endif()
