@@ -28,7 +28,6 @@ ecm_setup_version(${KDEPIMLIBS_VERSION} VARIABLE_PREFIX KLDAP
 )
 
 ########### Find packages ###########
-find_package(KF5KIO ${KF5_VERSION} CONFIG REQUIRED)
 find_package(KF5KCMUtils ${KF5_VERSION} CONFIG REQUIRED)
 find_package(KF5KDELibs4Support ${KF5_VERSION} CONFIG REQUIRED)
 
