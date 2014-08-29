@@ -86,10 +86,10 @@ void LdapModel::LdapModelPrivate::recreateRootItem()
 
 void LdapModel::LdapModelPrivate::createConnections()
 {
-    connect(search(), SIGNAL(result(KLDAP::LdapSearch *)),
-            m_parent, SLOT(gotSearchResult(KLDAP::LdapSearch *)));
-    connect(search(), SIGNAL(data(KLDAP::LdapSearch *, KLDAP::LdapObject)),
-            m_parent, SLOT(gotSearchData(KLDAP::LdapSearch *, KLDAP::LdapObject)));
+    connect(search(), SIGNAL(result(KLDAP::LdapSearch*)),
+            m_parent, SLOT(gotSearchResult(KLDAP::LdapSearch*)));
+    connect(search(), SIGNAL(data(KLDAP::LdapSearch*,KLDAP::LdapObject)),
+            m_parent, SLOT(gotSearchData(KLDAP::LdapSearch*,KLDAP::LdapObject)));
 }
 
 void LdapModel::LdapModelPrivate::populateRootToBaseDN()

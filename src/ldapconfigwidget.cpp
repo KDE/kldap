@@ -339,10 +339,10 @@ void LdapConfigWidget::Private::sendQuery()
     qDebug() << "sendQuery url:" << _url.toDisplayString();
 
     LdapSearch search;
-    connect(&search, SIGNAL(data(KLDAP::LdapSearch *, KLDAP::LdapObject)),
-            mParent, SLOT(loadData(KLDAP::LdapSearch *, KLDAP::LdapObject)));
-    connect(&search, SIGNAL(result(KLDAP::LdapSearch *)),
-            mParent, SLOT(loadResult(KLDAP::LdapSearch *)));
+    connect(&search, SIGNAL(data(KLDAP::LdapSearch*,KLDAP::LdapObject)),
+            mParent, SLOT(loadData(KLDAP::LdapSearch*,KLDAP::LdapObject)));
+    connect(&search, SIGNAL(result(KLDAP::LdapSearch*)),
+            mParent, SLOT(loadResult(KLDAP::LdapSearch*)));
 
     if (!search.search(_url)) {
         KMessageBox::error(mParent, search.errorString());

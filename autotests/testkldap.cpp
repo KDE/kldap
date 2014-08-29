@@ -193,10 +193,10 @@ void KLdapTest::testLdapSearch()
     LdapUrl url;
     url.setUrl(m_url);
     url.parseQuery();
-    connect(m_search, SIGNAL(result(KLDAP::LdapSearch *)),
-            this, SLOT(searchResult(KLDAP::LdapSearch *)));
-    connect(m_search, SIGNAL(data(KLDAP::LdapSearch *, KLDAP::LdapObject)),
-            this, SLOT(searchData(KLDAP::LdapSearch *, KLDAP::LdapObject)));
+    connect(m_search, SIGNAL(result(KLDAP::LdapSearch*)),
+            this, SLOT(searchResult(KLDAP::LdapSearch*)));
+    connect(m_search, SIGNAL(data(KLDAP::LdapSearch*,KLDAP::LdapObject)),
+            this, SLOT(searchData(KLDAP::LdapSearch*,KLDAP::LdapObject)));
     bool success = m_search->search(url);
     while (QCoreApplication::hasPendingEvents()) {
         qApp->processEvents();
