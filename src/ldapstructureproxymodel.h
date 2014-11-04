@@ -35,41 +35,40 @@ public:
     explicit LdapStructureProxyModel(QObject *parent = 0);
     ~LdapStructureProxyModel();
 
-    virtual QVariant data(const QModelIndex &index, int role) const;
+    QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
     /**
      * Reimplemented from QAbstractItemModel::setData(). This is a placeholder for when
      * LdapStructureProxyModel beomes writeable and always returns false.
      */
-    virtual bool setData(const QModelIndex &index,
+    bool setData(const QModelIndex &index,
                          const QVariant &value,
-                         int role = Qt::EditRole);
-    virtual bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const;
-    virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const;
-    virtual int columnCount(const QModelIndex &parent) const;
-    virtual Qt::ItemFlags flags(const QModelIndex &index) const;
-    virtual bool hasChildren(const QModelIndex &parent) const;
+                         int role = Qt::EditRole) Q_DECL_OVERRIDE;
+    bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const Q_DECL_OVERRIDE;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const Q_DECL_OVERRIDE;
+    int columnCount(const QModelIndex &parent) const Q_DECL_OVERRIDE;
+    Qt::ItemFlags flags(const QModelIndex &index) const Q_DECL_OVERRIDE;
+    bool hasChildren(const QModelIndex &parent) const Q_DECL_OVERRIDE;
 
-    virtual QModelIndex mapFromSource(const QModelIndex &sourceIndex) const;
-    virtual QModelIndex mapToSource(const QModelIndex &proxyIndex) const;
+    QModelIndex mapFromSource(const QModelIndex &sourceIndex) const Q_DECL_OVERRIDE;
+    QModelIndex mapToSource(const QModelIndex &proxyIndex) const Q_DECL_OVERRIDE;
 
     /**
      * Reimplemented from QAbstractItemModel::insertRows(). This is a placeholder for when
      * LdapStructureProxyModel beomes writeable and always returns false.
      */
-    virtual bool insertRows(int row, int count,
-                            const QModelIndex &parent = QModelIndex());
+    bool insertRows(int row, int count,
+                            const QModelIndex &parent = QModelIndex()) Q_DECL_OVERRIDE;
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). This is a placeholder for when
      * LdapStructureProxyModel beomes writeable and always returns false.
      */
-    virtual bool removeRows(int row, int count,
-                            const QModelIndex &parent = QModelIndex());
+    bool removeRows(int row, int count,
+                            const QModelIndex &parent = QModelIndex()) Q_DECL_OVERRIDE;
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). The default implementation
      * does nothing.
      */
-    virtual void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
-
+    void sort(int column, Qt::SortOrder order = Qt::AscendingOrder) Q_DECL_OVERRIDE;
     //
     // Drag and drop support
     //
@@ -77,18 +76,18 @@ public:
      * Reimplemented from QAbstractItemModel::supportedDropActions(). The default
      * implementation returns Qt::MoveAction.
      */
-    virtual Qt::DropActions supportedDropActions() const;
+    Qt::DropActions supportedDropActions() const Q_DECL_OVERRIDE;
     /**
      * Reimplemented from QAbstractItemModel::mimedata(). This is a placeholder for when
      * LdapStructureProxyModel beomes writeable and always returns 0.
      */
-    virtual QMimeData *mimeData(const QModelIndexList &indexes) const;
+    QMimeData *mimeData(const QModelIndexList &indexes) const Q_DECL_OVERRIDE;
     /**
      * Reimplemented from QAbstractItemModel::dropMimedata(). This is a placeholder for when
      * LdapStructureProxyModel beomes writeable and always returns false.
      */
-    virtual bool dropMimeData(const QMimeData *data, Qt::DropAction action,
-                              int row, int column, const QModelIndex &parent);
+    bool dropMimeData(const QMimeData *data, Qt::DropAction action,
+                              int row, int column, const QModelIndex &parent) Q_DECL_OVERRIDE;
 
 private:
     class LdapStructureProxyModelPrivate;
