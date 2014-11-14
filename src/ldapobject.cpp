@@ -99,7 +99,7 @@ const LdapAttrMap &LdapObject::attributes() const
 
 QString LdapObject::toString() const
 {
-    QString result = QString::fromLatin1("dn: %1\n").arg(d->mDn.toString());
+    QString result = QStringLiteral("dn: %1\n").arg(d->mDn.toString());
     LdapAttrMap::ConstIterator end(d->mAttrs.constEnd());
     for (LdapAttrMap::ConstIterator it = d->mAttrs.constBegin(); it != end; ++it) {
         const QString attr = it.key();
