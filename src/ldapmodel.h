@@ -61,7 +61,7 @@ public:
      * \see setConnection()
      * \see ready()
      */
-    explicit LdapModel(QObject *parent = 0);
+    explicit LdapModel(QObject *parent = Q_NULLPTR);
     /**
      * Constructs an LdapModel. Clients of this class should connect a slot to the ready()
      * signal before setting this model onto a view.
@@ -70,7 +70,7 @@ public:
      * \see setConnection()
      * \see ready()
      */
-    explicit LdapModel(LdapConnection &connection, QObject *parent = 0);
+    explicit LdapModel(LdapConnection &connection, QObject *parent = Q_NULLPTR);
     virtual ~LdapModel();
 
     /**

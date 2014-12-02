@@ -32,7 +32,7 @@ class KLDAP_EXPORT LdapAttributeProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
 public:
-    explicit LdapAttributeProxyModel(QObject *parent = 0);
+    explicit LdapAttributeProxyModel(QObject *parent = Q_NULLPTR);
     ~LdapAttributeProxyModel();
 
     virtual QVariant data(const QModelIndex &index, int role) const;
