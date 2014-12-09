@@ -261,7 +261,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
 
         QString mech = server.mech();
         if (mech.isEmpty()) {
-            mech = QLatin1String("DIGEST-MD5");
+            mech = QStringLiteral("DIGEST-MD5");
         }
 
         SASL_Data sasldata;
