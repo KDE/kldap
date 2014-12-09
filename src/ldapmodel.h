@@ -101,8 +101,8 @@ public:
      * LdapModel beomes writeable and always returns false.
      */
     bool setData(const QModelIndex &index,
-                         const QVariant &value,
-                         int role = Qt::EditRole) Q_DECL_OVERRIDE;
+                 const QVariant &value,
+                 int role = Qt::EditRole) Q_DECL_OVERRIDE;
     /**
      * Reimplemented from QAbstractItemModel::headerData().
      */
@@ -136,13 +136,13 @@ public:
      * LdapModel beomes writeable and always returns false.
      */
     bool insertRows(int row, int count,
-                            const QModelIndex &parent = QModelIndex()) Q_DECL_OVERRIDE;
+                    const QModelIndex &parent = QModelIndex()) Q_DECL_OVERRIDE;
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). This is a placeholder for when
      * LdapModel beomes writeable and always returns false.
      */
     bool removeRows(int row, int count,
-                            const QModelIndex &parent = QModelIndex()) Q_DECL_OVERRIDE;
+                    const QModelIndex &parent = QModelIndex()) Q_DECL_OVERRIDE;
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). The default implementation
      * does nothing.
@@ -167,7 +167,7 @@ public:
      * LdapModel beomes writeable and always returns false.
      */
     bool dropMimeData(const QMimeData *data, Qt::DropAction action,
-                              int row, int column, const QModelIndex &parent) Q_DECL_OVERRIDE;
+                      int row, int column, const QModelIndex &parent) Q_DECL_OVERRIDE;
 
     //
     // Other public utility functions
