@@ -26,8 +26,12 @@
 #include <QtCore/QTime>
 
 #include <stdlib.h>
-#ifdef HAVE_SYS_TIME_H
-#include <sys/time.h>
+
+//for struct timeval
+#if defined(HAVE_SYS_TIME_H)
+# include <sys/time.h>
+#elif defined(_WIN32)
+# include <winsock2.h>
 #endif
 
 #ifdef SASL2_FOUND
