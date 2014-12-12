@@ -31,9 +31,7 @@ ecm_setup_version(${KDEPIMLIBS_VERSION} VARIABLE_PREFIX KLDAP
 find_package(KF5KCMUtils ${KF5_VERSION} CONFIG REQUIRED)
 find_package(KF5KDELibs4Support ${KF5_VERSION} CONFIG REQUIRED)
 
-if(${CMAKE_SOURCE_DIR} STREQUAL ${KLdap_SOURCE_DIR})
-  find_package(KF5Contacts ${KDEPIMLIBS_VERSION} CONFIG REQUIRED)
-endif()
+find_package(KF5Contacts ${KDEPIMLIBS_VERSION} CONFIG REQUIRED)
 
 
 find_package(Ldap)
@@ -91,6 +89,4 @@ add_subdirectory(cmake)
 add_subdirectory(src)
 add_subdirectory(autotests)
 
-if ("${CMAKE_BINARY_DIR}" STREQUAL "${KLdap_BINARY_DIR}")
-  feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
-endif()
+feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
