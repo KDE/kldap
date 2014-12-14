@@ -36,6 +36,7 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kldap_config.h.cmake ${CMAKE_CURRENT_
 ########### next target ###############
 
 set(kldap_LIB_SRCS
+  ldap_debug.cpp
   ber.cpp
   ldif.cpp
   ldapurl.cpp

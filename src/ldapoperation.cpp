@@ -21,7 +21,7 @@
 #include "ldapoperation.h"
 #include "kldap_config.h"
 
-#include <qdebug.h>
+#include "ldap_debug.h"
 
 #include <QtCore/QTime>
 
@@ -213,19 +213,19 @@ static int kldap_sasl_interact(sasl_interact_t *interact, LdapOperation::SASL_Da
         switch (interact->id) {
         case SASL_CB_GETREALM:
             value = data->creds.realm;
-            qDebug() << "SASL_REALM=" << value;
+            qCDebug(LDAP_LOG) << "SASL_REALM=" << value;
             break;
         case SASL_CB_AUTHNAME:
             value = data->creds.authname;
-            qDebug() << "SASL_AUTHNAME=" << value;
+            qCDebug(LDAP_LOG) << "SASL_AUTHNAME=" << value;
             break;
         case SASL_CB_PASS:
             value = data->creds.password;
-            qDebug() << "SASL_PASSWD=[hidden]";
+            qCDebug(LDAP_LOG) << "SASL_PASSWD=[hidden]";
             break;
         case SASL_CB_USER:
             value = data->creds.authzid;
-            qDebug() << "SASL_AUTHZID=" << value;
+            qCDebug(LDAP_LOG) << "SASL_AUTHZID=" << value;
             break;
         }
         if (value.isEmpty()) {
@@ -288,7 +288,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
                             return KLDAP_SASL_ERROR;
                         }
                     }
-                    qDebug() << "sasl_client_start mech: "
+                    qCDebug(LDAP_LOG) << "sasl_client_start mech: "
                              << mechusing << " outlen " << outlen
                              << " result: " << saslresult;
                 } while (saslresult == SASL_INTERACT);
@@ -297,7 +297,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
                 }
 
             } else {
-                qDebug() << "sasl_client_step";
+                qCDebug(LDAP_LOG) << "sasl_client_step";
                 do {
                     saslresult = sasl_client_step(saslconn, sdata.data(), sdata.size(),
                                                   &client_interact, &out, &outlen);
@@ -307,7 +307,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
                         }
                     }
                 } while (saslresult == SASL_INTERACT);
-                qDebug() << "sasl_client_step result" << saslresult;
+                qCDebug(LDAP_LOG) << "sasl_client_step result" << saslresult;
                 if (saslresult != SASL_CONTINUE && saslresult != SASL_OK) {
                     return KLDAP_SASL_ERROR;
                 }
@@ -317,7 +317,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
             ccred.bv_len = outlen;
 
             if (async) {
-                qDebug() << "ldap_sasl_bind";
+                qCDebug(LDAP_LOG) << "ldap_sasl_bind";
                 int msgid;
                 ret =
                     ldap_sasl_bind(ld, server.bindDn().toUtf8().data(), mech.toLatin1(),
@@ -325,13 +325,13 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
                 if (ret == 0) {
                     ret = msgid;
                 }
-                qDebug() << "ldap_sasl_bind msgid" << ret;
+                qCDebug(LDAP_LOG) << "ldap_sasl_bind msgid" << ret;
             } else {
-                qDebug() << "ldap_sasl_bind_s";
+                qCDebug(LDAP_LOG) << "ldap_sasl_bind_s";
                 ret =
                     ldap_sasl_bind_s(ld, server.bindDn().toUtf8().data(), mech.toLatin1(),
                                      &ccred, 0, 0, &scred);
-                qDebug() << "ldap_sasl_bind_s ret" << ret;
+                qCDebug(LDAP_LOG) << "ldap_sasl_bind_s ret" << ret;
                 if (scred) {
                     sdata = QByteArray(scred->bv_val, scred->bv_len);
                 } else {
@@ -353,10 +353,10 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
         }
         ccred.bv_val = pass.data();
         ccred.bv_len = pass.size();
-        qDebug() << "binding to server, bindname: " << bindname << " password: *****";
+        qCDebug(LDAP_LOG) << "binding to server, bindname: " << bindname << " password: *****";
 
         if (async) {
-            qDebug() << "ldap_sasl_bind (simple)";
+            qCDebug(LDAP_LOG) << "ldap_sasl_bind (simple)";
 #ifndef HAVE_WINLDAP_H
             int msgid = 0;
             ret = ldap_sasl_bind(ld, bindname.data(), 0, &ccred, 0, 0, &msgid);
@@ -367,7 +367,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
             ret = ldap_simple_bind(ld, bindname.data(), pass.data());
 #endif
         } else {
-            qDebug() << "ldap_sasl_bind_s (simple)";
+            qCDebug(LDAP_LOG) << "ldap_sasl_bind_s (simple)";
 #ifndef HAVE_WINLDAP_H
             ret = ldap_sasl_bind_s(ld, bindname.data(), 0, &ccred, 0, 0, 0);
 #else
@@ -380,14 +380,14 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
 
 int LdapOperation::LdapOperationPrivate::processResult(int rescode, LDAPMessage *msg)
 {
-    //qDebug();
+    //qCDebug(LDAP_LOG);
     int retval;
     LDAP *ld = (LDAP *) mConnection->handle();
 
-    qDebug() << "rescode: " << rescode;
+    qCDebug(LDAP_LOG) << "rescode: " << rescode;
     switch (rescode) {
     case RES_SEARCH_ENTRY: {
-        //qDebug() << "Found search entry";
+        //qCDebug(LDAP_LOG) << "Found search entry";
         mObject.clear();
         LdapAttrMap attrs;
         char *name;
@@ -449,11 +449,11 @@ int LdapOperation::LdapOperationPrivate::processResult(int rescode, LDAPMessage 
         retval = KLDAP_SUCCESS;
 #endif
         if (retval != KLDAP_SUCCESS && retval != KLDAP_SASL_BIND_IN_PROGRESS) {
-            qDebug() << "RES_BIND error: " << retval;
+            qCDebug(LDAP_LOG) << "RES_BIND error: " << retval;
             ldap_msgfree(msg);
             return -1;
         }
-        qDebug() << "RES_BIND rescode" << rescode << "retval:" << retval;
+        qCDebug(LDAP_LOG) << "RES_BIND rescode" << rescode << "retval:" << retval;
         if (servercred) {
             mServerCred = QByteArray(servercred->bv_val, servercred->bv_len);
             ber_bvfree(servercred);
@@ -470,7 +470,7 @@ int LdapOperation::LdapOperationPrivate::processResult(int rescode, LDAPMessage 
         retval =
             ldap_parse_result(ld, msg, &errcodep, &matcheddn, &errmsg, &referralsp,
                               &serverctrls, 0);
-        qDebug() << "rescode" << rescode << "retval:" << retval
+        qCDebug(LDAP_LOG) << "rescode" << rescode << "retval:" << retval
                  << "matcheddn:" << matcheddn << "errcode:"
                  << errcodep << "errmsg:" << errmsg;
         if (retval != KLDAP_SUCCESS) {
@@ -511,7 +511,7 @@ int LdapOperation::LdapOperationPrivate::processResult(int rescode, LDAPMessage 
 static void addModOp(LDAPMod ***pmods, int mod_type, const QString &attr,
                      const QByteArray *value = 0)
 {
-    //  qDebug() << "type:" << mod_type << "attr:" << attr <<
+    //  qCDebug(LDAP_LOG) << "type:" << mod_type << "attr:" << attr <<
     //    "value:" << QString::fromUtf8(value,value.size()) <<
     //    "size:" << value.size();
     LDAPMod **mods;
@@ -571,7 +571,7 @@ static void addModOp(LDAPMod ***pmods, int mod_type, const QString &attr,
             (BerValue **) malloc(sizeof(BerValue *) * 2);
         mods[ i ]->mod_vals.modv_bvals[ 0 ] = berval;
         mods[ i ]->mod_vals.modv_bvals[ 1 ] = 0;
-//    qDebug() << "new bervalue struct" << attr << value;
+//    qCDebug(LDAP_LOG) << "new bervalue struct" << attr << value;
     } else {
         uint j = 0;
         while (mods[ i ]->mod_vals.modv_bvals[ j ] != 0) {
@@ -587,7 +587,7 @@ static void addModOp(LDAPMod ***pmods, int mod_type, const QString &attr,
         }
         mods[ i ]->mod_vals.modv_bvals[ j ] = berval;
         mods[ i ]->mod_vals.modv_bvals[ j + 1 ] = 0;
-        qDebug() << j << ". new bervalue";
+        qCDebug(LDAP_LOG) << j << ". new bervalue";
     }
 }
 
@@ -599,7 +599,7 @@ static void addControlOp(LDAPControl ***pctrls, const QString &oid,
 
     ctrls = *pctrls;
 
-    qDebug() << "oid:'" << oid << "' val: '" << value << "'";
+    qCDebug(LDAP_LOG) << "oid:'" << oid << "' val: '" << value << "'";
     int vallen = value.size();
     ctrl->ldctl_value.bv_len = vallen;
     if (vallen) {
@@ -698,7 +698,7 @@ int LdapOperation::search(const LdapDN &base, LdapUrl::Scope scope,
         break;
     }
 
-    qDebug() << "asyncSearch() base=\"" << base.toString()
+    qCDebug(LDAP_LOG) << "asyncSearch() base=\"" << base.toString()
              << "\" scope=" << (int)scope
              << "filter=\"" << filter
              << "\" attrs=" << attributes;
@@ -835,7 +835,7 @@ int LdapOperation::add_s(const LdapDN &dn, const ModOps &ops)
             addModOp(&lmod, 0, ops[i].attr, &ops[i].values[j]);
         }
     }
-    qDebug() << dn.toString();
+    qCDebug(LDAP_LOG) << dn.toString();
     int retval =
         ldap_add_ext_s(ld, dn.toString().toUtf8().data(), lmod, serverctrls,
                        clientctrls);
@@ -1179,7 +1179,7 @@ int LdapOperation::waitForResult(int id, int msecs)
         // Calculate the timeout value to use and assign it to a timeval structure
         // see man select (2) for details
         timeout = kldap_timeout_value(msecs, stopWatch.elapsed());
-        qDebug() << "(" << id << "," << msecs
+        qCDebug(LDAP_LOG) << "(" << id << "," << msecs
                  << "): Waiting" << timeout
                  << "msecs for result. Attempt #" << attempt++;
         struct timeval tv;

@@ -23,7 +23,7 @@
 #include "ldapmodelnode_p.h"
 #include "ldapsearch.h"
 
-#include <qdebug.h>
+#include "ldap_debug.h"
 #include <klocalizedstring.h>
 
 using namespace KLDAP;
@@ -91,7 +91,7 @@ QModelIndex LdapModel::index(int row, int col, const QModelIndex &parent) const
     if (childItem) {
         return createIndex(row, col, childItem);
     }
-    qDebug() << "Could not create valid index for row =" << row << ", col =" << col;
+    qCDebug(LDAP_LOG) << "Could not create valid index for row =" << row << ", col =" << col;
     return QModelIndex();
 }
 

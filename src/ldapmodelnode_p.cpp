@@ -20,7 +20,7 @@
 
 #include "ldapmodelnode_p.h"
 
-#include <qdebug.h>
+#include "ldap_debug.h"
 
 using namespace KLDAP;
 
@@ -61,7 +61,7 @@ LdapModelDNNode::LdapModelDNNode(LdapModelDNNode *parent,
       m_childItems(),
       m_dn(dn)
 {
-    qDebug() << "Creating DN =" << m_dn.toString();
+    qCDebug(LDAP_LOG) << "Creating DN =" << m_dn.toString();
 }
 
 LdapModelDNNode::~LdapModelDNNode()
@@ -123,7 +123,7 @@ LdapModelAttrNode::LdapModelAttrNode(LdapModelDNNode *parent,
       m_attrName(attrName),
       m_attrData(attrData)
 {
-    qDebug() << "Creating Name =" << m_attrName << " Data =" << m_attrData;
+    qCDebug(LDAP_LOG) << "Creating Name =" << m_attrName << " Data =" << m_attrData;
 }
 
 LdapModelAttrNode::~LdapModelAttrNode()

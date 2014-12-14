@@ -23,7 +23,7 @@
 
 #include <qprogressdialog.h>
 #include <kcombobox.h>
-#include <qdebug.h>
+#include "ldap_debug.h"
 #include <klocalizedstring.h>
 #include <klineedit.h>
 #include <kmessagebox.h>
@@ -336,7 +336,7 @@ void LdapConfigWidget::Private::sendQuery()
     _url.setAttributes(QStringList(mAttr));
     _url.setScope(LdapUrl::Base);
 
-    qDebug() << "sendQuery url:" << _url.toDisplayString();
+    qCDebug(LDAP_LOG) << "sendQuery url:" << _url.toDisplayString();
 
     LdapSearch search;
     connect(&search, SIGNAL(data(KLDAP::LdapSearch*,KLDAP::LdapObject)),
@@ -360,7 +360,7 @@ void LdapConfigWidget::Private::sendQuery()
     mProg->setValue(0);
     mProg->exec();
     if (mCancelled) {
-        qDebug() << "query canceled!";
+        qCDebug(LDAP_LOG) << "query canceled!";
         search.abandon();
     } else {
         if (search.error()) {
@@ -395,7 +395,7 @@ void LdapConfigWidget::Private::queryDNClicked()
 
 void LdapConfigWidget::Private::loadData(LdapSearch *, const LdapObject &object)
 {
-    qDebug() << "object:" << object.toString();
+    qCDebug(LDAP_LOG) << "object:" << object.toString();
     mProg->setValue(mProg->value() + 1);
     LdapAttrMap::ConstIterator end(object.attributes().constEnd());
     for (LdapAttrMap::ConstIterator it = object.attributes().constBegin();

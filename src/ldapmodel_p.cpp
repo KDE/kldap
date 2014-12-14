@@ -22,7 +22,7 @@
 #include "ldapmodelnode_p.h"
 #include "ldapsearch.h"
 
-#include <qdebug.h>
+#include "ldap_debug.h"
 
 using namespace KLDAP;
 
@@ -71,17 +71,17 @@ bool LdapModel::LdapModelPrivate::search(const LdapDN &searchBase,
 
 void LdapModel::LdapModelPrivate::setSearchType(SearchType t, LdapModelDNNode *item)
 {
-    //qDebug() << "item =" << item;
+    //qCDebug(LDAP_LOG) << "item =" << item;
     m_searchType = t;
     m_searchItem = item;
 }
 
 void LdapModel::LdapModelPrivate::recreateRootItem()
 {
-    //qDebug();
+    //qCDebug(LDAP_LOG);
     delete m_root;
     m_root = new LdapModelDNNode;
-    //qDebug() << "&m_root =" << &m_root;
+    //qCDebug(LDAP_LOG) << "&m_root =" << &m_root;
 }
 
 void LdapModel::LdapModelPrivate::createConnections()
@@ -94,18 +94,18 @@ void LdapModel::LdapModelPrivate::createConnections()
 
 void LdapModel::LdapModelPrivate::populateRootToBaseDN()
 {
-    //qDebug();
+    //qCDebug(LDAP_LOG);
 
     if (baseDN().isEmpty()) {
         // Query the server for the base DN
-        //qDebug() << "Searching for the baseDN";
+        //qCDebug(LDAP_LOG) << "Searching for the baseDN";
         setSearchType(LdapModelPrivate::NamingContexts, rootNode());
         search(LdapDN(), LdapUrl::Base, QString(), QStringList() << QLatin1String("namingContexts"));
         return;
     }
 
     // Start a search for the details of the baseDN object
-    //qDebug() << "Searching for attributes of the baseDN";
+    //qCDebug(LDAP_LOG) << "Searching for attributes of the baseDN";
     searchResults().clear();
     setSearchType(LdapModelPrivate::BaseDN, rootNode());
     search(baseDN(), LdapUrl::Base, QString(), QStringList() << QLatin1String("dn") << QLatin1String("objectClass"));
@@ -114,7 +114,7 @@ void LdapModel::LdapModelPrivate::populateRootToBaseDN()
 void LdapModel::LdapModelPrivate::gotSearchResult(KLDAP::LdapSearch *search)
 {
     Q_UNUSED(search);
-    qDebug();
+    qCDebug(LDAP_LOG);
 
     switch (searchType()) {
     case LdapModelPrivate::NamingContexts: {
@@ -123,7 +123,7 @@ void LdapModel::LdapModelPrivate::gotSearchResult(KLDAP::LdapSearch *search)
         if (!searchResults().isEmpty() &&
                 searchResults().at(0).hasAttribute(QLatin1String("namingContexts"))) {
             baseDN = QLatin1String(searchResults().at(0).value(QLatin1String("namingContexts")));
-            //qDebug() << "Found baseDN =" << baseDN;
+            //qCDebug(LDAP_LOG) << "Found baseDN =" << baseDN;
         }
         setBaseDN(LdapDN(baseDN));
 
@@ -136,7 +136,7 @@ void LdapModel::LdapModelPrivate::gotSearchResult(KLDAP::LdapSearch *search)
         break;
     }
     case LdapModelPrivate::BaseDN: {
-        //qDebug() << "Found details of the baseDN object."
+        //qCDebug(LDAP_LOG) << "Found details of the baseDN object."
         //         << "Creating objects down to this level.";
 
         // Get the baseDN LdapObject
@@ -150,7 +150,7 @@ void LdapModel::LdapModelPrivate::gotSearchResult(KLDAP::LdapSearch *search)
         LdapModelDNNode *item = 0;
         for (int i = 0; i < depth; ++i) {
             QString dn = baseDN().toString(i);
-            qDebug() << "Creating item for DN :" << dn;
+            qCDebug(LDAP_LOG) << "Creating item for DN :" << dn;
 
             //LdapObject obj( dn );
             item = new LdapModelDNNode(parent, LdapDN(dn));
@@ -172,7 +172,7 @@ void LdapModel::LdapModelPrivate::gotSearchResult(KLDAP::LdapSearch *search)
         break;
     }
     case LdapModelPrivate::ChildObjects: {
-        //qDebug() << "Found" << searchResults().size() << "child objects";
+        //qCDebug(LDAP_LOG) << "Found" << searchResults().size() << "child objects";
 
         if (searchResults().size() != 0) {
             // Create an index for the soon-to-be-a-parent item
@@ -205,8 +205,8 @@ void LdapModel::LdapModelPrivate::gotSearchData(KLDAP::LdapSearch *search,
         const KLDAP::LdapObject &obj)
 {
     Q_UNUSED(search);
-    //qDebug();
-    //qDebug() << "Object:";
-    //qDebug() << obj.toString();
+    //qCDebug(LDAP_LOG);
+    //qCDebug(LDAP_LOG) << "Object:";
+    //qCDebug(LDAP_LOG) << obj.toString();
     searchResults().append(obj);
 }

@@ -25,7 +25,7 @@
 #include <QtCore/QEventLoop>
 #include <QtCore/QTimer>
 
-#include <qdebug.h>
+#include "ldap_debug.h"
 #include <KLocalizedString>
 using namespace KLDAP;
 
@@ -71,7 +71,7 @@ void LdapSearch::Private::result()
     }
     int res = mOp.waitForResult(mId, LDAPSEARCH_BLOCKING_TIMEOUT);
 
-    qDebug() << "LDAP result:" << res;
+    qCDebug(LDAP_LOG) << "LDAP result:" << res;
 
     if (res != 0 &&
             (res == -1 ||
@@ -90,9 +90,9 @@ void LdapSearch::Private::result()
         QByteArray servercc;
         servercc = mOp.serverCred();
 
-        qDebug() << "LdapSearch RES_BIND";
+        qCDebug(LDAP_LOG) << "LdapSearch RES_BIND";
         if (mConn->ldapErrorCode() == KLDAP_SUCCESS) {   //bind succeeded
-            qDebug() << "bind succeeded";
+            qCDebug(LDAP_LOG) << "bind succeeded";
             LdapControls savedctrls = mOp.serverControls();
             if (mPageSize) {
                 LdapControls ctrls = savedctrls;
@@ -103,7 +103,7 @@ void LdapSearch::Private::result()
             mId = mOp.search(mBase, mScope, mFilter, mAttributes);
             mOp.setServerControls(savedctrls);
         } else { //next bind step
-            qDebug() << "bind next step";
+            qCDebug(LDAP_LOG) << "bind next step";
             mId = mOp.bind(servercc);
         }
         if (mId < 0) {
@@ -133,7 +133,7 @@ void LdapSearch::Private::result()
                     break;
                 }
             }
-            qDebug() << " estimated size:" << estsize;
+            qCDebug(LDAP_LOG) << " estimated size:" << estsize;
             if (estsize != -1 && !cookie.isEmpty()) {
                 LdapControls ctrls, savedctrls;
                 savedctrls = mOp.serverControls();
@@ -170,7 +170,7 @@ void LdapSearch::Private::result()
     }
     //If reached the requested entries, indicate it
     if (mMaxCount > 0 && mCount == mMaxCount) {
-        qDebug() << mCount << " entries reached";
+        qCDebug(LDAP_LOG) << mCount << " entries reached";
         emit mParent->result(mParent);
     }
 }
@@ -200,7 +200,7 @@ bool LdapSearch::Private::startSearch(const LdapDN &base, LdapUrl::Scope scope,
                                       const QString &filter,
                                       const QStringList &attributes, int pagesize, int count)
 {
-    qDebug() << "search: base=" << base.toString() << "scope=" << (int)scope
+    qCDebug(LDAP_LOG) << "search: base=" << base.toString() << "scope=" << (int)scope
              << "filter=" << filter << "attributes=" << attributes
              << "pagesize=" << pagesize;
     mAbandoned = false;
@@ -238,7 +238,7 @@ bool LdapSearch::Private::startSearch(const LdapDN &base, LdapUrl::Scope scope,
         }
         return false;
     }
-    qDebug() << "startSearch msg id=" << mId;
+    qCDebug(LDAP_LOG) << "startSearch msg id=" << mId;
 
     //maybe do this with threads?- need thread-safe client libs!!!
     QTimer::singleShot(0, mParent, SLOT(result()));

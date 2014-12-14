@@ -21,7 +21,7 @@
 #include "ber.h"
 #include "kldap_config.h"
 
-#include <qdebug.h>
+#include "ldap_debug.h"
 
 #include <QtCore/QList>
 #include <qvarlengtharray.h>
@@ -209,10 +209,10 @@ int Ber::printf(const QString &format, ...)
             ret = ber_printf(d->mBer, fmt);
             break;
         default:
-            qWarning() << "Invalid BER format parameter: '" << fmt << "'";
+            qCWarning(LDAP_LOG) << "Invalid BER format parameter: '" << fmt << "'";
             ret = -1;
         }
-        qDebug() << "ber_printf format:" << fmt << "ret:" << ret;
+        qCDebug(LDAP_LOG) << "ber_printf format:" << fmt << "ret:" << ret;
         if (ret == -1) {
             break;
         }
@@ -349,11 +349,11 @@ int Ber::scanf(const QString &format, ...)
             ret = ber_scanf(d->mBer, fmt);
             break;
         default:
-            qWarning() << "Invalid BER format parameter: '" << fmt << "'";
+            qCWarning(LDAP_LOG) << "Invalid BER format parameter: '" << fmt << "'";
             ret = -1;
         }
 
-        qDebug() << "ber_scanf format:" << fmt << "ret:" << ret;
+        qCDebug(LDAP_LOG) << "ber_scanf format:" << fmt << "ret:" << ret;
         if (ret == -1) {
             break;
         }

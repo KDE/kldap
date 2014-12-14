@@ -20,7 +20,7 @@
 
 #include "ldapserver.h"
 
-#include <qdebug.h>
+#include "ldap_debug.h"
 
 using namespace KLDAP;
 
@@ -285,7 +285,7 @@ void LdapServer::setUrl(const LdapUrl &url)
     } else if (url.hasExtension(QLatin1String("x-tls"))) {
         d->mSecurity = TLS;
     }
-    qDebug() << "security:" << d->mSecurity;
+    qCDebug(LDAP_LOG) << "security:" << d->mSecurity;
 
     d->mMech.clear();
     d->mUser.clear();

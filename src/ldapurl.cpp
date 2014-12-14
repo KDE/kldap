@@ -20,7 +20,7 @@
 
 #include "ldapurl.h"
 
-#include <qdebug.h>
+#include "ldap_debug.h"
 
 #include <QtCore/QStringList>
 
@@ -235,7 +235,7 @@ void LdapUrl::updateQuery()
     }
 
     setQuery(q);
-    qDebug() << "LDAP URL updateQuery():" << toDisplayString();
+    qCDebug(LDAP_LOG) << "LDAP URL updateQuery():" << toDisplayString();
 }
 
 void LdapUrl::parseQuery()
@@ -291,7 +291,7 @@ void LdapUrl::parseQuery()
             ext.critical = true;
             name.remove(0, 1);
         }
-        qDebug() << "LdapUrl extensions name=" << name << "value:" << value;
+        qCDebug(LDAP_LOG) << "LdapUrl extensions name=" << name << "value:" << value;
         ext.value = value.replace(QLatin1String("%2"), QLatin1String(","));
         setExtension(name, ext);
     }
