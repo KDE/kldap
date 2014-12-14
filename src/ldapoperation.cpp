@@ -289,8 +289,8 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
                         }
                     }
                     qCDebug(LDAP_LOG) << "sasl_client_start mech: "
-                             << mechusing << " outlen " << outlen
-                             << " result: " << saslresult;
+                                      << mechusing << " outlen " << outlen
+                                      << " result: " << saslresult;
                 } while (saslresult == SASL_INTERACT);
                 if (saslresult != SASL_CONTINUE && saslresult != SASL_OK) {
                     return KLDAP_SASL_ERROR;
@@ -471,8 +471,8 @@ int LdapOperation::LdapOperationPrivate::processResult(int rescode, LDAPMessage 
             ldap_parse_result(ld, msg, &errcodep, &matcheddn, &errmsg, &referralsp,
                               &serverctrls, 0);
         qCDebug(LDAP_LOG) << "rescode" << rescode << "retval:" << retval
-                 << "matcheddn:" << matcheddn << "errcode:"
-                 << errcodep << "errmsg:" << errmsg;
+                          << "matcheddn:" << matcheddn << "errcode:"
+                          << errcodep << "errmsg:" << errmsg;
         if (retval != KLDAP_SUCCESS) {
             ldap_msgfree(msg);
             return -1;
@@ -699,9 +699,9 @@ int LdapOperation::search(const LdapDN &base, LdapUrl::Scope scope,
     }
 
     qCDebug(LDAP_LOG) << "asyncSearch() base=\"" << base.toString()
-             << "\" scope=" << (int)scope
-             << "filter=\"" << filter
-             << "\" attrs=" << attributes;
+                      << "\" scope=" << (int)scope
+                      << "filter=\"" << filter
+                      << "\" attrs=" << attributes;
     int retval =
         ldap_search_ext(ld, base.toString().toUtf8().data(), lscope,
                         filter.isEmpty() ? QByteArray("objectClass=*").data() :
@@ -1180,8 +1180,8 @@ int LdapOperation::waitForResult(int id, int msecs)
         // see man select (2) for details
         timeout = kldap_timeout_value(msecs, stopWatch.elapsed());
         qCDebug(LDAP_LOG) << "(" << id << "," << msecs
-                 << "): Waiting" << timeout
-                 << "msecs for result. Attempt #" << attempt++;
+                          << "): Waiting" << timeout
+                          << "msecs for result. Attempt #" << attempt++;
         struct timeval tv;
         tv.tv_sec = timeout / 1000;
         tv.tv_usec = (timeout % 1000) * 1000;

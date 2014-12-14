@@ -201,8 +201,8 @@ bool LdapSearch::Private::startSearch(const LdapDN &base, LdapUrl::Scope scope,
                                       const QStringList &attributes, int pagesize, int count)
 {
     qCDebug(LDAP_LOG) << "search: base=" << base.toString() << "scope=" << (int)scope
-             << "filter=" << filter << "attributes=" << attributes
-             << "pagesize=" << pagesize;
+                      << "filter=" << filter << "attributes=" << attributes
+                      << "pagesize=" << pagesize;
     mAbandoned = false;
     mError = 0;
     mErrorString.clear();

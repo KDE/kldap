@@ -20,4 +20,3 @@
 #include "ldap_debug.h"
 Q_LOGGING_CATEGORY(LDAP_LOG, "log_ldap")
 
-
