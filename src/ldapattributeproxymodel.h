@@ -35,14 +35,14 @@ public:
     explicit LdapAttributeProxyModel(QObject *parent = Q_NULLPTR);
     ~LdapAttributeProxyModel();
 
-    virtual QVariant data(const QModelIndex &index, int role) const;
+    QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
     /**
      * Reimplemented from QAbstractItemModel::setData(). This is a placeholder for when
      * LdapAttributeProxyModel beomes writeable and always returns false.
      */
-    virtual bool setData(const QModelIndex &index,
+    bool setData(const QModelIndex &index,
                          const QVariant &value,
-                         int role = Qt::EditRole);
+                         int role = Qt::EditRole) Q_DECL_OVERRIDE;
     bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const Q_DECL_OVERRIDE;
     QVariant headerData(int section, Qt::Orientation orientation, int role) const Q_DECL_OVERRIDE;
     int columnCount(const QModelIndex &parent) const Q_DECL_OVERRIDE;
@@ -57,18 +57,18 @@ public:
      * LdapAttributeProxyModel beomes writeable and always returns false.
      */
     virtual bool insertRows(int row, int count,
-                            const QModelIndex &parent = QModelIndex());
+                            const QModelIndex &parent = QModelIndex()) Q_DECL_OVERRIDE;
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). This is a placeholder for when
      * LdapAttributeProxyModel beomes writeable and always returns false.
      */
     virtual bool removeRows(int row, int count,
-                            const QModelIndex &parent = QModelIndex());
+                            const QModelIndex &parent = QModelIndex()) Q_DECL_OVERRIDE;
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). The default implementation
      * does nothing.
      */
-    virtual void sort(int column, Qt::SortOrder order = Qt::AscendingOrder);
+    void sort(int column, Qt::SortOrder order = Qt::AscendingOrder) Q_DECL_OVERRIDE;
 
     //
     // Drag and drop support
@@ -88,7 +88,7 @@ public:
      * LdapAttributeProxyModel beomes writeable and always returns false.
      */
     virtual bool dropMimeData(const QMimeData *data, Qt::DropAction action,
-                              int row, int column, const QModelIndex &parent);
+                              int row, int column, const QModelIndex &parent) Q_DECL_OVERRIDE;
 
 private:
     class LdapAttributeProxyModelPrivate;
