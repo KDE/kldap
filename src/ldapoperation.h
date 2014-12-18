@@ -68,7 +68,7 @@ public:
         QList<QByteArray> values;
     } ModOp ;
 
-    typedef QList<ModOp> ModOps;
+    typedef QVector<ModOp> ModOps;
 
     enum SASL_Fields {
         SASL_Authname = 0x1,

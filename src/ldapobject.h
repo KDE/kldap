@@ -111,7 +111,7 @@ private:
     QSharedDataPointer<Private> d;
 };
 
-typedef QList<LdapObject> LdapObjects;
+typedef QVector<LdapObject> LdapObjects;
 }
 
 #endif

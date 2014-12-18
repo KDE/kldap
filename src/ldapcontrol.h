@@ -22,7 +22,7 @@
 #define KLDAP_LDAPCONTROL_H
 
 #include <QtCore/QString>
-#include <QtCore/QList>
+#include <QtCore/QVector>
 #include <QtCore/QSharedDataPointer>
 
 #include "kldap_export.h"
@@ -31,7 +31,7 @@ namespace KLDAP
 {
 
 class LdapControl;
-typedef QList<LdapControl> LdapControls;
+typedef QVector<LdapControl> LdapControls;
 
 /**
   @brief
