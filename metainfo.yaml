@@ -1,0 +1,14 @@
+maintainer: mlaurent
+description: LDap support library
+tier: 3
+type: functional
+platforms:
+    - name: All
+portingAid: false
+deprecated: false
+release: false
+libraries:
+ - qmake: Ldap 
+   cmake: "KF5::Ldap"
+cmakename: KF5Ldap
+
