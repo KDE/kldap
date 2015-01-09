@@ -62,8 +62,6 @@ generate_export_header(KF5Ldap BASE_NAME kldap)
 add_library(KF5::Ldap ALIAS KF5Ldap)
 
 target_link_libraries(KF5Ldap
-PUBLIC
-  KF5::CoreAddons
 PRIVATE
   KF5::Completion
   Qt5::Widgets
@@ -121,6 +119,6 @@ install(FILES
     COMPONENT Devel
 )
 
-ecm_generate_pri_file(BASE_NAME Ldap LIB_NAME KF5Ldap DEPS "CoreAddons" FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KF5_INCLUDE_INSTALL_DIR}/KLDAP/)
+ecm_generate_pri_file(BASE_NAME Ldap LIB_NAME KF5Ldap FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KF5_INCLUDE_INSTALL_DIR}/KLDAP/)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
 
