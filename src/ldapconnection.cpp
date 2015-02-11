@@ -29,14 +29,14 @@
 #ifdef SASL2_FOUND
 #include <sasl/sasl.h>
 static const sasl_callback_t callbacks[] = {
-    { SASL_CB_ECHOPROMPT, NULL, NULL },
-    { SASL_CB_NOECHOPROMPT, NULL, NULL },
-    { SASL_CB_GETREALM, NULL, NULL },
-    { SASL_CB_USER, NULL, NULL },
-    { SASL_CB_AUTHNAME, NULL, NULL },
-    { SASL_CB_PASS, NULL, NULL },
-    { SASL_CB_CANON_USER, NULL, NULL },
-    { SASL_CB_LIST_END, NULL, NULL }
+    { SASL_CB_ECHOPROMPT, Q_NULLPTR, Q_NULLPTR },
+    { SASL_CB_NOECHOPROMPT, Q_NULLPTR, Q_NULLPTR },
+    { SASL_CB_GETREALM, Q_NULLPTR, Q_NULLPTR },
+    { SASL_CB_USER, Q_NULLPTR, Q_NULLPTR },
+    { SASL_CB_AUTHNAME, Q_NULLPTR, Q_NULLPTR },
+    { SASL_CB_PASS, Q_NULLPTR, Q_NULLPTR },
+    { SASL_CB_CANON_USER, Q_NULLPTR, Q_NULLPTR },
+    { SASL_CB_LIST_END, Q_NULLPTR, Q_NULLPTR }
 };
 
 static bool ldapoperation_sasl_initialized = false;
@@ -80,10 +80,10 @@ public:
 
 LdapConnection::LdapConnectionPrivate::LdapConnectionPrivate()
 {
-    mSASLconn = 0;
+    mSASLconn = Q_NULLPTR;
 #ifdef SASL2_FOUND
     if (!ldapoperation_sasl_initialized) {
-        sasl_client_init(NULL);
+        sasl_client_init(Q_NULLPTR);
         ldapoperation_sasl_initialized = true;
     }
 #endif
@@ -92,20 +92,20 @@ LdapConnection::LdapConnectionPrivate::LdapConnectionPrivate()
 LdapConnection::LdapConnection()
     : d(new LdapConnectionPrivate)
 {
-    d->mLDAP = 0;
+    d->mLDAP = Q_NULLPTR;
 }
 
 LdapConnection::LdapConnection(const LdapUrl &url)
     : d(new LdapConnectionPrivate)
 {
-    d->mLDAP = 0;
+    d->mLDAP = Q_NULLPTR;
     setUrl(url);
 }
 
 LdapConnection::LdapConnection(const LdapServer &server)
     : d(new LdapConnectionPrivate)
 {
-    d->mLDAP = 0;
+    d->mLDAP = Q_NULLPTR;
     setServer(server);
 }
 
@@ -305,7 +305,7 @@ int LdapConnection::connect()
     if (d->mServer.security() == LdapServer::TLS) {
         qCDebug(LDAP_LOG) << "start TLS";
 #ifdef HAVE_LDAP_START_TLS_S
-        if ((ret = ldap_start_tls_s(d->mLDAP, NULL, NULL)) != LDAP_SUCCESS) {
+        if ((ret = ldap_start_tls_s(d->mLDAP, Q_NULLPTR, Q_NULLPTR)) != LDAP_SUCCESS) {
             d->mConnectionError = ldapErrorString();
             close();
             return ret;
@@ -340,7 +340,7 @@ int LdapConnection::connect()
 #ifdef SASL2_FOUND
     qCDebug(LDAP_LOG) << "initializing SASL client";
     int saslresult = sasl_client_new("ldap", d->mServer.host().toLatin1(),
-                                     0, 0, callbacks, 0, &d->mSASLconn);
+                                     Q_NULLPTR, Q_NULLPTR, callbacks, 0, &d->mSASLconn);
     if (saslresult != SASL_OK) {
         d->mConnectionError = i18n("Cannot initialize the SASL client.");
         return KLDAP_SASL_ERROR;
@@ -354,16 +354,16 @@ void LdapConnection::close()
 {
     if (d->mLDAP) {
 #ifdef HAVE_LDAP_UNBIND_EXT
-        ldap_unbind_ext(d->mLDAP, 0, 0);
+        ldap_unbind_ext(d->mLDAP, Q_NULLPTR, Q_NULLPTR);
 #else
         ldap_unbind(d->mLDAP);
 #endif
     }
-    d->mLDAP = 0;
+    d->mLDAP = Q_NULLPTR;
 #ifdef SASL2_FOUND
     if (d->mSASLconn) {
         sasl_dispose(&d->mSASLconn);
-        d->mSASLconn = 0;
+        d->mSASLconn = Q_NULLPTR;
     }
 #endif
     qCDebug(LDAP_LOG) << "connection closed!";

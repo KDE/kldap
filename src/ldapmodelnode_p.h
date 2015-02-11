@@ -41,7 +41,7 @@ class LdapModelDNNode;
 class LdapModelNode
 {
 public:
-    explicit LdapModelNode(LdapModelDNNode *parent = 0);
+    explicit LdapModelNode(LdapModelDNNode *parent = Q_NULLPTR);
     virtual ~LdapModelNode();
 
     enum NodeType {
@@ -78,11 +78,11 @@ private:
 class LdapModelDNNode : public LdapModelNode
 {
 public:
-    explicit LdapModelDNNode(LdapModelDNNode *parent = 0,
+    explicit LdapModelDNNode(LdapModelDNNode *parent = Q_NULLPTR,
                              const LdapDN &dn = LdapDN());
     ~LdapModelDNNode();
 
-    LdapModelNode::NodeType nodeType() const
+    LdapModelNode::NodeType nodeType() const Q_DECL_OVERRIDE
     {
         return LdapModelNode::DN;
     }
@@ -122,12 +122,12 @@ private:
 class LdapModelAttrNode : public LdapModelNode
 {
 public:
-    explicit LdapModelAttrNode(LdapModelDNNode *parent = 0,
+    explicit LdapModelAttrNode(LdapModelDNNode *parent = Q_NULLPTR,
                                const QString &attrName = QString(),
                                const QByteArray &attrData = QByteArray());
     ~LdapModelAttrNode();
 
-    LdapModelNode::NodeType nodeType() const
+    LdapModelNode::NodeType nodeType() const Q_DECL_OVERRIDE
     {
         return LdapModelNode::Attr;
     }

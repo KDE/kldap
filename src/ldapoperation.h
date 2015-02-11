@@ -129,14 +129,14 @@ public:
      * Can do simple or SASL bind. Returns a message id if successful, negative value if not.
      */
     int bind(const QByteArray &creds = QByteArray(),
-             SASL_Callback_Proc *saslproc = NULL, void *data = NULL);
+             SASL_Callback_Proc *saslproc = Q_NULLPTR, void *data = Q_NULLPTR);
 
     /**
      * Binds to the server which specified in the connection object.
      * Can do simple or SASL bind. This is the synchronous version.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
      */
-    int bind_s(SASL_Callback_Proc *saslproc = NULL, void *data = NULL);
+    int bind_s(SASL_Callback_Proc *saslproc = Q_NULLPTR, void *data = Q_NULLPTR);
 
     /**
      * Starts a search operation with the given base DN, scope, filter and

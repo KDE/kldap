@@ -253,7 +253,7 @@ Qt::DropActions LdapModel::supportedDropActions() const
 QMimeData *LdapModel::mimeData(const QModelIndexList &indexes) const
 {
     Q_UNUSED(indexes);
-    return 0;
+    return Q_NULLPTR;
 }
 
 bool LdapModel::dropMimeData(const QMimeData *data, Qt::DropAction action,

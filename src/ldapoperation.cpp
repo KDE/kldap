@@ -91,7 +91,7 @@ public:
 LdapOperation::LdapOperation()
     : d(new LdapOperationPrivate)
 {
-    d->mConnection = 0;
+    d->mConnection = Q_NULLPTR;
 }
 
 LdapOperation::LdapOperation(LdapConnection &conn)
@@ -229,7 +229,7 @@ static int kldap_sasl_interact(sasl_interact_t *interact, LdapOperation::SASL_Da
             break;
         }
         if (value.isEmpty()) {
-            interact->result = NULL;
+            interact->result = Q_NULLPTR;
             interact->len = 0;
         } else {
             interact->result = strdup(value.toUtf8());
@@ -255,10 +255,10 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
     if (server.auth() == LdapServer::SASL) {
 #if defined( SASL2_FOUND ) && !defined( HAVE_WINLDAP_H )
         sasl_conn_t *saslconn = (sasl_conn_t *)mConnection->saslHandle();
-        sasl_interact_t *client_interact = NULL;
-        const char *out = NULL;
+        sasl_interact_t *client_interact = Q_NULLPTR;
+        const char *out = Q_NULLPTR;
         uint outlen;
-        const char *mechusing = NULL;
+        const char *mechusing = Q_NULLPTR;
         struct berval ccred, *scred;
         int saslresult;
         QByteArray sdata = creds;
@@ -321,7 +321,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
                 int msgid;
                 ret =
                     ldap_sasl_bind(ld, server.bindDn().toUtf8().data(), mech.toLatin1(),
-                                   &ccred, 0, 0, &msgid);
+                                   &ccred, Q_NULLPTR, Q_NULLPTR, &msgid);
                 if (ret == 0) {
                     ret = msgid;
                 }
@@ -330,7 +330,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
                 qCDebug(LDAP_LOG) << "ldap_sasl_bind_s";
                 ret =
                     ldap_sasl_bind_s(ld, server.bindDn().toUtf8().data(), mech.toLatin1(),
-                                     &ccred, 0, 0, &scred);
+                                     &ccred, Q_NULLPTR, Q_NULLPTR, &scred);
                 qCDebug(LDAP_LOG) << "ldap_sasl_bind_s ret" << ret;
                 if (scred) {
                     sdata = QByteArray(scred->bv_val, scred->bv_len);
@@ -359,7 +359,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
             qCDebug(LDAP_LOG) << "ldap_sasl_bind (simple)";
 #ifndef HAVE_WINLDAP_H
             int msgid = 0;
-            ret = ldap_sasl_bind(ld, bindname.data(), 0, &ccred, 0, 0, &msgid);
+            ret = ldap_sasl_bind(ld, bindname.data(), Q_NULLPTR, &ccred, Q_NULLPTR, Q_NULLPTR, &msgid);
             if (ret == 0) {
                 ret = msgid;
             }
@@ -369,7 +369,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
         } else {
             qCDebug(LDAP_LOG) << "ldap_sasl_bind_s (simple)";
 #ifndef HAVE_WINLDAP_H
-            ret = ldap_sasl_bind_s(ld, bindname.data(), 0, &ccred, 0, 0, 0);
+            ret = ldap_sasl_bind_s(ld, bindname.data(), Q_NULLPTR, &ccred, Q_NULLPTR, Q_NULLPTR, Q_NULLPTR);
 #else
             ret = ldap_simple_bind_s(ld, bindname.data(), pass.data());
 #endif
@@ -400,12 +400,12 @@ int LdapOperation::LdapOperationPrivate::processResult(int rescode, LDAPMessage 
 
         // iterate over the attributes
         name = ldap_first_attribute(ld, msg, &entry);
-        while (name != 0) {
+        while (name != Q_NULLPTR) {
             // print the values
             bvals = ldap_get_values_len(ld, msg, name);
             LdapAttrValue values;
             if (bvals) {
-                for (int i = 0; bvals[i] != 0; i++) {
+                for (int i = 0; bvals[i] != Q_NULLPTR; i++) {
                     char *val = bvals[i]->bv_val;
                     unsigned long len = bvals[i]->bv_len;
                     values.append(QByteArray(val, len));
@@ -441,7 +441,7 @@ int LdapOperation::LdapOperationPrivate::processResult(int rescode, LDAPMessage 
         break;
     }
     case RES_BIND: {
-        struct berval *servercred = 0;
+        struct berval *servercred = Q_NULLPTR;
 #ifndef HAVE_WINLDAP_H
         // FIXME: Error handling Winldap does not have ldap_parse_sasl_bind_result
         retval = ldap_parse_sasl_bind_result(ld, msg, &servercred, 0);
@@ -463,8 +463,8 @@ int LdapOperation::LdapOperationPrivate::processResult(int rescode, LDAPMessage 
         break;
     }
     default: {
-        LDAPControl **serverctrls = 0;
-        char *matcheddn = 0, *errmsg = 0;
+        LDAPControl **serverctrls = Q_NULLPTR;
+        char *matcheddn = Q_NULLPTR, *errmsg = Q_NULLPTR;
         char **referralsp;
         int errcodep;
         retval =
@@ -509,7 +509,7 @@ int LdapOperation::LdapOperationPrivate::processResult(int rescode, LDAPMessage 
 }
 
 static void addModOp(LDAPMod ***pmods, int mod_type, const QString &attr,
-                     const QByteArray *value = 0)
+                     const QByteArray *value = Q_NULLPTR)
 {
     //  qCDebug(LDAP_LOG) << "type:" << mod_type << "attr:" << attr <<
     //    "value:" << QString::fromUtf8(value,value.size()) <<
@@ -520,38 +520,38 @@ static void addModOp(LDAPMod ***pmods, int mod_type, const QString &attr,
 
     uint i = 0;
 
-    if (mods == 0) {
+    if (mods == Q_NULLPTR) {
         mods = (LDAPMod **)malloc(2 * sizeof(LDAPMod *));
         mods[ 0 ] = (LDAPMod *)malloc(sizeof(LDAPMod));
-        mods[ 1 ] = 0;
+        mods[ 1 ] = Q_NULLPTR;
         memset(mods[ 0 ], 0, sizeof(LDAPMod));
     } else {
-        while (mods[ i ] != 0 &&
+        while (mods[ i ] != Q_NULLPTR &&
                 (strcmp(attr.toUtf8(), mods[i]->mod_type) != 0 ||
                  (mods[ i ]->mod_op & ~LDAP_MOD_BVALUES) != mod_type)) {
             i++;
         }
 
-        if (mods[ i ] == 0) {
+        if (mods[ i ] == Q_NULLPTR) {
             mods = (LDAPMod **)realloc(mods, (i + 2) * sizeof(LDAPMod *));
-            if (mods == 0) {
+            if (mods == Q_NULLPTR) {
                 qCritical() << "addModOp: realloc";
                 return;
             }
-            mods[ i + 1 ] = 0;
+            mods[ i + 1 ] = Q_NULLPTR;
             mods[ i ] = (LDAPMod *) malloc(sizeof(LDAPMod));
             memset(mods[ i ], 0, sizeof(LDAPMod));
         }
     }
 
     mods[ i ]->mod_op = mod_type | LDAP_MOD_BVALUES;
-    if (mods[ i ]->mod_type == 0) {
+    if (mods[ i ]->mod_type == Q_NULLPTR) {
         mods[ i ]->mod_type = strdup(attr.toUtf8());
     }
 
     *pmods = mods;
 
-    if (value == 0) {
+    if (value == Q_NULLPTR) {
         return;
     }
 
@@ -563,30 +563,30 @@ static void addModOp(LDAPMod ***pmods, int mod_type, const QString &attr,
         berval -> bv_val = (char *) malloc(vallen);
         memcpy(berval -> bv_val, value->data(), vallen);
     } else {
-        berval -> bv_val = 0;
+        berval -> bv_val = Q_NULLPTR;
     }
 
-    if (mods[ i ] -> mod_vals.modv_bvals == 0) {
+    if (mods[ i ] -> mod_vals.modv_bvals == Q_NULLPTR) {
         mods[ i ]->mod_vals.modv_bvals =
             (BerValue **) malloc(sizeof(BerValue *) * 2);
         mods[ i ]->mod_vals.modv_bvals[ 0 ] = berval;
-        mods[ i ]->mod_vals.modv_bvals[ 1 ] = 0;
+        mods[ i ]->mod_vals.modv_bvals[ 1 ] = Q_NULLPTR;
 //    qCDebug(LDAP_LOG) << "new bervalue struct" << attr << value;
     } else {
         uint j = 0;
-        while (mods[ i ]->mod_vals.modv_bvals[ j ] != 0) {
+        while (mods[ i ]->mod_vals.modv_bvals[ j ] != Q_NULLPTR) {
             j++;
         }
         mods[ i ]->mod_vals.modv_bvals =
             (BerValue **)realloc(mods[ i ]->mod_vals.modv_bvals,
                                  (j + 2) * sizeof(BerValue *));
-        if (mods[ i ]->mod_vals.modv_bvals == 0) {
+        if (mods[ i ]->mod_vals.modv_bvals == Q_NULLPTR) {
             qCritical() << "addModOp: realloc";
             free(berval);
             return;
         }
         mods[ i ]->mod_vals.modv_bvals[ j ] = berval;
-        mods[ i ]->mod_vals.modv_bvals[ j + 1 ] = 0;
+        mods[ i ]->mod_vals.modv_bvals[ j + 1 ] = Q_NULLPTR;
         qCDebug(LDAP_LOG) << j << ". new bervalue";
     }
 }
@@ -606,22 +606,22 @@ static void addControlOp(LDAPControl ***pctrls, const QString &oid,
         ctrl->ldctl_value.bv_val = (char *) malloc(vallen);
         memcpy(ctrl->ldctl_value.bv_val, value.data(), vallen);
     } else {
-        ctrl->ldctl_value.bv_val = 0;
+        ctrl->ldctl_value.bv_val = Q_NULLPTR;
     }
     ctrl->ldctl_iscritical = critical;
     ctrl->ldctl_oid = strdup(oid.toUtf8());
 
     uint i = 0;
 
-    if (ctrls == 0) {
+    if (ctrls == Q_NULLPTR) {
         ctrls = (LDAPControl **)malloc(2 * sizeof(LDAPControl *));
-        ctrls[ 0 ] = 0;
-        ctrls[ 1 ] = 0;
+        ctrls[ 0 ] = Q_NULLPTR;
+        ctrls[ 1 ] = Q_NULLPTR;
     } else {
-        while (ctrls[ i ] != 0) {
+        while (ctrls[ i ] != Q_NULLPTR) {
             i++;
         }
-        ctrls[ i + 1 ] = 0;
+        ctrls[ i + 1 ] = Q_NULLPTR;
         ctrls =
             (LDAPControl **)realloc(ctrls, (i + 2) * sizeof(LDAPControl *));
     }
@@ -669,10 +669,10 @@ int LdapOperation::search(const LdapDN &base, LdapUrl::Scope scope,
     Q_ASSERT(d->mConnection);
     LDAP *ld = (LDAP *) d->mConnection->handle();
 
-    char **attrs = 0;
+    char **attrs = Q_NULLPTR;
     int msgid;
 
-    LDAPControl **serverctrls = 0, **clientctrls = 0;
+    LDAPControl **serverctrls = Q_NULLPTR, **clientctrls = Q_NULLPTR;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -682,7 +682,7 @@ int LdapOperation::search(const LdapDN &base, LdapUrl::Scope scope,
         for (int i = 0; i < count; i++) {
             attrs[i] = strdup(attributes.at(i).toUtf8());
         }
-        attrs[count] = 0;
+        attrs[count] = Q_NULLPTR;
     }
 
     int lscope = LDAP_SCOPE_BASE;
@@ -706,7 +706,7 @@ int LdapOperation::search(const LdapDN &base, LdapUrl::Scope scope,
         ldap_search_ext(ld, base.toString().toUtf8().data(), lscope,
                         filter.isEmpty() ? QByteArray("objectClass=*").data() :
                         filter.toUtf8().data(),
-                        attrs, 0, serverctrls, clientctrls, 0,
+                        attrs, 0, serverctrls, clientctrls, Q_NULLPTR,
                         d->mConnection->sizeLimit(), &msgid);
 
     ldap_controls_free(serverctrls);
@@ -732,9 +732,9 @@ int LdapOperation::add(const LdapObject &object)
     LDAP *ld = (LDAP *) d->mConnection->handle();
 
     int msgid;
-    LDAPMod **lmod = 0;
+    LDAPMod **lmod = Q_NULLPTR;
 
-    LDAPControl **serverctrls = 0, **clientctrls = 0;
+    LDAPControl **serverctrls = Q_NULLPTR, **clientctrls = Q_NULLPTR;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -764,9 +764,9 @@ int LdapOperation::add_s(const LdapObject &object)
     Q_ASSERT(d->mConnection);
     LDAP *ld = (LDAP *) d->mConnection->handle();
 
-    LDAPMod **lmod = 0;
+    LDAPMod **lmod = Q_NULLPTR;
 
-    LDAPControl **serverctrls = 0, **clientctrls = 0;
+    LDAPControl **serverctrls = Q_NULLPTR, **clientctrls = Q_NULLPTR;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -794,9 +794,9 @@ int LdapOperation::add(const LdapDN &dn, const ModOps &ops)
     LDAP *ld = (LDAP *) d->mConnection->handle();
 
     int msgid;
-    LDAPMod **lmod = 0;
+    LDAPMod **lmod = Q_NULLPTR;
 
-    LDAPControl **serverctrls = 0, **clientctrls = 0;
+    LDAPControl **serverctrls = Q_NULLPTR, **clientctrls = Q_NULLPTR;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -824,9 +824,9 @@ int LdapOperation::add_s(const LdapDN &dn, const ModOps &ops)
     Q_ASSERT(d->mConnection);
     LDAP *ld = (LDAP *) d->mConnection->handle();
 
-    LDAPMod **lmod = 0;
+    LDAPMod **lmod = Q_NULLPTR;
 
-    LDAPControl **serverctrls = 0, **clientctrls = 0;
+    LDAPControl **serverctrls = Q_NULLPTR, **clientctrls = Q_NULLPTR;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -854,12 +854,12 @@ int LdapOperation::rename(const LdapDN &dn, const QString &newRdn,
 
     int msgid;
 
-    LDAPControl **serverctrls = 0, **clientctrls = 0;
+    LDAPControl **serverctrls = Q_NULLPTR, **clientctrls = Q_NULLPTR;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
     int retval = ldap_rename(ld, dn.toString().toUtf8().data(), newRdn.toUtf8().data(),
-                             newSuperior.isEmpty() ? (char *) 0 : newSuperior.toUtf8().data(),
+                             newSuperior.isEmpty() ? (char *) Q_NULLPTR : newSuperior.toUtf8().data(),
                              deleteold, serverctrls, clientctrls, &msgid);
 
     ldap_controls_free(serverctrls);
@@ -877,12 +877,12 @@ int LdapOperation::rename_s(const LdapDN &dn, const QString &newRdn,
     Q_ASSERT(d->mConnection);
     LDAP *ld = (LDAP *) d->mConnection->handle();
 
-    LDAPControl **serverctrls = 0, **clientctrls = 0;
+    LDAPControl **serverctrls = Q_NULLPTR, **clientctrls = Q_NULLPTR;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
     int retval = ldap_rename_s(ld, dn.toString().toUtf8().data(), newRdn.toUtf8().data(),
-                               newSuperior.isEmpty() ? (char *) 0 : newSuperior.toUtf8().data(),
+                               newSuperior.isEmpty() ? (char *) Q_NULLPTR : newSuperior.toUtf8().data(),
                                deleteold, serverctrls, clientctrls);
 
     ldap_controls_free(serverctrls);
@@ -898,7 +898,7 @@ int LdapOperation::del(const LdapDN &dn)
 
     int msgid;
 
-    LDAPControl **serverctrls = 0, **clientctrls = 0;
+    LDAPControl **serverctrls = Q_NULLPTR, **clientctrls = Q_NULLPTR;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -919,7 +919,7 @@ int LdapOperation::del_s(const LdapDN &dn)
     Q_ASSERT(d->mConnection);
     LDAP *ld = (LDAP *) d->mConnection->handle();
 
-    LDAPControl **serverctrls = 0, **clientctrls = 0;
+    LDAPControl **serverctrls = Q_NULLPTR, **clientctrls = Q_NULLPTR;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -937,9 +937,9 @@ int LdapOperation::modify(const LdapDN &dn, const ModOps &ops)
     LDAP *ld = (LDAP *)d->mConnection->handle();
 
     int msgid;
-    LDAPMod **lmod = 0;
+    LDAPMod **lmod = Q_NULLPTR;
 
-    LDAPControl **serverctrls = 0, **clientctrls = 0;
+    LDAPControl **serverctrls = Q_NULLPTR, **clientctrls = Q_NULLPTR;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -959,7 +959,7 @@ int LdapOperation::modify(const LdapDN &dn, const ModOps &ops)
             mtype = LDAP_MOD_DELETE;
             break;
         }
-        addModOp(&lmod, mtype, ops[i].attr, 0);
+        addModOp(&lmod, mtype, ops[i].attr, Q_NULLPTR);
         for (int j = 0; j < ops[i].values.count(); ++j) {
             addModOp(&lmod, mtype, ops[i].attr, &ops[i].values[j]);
         }
@@ -982,9 +982,9 @@ int LdapOperation::modify_s(const LdapDN &dn, const ModOps &ops)
     Q_ASSERT(d->mConnection);
     LDAP *ld = (LDAP *) d->mConnection->handle();
 
-    LDAPMod **lmod = 0;
+    LDAPMod **lmod = Q_NULLPTR;
 
-    LDAPControl **serverctrls = 0, **clientctrls = 0;
+    LDAPControl **serverctrls = Q_NULLPTR, **clientctrls = Q_NULLPTR;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -1004,7 +1004,7 @@ int LdapOperation::modify_s(const LdapDN &dn, const ModOps &ops)
             mtype = LDAP_MOD_DELETE;
             break;
         }
-        addModOp(&lmod, mtype, ops[i].attr, 0);
+        addModOp(&lmod, mtype, ops[i].attr, Q_NULLPTR);
         for (int j = 0; j < ops[i].values.count(); ++j) {
             addModOp(&lmod, mtype, ops[i].attr, &ops[i].values[j]);
         }
@@ -1025,7 +1025,7 @@ int LdapOperation::compare(const LdapDN &dn, const QString &attr, const QByteArr
     LDAP *ld = (LDAP *) d->mConnection->handle();
     int msgid;
 
-    LDAPControl **serverctrls = 0, **clientctrls = 0;
+    LDAPControl **serverctrls = Q_NULLPTR, **clientctrls = Q_NULLPTR;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -1054,7 +1054,7 @@ int LdapOperation::compare_s(const LdapDN &dn, const QString &attr, const QByteA
     Q_ASSERT(d->mConnection);
     LDAP *ld = (LDAP *) d->mConnection->handle();
 
-    LDAPControl **serverctrls = 0, **clientctrls = 0;
+    LDAPControl **serverctrls = Q_NULLPTR, **clientctrls = Q_NULLPTR;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -1082,7 +1082,7 @@ int LdapOperation::exop(const QString &oid, const QByteArray &data)
     LDAP *ld = (LDAP *) d->mConnection->handle();
     int msgid;
 
-    LDAPControl **serverctrls = 0, **clientctrls = 0;
+    LDAPControl **serverctrls = Q_NULLPTR, **clientctrls = Q_NULLPTR;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -1118,7 +1118,7 @@ int LdapOperation::exop_s(const QString &oid, const QByteArray &data)
     BerValue *retdata;
     char *retoid;
 
-    LDAPControl **serverctrls = 0, **clientctrls = 0;
+    LDAPControl **serverctrls = Q_NULLPTR, **clientctrls = Q_NULLPTR;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -1150,7 +1150,7 @@ int LdapOperation::abandon(int id)
     Q_ASSERT(d->mConnection);
     LDAP *ld = (LDAP *) d->mConnection->handle();
 
-    LDAPControl **serverctrls = 0, **clientctrls = 0;
+    LDAPControl **serverctrls = Q_NULLPTR, **clientctrls = Q_NULLPTR;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -1187,7 +1187,7 @@ int LdapOperation::waitForResult(int id, int msecs)
         tv.tv_usec = (timeout % 1000) * 1000;
 
         // Wait for a result
-        rescode = ldap_result(ld, id, 0, timeout < 0 ? 0 : &tv, &msg);
+        rescode = ldap_result(ld, id, 0, timeout < 0 ? Q_NULLPTR : &tv, &msg);
         if (rescode == -1) {
             return -1;
         }

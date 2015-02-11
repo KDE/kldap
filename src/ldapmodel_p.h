@@ -91,7 +91,7 @@ public:
         return m_baseDN;
     }
 
-    void setSearchType(SearchType t, LdapModelDNNode *item = 0);
+    void setSearchType(SearchType t, LdapModelDNNode *item = Q_NULLPTR);
 
     SearchType searchType()
     {
