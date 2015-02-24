@@ -309,7 +309,7 @@ bool LdapSearch::search(const LdapUrl &url, int count)
         }
     }
     bool critical = true;
-    int pagesize = url.extension(QLatin1String("x-pagesize"), critical).toInt();
+    int pagesize = url.extension(QStringLiteral("x-pagesize"), critical).toInt();
     return d->startSearch(url.dn(), url.scope(), url.filter(),
                           url.attributes(), pagesize, count);
 }
