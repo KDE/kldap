@@ -36,7 +36,11 @@ public:
     QString mPassword;
     QString mMech;
     QString mFilter;
-    int mTimeLimit, mSizeLimit, mVersion, mPageSize, mTimeout;
+    int mTimeLimit;
+    int mSizeLimit;
+    int mVersion;
+    int mPageSize;
+    int mTimeout;
     Security mSecurity;
     Auth mAuth;
     LdapUrl::Scope mScope;
@@ -349,7 +353,7 @@ void LdapServer::setUrl(const LdapUrl &url)
 LdapUrl LdapServer::url() const
 {
     LdapUrl url;
-    url.setScheme(d->mSecurity == SSL ? QLatin1String("ldaps") : QLatin1String("ldap"));
+    url.setScheme(d->mSecurity == SSL ? QStringLiteral("ldaps") : QStringLiteral("ldap"));
     url.setPort(d->mPort);
     url.setHost(d->mHost);
     url.setDn(d->mBaseDn);
@@ -358,36 +362,35 @@ LdapUrl LdapServer::url() const
     if (d->mAuth == SASL) {
         url.setUserName(d->mUser);
         url.setPassword(d->mPassword);
-        url.setExtension(QLatin1String("bindname"), d->mBindDn, true);
-        url.setExtension(QLatin1String("x-sasl"), QString());
+        url.setExtension(QStringLiteral("bindname"), d->mBindDn, true);
+        url.setExtension(QStringLiteral("x-sasl"), QString());
         if (!d->mMech.isEmpty()) {
-            url.setExtension(QLatin1String("x-mech"), d->mMech);
+            url.setExtension(QStringLiteral("x-mech"), d->mMech);
         }
         if (!d->mRealm.isEmpty()) {
-            url.setExtension(QLatin1String("x-realm"), d->mRealm);
+            url.setExtension(QStringLiteral("x-realm"), d->mRealm);
         }
     } else if (d->mAuth == Simple) {
         url.setUserName(d->mBindDn);
         url.setPassword(d->mPassword);
     }
     if (d->mVersion == 2) {
-        url.setExtension(QLatin1String("x-version"), d->mVersion);
+        url.setExtension(QStringLiteral("x-version"), d->mVersion);
     }
     if (d->mTimeout) {
-        url.setExtension(QLatin1String("x-timeout"), d->mTimeout);
+        url.setExtension(QStringLiteral("x-timeout"), d->mTimeout);
     }
     if (d->mTimeLimit != 0) {
-        url.setExtension(QLatin1String("x-timelimit"), d->mTimeLimit);
+        url.setExtension(QStringLiteral("x-timelimit"), d->mTimeLimit);
     }
     if (d->mSizeLimit != 0) {
-        url.setExtension(QLatin1String("x-sizelimit"), d->mSizeLimit);
+        url.setExtension(QStringLiteral("x-sizelimit"), d->mSizeLimit);
     }
     if (d->mPageSize != 0) {
-        url.setExtension(QLatin1String("x-pagesize"), d->mPageSize);
+        url.setExtension(QStringLiteral("x-pagesize"), d->mPageSize);
     }
     if (d->mSecurity == TLS) {
-        url.setExtension(QLatin1String("x-tls"), 1, true);
+        url.setExtension(QStringLiteral("x-tls"), 1, true);
     }
-
     return url;
 }

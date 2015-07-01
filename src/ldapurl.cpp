@@ -203,13 +203,13 @@ void LdapUrl::updateQuery()
     q += QLatin1Char('?');
     switch (d->m_scope) {
     case Sub:
-        q += QLatin1String("sub");
+        q += QStringLiteral("sub");
         break;
     case One:
-        q += QLatin1String("one");
+        q += QStringLiteral("one");
         break;
     case Base:
-        q += QLatin1String("base");
+        q += QStringLiteral("base");
         break;
     }
 
