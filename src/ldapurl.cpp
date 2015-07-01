@@ -83,9 +83,10 @@ void LdapUrl::setDn(const LdapDN &dn)
 {
     QString tmp = dn.toString();
     if (tmp.startsWith(QLatin1Char('/'))) {
-        tmp = tmp.mid(1);
+        setPath(tmp);
+    } else {
+        setPath(QLatin1Char('/')  + tmp);
     }
-    setPath(tmp);
 }
 
 LdapDN LdapUrl::dn() const
