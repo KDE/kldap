@@ -18,7 +18,7 @@ include(KDEFrameworkCompilerSettings)
 
 
 set(KF5_VERSION "5.12.0")
-set(KLDAP_LIB_VERSION "4.79.0")
+set(KLDAP_LIB_VERSION "4.80.0")
 
 ecm_setup_version(${KLDAP_LIB_VERSION} VARIABLE_PREFIX KLDAP
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kldap_version.h"
