@@ -85,6 +85,9 @@ install(FILES
 ########### Targets ###########
 add_subdirectory(cmake)
 add_subdirectory(src)
-add_subdirectory(autotests)
+
+if(BUILD_TESTING)
+    add_subdirectory(autotests)
+endif()
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
