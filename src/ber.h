@@ -115,8 +115,8 @@ public:
      *   </li>
      * </ul>
      */
-    int printf(const QString &format, ...);
-    int scanf(const QString &format, ...);
+    int printf(QString format, ...); // Passing by-value since it's used by va_start
+    int scanf(QString format, ...);
     unsigned int peekTag(int &size);
     unsigned int skipTag(int &size);
 

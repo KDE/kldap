@@ -124,7 +124,7 @@ QByteArray Ber::flatten() const
     return ret;
 }
 
-int Ber::printf(const QString &format, ...)
+int Ber::printf(QString format, ...)
 {
     char fmt[2];
     va_list args;
@@ -221,7 +221,7 @@ int Ber::printf(const QString &format, ...)
     return ret;
 }
 
-int Ber::scanf(const QString &format, ...)
+int Ber::scanf(QString format, ...)
 {
     char fmt[2];
     va_list args;
