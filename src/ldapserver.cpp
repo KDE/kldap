@@ -24,7 +24,7 @@
 
 using namespace KLDAP;
 
-class LdapServer::LdapServerPrivate
+class Q_DECL_HIDDEN LdapServer::LdapServerPrivate
 {
 public:
     QString mHost;

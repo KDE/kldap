@@ -27,7 +27,7 @@
 
 using namespace KLDAP;
 
-class LdapAttributeProxyModel::LdapAttributeProxyModelPrivate
+class Q_DECL_HIDDEN LdapAttributeProxyModel::LdapAttributeProxyModelPrivate
 {
 public:
     LdapAttributeProxyModelPrivate();

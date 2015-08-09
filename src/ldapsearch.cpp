@@ -32,7 +32,7 @@ using namespace KLDAP;
 //blocking the GUI for xxx milliseconds
 #define LDAPSEARCH_BLOCKING_TIMEOUT 10
 
-class LdapSearch::Private
+class Q_DECL_HIDDEN LdapSearch::Private
 {
 public:
     Private(LdapSearch *parent)

@@ -57,7 +57,7 @@
 
 using namespace KLDAP;
 
-class Ber::BerPrivate
+class Q_DECL_HIDDEN Ber::BerPrivate
 {
 public:
 #ifdef LDAP_FOUND

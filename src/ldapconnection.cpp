@@ -58,7 +58,7 @@ static bool ldapoperation_sasl_initialized = false;
 
 using namespace KLDAP;
 
-class LdapConnection::LdapConnectionPrivate
+class Q_DECL_HIDDEN LdapConnection::LdapConnectionPrivate
 {
 public:
     LdapConnectionPrivate();

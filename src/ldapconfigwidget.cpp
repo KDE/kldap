@@ -39,7 +39,7 @@
 
 using namespace KLDAP;
 
-class LdapConfigWidget::Private
+class Q_DECL_HIDDEN LdapConfigWidget::Private
 {
 public:
     Private(LdapConfigWidget *parent)

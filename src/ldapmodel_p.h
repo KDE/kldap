@@ -35,7 +35,7 @@ class LdapSearch;
 /**
  * @internal
  */
-class LdapModel::LdapModelPrivate
+class Q_DECL_HIDDEN LdapModel::LdapModelPrivate
 {
 public:
     enum SearchType {

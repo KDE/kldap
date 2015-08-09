@@ -26,7 +26,7 @@
 
 using namespace KLDAP;
 
-class LdapUrl::LdapUrlPrivate
+class Q_DECL_HIDDEN LdapUrl::LdapUrlPrivate
 {
 public:
     LdapUrlPrivate()

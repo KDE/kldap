@@ -69,7 +69,7 @@ static int kldap_timeout_value(int msecs, int elapsed)
     return timeout < 0 ? 0 : timeout;
 }
 
-class LdapOperation::LdapOperationPrivate
+class Q_DECL_HIDDEN LdapOperation::LdapOperationPrivate
 {
 public:
     LdapOperationPrivate();

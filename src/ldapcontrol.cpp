@@ -25,7 +25,7 @@
 
 using namespace KLDAP;
 
-class LdapControl::Private : public QSharedData
+class Q_DECL_HIDDEN LdapControl::Private : public QSharedData
 {
 public:
     Private()
