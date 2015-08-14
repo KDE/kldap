@@ -196,7 +196,7 @@ void LdapUrl::updateQuery()
 
     // set the attributes to query
     if (!d->m_attributes.isEmpty()) {
-        q += d->m_attributes.join(QLatin1String(","));
+        q += d->m_attributes.join(QStringLiteral(","));
     }
 
     // set the scope
