@@ -375,7 +375,7 @@ void LdapConfigWidget::Private::sendQuery()
 
 void LdapConfigWidget::Private::queryMechClicked()
 {
-    mAttr = QLatin1String("supportedsaslmechanisms");
+    mAttr = QStringLiteral("supportedsaslmechanisms");
     sendQuery();
     if (!mQResult.isEmpty()) {
         mQResult.sort();
@@ -386,7 +386,7 @@ void LdapConfigWidget::Private::queryMechClicked()
 
 void LdapConfigWidget::Private::queryDNClicked()
 {
-    mAttr = QLatin1String("namingcontexts");
+    mAttr = QStringLiteral("namingcontexts");
     sendQuery();
     if (!mQResult.isEmpty()) {
         mDn->setText(mQResult.first());

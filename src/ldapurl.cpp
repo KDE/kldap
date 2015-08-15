@@ -254,7 +254,7 @@ void LdapUrl::parseQuery()
 
     d->m_attributes.clear();
     d->m_scope = Base;
-    d->m_filter = QLatin1String("(objectClass=*)");
+    d->m_filter = QStringLiteral("(objectClass=*)");
     d->m_extensions.clear();
 
     int i = 0;
