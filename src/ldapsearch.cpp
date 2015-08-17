@@ -32,10 +32,10 @@ using namespace KLDAP;
 //blocking the GUI for xxx milliseconds
 #define LDAPSEARCH_BLOCKING_TIMEOUT 10
 
-class Q_DECL_HIDDEN LdapSearch::Private
+class LdapSearchPrivate
 {
 public:
-    Private(LdapSearch *parent)
+    LdapSearchPrivate(LdapSearch *parent)
         : mParent(parent)
     {
     }
@@ -63,7 +63,7 @@ public:
     bool mFinished;
 };
 
-void LdapSearch::Private::result()
+void LdapSearchPrivate::result()
 {
     if (mAbandoned) {
         mOp.abandon(mId);
@@ -175,7 +175,7 @@ void LdapSearch::Private::result()
     }
 }
 
-bool LdapSearch::Private::connect()
+bool LdapSearchPrivate::connect()
 {
     int ret = mConn->connect();
     if (ret != KLDAP_SUCCESS) {
@@ -187,7 +187,7 @@ bool LdapSearch::Private::connect()
     return true;
 }
 
-void LdapSearch::Private::closeConnection()
+void LdapSearchPrivate::closeConnection()
 {
     if (mOwnConnection && mConn) {
         delete mConn;
@@ -196,7 +196,7 @@ void LdapSearch::Private::closeConnection()
 }
 
 //This starts the real job
-bool LdapSearch::Private::startSearch(const LdapDN &base, LdapUrl::Scope scope,
+bool LdapSearchPrivate::startSearch(const LdapDN &base, LdapUrl::Scope scope,
                                       const QString &filter,
                                       const QStringList &attributes, int pagesize, int count)
 {
@@ -249,14 +249,14 @@ bool LdapSearch::Private::startSearch(const LdapDN &base, LdapUrl::Scope scope,
 ///////////////////////////////////////////////
 
 LdapSearch::LdapSearch()
-    : d(new Private(this))
+    : d(new LdapSearchPrivate(this))
 {
     d->mOwnConnection = true;
     d->mConn = Q_NULLPTR;
 }
 
 LdapSearch::LdapSearch(LdapConnection &connection)
-    : d(new Private(this))
+    : d(new LdapSearchPrivate(this))
 {
     d->mOwnConnection = false;
     d->mConn = &connection;

@@ -25,6 +25,7 @@
 #include <QtCore/QList>
 #include <QtCore/QObject>
 #include <QtCore/QString>
+class LdapSearchPrivate;
 
 #include "kldap_export.h"
 
@@ -140,8 +141,7 @@ Q_SIGNALS:
     void result(KLDAP::LdapSearch *search);
 
 private:
-    class Private;
-    Private *const d;
+    LdapSearchPrivate *const d;
 
     Q_PRIVATE_SLOT(d, void result())
 

@@ -25,15 +25,15 @@
 
 using namespace KLDAP;
 
-class Q_DECL_HIDDEN LdapControl::Private : public QSharedData
+class LdapControlPrivate : public QSharedData
 {
 public:
-    Private()
+    LdapControlPrivate()
     {
         mCritical = false;
     }
 
-    Private(const Private &other)
+    LdapControlPrivate(const LdapControlPrivate &other)
         : QSharedData(other)
     {
         mOid = other.mOid;
@@ -47,13 +47,13 @@ public:
 };
 
 LdapControl::LdapControl()
-    : d(new Private)
+    : d(new LdapControlPrivate)
 {
     setControl(QString(), QByteArray(), false);
 }
 
 LdapControl::LdapControl(const QString &oid, const QByteArray &value, bool critical)
-    : d(new Private)
+    : d(new LdapControlPrivate)
 {
     setControl(oid, value, critical);
 }

@@ -24,6 +24,7 @@
 #include <QtCore/QString>
 #include <QtCore/QVector>
 #include <QtCore/QSharedDataPointer>
+class LdapControlPrivate;
 
 #include "kldap_export.h"
 
@@ -109,8 +110,7 @@ public:
     static void insert(LdapControls &list, const LdapControl &ctrl);
 
 private:
-    class Private;
-    QSharedDataPointer<Private> d;
+    QSharedDataPointer<LdapControlPrivate> d;
 };
 
 }

@@ -25,14 +25,14 @@
 
 using namespace KLDAP;
 
-class Q_DECL_HIDDEN LdapObject::Private : public QSharedData
+class LdapObjectPrivate : public QSharedData
 {
 public:
-    Private()
+    LdapObjectPrivate()
     {
     }
 
-    Private(const Private &other)
+    LdapObjectPrivate(const LdapObjectPrivate &other)
         : QSharedData(other)
     {
         mDn = other.mDn;
@@ -44,12 +44,12 @@ public:
 };
 
 LdapObject::LdapObject()
-    : d(new Private)
+    : d(new LdapObjectPrivate)
 {
 }
 
 LdapObject::LdapObject(const QString &dn)
-    : d(new Private)
+    : d(new LdapObjectPrivate)
 {
     d->mDn = LdapDN(dn);
 }
