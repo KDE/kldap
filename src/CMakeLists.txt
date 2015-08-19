@@ -106,7 +106,6 @@ ecm_generate_headers(KLdap_CamelCase_HEADERS
 )
 
 install(FILES
-    ${KLdap_CamelCase_HEADERS}
     ${CMAKE_CURRENT_BINARY_DIR}/kldap_export.h
     ${KLdap_HEADERS}
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KLDAP/kldap
