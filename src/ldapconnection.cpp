@@ -145,12 +145,6 @@ QString LdapConnection::errorString(int code)
     //No translated error messages yet
 #ifdef LDAP_FOUND
     return QString::fromUtf8(ldap_err2string(code));
-    switch (code) {
-    case LDAP_OPERATIONS_ERROR:
-        return i18n("LDAP Operations error");
-        //FIXME:
-        /* add the LDAP error codes */
-    }
 #else
     return i18n("No LDAP Support...");
 #endif
