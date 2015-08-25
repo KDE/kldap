@@ -171,6 +171,7 @@ QByteArray LdapOperation::serverCred() const
 }
 
 LdapOperation::LdapOperationPrivate::LdapOperationPrivate()
+    : mConnection(Q_NULLPTR)
 {
 }
 
