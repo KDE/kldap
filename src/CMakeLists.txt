@@ -36,7 +36,6 @@ configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kldap_config.h.cmake ${CMAKE_CURRENT_
 ########### next target ###############
 
 set(kldap_LIB_SRCS
-  ldap_debug.cpp
   ber.cpp
   ldif.cpp
   ldapurl.cpp
@@ -54,6 +53,7 @@ set(kldap_LIB_SRCS
   ldapstructureproxymodel.cpp
   ldapattributeproxymodel.cpp
 )
+ecm_qt_declare_logging_category(kldap_LIB_SRCS HEADER ldap_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME log_ldap)
 
 add_library(KF5Ldap ${kldap_LIB_SRCS})
 
