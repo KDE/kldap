@@ -143,7 +143,7 @@ void LdapConfigWidget::Private::initWidget()
         label = new QLabel(i18n("Host:"), mParent);
         mHost = new QLineEdit(mParent);
         mHost->setObjectName(QStringLiteral("kcfg_ldaphost"));
-        mParent->connect(mHost, SIGNAL(textChanged(QString)), SIGNAL(hostNameChanged(QString)));
+        mParent->connect(mHost, &QLineEdit::textChanged, mParent, &LdapConfigWidget::hostNameChanged);
         mainLayout->addWidget(label, row, 0);
         mainLayout->addWidget(mHost, row, 1, 1, 3);
         row++;
