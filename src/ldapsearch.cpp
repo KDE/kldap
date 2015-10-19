@@ -128,7 +128,7 @@ void LdapSearchPrivate::result()
             int estsize = -1;
             const int numberOfControls(mOp.controls().count());
             for (int i = 0; i < numberOfControls; ++i) {
-                estsize = mOp.controls()[i].parsePageControl(cookie);
+                estsize = mOp.controls().at(i).parsePageControl(cookie);
                 if (estsize != -1) {
                     break;
                 }
