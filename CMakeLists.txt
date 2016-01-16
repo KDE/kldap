@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8.12)
 project(KLdap)
 
 # ECM setup
-find_package(ECM 5.14.0 CONFIG REQUIRED)
+find_package(ECM 5.17.0 CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${KLdap_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
 
 include(GenerateExportHeader)
@@ -17,8 +17,8 @@ include(KDECMakeSettings)
 include(KDEFrameworkCompilerSettings)
 include(ECMQtDeclareLoggingCategory)
 
-set(KF5_VERSION "5.12.0")
-set(KLDAP_LIB_VERSION "4.80.0")
+set(KF5_VERSION "5.17.0")
+set(KLDAP_LIB_VERSION "5.0.40")
 
 ecm_setup_version(${KLDAP_LIB_VERSION} VARIABLE_PREFIX KLDAP
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kldap_version.h"
