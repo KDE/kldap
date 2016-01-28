@@ -1,12 +1,62 @@
-# - Try to find the LDAP client libraries
-# Once done this will define
+#.rst:
+# FindLdap
+# --------
 #
-#  Ldap_FOUND - system has libldap
-#  Ldap_INCLUDE_DIRS - the ldap include directory
-#  Ldap_LIBRARIES - libldap + liblber (if found) library
+# Try to find the LDAP client libraries.
+#
+# This will define the following variables:
+#
+# ``Ldap_FOUND``
+#     True if libldap is available.
+#
+# ``Ldap_VERSION``
+#     The version of libldap
+#
+# ``Ldap_INCLUDE_DIRS``
+#     This should be passed to target_include_directories() if
+#     the target is not used for linking
+#
+# ``Ldap_LIBRARIES``
+#     The LDAP libraries (libldap + liblber if available)
+#     This can be passed to target_link_libraries() instead of
+#     the ``Ldap::Ldap`` target
+#
+# If ``Ldap_FOUND`` is TRUE, the following imported target
+# will be available:
+#
+# ``Ldap::Ldap``
+#     The LDAP library
+#
+#=============================================================================
+# Copyright 2006 Szombathelyi György <gyurco@freemail.hu>
+# Copyright 2007-2016 Laurent Montel <montel@kde.org>
 
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions
+# are met:
+#
+# 1. Redistributions of source code must retain the copyright
+#    notice, this list of conditions and the following disclaimer.
+# 2. Redistributions in binary form must reproduce the copyright
+#    notice, this list of conditions and the following disclaimer in the
+#    documentation and/or other materials provided with the distribution.
+# 3. The name of the author may not be used to endorse or promote products
+#    derived from this software without specific prior written permission.
+#
+# THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
+# IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
+# OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+# IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT,
+# INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT
+# NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+# DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+# THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
+# THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#=============================================================================
 
-find_path(Ldap_INCLUDE_DIRS ldap.h)
+find_path(Ldap_INCLUDE_DIRS NAMES ldap.h)
 
 if(APPLE)
    find_library(Ldap_LIBRARIES NAMES LDAP
@@ -44,4 +94,17 @@ find_package_handle_standard_args(Ldap
     VERSION_VAR Ldap_VERSION
 )
 
+if(Ldap_FOUND AND NOT TARGET Ldap::Ldap)
+  add_library(Ldap::Ldap UNKNOWN IMPORTED)
+  set_target_properties(Ldap::Ldap PROPERTIES
+  IMPORTED_LOCATION "${Ldap_LIBRARIES}"
+  INTERFACE_INCLUDE_DIRECTORIES "${Ldap_INCLUDE_DIRS}")
+endif()
+
 mark_as_advanced(Ldap_INCLUDE_DIRS Ldap_LIBRARIES Lber_LIBRARIES Ldap_VERSION)
+
+include(FeatureSummary)
+set_package_properties(Ldap PROPERTIES
+  URL "http://www.openldap.org/"
+  DESCRIPTION "LDAP (Lightweight Directory Access Protocol) libraries."
+)
