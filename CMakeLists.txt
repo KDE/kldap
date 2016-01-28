@@ -34,8 +34,6 @@ find_package(KF5I18n ${KF5_VERSION} CONFIG REQUIRED)
 
 find_package(Ldap)
 set_package_properties(Ldap PROPERTIES
-  DESCRIPTION "LDAP (Lightweight Directory Access Protocol) libraries"
-  URL "http://www.openldap.org"
   TYPE RECOMMENDED
   PURPOSE "Needed to provide LDAP functionality in KDE"
 )
