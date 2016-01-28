@@ -39,11 +39,7 @@ set_package_properties(Ldap PROPERTIES
 )
 
 find_package(Sasl2)
-set_package_properties(Sasl2 PROPERTIES
-                             DESCRIPTION "The Cyrus-sasl library"
-                             URL "http://www.cyrussasl.org"
-                             TYPE OPTIONAL
-)
+set_package_properties(Sasl2 PROPERTIES TYPE OPTIONAL)
 
 if (Ldap_FOUND)
    set(LDAP_FOUND 1)
