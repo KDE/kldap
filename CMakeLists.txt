@@ -18,7 +18,7 @@ include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(ECMQtDeclareLoggingCategory)
 
 set(KF5_VERSION "5.17.0")
-set(KLDAP_LIB_VERSION "5.1.40")
+set(KLDAP_LIB_VERSION "5.1.41")
 
 ecm_setup_version(${KLDAP_LIB_VERSION} VARIABLE_PREFIX KLDAP
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kldap_version.h"

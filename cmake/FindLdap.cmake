@@ -27,10 +27,14 @@
 # ``Ldap::Ldap``
 #     The LDAP library
 #
+# Since pre-5.0.0.
+#
+# Imported target since 5.1.41
+#
 #=============================================================================
 # Copyright 2006 Szombathelyi György <gyurco@freemail.hu>
 # Copyright 2007-2016 Laurent Montel <montel@kde.org>
-
+#
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions

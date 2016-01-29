@@ -27,6 +27,10 @@
 # ``Sasl2::Sasl2``
 #     The SASL2 library
 #
+# Since pre-5.0.0.
+#
+# Imported target since 5.1.41
+#
 #=============================================================================
 # Copyright 2006, 2007 Laurent Montel <montel@kde.org>
 #
