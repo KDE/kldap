@@ -1,0 +1,5 @@
+log_kldap kioslave (kldap)
+log_sieve kioslave (sieve)
+log_smtp kioslave (smtp)
+log_pop3 kioslave (pop3)
+

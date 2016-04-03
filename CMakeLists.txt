@@ -19,6 +19,14 @@ include(ECMQtDeclareLoggingCategory)
 
 set(KF5_VERSION "5.19.0")
 set(KLDAP_LIB_VERSION "5.2.40")
+set(MBOXLIB_VERSION "5.2.40")
+
+find_package(KF5KIO ${KF5_VERSION} CONFIG REQUIRED)
+find_package(KF5I18n ${KF5_VERSION} CONFIG REQUIRED)
+find_package(KF5DocTools ${KF5_VERSION} CONFIG REQUIRED)
+find_package(KF5Mbox ${MBOXLIB_VERSION} CONFIG REQUIRED)
+add_definitions("-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_TO_ASCII")
+
 
 ecm_setup_version(${KLDAP_LIB_VERSION} VARIABLE_PREFIX KLDAP
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kldap_version.h"
@@ -79,9 +87,11 @@ install(FILES
 ########### Targets ###########
 add_subdirectory(cmake)
 add_subdirectory(src)
-
+add_subdirectory(kioslave)
 if(BUILD_TESTING)
     add_subdirectory(autotests)
 endif()
+
+install( FILES kldap.categories DESTINATION ${KDE_INSTALL_CONFDIR} )
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
