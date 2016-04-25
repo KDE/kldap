@@ -70,8 +70,13 @@ PRIVATE
   ${kldap_EXTRA_LIBS}
 )
 
-target_include_directories(KF5Ldap INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KLDAP;${Ldap_INCLUDE_DIRS};${Sasl2_INCLUDE_DIRS}>")
-target_include_directories(KF5Ldap PUBLIC "$<BUILD_INTERFACE:${KLdap_SOURCE_DIR}/src;${KLdap_BINARY_DIR}/src;${Ldap_INCLUDE_DIRS};${Sasl2_INCLUDE_DIRS}>")
+target_include_directories(KF5Ldap INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KLDAP;${Ldap_INCLUDE_DIRS}>")
+target_include_directories(KF5Ldap PUBLIC "$<BUILD_INTERFACE:${KLdap_SOURCE_DIR}/src;${KLdap_BINARY_DIR}/src;${Ldap_INCLUDE_DIRS}>")
+
+if(Sasl2_FOUND)
+    target_include_directories(KF5Ldap INTERFACE "$<INSTALL_INTERFACE:${Sasl2_INCLUDE_DIRS}>")
+    target_include_directories(KF5Ldap PUBLIC "$<BUILD_INTERFACE:${Sasl2_INCLUDE_DIRS}>")
+endif()
 
 set_target_properties(KF5Ldap PROPERTIES
     VERSION ${KLDAP_VERSION_STRING}
