@@ -17,8 +17,10 @@ include(KDECMakeSettings)
 include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(ECMQtDeclareLoggingCategory)
 
+set(PIM_VERSION "5.2.40")
+
 set(KF5_VERSION "5.19.0")
-set(KLDAP_LIB_VERSION "5.2.40")
+set(KLDAP_LIB_VERSION ${PIM_VERSION})
 set(MBOXLIB_VERSION "5.2.40")
 
 find_package(KF5KIO ${KF5_VERSION} CONFIG REQUIRED)
