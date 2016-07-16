@@ -1,4 +1,2 @@
 log_kldap kioslave (kldap)
-log_smtp kioslave (smtp)
-log_pop3 kioslave (pop3)
 
