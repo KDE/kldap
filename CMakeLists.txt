@@ -21,7 +21,7 @@ include(ECMQtDeclareLoggingCategory)
 set(PIM_VERSION "5.3.0")
 
 set(KLDAP_LIB_VERSION ${PIM_VERSION})
-set(MBOXLIB_VERSION "5.2.90")
+set(MBOXLIB_VERSION "5.3.0")
 
 find_package(KF5KIO ${KF5_VERSION} CONFIG REQUIRED)
 find_package(KF5I18n ${KF5_VERSION} CONFIG REQUIRED)
