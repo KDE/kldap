@@ -1,5 +1,5 @@
 maintainer: mlaurent
-description: LDap support library
+description: LDAP support library
 tier: 3
 type: functional
 platforms:
@@ -12,3 +12,7 @@ libraries:
    cmake: "KF5::Ldap"
 cmakename: KF5Ldap
 
+public_lib: true
+group: kdepim
+platforms:
+    - name: Linux
