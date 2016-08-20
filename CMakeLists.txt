@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 2.8.12)
 project(KLdap)
 
 # ECM setup
-set(KF5_VERSION "5.23.0")
+set(KF5_VERSION "5.25.0")
 find_package(ECM ${KF5_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${KLdap_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
 
