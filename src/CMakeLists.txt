@@ -53,7 +53,7 @@ set(kldap_LIB_SRCS
   ldapstructureproxymodel.cpp
   ldapattributeproxymodel.cpp
 )
-ecm_qt_declare_logging_category(kldap_LIB_SRCS HEADER ldap_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME log_ldap)
+ecm_qt_declare_logging_category(kldap_LIB_SRCS HEADER ldap_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME org.kde.pim.ldap)
 
 add_library(KF5Ldap ${kldap_LIB_SRCS})
 
