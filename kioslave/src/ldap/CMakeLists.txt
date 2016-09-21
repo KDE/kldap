@@ -1,6 +1,6 @@
 
 set(kio_ldap_PART_SRCS kio_ldap.cpp)
-ecm_qt_declare_logging_category(kio_ldap_PART_SRCS HEADER kldap_debug.h IDENTIFIER KLDAP_LOG CATEGORY_NAME log_kldap)
+ecm_qt_declare_logging_category(kio_ldap_PART_SRCS HEADER kldap_debug.h IDENTIFIER KLDAP_LOG CATEGORY_NAME org.kde.pim.kldap)
 
 add_library(kio_ldap MODULE ${kio_ldap_PART_SRCS})
 
