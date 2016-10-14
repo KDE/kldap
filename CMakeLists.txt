@@ -18,7 +18,7 @@ include(KDECMakeSettings)
 include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(ECMQtDeclareLoggingCategory)
 
-set(PIM_VERSION "5.3.2")
+set(PIM_VERSION "5.3.3")
 
 set(KLDAP_LIB_VERSION ${PIM_VERSION})
 set(MBOXLIB_VERSION "5.3.2")
