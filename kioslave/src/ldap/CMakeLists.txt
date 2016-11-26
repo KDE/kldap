@@ -4,7 +4,7 @@ ecm_qt_declare_logging_category(kio_ldap_PART_SRCS HEADER kldap_debug.h IDENTIFI
 
 add_library(kio_ldap MODULE ${kio_ldap_PART_SRCS})
 
-target_link_libraries(kio_ldap KF5::KIOCore KF5::I18n KF5::Ldap KF5::Mbox)
+target_link_libraries(kio_ldap KF5::KIOCore KF5::I18n KF5::Ldap)
 set_target_properties(kio_ldap PROPERTIES OUTPUT_NAME "ldap")
 install(TARGETS kio_ldap  DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/kio)
 
