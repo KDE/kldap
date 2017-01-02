@@ -183,7 +183,7 @@ int Ber::printf(QString format, ...)
             for (j = 0; j < v->count(); j++) {
                 l[j] = v->at(j).data();
             }
-            l[j] = Q_NULLPTR;
+            l[j] = nullptr;
             ret = ber_printf(d->mBer, fmt, l.data());
             break;
         }
@@ -197,7 +197,7 @@ int Ber::printf(QString format, ...)
                 bvs[j].bv_len = V->at(j).size();
                 bv[j] = &bvs[j];
             }
-            bv[V->count()] = Q_NULLPTR;
+            bv[V->count()] = nullptr;
             ret = ber_printf(d->mBer, fmt, bv.data());
             break;
         }

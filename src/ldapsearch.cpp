@@ -191,7 +191,7 @@ void LdapSearchPrivate::closeConnection()
 {
     if (mOwnConnection && mConn) {
         delete mConn;
-        mConn = Q_NULLPTR;
+        mConn = nullptr;
     }
 }
 
@@ -219,7 +219,7 @@ bool LdapSearchPrivate::startSearch(const LdapDN &base, LdapUrl::Scope scope,
     LdapControls savedctrls = mOp.serverControls();
     if (pagesize) {
         LdapControls ctrls = savedctrls;
-        mConn->setOption(0x0008, Q_NULLPTR);   // Disable referals or paging won't work
+        mConn->setOption(0x0008, nullptr);   // Disable referals or paging won't work
         LdapControl::insert(ctrls, LdapControl::createPageControl(pagesize));
         mOp.setServerControls(ctrls);
     }
@@ -252,7 +252,7 @@ LdapSearch::LdapSearch()
     : d(new LdapSearchPrivate(this))
 {
     d->mOwnConnection = true;
-    d->mConn = Q_NULLPTR;
+    d->mConn = nullptr;
 }
 
 LdapSearch::LdapSearch(LdapConnection &connection)

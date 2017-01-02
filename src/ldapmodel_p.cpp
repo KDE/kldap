@@ -33,7 +33,7 @@ LdapModel::LdapModelPrivate::LdapModelPrivate(LdapModel *parent)
       m_searchResultObjects(),
       m_baseDN(),
       m_searchType(NotSearching),
-      m_searchItem(Q_NULLPTR)
+      m_searchItem(nullptr)
 {
 }
 
@@ -44,7 +44,7 @@ LdapModel::LdapModelPrivate::LdapModelPrivate(LdapModel *parent, LdapConnection 
       m_searchResultObjects(),
       m_baseDN(),
       m_searchType(NotSearching),
-      m_searchItem(Q_NULLPTR)
+      m_searchItem(nullptr)
 {
 }
 
@@ -147,7 +147,7 @@ void LdapModel::LdapModelPrivate::gotSearchResult(KLDAP::LdapSearch *search)
 
         // Create items that represent objects down to the baseDN
         LdapModelDNNode *parent = rootNode();
-        LdapModelDNNode *item = Q_NULLPTR;
+        LdapModelDNNode *item = nullptr;
         for (int i = 0; i < depth; ++i) {
             QString dn = baseDN().toString(i);
             qCDebug(LDAP_LOG) << "Creating item for DN :" << dn;

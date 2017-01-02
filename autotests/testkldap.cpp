@@ -44,8 +44,8 @@ void KLdapTest::initTestCase()
       The specified server should not be a production server in case we break anything here.
       You have been warned!
     */
-    m_search = Q_NULLPTR;
-    m_model = Q_NULLPTR;
+    m_search = nullptr;
+    m_model = nullptr;
 
     QString filename(QStringLiteral("testurl.txt"));
     QFile file(filename);

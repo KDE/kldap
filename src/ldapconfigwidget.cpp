@@ -43,7 +43,7 @@ class Q_DECL_HIDDEN LdapConfigWidget::Private
 {
 public:
     Private(LdapConfigWidget *parent)
-        : mParent(parent), mFeatures(W_ALL), mProg(Q_NULLPTR)
+        : mParent(parent), mFeatures(W_ALL), mProg(nullptr)
     {
         mainLayout = new QGridLayout(mParent);
         mainLayout->setMargin(0);
@@ -89,12 +89,12 @@ void LdapConfigWidget::Private::initWidget()
 {
     QLabel *label;
 
-    mUser = mPassword = mHost = mDn = mBindDn = mRealm = mFilter = Q_NULLPTR;
-    mPort = mVersion = mTimeLimit = mSizeLimit = Q_NULLPTR;
-    mAnonymous = mSimple = mSASL = mSecNo = mSecTLS = mSecSSL = Q_NULLPTR;
-    mEditButton =  mQueryMech = Q_NULLPTR;
-    mPageSize = Q_NULLPTR;
-    mMech = Q_NULLPTR;
+    mUser = mPassword = mHost = mDn = mBindDn = mRealm = mFilter = nullptr;
+    mPort = mVersion = mTimeLimit = mSizeLimit = nullptr;
+    mAnonymous = mSimple = mSASL = mSecNo = mSecTLS = mSecSSL = nullptr;
+    mEditButton =  mQueryMech = nullptr;
+    mPageSize = nullptr;
+    mMech = nullptr;
     int row = 0;
     int col;
 
@@ -349,7 +349,7 @@ void LdapConfigWidget::Private::sendQuery()
         return;
     }
 
-    if (mProg == Q_NULLPTR) {
+    if (mProg == nullptr) {
         mProg = new QProgressDialog(mParent);
         mProg->setWindowTitle(i18n("LDAP Query"));
         mProg->setModal(true);
@@ -756,7 +756,7 @@ QString LdapConfigWidget::filter() const
 
 void LdapConfigWidget::setMech(const QString &mech)
 {
-    if (d->mMech == Q_NULLPTR) {
+    if (d->mMech == nullptr) {
         return;
     }
     if (!mech.isEmpty()) {

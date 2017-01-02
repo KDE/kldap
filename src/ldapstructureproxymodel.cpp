@@ -153,7 +153,7 @@ Qt::DropActions LdapStructureProxyModel::supportedDropActions() const
 QMimeData *LdapStructureProxyModel::mimeData(const QModelIndexList &indexes) const
 {
     Q_UNUSED(indexes);
-    return Q_NULLPTR;
+    return nullptr;
 }
 
 bool LdapStructureProxyModel::dropMimeData(const QMimeData *data, Qt::DropAction action,

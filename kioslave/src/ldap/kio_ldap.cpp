@@ -288,7 +288,7 @@ void LDAPProtocol::setHost(const QString &host, quint16 port,
         mServer.setPort(port);
     } else {
         struct servent *pse;
-        if ((pse = getservbyname(mProtocol, "tcp")) == Q_NULLPTR) {
+        if ((pse = getservbyname(mProtocol, "tcp")) == nullptr) {
             if (mProtocol == "ldaps") {
                 mServer.setPort(636);
             } else {
