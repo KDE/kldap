@@ -1,6 +1,7 @@
-cmake_minimum_required(VERSION 2.8.12)
+cmake_minimum_required(VERSION 3.0)
+set(PIM_VERSION "5.4.40")
 
-project(KLdap)
+project(KLdap VERSION ${PIM_VERSION})
 
 # ECM setup
 set(KF5_VERSION "5.28.0")
@@ -20,7 +21,6 @@ include(ECMQtDeclareLoggingCategory)
 include(ECMCoverageOption)
 
 
-set(PIM_VERSION "5.4.40")
 
 set(KLDAP_LIB_VERSION ${PIM_VERSION})
 
@@ -30,7 +30,7 @@ find_package(KF5DocTools ${KF5_VERSION} CONFIG REQUIRED)
 add_definitions("-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_TO_ASCII")
 
 
-ecm_setup_version(${KLDAP_LIB_VERSION} VARIABLE_PREFIX KLDAP
+ecm_setup_version(PROJECT VARIABLE_PREFIX KLDAP
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kldap_version.h"
                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5LdapConfigVersion.cmake"
                         SOVERSION 5
