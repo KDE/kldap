@@ -36,7 +36,8 @@ class LdapSearchPrivate
 {
 public:
     LdapSearchPrivate(LdapSearch *parent)
-        : mParent(parent)
+        : mParent(parent),
+          mConn(nullptr)
     {
     }
 

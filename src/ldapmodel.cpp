@@ -291,7 +291,7 @@ bool LdapModel::hasChildrenOfType(const QModelIndex &parent, LdapDataType type) 
     if (!parent.isValid() || parentNode->isPopulated()) {
         // Check to see if the parent has any children of the specified type
         const QList<LdapModelNode *> &children = parentNode->children();
-        foreach (LdapModelNode *child, children) {
+        for (LdapModelNode *child : children) {
             if (child->nodeType() == nodeType) {
                 return true;
             }

@@ -89,10 +89,6 @@ public:
      */
     virtual bool dropMimeData(const QMimeData *data, Qt::DropAction action,
                               int row, int column, const QModelIndex &parent) Q_DECL_OVERRIDE;
-
-private:
-    class LdapAttributeProxyModelPrivate;
-    LdapAttributeProxyModelPrivate *const m_d;
 };
 
 }

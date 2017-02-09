@@ -27,28 +27,14 @@
 
 using namespace KLDAP;
 
-class Q_DECL_HIDDEN LdapStructureProxyModel::LdapStructureProxyModelPrivate
-{
-public:
-    LdapStructureProxyModelPrivate();
-
-};
-
-LdapStructureProxyModel::LdapStructureProxyModelPrivate::LdapStructureProxyModelPrivate()
-{
-
-}
-
 LdapStructureProxyModel::LdapStructureProxyModel(QObject *parent)
-    : QSortFilterProxyModel(parent),
-      m_d(new LdapStructureProxyModelPrivate())
+    : QSortFilterProxyModel(parent)
 {
 
 }
 
 LdapStructureProxyModel::~LdapStructureProxyModel()
 {
-    delete m_d;
 }
 
 QVariant LdapStructureProxyModel::data(const QModelIndex &index,

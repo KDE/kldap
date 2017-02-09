@@ -29,8 +29,8 @@ class LdapControlPrivate : public QSharedData
 {
 public:
     LdapControlPrivate()
+        : mCritical(false)
     {
-        mCritical = false;
     }
 
     LdapControlPrivate(const LdapControlPrivate &other)

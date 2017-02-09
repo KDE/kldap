@@ -69,7 +69,11 @@ public:
     QLineEdit *mUser;
     QLineEdit *mPassword;
     QLineEdit *mHost;
-    QSpinBox  *mPort, *mVersion, *mSizeLimit, *mTimeLimit, *mPageSize;
+    QSpinBox  *mPort;
+    QSpinBox *mVersion;
+    QSpinBox *mSizeLimit;
+    QSpinBox *mTimeLimit;
+    QSpinBox *mPageSize;
     QLineEdit *mDn, *mBindDn, *mRealm;
     QLineEdit *mFilter;
     QRadioButton *mAnonymous, *mSimple, *mSASL;
