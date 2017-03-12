@@ -4,7 +4,7 @@ set(PIM_VERSION "5.4.40")
 project(KLdap VERSION ${PIM_VERSION})
 
 # ECM setup
-set(KF5_VERSION "5.31.0")
+set(KF5_VERSION "5.32.0")
 find_package(ECM ${KF5_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${KLdap_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
 
