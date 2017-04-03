@@ -211,7 +211,7 @@ Ldif::ParseValue Ldif::processLine()
 
     d->mUrl = splitLine(d->mLine, d->mAttr, d->mValue);
 
-    QString attrLower = d->mAttr.toLower();
+    const QString attrLower = d->mAttr.toLower();
 
     switch (d->mEntryType) {
     case Entry_None:
