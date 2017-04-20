@@ -215,7 +215,7 @@ void LDAPProtocol::LDAPEntry2UDSEntry(const LdapDN &dn, UDSEntry &entry,
     entry.clear();
     QString name = dn.toString();
     if ((pos = name.indexOf(QLatin1Char(','))) > 0) {
-        name = name.left(pos);
+        name.truncate(pos);
     }
     if ((pos = name.indexOf(QLatin1Char('='))) > 0) {
         name.remove(0, pos + 1);
