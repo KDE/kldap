@@ -233,7 +233,7 @@ static int kldap_sasl_interact(sasl_interact_t *interact, LdapOperation::SASL_Da
             interact->result = nullptr;
             interact->len = 0;
         } else {
-            interact->result = strdup(value.toUtf8());
+            interact->result = strdup(value.toUtf8().constData());
             interact->len = strlen((const char *)interact->result);
         }
         interact++;
@@ -281,7 +281,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
         do {
             if (sdata.isEmpty()) {
                 do {
-                    saslresult = sasl_client_start(saslconn, mech.toLatin1(),
+                    saslresult = sasl_client_start(saslconn, mech.toLatin1().constData(),
                                                    &client_interact, &out, &outlen, &mechusing);
 
                     if (saslresult == SASL_INTERACT) {
@@ -321,7 +321,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
                 qCDebug(LDAP_LOG) << "ldap_sasl_bind";
                 int msgid;
                 ret =
-                    ldap_sasl_bind(ld, server.bindDn().toUtf8().data(), mech.toLatin1(),
+                    ldap_sasl_bind(ld, server.bindDn().toUtf8().constData(), mech.toLatin1().constData(),
                                    &ccred, nullptr, nullptr, &msgid);
                 if (ret == 0) {
                     ret = msgid;
@@ -330,7 +330,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
             } else {
                 qCDebug(LDAP_LOG) << "ldap_sasl_bind_s";
                 ret =
-                    ldap_sasl_bind_s(ld, server.bindDn().toUtf8().data(), mech.toLatin1(),
+                    ldap_sasl_bind_s(ld, server.bindDn().toUtf8().constData(), mech.toLatin1().constData(),
                                      &ccred, nullptr, nullptr, &scred);
                 qCDebug(LDAP_LOG) << "ldap_sasl_bind_s ret" << ret;
                 if (scred) {
@@ -528,7 +528,7 @@ static void addModOp(LDAPMod ***pmods, int mod_type, const QString &attr,
         memset(mods[ 0 ], 0, sizeof(LDAPMod));
     } else {
         while (mods[ i ] != nullptr &&
-                (strcmp(attr.toUtf8(), mods[i]->mod_type) != 0 ||
+                (strcmp(attr.toUtf8().constData(), mods[i]->mod_type) != 0 ||
                  (mods[ i ]->mod_op & ~LDAP_MOD_BVALUES) != mod_type)) {
             i++;
         }
@@ -547,7 +547,7 @@ static void addModOp(LDAPMod ***pmods, int mod_type, const QString &attr,
 
     mods[ i ]->mod_op = mod_type | LDAP_MOD_BVALUES;
     if (mods[ i ]->mod_type == nullptr) {
-        mods[ i ]->mod_type = strdup(attr.toUtf8());
+        mods[ i ]->mod_type = strdup(attr.toUtf8().constData());
     }
 
     *pmods = mods;
@@ -610,7 +610,7 @@ static void addControlOp(LDAPControl ***pctrls, const QString &oid,
         ctrl->ldctl_value.bv_val = nullptr;
     }
     ctrl->ldctl_iscritical = critical;
-    ctrl->ldctl_oid = strdup(oid.toUtf8());
+    ctrl->ldctl_oid = strdup(oid.toUtf8().constData());
 
     uint i = 0;
 
@@ -681,7 +681,7 @@ int LdapOperation::search(const LdapDN &base, LdapUrl::Scope scope,
     if (count > 0) {
         attrs = static_cast<char **>(malloc((count + 1) * sizeof(char *)));
         for (int i = 0; i < count; i++) {
-            attrs[i] = strdup(attributes.at(i).toUtf8());
+            attrs[i] = strdup(attributes.at(i).toUtf8().constData());
         }
         attrs[count] = nullptr;
     }

@@ -2,9 +2,6 @@ include(CheckFunctionExists)
 include(CheckIncludeFiles)
 include(CheckSymbolExists)
 
-# Reactivate it
-remove_definitions(-DQT_NO_CAST_FROM_BYTEARRAY)
-
 check_include_files(sys/time.h HAVE_SYS_TIME_H)
 
 set(kldap_EXTRA_LIBS)

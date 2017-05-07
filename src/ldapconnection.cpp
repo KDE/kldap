@@ -333,7 +333,7 @@ int LdapConnection::connect()
 
 #ifdef SASL2_FOUND
     qCDebug(LDAP_LOG) << "initializing SASL client";
-    int saslresult = sasl_client_new("ldap", d->mServer.host().toLatin1(),
+    int saslresult = sasl_client_new("ldap", d->mServer.host().toLatin1().constData(),
                                      nullptr, nullptr, callbacks, 0, &d->mSASLconn);
     if (saslresult != SASL_OK) {
         d->mConnectionError = i18n("Cannot initialize the SASL client.");
