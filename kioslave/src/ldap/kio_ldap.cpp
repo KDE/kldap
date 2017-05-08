@@ -189,7 +189,7 @@ void LDAPProtocol::controlsFromMetaData(LdapControls &serverctrls,
         Ldif::splitControl(val, oid, critical, value);
         qCDebug(KLDAP_LOG) << "server ctrl #" << i << " value: " << val <<
                            " oid: " << oid << " critical: " << critical << " value: " <<
-                           QString::fromUtf8(value, value.size()) << endl;
+                           QString::fromUtf8(value.constData(), value.size()) << endl;
         LdapControl ctrl(oid, val, critical);
         serverctrls.append(ctrl);
         i++;
@@ -200,7 +200,7 @@ void LDAPProtocol::controlsFromMetaData(LdapControls &serverctrls,
         Ldif::splitControl(val, oid, critical, value);
         qCDebug(KLDAP_LOG) << "client ctrl #" << i << " value: " << val <<
                            " oid: " << oid << " critical: " << critical << " value: " <<
-                           QString::fromUtf8(value, value.size()) << endl;
+                           QString::fromUtf8(value.constData(), value.size()) << endl;
         LdapControl ctrl(oid, val, critical);
         clientctrls.append(ctrl);
         i++;
@@ -288,7 +288,7 @@ void LDAPProtocol::setHost(const QString &host, quint16 port,
         mServer.setPort(port);
     } else {
         struct servent *pse;
-        if ((pse = getservbyname(mProtocol, "tcp")) == nullptr) {
+        if ((pse = getservbyname(mProtocol.constData(), "tcp")) == nullptr) {
             if (mProtocol == "ldaps") {
                 mServer.setPort(636);
             } else {
