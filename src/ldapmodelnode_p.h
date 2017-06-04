@@ -82,7 +82,7 @@ public:
                              const LdapDN &dn = LdapDN());
     ~LdapModelDNNode();
 
-    LdapModelNode::NodeType nodeType() const Q_DECL_OVERRIDE
+    LdapModelNode::NodeType nodeType() const override
     {
         return LdapModelNode::DN;
     }
@@ -127,7 +127,7 @@ public:
                                const QByteArray &attrData = QByteArray());
     ~LdapModelAttrNode();
 
-    LdapModelNode::NodeType nodeType() const Q_DECL_OVERRIDE
+    LdapModelNode::NodeType nodeType() const override
     {
         return LdapModelNode::Attr;
     }

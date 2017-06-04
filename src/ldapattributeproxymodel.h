@@ -35,40 +35,40 @@ public:
     explicit LdapAttributeProxyModel(QObject *parent = nullptr);
     ~LdapAttributeProxyModel();
 
-    QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
+    QVariant data(const QModelIndex &index, int role) const override;
     /**
      * Reimplemented from QAbstractItemModel::setData(). This is a placeholder for when
      * LdapAttributeProxyModel beomes writeable and always returns false.
      */
     bool setData(const QModelIndex &index,
                  const QVariant &value,
-                 int role = Qt::EditRole) Q_DECL_OVERRIDE;
-    bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const Q_DECL_OVERRIDE;
-    QVariant headerData(int section, Qt::Orientation orientation, int role) const Q_DECL_OVERRIDE;
-    int columnCount(const QModelIndex &parent) const Q_DECL_OVERRIDE;
-    Qt::ItemFlags flags(const QModelIndex &index) const Q_DECL_OVERRIDE;
-    bool hasChildren(const QModelIndex &parent) const Q_DECL_OVERRIDE;
+                 int role = Qt::EditRole) override;
+    bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
+    int columnCount(const QModelIndex &parent) const override;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
+    bool hasChildren(const QModelIndex &parent) const override;
 
-    QModelIndex mapFromSource(const QModelIndex &sourceIndex) const Q_DECL_OVERRIDE;
-    QModelIndex mapToSource(const QModelIndex &proxyIndex) const Q_DECL_OVERRIDE;
+    QModelIndex mapFromSource(const QModelIndex &sourceIndex) const override;
+    QModelIndex mapToSource(const QModelIndex &proxyIndex) const override;
 
     /**
      * Reimplemented from QAbstractItemModel::insertRows(). This is a placeholder for when
      * LdapAttributeProxyModel beomes writeable and always returns false.
      */
     virtual bool insertRows(int row, int count,
-                            const QModelIndex &parent = QModelIndex()) Q_DECL_OVERRIDE;
+                            const QModelIndex &parent = QModelIndex()) override;
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). This is a placeholder for when
      * LdapAttributeProxyModel beomes writeable and always returns false.
      */
     virtual bool removeRows(int row, int count,
-                            const QModelIndex &parent = QModelIndex()) Q_DECL_OVERRIDE;
+                            const QModelIndex &parent = QModelIndex()) override;
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). The default implementation
      * does nothing.
      */
-    void sort(int column, Qt::SortOrder order = Qt::AscendingOrder) Q_DECL_OVERRIDE;
+    void sort(int column, Qt::SortOrder order = Qt::AscendingOrder) override;
 
     //
     // Drag and drop support
@@ -77,18 +77,18 @@ public:
      * Reimplemented from QAbstractItemModel::supportedDropActions(). The default
      * implementation returns Qt::MoveAction.
      */
-    Qt::DropActions supportedDropActions() const Q_DECL_OVERRIDE;
+    Qt::DropActions supportedDropActions() const override;
     /**
      * Reimplemented from QAbstractItemModel::mimedata(). This is a placeholder for when
      * LdapAttributeProxyModel beomes writeable and always returns 0.
      */
-    QMimeData *mimeData(const QModelIndexList &indexes) const Q_DECL_OVERRIDE;
+    QMimeData *mimeData(const QModelIndexList &indexes) const override;
     /**
      * Reimplemented from QAbstractItemModel::dropMimedata(). This is a placeholder for when
      * LdapAttributeProxyModel beomes writeable and always returns false.
      */
     virtual bool dropMimeData(const QMimeData *data, Qt::DropAction action,
-                              int row, int column, const QModelIndex &parent) Q_DECL_OVERRIDE;
+                              int row, int column, const QModelIndex &parent) override;
 };
 
 }

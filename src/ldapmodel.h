@@ -87,67 +87,67 @@ public:
     /**
      * Reimplemented from QAbstractItemModel::index().
      */
-    QModelIndex index(int row, int col, const QModelIndex &parent) const Q_DECL_OVERRIDE;
+    QModelIndex index(int row, int col, const QModelIndex &parent) const override;
     /**
      * Reimplemented from QAbstractItemModel::parent().
      */
-    QModelIndex parent(const QModelIndex &child) const Q_DECL_OVERRIDE;
+    QModelIndex parent(const QModelIndex &child) const override;
     /**
      * Reimplemented from QAbstractItemModel::data().
      */
-    QVariant data(const QModelIndex &index, int role) const Q_DECL_OVERRIDE;
+    QVariant data(const QModelIndex &index, int role) const override;
     /**
      * Reimplemented from QAbstractItemModel::setData(). This is a placeholder for when
      * LdapModel beomes writeable and always returns false.
      */
     bool setData(const QModelIndex &index,
                  const QVariant &value,
-                 int role = Qt::EditRole) Q_DECL_OVERRIDE;
+                 int role = Qt::EditRole) override;
     /**
      * Reimplemented from QAbstractItemModel::headerData().
      */
-    QVariant headerData(int section, Qt::Orientation orientation, int role) const Q_DECL_OVERRIDE;
+    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
     /**
      * Reimplemented from QAbstractItemModel::flags().
      */
-    Qt::ItemFlags flags(const QModelIndex &index) const Q_DECL_OVERRIDE;
+    Qt::ItemFlags flags(const QModelIndex &index) const override;
     /**
      * Reimplemented from QAbstractItemModel::columnCount().
      */
-    int columnCount(const QModelIndex &parent) const Q_DECL_OVERRIDE;
+    int columnCount(const QModelIndex &parent) const override;
     /**
      * Reimplemented from QAbstractItemModel::rowCount().
      */
-    int rowCount(const QModelIndex &parent) const Q_DECL_OVERRIDE;
+    int rowCount(const QModelIndex &parent) const override;
     /**
      * Reimplemented from QAbstractItemModel::hasChildren().
      */
-    bool hasChildren(const QModelIndex &parent) const Q_DECL_OVERRIDE;
+    bool hasChildren(const QModelIndex &parent) const override;
     /**
      * Reimplemented from QAbstractItemModel::canFetchMore().
      */
-    bool canFetchMore(const QModelIndex &parent) const Q_DECL_OVERRIDE;
+    bool canFetchMore(const QModelIndex &parent) const override;
     /**
      * Reimplemented from QAbstractItemModel::fetchMore().
      */
-    void fetchMore(const QModelIndex &parent) Q_DECL_OVERRIDE;
+    void fetchMore(const QModelIndex &parent) override;
     /**
      * Reimplemented from QAbstractItemModel::insertRows(). This is a placeholder for when
      * LdapModel beomes writeable and always returns false.
      */
     bool insertRows(int row, int count,
-                    const QModelIndex &parent = QModelIndex()) Q_DECL_OVERRIDE;
+                    const QModelIndex &parent = QModelIndex()) override;
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). This is a placeholder for when
      * LdapModel beomes writeable and always returns false.
      */
     bool removeRows(int row, int count,
-                    const QModelIndex &parent = QModelIndex()) Q_DECL_OVERRIDE;
+                    const QModelIndex &parent = QModelIndex()) override;
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). The default implementation
      * does nothing.
      */
-    void sort(int column, Qt::SortOrder order = Qt::AscendingOrder) Q_DECL_OVERRIDE;
+    void sort(int column, Qt::SortOrder order = Qt::AscendingOrder) override;
 
     //
     // Drag and drop support
@@ -156,18 +156,18 @@ public:
      * Reimplemented from QAbstractItemModel::supportedDropActions(). The default
      * implementation returns Qt::MoveAction.
      */
-    Qt::DropActions supportedDropActions() const Q_DECL_OVERRIDE;
+    Qt::DropActions supportedDropActions() const override;
     /**
      * Reimplemented from QAbstractItemModel::mimedata(). This is a placeholder for when
      * LdapModel beomes writeable and always returns 0.
      */
-    QMimeData *mimeData(const QModelIndexList &indexes) const Q_DECL_OVERRIDE;
+    QMimeData *mimeData(const QModelIndexList &indexes) const override;
     /**
      * Reimplemented from QAbstractItemModel::dropMimedata(). This is a placeholder for when
      * LdapModel beomes writeable and always returns false.
      */
     bool dropMimeData(const QMimeData *data, Qt::DropAction action,
-                      int row, int column, const QModelIndex &parent) Q_DECL_OVERRIDE;
+                      int row, int column, const QModelIndex &parent) override;
 
     //
     // Other public utility functions
@@ -188,12 +188,12 @@ public Q_SLOTS:
      * Reimplemented from QAbstractItemModel::revert(). This is a placeholder for when
      * LdapModel beomes writeable. This implementation does nothing.
      */
-    void revert() Q_DECL_OVERRIDE;
+    void revert() override;
     /**
      * Reimplemented from QAbstractItemModel::revert(). This is a placeholder for when
      * LdapModel beomes writeable. This implementation does nothing and returns false.
      */
-    bool submit() Q_DECL_OVERRIDE;
+    bool submit() override;
 
 Q_SIGNALS:
     /**
