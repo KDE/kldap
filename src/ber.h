@@ -21,7 +21,7 @@
 #ifndef KLDAP_BER_H
 #define KLDAP_BER_H
 
-#include <QtCore/QByteArray>
+#include <QByteArray>
 
 #include "kldap_export.h"
 

@@ -21,8 +21,8 @@
 #ifndef KLDAP_LDAPURL_H
 #define KLDAP_LDAPURL_H
 
-#include <QtCore/QMap>
-#include <QtCore/QStringList>
+#include <QMap>
+#include <QStringList>
 
 #include <QUrl>
 

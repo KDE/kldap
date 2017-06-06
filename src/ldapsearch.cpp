@@ -22,8 +22,8 @@
 #include "ldapdn.h"
 #include "ldapdefs.h"
 
-#include <QtCore/QEventLoop>
-#include <QtCore/QTimer>
+#include <QEventLoop>
+#include <QTimer>
 
 #include "ldap_debug.h"
 #include <KLocalizedString>

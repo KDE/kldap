@@ -21,7 +21,7 @@
 #ifndef KLDAP_LDAPMODEL_H
 #define KLDAP_LDAPMODEL_H
 
-#include <QtCore/QAbstractItemModel>
+#include <QAbstractItemModel>
 
 #include "ldapconnection.h"
 #include "ldapobject.h"

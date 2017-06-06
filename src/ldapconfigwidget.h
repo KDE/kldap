@@ -21,7 +21,7 @@
 #ifndef KLDAP_LDAPCONFIGWIDGET_H
 #define KLDAP_LDAPCONFIGWIDGET_H
 
-#include <QtCore/QString>
+#include <QString>
 #include <QWidget>
 
 #include "ldapdn.h"

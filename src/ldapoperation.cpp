@@ -23,7 +23,7 @@
 
 #include "ldap_debug.h"
 
-#include <QtCore/QTime>
+#include <QTime>
 
 #include <stdlib.h>
 

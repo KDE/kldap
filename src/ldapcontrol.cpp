@@ -21,7 +21,7 @@
 #include "ldapcontrol.h"
 #include "ber.h"
 
-#include <QtCore/QSharedData>
+#include <QSharedData>
 
 using namespace KLDAP;
 

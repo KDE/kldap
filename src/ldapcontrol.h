@@ -21,9 +21,9 @@
 #ifndef KLDAP_LDAPCONTROL_H
 #define KLDAP_LDAPCONTROL_H
 
-#include <QtCore/QString>
-#include <QtCore/QVector>
-#include <QtCore/QSharedDataPointer>
+#include <QString>
+#include <QVector>
+#include <QSharedDataPointer>
 class LdapControlPrivate;
 
 #include "kldap_export.h"

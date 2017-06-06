@@ -21,10 +21,10 @@
 #ifndef KLDAP_LDAPSEARCH_H
 #define KLDAP_LDAPSEARCH_H
 
-#include <QtCore/QByteArray>
-#include <QtCore/QList>
-#include <QtCore/QObject>
-#include <QtCore/QString>
+#include <QByteArray>
+#include <QList>
+#include <QObject>
+#include <QString>
 class LdapSearchPrivate;
 
 #include "kldap_export.h"

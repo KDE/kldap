@@ -23,8 +23,8 @@
 
 #include <QByteArray>
 #include <QString>
-#include <QtCore/QList>
-#include <QtCore/QVariant>
+#include <QList>
+#include <QVariant>
 
 #include "ldapdn.h"
 #include "ldapobject.h"

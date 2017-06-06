@@ -21,7 +21,7 @@
 #ifndef KLDAP_LDAPSERVER_H
 #define KLDAP_LDAPSERVER_H
 
-#include <QtCore/QString>
+#include <QString>
 
 #include "ldapurl.h"
 #include "ldapdn.h"

@@ -23,7 +23,7 @@
 
 #include "kldap_export.h"
 
-#include <QtCore/QStringList>
+#include <QStringList>
 
 namespace KLDAP
 {

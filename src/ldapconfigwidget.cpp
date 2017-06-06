@@ -28,7 +28,7 @@
 #include <klineedit.h>
 #include <kmessagebox.h>
 
-#include <QtCore/QObject>
+#include <QObject>
 #include <QCheckBox>
 #include <QGroupBox>
 #include <QLabel>

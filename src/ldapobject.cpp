@@ -21,7 +21,7 @@
 #include "ldapobject.h"
 #include "ldif.h"
 
-#include <QtCore/QSharedData>
+#include <QSharedData>
 
 using namespace KLDAP;
 

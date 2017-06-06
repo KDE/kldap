@@ -21,10 +21,10 @@
 #ifndef KLDAP_LDAPOBJECT_H
 #define KLDAP_LDAPOBJECT_H
 
-#include <QtCore/QList>
-#include <QtCore/QMap>
-#include <QtCore/QSharedDataPointer>
-#include <QtCore/QString>
+#include <QList>
+#include <QMap>
+#include <QSharedDataPointer>
+#include <QString>
 class LdapObjectPrivate;
 
 #include "ldapdn.h"

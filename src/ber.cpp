@@ -23,7 +23,7 @@
 
 #include "ldap_debug.h"
 
-#include <QtCore/QList>
+#include <QList>
 #include <qvarlengtharray.h>
 
 #include <cstdarg>

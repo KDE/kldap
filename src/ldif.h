@@ -21,8 +21,8 @@
 #ifndef KLDAP_LDIF_H
 #define KLDAP_LDIF_H
 
-#include <QtCore/QString>
-#include <QtCore/QByteArray>
+#include <QString>
+#include <QByteArray>
 
 #include "ldapdn.h"
 #include "kldap_export.h"

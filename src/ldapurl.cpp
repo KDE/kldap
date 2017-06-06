@@ -22,7 +22,7 @@
 
 #include "ldap_debug.h"
 
-#include <QtCore/QStringList>
+#include <QStringList>
 
 using namespace KLDAP;
 
