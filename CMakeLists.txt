@@ -39,7 +39,6 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KLDAP
 ########### Find packages ###########
 find_package(KF5Completion ${KF5_VERSION} CONFIG REQUIRED)
 find_package(KF5WidgetsAddons ${KF5_VERSION} CONFIG REQUIRED)
-find_package(KF5I18n ${KF5_VERSION} CONFIG REQUIRED)
 
 
 find_package(Ldap)
