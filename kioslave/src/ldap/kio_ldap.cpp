@@ -30,8 +30,12 @@
 #include <KLocalizedString>
 #include <QCoreApplication>
 
+#ifdef Q_OS_WIN
+#include <Winsock2.h>
+#else
 #include <netdb.h>
 #include <netinet/in.h>
+#endif
 #include <sys/stat.h>
 
 using namespace KIO;
