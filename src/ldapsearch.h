@@ -36,6 +36,8 @@ class LdapSearchPrivate;
 #include "ldapserver.h"
 #include "ldapurl.h"
 
+// clazy:excludeall=ctor-missing-parent-argument
+
 namespace KLDAP
 {
 
