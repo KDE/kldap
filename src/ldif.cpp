@@ -330,7 +330,7 @@ Ldif::ParseValue Ldif::nextItem()
 
     while (retval == None) {
         if (d->mPos < (uint)d->mLdif.size()) {
-            c = d->mLdif[d->mPos];
+            c = d->mLdif.at(d->mPos);
             d->mPos++;
             if (d->mIsNewLine && c == '\r') {
                 continue; //handle \n\r line end
