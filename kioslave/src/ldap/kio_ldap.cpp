@@ -458,7 +458,7 @@ void LDAPProtocol::get(const QUrl &_url)
                 }
                 qCDebug(KLDAP_LOG) << " estimated size: " << estsize;
                 if (estsize != -1 && !cookie.isEmpty()) {
-                    LdapControls ctrls;
+                    LdapControls ctrls; // clazy:exclude=container-inside-loop
                     ctrls = serverctrls;
                     qCDebug(KLDAP_LOG) << "page size: " << mServer.pageSize() << " estimated size: " << estsize;
                     ctrls.append(LdapControl::createPageControl(mServer.pageSize(), cookie));
