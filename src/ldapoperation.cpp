@@ -394,6 +394,7 @@ int LdapOperation::LdapOperationPrivate::processResult(int rescode, LDAPMessage 
         char *name;
         struct berval **bvals;
         BerElement     *entry;
+        LdapAttrValue values;
 
         char *dn = ldap_get_dn(ld, msg);
         mObject.setDn(QString::fromUtf8(dn));
@@ -404,7 +405,6 @@ int LdapOperation::LdapOperationPrivate::processResult(int rescode, LDAPMessage 
         while (name != nullptr) {
             // print the values
             bvals = ldap_get_values_len(ld, msg, name);
-            LdapAttrValue values;
             if (bvals) {
                 for (int i = 0; bvals[i] != nullptr; i++) {
                     char *val = bvals[i]->bv_val;
@@ -414,6 +414,7 @@ int LdapOperation::LdapOperationPrivate::processResult(int rescode, LDAPMessage 
                 ldap_value_free_len(bvals);
             }
             attrs[ QString::fromLatin1(name) ] = values;
+            values.clear();
             ldap_memfree(name);
 
             // next attribute
