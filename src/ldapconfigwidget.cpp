@@ -393,7 +393,7 @@ void LdapConfigWidget::Private::queryDNClicked()
     mAttr = QStringLiteral("namingcontexts");
     sendQuery();
     if (!mQResult.isEmpty()) {
-        mDn->setText(mQResult.first());
+        mDn->setText(mQResult.constFirst());
     }
 }
 
