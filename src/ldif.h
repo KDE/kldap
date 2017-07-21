@@ -27,6 +27,8 @@
 #include "ldapdn.h"
 #include "kldap_export.h"
 
+// clazy:excludeall=copyable-polymorphic
+
 namespace KLDAP
 {
 
