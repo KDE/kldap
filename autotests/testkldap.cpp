@@ -67,7 +67,6 @@ void KLdapTest::testBer()
 {
     Ber ber1, ber2, ber3, ber4, ber5, ber6, ber7;
     Ber bber;
-    QByteArray flat;
 
     int ainteger;
     QByteArray aoctetString1, aoctetString2, aoctetString3;
