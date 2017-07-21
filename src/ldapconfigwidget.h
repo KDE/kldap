@@ -46,8 +46,6 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
 {
     Q_OBJECT
     Q_FLAGS(WinFlags)
-    Q_ENUMS(Security)
-    Q_ENUMS(Auth)
     Q_PROPERTY(WinFlags features READ features WRITE setFeatures)
     Q_PROPERTY(QString user READ user WRITE setUser)
     Q_PROPERTY(QString bindDn READ bindDn WRITE setBindDn)
@@ -84,15 +82,17 @@ public:
         W_PAGESIZE = 0x2000,
         W_ALL = 0x2fff
     };
-
-    typedef enum {
-        None, SSL, TLS
-    } Security;
-    typedef enum {
-        Anonymous, Simple, SASL
-    } Auth;
-
     Q_DECLARE_FLAGS(WinFlags, WinFlag)
+
+    enum Security {
+        None, SSL, TLS
+    };
+    Q_ENUM(Security)
+
+    enum Auth {
+        Anonymous, Simple, SASL
+    };
+    Q_ENUM(Auth)
 
     /** Constructs an empty configuration widget.
      * You need to call setFlags() after this.
