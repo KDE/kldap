@@ -122,7 +122,7 @@ void LdapModel::LdapModelPrivate::gotSearchResult(KLDAP::LdapSearch *search)
         QString baseDN;
         if (!searchResults().isEmpty() &&
                 searchResults().at(0).hasAttribute(QStringLiteral("namingContexts"))) {
-            baseDN = QLatin1String(searchResults().at(0).value(QStringLiteral("namingContexts")));
+            baseDN = QString::fromLatin1(searchResults().at(0).value(QStringLiteral("namingContexts")));
             //qCDebug(LDAP_LOG) << "Found baseDN =" << baseDN;
         }
         setBaseDN(LdapDN(baseDN));
