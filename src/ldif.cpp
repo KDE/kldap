@@ -129,7 +129,6 @@ QByteArray Ldif::assembleLine(const QString &fieldname, const QString &value,
 bool Ldif::splitLine(const QByteArray &line, QString &fieldname, QByteArray &value)
 {
     int position;
-    QByteArray tmp;
     int linelen;
 
 //  qCDebug(LDAP_LOG) << "line:" << QString::fromUtf8(line);
