@@ -152,15 +152,15 @@ void KLdapTest::testLdapUrl()
                              "dc=kde,dc=org?cn,mail?sub?(objectClass=*)?x-dir=base"));
     url.parseQuery();
 
-    QCOMPARE(url.userName(), QString::fromLatin1("cn=manager,dc=kde,dc=org"));
-    QCOMPARE(url.password(), QString::fromLatin1("password"));
+    QCOMPARE(url.userName(), QStringLiteral("cn=manager,dc=kde,dc=org"));
+    QCOMPARE(url.password(), QStringLiteral("password"));
     QCOMPARE(url.dn(), LdapDN(QStringLiteral("dc=kde,dc=org")));
     QCOMPARE(url.scope(), LdapUrl::Sub);
-    QCOMPARE(url.attributes().at(0), QString::fromLatin1("cn"));
-    QCOMPARE(url.attributes().at(1), QString::fromLatin1("mail"));
-    QCOMPARE(url.filter(), QString::fromLatin1("(objectClass=*)"));
-    QCOMPARE(url.extension(QString::fromLatin1("x-dir"), critical),
-             QString::fromLatin1("base"));
+    QCOMPARE(url.attributes().at(0), QStringLiteral("cn"));
+    QCOMPARE(url.attributes().at(1), QStringLiteral("mail"));
+    QCOMPARE(url.filter(), QStringLiteral("(objectClass=*)"));
+    QCOMPARE(url.extension(QStringLiteral("x-dir"), critical),
+             QStringLiteral("base"));
 }
 
 void KLdapTest::testLdapConnection()
@@ -281,19 +281,19 @@ void KLdapTest::testLdapModel()
              "/dc=kde,dc=org?cn,mail?sub?(objectClass=*)?x-dir=base");
   url.parseQuery();
 
-  QCOMPARE( url.user(), QString::fromLatin1("cn=manager,dc=kde,dc=org") );
-  QCOMPARE( url.password(), QString::fromLatin1("password") );
-  QCOMPARE( url.dn(), QString::fromLatin1("dc=kde,dc=org") );
+  QCOMPARE( url.user(), QStringLiteral("cn=manager,dc=kde,dc=org") );
+  QCOMPARE( url.password(), QStringLiteral("password") );
+  QCOMPARE( url.dn(), QStringLiteral("dc=kde,dc=org") );
   QCOMPARE( url.scope(), LdapUrl::Sub );
-  QCOMPARE( url.attributes().at(0), QString::fromLatin1("cn") );
-  QCOMPARE( url.attributes().at(1), QString::fromLatin1("mail") );
-  QCOMPARE( url.filter(), QString::fromLatin1("(objectClass=*)") );
-  QCOMPARE( url.extension(QString::fromLatin1("x-dir"), critical), QString::fromLatin1("base") );
+  QCOMPARE( url.attributes().at(0), QStringLiteral("cn") );
+  QCOMPARE( url.attributes().at(1), QStringLiteral("mail") );
+  QCOMPARE( url.filter(), QStringLiteral("(objectClass=*)") );
+  QCOMPARE( url.extension(QStringLiteral("x-dir"), critical), QStringLiteral("base") );
 
   url.setDn("ou=People,dc=kde,dc=org");
-  QCOMPARE( url.dn(), QString::fromLatin1("ou=People,dc=kde,dc=org") );
+  QCOMPARE( url.dn(), QStringLiteral("ou=People,dc=kde,dc=org") );
   url.setDn("/ou=People,dc=kde,dc=org");
-  QCOMPARE( url.dn(), QString::fromLatin1("ou=People,dc=kde,dc=org") );
+  QCOMPARE( url.dn(), QStringLiteral("ou=People,dc=kde,dc=org") );
 
   LdapServer server;
 //  url.setUrl("ldaps://cn=manager,dc=kde,dc=org:passwor@localhost:3999/"
@@ -302,20 +302,20 @@ url.setUrl("ldaps://cn=manager,dc=kde,dc=org:password@localhost:3999/"
            "dc=kde,dc=org??base??x-timelimit=5");
 url.parseQuery();
 server.setUrl( url );
-QCOMPARE( url.query(), QString::fromLatin1("??base??x-timelimit=5") );
+QCOMPARE( url.query(), QStringLiteral("??base??x-timelimit=5") );
 QCOMPARE( url.url(), server.url().url() );
 
 LdapControl c1;
-c1.setControl( QString::fromLatin1("1.2.3.4.5.6"), QByteArray("abcdefg"), true );
+c1.setControl( QStringLiteral("1.2.3.4.5.6"), QByteArray("abcdefg"), true );
 //test copy constructor
 LdapControl c2(c1);
-QCOMPARE( c2.oid(), QString::fromLatin1("1.2.3.4.5.6") );
+QCOMPARE( c2.oid(), QStringLiteral("1.2.3.4.5.6") );
 QCOMPARE( c2.value(), QByteArray("abcdefg") );
 QCOMPARE( c2.critical(), true );
 //test assignment operator
 LdapControl c3;
 c3 = c1;
-QCOMPARE( c3.oid(), QString::fromLatin1("1.2.3.4.5.6") );
+QCOMPARE( c3.oid(), QStringLiteral("1.2.3.4.5.6") );
 QCOMPARE( c3.value(), QByteArray("abcdefg") );
 QCOMPARE( c3.critical(), true );
 */
