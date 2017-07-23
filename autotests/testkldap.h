@@ -30,6 +30,10 @@ using namespace KLDAP;
 class KLdapTest : public QObject
 {
     Q_OBJECT
+public:
+    explicit KLdapTest(QObject *parent = nullptr);
+    ~KLdapTest() = default;
+
 private Q_SLOTS:
     //void testKLdap();
 

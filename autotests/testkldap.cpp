@@ -36,6 +36,11 @@
 #include <QFile>
 QTEST_MAIN(KLdapTest)
 
+KLdapTest::KLdapTest(QObject *parent)
+    : QObject(parent)
+{
+}
+
 void KLdapTest::initTestCase()
 {
     /*
