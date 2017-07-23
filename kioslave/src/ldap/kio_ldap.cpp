@@ -735,8 +735,7 @@ void LDAPProtocol::listDir(const QUrl &_url)
     bool critical = true;
     bool isSub = (usrc.extension(QStringLiteral("x-dir"), critical) == QLatin1String("sub"));
 
-//Reactivate it
-    //qCDebug(KLDAP_LOG) << "listDir(" << _url << ")";
+    qCDebug(KLDAP_LOG) << "listDir(" << _url << ")";
 
     changeCheck(usrc);
     if (!mConnected) {
