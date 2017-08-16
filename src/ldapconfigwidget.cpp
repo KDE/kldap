@@ -27,6 +27,7 @@
 #include <klocalizedstring.h>
 #include <klineedit.h>
 #include <kmessagebox.h>
+#include <KPasswordLineEdit>
 
 #include <QObject>
 #include <QCheckBox>
@@ -36,7 +37,6 @@
 #include <QRadioButton>
 #include <QSpinBox>
 #include <QGridLayout>
-
 using namespace KLDAP;
 
 class Q_DECL_HIDDEN LdapConfigWidget::Private
@@ -67,7 +67,7 @@ public:
     QString mAttr;
 
     QLineEdit *mUser;
-    QLineEdit *mPassword;
+    KPasswordLineEdit *mPassword;
     QLineEdit *mHost;
     QSpinBox  *mPort;
     QSpinBox *mVersion;
@@ -93,7 +93,8 @@ void LdapConfigWidget::Private::initWidget()
 {
     QLabel *label;
 
-    mUser = mPassword = mHost = mDn = mBindDn = mRealm = mFilter = nullptr;
+    mUser = mHost = mDn = mBindDn = mRealm = mFilter = nullptr;
+    mPassword = nullptr;
     mPort = mVersion = mTimeLimit = mSizeLimit = nullptr;
     mAnonymous = mSimple = mSASL = mSecNo = mSecTLS = mSecSSL = nullptr;
     mEditButton =  mQueryMech = nullptr;
@@ -134,9 +135,8 @@ void LdapConfigWidget::Private::initWidget()
 
     if (mFeatures & W_PASS) {
         label = new QLabel(i18n("Password:"), mParent);
-        mPassword = new QLineEdit(mParent);
+        mPassword = new KPasswordLineEdit(mParent);
         mPassword->setObjectName(QStringLiteral("kcfg_ldappassword"));
-        mPassword->setEchoMode(QLineEdit::Password);
 
         mainLayout->addWidget(label, row, 0);
         mainLayout->addWidget(mPassword, row, 1, 1, 3);
@@ -557,7 +557,7 @@ LdapServer LdapConfigWidget::server() const
         _server.setBindDn(d->mBindDn->text());
     }
     if (d->mPassword) {
-        _server.setPassword(d->mPassword->text());
+        _server.setPassword(d->mPassword->password());
     }
     if (d->mRealm) {
         _server.setRealm(d->mRealm->text());
@@ -665,13 +665,13 @@ QString LdapConfigWidget::user() const
 void LdapConfigWidget::setPassword(const QString &password)
 {
     if (d->mPassword) {
-        d->mPassword->setText(password);
+        d->mPassword->setPassword(password);
     }
 }
 
 QString LdapConfigWidget::password() const
 {
-    return d->mPassword ? d->mPassword->text() : QString();
+    return d->mPassword ? d->mPassword->password() : QString();
 }
 
 void LdapConfigWidget::setBindDn(const QString &binddn)
