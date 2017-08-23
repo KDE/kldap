@@ -56,13 +56,13 @@ public:
      * Reimplemented from QAbstractItemModel::insertRows(). This is a placeholder for when
      * LdapAttributeProxyModel beomes writeable and always returns false.
      */
-    virtual bool insertRows(int row, int count,
+    bool insertRows(int row, int count,
                             const QModelIndex &parent = QModelIndex()) override;
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). This is a placeholder for when
      * LdapAttributeProxyModel beomes writeable and always returns false.
      */
-    virtual bool removeRows(int row, int count,
+    bool removeRows(int row, int count,
                             const QModelIndex &parent = QModelIndex()) override;
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). The default implementation
@@ -87,7 +87,7 @@ public:
      * Reimplemented from QAbstractItemModel::dropMimedata(). This is a placeholder for when
      * LdapAttributeProxyModel beomes writeable and always returns false.
      */
-    virtual bool dropMimeData(const QMimeData *data, Qt::DropAction action,
+    bool dropMimeData(const QMimeData *data, Qt::DropAction action,
                               int row, int column, const QModelIndex &parent) override;
 };
 
