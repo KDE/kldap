@@ -44,6 +44,7 @@ public:
     Security mSecurity;
     Auth mAuth;
     LdapUrl::Scope mScope;
+    int mCompletionWeight = -1;
 };
 
 LdapServer::LdapServer()
@@ -95,6 +96,7 @@ void LdapServer::clear()
     d->mVersion = 3;
     d->mTimeout = 0;
     d->mSizeLimit = d->mTimeLimit = d->mPageSize = 0;
+    d->mCompletionWeight = -1;
 }
 
 QString LdapServer::host() const
@@ -393,4 +395,14 @@ LdapUrl LdapServer::url() const
         url.setExtension(QStringLiteral("x-tls"), 1, true);
     }
     return url;
+}
+
+void LdapServer::setCompletionWeight(int value)
+{
+    d->mCompletionWeight = value;
+}
+
+int LdapServer::completionWeight() const
+{
+    return d->mCompletionWeight;
 }
