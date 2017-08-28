@@ -284,6 +284,11 @@ public:
      */
     LdapUrl url() const;
 
+
+    void setCompletionWeight(int value);
+    int completionWeight() const;
+
+
 private:
     class LdapServerPrivate;
     LdapServerPrivate *const d;
