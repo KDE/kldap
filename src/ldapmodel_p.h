@@ -108,13 +108,13 @@ public:
     void gotSearchData(KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj);
 
 private:
-    LdapModel *m_parent;
-    LdapModelDNNode *m_root;
-    LdapSearch *m_search;
+    LdapModel *m_parent = nullptr;
+    LdapModelDNNode *m_root = nullptr;
+    LdapSearch *m_search = nullptr;
     LdapObjects m_searchResultObjects;
     LdapDN m_baseDN;
     SearchType m_searchType;
-    LdapModelDNNode *m_searchItem;
+    LdapModelDNNode *m_searchItem = nullptr;
 };
 
 }

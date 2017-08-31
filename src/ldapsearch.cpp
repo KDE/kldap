@@ -48,10 +48,11 @@ public:
                      const QString &filter, const QStringList &attributes,
                      int pagesize, int count);
 
-    LdapSearch *mParent;
-    LdapConnection *mConn;
+    LdapSearch *mParent = nullptr;
+    LdapConnection *mConn = nullptr;
     LdapOperation mOp;
-    bool mOwnConnection, mAbandoned;
+    bool mOwnConnection = false;
+    bool mAbandoned = false;
     int mId, mPageSize;
     LdapDN mBase;
     QString mFilter;
@@ -60,8 +61,9 @@ public:
 
     QString mErrorString;
     int mError;
-    int mCount, mMaxCount;
-    bool mFinished;
+    int mCount;
+    int mMaxCount;
+    bool mFinished = false;
 };
 
 void LdapSearchPrivate::result()

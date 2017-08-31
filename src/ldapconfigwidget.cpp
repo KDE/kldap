@@ -61,32 +61,38 @@ public:
     void sendQuery();
     void initWidget();
 
-    LdapConfigWidget *mParent;
+    LdapConfigWidget *mParent = nullptr;
     WinFlags mFeatures;
     QStringList mQResult;
     QString mAttr;
 
-    QLineEdit *mUser;
-    KPasswordLineEdit *mPassword;
-    QLineEdit *mHost;
-    QSpinBox  *mPort;
-    QSpinBox *mVersion;
-    QSpinBox *mSizeLimit;
-    QSpinBox *mTimeLimit;
-    QSpinBox *mPageSize;
-    QLineEdit *mDn, *mBindDn, *mRealm;
-    QLineEdit *mFilter;
-    QRadioButton *mAnonymous, *mSimple, *mSASL;
-    QCheckBox *mSubTree;
-    QPushButton *mEditButton;
-    QPushButton *mQueryMech;
-    QRadioButton *mSecNo, *mSecTLS, *mSecSSL;
-    KComboBox *mMech;
+    QLineEdit *mUser = nullptr;
+    KPasswordLineEdit *mPassword = nullptr;
+    QLineEdit *mHost = nullptr;
+    QSpinBox  *mPort = nullptr;
+    QSpinBox *mVersion = nullptr;
+    QSpinBox *mSizeLimit = nullptr;
+    QSpinBox *mTimeLimit = nullptr;
+    QSpinBox *mPageSize = nullptr;
+    QLineEdit *mDn = nullptr;
+    QLineEdit *mBindDn = nullptr;
+    QLineEdit *mRealm = nullptr;
+    QLineEdit *mFilter = nullptr;
+    QRadioButton *mAnonymous = nullptr;
+    QRadioButton *mSimple = nullptr;
+    QRadioButton *mSASL = nullptr;
+    QCheckBox *mSubTree = nullptr;
+    QPushButton *mEditButton = nullptr;
+    QPushButton *mQueryMech = nullptr;
+    QRadioButton *mSecNo = nullptr;
+    QRadioButton *mSecTLS = nullptr;
+    QRadioButton *mSecSSL = nullptr;
+    KComboBox *mMech = nullptr;
 
-    bool mCancelled;
-    QProgressDialog *mProg;
+    bool mCancelled = false;
+    QProgressDialog *mProg = nullptr;
 
-    QGridLayout *mainLayout;
+    QGridLayout *mainLayout = nullptr;
 };
 
 void LdapConfigWidget::Private::initWidget()

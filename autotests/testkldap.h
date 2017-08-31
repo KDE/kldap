@@ -53,9 +53,9 @@ public Q_SLOTS:
 
 private:
     QString m_url;
-    LdapSearch *m_search;
+    LdapSearch *m_search = nullptr;
     LdapObjects m_objects;
-    LdapModel *m_model;
+    LdapModel *m_model = nullptr;
 };
 
 #endif
