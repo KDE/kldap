@@ -70,8 +70,8 @@ public:
     }
 
 private:
-    LdapModelDNNode *m_parent;
-    bool m_isPopulated;
+    LdapModelDNNode *m_parent = nullptr;
+    bool m_isPopulated = false;
 };
 
 /**

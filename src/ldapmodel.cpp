@@ -80,7 +80,7 @@ QModelIndex LdapModel::parent(const QModelIndex &child) const
 QModelIndex LdapModel::index(int row, int col, const QModelIndex &parent) const
 {
     // Retrieve a pointer to the parent item
-    LdapModelDNNode *parentItem;
+    LdapModelDNNode *parentItem = nullptr;
     if (!parent.isValid()) {
         parentItem = m_d->rootNode();
     } else {

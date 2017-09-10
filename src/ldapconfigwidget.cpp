@@ -97,7 +97,7 @@ public:
 
 void LdapConfigWidget::Private::initWidget()
 {
-    QLabel *label;
+    QLabel *label = nullptr;
 
     mUser = mHost = mDn = mBindDn = mRealm = mFilter = nullptr;
     mPassword = nullptr;
