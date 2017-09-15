@@ -24,7 +24,6 @@
 #include <QByteArray>
 #include <QString>
 #include <QList>
-#include <QVariant>
 
 #include "ldapdn.h"
 #include "ldapobject.h"

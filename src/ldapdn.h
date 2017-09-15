@@ -22,8 +22,7 @@
 #define KLDAP_LDAPDN_H
 
 #include "kldap_export.h"
-
-#include <QStringList>
+#include <QString>
 
 namespace KLDAP
 {

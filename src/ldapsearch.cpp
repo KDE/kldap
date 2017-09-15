@@ -22,7 +22,6 @@
 #include "ldapdn.h"
 #include "ldapdefs.h"
 
-#include <QEventLoop>
 #include <QTimer>
 
 #include "ldap_debug.h"

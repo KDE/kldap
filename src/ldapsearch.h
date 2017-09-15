@@ -21,8 +21,6 @@
 #ifndef KLDAP_LDAPSEARCH_H
 #define KLDAP_LDAPSEARCH_H
 
-#include <QByteArray>
-#include <QList>
 #include <QObject>
 #include <QString>
 class LdapSearchPrivate;
