@@ -28,7 +28,7 @@ if(Sasl2_FOUND)
   set(kldap_EXTRA_LIBS ${kldap_EXTRA_LIBS} ${Sasl2_LIBRARIES})
 endif()
 
-configure_file(${CMAKE_CURRENT_SOURCE_DIR}/kldap_config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/kldap_config.h)
+configure_file(kldap_config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/kldap_config.h)
 
 ########### next target ###############
 
