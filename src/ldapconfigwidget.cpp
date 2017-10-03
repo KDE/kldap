@@ -304,9 +304,8 @@ void LdapConfigWidget::Private::initWidget()
         vbox->addLayout(hbox);
         label = new QLabel(i18n("SASL mechanism:"), authbox);
         hbox->addWidget(label);
-        mMech = new KComboBox(false, authbox);
+        mMech = new KComboBox(authbox);
         mMech->setObjectName(QStringLiteral("kcfg_ldapsaslmech"));
-        mMech->setEditable(true);
         mMech->addItem(QStringLiteral("DIGEST-MD5"));
         mMech->addItem(QStringLiteral("GSSAPI"));
         mMech->addItem(QStringLiteral("PLAIN"));
