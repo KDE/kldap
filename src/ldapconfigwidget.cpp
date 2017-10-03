@@ -239,7 +239,7 @@ void LdapConfigWidget::Private::initWidget()
         //without host query doesn't make sense
         if (mHost) {
             QPushButton *dnquery = new QPushButton(i18n("Query Server"), mParent);
-            connect(dnquery, SIGNAL(clicked()), mParent, SLOT(queryDNClicked()));
+            connect(dnquery, &QPushButton::clicked, mParent, [this]() { queryDNClicked(); });
             mainLayout->addWidget(dnquery, row, 2, 1, 1);
         }
         row++;
@@ -270,9 +270,9 @@ void LdapConfigWidget::Private::initWidget()
         hbox->addWidget(mSecSSL);
         mainLayout->addWidget(btgroup, row, 0, 1, 4);
 
-        connect(mSecNo, SIGNAL(clicked()), mParent, SLOT(setLDAPPort()));
-        connect(mSecTLS, SIGNAL(clicked()), mParent, SLOT(setLDAPPort()));
-        connect(mSecSSL, SIGNAL(clicked()), mParent, SLOT(setLDAPSPort()));
+        connect(mSecNo, &QRadioButton::clicked, mParent, [this]() { setLDAPPort(); });
+        connect(mSecTLS, &QRadioButton::clicked, mParent, [this]() { setLDAPPort(); });
+        connect(mSecSSL, &QRadioButton::clicked, mParent, [this]() { setLDAPSPort(); });
 
         mSecNo->setChecked(true);
         row++;
@@ -315,14 +315,14 @@ void LdapConfigWidget::Private::initWidget()
         if (mHost) {
             mQueryMech = new QPushButton(i18n("Query Server"), authbox);
             hbox->addWidget(mQueryMech);
-            connect(mQueryMech, SIGNAL(clicked()), mParent, SLOT(queryMechClicked()));
+            connect(mQueryMech, &QPushButton::clicked, mParent, [this]() { queryMechClicked(); });
         }
 
         mainLayout->addWidget(authbox, row, 0, 2, 4);
 
-        connect(mAnonymous, SIGNAL(toggled(bool)), mParent, SLOT(setAnonymous(bool)));
-        connect(mSimple, SIGNAL(toggled(bool)), mParent, SLOT(setSimple(bool)));
-        connect(mSASL, SIGNAL(toggled(bool)), mParent, SLOT(setSASL(bool)));
+        connect(mAnonymous, &QRadioButton::toggled, mParent, [this] (bool b) { setAnonymous(b); });
+        connect(mSimple, &QRadioButton::toggled, mParent, [this] (bool b) { setSimple(b); });
+        connect(mSASL, &QRadioButton::toggled, mParent, [this] (bool b) { setSASL(b); });
 
         mAnonymous->setChecked(true);
     }

@@ -119,7 +119,7 @@ void LdapSearchPrivate::result()
             emit mParent->result(mParent);
             return;
         }
-        QTimer::singleShot(0, mParent, SLOT(result()));
+        QTimer::singleShot(0, mParent, [this]() { result(); });
         return;
     }
 
@@ -151,7 +151,7 @@ void LdapSearchPrivate::result()
                     return;
                 }
                 //continue with the next page
-                QTimer::singleShot(0, mParent, SLOT(result()));
+                QTimer::singleShot(0, mParent, [this]() { result(); });
                 return;
             }
         }
@@ -168,7 +168,7 @@ void LdapSearchPrivate::result()
 
     //If not reached the requested entries, continue
     if (mMaxCount <= 0 || mCount < mMaxCount) {
-        QTimer::singleShot(0, mParent, SLOT(result()));
+        QTimer::singleShot(0, mParent, [this]() { result(); });
     }
     //If reached the requested entries, indicate it
     if (mMaxCount > 0 && mCount == mMaxCount) {
@@ -243,7 +243,7 @@ bool LdapSearchPrivate::startSearch(const LdapDN &base, LdapUrl::Scope scope,
     qCDebug(LDAP_LOG) << "startSearch msg id=" << mId;
 
     //maybe do this with threads?- need thread-safe client libs!!!
-    QTimer::singleShot(0, mParent, SLOT(result()));
+    QTimer::singleShot(0, mParent, [this]() { result(); });
 
     return true;
 }
@@ -328,7 +328,7 @@ void LdapSearch::continueSearch()
 {
     Q_ASSERT(!d->mFinished);
     d->mCount = 0;
-    QTimer::singleShot(0, this, SLOT(result()));
+    QTimer::singleShot(0, this, [this]() { d->result(); });
 }
 
 bool LdapSearch::isFinished()

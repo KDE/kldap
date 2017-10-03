@@ -274,13 +274,6 @@ private:
     class Private;
     Private *const d;
 
-    Q_PRIVATE_SLOT(d, void setLDAPPort())
-    Q_PRIVATE_SLOT(d, void setLDAPSPort())
-    Q_PRIVATE_SLOT(d, void setAnonymous(bool))
-    Q_PRIVATE_SLOT(d, void setSimple(bool))
-    Q_PRIVATE_SLOT(d, void setSASL(bool))
-    Q_PRIVATE_SLOT(d, void queryDNClicked())
-    Q_PRIVATE_SLOT(d, void queryMechClicked())
     Q_PRIVATE_SLOT(d, void loadData(KLDAP::LdapSearch *, const KLDAP::LdapObject &))
     Q_PRIVATE_SLOT(d, void loadResult(KLDAP::LdapSearch *))
 };

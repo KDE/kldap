@@ -142,9 +142,6 @@ Q_SIGNALS:
 
 private:
     LdapSearchPrivate *const d;
-
-    Q_PRIVATE_SLOT(d, void result())
-
     Q_DISABLE_COPY(LdapSearch)
 };
 
