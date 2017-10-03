@@ -273,9 +273,6 @@ Q_SIGNALS:
 private:
     class Private;
     Private *const d;
-
-    Q_PRIVATE_SLOT(d, void loadData(KLDAP::LdapSearch *, const KLDAP::LdapObject &))
-    Q_PRIVATE_SLOT(d, void loadResult(KLDAP::LdapSearch *))
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(LdapConfigWidget::WinFlags)

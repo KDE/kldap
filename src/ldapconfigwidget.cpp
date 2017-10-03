@@ -348,10 +348,8 @@ void LdapConfigWidget::Private::sendQuery()
     qCDebug(LDAP_LOG) << "sendQuery url:" << _url.toDisplayString();
 
     LdapSearch search;
-    connect(&search, SIGNAL(data(KLDAP::LdapSearch*,KLDAP::LdapObject)),
-            mParent, SLOT(loadData(KLDAP::LdapSearch*,KLDAP::LdapObject)));
-    connect(&search, SIGNAL(result(KLDAP::LdapSearch*)),
-            mParent, SLOT(loadResult(KLDAP::LdapSearch*)));
+    connect(&search, &LdapSearch::data, mParent, [this](KLDAP::LdapSearch *s, const KLDAP::LdapObject &obj) {loadData(s, obj); });
+    connect(&search, &LdapSearch::result, mParent, [this](KLDAP::LdapSearch*s) { loadResult(s); });
 
     if (!search.search(_url)) {
         KMessageBox::error(mParent, search.errorString(), i18n("Check server"));

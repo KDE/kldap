@@ -208,9 +208,6 @@ Q_SIGNALS:
 private:
     class LdapModelPrivate;
     LdapModelPrivate *const m_d;
-
-    Q_PRIVATE_SLOT(m_d, void gotSearchResult(KLDAP::LdapSearch *))
-    Q_PRIVATE_SLOT(m_d, void gotSearchData(KLDAP::LdapSearch *, const KLDAP::LdapObject &))
 };
 
 }

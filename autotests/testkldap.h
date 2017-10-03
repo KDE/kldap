@@ -47,11 +47,9 @@ private Q_SLOTS:
     void testLdapDN();
     void testLdapModel();
 
-public Q_SLOTS:
+private:
     void searchResult(KLDAP::LdapSearch *search);
     void searchData(KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj);
-
-private:
     QString m_url;
     LdapSearch *m_search = nullptr;
     LdapObjects m_objects;
