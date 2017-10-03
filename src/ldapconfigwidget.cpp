@@ -354,7 +354,7 @@ void LdapConfigWidget::Private::sendQuery()
             mParent, SLOT(loadResult(KLDAP::LdapSearch*)));
 
     if (!search.search(_url)) {
-        KMessageBox::error(mParent, search.errorString());
+        KMessageBox::error(mParent, search.errorString(), i18n("Check server"));
         return;
     }
 
