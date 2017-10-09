@@ -640,12 +640,11 @@ static void createControls(LDAPControl ***pctrls, const LdapControls &ctrls)
 
 static void extractControls(LdapControls &ctrls, LDAPControl **pctrls)
 {
-    LDAPControl *ctrl;
     LdapControl control;
     int i = 0;
 
     while (pctrls[i]) {
-        ctrl = pctrls[ i ];
+        LDAPControl *ctrl = pctrls[ i ];
         control.setOid(QString::fromUtf8(ctrl->ldctl_oid));
         control.setValue(QByteArray(ctrl->ldctl_value.bv_val,
                                     ctrl->ldctl_value.bv_len));
@@ -1170,7 +1169,6 @@ int LdapOperation::waitForResult(int id, int msecs)
     LDAP *ld = (LDAP *) d->mConnection->handle();
 
     LDAPMessage *msg;
-    int rescode;
 
     QTime stopWatch;
     stopWatch.start();
@@ -1189,7 +1187,7 @@ int LdapOperation::waitForResult(int id, int msecs)
         tv.tv_usec = (timeout % 1000) * 1000;
 
         // Wait for a result
-        rescode = ldap_result(ld, id, 0, timeout < 0 ? nullptr : &tv, &msg);
+        int rescode = ldap_result(ld, id, 0, timeout < 0 ? nullptr : &tv, &msg);
         if (rescode == -1) {
             return -1;
         }
