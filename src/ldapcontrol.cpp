@@ -29,7 +29,6 @@ class LdapControlPrivate : public QSharedData
 {
 public:
     LdapControlPrivate()
-        : mCritical(false)
     {
     }
 
@@ -43,7 +42,7 @@ public:
 
     QString mOid;
     QByteArray mValue;
-    bool mCritical;
+    bool mCritical = false;
 };
 
 LdapControl::LdapControl()

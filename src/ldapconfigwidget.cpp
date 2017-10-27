@@ -43,7 +43,7 @@ class Q_DECL_HIDDEN LdapConfigWidget::Private
 {
 public:
     Private(LdapConfigWidget *parent)
-        : mParent(parent), mFeatures(W_ALL), mProg(nullptr)
+        : mParent(parent)
     {
         mainLayout = new QGridLayout(mParent);
         mainLayout->setMargin(0);
@@ -62,7 +62,7 @@ public:
     void initWidget();
 
     LdapConfigWidget *mParent = nullptr;
-    WinFlags mFeatures;
+    WinFlags mFeatures = W_ALL;
     QStringList mQResult;
     QString mAttr;
 

@@ -165,7 +165,7 @@ void LdapModel::LdapModelPrivate::gotSearchResult(KLDAP::LdapSearch *search)
         //emit( layoutChanged() );
 
         // Let the world know we are ready for action
-        emit m_parent->ready();
+        Q_EMIT m_parent->ready();
 
         break;
     }
@@ -186,7 +186,7 @@ void LdapModel::LdapModelPrivate::gotSearchResult(KLDAP::LdapSearch *search)
             }
 
             m_parent->endInsertRows();
-            emit m_parent->layoutChanged();
+            Q_EMIT m_parent->layoutChanged();
         }
 
         // Flag that we are no longer searching

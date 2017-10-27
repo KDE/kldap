@@ -82,7 +82,7 @@ void LdapSearchPrivate::result()
         //error happened, but no timeout
         mError = mConn->ldapErrorCode();
         mErrorString = mConn->ldapErrorString();
-        emit mParent->result(mParent);
+        Q_EMIT mParent->result(mParent);
         return;
     }
 
@@ -116,7 +116,7 @@ void LdapSearchPrivate::result()
                 mError = mConn->ldapErrorCode();
                 mErrorString = mConn->ldapErrorString();
             }
-            emit mParent->result(mParent);
+            Q_EMIT mParent->result(mParent);
             return;
         }
         QTimer::singleShot(0, mParent, [this]() { result(); });
@@ -147,7 +147,7 @@ void LdapSearchPrivate::result()
                 if (mId == -1) {
                     mError = mConn->ldapErrorCode();
                     mErrorString = mConn->ldapErrorString();
-                    emit mParent->result(mParent);
+                    Q_EMIT mParent->result(mParent);
                     return;
                 }
                 //continue with the next page
@@ -156,13 +156,13 @@ void LdapSearchPrivate::result()
             }
         }
         mFinished = true;
-        emit mParent->result(mParent);
+        Q_EMIT mParent->result(mParent);
         return;
     }
 
     //Found an entry
     if (res == LdapOperation::RES_SEARCH_ENTRY) {
-        emit mParent->data(mParent, mOp.object());
+        Q_EMIT mParent->data(mParent, mOp.object());
         mCount++;
     }
 
@@ -173,7 +173,7 @@ void LdapSearchPrivate::result()
     //If reached the requested entries, indicate it
     if (mMaxCount > 0 && mCount == mMaxCount) {
         qCDebug(LDAP_LOG) << mCount << " entries reached";
-        emit mParent->result(mParent);
+        Q_EMIT mParent->result(mParent);
     }
 }
 
