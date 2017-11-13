@@ -9,6 +9,12 @@ set(KF5_VERSION "5.39.0")
 find_package(ECM ${KF5_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${KLdap_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
 
+# TODO: Remove the cmake/deprecated directory when we'll require ECM >= 5.41.0
+if("${ECM_VERSION}" VERSION_LESS "5.41.0")
+  set(CMAKE_MODULE_PATH ${KLdap_SOURCE_DIR}/cmake/deprecated)
+  add_subdirectory(cmake/deprecated)
+endif()
+
 include(GenerateExportHeader)
 include(ECMGenerateHeaders)
 include(ECMGeneratePriFile)

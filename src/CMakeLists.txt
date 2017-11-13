@@ -25,7 +25,7 @@ if(Ldap_FOUND)
 endif()
 
 if(Sasl2_FOUND)
-  set(kldap_EXTRA_LIBS ${kldap_EXTRA_LIBS} ${Sasl2_LIBRARIES})
+  set(kldap_EXTRA_LIBS ${kldap_EXTRA_LIBS} Sasl2::Sasl2)
 endif()
 
 configure_file(kldap_config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/kldap_config.h)
@@ -80,7 +80,6 @@ set_target_properties(KF5Ldap PROPERTIES
     SOVERSION ${KLDAP_SOVERSION}
     EXPORT_NAME Ldap
 )
-
 
 install(TARGETS KF5Ldap EXPORT KF5LdapTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS})
 
