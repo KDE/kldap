@@ -11,8 +11,7 @@ set(CMAKE_MODULE_PATH ${KLdap_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
 
 # TODO: Remove the cmake/deprecated directory when we'll require ECM >= 5.41.0
 if("${ECM_VERSION}" VERSION_LESS "5.41.0")
-  set(CMAKE_MODULE_PATH ${KLdap_SOURCE_DIR}/cmake/deprecated)
-  add_subdirectory(cmake/deprecated)
+  set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${KLdap_SOURCE_DIR}/cmake/deprecated)
 endif()
 
 include(GenerateExportHeader)
@@ -26,8 +25,6 @@ include(KDECMakeSettings)
 include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 include(ECMQtDeclareLoggingCategory)
 include(ECMCoverageOption)
-
-
 
 set(KLDAP_LIB_VERSION ${PIM_VERSION})
 
@@ -96,6 +93,10 @@ install(FILES
 
 ########### Targets ###########
 add_subdirectory(cmake)
+# TODO: Remove the cmake/deprecated directory when we'll require ECM >= 5.41.0
+if("${ECM_VERSION}" VERSION_LESS "5.41.0")
+  add_subdirectory(cmake/deprecated)
+endif()
 add_subdirectory(src)
 add_subdirectory(kioslave)
 if(BUILD_TESTING)
