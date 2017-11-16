@@ -69,12 +69,12 @@ if(APPLE)
       /Library/Frameworks
    )
 else()
-   find_library(Ldap_LIBRARIES NAMES ldap)
-   find_library(Lber_LIBRARIES NAMES lber)
+   find_library(Ldap_LIBRARY NAMES ldap)
+   find_library(Lber_LIBRARY NAMES lber)
 endif()
 
-if(Ldap_LIBRARIES AND Lber_LIBRARIES)
-  set(Ldap_LIBRARIES ${Ldap_LIBRARIES} ${Lber_LIBRARIES})
+if(Ldap_LIBRARY AND Lber_LIBRARY)
+  set(Ldap_LIBRARIES ${Ldap_LIBRARY} ${Lber_LIBRARY})
 endif()
 
 if(EXISTS ${Ldap_INCLUDE_DIRS}/ldap_features.h)
@@ -98,14 +98,21 @@ find_package_handle_standard_args(Ldap
     VERSION_VAR Ldap_VERSION
 )
 
+if(Ldap_FOUND AND NOT TARGET Lber::Lber)
+  add_library(Lber::Lber UNKNOWN IMPORTED)
+  set_target_properties(Lber::Lber PROPERTIES
+  IMPORTED_LOCATION "${Lber_LIBRARY}")
+endif()
+
 if(Ldap_FOUND AND NOT TARGET Ldap::Ldap)
   add_library(Ldap::Ldap UNKNOWN IMPORTED)
   set_target_properties(Ldap::Ldap PROPERTIES
-  IMPORTED_LOCATION "${Ldap_LIBRARIES}"
-  INTERFACE_INCLUDE_DIRECTORIES "${Ldap_INCLUDE_DIRS}")
+  IMPORTED_LOCATION "${Ldap_LIBRARY}"
+  INTERFACE_INCLUDE_DIRECTORIES "${Ldap_INCLUDE_DIRS}"
+  INTERFACE_LINK_LIBRARIES Lber::Lber)
 endif()
 
-mark_as_advanced(Ldap_INCLUDE_DIRS Ldap_LIBRARIES Lber_LIBRARIES Ldap_VERSION)
+mark_as_advanced(Ldap_INCLUDE_DIRS Ldap_LIBRARY Lber_LIBRARY Ldap_LIBRARIES)
 
 include(FeatureSummary)
 set_package_properties(Ldap PROPERTIES
