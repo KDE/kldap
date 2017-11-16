@@ -1,4 +1,0 @@
-install(FILES
-    FindLdap.cmake
-    DESTINATION ${CMAKECONFIG_INSTALL_DIR}
-)

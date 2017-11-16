@@ -1,14 +1,3 @@
 @PACKAGE_INIT@
 
-set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_LIST_DIR} ${CMAKE_MODULE_PATH})
-include(CMakeFindDependencyMacro)
-find_dependency(Ldap)
-find_dependency(Sasl2)
-
-include(FeatureSummary)
-
-set_package_properties(Ldap PROPERTIES
-  PURPOSE "Needed to provide LDAP functionality in KDE"
-)
-
 include("${CMAKE_CURRENT_LIST_DIR}/KF5LdapTargets.cmake")

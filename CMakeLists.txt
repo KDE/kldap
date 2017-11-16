@@ -92,11 +92,6 @@ install(FILES
 )
 
 ########### Targets ###########
-add_subdirectory(cmake)
-# TODO: Remove the cmake/deprecated directory when we'll require ECM >= 5.41.0
-if("${ECM_VERSION}" VERSION_LESS "5.41.0")
-  add_subdirectory(cmake/deprecated)
-endif()
 add_subdirectory(src)
 add_subdirectory(kioslave)
 if(BUILD_TESTING)
