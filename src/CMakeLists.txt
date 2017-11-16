@@ -7,13 +7,13 @@ check_include_files(sys/time.h HAVE_SYS_TIME_H)
 set(kldap_EXTRA_LIBS)
 
 if(Ldap_FOUND)
-  set(kldap_EXTRA_LIBS ${Ldap_LIBRARIES})
+  set(kldap_EXTRA_LIBS Ldap::Ldap)
   if(WIN32)
     set(kldap_EXTRA_LIBS ${kldap_EXTRA_LIBS} ws2_32)
   endif()
   set(HAVE_LDAP_H)
   set(CMAKE_REQUIRED_INCLUDES lber.h ldap.h)
-  set(CMAKE_REQUIRED_LIBRARIES ${Ldap_LIBRARIES})
+  set(CMAKE_REQUIRED_LIBRARIES Ldap::Ldap)
   check_function_exists(ldap_start_tls_s HAVE_LDAP_START_TLS_S)
   check_function_exists(ldap_initialize HAVE_LDAP_INITIALIZE)
   check_function_exists(ber_memfree HAVE_BER_MEMFREE)
@@ -67,13 +67,8 @@ PRIVATE
   ${kldap_EXTRA_LIBS}
 )
 
-target_include_directories(KF5Ldap INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KLDAP;${Ldap_INCLUDE_DIRS}>")
-target_include_directories(KF5Ldap PUBLIC "$<BUILD_INTERFACE:${KLdap_SOURCE_DIR}/src;${KLdap_BINARY_DIR}/src;${Ldap_INCLUDE_DIRS}>")
-
-if(Sasl2_FOUND)
-    target_include_directories(KF5Ldap INTERFACE "$<INSTALL_INTERFACE:${Sasl2_INCLUDE_DIRS}>")
-    target_include_directories(KF5Ldap PUBLIC "$<BUILD_INTERFACE:${Sasl2_INCLUDE_DIRS}>")
-endif()
+target_include_directories(KF5Ldap INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KLDAP>")
+target_include_directories(KF5Ldap PUBLIC "$<BUILD_INTERFACE:${KLdap_SOURCE_DIR}/src;${KLdap_BINARY_DIR}/src>")
 
 set_target_properties(KF5Ldap PROPERTIES
     VERSION ${KLDAP_VERSION_STRING}
