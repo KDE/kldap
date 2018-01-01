@@ -33,7 +33,7 @@
 #
 #=============================================================================
 # Copyright 2006 Szombathelyi György <gyurco@freemail.hu>
-# Copyright 2007-2017 Laurent Montel <montel@kde.org>
+# Copyright 2007-2018 Laurent Montel <montel@kde.org>
 #
 #
 # Redistribution and use in source and binary forms, with or without
