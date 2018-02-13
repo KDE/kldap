@@ -52,7 +52,8 @@ public:
     LdapOperation mOp;
     bool mOwnConnection = false;
     bool mAbandoned = false;
-    int mId, mPageSize;
+    int mId;
+    int mPageSize;
     LdapDN mBase;
     QString mFilter;
     QStringList mAttributes;
@@ -202,7 +203,7 @@ bool LdapSearchPrivate::startSearch(const LdapDN &base, LdapUrl::Scope scope,
                                       const QString &filter,
                                       const QStringList &attributes, int pagesize, int count)
 {
-    qCDebug(LDAP_LOG) << "search: base=" << base.toString() << "scope=" << (int)scope
+    qCDebug(LDAP_LOG) << "search: base=" << base.toString() << "scope=" << static_cast<int>(scope)
                       << "filter=" << filter << "attributes=" << attributes
                       << "pagesize=" << pagesize;
     mAbandoned = false;

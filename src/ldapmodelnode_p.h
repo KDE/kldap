@@ -81,7 +81,7 @@ class LdapModelDNNode : public LdapModelNode
 public:
     explicit LdapModelDNNode(LdapModelDNNode *parent = nullptr,
                              const LdapDN &dn = LdapDN());
-    ~LdapModelDNNode();
+    ~LdapModelDNNode() override;
 
     LdapModelNode::NodeType nodeType() const override
     {
@@ -126,7 +126,7 @@ public:
     explicit LdapModelAttrNode(LdapModelDNNode *parent = nullptr,
                                const QString &attrName = QString(),
                                const QByteArray &attrData = QByteArray());
-    ~LdapModelAttrNode();
+    ~LdapModelAttrNode() override;
 
     LdapModelNode::NodeType nodeType() const override
     {
