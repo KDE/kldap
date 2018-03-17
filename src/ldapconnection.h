@@ -52,7 +52,7 @@ public:
     /** Constructs an LdapConnection with the parameters given in server */
     explicit LdapConnection(const LdapServer &server);
 
-    virtual ~LdapConnection();
+    ~LdapConnection();
 
     /**
      * Sets the connection parameters via the specified url. After this,

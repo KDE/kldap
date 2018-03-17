@@ -62,7 +62,7 @@ public:
      */
     explicit LdapSearch(LdapConnection &connection);
 
-    virtual ~LdapSearch();
+    ~LdapSearch();
 
     /**
      * Sets the connection for this object to use for searches from now

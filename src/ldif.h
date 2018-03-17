@@ -61,7 +61,7 @@ public:
     Ldif(const Ldif &that);
     Ldif &operator=(const Ldif &that);
 
-    virtual ~Ldif();
+    ~Ldif();
 
     /**
      * Assembles fieldname and value into a valid Ldif line, BASE64 encodes the

@@ -71,7 +71,7 @@ public:
      * \see ready()
      */
     explicit LdapModel(LdapConnection &connection, QObject *parent = nullptr);
-    virtual ~LdapModel();
+    ~LdapModel() override;
 
     /**
      * Set the connection that the model should use.

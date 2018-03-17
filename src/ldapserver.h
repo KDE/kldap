@@ -67,7 +67,7 @@ public:
     /**
      * Destroys the LDAP server object.
      */
-    virtual ~LdapServer();
+    ~LdapServer();
 
     /**
      * Describes the encryption settings that can be used

@@ -57,7 +57,7 @@ public:
     /**
      * Destroys the control object.
      */
-    virtual ~LdapControl();
+    ~LdapControl();
     /**
      * Sets the control's OID, value and criticality.
      */

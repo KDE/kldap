@@ -104,7 +104,7 @@ public:
     explicit LdapConfigWidget(WinFlags flags, QWidget *parent = nullptr,
                               Qt::WindowFlags fl = 0);
     /** Destructs a configuration widget */
-    virtual ~LdapConfigWidget();
+    ~LdapConfigWidget();
 
     /** Sets the user name. Kconfig widget name: kcfg_ldapuser
      *  @param user the user name to set

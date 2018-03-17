@@ -48,7 +48,7 @@ public:
     /**
      * Destroys the Ber object.
      */
-    virtual ~Ber();
+    ~Ber();
 
     Ber(const Ber &that);
     Ber &operator=(const Ber &that);

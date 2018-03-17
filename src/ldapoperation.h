@@ -95,7 +95,7 @@ public:
 
     LdapOperation();
     LdapOperation(LdapConnection &conn);
-    virtual ~LdapOperation();
+    ~LdapOperation();
 
     /**
      * Sets the connection object. Without living connection object,

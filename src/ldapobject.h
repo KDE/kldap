@@ -47,7 +47,7 @@ class KLDAP_EXPORT LdapObject
 public:
     LdapObject();
     explicit LdapObject(const QString &dn);
-    virtual ~LdapObject();
+    ~LdapObject();
 
     LdapObject(const LdapObject &that);
     LdapObject &operator=(const LdapObject &that);

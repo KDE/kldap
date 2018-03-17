@@ -87,7 +87,7 @@ public:
     /**
      * Destroys the LDAP url.
      */
-    virtual ~LdapUrl();
+    ~LdapUrl();
 
     /**
      * Sets the @p dn part of the LDAP url.
