@@ -43,6 +43,8 @@ public:
     int mTimeout;
     Security mSecurity;
     Auth mAuth;
+    QString mTLSCACertFile;
+    TLSRequireCertificate mTLSRequireCertificate;
     LdapUrl::Scope mScope;
     int mCompletionWeight = -1;
 };
@@ -93,6 +95,8 @@ void LdapServer::clear()
     d->mPassword.clear();
     d->mSecurity = None;
     d->mAuth = Anonymous;
+    d->mTLSRequireCertificate = TLSReqCertDefault;
+    d->mTLSCACertFile.clear();
     d->mVersion = 3;
     d->mTimeout = 0;
     d->mSizeLimit = d->mTimeLimit = d->mPageSize = 0;
@@ -172,6 +176,16 @@ LdapServer::Security LdapServer::security() const
 LdapServer::Auth LdapServer::auth() const
 {
     return d->mAuth;
+}
+
+LdapServer::TLSRequireCertificate LdapServer::tlsRequireCertificate() const
+{
+    return d->mTLSRequireCertificate;
+}
+
+QString LdapServer::tlsCACertFile() const
+{
+    return d->mTLSCACertFile;
 }
 
 QString LdapServer::mech() const
@@ -257,6 +271,16 @@ void LdapServer::setSecurity(Security security)
 void LdapServer::setAuth(Auth auth)
 {
     d->mAuth = auth;
+}
+
+void LdapServer::setTLSRequireCertificate(LdapServer::TLSRequireCertificate reqCert)
+{
+    d->mTLSRequireCertificate = reqCert;
+}
+
+void LdapServer::setTLSCACertFile(const QString &caCertFile)
+{
+    d->mTLSCACertFile = caCertFile;
 }
 
 void LdapServer::setMech(const QString &mech)

@@ -297,7 +297,45 @@ int LdapConnection::connect()
     //FIXME: accessing to certificate handling would be good
     qCDebug(LDAP_LOG) << "setting security to:" << d->mServer.security();
     if (d->mServer.security() == LdapServer::TLS) {
+        bool initContext = false;
+        if (d->mServer.tlsCACertFile().isEmpty() == false) {
+            if(setOption(LDAP_OPT_X_TLS_CACERTFILE, d->mServer.tlsCACertFile().toUtf8().data()) != LDAP_OPT_SUCCESS) {
+                d->mConnectionError = i18n("Could not set CA certificate file.");
+                return -1;
+            }
+            initContext = true;
+        }
+
+        if (d->mServer.tlsRequireCertificate() != LdapServer::TLSReqCertDefault) {
+            int reqcert;
+            switch (d->mServer.tlsRequireCertificate()) {
+            case LdapServer::TLSReqCertAllow: reqcert = LDAP_OPT_X_TLS_ALLOW; break;
+            case LdapServer::TLSReqCertDemand: reqcert = LDAP_OPT_X_TLS_DEMAND; break;
+            case LdapServer::TLSReqCertHard: reqcert = LDAP_OPT_X_TLS_HARD; break;
+            case LdapServer::TLSReqCertNever: reqcert = LDAP_OPT_X_TLS_NEVER; break;
+            case LdapServer::TLSReqCertTry: reqcert = LDAP_OPT_X_TLS_TRY; break;
+            default:
+                d->mConnectionError = i18n("Invalid TLS require certificate mode.");
+                return -1;
+            }
+
+            if (setOption(LDAP_OPT_X_TLS_REQUIRE_CERT, &reqcert) != LDAP_OPT_SUCCESS) {
+                d->mConnectionError = i18n("Could not set TLS require certificate mode.");
+                return -1;
+            }
+            initContext = true;
+        }
+
+        if (initContext) {
+            int isServer = 0;
+            if (setOption(LDAP_OPT_X_TLS_NEWCTX, &isServer) != LDAP_OPT_SUCCESS) {
+                d->mConnectionError = i18n("Could not initialize new TLS context.");
+                return -1;
+            }
+        }
+
         qCDebug(LDAP_LOG) << "start TLS";
+
 #ifdef HAVE_LDAP_START_TLS_S
         if ((ret = ldap_start_tls_s(d->mLDAP, nullptr, nullptr)) != LDAP_SUCCESS) {
             d->mConnectionError = ldapErrorString();

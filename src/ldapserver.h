@@ -90,6 +90,19 @@ public:
     } Auth;
 
     /**
+      * Describes the certificate request and check behaviour
+      * for TLS/SSL connections.
+      */
+    typedef enum {
+        TLSReqCertDefault, ///< Use system defaults
+        TLSReqCertNever,   ///< Do not require any certificates.
+        TLSReqCertDemand,  ///< Use LDAP_OPT_X_TLS_DEMAND.
+        TLSReqCertAllow,   ///< Use LDAP_OPT_X_TLS_ALLOW.
+        TLSReqCertTry,     ///< Use LDAP_OPT_X_TLS_TRY.
+        TLSReqCertHard,    ///< Use LDAP_OPT_X_TLS_HARD.
+    } TLSRequireCertificate;
+
+    /**
      * Clears all server settings.
      */
     void clear();
@@ -201,6 +214,26 @@ public:
      * Returns the authentication method of the LDAP connection.
      */
     Auth auth() const;
+
+    /**
+      * Sets the certificate require mode for TLS/SSL connections
+      */
+    void setTLSRequireCertificate(TLSRequireCertificate reqCert);
+
+    /**
+      * Returns the certificate require mode for TLS/SSL connections
+      */
+    TLSRequireCertificate tlsRequireCertificate() const;
+
+    /**
+      * Sets the CA certificate file for TLS/SSL connections
+      */
+    void setTLSCACertFile(const QString &caCertFile);
+
+    /**
+      * Returns the CA certificate file used for TLS/SSL connections.
+      */
+    QString tlsCACertFile() const;
 
     /**
      * Sets the @p mech of the LDAP connection.
