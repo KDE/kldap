@@ -48,11 +48,6 @@ LdapUrl::LdapUrl()
 LdapUrl::LdapUrl(const QUrl &_url)
     : QUrl(_url), d(new LdapUrlPrivate)
 {
-    QString tmp = path();
-    if (tmp.startsWith(QLatin1Char('/'))) {
-        tmp = tmp.mid(1);
-    }
-    setPath(tmp);
     parseQuery();
 }
 
