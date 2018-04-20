@@ -49,9 +49,6 @@ void KLdapTest::initTestCase()
       The specified server should not be a production server in case we break anything here.
       You have been warned!
     */
-    m_search = nullptr;
-    m_model = nullptr;
-
     QString filename(QStringLiteral("testurl.txt"));
     QFile file(filename);
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
@@ -59,8 +56,6 @@ void KLdapTest::initTestCase()
         stream >> m_url;
         file.close();
     }
-//    else
-//        QCOMPARE( 0, 1 );
 
     m_search = new LdapSearch;
 
@@ -166,6 +161,31 @@ void KLdapTest::testLdapUrl()
     QCOMPARE(url.filter(), QStringLiteral("(objectClass=*)"));
     QCOMPARE(url.extension(QStringLiteral("x-dir"), critical),
              QStringLiteral("base"));
+    QCOMPARE(url.query(), QStringLiteral("?cn,mail?sub??x-dir=base"));
+    // For some reason the code removes the filter if it's (objectClass=*)...
+    QCOMPARE(url.toString(), QStringLiteral("ldap://cn=manager,dc=kde,dc=org:password@localhost:3999/"
+                                            "dc=kde,dc=org??cn,mail?sub??x-dir=base"));
+
+    // Now set a different filter
+    url.setFilter(QStringLiteral("(objectclass=person)"));
+    QCOMPARE(url.toDisplayString(), QStringLiteral("ldap://cn=manager,dc=kde,dc=org@localhost:3999/"
+                                                   "dc=kde,dc=org??cn,mail?sub?%28objectclass%3Dperson%29?x-dir=base"));
+    QCOMPARE(url.filter(), QStringLiteral("(objectclass=person)"));
+
+    // And now a filter with non-ascii letters
+    url.setFilter(QString::fromUtf8("(givenName=Valérie *)"));
+    QCOMPARE(url.toDisplayString(), QString::fromUtf8("ldap://cn=manager,dc=kde,dc=org@localhost:3999/"
+                                                      "dc=kde,dc=org??cn,mail?sub?%28givenName%3DValérie %2A%29?x-dir=base"));
+    QCOMPARE(url.filter(), QStringLiteral("(givenName=Valérie *)"));
+
+    // Test roundtrip via QUrl, as happens when sending it to kio_ldap
+    const QUrl qurl(url);
+    QCOMPARE(qurl.toDisplayString(), url.toDisplayString());
+
+    const LdapUrl kiourl(qurl);
+    QCOMPARE(kiourl.toString(), url.toString());
+    QCOMPARE(kiourl.toDisplayString(), url.toDisplayString());
+    QCOMPARE(kiourl.filter(), QStringLiteral("(givenName=Valérie *)"));
 }
 
 void KLdapTest::testLdapConnection()

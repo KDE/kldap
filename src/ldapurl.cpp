@@ -243,7 +243,7 @@ void LdapUrl::parseQuery()
 {
     Extension ext;
     QStringList extensions;
-    QString q = query();
+    QString q = query(QUrl::FullyEncoded);
     // remove first ?
     if (q.startsWith(QLatin1Char('?'))) {
         q.remove(0, 1);
