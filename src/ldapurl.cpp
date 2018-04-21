@@ -48,11 +48,6 @@ LdapUrl::LdapUrl()
 LdapUrl::LdapUrl(const QUrl &_url)
     : QUrl(_url), d(new LdapUrlPrivate)
 {
-    QString tmp = path();
-    if (tmp.startsWith(QLatin1Char('/'))) {
-        tmp = tmp.mid(1);
-    }
-    setPath(tmp);
     parseQuery();
 }
 
@@ -243,7 +238,7 @@ void LdapUrl::parseQuery()
 {
     Extension ext;
     QStringList extensions;
-    QString q = query();
+    QString q = query(QUrl::FullyEncoded);
     // remove first ?
     if (q.startsWith(QLatin1Char('?'))) {
         q.remove(0, 1);
