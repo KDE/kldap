@@ -87,46 +87,46 @@ public:
     /**
      * Reimplemented from QAbstractItemModel::index().
      */
-    QModelIndex index(int row, int col, const QModelIndex &parent) const override;
+    Q_REQUIRED_RESULT QModelIndex index(int row, int col, const QModelIndex &parent) const override;
     /**
      * Reimplemented from QAbstractItemModel::parent().
      */
-    QModelIndex parent(const QModelIndex &child) const override;
+    Q_REQUIRED_RESULT QModelIndex parent(const QModelIndex &child) const override;
     /**
      * Reimplemented from QAbstractItemModel::data().
      */
-    QVariant data(const QModelIndex &index, int role) const override;
+    Q_REQUIRED_RESULT QVariant data(const QModelIndex &index, int role) const override;
     /**
      * Reimplemented from QAbstractItemModel::setData(). This is a placeholder for when
      * LdapModel beomes writeable and always returns false.
      */
-    bool setData(const QModelIndex &index,
+    Q_REQUIRED_RESULT bool setData(const QModelIndex &index,
                  const QVariant &value,
                  int role = Qt::EditRole) override;
     /**
      * Reimplemented from QAbstractItemModel::headerData().
      */
-    QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
+    Q_REQUIRED_RESULT QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
     /**
      * Reimplemented from QAbstractItemModel::flags().
      */
-    Qt::ItemFlags flags(const QModelIndex &index) const override;
+    Q_REQUIRED_RESULT Qt::ItemFlags flags(const QModelIndex &index) const override;
     /**
      * Reimplemented from QAbstractItemModel::columnCount().
      */
-    int columnCount(const QModelIndex &parent) const override;
+    Q_REQUIRED_RESULT int columnCount(const QModelIndex &parent) const override;
     /**
      * Reimplemented from QAbstractItemModel::rowCount().
      */
-    int rowCount(const QModelIndex &parent) const override;
+    Q_REQUIRED_RESULT int rowCount(const QModelIndex &parent) const override;
     /**
      * Reimplemented from QAbstractItemModel::hasChildren().
      */
-    bool hasChildren(const QModelIndex &parent) const override;
+    Q_REQUIRED_RESULT bool hasChildren(const QModelIndex &parent) const override;
     /**
      * Reimplemented from QAbstractItemModel::canFetchMore().
      */
-    bool canFetchMore(const QModelIndex &parent) const override;
+    Q_REQUIRED_RESULT bool canFetchMore(const QModelIndex &parent) const override;
     /**
      * Reimplemented from QAbstractItemModel::fetchMore().
      */
@@ -135,13 +135,13 @@ public:
      * Reimplemented from QAbstractItemModel::insertRows(). This is a placeholder for when
      * LdapModel beomes writeable and always returns false.
      */
-    bool insertRows(int row, int count,
+    Q_REQUIRED_RESULT bool insertRows(int row, int count,
                     const QModelIndex &parent = QModelIndex()) override;
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). This is a placeholder for when
      * LdapModel beomes writeable and always returns false.
      */
-    bool removeRows(int row, int count,
+    Q_REQUIRED_RESULT bool removeRows(int row, int count,
                     const QModelIndex &parent = QModelIndex()) override;
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). The default implementation
@@ -156,7 +156,7 @@ public:
      * Reimplemented from QAbstractItemModel::supportedDropActions(). The default
      * implementation returns Qt::MoveAction.
      */
-    Qt::DropActions supportedDropActions() const override;
+    Q_REQUIRED_RESULT Qt::DropActions supportedDropActions() const override;
     /**
      * Reimplemented from QAbstractItemModel::mimedata(). This is a placeholder for when
      * LdapModel beomes writeable and always returns 0.
@@ -166,7 +166,7 @@ public:
      * Reimplemented from QAbstractItemModel::dropMimedata(). This is a placeholder for when
      * LdapModel beomes writeable and always returns false.
      */
-    bool dropMimeData(const QMimeData *data, Qt::DropAction action,
+    Q_REQUIRED_RESULT bool dropMimeData(const QMimeData *data, Qt::DropAction action,
                       int row, int column, const QModelIndex &parent) override;
 
     //

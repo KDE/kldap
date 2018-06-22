@@ -78,15 +78,15 @@ public:
     /**
      * Returns the control's OID.
      */
-    QString oid() const;
+    Q_REQUIRED_RESULT QString oid() const;
     /**
      * Returns the control's value.
      */
-    QByteArray value() const;
+    Q_REQUIRED_RESULT QByteArray value() const;
     /**
      * Returns the control's criticality.
      */
-    bool critical() const;
+    Q_REQUIRED_RESULT bool critical() const;
 
     /**
      * Parses a paging results control, which the server returned.
@@ -95,11 +95,11 @@ public:
      * value cannot be decoded, returns -1.
      * @param cookie the cookie to hold server's cookie
      */
-    int parsePageControl(QByteArray &cookie) const;
+    Q_REQUIRED_RESULT int parsePageControl(QByteArray &cookie) const;
     /**
      * Creates a paging search control.
      */
-    static LdapControl createPageControl(int pagesize, const QByteArray &cookie = QByteArray());
+    Q_REQUIRED_RESULT static LdapControl createPageControl(int pagesize, const QByteArray &cookie = QByteArray());
 
     /**
      * Inserts a unique control against a list of controls.

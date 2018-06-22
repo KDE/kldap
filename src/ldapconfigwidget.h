@@ -111,14 +111,14 @@ public:
      */
     void setUser(const QString &user);
     /** Gets the user name. Kconfig widget name: kcfg_ldapuser */
-    QString user() const;
+    Q_REQUIRED_RESULT QString user() const;
 
     /** Sets the password. Kconfig widget name: kcfg_ldappassword
      *  @param password the password to set
      */
     void setPassword(const QString &password);
     /** Gets the password. Kconfig widget name: kcfg_ldappassword */
-    QString password() const;
+    Q_REQUIRED_RESULT QString password() const;
 
     /**
      * Sets the bind dn.
@@ -127,56 +127,56 @@ public:
      */
     void setBindDn(const QString &binddn);
     /** Gets the bind dn. Kconfig widget name: kcfg_ldapbinddn*/
-    QString bindDn() const;
+    Q_REQUIRED_RESULT QString bindDn() const;
 
     /** Sets the SASL realm. Kconfig widget name: kcfg_ldaprealm
      *  @param realm the SASL realm to set
      */
     void setRealm(const QString &realm);
     /** Gets the SASL realm. Kconfig widget name: kcfg_ldaprealm */
-    QString realm() const;
+    Q_REQUIRED_RESULT QString realm() const;
 
     /** Sets the host name. Kconfig widget name: kcfg_ldaphost
      *  @param host the LDAP host to set
      */
     void setHost(const QString &host);
     /** Gets the host name. Kconfig widget name: kcfg_ldaphost */
-    QString host() const;
+    Q_REQUIRED_RESULT QString host() const;
 
     /** Sets the LDAP port. Kconfig widget name: kcfg_ldapport
      *  @param port the LDAP port to set
      */
     void setPort(int port);
     /** Gets the LDAP port. Kconfig widget name: kcfg_ldapport */
-    int port() const;
+    Q_REQUIRED_RESULT int port() const;
 
     /** Sets the LDAP protocol version. Kconfig widget name: kcfg_ldapver
      *  @param version the LDAP protocol version to set
      */
     void setVersion(int version);
     /** Gets the LDAP protocol version. Kconfig widget name: kcfg_ldapver */
-    int version() const;
+    Q_REQUIRED_RESULT int version() const;
 
     /** Sets the LDAP Base DN. Kconfig widget name: kcfg_ldapdn
      *  @param dn the LDAP Base DN to set
      */
     void setDn(const LdapDN &dn);
     /** Gets the LDAP Base DN. Kconfig widget name: kcfg_ldapdn */
-    LdapDN dn() const;
+    Q_REQUIRED_RESULT LdapDN dn() const;
 
     /** Sets the LDAP Filter. Kconfig widget name: kcfg_ldapfilter
      *  @param filter the LDAP Filter to set
      */
     void setFilter(const QString &filter);
     /** Gets the LDAP Filter. Kconfig widget name: kcfg_ldapfilter */
-    QString filter() const;
+    Q_REQUIRED_RESULT QString filter() const;
 
     /** Sets the SASL Mechanism. Kconfig widget name: kcfg_ldapsaslmech
      *  @param mech the SASL Mechanism to set
      */
     void setMech(const QString &mech);
     /** Gets the SASL Mechanism. Kconfig widget name: kcfg_ldapsaslmech */
-    QString mech() const;
+    Q_REQUIRED_RESULT QString mech() const;
 
     /**
      * Sets the security type (None, SSL, TLS).
@@ -189,7 +189,7 @@ public:
      * Kconfig widget names: kcfg_ldapnosec, kcfg_ldaptls, kcfg_ldapssl
      * @param security the security type to set
      */
-    Security security() const;
+    Q_REQUIRED_RESULT Security security() const;
 
     /**
      * Sets the authentication type (Anonymous, Simple, SASL).
@@ -202,7 +202,7 @@ public:
      * Kconfig widget names: kcfg_ldapanon, kcfg_ldapsimple, kcfg_ldapsasl
      * @param auth the authentication type to set
      */
-    Auth auth() const;
+    Q_REQUIRED_RESULT Auth auth() const;
 
     /**
      * Sets the size limit.
@@ -214,7 +214,7 @@ public:
      * Returns the size limit.
      * KConfig widget name: kcfg_ldapsizelimit
      */
-    int sizeLimit() const;
+    Q_REQUIRED_RESULT int sizeLimit() const;
 
     /**
      * Sets the time limit.
@@ -226,7 +226,7 @@ public:
      * Returns the time limit.
      * KConfig widget name: kcfg_ldaptimelimit
      */
-    int timeLimit() const;
+    Q_REQUIRED_RESULT int timeLimit() const;
 
     /**
      * Sets the page size.
@@ -238,16 +238,16 @@ public:
      * Returns the page size.
      * KConfig widget name: kcfg_ldappagesize
      */
-    int pageSize() const;
+    Q_REQUIRED_RESULT int pageSize() const;
 
-    WinFlags features() const;
+    Q_REQUIRED_RESULT WinFlags features() const;
     void setFeatures(WinFlags features);
 
     /**
      * Returns a LDAP Url constructed from the settings given.
      * Extensions are filled for use in the LDAP ioslave
      */
-    LdapUrl url() const;
+    Q_REQUIRED_RESULT LdapUrl url() const;
     /**
      * Set up the widget via an LDAP Url.
      * @param url the LDAP Url to set
@@ -257,7 +257,7 @@ public:
     /**
      * Returns an LdapServer object constructed from the settings given.
      */
-    LdapServer server() const;
+    Q_REQUIRED_RESULT LdapServer server() const;
     /**
      * Set up the widget via an LdapServer object.
      * @param server the LdapServer object to set

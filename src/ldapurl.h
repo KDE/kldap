@@ -98,7 +98,7 @@ public:
      * Returns the dn part of the LDAP url.
      * This is equal to path() with the slash removed from the beginning.
      */
-    LdapDN dn() const;
+    Q_REQUIRED_RESULT LdapDN dn() const;
 
     /**
      * Sets the @p attributes part of the LDAP url.
@@ -108,7 +108,7 @@ public:
     /**
      * Returns the attributes part of the LDAP url.
      */
-    QStringList attributes() const;
+    Q_REQUIRED_RESULT QStringList attributes() const;
 
     /**
      * Sets the scope part of the LDAP url.
@@ -118,7 +118,7 @@ public:
     /**
      * Returns the scope part of the LDAP url.
      */
-    Scope scope() const;
+    Q_REQUIRED_RESULT Scope scope() const;
 
     /**
      * Sets the filter part of the LDAP url.
@@ -128,22 +128,22 @@ public:
     /**
      * Returns the filter part of the LDAP url.
      */
-    QString filter() const;
+    Q_REQUIRED_RESULT QString filter() const;
 
     /**
      * Returns whether the specified @p extension exists in the LDAP url.
      */
-    bool hasExtension(const QString &extension) const;
+    Q_REQUIRED_RESULT bool hasExtension(const QString &extension) const;
 
     /**
      * Returns the specified @p extension.
      */
-    Extension extension(const QString &extension) const;
+    Q_REQUIRED_RESULT Extension extension(const QString &extension) const;
 
     /**
      * Returns the specified @p extension.
      */
-    QString extension(const QString &extension, bool &critical) const;
+    Q_REQUIRED_RESULT QString extension(const QString &extension, bool &critical) const;
 
     /**
      * Sets the specified extension @p key with the value and criticality in @p extension.

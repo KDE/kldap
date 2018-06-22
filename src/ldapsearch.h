@@ -88,19 +88,19 @@ public:
      * will be emitted when the number of entries is reached, but with
      * isFinished() set to false.
      */
-    bool search(const LdapServer &server,
+    Q_REQUIRED_RESULT bool search(const LdapServer &server,
                 const QStringList &attributes = QStringList(), int count = 0);
 
     /**
      * Starts a search operation on the given LDAP URL.
      */
-    bool search(const LdapUrl &url, int count = 0);
+    Q_REQUIRED_RESULT bool search(const LdapUrl &url, int count = 0);
 
     /**
      * Starts a search operation if the LdapConnection object already set
      * in the constructor.
      */
-    bool search(const LdapDN &base,
+    Q_REQUIRED_RESULT bool search(const LdapDN &base,
                 LdapUrl::Scope scope = LdapUrl::Sub,
                 const QString &filter = QString(),
                 const QStringList &attributes = QStringList(),
@@ -113,7 +113,7 @@ public:
     /**
      * Returns true if the search is finished else returns false.
      */
-    bool isFinished();
+    Q_REQUIRED_RESULT bool isFinished();
     /**
      * Tries to abandon the search.
      */
@@ -122,12 +122,12 @@ public:
     /**
      * Returns the error code of the search operation (0 if no error).
      */
-    int error() const;
+    Q_REQUIRED_RESULT int error() const;
 
     /**
      * Returns the error description of the search operation.
      */
-    QString errorString() const;
+    Q_REQUIRED_RESULT QString errorString() const;
 
 Q_SIGNALS:
     /**

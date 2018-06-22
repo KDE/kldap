@@ -45,38 +45,38 @@ public:
     /**
      * \returns A QString representing the DN.
      */
-    QString toString() const;
+    Q_REQUIRED_RESULT QString toString() const;
 
     /**
      * \param depth The depth of the DN to return using a zero-based index.
      * \returns A QString representing the DN levels deep in the directory.
      */
-    QString toString(int depth) const;
+    Q_REQUIRED_RESULT QString toString(int depth) const;
 
     /**
      * \returns A QString representing the RDN of this DN.
      */
-    QString rdnString() const;
+    Q_REQUIRED_RESULT QString rdnString() const;
 
     /**
      * \param depth The depth of the RDN to return using a zero-based index.
      * \returns A QString representing the RDN levels deep in the directory.
      */
-    QString rdnString(int depth) const;
+    Q_REQUIRED_RESULT QString rdnString(int depth) const;
 
     /**
      * \returns True if this is a valid DN, false otherwise.
      */
-    bool isValid() const;
+    Q_REQUIRED_RESULT bool isValid() const;
 
     /**
      * \returns The depth of this DN in the directory.
      */
-    int depth() const;
+    Q_REQUIRED_RESULT int depth() const;
 
-    bool operator == (const LdapDN &rhs) const;
+    Q_REQUIRED_RESULT bool operator == (const LdapDN &rhs) const;
 
-    bool operator != (const LdapDN &rhs) const;
+    Q_REQUIRED_RESULT bool operator != (const LdapDN &rhs) const;
 
 private:
     class LdapDNPrivate;

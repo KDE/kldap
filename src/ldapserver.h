@@ -115,7 +115,7 @@ public:
     /**
      * Returns the host of the LDAP connection.
      */
-    QString host() const;
+    Q_REQUIRED_RESULT QString host() const;
 
     /**
      * Sets the port of the LDAP connection.
@@ -127,7 +127,7 @@ public:
     /**
      * Returns the port of the LDAP connection.
      */
-    int port() const;
+    Q_REQUIRED_RESULT int port() const;
 
     /**
      * Sets the @p baseDn of the LDAP connection.
@@ -137,7 +137,7 @@ public:
     /**
      * Returns the baseDn of the LDAP connection.
      */
-    LdapDN baseDn() const;
+    Q_REQUIRED_RESULT LdapDN baseDn() const;
 
     /**
      * Sets the @p user of the LDAP connection.
@@ -147,7 +147,7 @@ public:
     /**
      * Returns the user of the LDAP connection.
      */
-    QString user() const;
+    Q_REQUIRED_RESULT QString user() const;
 
     /**
      * Sets the @p bindDn of the LDAP connection.
@@ -157,7 +157,7 @@ public:
     /**
      * Returns the bindDn of the LDAP connection.
      */
-    QString bindDn() const;
+    Q_REQUIRED_RESULT QString bindDn() const;
 
     /**
      * Sets the @p realm of the LDAP connection.
@@ -167,7 +167,7 @@ public:
     /**
      * Returns the realm of the LDAP connection.
      */
-    QString realm() const;
+    Q_REQUIRED_RESULT QString realm() const;
 
     /**
      * Sets the @p password of the LDAP connection.
@@ -189,7 +189,7 @@ public:
     /**
      * Returns the protocol version of the LDAP connection.
      */
-    int version() const;
+    Q_REQUIRED_RESULT int version() const;
 
     /**
      * Sets the security @p mode of the LDAP connection.
@@ -201,7 +201,7 @@ public:
     /**
      * Returns the security mode of the LDAP connection.
      */
-    Security security() const;
+    Q_REQUIRED_RESULT Security security() const;
 
     /**
      * Sets the @p authentication method of the LDAP connection.
@@ -213,7 +213,7 @@ public:
     /**
      * Returns the authentication method of the LDAP connection.
      */
-    Auth auth() const;
+    Q_REQUIRED_RESULT Auth auth() const;
 
     /**
       * Sets the certificate require mode for TLS/SSL connections
@@ -223,7 +223,7 @@ public:
     /**
       * Returns the certificate require mode for TLS/SSL connections
       */
-    TLSRequireCertificate tlsRequireCertificate() const;
+    Q_REQUIRED_RESULT TLSRequireCertificate tlsRequireCertificate() const;
 
     /**
       * Sets the CA certificate file for TLS/SSL connections
@@ -233,7 +233,7 @@ public:
     /**
       * Returns the CA certificate file used for TLS/SSL connections.
       */
-    QString tlsCACertFile() const;
+    Q_REQUIRED_RESULT QString tlsCACertFile() const;
 
     /**
      * Sets the @p mech of the LDAP connection.
@@ -243,7 +243,7 @@ public:
     /**
      * Returns the mech of the LDAP connection.
      */
-    QString mech() const;
+    Q_REQUIRED_RESULT QString mech() const;
 
     /**
      * Sets the @p timeout of the LDAP connection.
@@ -253,7 +253,7 @@ public:
     /**
      * Returns the timeout of the LDAP connection.
      */
-    int timeout() const;
+    Q_REQUIRED_RESULT int timeout() const;
 
     /**
      * Sets the search @p scope of the LDAP connection.
@@ -263,7 +263,7 @@ public:
     /**
      * Returns the search scope of the LDAP connection.
      */
-    LdapUrl::Scope scope() const;
+    Q_REQUIRED_RESULT LdapUrl::Scope scope() const;
 
     /**
      * Sets the time @p limit of the LDAP connection.
@@ -273,7 +273,7 @@ public:
     /**
      * Returns the time limit of the LDAP connection.
      */
-    int timeLimit() const;
+    Q_REQUIRED_RESULT int timeLimit() const;
 
     /**
      * Sets the size @p limit of the LDAP connection.
@@ -283,7 +283,7 @@ public:
     /**
      * Returns the size limit of the LDAP connection.
      */
-    int sizeLimit() const;
+    Q_REQUIRED_RESULT int sizeLimit() const;
 
     /**
      * Sets the page @p size of the LDAP connection.
@@ -293,7 +293,7 @@ public:
     /**
      * Returns the page size of the LDAP connection.
      */
-    int pageSize() const;
+    Q_REQUIRED_RESULT int pageSize() const;
 
     /**
      * Sets the @p filter string of the LDAP connection.
@@ -303,7 +303,7 @@ public:
     /**
      * Returns the filter string of the LDAP connection.
      */
-    QString filter() const;
+    Q_REQUIRED_RESULT QString filter() const;
 
     /**
      * Sets the server parameters from an RFC2255 compliant LDAP @p url.
@@ -317,7 +317,7 @@ public:
      * KLDAP extensions: x-tls, x-version, x-sasl, x-mech, x-realm,
      * x-sizelimit, x-timelimit, x-pagesize, x-timeout
      */
-    LdapUrl url() const;
+    Q_REQUIRED_RESULT LdapUrl url() const;
 
 
     void setCompletionWeight(int value);

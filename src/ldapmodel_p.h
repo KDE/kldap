@@ -93,7 +93,7 @@ public:
 
     void setSearchType(SearchType t, LdapModelDNNode *item = nullptr);
 
-    SearchType searchType()
+    Q_REQUIRED_RESULT SearchType searchType()
     {
         return m_searchType;
     }

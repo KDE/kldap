@@ -82,7 +82,7 @@ public:
     /**
      * Returns a translated error string if connect() failed.
      */
-    QString connectionError() const;
+    Q_REQUIRED_RESULT QString connectionError() const;
     /**
      *  Closes the LDAP connection.
      */
@@ -91,36 +91,36 @@ public:
     /** Sets the size limit for the connection.
      *  @param sizelimit the connection size limit to set
      */
-    bool setSizeLimit(int sizelimit);
+    Q_REQUIRED_RESULT bool setSizeLimit(int sizelimit);
     /** Returns the current size limit. */
-    int sizeLimit() const;
+    Q_REQUIRED_RESULT int sizeLimit() const;
 
     /** Sets the time limit for the connection.
      *  @param timelimit the connection time limit to set
      */
-    bool setTimeLimit(int timelimit);
+    Q_REQUIRED_RESULT bool setTimeLimit(int timelimit);
     /** Returns the current time limit. */
-    int timeLimit() const;
+    Q_REQUIRED_RESULT int timeLimit() const;
 
     /** Gets an option from the connection. The option value can be client
       * library specific, so avoid this function if possible
       * @param option the connection option to return
       * @param value the value of option to get
       */
-    int getOption(int option, void *value) const;
+    Q_REQUIRED_RESULT int getOption(int option, void *value) const;
     /** Sets an option in the connection. The option value can be client
       * library specific, so avoid this function if possible */
-    int setOption(int option, void *value);
+    Q_REQUIRED_RESULT int setOption(int option, void *value);
 
     /** Returns the LDAP error code from the last operation */
-    int ldapErrorCode() const;
+    Q_REQUIRED_RESULT int ldapErrorCode() const;
     /** Returns the LDAP error string from the last operation */
-    QString ldapErrorString() const;
+    Q_REQUIRED_RESULT QString ldapErrorString() const;
     /** Returns a translated error message from the specified LDAP error code */
-    static QString errorString(int code);
+    Q_REQUIRED_RESULT static QString errorString(int code);
 
     /** Returns the SASL error string from the last SASL operation */
-    QString saslErrorString() const;
+    Q_REQUIRED_RESULT QString saslErrorString() const;
 
     /**
      * Returns the opaqe client-library specific LDAP object.
