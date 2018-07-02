@@ -99,10 +99,10 @@ public:
      * @param parent the QWidget parent
      * @param fl the window flags to set
      */
-    explicit LdapConfigWidget(QWidget *parent = nullptr, Qt::WindowFlags fl = 0);
+    explicit LdapConfigWidget(QWidget *parent = nullptr, Qt::WindowFlags fl = {});
     /** Constructs a configuration widget */
     explicit LdapConfigWidget(WinFlags flags, QWidget *parent = nullptr,
-                              Qt::WindowFlags fl = 0);
+                              Qt::WindowFlags fl = {});
     /** Destructs a configuration widget */
     ~LdapConfigWidget();
 
