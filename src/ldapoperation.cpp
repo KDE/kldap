@@ -34,9 +34,7 @@
 # include <winsock2.h>
 #endif
 
-#ifdef SASL2_FOUND
 #include <sasl/sasl.h>
-#endif
 
 #ifdef LDAP_FOUND
 # ifndef HAVE_WINLDAP_H
@@ -181,7 +179,6 @@ LdapOperation::LdapOperationPrivate::~LdapOperationPrivate()
 
 #ifdef LDAP_FOUND
 
-#ifdef SASL2_FOUND
 static int kldap_sasl_interact(sasl_interact_t *interact, LdapOperation::SASL_Data *data)
 {
     if (data->proc) {
@@ -240,7 +237,6 @@ static int kldap_sasl_interact(sasl_interact_t *interact, LdapOperation::SASL_Da
     }
     return KLDAP_SUCCESS;
 }
-#endif
 
 int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
         SASL_Callback_Proc *saslproc,
@@ -254,7 +250,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds,
     int ret;
 
     if (server.auth() == LdapServer::SASL) {
-#if defined( SASL2_FOUND ) && !defined( HAVE_WINLDAP_H )
+#if !defined( HAVE_WINLDAP_H )
         sasl_conn_t *saslconn = (sasl_conn_t *)mConnection->saslHandle();
         sasl_interact_t *client_interact = nullptr;
         const char *out = nullptr;

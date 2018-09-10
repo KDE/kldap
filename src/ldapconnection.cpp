@@ -20,13 +20,12 @@
 
 #include "ldapconnection.h"
 #include "ldapdefs.h"
-#include "kldap_config.h" // SASL2_FOUND, LDAP_FOUND
+#include "kldap_config.h" // LDAP_FOUND
 
 #include <stdlib.h>
 #include <klocalizedstring.h>
 #include "ldap_debug.h"
 
-#ifdef SASL2_FOUND
 #include <sasl/sasl.h>
 static const sasl_callback_t callbacks[] = {
     { SASL_CB_ECHOPROMPT, nullptr, nullptr },
@@ -40,7 +39,6 @@ static const sasl_callback_t callbacks[] = {
 };
 
 static bool ldapoperation_sasl_initialized = false;
-#endif
 
 #ifdef LDAP_FOUND
 # ifndef HAVE_WINLDAP_H
@@ -70,23 +68,16 @@ public:
 #else
     void *mLDAP;
 #endif
-#ifdef SASL2_FOUND
     sasl_conn_t *mSASLconn;
-#else
-    void *mSASLconn;
-#endif
-
 };
 
 LdapConnection::LdapConnectionPrivate::LdapConnectionPrivate()
 {
     mSASLconn = nullptr;
-#ifdef SASL2_FOUND
     if (!ldapoperation_sasl_initialized) {
         sasl_client_init(nullptr);
         ldapoperation_sasl_initialized = true;
     }
-#endif
 }
 
 LdapConnection::LdapConnection()
@@ -152,15 +143,9 @@ QString LdapConnection::errorString(int code)
 
 QString LdapConnection::saslErrorString() const
 {
-#ifdef SASL2_FOUND
     const char *str;
     str = sasl_errdetail(d->mSASLconn);
     return QString::fromLocal8Bit(str);
-#else
-    return i18n("SASL support is not available. Please recompile libkldap with the "
-                "Cyrus-SASL (or compatible) client libraries, or complain to your "
-                "distribution packagers.");
-#endif
 }
 
 QString LdapConnection::connectionError() const
@@ -369,7 +354,6 @@ int LdapConnection::connect()
         }
     }
 
-#ifdef SASL2_FOUND
     qCDebug(LDAP_LOG) << "initializing SASL client";
     int saslresult = sasl_client_new("ldap", d->mServer.host().toLatin1().constData(),
                                      nullptr, nullptr, callbacks, 0, &d->mSASLconn);
@@ -377,7 +361,6 @@ int LdapConnection::connect()
         d->mConnectionError = i18n("Cannot initialize the SASL client.");
         return KLDAP_SASL_ERROR;
     }
-#endif
 
     return 0;
 }
@@ -392,12 +375,10 @@ void LdapConnection::close()
 #endif
     }
     d->mLDAP = nullptr;
-#ifdef SASL2_FOUND
     if (d->mSASLconn) {
         sasl_dispose(&d->mSASLconn);
         d->mSASLconn = nullptr;
     }
-#endif
     qCDebug(LDAP_LOG) << "connection closed!";
 }
 #else //LDAP_FOUND

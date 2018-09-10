@@ -47,14 +47,10 @@ set_package_properties(Ldap PROPERTIES
 )
 
 find_package(Sasl2)
-set_package_properties(Sasl2 PROPERTIES TYPE OPTIONAL)
+set_package_properties(Sasl2 PROPERTIES TYPE REQUIRED)
 
 if (Ldap_FOUND)
    set(LDAP_FOUND 1)
-endif()
-
-if (Sasl2_FOUND)
-   set(SASL2_FOUND 1)
 endif()
 
 add_definitions("-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_TO_ASCII")
