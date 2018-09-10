@@ -410,7 +410,6 @@ void LDAPProtocol::get(const QUrl &_url)
 
     changeCheck(usrc);
     if (!mConnected) {
-        finished();
         return;
     }
 
@@ -501,7 +500,6 @@ void LDAPProtocol::stat(const QUrl &_url)
 
     changeCheck(usrc);
     if (!mConnected) {
-        finished();
         return;
     }
 
@@ -552,7 +550,6 @@ void LDAPProtocol::del(const QUrl &_url, bool)
 
     changeCheck(usrc);
     if (!mConnected) {
-        finished();
         return;
     }
 
@@ -584,7 +581,6 @@ void LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
 
     changeCheck(usrc);
     if (!mConnected) {
-        finished();
         return;
     }
 
@@ -739,7 +735,6 @@ void LDAPProtocol::listDir(const QUrl &_url)
 
     changeCheck(usrc);
     if (!mConnected) {
-        finished();
         return;
     }
     usrc2 = usrc;
