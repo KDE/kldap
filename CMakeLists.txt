@@ -52,9 +52,7 @@ if (Ldap_FOUND)
    set(LDAP_FOUND 1)
 endif()
 
-add_definitions("-DQT_NO_CAST_FROM_ASCII -DQT_NO_CAST_TO_ASCII")
 add_definitions(-DTRANSLATION_DOMAIN=\"libkldap5\")
-add_definitions(-DQT_NO_URL_CAST_FROM_STRING)
 add_definitions(-DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
 
 ########### CMake Config Files ###########
