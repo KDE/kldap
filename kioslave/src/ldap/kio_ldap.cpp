@@ -223,23 +223,23 @@ void LDAPProtocol::LDAPEntry2UDSEntry(const LdapDN &dn, UDSEntry &entry, const L
     if (!dir) {
         name += QLatin1String(".ldif");
     }
-    entry.insert(KIO::UDSEntry::UDS_NAME, name);
+    entry.fastInsert(KIO::UDSEntry::UDS_NAME, name);
 
     // the file type
-    entry.insert(KIO::UDSEntry::UDS_FILE_TYPE, dir ? S_IFDIR : S_IFREG);
+    entry.fastInsert(KIO::UDSEntry::UDS_FILE_TYPE, dir ? S_IFDIR : S_IFREG);
 
     // the mimetype
     if (!dir) {
-        entry.insert(KIO::UDSEntry::UDS_MIME_TYPE, QStringLiteral("text/plain"));
+        entry.fastInsert(KIO::UDSEntry::UDS_MIME_TYPE, QStringLiteral("text/plain"));
     }
 
-    entry.insert(KIO::UDSEntry::UDS_ACCESS, dir ? 0500 : 0400);
+    entry.fastInsert(KIO::UDSEntry::UDS_ACCESS, dir ? 0500 : 0400);
 
     // the url
     LdapUrl url = usrc;
     url.setPath(QLatin1Char('/') + dn.toString());
     url.setScope(dir ? LdapUrl::One : LdapUrl::Base);
-    entry.insert(KIO::UDSEntry::UDS_URL, url.toDisplayString());
+    entry.fastInsert(KIO::UDSEntry::UDS_URL, url.toDisplayString());
 }
 
 void LDAPProtocol::changeCheck(const LdapUrl &url)
