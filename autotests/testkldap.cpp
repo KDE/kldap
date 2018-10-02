@@ -149,7 +149,7 @@ void KLdapTest::testLdapUrl()
     bool critical;
 
     url.setUrl(QStringLiteral("ldap://cn=manager,dc=kde,dc=org:password@localhost:3999/"
-                             "dc=kde,dc=org?cn,mail?sub?(objectClass=*)?x-dir=base"));
+                              "dc=kde,dc=org?cn,mail?sub?(objectClass=*)?x-dir=base"));
     url.parseQuery();
 
     QCOMPARE(url.userName(), QStringLiteral("cn=manager,dc=kde,dc=org"));

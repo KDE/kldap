@@ -27,9 +27,7 @@
 #include "ldapobject.h"
 #include "kldap_export.h"
 
-namespace KLDAP
-{
-
+namespace KLDAP {
 /**
  * A ModelView interface to an LDAP tree. At present the model is read only. Editing is
  * planned for a future release.
@@ -100,9 +98,7 @@ public:
      * Reimplemented from QAbstractItemModel::setData(). This is a placeholder for when
      * LdapModel beomes writeable and always returns false.
      */
-    Q_REQUIRED_RESULT bool setData(const QModelIndex &index,
-                 const QVariant &value,
-                 int role = Qt::EditRole) override;
+    Q_REQUIRED_RESULT bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
     /**
      * Reimplemented from QAbstractItemModel::headerData().
      */
@@ -135,14 +131,12 @@ public:
      * Reimplemented from QAbstractItemModel::insertRows(). This is a placeholder for when
      * LdapModel beomes writeable and always returns false.
      */
-    Q_REQUIRED_RESULT bool insertRows(int row, int count,
-                    const QModelIndex &parent = QModelIndex()) override;
+    Q_REQUIRED_RESULT bool insertRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). This is a placeholder for when
      * LdapModel beomes writeable and always returns false.
      */
-    Q_REQUIRED_RESULT bool removeRows(int row, int count,
-                    const QModelIndex &parent = QModelIndex()) override;
+    Q_REQUIRED_RESULT bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). The default implementation
      * does nothing.
@@ -166,8 +160,7 @@ public:
      * Reimplemented from QAbstractItemModel::dropMimedata(). This is a placeholder for when
      * LdapModel beomes writeable and always returns false.
      */
-    Q_REQUIRED_RESULT bool dropMimeData(const QMimeData *data, Qt::DropAction action,
-                      int row, int column, const QModelIndex &parent) override;
+    Q_REQUIRED_RESULT bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent) override;
 
     //
     // Other public utility functions
@@ -209,6 +202,5 @@ private:
     class LdapModelPrivate;
     LdapModelPrivate *const m_d;
 };
-
 }
 #endif

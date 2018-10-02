@@ -26,9 +26,7 @@
 #include "ldapmodel.h"
 #include "ldapobject.h"
 
-namespace KLDAP
-{
-
+namespace KLDAP {
 class LdapModelDNNode;
 class LdapSearch;
 
@@ -52,16 +50,13 @@ public:
 
     void setConnection(LdapConnection &connection);
 
-    bool search(const LdapDN &searchBase,
-                LdapUrl::Scope scope = LdapUrl::Sub,
-                const QString &filter = QString(),
-                const QStringList &attributes = QStringList(),
-                int pagesize = 0);
+    bool search(const LdapDN &searchBase, LdapUrl::Scope scope = LdapUrl::Sub, const QString &filter = QString(), const QStringList &attributes = QStringList(), int pagesize = 0);
 
     LdapModelDNNode *rootNode()
     {
         return m_root;
     }
+
     LdapSearch *search()
     {
         return m_search;
@@ -71,6 +66,7 @@ public:
     {
         return m_searchResultObjects;
     }
+
     const LdapObjects &searchResults() const
     {
         return m_searchResultObjects;
@@ -82,10 +78,12 @@ public:
     {
         m_baseDN = baseDN;
     }
+
     LdapDN &baseDN()
     {
         return m_baseDN;
     }
+
     const LdapDN &baseDN() const
     {
         return m_baseDN;
@@ -97,6 +95,7 @@ public:
     {
         return m_searchType;
     }
+
     LdapModelDNNode *searchItem()
     {
         return m_searchItem;
@@ -116,6 +115,5 @@ private:
     SearchType m_searchType;
     LdapModelDNNode *m_searchItem = nullptr;
 };
-
 }
 #endif

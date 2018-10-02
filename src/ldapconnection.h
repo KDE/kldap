@@ -27,9 +27,7 @@
 #include "ldapserver.h"
 #include "kldap_export.h"
 
-namespace KLDAP
-{
-
+namespace KLDAP {
 /**
  * @brief
  * This class represents a connection to an LDAP server.
@@ -140,7 +138,6 @@ private:
 
     Q_DISABLE_COPY(LdapConnection)
 };
-
 }
 
 #endif

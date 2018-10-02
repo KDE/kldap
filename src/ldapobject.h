@@ -32,9 +32,7 @@ class LdapObjectPrivate;
 
 // clazy:excludeall=copyable-polymorphic
 
-namespace KLDAP
-{
-
+namespace KLDAP {
 typedef QList<QByteArray> LdapAttrValue;
 typedef QMap<QString, LdapAttrValue > LdapAttrMap;
 

@@ -29,9 +29,7 @@
 
 // clazy:excludeall=copyable-polymorphic
 
-namespace KLDAP
-{
-
+namespace KLDAP {
 /**
  * @short A class that contains LDAP server connection settings.
  *
@@ -319,16 +317,13 @@ public:
      */
     Q_REQUIRED_RESULT LdapUrl url() const;
 
-
     void setCompletionWeight(int value);
     int completionWeight() const;
-
 
 private:
     class LdapServerPrivate;
     LdapServerPrivate *const d;
 };
-
 }
 
 #endif

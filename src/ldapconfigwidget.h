@@ -30,9 +30,7 @@
 #include "ldapserver.h"
 #include "ldapurl.h"
 
-namespace KLDAP
-{
-
+namespace KLDAP {
 class LdapSearch;
 
 /**
@@ -101,8 +99,7 @@ public:
      */
     explicit LdapConfigWidget(QWidget *parent = nullptr, Qt::WindowFlags fl = {});
     /** Constructs a configuration widget */
-    explicit LdapConfigWidget(WinFlags flags, QWidget *parent = nullptr,
-                              Qt::WindowFlags fl = {});
+    explicit LdapConfigWidget(WinFlags flags, QWidget *parent = nullptr, Qt::WindowFlags fl = {});
     /** Destructs a configuration widget */
     ~LdapConfigWidget();
 
@@ -276,7 +273,6 @@ private:
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(LdapConfigWidget::WinFlags)
-
 }
 
 #endif

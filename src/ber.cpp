@@ -77,7 +77,7 @@ Ber::Ber(const QByteArray &value)
     : d(new BerPrivate)
 {
     struct berval bv;
-    bv.bv_val = (char *) value.data();
+    bv.bv_val = (char *)value.data();
     bv.bv_len = value.size();
     d->mBer = ber_init(&bv);
     Q_ASSERT(d->mBer);
@@ -138,45 +138,52 @@ int Ber::printf(QString format, ...)
         switch (fmt[0]) {
         case 'b':
         case 'e':
-        case 'i': {
+        case 'i':
+        {
             ber_int_t v = va_arg(args, int);
             ret = ber_printf(d->mBer, fmt, v);
             break;
         }
-        case 'B': {
+        case 'B':
+        {
             //FIXME: QBitArray vould be logical, but how to access the bits?
             QByteArray *B = va_arg(args, QByteArray *);
             int Bc = va_arg(args, int);
             ret = ber_printf(d->mBer, fmt, B->data(), Bc);
             break;
         }
-        case 'o': {
+        case 'o':
+        {
             QByteArray *o = va_arg(args, QByteArray *);
             ret = ber_printf(d->mBer, fmt, o->data(), o->size());
             break;
         }
-        case 'O': {
+        case 'O':
+        {
             QByteArray *O = va_arg(args, QByteArray *);
             struct berval bv;
-            bv.bv_val = (char *) O->data();
+            bv.bv_val = (char *)O->data();
             bv.bv_len = O->size();
             ret = ber_printf(d->mBer, fmt, &bv);
             break;
+            break;
         }
-        break;
-        case 's': {
+        case 's':
+        {
             QByteArray *s = va_arg(args, QByteArray *);
             ret = ber_printf(d->mBer, fmt, s->data());
             break;
+            break;
         }
-        break;
-        case 't': {
+        case 't':
+        {
             unsigned int t = va_arg(args, unsigned int);
             ret = ber_printf(d->mBer, fmt, t);
             break;
+            break;
         }
-        break;
-        case 'v': {
+        case 'v':
+        {
             QList<QByteArray> *v = va_arg(args, QList<QByteArray> *);
             QVarLengthArray<const char *> l(v->count() + 1);
             int j;
@@ -187,13 +194,14 @@ int Ber::printf(QString format, ...)
             ret = ber_printf(d->mBer, fmt, l.data());
             break;
         }
-        case 'V': {
+        case 'V':
+        {
             QList<QByteArray> *V = va_arg(args, QList<QByteArray> *);
             QVarLengthArray<struct berval *> bv(V->count() + 1);
             QVarLengthArray<struct berval> bvs(V->count());
             int j;
             for (j = 0; j < V->count(); j++) {
-                bvs[j].bv_val = (char *) V->at(j).data();
+                bvs[j].bv_val = (char *)V->at(j).data();
                 bvs[j].bv_len = V->at(j).size();
                 bv[j] = &bvs[j];
             }
@@ -236,12 +244,14 @@ int Ber::scanf(QString format, ...)
         case 'l':
         case 'b':
         case 'e':
-        case 'i': {
+        case 'i':
+        {
             int *v = va_arg(args, int *);
             ret = ber_scanf(d->mBer, fmt, v);
             break;
         }
-        case 'B': {
+        case 'B':
+        {
             //FIXME: QBitArray vould be logical, but how to access the bits?
             QByteArray *B = va_arg(args, QByteArray *);
             int *Bc = va_arg(args, int *);
@@ -253,7 +263,8 @@ int Ber::scanf(QString format, ...)
             }
             break;
         }
-        case 'o': {
+        case 'o':
+        {
             QByteArray *o = va_arg(args, QByteArray *);
             struct berval bv;
             ret = ber_scanf(d->mBer, fmt, &bv);
@@ -263,7 +274,8 @@ int Ber::scanf(QString format, ...)
             }
             break;
         }
-        case 'O': {
+        case 'O':
+        {
             QByteArray *O = va_arg(args, QByteArray *);
             struct berval *bv;
             ret = ber_scanf(d->mBer, fmt, &bv);
@@ -272,9 +284,10 @@ int Ber::scanf(QString format, ...)
                 ber_bvfree(bv);
             }
             break;
+            break;
         }
-        break;
-        case 'm': { //the same as 'O', just *bv should not be freed.
+        case 'm':
+        {           //the same as 'O', just *bv should not be freed.
             QByteArray *m = va_arg(args, QByteArray *);
             struct berval *bv;
             ret = ber_scanf(d->mBer, fmt, &bv);
@@ -283,7 +296,8 @@ int Ber::scanf(QString format, ...)
             }
             break;
         }
-        case 'a': {
+        case 'a':
+        {
             QByteArray *a = va_arg(args, QByteArray *);
             char *c;
             ret = ber_scanf(d->mBer, fmt, &c);
@@ -294,7 +308,8 @@ int Ber::scanf(QString format, ...)
             break;
         }
 
-        case 's': {
+        case 's':
+        {
             QByteArray *s = va_arg(args, QByteArray *);
             char buf[255];
             ber_len_t l = sizeof(buf);
@@ -305,13 +320,15 @@ int Ber::scanf(QString format, ...)
             break;
         }
         case 't':
-        case 'T': {
+        case 'T':
+        {
             unsigned int *t = va_arg(args, unsigned int *);
             ret = ber_scanf(d->mBer, fmt, t);
             break;
+            break;
         }
-        break;
-        case 'v': {
+        case 'v':
+        {
             QList<QByteArray> *v = va_arg(args, QList<QByteArray> *);
             char **c, **c2;
             ret = ber_scanf(d->mBer, fmt, &c);
@@ -322,11 +339,12 @@ int Ber::scanf(QString format, ...)
                     ber_memfree(*c);
                     c++;
                 }
-                ber_memfree((char *) c2);
+                ber_memfree((char *)c2);
             }
             break;
         }
-        case 'V': {
+        case 'V':
+        {
             QList<QByteArray> *v = va_arg(args, QList<QByteArray> *);
             struct berval **bv, **bv2;
             ret = ber_scanf(d->mBer, fmt, &bv);
@@ -357,7 +375,6 @@ int Ber::scanf(QString format, ...)
         if (ret == -1) {
             break;
         }
-
     }
     va_end(args);
     return ret;
@@ -380,6 +397,7 @@ unsigned int Ber::skipTag(int &size)
     size = len;
     return ret;
 }
+
 #else
 
 Ber::Ber()

@@ -31,9 +31,7 @@
 
 // clazy:excludeall=copyable-polymorphic
 
-namespace KLDAP
-{
-
+namespace KLDAP {
 class LdapModelDNNode;
 
 /**
@@ -57,12 +55,14 @@ public:
     {
         return 2;
     }
+
     int row() const;
 
     void setPopulated(bool b)
     {
         m_isPopulated = b;
     }
+
     bool isPopulated() const
     {
         return m_isPopulated;
@@ -79,8 +79,7 @@ private:
 class LdapModelDNNode : public LdapModelNode
 {
 public:
-    explicit LdapModelDNNode(LdapModelDNNode *parent = nullptr,
-                             const LdapDN &dn = LdapDN());
+    explicit LdapModelDNNode(LdapModelDNNode *parent = nullptr, const LdapDN &dn = LdapDN());
     ~LdapModelDNNode() override;
 
     LdapModelNode::NodeType nodeType() const override
@@ -94,6 +93,7 @@ public:
     {
         return m_childItems.size();
     }
+
     const QList<LdapModelNode *> &children() const
     {
         return m_childItems;
@@ -123,9 +123,7 @@ private:
 class LdapModelAttrNode : public LdapModelNode
 {
 public:
-    explicit LdapModelAttrNode(LdapModelDNNode *parent = nullptr,
-                               const QString &attrName = QString(),
-                               const QByteArray &attrData = QByteArray());
+    explicit LdapModelAttrNode(LdapModelDNNode *parent = nullptr, const QString &attrName = QString(), const QByteArray &attrData = QByteArray());
     ~LdapModelAttrNode() override;
 
     LdapModelNode::NodeType nodeType() const override
@@ -137,6 +135,7 @@ public:
     {
         return m_attrName;
     }
+
     const QByteArray &attributeData()
     {
         return m_attrData;
@@ -146,7 +145,6 @@ private:
     QString m_attrName;
     QByteArray m_attrData;
 };
-
 }
 
 #endif

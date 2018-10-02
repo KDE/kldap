@@ -29,15 +29,15 @@
 using namespace KLDAP;
 
 LdapModel::LdapModel(QObject *parent)
-    : QAbstractItemModel(parent),
-      m_d(new LdapModelPrivate(this))
+    : QAbstractItemModel(parent)
+    , m_d(new LdapModelPrivate(this))
 {
     m_d->createConnections();
 }
 
 LdapModel::LdapModel(LdapConnection &connection, QObject *parent)
-    : QAbstractItemModel(parent),
-      m_d(new LdapModelPrivate(this, connection))
+    : QAbstractItemModel(parent)
+    , m_d(new LdapModelPrivate(this, connection))
 {
     m_d->createConnections();
 
@@ -131,9 +131,7 @@ QVariant LdapModel::data(const QModelIndex &index, int role) const
     return QVariant();
 }
 
-bool LdapModel::setData(const QModelIndex &index,
-                        const QVariant &value,
-                        int role)
+bool LdapModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     Q_UNUSED(index);
     Q_UNUSED(value);
@@ -166,8 +164,8 @@ Qt::ItemFlags LdapModel::flags(const QModelIndex &index) const
 
 int LdapModel::columnCount(const QModelIndex &parent) const
 {
-    LdapModelDNNode *parentNode =
-        parent.isValid() ? static_cast<LdapModelDNNode *>(parent.internalPointer()) : m_d->rootNode();
+    LdapModelDNNode *parentNode
+        = parent.isValid() ? static_cast<LdapModelDNNode *>(parent.internalPointer()) : m_d->rootNode();
     return parentNode->columnCount();
 }
 
@@ -177,17 +175,17 @@ int LdapModel::rowCount(const QModelIndex &parent) const
         return 0;
     }
 
-    const LdapModelDNNode *parentNode =
-        parent.isValid() ? static_cast<LdapModelDNNode *>(parent.internalPointer()) : m_d->rootNode();
+    const LdapModelDNNode *parentNode
+        = parent.isValid() ? static_cast<LdapModelDNNode *>(parent.internalPointer()) : m_d->rootNode();
     return parentNode->childCount();
 }
 
 bool LdapModel::hasChildren(const QModelIndex &parent) const
 {
     // We return true unless the item has been populated and we are able to do a definitive test
-    const LdapModelNode *node = parent.isValid() ?
-                                static_cast<const LdapModelNode *>(parent.internalPointer()) :
-                                m_d->rootNode();
+    const LdapModelNode *node = parent.isValid()
+                                ? static_cast<const LdapModelNode *>(parent.internalPointer())
+                                : m_d->rootNode();
 
     if (node->nodeType() != LdapModelNode::DN) {
         return false;
@@ -202,15 +200,15 @@ bool LdapModel::hasChildren(const QModelIndex &parent) const
 
 bool LdapModel::canFetchMore(const QModelIndex &parent) const
 {
-    const LdapModelDNNode *parentNode =
-        parent.isValid() ? static_cast<LdapModelDNNode *>(parent.internalPointer()) : m_d->rootNode();
+    const LdapModelDNNode *parentNode
+        = parent.isValid() ? static_cast<LdapModelDNNode *>(parent.internalPointer()) : m_d->rootNode();
     return !parentNode->isPopulated();
 }
 
 void LdapModel::fetchMore(const QModelIndex &parent)
 {
-    LdapModelDNNode *parentNode =
-        parent.isValid() ? static_cast<LdapModelDNNode *>(parent.internalPointer()) : m_d->rootNode();
+    LdapModelDNNode *parentNode
+        = parent.isValid() ? static_cast<LdapModelDNNode *>(parent.internalPointer()) : m_d->rootNode();
 
     // Search for the immediate children of parentItem.
     m_d->searchResults().clear();
@@ -221,8 +219,7 @@ void LdapModel::fetchMore(const QModelIndex &parent)
     parentNode->setPopulated(true);
 }
 
-bool LdapModel::insertRows(int row, int count,
-                           const QModelIndex &parent)
+bool LdapModel::insertRows(int row, int count, const QModelIndex &parent)
 {
     Q_UNUSED(row);
     Q_UNUSED(count);
@@ -230,8 +227,7 @@ bool LdapModel::insertRows(int row, int count,
     return false;
 }
 
-bool LdapModel::removeRows(int row, int count,
-                           const QModelIndex &parent)
+bool LdapModel::removeRows(int row, int count, const QModelIndex &parent)
 {
     Q_UNUSED(row);
     Q_UNUSED(count);
@@ -256,8 +252,7 @@ QMimeData *LdapModel::mimeData(const QModelIndexList &indexes) const
     return nullptr;
 }
 
-bool LdapModel::dropMimeData(const QMimeData *data, Qt::DropAction action,
-                             int row, int column, const QModelIndex &parent)
+bool LdapModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent)
 {
     /** \todo Implement drag and drop for LdapModel */
     Q_UNUSED(data);
@@ -283,9 +278,9 @@ bool LdapModel::hasChildrenOfType(const QModelIndex &parent, LdapDataType type) 
         break;
     }
 
-    const LdapModelNode *node = parent.isValid() ?
-                                static_cast<const LdapModelNode *>(parent.internalPointer()) :
-                                m_d->rootNode();
+    const LdapModelNode *node = parent.isValid()
+                                ? static_cast<const LdapModelNode *>(parent.internalPointer())
+                                : m_d->rootNode();
 
     const LdapModelDNNode *parentNode = static_cast<const LdapModelDNNode *>(node);
     if (!parent.isValid() || parentNode->isPopulated()) {
@@ -308,7 +303,6 @@ bool LdapModel::hasChildrenOfType(const QModelIndex &parent, LdapDataType type) 
 
 void LdapModel::revert()
 {
-
 }
 
 bool LdapModel::submit()

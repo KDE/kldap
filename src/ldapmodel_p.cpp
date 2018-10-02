@@ -27,24 +27,24 @@
 using namespace KLDAP;
 
 LdapModel::LdapModelPrivate::LdapModelPrivate(LdapModel *parent)
-    : m_parent(parent),
-      m_root(new LdapModelDNNode),
-      m_search(new LdapSearch),
-      m_searchResultObjects(),
-      m_baseDN(),
-      m_searchType(NotSearching),
-      m_searchItem(nullptr)
+    : m_parent(parent)
+    , m_root(new LdapModelDNNode)
+    , m_search(new LdapSearch)
+    , m_searchResultObjects()
+    , m_baseDN()
+    , m_searchType(NotSearching)
+    , m_searchItem(nullptr)
 {
 }
 
 LdapModel::LdapModelPrivate::LdapModelPrivate(LdapModel *parent, LdapConnection &connection)
-    : m_parent(parent),
-      m_root(new LdapModelDNNode),
-      m_search(new LdapSearch(connection)),
-      m_searchResultObjects(),
-      m_baseDN(),
-      m_searchType(NotSearching),
-      m_searchItem(nullptr)
+    : m_parent(parent)
+    , m_root(new LdapModelDNNode)
+    , m_search(new LdapSearch(connection))
+    , m_searchResultObjects()
+    , m_baseDN()
+    , m_searchType(NotSearching)
+    , m_searchItem(nullptr)
 {
 }
 
@@ -60,11 +60,7 @@ void LdapModel::LdapModelPrivate::setConnection(LdapConnection &connection)
     m_search->setConnection(connection);
 }
 
-bool LdapModel::LdapModelPrivate::search(const LdapDN &searchBase,
-        LdapUrl::Scope scope,
-        const QString &filter,
-        const QStringList &attributes,
-        int pagesize)
+bool LdapModel::LdapModelPrivate::search(const LdapDN &searchBase, LdapUrl::Scope scope, const QString &filter, const QStringList &attributes, int pagesize)
 {
     return m_search->search(searchBase, scope, filter, attributes, pagesize);
 }
@@ -86,8 +82,12 @@ void LdapModel::LdapModelPrivate::recreateRootItem()
 
 void LdapModel::LdapModelPrivate::createConnections()
 {
-    connect(search(), &LdapSearch::data, m_parent, [this](KLDAP::LdapSearch *s, const KLDAP::LdapObject &obj) {gotSearchData(s, obj); });
-    connect(search(), &LdapSearch::result, m_parent, [this](KLDAP::LdapSearch *s) { gotSearchResult(s); });
+    connect(search(), &LdapSearch::data, m_parent, [this](KLDAP::LdapSearch *s, const KLDAP::LdapObject &obj) {
+        gotSearchData(s, obj);
+    });
+    connect(search(), &LdapSearch::result, m_parent, [this](KLDAP::LdapSearch *s) {
+        gotSearchResult(s);
+    });
 }
 
 void LdapModel::LdapModelPrivate::populateRootToBaseDN()
@@ -115,11 +115,12 @@ void LdapModel::LdapModelPrivate::gotSearchResult(KLDAP::LdapSearch *search)
     qCDebug(LDAP_LOG);
 
     switch (searchType()) {
-    case LdapModelPrivate::NamingContexts: {
+    case LdapModelPrivate::NamingContexts:
+    {
         // Set the baseDN
         QString baseDN;
-        if (!searchResults().isEmpty() &&
-                searchResults().at(0).hasAttribute(QStringLiteral("namingContexts"))) {
+        if (!searchResults().isEmpty()
+            && searchResults().at(0).hasAttribute(QStringLiteral("namingContexts"))) {
             baseDN = QString::fromLatin1(searchResults().at(0).value(QStringLiteral("namingContexts")));
             //qCDebug(LDAP_LOG) << "Found baseDN =" << baseDN;
         }
@@ -133,7 +134,8 @@ void LdapModel::LdapModelPrivate::gotSearchResult(KLDAP::LdapSearch *search)
 
         break;
     }
-    case LdapModelPrivate::BaseDN: {
+    case LdapModelPrivate::BaseDN:
+    {
         //qCDebug(LDAP_LOG) << "Found details of the baseDN object."
         //         << "Creating objects down to this level.";
 
@@ -169,7 +171,7 @@ void LdapModel::LdapModelPrivate::gotSearchResult(KLDAP::LdapSearch *search)
 
         break;
     }
-    case LdapModelPrivate::ChildObjects: {
+    case LdapModelPrivate::ChildObjects:
         //qCDebug(LDAP_LOG) << "Found" << searchResults().size() << "child objects";
 
         if (searchResults().size() != 0) {
@@ -193,14 +195,12 @@ void LdapModel::LdapModelPrivate::gotSearchResult(KLDAP::LdapSearch *search)
         setSearchType(LdapModelPrivate::NotSearching);
 
         break;
-    }
     default:
         break;
     }
 }
 
-void LdapModel::LdapModelPrivate::gotSearchData(KLDAP::LdapSearch *search,
-        const KLDAP::LdapObject &obj)
+void LdapModel::LdapModelPrivate::gotSearchData(KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj)
 {
     Q_UNUSED(search);
     //qCDebug(LDAP_LOG);

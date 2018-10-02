@@ -30,24 +30,20 @@ using namespace KLDAP;
 LdapStructureProxyModel::LdapStructureProxyModel(QObject *parent)
     : QSortFilterProxyModel(parent)
 {
-
 }
 
 LdapStructureProxyModel::~LdapStructureProxyModel()
 {
 }
 
-QVariant LdapStructureProxyModel::data(const QModelIndex &index,
-                                       int role) const
+QVariant LdapStructureProxyModel::data(const QModelIndex &index, int role) const
 {
     // Included just in case we decide to do any special presentation of the data
     // at some other point throughout the 4.x series.
     return sourceModel()->data(mapToSource(index), role);
 }
 
-bool LdapStructureProxyModel::setData(const QModelIndex &index,
-                                      const QVariant &value,
-                                      int role)
+bool LdapStructureProxyModel::setData(const QModelIndex &index, const QVariant &value, int role)
 {
     Q_UNUSED(index);
     Q_UNUSED(value);
@@ -55,19 +51,16 @@ bool LdapStructureProxyModel::setData(const QModelIndex &index,
     return false;
 }
 
-bool LdapStructureProxyModel::filterAcceptsRow(int sourceRow,
-        const QModelIndex &sourceParent) const
+bool LdapStructureProxyModel::filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const
 {
     QModelIndex idx = sourceModel()->index(sourceRow, 0, sourceParent);
-    LdapModelNode::NodeType nodeType =
-        static_cast<LdapModelNode::NodeType>(
-            sourceModel()->data(idx, LdapModel::NodeTypeRole).toUInt());
+    LdapModelNode::NodeType nodeType
+        = static_cast<LdapModelNode::NodeType>(
+              sourceModel()->data(idx, LdapModel::NodeTypeRole).toUInt());
     return nodeType == LdapModelNode::DN;
 }
 
-QVariant LdapStructureProxyModel::headerData(int section,
-        Qt::Orientation orientation,
-        int role) const
+QVariant LdapStructureProxyModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
     Q_UNUSED(section);
     if (orientation == Qt::Horizontal && role == Qt::DisplayRole) {
@@ -77,7 +70,7 @@ QVariant LdapStructureProxyModel::headerData(int section,
     return QVariant();
 }
 
-int LdapStructureProxyModel::columnCount(const QModelIndex &/*parent*/) const
+int LdapStructureProxyModel::columnCount(const QModelIndex & /*parent*/) const
 {
     // No need for more than one column just to show the structure
     return 1;
@@ -107,8 +100,7 @@ QModelIndex LdapStructureProxyModel::mapToSource(const QModelIndex &proxyIndex) 
     return QSortFilterProxyModel::mapToSource(proxyIndex);
 }
 
-bool LdapStructureProxyModel::insertRows(int row, int count,
-        const QModelIndex &parent)
+bool LdapStructureProxyModel::insertRows(int row, int count, const QModelIndex &parent)
 {
     Q_UNUSED(row);
     Q_UNUSED(count);
@@ -116,8 +108,7 @@ bool LdapStructureProxyModel::insertRows(int row, int count,
     return false;
 }
 
-bool LdapStructureProxyModel::removeRows(int row, int count,
-        const QModelIndex &parent)
+bool LdapStructureProxyModel::removeRows(int row, int count, const QModelIndex &parent)
 {
     Q_UNUSED(row);
     Q_UNUSED(count);
@@ -142,8 +133,7 @@ QMimeData *LdapStructureProxyModel::mimeData(const QModelIndexList &indexes) con
     return nullptr;
 }
 
-bool LdapStructureProxyModel::dropMimeData(const QMimeData *data, Qt::DropAction action,
-        int row, int column, const QModelIndex &parent)
+bool LdapStructureProxyModel::dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent)
 {
     /** \todo Implement drag and drop for LdapModel */
     Q_UNUSED(data);
@@ -153,4 +143,3 @@ bool LdapStructureProxyModel::dropMimeData(const QMimeData *data, Qt::DropAction
     Q_UNUSED(parent);
     return false;
 }
-

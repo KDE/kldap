@@ -25,8 +25,8 @@
 using namespace KLDAP;
 
 LdapModelNode::LdapModelNode(LdapModelDNNode *parent)
-    : m_parent(parent),
-      m_isPopulated(false)
+    : m_parent(parent)
+    , m_isPopulated(false)
 {
     if (m_parent) {
         m_parent->appendChild(this);
@@ -35,7 +35,6 @@ LdapModelNode::LdapModelNode(LdapModelDNNode *parent)
 
 LdapModelNode::~LdapModelNode()
 {
-
 }
 
 LdapModelDNNode *LdapModelNode::parent()
@@ -55,11 +54,10 @@ int LdapModelNode::row() const
 // LdapModelDNNode imlpementation
 //
 
-LdapModelDNNode::LdapModelDNNode(LdapModelDNNode *parent,
-                                 const LdapDN &dn)
-    : LdapModelNode(parent),
-      m_childItems(),
-      m_dn(dn)
+LdapModelDNNode::LdapModelDNNode(LdapModelDNNode *parent, const LdapDN &dn)
+    : LdapModelNode(parent)
+    , m_childItems()
+    , m_dn(dn)
 {
     qCDebug(LDAP_LOG) << "Creating DN =" << m_dn.toString();
 }
@@ -116,17 +114,14 @@ void LdapModelDNNode::setLdapObject(const LdapObject &object)
 // LdapModelAttrNode imlpementation
 //
 
-LdapModelAttrNode::LdapModelAttrNode(LdapModelDNNode *parent,
-                                     const QString &attrName,
-                                     const QByteArray &attrData)
-    : LdapModelNode(parent),
-      m_attrName(attrName),
-      m_attrData(attrData)
+LdapModelAttrNode::LdapModelAttrNode(LdapModelDNNode *parent, const QString &attrName, const QByteArray &attrData)
+    : LdapModelNode(parent)
+    , m_attrName(attrName)
+    , m_attrData(attrData)
 {
     qCDebug(LDAP_LOG) << "Creating Name =" << m_attrName << " Data =" << m_attrData;
 }
 
 LdapModelAttrNode::~LdapModelAttrNode()
 {
-
 }

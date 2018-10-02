@@ -27,9 +27,7 @@
 
 // clazy:excludeall=copyable-polymorphic
 
-namespace KLDAP
-{
-
+namespace KLDAP {
 /**
  * This class allows encoding and decoding Qt structures using Basic
  * Encoding Rules.
@@ -126,6 +124,5 @@ private:
     class BerPrivate;
     BerPrivate *const d;
 };
-
 }
 #endif

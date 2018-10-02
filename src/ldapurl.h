@@ -30,9 +30,7 @@
 
 // clazy:excludeall=copyable-polymorphic
 
-namespace KLDAP
-{
-
+namespace KLDAP {
 /**
  * @short A special url class for LDAP.
  *
@@ -180,7 +178,6 @@ private:
     class LdapUrlPrivate;
     LdapUrlPrivate *const d;
 };
-
 }
 
 #endif

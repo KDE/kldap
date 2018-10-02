@@ -25,9 +25,7 @@
 
 #include "kldap_export.h"
 
-namespace KLDAP
-{
-
+namespace KLDAP {
 class KLDAP_EXPORT LdapAttributeProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
@@ -40,9 +38,7 @@ public:
      * Reimplemented from QAbstractItemModel::setData(). This is a placeholder for when
      * LdapAttributeProxyModel beomes writeable and always returns false.
      */
-    Q_REQUIRED_RESULT bool setData(const QModelIndex &index,
-                 const QVariant &value,
-                 int role = Qt::EditRole) override;
+    Q_REQUIRED_RESULT bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
     Q_REQUIRED_RESULT bool filterAcceptsRow(int sourceRow, const QModelIndex &sourceParent) const override;
     Q_REQUIRED_RESULT QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
     Q_REQUIRED_RESULT int columnCount(const QModelIndex &parent) const override;
@@ -56,14 +52,12 @@ public:
      * Reimplemented from QAbstractItemModel::insertRows(). This is a placeholder for when
      * LdapAttributeProxyModel beomes writeable and always returns false.
      */
-    Q_REQUIRED_RESULT bool insertRows(int row, int count,
-                            const QModelIndex &parent = QModelIndex()) override;
+    Q_REQUIRED_RESULT bool insertRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). This is a placeholder for when
      * LdapAttributeProxyModel beomes writeable and always returns false.
      */
-    Q_REQUIRED_RESULT bool removeRows(int row, int count,
-                            const QModelIndex &parent = QModelIndex()) override;
+    Q_REQUIRED_RESULT bool removeRows(int row, int count, const QModelIndex &parent = QModelIndex()) override;
     /**
      * Reimplemented from QAbstractItemModel::removeRows(). The default implementation
      * does nothing.
@@ -87,9 +81,7 @@ public:
      * Reimplemented from QAbstractItemModel::dropMimedata(). This is a placeholder for when
      * LdapAttributeProxyModel beomes writeable and always returns false.
      */
-    Q_REQUIRED_RESULT bool dropMimeData(const QMimeData *data, Qt::DropAction action,
-                              int row, int column, const QModelIndex &parent) override;
+    Q_REQUIRED_RESULT bool dropMimeData(const QMimeData *data, Qt::DropAction action, int row, int column, const QModelIndex &parent) override;
 };
-
 }
 #endif

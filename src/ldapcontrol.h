@@ -30,9 +30,7 @@ class LdapControlPrivate;
 
 // clazy:excludeall=copyable-polymorphic
 
-namespace KLDAP
-{
-
+namespace KLDAP {
 class LdapControl;
 typedef QVector<LdapControl> LdapControls;
 
@@ -53,7 +51,7 @@ public:
     LdapControl(const QString &oid, const QByteArray &value, bool critical = false);
 
     LdapControl(const LdapControl &that);
-    LdapControl &operator= (const LdapControl &that);
+    LdapControl &operator=(const LdapControl &that);
     /**
      * Destroys the control object.
      */
@@ -61,8 +59,7 @@ public:
     /**
      * Sets the control's OID, value and criticality.
      */
-    void setControl(const QString &oid, const QByteArray &value,
-                    bool critical = false);
+    void setControl(const QString &oid, const QByteArray &value, bool critical = false);
     /**
      * Sets the control's OID.
      */
@@ -114,7 +111,6 @@ public:
 private:
     QSharedDataPointer<LdapControlPrivate> d;
 };
-
 }
 
 #endif

@@ -38,8 +38,7 @@ public:
     LDAPProtocol(const QByteArray &protocol, const QByteArray &pool, const QByteArray &app);
     ~LDAPProtocol() override;
 
-    void setHost(const QString &host, quint16 port,
-                         const QString &user, const QString &pass) override;
+    void setHost(const QString &host, quint16 port, const QString &user, const QString &pass) override;
 
     void openConnection() override;
     void closeConnection() override;
@@ -57,10 +56,8 @@ private:
     KLDAP::LdapServer mServer;
     bool mConnected;
 
-    void controlsFromMetaData(KLDAP::LdapControls &serverctrls,
-                              KLDAP::LdapControls &clientctrls);
-    void LDAPEntry2UDSEntry(const KLDAP::LdapDN &dn, KIO::UDSEntry &entry,
-                            const KLDAP::LdapUrl &usrc, bool dir = false);
+    void controlsFromMetaData(KLDAP::LdapControls &serverctrls, KLDAP::LdapControls &clientctrls);
+    void LDAPEntry2UDSEntry(const KLDAP::LdapDN &dn, KIO::UDSEntry &entry, const KLDAP::LdapUrl &usrc, bool dir = false);
     int asyncSearch(KLDAP::LdapUrl &usrc, const QByteArray &cookie = "");
 
     void LDAPErr(int err = KLDAP_SUCCESS);

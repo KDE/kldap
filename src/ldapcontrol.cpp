@@ -63,7 +63,7 @@ LdapControl::LdapControl(const LdapControl &that)
     setControl(that.d->mOid, that.d->mValue, that.d->mCritical);
 }
 
-LdapControl &LdapControl::operator= (const LdapControl &that)
+LdapControl &LdapControl::operator=(const LdapControl &that)
 {
     if (this != &that) {
         d = that.d;

@@ -69,7 +69,7 @@ LdapServer::LdapServer(const LdapServer &that)
     *d = *that.d;
 }
 
-LdapServer &LdapServer::operator= (const LdapServer &that)
+LdapServer &LdapServer::operator=(const LdapServer &that)
 {
     if (this == &that) {
         return *this;

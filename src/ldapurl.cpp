@@ -46,13 +46,15 @@ LdapUrl::LdapUrl()
 }
 
 LdapUrl::LdapUrl(const QUrl &_url)
-    : QUrl(_url), d(new LdapUrlPrivate)
+    : QUrl(_url)
+    , d(new LdapUrlPrivate)
 {
     parseQuery();
 }
 
 LdapUrl::LdapUrl(const LdapUrl &that)
-    : QUrl(that), d(new LdapUrlPrivate)
+    : QUrl(that)
+    , d(new LdapUrlPrivate)
 {
     *d = *that.d;
 }
@@ -138,7 +140,7 @@ LdapUrl::Extension LdapUrl::extension(const QString &key) const
 
     it = d->m_extensions.constFind(key);
     if (it != d->m_extensions.constEnd()) {
-        return (*it);
+        return *it;
     } else {
         Extension ext;
         ext.value = QLatin1String("");
@@ -255,7 +257,7 @@ void LdapUrl::parseQuery()
     int i = 0;
     QStringList::const_iterator end(url_items.constEnd());
     for (QStringList::const_iterator it = url_items.constBegin();
-            it != end; ++it, i++) {
+         it != end; ++it, i++) {
         switch (i) {
         case 0:
             d->m_attributes = (*it).split(QLatin1Char(','), QString::SkipEmptyParts);
@@ -279,7 +281,7 @@ void LdapUrl::parseQuery()
     QString name, value;
     QStringList::const_iterator end2(extensions.constEnd());
     for (QStringList::const_iterator it = extensions.constBegin();
-            it != end2; ++it) {
+         it != end2; ++it) {
         ext.critical = false;
         name = fromPercentEncoding((*it).section(QLatin1Char('='), 0, 0).toLatin1()).toLower();
         value = fromPercentEncoding((*it).section(QLatin1Char('='), 1).toLatin1());

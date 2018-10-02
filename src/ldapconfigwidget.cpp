@@ -69,7 +69,7 @@ public:
     QLineEdit *mUser = nullptr;
     KPasswordLineEdit *mPassword = nullptr;
     QLineEdit *mHost = nullptr;
-    QSpinBox  *mPort = nullptr;
+    QSpinBox *mPort = nullptr;
     QSpinBox *mVersion = nullptr;
     QSpinBox *mSizeLimit = nullptr;
     QSpinBox *mTimeLimit = nullptr;
@@ -103,7 +103,7 @@ void LdapConfigWidget::Private::initWidget()
     mPassword = nullptr;
     mPort = mVersion = mTimeLimit = mSizeLimit = nullptr;
     mAnonymous = mSimple = mSASL = mSecNo = mSecTLS = mSecSSL = nullptr;
-    mEditButton =  mQueryMech = nullptr;
+    mEditButton = mQueryMech = nullptr;
     mPageSize = nullptr;
     mMech = nullptr;
     int row = 0;
@@ -239,7 +239,9 @@ void LdapConfigWidget::Private::initWidget()
         //without host query doesn't make sense
         if (mHost) {
             QPushButton *dnquery = new QPushButton(i18n("Query Server"), mParent);
-            connect(dnquery, &QPushButton::clicked, mParent, [this]() { queryDNClicked(); });
+            connect(dnquery, &QPushButton::clicked, mParent, [this]() {
+                queryDNClicked();
+            });
             mainLayout->addWidget(dnquery, row, 2, 1, 1);
         }
         row++;
@@ -270,33 +272,38 @@ void LdapConfigWidget::Private::initWidget()
         hbox->addWidget(mSecSSL);
         mainLayout->addWidget(btgroup, row, 0, 1, 4);
 
-        connect(mSecNo, &QRadioButton::clicked, mParent, [this]() { setLDAPPort(); });
-        connect(mSecTLS, &QRadioButton::clicked, mParent, [this]() { setLDAPPort(); });
-        connect(mSecSSL, &QRadioButton::clicked, mParent, [this]() { setLDAPSPort(); });
+        connect(mSecNo, &QRadioButton::clicked, mParent, [this]() {
+            setLDAPPort();
+        });
+        connect(mSecTLS, &QRadioButton::clicked, mParent, [this]() {
+            setLDAPPort();
+        });
+        connect(mSecSSL, &QRadioButton::clicked, mParent, [this]() {
+            setLDAPSPort();
+        });
 
         mSecNo->setChecked(true);
         row++;
     }
 
     if (mFeatures & W_AUTHBOX) {
-
-        QGroupBox *authbox =
-            new QGroupBox(i18n("Authentication"), mParent);
+        QGroupBox *authbox
+            = new QGroupBox(i18n("Authentication"), mParent);
         QVBoxLayout *vbox = new QVBoxLayout;
         authbox->setLayout(vbox);
         QHBoxLayout *hbox = new QHBoxLayout;
         vbox->addLayout(hbox);
 
-        mAnonymous =
-            new QRadioButton(i18nc("@option:radio anonymous authentication", "Anonymous"), authbox);
+        mAnonymous
+            = new QRadioButton(i18nc("@option:radio anonymous authentication", "Anonymous"), authbox);
         mAnonymous->setObjectName(QStringLiteral("kcfg_ldapanon"));
         hbox->addWidget(mAnonymous);
-        mSimple =
-            new QRadioButton(i18nc("@option:radio simple authentication", "Simple"), authbox);
+        mSimple
+            = new QRadioButton(i18nc("@option:radio simple authentication", "Simple"), authbox);
         mSimple->setObjectName(QStringLiteral("kcfg_ldapsimple"));
         hbox->addWidget(mSimple);
-        mSASL =
-            new QRadioButton(i18nc("@option:radio SASL authentication", "SASL"), authbox);
+        mSASL
+            = new QRadioButton(i18nc("@option:radio SASL authentication", "SASL"), authbox);
         mSASL->setObjectName(QStringLiteral("kcfg_ldapsasl"));
         hbox->addWidget(mSASL);
 
@@ -315,14 +322,22 @@ void LdapConfigWidget::Private::initWidget()
         if (mHost) {
             mQueryMech = new QPushButton(i18n("Query Server"), authbox);
             hbox->addWidget(mQueryMech);
-            connect(mQueryMech, &QPushButton::clicked, mParent, [this]() { queryMechClicked(); });
+            connect(mQueryMech, &QPushButton::clicked, mParent, [this]() {
+                queryMechClicked();
+            });
         }
 
         mainLayout->addWidget(authbox, row, 0, 2, 4);
 
-        connect(mAnonymous, &QRadioButton::toggled, mParent, [this] (bool b) { setAnonymous(b); });
-        connect(mSimple, &QRadioButton::toggled, mParent, [this] (bool b) { setSimple(b); });
-        connect(mSASL, &QRadioButton::toggled, mParent, [this] (bool b) { setSASL(b); });
+        connect(mAnonymous, &QRadioButton::toggled, mParent, [this](bool b) {
+            setAnonymous(b);
+        });
+        connect(mSimple, &QRadioButton::toggled, mParent, [this](bool b) {
+            setSimple(b);
+        });
+        connect(mSASL, &QRadioButton::toggled, mParent, [this](bool b) {
+            setSASL(b);
+        });
 
         mAnonymous->setChecked(true);
     }
@@ -348,8 +363,12 @@ void LdapConfigWidget::Private::sendQuery()
     qCDebug(LDAP_LOG) << "sendQuery url:" << _url.toDisplayString();
 
     LdapSearch search;
-    connect(&search, &LdapSearch::data, mParent, [this](KLDAP::LdapSearch *s, const KLDAP::LdapObject &obj) {loadData(s, obj); });
-    connect(&search, &LdapSearch::result, mParent, [this](KLDAP::LdapSearch*s) { loadResult(s); });
+    connect(&search, &LdapSearch::data, mParent, [this](KLDAP::LdapSearch *s, const KLDAP::LdapObject &obj) {
+        loadData(s, obj);
+    });
+    connect(&search, &LdapSearch::result, mParent, [this](KLDAP::LdapSearch *s) {
+        loadResult(s);
+    });
 
     if (!search.search(_url)) {
         KMessageBox::error(mParent, search.errorString(), i18n("Check server"));
@@ -406,10 +425,10 @@ void LdapConfigWidget::Private::loadData(LdapSearch *, const LdapObject &object)
     mProg->setValue(mProg->value() + 1);
     LdapAttrMap::ConstIterator end(object.attributes().constEnd());
     for (LdapAttrMap::ConstIterator it = object.attributes().constBegin();
-            it != end; ++it) {
+         it != end; ++it) {
         LdapAttrValue::ConstIterator end2((*it).constEnd());
         for (LdapAttrValue::ConstIterator it2 = (*it).constBegin();
-                it2 != end2; ++it2) {
+             it2 != end2; ++it2) {
             mQResult.push_back(QString::fromUtf8(*it2));
         }
     }
@@ -512,13 +531,14 @@ void LdapConfigWidget::Private::setLDAPSPort()
 }
 
 LdapConfigWidget::LdapConfigWidget(QWidget *parent, Qt::WindowFlags fl)
-    : QWidget(parent, fl), d(new Private(this))
+    : QWidget(parent, fl)
+    , d(new Private(this))
 {
 }
 
-LdapConfigWidget::LdapConfigWidget(LdapConfigWidget::WinFlags flags,
-                                   QWidget *parent, Qt::WindowFlags fl)
-    : QWidget(parent, fl), d(new Private(this))
+LdapConfigWidget::LdapConfigWidget(LdapConfigWidget::WinFlags flags, QWidget *parent, Qt::WindowFlags fl)
+    : QWidget(parent, fl)
+    , d(new Private(this))
 {
     d->mFeatures = flags;
 

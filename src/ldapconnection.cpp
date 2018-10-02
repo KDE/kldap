@@ -284,7 +284,7 @@ int LdapConnection::connect()
     if (d->mServer.security() == LdapServer::TLS) {
         bool initContext = false;
         if (d->mServer.tlsCACertFile().isEmpty() == false) {
-            if(setOption(LDAP_OPT_X_TLS_CACERTFILE, d->mServer.tlsCACertFile().toUtf8().data()) != LDAP_OPT_SUCCESS) {
+            if (setOption(LDAP_OPT_X_TLS_CACERTFILE, d->mServer.tlsCACertFile().toUtf8().data()) != LDAP_OPT_SUCCESS) {
                 d->mConnectionError = i18n("Could not set CA certificate file.");
                 return -1;
             }
@@ -294,11 +294,21 @@ int LdapConnection::connect()
         if (d->mServer.tlsRequireCertificate() != LdapServer::TLSReqCertDefault) {
             int reqcert;
             switch (d->mServer.tlsRequireCertificate()) {
-            case LdapServer::TLSReqCertAllow: reqcert = LDAP_OPT_X_TLS_ALLOW; break;
-            case LdapServer::TLSReqCertDemand: reqcert = LDAP_OPT_X_TLS_DEMAND; break;
-            case LdapServer::TLSReqCertHard: reqcert = LDAP_OPT_X_TLS_HARD; break;
-            case LdapServer::TLSReqCertNever: reqcert = LDAP_OPT_X_TLS_NEVER; break;
-            case LdapServer::TLSReqCertTry: reqcert = LDAP_OPT_X_TLS_TRY; break;
+            case LdapServer::TLSReqCertAllow:
+                reqcert = LDAP_OPT_X_TLS_ALLOW;
+                break;
+            case LdapServer::TLSReqCertDemand:
+                reqcert = LDAP_OPT_X_TLS_DEMAND;
+                break;
+            case LdapServer::TLSReqCertHard:
+                reqcert = LDAP_OPT_X_TLS_HARD;
+                break;
+            case LdapServer::TLSReqCertNever:
+                reqcert = LDAP_OPT_X_TLS_NEVER;
+                break;
+            case LdapServer::TLSReqCertTry:
+                reqcert = LDAP_OPT_X_TLS_TRY;
+                break;
             default:
                 d->mConnectionError = i18n("Invalid TLS require certificate mode.");
                 return -1;
@@ -381,6 +391,7 @@ void LdapConnection::close()
     }
     qCDebug(LDAP_LOG) << "connection closed!";
 }
+
 #else //LDAP_FOUND
 
 int LdapConnection::getOption(int option, void *value) const
@@ -433,10 +444,10 @@ int LdapConnection::timeLimit() const
 
 int LdapConnection::connect()
 {
-    d->mConnectionError =
-        i18n("LDAP support not compiled in. Please recompile libkldap with the "
-             "OpenLDAP (or compatible) client libraries, or complain to your "
-             "distribution packagers.");
+    d->mConnectionError
+        = i18n("LDAP support not compiled in. Please recompile libkldap with the "
+               "OpenLDAP (or compatible) client libraries, or complain to your "
+               "distribution packagers.");
     qCritical() << "No LDAP support...";
     return -1;
 }

@@ -33,9 +33,7 @@
 #include <QList>
 #include <QString>
 
-namespace KLDAP
-{
-
+namespace KLDAP {
 /**
  * @brief
  * This class allows sending an ldap operation
@@ -66,7 +64,7 @@ public:
         ModType type;
         QString attr;
         QList<QByteArray> values;
-    } ModOp ;
+    } ModOp;
 
     typedef QVector<ModOp> ModOps;
 
@@ -128,8 +126,7 @@ public:
      * Binds to the server which specified in the connection object.
      * Can do simple or SASL bind. Returns a message id if successful, negative value if not.
      */
-    Q_REQUIRED_RESULT int bind(const QByteArray &creds = QByteArray(),
-             SASL_Callback_Proc *saslproc = nullptr, void *data = nullptr);
+    Q_REQUIRED_RESULT int bind(const QByteArray &creds = QByteArray(), SASL_Callback_Proc *saslproc = nullptr, void *data = nullptr);
 
     /**
      * Binds to the server which specified in the connection object.
@@ -142,8 +139,7 @@ public:
      * Starts a search operation with the given base DN, scope, filter and
      * result attributes. Returns a message id if successful, -1 if not.
      */
-    Q_REQUIRED_RESULT int search(const LdapDN &base, LdapUrl::Scope scope,
-               const QString &filter, const QStringList &attrs);
+    Q_REQUIRED_RESULT int search(const LdapDN &base, LdapUrl::Scope scope, const QString &filter, const QStringList &attrs);
     /**
      * Starts an addition operation.
      * Returns a message id if successful, -1 if not.
@@ -177,16 +173,14 @@ public:
      * the old dn if deleteold is true.
      * Returns a message id if successful, -1 if not.
      */
-    Q_REQUIRED_RESULT int rename(const LdapDN &dn, const QString &newRdn,
-               const QString &newSuperior, bool deleteold = true);
+    Q_REQUIRED_RESULT int rename(const LdapDN &dn, const QString &newRdn, const QString &newSuperior, bool deleteold = true);
     /**
      * Performs a modrdn operation on given DN, changing its RDN to newRdn,
      * changing its parent to newSuperior (if it's not empty), and deletes
      * the old dn if deleteold is true. This is the synchronous version.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
      */
-    Q_REQUIRED_RESULT int rename_s(const LdapDN &dn, const QString &newRdn,
-                 const QString &newSuperior, bool deleteold = true);
+    Q_REQUIRED_RESULT int rename_s(const LdapDN &dn, const QString &newRdn, const QString &newSuperior, bool deleteold = true);
     /**
      * Starts a delete operation on the given DN.
      * Returns a message id if successful, -1 if not.
@@ -281,7 +275,7 @@ public:
      * This function returns the referral strings from the parsed message
      * (if any).
      */
-   Q_REQUIRED_RESULT  QList<QByteArray> referrals() const;
+    Q_REQUIRED_RESULT QList<QByteArray> referrals() const;
     /**
      * Returns the server response for a bind request (result
      * returned RES_BIND).
@@ -294,7 +288,6 @@ private:
 
     Q_DISABLE_COPY(LdapOperation)
 };
-
 }
 
 #endif
