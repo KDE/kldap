@@ -26,7 +26,7 @@ set(KLDAP_LIB_VERSION ${PIM_VERSION})
 find_package(KF5KIO ${KF5_VERSION} CONFIG REQUIRED)
 find_package(KF5I18n ${KF5_VERSION} CONFIG REQUIRED)
 find_package(KF5DocTools ${KF5_VERSION} CONFIG REQUIRED)
-add_definitions(-DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
+
 
 ecm_setup_version(PROJECT VARIABLE_PREFIX KLDAP
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kldap_version.h"
@@ -53,7 +53,7 @@ if (Ldap_FOUND)
 endif()
 
 add_definitions(-DTRANSLATION_DOMAIN=\"libkldap5\")
-add_definitions(-DQT_NO_NARROWING_CONVERSIONS_IN_CONNECT)
+
 
 ########### CMake Config Files ###########
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KF5Ldap")
