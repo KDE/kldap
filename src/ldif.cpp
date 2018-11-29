@@ -79,7 +79,7 @@ QByteArray Ldif::assembleLine(const QString &fieldname, const QByteArray &value,
     } else {
         isDn = fieldname.toLower() == QLatin1String("dn");
         //SAFE-INIT-CHAR
-        if (value.size() > 0 && value[0] > 0 && value[0] != '\n'
+        if (!value.isEmpty() && value[0] > 0 && value[0] != '\n'
             && value[0] != '\r' && value[0] != ':' && value[0] != '<') {
             safe = true;
         }
@@ -242,7 +242,7 @@ Ldif::ParseValue Ldif::processLine()
         } else if (attrLower == QLatin1String("control")) {
             d->mUrl = splitControl(d->mValue, d->mOid, d->mCritical, d->mValue);
             retval = Control;
-        } else if (!d->mAttr.isEmpty() && d->mValue.size() > 0) {
+        } else if (!d->mAttr.isEmpty() && !d->mValue.isEmpty()) {
             d->mEntryType = Entry_Add;
             retval = Item;
         }

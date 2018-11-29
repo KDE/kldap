@@ -682,7 +682,7 @@ void LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
                     break;
                 }
                 case Ldif::Entry_Add:
-                    if (ldif.value().size() > 0) {
+                    if (!ldif.value().isEmpty()) {
                         addObject.addValue(ldif.attr(), ldif.value());
                     }
                     break;
