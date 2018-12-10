@@ -116,6 +116,6 @@ mark_as_advanced(Ldap_INCLUDE_DIRS Ldap_LIBRARY Lber_LIBRARY Ldap_LIBRARIES)
 
 include(FeatureSummary)
 set_package_properties(Ldap PROPERTIES
-  URL "http://www.openldap.org/"
+  URL "https://www.openldap.org/"
   DESCRIPTION "LDAP (Lightweight Directory Access Protocol) libraries."
 )
