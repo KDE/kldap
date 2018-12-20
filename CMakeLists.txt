@@ -4,9 +4,9 @@ set(PIM_VERSION "5.10.40")
 project(KLdap VERSION ${PIM_VERSION})
 
 # ECM setup
-set(KF5_VERSION "5.53.0")
+set(KF5_MIN_VERSION "5.53.0")
 
-find_package(ECM ${KF5_VERSION} CONFIG REQUIRED)
+find_package(ECM ${KF5_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${KLdap_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
 
 include(GenerateExportHeader)
@@ -23,9 +23,9 @@ include(ECMQtDeclareLoggingCategory)
 
 set(KLDAP_LIB_VERSION ${PIM_VERSION})
 
-find_package(KF5KIO ${KF5_VERSION} CONFIG REQUIRED)
-find_package(KF5I18n ${KF5_VERSION} CONFIG REQUIRED)
-find_package(KF5DocTools ${KF5_VERSION} CONFIG REQUIRED)
+find_package(KF5KIO ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5DocTools ${KF5_MIN_VERSION} CONFIG REQUIRED)
 
 
 ecm_setup_version(PROJECT VARIABLE_PREFIX KLDAP
@@ -35,8 +35,8 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KLDAP
 )
 
 ########### Find packages ###########
-find_package(KF5Completion ${KF5_VERSION} CONFIG REQUIRED)
-find_package(KF5WidgetsAddons ${KF5_VERSION} CONFIG REQUIRED)
+find_package(KF5Completion ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5WidgetsAddons ${KF5_MIN_VERSION} CONFIG REQUIRED)
 
 
 find_package(Ldap)
