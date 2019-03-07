@@ -87,7 +87,7 @@ public:
     QRadioButton *mSecNo = nullptr;
     QRadioButton *mSecTLS = nullptr;
     QRadioButton *mSecSSL = nullptr;
-    KComboBox *mMech = nullptr;
+    QComboBox *mMech = nullptr;
 
     bool mCancelled = false;
     QProgressDialog *mProg = nullptr;
@@ -311,7 +311,7 @@ void LdapConfigWidget::Private::initWidget()
         vbox->addLayout(hbox);
         label = new QLabel(i18n("SASL mechanism:"), authbox);
         hbox->addWidget(label);
-        mMech = new KComboBox(authbox);
+        mMech = new QComboBox(authbox);
         mMech->setObjectName(QStringLiteral("kcfg_ldapsaslmech"));
         mMech->addItem(QStringLiteral("DIGEST-MD5"));
         mMech->addItem(QStringLiteral("GSSAPI"));
