@@ -38,6 +38,11 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KLDAP
 find_package(KF5Completion ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5WidgetsAddons ${KF5_MIN_VERSION} CONFIG REQUIRED)
 
+if (${KF5Completion_VERSION} STRGREATER "5.56.0")
+        add_definitions(-DQT_NO_FOREACH)
+        MESSAGE(STATUS "compile without foreach")
+endif()
+
 
 find_package(Ldap)
 set_package_properties(Ldap PROPERTIES
