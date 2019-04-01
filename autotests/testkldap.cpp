@@ -31,8 +31,8 @@
 #include "ldapsearch.h"
 #include "ber.h"
 
-#include <qdebug.h>
-#include <qtest.h>
+#include <QDebug>
+#include <QTest>
 #include <QFile>
 QTEST_MAIN(KLdapTest)
 

@@ -21,7 +21,7 @@
 #include "ldapconfigwidget.h"
 #include "ldapsearch.h"
 
-#include <qprogressdialog.h>
+#include <QProgressDialog>
 #include <kcombobox.h>
 #include "ldap_debug.h"
 #include <klocalizedstring.h>

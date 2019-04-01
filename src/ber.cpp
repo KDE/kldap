@@ -24,7 +24,7 @@
 #include "ldap_debug.h"
 
 #include <QList>
-#include <qvarlengtharray.h>
+#include <QVarLengthArray>
 
 #include <cstdarg>
 

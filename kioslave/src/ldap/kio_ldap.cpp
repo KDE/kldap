@@ -26,7 +26,7 @@
 #include <kldap/ldif.h>
 #include <kldap/ldapcontrol.h>
 
-#include <qdebug.h>
+#include <QDebug>
 #include <KLocalizedString>
 #include <QCoreApplication>
 
