@@ -4,7 +4,7 @@ set(PIM_VERSION "5.11.40")
 project(KLdap VERSION ${PIM_VERSION})
 
 # ECM setup
-set(KF5_MIN_VERSION "5.56.0")
+set(KF5_MIN_VERSION "5.57.0")
 
 find_package(ECM ${KF5_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${KLdap_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
@@ -38,10 +38,7 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KLDAP
 find_package(KF5Completion ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5WidgetsAddons ${KF5_MIN_VERSION} CONFIG REQUIRED)
 
-if (${KF5Completion_VERSION} STRGREATER "5.56.0")
-        add_definitions(-DQT_NO_FOREACH)
-        MESSAGE(STATUS "compile without foreach")
-endif()
+add_definitions(-DQT_NO_FOREACH)
 
 
 find_package(Ldap)
