@@ -173,7 +173,7 @@ void KLdapTest::testLdapUrl()
     QCOMPARE(url.filter(), QStringLiteral("(objectclass=person)"));
 
     // And now a filter with non-ascii letters
-    url.setFilter(QString::fromUtf8("(givenName=Valérie *)"));
+    url.setFilter(QStringLiteral("(givenName=Valérie *)"));
     QCOMPARE(url.toDisplayString(), QString::fromUtf8("ldap://cn=manager,dc=kde,dc=org@localhost:3999/"
                                                       "dc=kde,dc=org??cn,mail?sub?%28givenName%3DValérie %2A%29?x-dir=base"));
     QCOMPARE(url.filter(), QStringLiteral("(givenName=Valérie *)"));
