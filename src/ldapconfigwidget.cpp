@@ -356,7 +356,7 @@ void LdapConfigWidget::Private::sendQuery()
 
     LdapUrl _url(_server.url());
 
-    _url.setDn(LdapDN(QStringLiteral("")));
+    _url.setDn(LdapDN(QLatin1String("")));
     _url.setAttributes(QStringList(mAttr));
     _url.setScope(LdapUrl::Base);
 
