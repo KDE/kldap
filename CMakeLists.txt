@@ -39,7 +39,7 @@ find_package(KF5Completion ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5WidgetsAddons ${KF5_MIN_VERSION} CONFIG REQUIRED)
 
 add_definitions(-DQT_NO_FOREACH)
-
+#add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x060000)
 
 find_package(Ldap)
 set_package_properties(Ldap PROPERTIES
