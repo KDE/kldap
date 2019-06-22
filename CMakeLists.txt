@@ -4,7 +4,7 @@ set(PIM_VERSION "5.11.40")
 project(KLdap VERSION ${PIM_VERSION})
 
 # ECM setup
-set(KF5_MIN_VERSION "5.58.0")
+set(KF5_MIN_VERSION "5.59.0")
 
 find_package(ECM ${KF5_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${KLdap_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
@@ -88,10 +88,6 @@ if(BUILD_TESTING)
     add_subdirectory(autotests)
 endif()
 
-if (${ECM_VERSION} STRGREATER "5.58.0")
-    install(FILES kldap.renamecategories kldap.categories  DESTINATION  ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
-else()
-    install(FILES kldap.renamecategories kldap.categories  DESTINATION ${KDE_INSTALL_CONFDIR})
-endif()
+install(FILES kldap.renamecategories kldap.categories  DESTINATION  ${KDE_INSTALL_LOGGINGCATEGORIESDIR})
 
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
