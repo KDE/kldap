@@ -354,11 +354,19 @@ void LDAPProtocol::openConnection()
                 mConn.setServer(mServer);
                 cached = false;
             } else {
-                bool ok = firstauth
-                          ? openPasswordDialog(info)
-                          : openPasswordDialog(info, i18n("Invalid authorization information."));
-                if (!ok) {
-                    error(ERR_USER_CANCELED, i18n("LDAP connection canceled."));
+                const int errorCode = firstauth
+                          ? openPasswordDialogV2(info)
+                          : openPasswordDialogV2(info, i18n("Invalid authorization information."));
+                if (!errorCode) {
+                    if (info.keepPassword)  {  // user asked password be save/remembered
+                        cacheAuthentication(info);
+                    }
+                } else {
+                    if (errorCode == ERR_USER_CANCELED) {
+                        error(ERR_USER_CANCELED, i18n("LDAP connection canceled."));
+                    } else {
+                        error(errorCode, QString());
+                    }
                     closeConnection();
                     return;
                 }
