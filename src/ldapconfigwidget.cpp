@@ -239,8 +239,12 @@ void LdapConfigWidget::Private::initWidget()
         //without host query doesn't make sense
         if (mHost) {
             QPushButton *dnquery = new QPushButton(i18n("Query Server"), mParent);
+            dnquery->setEnabled(false);
             connect(dnquery, &QPushButton::clicked, mParent, [this]() {
                 queryDNClicked();
+            });
+            connect(mDn, &QLineEdit::textChanged, mParent, [dnquery](const QString &text) {
+                dnquery->setEnabled(!text.trimmed().isEmpty());
             });
             mainLayout->addWidget(dnquery, row, 2, 1, 1);
         }
