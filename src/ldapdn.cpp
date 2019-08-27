@@ -158,7 +158,7 @@ QString LdapDN::toString(int depth) const
         dn += rdns.at(rdns.size() - 1 - i) + QLatin1Char(',');
         qCDebug(LDAP_LOG) << "dn =" << dn;
     }
-    dn.truncate(dn.length() - 1);   // Strip off the extraneous comma
+    dn.chop(1);   // Strip off the extraneous comma
 
     return dn;
 }
