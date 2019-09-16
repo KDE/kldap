@@ -222,9 +222,7 @@ void KLdapTest::testLdapSearch()
     connect(m_search, &LdapSearch::data,
             this, &KLdapTest::searchData);
     bool success = m_search->search(url);
-    while (QCoreApplication::hasPendingEvents()) {
-        qApp->processEvents();
-    }
+    QCoreApplication::processEvents();
 
     QEXPECT_FAIL("", "Will fail since no server is available for testing", Abort);
     QCOMPARE(success, true);
@@ -284,9 +282,7 @@ void KLdapTest::testLdapModel()
     // Let's use this connection with the model
     m_model->setConnection(conn);
 
-    while (QCoreApplication::hasPendingEvents()) {
-        qApp->processEvents();
-    }
+    QCoreApplication::processEvents();
 
     QModelIndex rootIndex = QModelIndex();
     QVariant data = m_model->data(rootIndex, Qt::DisplayRole);
