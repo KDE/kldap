@@ -23,7 +23,7 @@
 
 #include "ldap_debug.h"
 
-#include <QTime>
+#include <QElapsedTimer>
 
 #include <stdlib.h>
 
@@ -1162,7 +1162,7 @@ int LdapOperation::waitForResult(int id, int msecs)
 
     LDAPMessage *msg;
 
-    QTime stopWatch;
+    QElapsedTimer stopWatch;
     stopWatch.start();
     int attempt(1);
     int timeout(0);
