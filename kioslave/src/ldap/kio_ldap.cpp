@@ -150,7 +150,7 @@ void LDAPProtocol::LDAPErr(int err)
     case KLDAP_AUTH_UNKNOWN:
     case KLDAP_INVALID_CREDENTIALS:
     case KLDAP_STRONG_AUTH_NOT_SUPPORTED:
-        error(ERR_COULD_NOT_AUTHENTICATE, msg);
+        error(ERR_CANNOT_AUTHENTICATE, msg);
         break;
     case KLDAP_ALREADY_EXISTS:
         error(ERR_FILE_ALREADY_EXIST, msg);
@@ -160,7 +160,7 @@ void LDAPProtocol::LDAPErr(int err)
         break;
     case KLDAP_CONNECT_ERROR:
     case KLDAP_SERVER_DOWN:
-        error(ERR_COULD_NOT_CONNECT, msg);
+        error(ERR_CANNOT_CONNECT, msg);
         break;
     case KLDAP_TIMEOUT:
         error(ERR_SERVER_TIMEOUT, msg);
@@ -310,7 +310,7 @@ void LDAPProtocol::openConnection()
 
     mConn.setServer(mServer);
     if (mConn.connect() != 0) {
-        error(ERR_COULD_NOT_CONNECT, mConn.connectionError());
+        error(ERR_CANNOT_CONNECT, mConn.connectionError());
         return;
     }
 
