@@ -22,7 +22,7 @@
 #include "ldapsearch.h"
 
 #include <QProgressDialog>
-#include <kcombobox.h>
+#include <QComboBox>
 #include "ldap_debug.h"
 #include <klocalizedstring.h>
 #include <klineedit.h>
