@@ -25,7 +25,6 @@
 #include <QComboBox>
 #include "ldap_debug.h"
 #include <klocalizedstring.h>
-#include <klineedit.h>
 #include <kmessagebox.h>
 #include <KPasswordLineEdit>
 
