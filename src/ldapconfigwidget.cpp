@@ -24,7 +24,7 @@
 #include <QProgressDialog>
 #include <QComboBox>
 #include "ldap_debug.h"
-#include <klocalizedstring.h>
+#include <KLocalizedString>
 #include <kmessagebox.h>
 #include <KPasswordLineEdit>
 
