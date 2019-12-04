@@ -26,7 +26,6 @@
 #include "ldapurl.h"
 #include "ldapserver.h"
 #include "ldapconnection.h"
-#include "ldapmodel.h"
 #include "ldapoperation.h"
 #include "ldapsearch.h"
 #include "ber.h"
@@ -58,9 +57,6 @@ void KLdapTest::initTestCase()
     }
 
     m_search = new LdapSearch;
-
-    /* Let's also create an LdapModel object */
-    m_model = new LdapModel(this);
 }
 
 void KLdapTest::testBer()
@@ -139,7 +135,6 @@ void KLdapTest::testBer()
 void KLdapTest::cleanupTestCase()
 {
     delete m_search;
-    delete m_model;
 }
 
 void KLdapTest::testLdapUrl()
@@ -279,17 +274,7 @@ void KLdapTest::testLdapModel()
     QEXPECT_FAIL("", "Will fail since no server is available for testing", Abort);
     QCOMPARE(ret, 0);
 
-    // Let's use this connection with the model
-    m_model->setConnection(conn);
-
     QCoreApplication::processEvents();
-
-    QModelIndex rootIndex = QModelIndex();
-    QVariant data = m_model->data(rootIndex, Qt::DisplayRole);
-    qDebug() << "Root Item Distinguished Name =" << data.toString();
-
-    QVERIFY(m_model->hasChildren(rootIndex) == true);
-    QVERIFY(m_model->canFetchMore(rootIndex) == false);
 }
 
 /*

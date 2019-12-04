@@ -42,11 +42,6 @@ set(kldap_LIB_SRCS
   ldapsearch.cpp
   ldapconfigwidget.cpp
   ldapdn.cpp
-  ldapmodelnode_p.cpp
-  ldapmodel.cpp
-  ldapmodel_p.cpp
-  ldapstructureproxymodel.cpp
-  ldapattributeproxymodel.cpp
 )
 ecm_qt_declare_logging_category(kldap_LIB_SRCS HEADER ldap_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME org.kde.pim.ldap)
 
@@ -80,18 +75,15 @@ install(TARGETS KF5Ldap EXPORT KF5LdapTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS
 ecm_generate_headers(KLdap_CamelCase_HEADERS
   HEADER_NAMES
   Ber
-  LdapAttributeProxyModel
   LdapConfigWidget
   LdapConnection
   LdapControl
   LdapDN
-  LdapModel
   LdapObject
   LdapOperation
   LdapSearch
   LdapServer
   LdapDefs
-  LdapStructureProxyModel
   LdapUrl
   Ldif
   PREFIX KLDAP

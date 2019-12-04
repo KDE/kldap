@@ -21,7 +21,6 @@
 #define TESTKLDAP_H
 
 #include <QObject>
-#include <ldapmodel.h>
 #include <ldapobject.h>
 #include <ldapsearch.h>
 
@@ -53,7 +52,6 @@ private:
     QString m_url;
     LdapSearch *m_search = nullptr;
     LdapObjects m_objects;
-    LdapModel *m_model = nullptr;
 };
 
 #endif
