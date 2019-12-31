@@ -438,14 +438,14 @@ QByteArray Ber::flatten() const
     return QByteArray();
 }
 
-int Ber::printf(const QString &format, ...)
+int Ber::printf(QString format, ...)
 {
     Q_UNUSED(format);
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-int Ber::scanf(const QString &format, ...)
+int Ber::scanf(QString format, ...)
 {
     Q_UNUSED(format);
     qCritical() << "LDAP support not compiled";
