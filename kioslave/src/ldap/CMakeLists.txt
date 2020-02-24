@@ -1,6 +1,14 @@
 
 set(kio_ldap_PART_SRCS kio_ldap.cpp)
-ecm_qt_declare_logging_category(kio_ldap_PART_SRCS HEADER kldap_debug.h IDENTIFIER KLDAP_LOG CATEGORY_NAME org.kde.pim.kldap)
+if (ECM_VERSION VERSION_LESS "5.68.0")
+    ecm_qt_declare_logging_category(kio_ldap_PART_SRCS HEADER kldap_debug.h IDENTIFIER KLDAP_LOG CATEGORY_NAME org.kde.pim.kldap)
+else()
+    ecm_qt_declare_logging_category(kio_ldap_PART_SRCS HEADER kldap_debug.h IDENTIFIER KLDAP_LOG CATEGORY_NAME org.kde.pim.kldap
+        DESCRIPTION "kioslave (kldap)"
+        OLD_CATEGORY_NAMES log_kldap
+        EXPORT KLDAP
+    )
+endif()
 
 add_library(kio_ldap MODULE ${kio_ldap_PART_SRCS})
 
