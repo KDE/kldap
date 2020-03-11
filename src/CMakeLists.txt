@@ -43,15 +43,11 @@ set(kldap_LIB_SRCS
   ldapconfigwidget.cpp
   ldapdn.cpp
 )
-if (ECM_VERSION VERSION_LESS "5.68.0")
-    ecm_qt_declare_logging_category(kldap_LIB_SRCS HEADER ldap_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME org.kde.pim.ldap)
-else()
-    ecm_qt_declare_logging_category(kldap_LIB_SRCS HEADER ldap_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME org.kde.pim.ldap
+ecm_qt_declare_logging_category(kldap_LIB_SRCS HEADER ldap_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME org.kde.pim.ldap
         DESCRIPTION "kldaplib (kldap)"
         OLD_CATEGORY_NAMES log_ldap
         EXPORT KLDAP
     )
-endif()
 
 
 
