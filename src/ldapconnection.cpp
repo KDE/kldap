@@ -279,9 +279,8 @@ int LdapConnection::connect()
     }
 #endif
 
-    //FIXME: accessing to certificate handling would be good
     qCDebug(LDAP_LOG) << "setting security to:" << d->mServer.security();
-    if (d->mServer.security() == LdapServer::TLS) {
+    if (d->mServer.security() != LdapServer::None) {
         bool initContext = false;
         if (d->mServer.tlsCACertFile().isEmpty() == false) {
             if (setOption(LDAP_OPT_X_TLS_CACERTFILE, d->mServer.tlsCACertFile().toUtf8().data()) != LDAP_OPT_SUCCESS) {
@@ -328,7 +327,9 @@ int LdapConnection::connect()
                 return -1;
             }
         }
+    }
 
+    if (d->mServer.security() == LdapServer::TLS) {
         qCDebug(LDAP_LOG) << "start TLS";
 
 #ifdef HAVE_LDAP_START_TLS_S
