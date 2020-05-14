@@ -41,7 +41,7 @@ find_package(KF5WidgetsAddons ${KF5_MIN_VERSION} CONFIG REQUIRED)
 add_definitions(-DQT_NO_FOREACH)
 add_definitions(-DQT_NO_KEYWORDS)
 if (EXISTS "${CMAKE_SOURCE_DIR}/.git")
-   add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050e00)
+   add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f00)
    add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x054600)
 endif()
 
