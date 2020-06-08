@@ -911,7 +911,7 @@ void LdapConfigWidget::setFeatures(LdapConfigWidget::WinFlags features)
     QList<QObject *> ch = children();
     const int numberOfChild(ch.count());
     for (int i = 0; i < numberOfChild; ++i) {
-        QWidget *widget = dynamic_cast<QWidget *>(ch[ i ]);
+        QWidget *widget = qobject_cast<QWidget *>(ch[ i ]);
         if (widget && widget->parent() == this) {
             delete(widget);
         }
