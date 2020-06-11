@@ -26,8 +26,12 @@ set(KLDAP_LIB_VERSION ${PIM_VERSION})
 
 find_package(KF5KIO ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
-find_package(KF5DocTools ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5DocTools ${KF5_MIN_VERSION} CONFIG)
 
+# tell what is missing without doctools
+set_package_properties(KF5DocTools PROPERTIES DESCRIPTION "Provides tools to generate documentation in various format from DocBook files"
+                       TYPE OPTIONAL
+                       PURPOSE "Required to build documentation")
 
 ecm_setup_version(PROJECT VARIABLE_PREFIX KLDAP
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kldap_version.h"
