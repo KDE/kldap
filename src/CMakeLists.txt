@@ -50,7 +50,6 @@ set(kldap_LIB_widgets_SRCS
   widgets/ldapclientsearch.cpp
   widgets/ldapclientsearchconfig.cpp
   widgets/ldapconfigurewidget.cpp
-  #widgets/ldapsearchdialog.cpp
  )
  
  set(kldap_LIB_SRCS
@@ -127,7 +126,6 @@ ecm_generate_headers(KLdapWidgets_CamelCase_HEADERS
   LdapClientSearchConfig
   LdapClientSearch
   AddHostDialog
-  LdapSearchDialog
   LdapClient
   LdapConfigureWidget
   RELATIVE widgets
