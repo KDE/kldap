@@ -1,3 +1,3 @@
 #! /bin/sh
-$XGETTEXT *.cpp -o $podir/libkldap5.pot
+$XGETTEXT core/*.cpp widgets/*.cpp -o $podir/libkldap5.pot
 

@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-set(PIM_VERSION "5.14.40")
+set(PIM_VERSION "5.14.41")
 
 project(KLdap VERSION ${PIM_VERSION})
 
@@ -21,12 +21,17 @@ include(ECMSetupVersion)
 include(FeatureSummary)
 include(ECMQtDeclareLoggingCategory)
 
+set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(KLDAP_LIB_VERSION ${PIM_VERSION})
 
 find_package(KF5KIO ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5DocTools ${KF5_MIN_VERSION} CONFIG)
+find_package(KF5Wallet ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5KIO ${KF5_MIN_VERSION} CONFIG REQUIRED)
+
 
 # tell what is missing without doctools
 set_package_properties(KF5DocTools PROPERTIES DESCRIPTION "Provides tools to generate documentation in various format from DocBook files"
@@ -94,6 +99,7 @@ add_subdirectory(src)
 add_subdirectory(kioslave)
 if(BUILD_TESTING)
     add_subdirectory(autotests)
+    add_subdirectory(tests)
 endif()
 
 ecm_qt_install_logging_categories(

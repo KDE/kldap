@@ -30,22 +30,43 @@ configure_file(kldap_config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/kldap_config.h)
 
 ########### next target ###############
 
-set(kldap_LIB_SRCS
-  ber.cpp
-  ldif.cpp
-  ldapurl.cpp
-  ldapserver.cpp
-  ldapobject.cpp
-  ldapconnection.cpp
-  ldapoperation.cpp
-  ldapcontrol.cpp
-  ldapsearch.cpp
-  ldapconfigwidget.cpp
-  ldapdn.cpp
+set(kldap_LIB_core_SRCS
+  core/ber.cpp
+  core/ldif.cpp
+  core/ldapurl.cpp
+  core/ldapserver.cpp
+  core/ldapobject.cpp
+  core/ldapconnection.cpp
+  core/ldapoperation.cpp
+  core/ldapcontrol.cpp
+  core/ldapsearch.cpp
+  core/ldapdn.cpp
 )
+
+set(kldap_LIB_widgets_SRCS
+  widgets/ldapconfigwidget.cpp
+  widgets/addhostdialog.cpp
+  widgets/ldapclient.cpp
+  widgets/ldapclientsearch.cpp
+  widgets/ldapclientsearchconfig.cpp
+  widgets/ldapconfigurewidget.cpp
+  #widgets/ldapsearchdialog.cpp
+ )
+ 
+ set(kldap_LIB_SRCS
+      ${kldap_LIB_core_SRCS}
+      ${kldap_LIB_widgets_SRCS}
+      )
+ 
 ecm_qt_declare_logging_category(kldap_LIB_SRCS HEADER ldap_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME org.kde.pim.ldap
         DESCRIPTION "kldaplib (kldap)"
         OLD_CATEGORY_NAMES log_ldap
+        EXPORT KLDAP
+    )
+
+ecm_qt_declare_logging_category(kldap_LIB_SRCS HEADER ldapclient_debug.h IDENTIFIER LDAPCLIENT_LOG CATEGORY_NAME org.kde.pim.ldapclient
+        DESCRIPTION "ldapclient (libkdepim)"
+        OLD_CATEGORY_NAMES log_ldapclient
         EXPORT KLDAP
     )
 
@@ -62,11 +83,15 @@ PRIVATE
   Qt5::Widgets
   KF5::I18n
   KF5::WidgetsAddons
+  KF5::ConfigCore
+  KF5::Wallet
+  KF5::CoreAddons
+  KF5::KIOWidgets
   ${kldap_EXTRA_LIBS}
 )
 
 target_include_directories(KF5Ldap INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KLDAP>")
-target_include_directories(KF5Ldap PUBLIC "$<BUILD_INTERFACE:${KLdap_SOURCE_DIR}/src;${KLdap_BINARY_DIR}/src>")
+target_include_directories(KF5Ldap PUBLIC "$<BUILD_INTERFACE:${KLdap_SOURCE_DIR}/src/core;${KLdap_BINARY_DIR}/src/core>")
 
 set_target_properties(KF5Ldap PROPERTIES
     VERSION ${KLDAP_VERSION_STRING}
@@ -78,10 +103,9 @@ install(TARGETS KF5Ldap EXPORT KF5LdapTargets ${KF5_INSTALL_TARGETS_DEFAULT_ARGS
 
 ########### install files ###############
 
-ecm_generate_headers(KLdap_CamelCase_HEADERS
+ecm_generate_headers(KLdapCore_CamelCase_HEADERS
   HEADER_NAMES
   Ber
-  LdapConfigWidget
   LdapConnection
   LdapControl
   LdapDN
@@ -92,19 +116,36 @@ ecm_generate_headers(KLdap_CamelCase_HEADERS
   LdapDefs
   LdapUrl
   Ldif
+  RELATIVE core
   PREFIX KLDAP
-  REQUIRED_HEADERS KLdap_HEADERS
+  REQUIRED_HEADERS KLdapCore_HEADERS
+)
+
+ecm_generate_headers(KLdapWidgets_CamelCase_HEADERS
+  HEADER_NAMES
+  LdapConfigWidget
+  LdapClientSearchConfig
+  LdapClientSearch
+  AddHostDialog
+  LdapSearchDialog
+  LdapClient
+  LdapConfigureWidget
+  RELATIVE widgets
+  PREFIX KLDAP
+  REQUIRED_HEADERS KLdapWidgets_HEADERS
 )
 
 install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/kldap_export.h
-    ${KLdap_HEADERS}
+    ${KLdapCore_HEADERS}
+    ${KLdapWidgets_HEADERS}
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KLDAP/kldap
     COMPONENT Devel
 )
 
 install(FILES
-    ${KLdap_CamelCase_HEADERS}
+    ${KLdapCore_CamelCase_HEADERS}
+    ${KLdapWidgets_CamelCase_HEADERS}
     DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KLDAP/KLDAP/
     COMPONENT Devel
 )
