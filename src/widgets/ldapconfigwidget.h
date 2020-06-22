@@ -31,7 +31,6 @@
 #include "ldapurl.h"
 
 namespace KLDAP {
-class LdapSearch;
 
 /**
   @brief LDAP Configuration widget
