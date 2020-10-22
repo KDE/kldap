@@ -15,7 +15,6 @@
 
 #include "ldapclient.h"
 
-#include <kldap/ldapobject.h>
 #include <kldap/ldapserver.h>
 #include <kldap/ldapurl.h>
 #include <kldap/ldif.h>

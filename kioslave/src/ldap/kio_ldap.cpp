@@ -9,7 +9,6 @@
 #include "kldap_debug.h"
 
 #include <kldap/ldif.h>
-#include <kldap/ldapcontrol.h>
 
 #include <QDebug>
 #include <KLocalizedString>

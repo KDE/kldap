@@ -9,7 +9,6 @@
 
 #include "ldap_debug.h"
 
-#include <QStringList>
 
 using namespace KLDAP;
 
