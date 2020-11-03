@@ -96,7 +96,7 @@ void LdapConfigureWidget::slotSelectionChanged(QListWidgetItem *item)
 
 void LdapConfigureWidget::slotItemClicked(QListWidgetItem *item)
 {
-    LDAPItem *ldapItem = dynamic_cast<LDAPItem *>(item);
+    auto *ldapItem = dynamic_cast<LDAPItem *>(item);
     if (!ldapItem) {
         return;
     }
@@ -121,7 +121,7 @@ void LdapConfigureWidget::slotAddHost()
 
 void LdapConfigureWidget::slotEditHost()
 {
-    LDAPItem *item = dynamic_cast<LDAPItem *>(mHostListView->currentItem());
+    auto *item = dynamic_cast<LDAPItem *>(mHostListView->currentItem());
     if (!item) {
         return;
     }
@@ -143,7 +143,7 @@ void LdapConfigureWidget::slotRemoveHost()
     if (!item) {
         return;
     }
-    LDAPItem *ldapItem = dynamic_cast<LDAPItem *>(item);
+    auto *ldapItem = dynamic_cast<LDAPItem *>(item);
     if (KMessageBox::No == KMessageBox::questionYesNo(this, i18n("Do you want to remove setting for host \"%1\"?", ldapItem->server().host()), i18n("Remove Host"))) {
         return;
     }
@@ -179,7 +179,7 @@ void LdapConfigureWidget::slotMoveUp()
         return;
     }
 
-    LDAPItem *above = static_cast<LDAPItem *>(mHostListView->item(mHostListView->row(item) - 1));
+    auto *above = static_cast<LDAPItem *>(mHostListView->item(mHostListView->row(item) - 1));
     if (!above) {
         return;
     }
@@ -204,7 +204,7 @@ void LdapConfigureWidget::slotMoveDown()
         return;
     }
 
-    LDAPItem *below = static_cast<LDAPItem *>(mHostListView->item(mHostListView->row(item) + 1));
+    auto *below = static_cast<LDAPItem *>(mHostListView->item(mHostListView->row(item) + 1));
     if (!below) {
         return;
     }
@@ -227,7 +227,7 @@ void LdapConfigureWidget::load()
     for (int i = 0; i < count; ++i) {
         KLDAP::LdapServer server;
         mClientSearchConfig->readConfig(server, group, i, true);
-        LDAPItem *item = new LDAPItem(mHostListView, server, true);
+        auto *item = new LDAPItem(mHostListView, server, true);
         item->setCheckState(Qt::Checked);
     }
 
@@ -252,7 +252,7 @@ void LdapConfigureWidget::save()
     int selected = 0;
     int unselected = 0;
     for (int i = 0; i < mHostListView->count(); ++i) {
-        LDAPItem *item = dynamic_cast<LDAPItem *>(mHostListView->item(i));
+        auto *item = dynamic_cast<LDAPItem *>(mHostListView->item(i));
         if (!item) {
             continue;
         }
@@ -276,13 +276,13 @@ void LdapConfigureWidget::save()
 
 void LdapConfigureWidget::initGUI()
 {
-    QVBoxLayout *layout = new QVBoxLayout(this);
+    auto *layout = new QVBoxLayout(this);
     layout->setObjectName(QStringLiteral("layout"));
     layout->setContentsMargins(0, 0, 0, 0);
 
     QGroupBox *groupBox = new QGroupBox(i18n("LDAP Servers"));
     layout->addWidget(groupBox);
-    QVBoxLayout *mainLayout = new QVBoxLayout;
+    auto *mainLayout = new QVBoxLayout;
     mainLayout->setObjectName(QStringLiteral("mainlayout"));
     groupBox->setLayout(mainLayout);
 
@@ -293,7 +293,7 @@ void LdapConfigureWidget::initGUI()
     QWidget *hBox = new QWidget(this);
     mainLayout->addWidget(hBox);
 
-    QHBoxLayout *hBoxHBoxLayout = new QHBoxLayout(hBox);
+    auto *hBoxHBoxLayout = new QHBoxLayout(hBox);
     hBoxHBoxLayout->setContentsMargins(0, 0, 0, 0);
     hBoxHBoxLayout->setSpacing(6);
     // Contents of the hbox: listview and up/down buttons on the right (vbox)
@@ -302,7 +302,7 @@ void LdapConfigureWidget::initGUI()
     mHostListView->setSortingEnabled(false);
 
     QWidget *upDownBox = new QWidget(hBox);
-    QVBoxLayout *upDownBoxVBoxLayout = new QVBoxLayout(upDownBox);
+    auto *upDownBoxVBoxLayout = new QVBoxLayout(upDownBox);
     upDownBoxVBoxLayout->setContentsMargins(0, 0, 0, 0);
     hBoxHBoxLayout->addWidget(upDownBox);
     upDownBoxVBoxLayout->setSpacing(6);
@@ -320,7 +320,7 @@ void LdapConfigureWidget::initGUI()
     upDownBoxVBoxLayout->addWidget(spacer);
     upDownBoxVBoxLayout->setStretchFactor(spacer, 100);
 
-    QDialogButtonBox *buttons = new QDialogButtonBox(this);
+    auto *buttons = new QDialogButtonBox(this);
     QPushButton *add = buttons->addButton(i18n("&Add Host..."),
                                           QDialogButtonBox::ActionRole);
     connect(add, &QPushButton::clicked, this, &LdapConfigureWidget::slotAddHost);

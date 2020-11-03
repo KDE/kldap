@@ -236,7 +236,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds, SASL_Call
 
     if (server.auth() == LdapServer::SASL) {
 #if !defined(HAVE_WINLDAP_H)
-        sasl_conn_t *saslconn = (sasl_conn_t *)mConnection->saslHandle();
+        auto *saslconn = (sasl_conn_t *)mConnection->saslHandle();
         sasl_interact_t *client_interact = nullptr;
         const char *out = nullptr;
         uint outlen;
@@ -579,7 +579,7 @@ static void addModOp(LDAPMod ***pmods, int mod_type, const QString &attr, const 
 static void addControlOp(LDAPControl ***pctrls, const QString &oid, const QByteArray &value, bool critical)
 {
     LDAPControl **ctrls;
-    LDAPControl *ctrl = (LDAPControl *)malloc(sizeof(LDAPControl));
+    auto *ctrl = (LDAPControl *)malloc(sizeof(LDAPControl));
 
     ctrls = *pctrls;
 

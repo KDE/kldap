@@ -162,7 +162,7 @@ void LdapClientSearch::Private::readConfig()
         mNoLDAPLookup = true;
     } else {
         for (int j = 0; j < numHosts; ++j) {
-            LdapClient *ldapClient = new LdapClient(j, q);
+            auto *ldapClient = new LdapClient(j, q);
             KLDAP::LdapServer server;
             mClientSearchConfig->readConfig(server, config, j, true);
             if (!server.host().isEmpty()) {
