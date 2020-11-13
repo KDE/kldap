@@ -32,6 +32,12 @@ find_package(KF5DocTools ${KF5_MIN_VERSION} CONFIG)
 find_package(KF5Wallet ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5KIO ${KF5_MIN_VERSION} CONFIG REQUIRED)
 
+#it will replace kwallet support
+find_package(Qt5Keychain CONFIG)
+set_package_properties(Qt5Keychain PROPERTIES
+                                   DESCRIPTION "Provides support for secure credentials storage"
+                                   URL "https://github.com/frankosterfeld/qtkeychain"
+                                   TYPE OPTIONAL)
 
 # tell what is missing without doctools
 set_package_properties(KF5DocTools PROPERTIES DESCRIPTION "Provides tools to generate documentation in various format from DocBook files"
