@@ -5,6 +5,7 @@
  */
 
 #include "ldapclientsearchconfig.h"
+#include "ldapclient_debug.h"
 #include <kldap/ldapserver.h>
 
 #include <KConfig>
@@ -12,7 +13,8 @@
 #include <KMessageBox>
 #include <KLocalizedString>
 #include <kwallet.h>
-
+#include <qt5keychain/keychain.h>
+using namespace QKeychain;
 using namespace KLDAP;
 
 class Q_DECL_HIDDEN LdapClientSearchConfig::Private
@@ -106,10 +108,10 @@ void LdapClientSearchConfig::readConfig(KLDAP::LdapServer &server, KConfigGroup 
     QString pwdBindDN = config.readEntry(pwdBindBNEntry, QString());
     if (!pwdBindDN.isEmpty()) {
         if (d->askWallet && KMessageBox::Yes == KMessageBox::questionYesNo(nullptr, i18n("LDAP password is stored as clear text, do you want to store it in kwallet?"),
-                                                                           i18n("Store clear text password in KWallet"),
+                                                                           i18n("Store clear text password in Wallet"),
                                                                            KStandardGuiItem::yes(),
                                                                            KStandardGuiItem::no(),
-                                                                           QStringLiteral("DoAskToStoreToKwallet"))) {
+                                                                           QStringLiteral("DoAskToStoreToWallet"))) {
             d->wallet = KWallet::Wallet::openWallet(KWallet::Wallet::LocalWallet(), 0);
             if (d->wallet) {
                 connect(d->wallet, &KWallet::Wallet::walletClosed, this, &LdapClientSearchConfig::slotWalletClosed);
@@ -186,15 +188,15 @@ void LdapClientSearchConfig::writeConfig(const KLDAP::LdapServer &server, KConfi
     const QString passwordEntry = prefix + QStringLiteral("PwdBind%1").arg(j);
     const QString password = server.password();
     if (!password.isEmpty()) {
-        if (d->useWallet && !d->wallet) {
-            d->wallet = KWallet::Wallet::openWallet(KWallet::Wallet::LocalWallet(), 0);
-        }
-        if (d->wallet) {
-            d->wallet->writePassword(passwordEntry, password);
-        } else {
-            config.writeEntry(passwordEntry, password);
-            d->useWallet = false;
-        }
+        auto writeJob = new WritePasswordJob(QStringLiteral("ldapclient"), this);
+        connect(writeJob, &Job::finished, this, [this](QKeychain::Job *baseJob) {
+            if (baseJob->error()) {
+                qCWarning(LDAPCLIENT_LOG) << "Error writing password using QKeychain:" << baseJob->errorString();
+            }
+        });
+        writeJob->setKey(passwordEntry);
+        writeJob->setTextData(password);
+        writeJob->start();
     }
 
     config.writeEntry(prefix + QStringLiteral("TimeLimit%1").arg(j), server.timeLimit());

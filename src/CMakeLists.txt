@@ -87,6 +87,7 @@ PRIVATE
   KF5::CoreAddons
   KF5::KIOCore
   ${kldap_EXTRA_LIBS}
+  qt5keychain
 )
 
 target_include_directories(KF5Ldap INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KLDAP>")
