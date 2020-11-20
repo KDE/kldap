@@ -127,6 +127,7 @@ void LdapClientSearchConfig::readConfig(KLDAP::LdapServer &server, KConfigGroup 
         }
         server.setPassword(pwdBindDN);
     } else if (d->askWallet) { //Look at in Wallet
+        //Move as async here.
         d->wallet = KWallet::Wallet::openWallet(KWallet::Wallet::LocalWallet(), 0);
         if (d->wallet) {
             d->useWallet = true;
