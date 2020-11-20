@@ -189,7 +189,7 @@ void LdapClientSearchConfig::writeConfig(const KLDAP::LdapServer &server, KConfi
     const QString password = server.password();
     if (!password.isEmpty()) {
         auto writeJob = new WritePasswordJob(QStringLiteral("ldapclient"), this);
-        connect(writeJob, &Job::finished, this, [this](QKeychain::Job *baseJob) {
+        connect(writeJob, &Job::finished, this, [](QKeychain::Job *baseJob) {
             if (baseJob->error()) {
                 qCWarning(LDAPCLIENT_LOG) << "Error writing password using QKeychain:" << baseJob->errorString();
             }
