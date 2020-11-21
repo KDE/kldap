@@ -56,7 +56,7 @@ void LdapSearchPrivate::result()
         mOp.abandon(mId);
         return;
     }
-    int res = mOp.waitForResult(mId, LDAPSEARCH_BLOCKING_TIMEOUT);
+    const int res = mOp.waitForResult(mId, LDAPSEARCH_BLOCKING_TIMEOUT);
 
     qCDebug(LDAP_LOG) << "LDAP result:" << res;
 
@@ -73,8 +73,7 @@ void LdapSearchPrivate::result()
 
     //binding
     if (res == LdapOperation::RES_BIND) {
-        QByteArray servercc;
-        servercc = mOp.serverCred();
+        const QByteArray servercc = mOp.serverCred();
 
         qCDebug(LDAP_LOG) << "LdapSearch RES_BIND";
         if (mConn->ldapErrorCode() == KLDAP_SUCCESS) {   //bind succeeded
@@ -169,7 +168,7 @@ void LdapSearchPrivate::result()
 
 bool LdapSearchPrivate::connect()
 {
-    int ret = mConn->connect();
+    const int ret = mConn->connect();
     if (ret != KLDAP_SUCCESS) {
         mError = ret;
         mErrorString = mConn->connectionError();
@@ -300,7 +299,7 @@ bool LdapSearch::search(const LdapUrl &url, int count)
         }
     }
     bool critical = true;
-    int pagesize = url.extension(QStringLiteral("x-pagesize"), critical).toInt();
+    const int pagesize = url.extension(QStringLiteral("x-pagesize"), critical).toInt();
     return d->startSearch(url.dn(), url.scope(), url.filter(),
                           url.attributes(), pagesize, count);
 }

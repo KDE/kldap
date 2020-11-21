@@ -64,7 +64,7 @@ LdapUrl::~LdapUrl()
 
 void LdapUrl::setDn(const LdapDN &dn)
 {
-    QString tmp = dn.toString();
+    const QString tmp = dn.toString();
     if (tmp.startsWith(QLatin1Char('/'))) {
         setPath(tmp);
     } else {
@@ -137,9 +137,7 @@ LdapUrl::Extension LdapUrl::extension(const QString &key) const
 
 QString LdapUrl::extension(const QString &key, bool &critical) const
 {
-    Extension ext;
-
-    ext = extension(key);
+    const Extension ext = extension(key);
     critical = ext.critical;
     return ext.value;
 }

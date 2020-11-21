@@ -285,7 +285,7 @@ void LdapServer::setUrl(const LdapUrl &url)
     bool critical = true;
 
     d->mHost = url.host();
-    int port = url.port();
+    const int port = url.port();
     if (port <= 0) {
         d->mPort = 389;
     } else {
