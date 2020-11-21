@@ -35,7 +35,6 @@ int main(int argc, char *argv[])
 }
 
 TestLDAPClient::TestLDAPClient()
-    : mClient(nullptr)
 {
 }
 

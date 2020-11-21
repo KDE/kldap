@@ -23,7 +23,6 @@ class LdapSearchPrivate
 public:
     LdapSearchPrivate(LdapSearch *parent)
         : mParent(parent)
-        , mConn(nullptr)
     {
     }
 
@@ -32,7 +31,7 @@ public:
     void closeConnection();
     bool startSearch(const LdapDN &base, LdapUrl::Scope scope, const QString &filter, const QStringList &attributes, int pagesize, int count);
 
-    LdapSearch *mParent = nullptr;
+    LdapSearch *const mParent;
     LdapConnection *mConn = nullptr;
     LdapOperation mOp;
     bool mOwnConnection = false;

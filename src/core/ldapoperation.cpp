@@ -70,7 +70,7 @@ public:
     QString mMatchedDn;
     QList<QByteArray> mReferrals;
 
-    LdapConnection *mConnection;
+    LdapConnection *mConnection = nullptr;
 };
 
 LdapOperation::LdapOperation()
@@ -156,7 +156,6 @@ QByteArray LdapOperation::serverCred() const
 }
 
 LdapOperation::LdapOperationPrivate::LdapOperationPrivate()
-    : mConnection(nullptr)
 {
 }
 

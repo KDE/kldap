@@ -233,7 +233,7 @@ void LdapUrl::parseQuery()
     }
 
     // split into a list
-    QStringList url_items = q.split(QLatin1Char('?'));
+    const QStringList url_items = q.split(QLatin1Char('?'));
 
     d->m_attributes.clear();
     d->m_scope = Base;
