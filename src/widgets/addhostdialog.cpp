@@ -38,7 +38,7 @@ public:
     KLDAP::LdapConfigWidget *mCfg = nullptr;
     KLDAP::LdapServer *mServer = nullptr;
     QPushButton *mOkButton = nullptr;
-    AddHostDialog *q = nullptr;
+    AddHostDialog *const q;
 };
 
 void AddHostDialogPrivate::readConfig()

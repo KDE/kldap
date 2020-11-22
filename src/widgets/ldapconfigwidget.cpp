@@ -32,7 +32,7 @@ public:
         : mParent(parent)
     {
         mainLayout = new QGridLayout(mParent);
-        mainLayout->setContentsMargins(0, 0, 0, 0);
+        mainLayout->setContentsMargins({});
     }
 
     void setLDAPPort();

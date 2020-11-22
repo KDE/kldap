@@ -43,7 +43,7 @@ public:
     void slotInfoMessage(KJob *, const QString &info, const QString &);
     void slotDone();
 
-    LdapClient *q = nullptr;
+    LdapClient *const q;
 
     KLDAP::LdapServer mServer;
     QString mScope;

@@ -37,8 +37,6 @@ class Q_DECL_HIDDEN LdapClientSearch::Private
 public:
     Private(LdapClientSearch *qq)
         : q(qq)
-        , mActiveClients(0)
-        , mNoLDAPLookup(false)
     {
         mClientSearchConfig = new LdapClientSearchConfig;
     }
@@ -59,7 +57,7 @@ public:
     void slotDataTimer();
     void slotFileChanged(const QString &);
 
-    LdapClientSearch *q = nullptr;
+    LdapClientSearch *const q;
     QList<LdapClient *> mClients;
     QStringList mAttributes;
     QString mSearchText;
