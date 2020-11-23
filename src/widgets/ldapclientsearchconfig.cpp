@@ -149,8 +149,7 @@ void LdapClientSearchConfig::readConfig(KLDAP::LdapServer &server, KConfigGroup 
     server.setPageSize(config.readEntry(prefix + QStringLiteral("PageSize%1").arg(j), 0));
     server.setVersion(config.readEntry(prefix + QStringLiteral("Version%1").arg(j), 3));
 
-    QString tmp;
-    tmp = config.readEntry(prefix + QStringLiteral("Security%1").arg(j),
+    QString tmp = config.readEntry(prefix + QStringLiteral("Security%1").arg(j),
                            QStringLiteral("None"));
     server.setSecurity(KLDAP::LdapServer::None);
     if (tmp == QLatin1String("SSL")) {
