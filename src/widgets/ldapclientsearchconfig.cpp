@@ -71,6 +71,7 @@ void LdapClientSearchConfig::clearWalletPassword()
     }
 }
 
+//Move as async.
 void LdapClientSearchConfig::readConfig(KLDAP::LdapServer &server, KConfigGroup &config, int j, bool active)
 {
     QString prefix;
