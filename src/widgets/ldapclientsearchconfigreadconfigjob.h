@@ -34,6 +34,7 @@ Q_SIGNALS:
     void configLoaded(const KLDAP::LdapServer &server);
 
 private:
+    void searchLdapClientConfigFinished();
     void readConfig();
     int mServerIndex = -1;
     KConfigGroup mConfig;

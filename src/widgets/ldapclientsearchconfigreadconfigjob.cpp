@@ -28,15 +28,21 @@ LdapClientSearchConfigReadConfigJob::~LdapClientSearchConfigReadConfigJob()
 
 bool LdapClientSearchConfigReadConfigJob::canStart() const
 {
-    return true;
+    //TODO check mConfig too
+    return mServerIndex != -1;
+}
+
+void LdapClientSearchConfigReadConfigJob::searchLdapClientConfigFinished()
+{
+    Q_EMIT configLoaded(mServer);
+    deleteLater();
 }
 
 void LdapClientSearchConfigReadConfigJob::start()
 {
     if (!canStart()) {
         //Failed !
-        Q_EMIT configLoaded(mServer);
-        deleteLater();
+        searchLdapClientConfigFinished();
         return;
     }
     readConfig();
@@ -171,6 +177,5 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
     mServer.setMech(mConfig.readEntry(prefix + QStringLiteral("Mech%1").arg(mServerIndex), QString()));
     mServer.setFilter(mConfig.readEntry(prefix + QStringLiteral("UserFilter%1").arg(mServerIndex), QString()));
     mServer.setCompletionWeight(mConfig.readEntry(prefix + QStringLiteral("CompletionWeight%1").arg(mServerIndex), -1));
-    Q_EMIT configLoaded(mServer);
-    deleteLater();
+    searchLdapClientConfigFinished();
 }
