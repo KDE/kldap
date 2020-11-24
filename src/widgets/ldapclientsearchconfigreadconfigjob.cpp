@@ -31,7 +31,7 @@ bool LdapClientSearchConfigReadConfigJob::canStart() const
     return mServerIndex != -1 && mConfig.isValid();
 }
 
-void LdapClientSearchConfigReadConfigJob::searchLdapClientConfigFinished()
+void LdapClientSearchConfigReadConfigJob::readLdapClientConfigFinished()
 {
     Q_EMIT configLoaded(mServer);
     deleteLater();
@@ -41,7 +41,7 @@ void LdapClientSearchConfigReadConfigJob::start()
 {
     if (!canStart()) {
         //Failed !
-        searchLdapClientConfigFinished();
+        readLdapClientConfigFinished();
         return;
     }
     readConfig();
@@ -194,6 +194,6 @@ void LdapClientSearchConfigReadConfigJob::readSieveServerPasswordFinished(QKeych
     } else {
         qCWarning(LDAPCLIENT_LOG) << "We have an error during reading password " << job->errorString();
     }
-    searchLdapClientConfigFinished();
+    readLdapClientConfigFinished();
 }
 

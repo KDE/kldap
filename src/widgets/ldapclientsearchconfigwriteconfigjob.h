@@ -4,8 +4,8 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#ifndef LDAPCLIENTSEARCHCONFIGREADCONFIGJOB_H
-#define LDAPCLIENTSEARCHCONFIGREADCONFIGJOB_H
+#ifndef LDAPCLIENTSEARCHCONFIGWRITECONFIGJOB_H
+#define LDAPCLIENTSEARCHCONFIGWRITECONFIGJOB_H
 #include <QObject>
 #include "kldap_export.h"
 #include <KLDAP/LdapServer>
@@ -14,12 +14,12 @@ namespace QKeychain {
 class Job;
 }
 namespace KLDAP {
-class KLDAP_EXPORT LdapClientSearchConfigReadConfigJob : public QObject
+class KLDAP_EXPORT LdapClientSearchConfigWriteConfigJob : public QObject
 {
     Q_OBJECT
 public:
-    explicit LdapClientSearchConfigReadConfigJob(QObject *parent = nullptr);
-    ~LdapClientSearchConfigReadConfigJob() override;
+    explicit LdapClientSearchConfigWriteConfigJob(QObject *parent = nullptr);
+    ~LdapClientSearchConfigWriteConfigJob() override;
 
     Q_REQUIRED_RESULT bool canStart() const;
     void start();
@@ -34,12 +34,11 @@ public:
     void setConfig(const KConfigGroup &newConfig);
 
 Q_SIGNALS:
-    void configLoaded(const KLDAP::LdapServer &server);
+    void configSaved();
 
 private:
-    void readSieveServerPasswordFinished(QKeychain::Job *baseJob);
-    void readLdapClientConfigFinished();
-    void readConfig();
+    void writeLdapClientConfigFinished();
+    void writeConfig();
     int mServerIndex = -1;
     KConfigGroup mConfig;
     bool mActive = false;
@@ -47,4 +46,4 @@ private:
 };
 
 }
-#endif // LDAPCLIENTSEARCHCONFIGREADCONFIGJOB_H
+#endif // LDAPCLIENTSEARCHCONFIGWRITECONFIGJOB_H
