@@ -10,6 +10,9 @@
 #include <KConfigGroup>
 
 #include <KLDAP/LdapServer>
+namespace QKeychain {
+class Job;
+}
 namespace KLDAP {
 class LdapClientSearchConfigReadConfigJob : public QObject
 {
@@ -34,6 +37,7 @@ Q_SIGNALS:
     void configLoaded(const KLDAP::LdapServer &server);
 
 private:
+    void readSieveServerPasswordFinished(QKeychain::Job *baseJob);
     void searchLdapClientConfigFinished();
     void readConfig();
     int mServerIndex = -1;

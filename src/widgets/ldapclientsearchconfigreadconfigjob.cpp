@@ -28,8 +28,7 @@ LdapClientSearchConfigReadConfigJob::~LdapClientSearchConfigReadConfigJob()
 
 bool LdapClientSearchConfigReadConfigJob::canStart() const
 {
-    //TODO check mConfig too
-    return mServerIndex != -1;
+    return mServerIndex != -1 && mConfig.isValid();
 }
 
 void LdapClientSearchConfigReadConfigJob::searchLdapClientConfigFinished()
@@ -177,5 +176,24 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
     mServer.setMech(mConfig.readEntry(prefix + QStringLiteral("Mech%1").arg(mServerIndex), QString()));
     mServer.setFilter(mConfig.readEntry(prefix + QStringLiteral("UserFilter%1").arg(mServerIndex), QString()));
     mServer.setCompletionWeight(mConfig.readEntry(prefix + QStringLiteral("CompletionWeight%1").arg(mServerIndex), -1));
+
+    const QString pwdBindBNEntry = prefix + QStringLiteral("PwdBind%1").arg(mServerIndex);
+
+    auto readJob = new ReadPasswordJob(QStringLiteral("ldapclient"), this);
+    connect(readJob, &Job::finished, this, &LdapClientSearchConfigReadConfigJob::readSieveServerPasswordFinished);
+    readJob->setKey(pwdBindBNEntry);
+    readJob->start();
+}
+
+void LdapClientSearchConfigReadConfigJob::readSieveServerPasswordFinished(QKeychain::Job *baseJob)
+{
+    auto *job = qobject_cast<ReadPasswordJob *>(baseJob);
+    Q_ASSERT(job);
+    if (!job->error()) {
+        mServer.setPassword(job->textData());
+    } else {
+        qCWarning(LDAPCLIENT_LOG) << "We have an error during reading password " << job->errorString();
+    }
     searchLdapClientConfigFinished();
 }
+
