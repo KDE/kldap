@@ -160,6 +160,7 @@ void LdapClientSearch::Private::readConfig()
         mNoLDAPLookup = true;
     } else {
         for (int j = 0; j < numHosts; ++j) {
+            //Move as async
             auto *ldapClient = new LdapClient(j, q);
             KLDAP::LdapServer server;
             mClientSearchConfig->readConfig(server, config, j, true);
