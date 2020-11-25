@@ -21,6 +21,7 @@
 #include <KMessageBox>
 
 #include "ldapclientsearch.h"
+#include "ldapclientsearchconfigwriteconfigjob.h"
 #include "ldapclientsearchconfig.h"
 #include <kldap/ldapserver.h>
 
@@ -259,10 +260,18 @@ void LdapConfigureWidget::save()
 
         KLDAP::LdapServer server = item->server();
         if (item->checkState() == Qt::Checked) {
-            mClientSearchConfig->writeConfig(server, group, selected, true);
+            auto job = new LdapClientSearchConfigWriteConfigJob;
+            job->setActive(true);
+            job->setConfig(group);
+            job->setServerIndex(selected);
+            job->start();
             selected++;
         } else {
-            mClientSearchConfig->writeConfig(server, group, unselected, false);
+            auto job = new LdapClientSearchConfigWriteConfigJob;
+            job->setActive(false);
+            job->setConfig(group);
+            job->setServerIndex(unselected);
+            job->start();
             unselected++;
         }
     }

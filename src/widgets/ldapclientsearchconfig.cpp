@@ -173,67 +173,6 @@ void LdapClientSearchConfig::readConfig(KLDAP::LdapServer &server, KConfigGroup 
     server.setCompletionWeight(config.readEntry(prefix + QStringLiteral("CompletionWeight%1").arg(j), -1));
 }
 
-void LdapClientSearchConfig::writeConfig(const KLDAP::LdapServer &server, KConfigGroup &config, int j, bool active)
-{
-    QString prefix;
-    if (active) {
-        prefix = QStringLiteral("Selected");
-    }
-
-    config.writeEntry(prefix + QStringLiteral("Host%1").arg(j), server.host());
-    config.writeEntry(prefix + QStringLiteral("Port%1").arg(j), server.port());
-    config.writeEntry(prefix + QStringLiteral("Base%1").arg(j), server.baseDn().toString());
-    config.writeEntry(prefix + QStringLiteral("User%1").arg(j), server.user());
-    config.writeEntry(prefix + QStringLiteral("Bind%1").arg(j), server.bindDn());
-
-    const QString passwordEntry = prefix + QStringLiteral("PwdBind%1").arg(j);
-    const QString password = server.password();
-    if (!password.isEmpty()) {
-        auto writeJob = new WritePasswordJob(QStringLiteral("ldapclient"), this);
-        connect(writeJob, &Job::finished, this, [](QKeychain::Job *baseJob) {
-            if (baseJob->error()) {
-                qCWarning(LDAPCLIENT_LOG) << "Error writing password using QKeychain:" << baseJob->errorString();
-            }
-        });
-        writeJob->setKey(passwordEntry);
-        writeJob->setTextData(password);
-        writeJob->start();
-    }
-
-    config.writeEntry(prefix + QStringLiteral("TimeLimit%1").arg(j), server.timeLimit());
-    config.writeEntry(prefix + QStringLiteral("SizeLimit%1").arg(j), server.sizeLimit());
-    config.writeEntry(prefix + QStringLiteral("PageSize%1").arg(j), server.pageSize());
-    config.writeEntry(prefix + QStringLiteral("Version%1").arg(j), server.version());
-    QString tmp;
-    switch (server.security()) {
-    case KLDAP::LdapServer::TLS:
-        tmp = QStringLiteral("TLS");
-        break;
-    case KLDAP::LdapServer::SSL:
-        tmp = QStringLiteral("SSL");
-        break;
-    default:
-        tmp = QStringLiteral("None");
-    }
-    config.writeEntry(prefix + QStringLiteral("Security%1").arg(j), tmp);
-    switch (server.auth()) {
-    case KLDAP::LdapServer::Simple:
-        tmp = QStringLiteral("Simple");
-        break;
-    case KLDAP::LdapServer::SASL:
-        tmp = QStringLiteral("SASL");
-        break;
-    default:
-        tmp = QStringLiteral("Anonymous");
-    }
-    config.writeEntry(prefix + QStringLiteral("Auth%1").arg(j), tmp);
-    config.writeEntry(prefix + QStringLiteral("Mech%1").arg(j), server.mech());
-    config.writeEntry(prefix + QStringLiteral("UserFilter%1").arg(j), server.filter().trimmed());
-    if (server.completionWeight() > -1) {
-        config.writeEntry(prefix + QStringLiteral("CompletionWeight%1").arg(j), server.completionWeight());
-    }
-}
-
 void LdapClientSearchConfig::slotWalletClosed()
 {
     delete d->wallet;
