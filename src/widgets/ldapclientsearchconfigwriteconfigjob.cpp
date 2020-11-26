@@ -138,3 +138,13 @@ void LdapClientSearchConfigWriteConfigJob::writeConfig()
     }
 }
 
+KLDAP::LdapServer LdapClientSearchConfigWriteConfigJob::server() const
+{
+    return mServer;
+}
+
+void LdapClientSearchConfigWriteConfigJob::setServer(const KLDAP::LdapServer &server)
+{
+    mServer = server;
+}
+

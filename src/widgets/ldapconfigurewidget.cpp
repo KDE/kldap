@@ -264,6 +264,7 @@ void LdapConfigureWidget::save()
             job->setActive(true);
             job->setConfig(group);
             job->setServerIndex(selected);
+            job->setServer(server);
             job->start();
             selected++;
         } else {
@@ -271,6 +272,7 @@ void LdapConfigureWidget::save()
             job->setActive(false);
             job->setConfig(group);
             job->setServerIndex(unselected);
+            job->setServer(server);
             job->start();
             unselected++;
         }

@@ -33,6 +33,9 @@ public:
     Q_REQUIRED_RESULT KConfigGroup config() const;
     void setConfig(const KConfigGroup &newConfig);
 
+    Q_REQUIRED_RESULT KLDAP::LdapServer server() const;
+    void setServer(const KLDAP::LdapServer &server);
+
 Q_SIGNALS:
     void configSaved();
 

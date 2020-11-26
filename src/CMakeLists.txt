@@ -131,6 +131,8 @@ ecm_generate_headers(KLdapWidgets_CamelCase_HEADERS
   AddHostDialog
   LdapClient
   LdapConfigureWidget
+  LdapClientSearchConfigWriteConfigJob
+  LdapClientSearchConfigReadConfigJob
   RELATIVE widgets
   PREFIX KLDAP
   REQUIRED_HEADERS KLdapWidgets_HEADERS
