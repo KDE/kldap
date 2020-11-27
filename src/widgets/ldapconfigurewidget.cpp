@@ -42,6 +42,7 @@ public:
 
     void setServer(const KLDAP::LdapServer &server)
     {
+        //TODO load settings here.
         mServer = server;
 
         setText(mServer.host());
