@@ -23,50 +23,12 @@
 #include "ldapclientsearch.h"
 #include "ldapclientsearchconfigwriteconfigjob.h"
 #include "ldapclientsearchconfig.h"
+#include "ldapwidgetitem_p.h"
 #include <kldap/ldapserver.h>
 
 #include "addhostdialog.h"
 
 using namespace KLDAP;
-class LDAPItem : public QListWidgetItem
-{
-public:
-    LDAPItem(QListWidget *parent, const KLDAP::LdapServer &server, bool isActive = false)
-        : QListWidgetItem(parent, QListWidgetItem::UserType)
-        , mIsActive(isActive)
-    {
-        setFlags(Qt::ItemIsEnabled | Qt::ItemIsSelectable | Qt::ItemIsUserCheckable);
-        setCheckState(isActive ? Qt::Checked : Qt::Unchecked);
-        setServer(server);
-    }
-
-    void setServer(const KLDAP::LdapServer &server)
-    {
-        //TODO load settings here.
-        mServer = server;
-
-        setText(mServer.host());
-    }
-
-    const KLDAP::LdapServer &server() const
-    {
-        return mServer;
-    }
-
-    void setIsActive(bool isActive)
-    {
-        mIsActive = isActive;
-    }
-
-    bool isActive() const
-    {
-        return mIsActive;
-    }
-
-private:
-    KLDAP::LdapServer mServer;
-    bool mIsActive = false;
-};
 
 LdapConfigureWidget::LdapConfigureWidget(QWidget *parent)
     : QWidget(parent)
@@ -98,7 +60,7 @@ void LdapConfigureWidget::slotSelectionChanged(QListWidgetItem *item)
 
 void LdapConfigureWidget::slotItemClicked(QListWidgetItem *item)
 {
-    auto *ldapItem = dynamic_cast<LDAPItem *>(item);
+    auto *ldapItem = dynamic_cast<LdapWidgetItem *>(item);
     if (!ldapItem) {
         return;
     }
@@ -115,7 +77,7 @@ void LdapConfigureWidget::slotAddHost()
     KLDAP::AddHostDialog dlg(&server, this);
 
     if (dlg.exec() && !server.host().trimmed().isEmpty()) {   //krazy:exclude=crashy
-        new LDAPItem(mHostListView, server);
+        new LdapWidgetItem(mHostListView, server);
 
         Q_EMIT changed(true);
     }
@@ -123,7 +85,7 @@ void LdapConfigureWidget::slotAddHost()
 
 void LdapConfigureWidget::slotEditHost()
 {
-    auto *item = dynamic_cast<LDAPItem *>(mHostListView->currentItem());
+    auto *item = dynamic_cast<LdapWidgetItem *>(mHostListView->currentItem());
     if (!item) {
         return;
     }
@@ -145,7 +107,7 @@ void LdapConfigureWidget::slotRemoveHost()
     if (!item) {
         return;
     }
-    auto *ldapItem = dynamic_cast<LDAPItem *>(item);
+    auto *ldapItem = dynamic_cast<LdapWidgetItem *>(item);
     if (KMessageBox::No == KMessageBox::questionYesNo(this, i18n("Do you want to remove setting for host \"%1\"?", ldapItem->server().host()), i18n("Remove Host"))) {
         return;
     }
@@ -157,7 +119,7 @@ void LdapConfigureWidget::slotRemoveHost()
     Q_EMIT changed(true);
 }
 
-static void swapItems(LDAPItem *item, LDAPItem *other)
+static void swapItems(LdapWidgetItem *item, LdapWidgetItem *other)
 {
     KLDAP::LdapServer server = item->server();
     bool isActive = item->isActive();
@@ -176,12 +138,12 @@ void LdapConfigureWidget::slotMoveUp()
         return;
     }
 
-    LDAPItem *item = static_cast<LDAPItem *>(mHostListView->selectedItems().first());
+    LdapWidgetItem *item = static_cast<LdapWidgetItem *>(mHostListView->selectedItems().first());
     if (!item) {
         return;
     }
 
-    auto *above = static_cast<LDAPItem *>(mHostListView->item(mHostListView->row(item) - 1));
+    auto *above = static_cast<LdapWidgetItem *>(mHostListView->item(mHostListView->row(item) - 1));
     if (!above) {
         return;
     }
@@ -201,12 +163,12 @@ void LdapConfigureWidget::slotMoveDown()
         return;
     }
 
-    LDAPItem *item = static_cast<LDAPItem *>(mHostListView->selectedItems().first());
+    LdapWidgetItem *item = static_cast<LdapWidgetItem *>(mHostListView->selectedItems().first());
     if (!item) {
         return;
     }
 
-    auto *below = static_cast<LDAPItem *>(mHostListView->item(mHostListView->row(item) + 1));
+    auto *below = static_cast<LdapWidgetItem *>(mHostListView->item(mHostListView->row(item) + 1));
     if (!below) {
         return;
     }
@@ -229,7 +191,7 @@ void LdapConfigureWidget::load()
     for (int i = 0; i < count; ++i) {
         KLDAP::LdapServer server;
         mClientSearchConfig->readConfig(server, group, i, true);
-        auto *item = new LDAPItem(mHostListView, server, true);
+        auto *item = new LdapWidgetItem(mHostListView, server, true);
         item->setCheckState(Qt::Checked);
     }
 
@@ -237,7 +199,7 @@ void LdapConfigureWidget::load()
     for (int i = 0; i < count; ++i) {
         KLDAP::LdapServer server;
         mClientSearchConfig->readConfig(server, group, i, false);
-        new LDAPItem(mHostListView, server);
+        new LdapWidgetItem(mHostListView, server);
     }
 
     Q_EMIT changed(false);
@@ -254,7 +216,7 @@ void LdapConfigureWidget::save()
     int selected = 0;
     int unselected = 0;
     for (int i = 0; i < mHostListView->count(); ++i) {
-        auto *item = dynamic_cast<LDAPItem *>(mHostListView->item(i));
+        auto *item = dynamic_cast<LdapWidgetItem *>(mHostListView->item(i));
         if (!item) {
             continue;
         }
