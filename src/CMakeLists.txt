@@ -53,6 +53,7 @@ set(kldap_LIB_widgets_SRCS
   widgets/ldapclientsearchconfigreadconfigjob.cpp
   widgets/ldapclientsearchconfigwriteconfigjob.cpp
   widgets/ldapwidgetitem_p.cpp
+  widgets/ldapwidgetitemreadconfigserverjob.cpp
  )
  
  set(kldap_LIB_SRCS
