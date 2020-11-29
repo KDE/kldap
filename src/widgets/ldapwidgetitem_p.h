@@ -13,7 +13,7 @@ namespace KLDAP {
 class LdapWidgetItem : public QListWidgetItem
 {
 public:
-    explicit LdapWidgetItem(QListWidget *parent, const KLDAP::LdapServer &server, bool isActive = false);
+    explicit LdapWidgetItem(QListWidget *parent, bool isActive = false);
 
     void setServer(const KLDAP::LdapServer &server);
 

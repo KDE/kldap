@@ -22,6 +22,7 @@
 
 #include "ldapclientsearch.h"
 #include "ldapclientsearchconfigwriteconfigjob.h"
+#include "ldapwidgetitemreadconfigserverjob.h"
 #include "ldapclientsearchconfig.h"
 #include "ldapwidgetitem_p.h"
 #include <kldap/ldapserver.h>
@@ -77,7 +78,8 @@ void LdapConfigureWidget::slotAddHost()
     KLDAP::AddHostDialog dlg(&server, this);
 
     if (dlg.exec() && !server.host().trimmed().isEmpty()) {   //krazy:exclude=crashy
-        new LdapWidgetItem(mHostListView, server);
+        auto item = new LdapWidgetItem(mHostListView);
+        item->setServer(server);
 
         Q_EMIT changed(true);
     }
@@ -189,17 +191,26 @@ void LdapConfigureWidget::load()
 
     int count = group.readEntry("NumSelectedHosts", 0);
     for (int i = 0; i < count; ++i) {
-        KLDAP::LdapServer server;
-        mClientSearchConfig->readConfig(server, group, i, true);
-        auto *item = new LdapWidgetItem(mHostListView, server, true);
+        auto *item = new LdapWidgetItem(mHostListView, true);
         item->setCheckState(Qt::Checked);
+        auto job = new LdapWidgetItemReadConfigServerJob(this);
+        job->setCurrentIndex(i);
+        job->setActive(true);
+        job->setConfig(group);
+        job->setLdapWidgetItem(item);
+        job->start();
     }
 
     count = group.readEntry("NumHosts", 0);
     for (int i = 0; i < count; ++i) {
-        KLDAP::LdapServer server;
-        mClientSearchConfig->readConfig(server, group, i, false);
-        new LdapWidgetItem(mHostListView, server);
+        auto item = new LdapWidgetItem(mHostListView);
+        auto job = new LdapWidgetItemReadConfigServerJob(this);
+        job->setCurrentIndex(i);
+        job->setActive(false);
+        job->setConfig(group);
+        job->setLdapWidgetItem(item);
+        job->start();
+
     }
 
     Q_EMIT changed(false);
