@@ -12,6 +12,7 @@
 #include "ldapclientsearch.h"
 #include "ldapclientsearchconfig.h"
 #include "ldapclient_debug.h"
+#include "ldapsearchclientreadconfigserverjob.h"
 
 #include "ldapclient.h"
 
@@ -160,15 +161,15 @@ void LdapClientSearch::Private::readConfig()
         mNoLDAPLookup = true;
     } else {
         for (int j = 0; j < numHosts; ++j) {
-            //Move as async
             auto *ldapClient = new LdapClient(j, q);
-            KLDAP::LdapServer server;
-            mClientSearchConfig->readConfig(server, config, j, true);
-            if (!server.host().isEmpty()) {
-                mNoLDAPLookup = false;
-            }
-            ldapClient->setServer(server);
+            auto job = new LdapSearchClientReadConfigServerJob;
+            job->setCurrentIndex(j);
+            job->setActive(true);
+            job->setConfig(config);
+            job->setLdapClient(ldapClient);
+            job->start();
 
+            mNoLDAPLookup = false;
             readWeighForClient(ldapClient, config, j);
 
             ldapClient->setAttributes(mAttributes);
