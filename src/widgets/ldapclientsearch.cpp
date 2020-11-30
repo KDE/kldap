@@ -39,12 +39,10 @@ public:
     Private(LdapClientSearch *qq)
         : q(qq)
     {
-        mClientSearchConfig = new LdapClientSearchConfig;
     }
 
     ~Private()
     {
-        delete mClientSearchConfig;
     }
 
     void readWeighForClient(LdapClient *client, const KConfigGroup &config, int clientNumber);
@@ -68,7 +66,6 @@ public:
     bool mNoLDAPLookup = false;
     LdapResultObject::List mResults;
     QString mConfigFile;
-    LdapClientSearchConfig *mClientSearchConfig = nullptr;
 };
 
 LdapClientSearch::LdapClientSearch(QObject *parent)
