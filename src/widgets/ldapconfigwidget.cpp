@@ -47,8 +47,7 @@ public:
     void sendQuery();
     void initWidget();
 
-    LdapConfigWidget *mParent = nullptr;
-    WinFlags mFeatures = W_ALL;
+    LdapConfigWidget *const mParent;
     QStringList mQResult;
     QString mAttr;
 
@@ -75,10 +74,11 @@ public:
     QRadioButton *mSecSSL = nullptr;
     QComboBox *mMech = nullptr;
 
-    bool mCancelled = false;
     QProgressDialog *mProg = nullptr;
 
     QGridLayout *mainLayout = nullptr;
+    WinFlags mFeatures = W_ALL;
+    bool mCancelled = false;
 };
 
 void LdapConfigWidget::Private::initWidget()
