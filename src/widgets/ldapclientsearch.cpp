@@ -114,7 +114,7 @@ void LdapClientSearch::Private::readWeighForClient(LdapClient *client, const KCo
 void LdapClientSearch::updateCompletionWeights()
 {
     KConfigGroup config(KLDAP::LdapClientSearchConfig::config(), "LDAP");
-    for (int i = 0; i < d->mClients.size(); ++i) {
+    for (int i = 0, total = d->mClients.size(); i < total; ++i) {
         d->readWeighForClient(d->mClients[ i ], config, i);
     }
 }
