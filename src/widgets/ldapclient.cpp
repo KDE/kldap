@@ -105,9 +105,7 @@ void LdapClient::setScope(const QString &scope)
 void LdapClient::startQuery(const QString &filter)
 {
     cancelQuery();
-    KLDAP::LdapUrl url;
-
-    url = d->mServer.url();
+    KLDAP::LdapUrl url{d->mServer.url()};
 
     url.setAttributes(d->mAttrs);
     url.setScope(d->mScope == QLatin1String("one") ? KLDAP::LdapUrl::One : KLDAP::LdapUrl::Sub);
