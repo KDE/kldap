@@ -9,7 +9,6 @@
 
 #include <KConfig>
 #include <KConfigGroup>
-#include <KLocalizedString>
 #include <kldap/ldapdn.h>
 #include <qt5keychain/keychain.h>
 using namespace QKeychain;
