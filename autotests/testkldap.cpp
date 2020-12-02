@@ -224,7 +224,7 @@ void KLdapTest::searchResult(KLDAP::LdapSearch *search)
 
 void KLdapTest::searchData(KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj)
 {
-    Q_UNUSED(search);
+    Q_UNUSED(search)
     //qDebug();
     //qDebug() << "Object:";
     //qDebug() << obj.toString();

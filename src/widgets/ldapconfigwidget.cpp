@@ -426,7 +426,7 @@ void LdapConfigWidget::Private::loadData(LdapSearch *, const LdapObject &object)
 
 void LdapConfigWidget::Private::loadResult(LdapSearch *search)
 {
-    Q_UNUSED(search);
+    Q_UNUSED(search)
     mCancelled = false;
     mProg->close();
 }

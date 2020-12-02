@@ -427,28 +427,28 @@ QByteArray Ber::flatten() const
 
 int Ber::printf(QString format, ...)
 {
-    Q_UNUSED(format);
+    Q_UNUSED(format)
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
 int Ber::scanf(QString format, ...)
 {
-    Q_UNUSED(format);
+    Q_UNUSED(format)
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
 unsigned int Ber::peekTag(int &size)
 {
-    Q_UNUSED(size);
+    Q_UNUSED(size)
     qCritical() << "LDAP support not compiled";
     return 0;
 }
 
 unsigned int Ber::skipTag(int &size)
 {
-    Q_UNUSED(size);
+    Q_UNUSED(size)
     qCritical() << "LDAP support not compiled";
     return 0;
 }
