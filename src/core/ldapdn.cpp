@@ -134,7 +134,7 @@ QString LdapDN::toString() const
 
 QString LdapDN::toString(int depth) const
 {
-    QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, QLatin1Char(','));
+    const QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, QLatin1Char(','));
     if (depth >= rdns.size()) {
         return QString();
     }
@@ -153,13 +153,13 @@ QString LdapDN::toString(int depth) const
 QString LdapDN::rdnString() const
 {
     /** \TODO We should move this into the d pointer as we calculate rdns quite a lot */
-    QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, QLatin1Char(','));
+    const QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, QLatin1Char(','));
     return rdns.at(0);
 }
 
 QString LdapDN::rdnString(int depth) const
 {
-    QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, QLatin1Char(','));
+    const QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, QLatin1Char(','));
     if (depth >= rdns.size()) {
         return QString();
     }
@@ -186,7 +186,7 @@ bool LdapDN::isValid() const
 
 int LdapDN::depth() const
 {
-    QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, QLatin1Char(','));
+    const QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, QLatin1Char(','));
     return rdns.size();
 }
 

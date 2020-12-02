@@ -35,7 +35,7 @@ void KLdapTest::initTestCase()
       The specified server should not be a production server in case we break anything here.
       You have been warned!
     */
-    QString filename(QStringLiteral("testurl.txt"));
+    const QString filename(QStringLiteral("testurl.txt"));
     QFile file(filename);
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QTextStream stream(&file);
@@ -203,7 +203,7 @@ void KLdapTest::testLdapSearch()
             this, &KLdapTest::searchResult);
     connect(m_search, &LdapSearch::data,
             this, &KLdapTest::searchData);
-    bool success = m_search->search(url);
+    const bool success = m_search->search(url);
     QCoreApplication::processEvents();
 
     QEXPECT_FAIL("", "Will fail since no server is available for testing", Abort);
@@ -215,7 +215,7 @@ void KLdapTest::testLdapSearch()
 void KLdapTest::searchResult(KLDAP::LdapSearch *search)
 {
     qDebug();
-    int err = search->error();
+    const int err = search->error();
     if (err) {
         qDebug() << "Search returned the following error:" << search->errorString();
     }
@@ -233,8 +233,8 @@ void KLdapTest::searchData(KLDAP::LdapSearch *search, const KLDAP::LdapObject &o
 
 void KLdapTest::testLdapDN()
 {
-    QString strDN(QStringLiteral("uid=Test\\+Person+ou=accounts\\,outgoing,dc=kde,dc=org"));
-    LdapDN dn(strDN);
+    const QString strDN(QStringLiteral("uid=Test\\+Person+ou=accounts\\,outgoing,dc=kde,dc=org"));
+    const LdapDN dn(strDN);
     QCOMPARE(dn.isValid(), true);
     QCOMPARE(dn.rdnString(), QStringLiteral("uid=Test\\+Person+ou=accounts\\,outgoing"));
 }
