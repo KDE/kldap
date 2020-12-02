@@ -92,10 +92,10 @@ public:
       * @param option the connection option to return
       * @param value the value of option to get
       */
-    Q_REQUIRED_RESULT int getOption(int option, void *value) const;
+    int getOption(int option, void *value) const;
     /** Sets an option in the connection. The option value can be client
       * library specific, so avoid this function if possible */
-    Q_REQUIRED_RESULT int setOption(int option, void *value);
+    int setOption(int option, void *value);
 
     /** Returns the LDAP error code from the last operation */
     Q_REQUIRED_RESULT int ldapErrorCode() const;
