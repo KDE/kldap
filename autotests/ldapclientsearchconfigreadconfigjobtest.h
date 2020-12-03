@@ -15,6 +15,8 @@ class LdapClientSearchConfigReadConfigJobTest : public QObject
 public:
     explicit LdapClientSearchConfigReadConfigJobTest(QObject *parent = nullptr);
     ~LdapClientSearchConfigReadConfigJobTest() = default;
+private Q_SLOTS:
+    void shouldHaveDefaultValues();
 };
 
 #endif // LDAPCLIENTSEARCHCONFIGREADCONFIGJOBTEST_H

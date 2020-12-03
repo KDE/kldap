@@ -10,5 +10,5 @@ set(ldapclientsearchconfigreadconfigjobtest_source ldapclientsearchconfigreadcon
 add_executable(ldapclientsearchconfigreadconfigjobtest ${ldapclientsearchconfigreadconfigjobtest_source})
 add_test(NAME ldapclientsearchconfigreadconfigjobtest COMMAND ldapclientsearchconfigreadconfigjobtest)
 ecm_mark_as_test(ldapclientsearchconfigreadconfigjobtest)
-target_link_libraries(ldapclientsearchconfigreadconfigjobtest Qt5::Test KF5::Ldap) 
+target_link_libraries(ldapclientsearchconfigreadconfigjobtest Qt5::Test KF5::Ldap KF5::ConfigCore) 
 
