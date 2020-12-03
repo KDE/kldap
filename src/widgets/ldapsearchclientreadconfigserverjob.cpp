@@ -7,6 +7,7 @@
 #include "ldapsearchclientreadconfigserverjob.h"
 #include "ldapclient.h"
 #include "ldapclientsearchconfigreadconfigjob.h"
+#include "ldapclient_debug.h"
 using namespace KLDAP;
 LdapSearchClientReadConfigServerJob::LdapSearchClientReadConfigServerJob(QObject *parent)
     : QObject(parent)
@@ -21,12 +22,22 @@ LdapSearchClientReadConfigServerJob::~LdapSearchClientReadConfigServerJob()
 
 void LdapSearchClientReadConfigServerJob::start()
 {
+    if (!canStart()) {
+        qCWarning(LDAPCLIENT_LOG) << " Impossible to start LdapSearchClientReadConfigServerJob";
+        deleteLater();
+        return;
+    }
     auto job = new LdapClientSearchConfigReadConfigJob(this);
     connect(job, &LdapClientSearchConfigReadConfigJob::configLoaded, this, &LdapSearchClientReadConfigServerJob::slotConfigLoaded);
     job->setActive(mActive);
     job->setConfig(mConfig);
     job->setServerIndex(mCurrentIndex);
     job->start();
+}
+
+bool LdapSearchClientReadConfigServerJob::canStart() const
+{
+    return mCurrentIndex != -1 && mConfig.isValid();
 }
 
 void LdapSearchClientReadConfigServerJob::slotConfigLoaded(const KLDAP::LdapServer &server)

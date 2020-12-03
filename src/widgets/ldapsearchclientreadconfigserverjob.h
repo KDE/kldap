@@ -20,6 +20,7 @@ public:
     ~LdapSearchClientReadConfigServerJob() override;
 
     void start();
+    Q_REQUIRED_RESULT bool canStart() const;
 
     Q_REQUIRED_RESULT int currentIndex() const;
     void setCurrentIndex(int currentIndex);
