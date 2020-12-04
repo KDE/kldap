@@ -73,11 +73,7 @@ LdapClientSearch::LdapClientSearch(QObject *parent)
     : QObject(parent)
     , d(new Private(this))
 {
-    const QStringList attr{ QStringLiteral("cn")
-                , QStringLiteral("mail")
-                , QStringLiteral("givenname")
-                , QStringLiteral("sn")};
-    d->init(attr);
+    d->init(LdapClientSearch::defaultAttributes());
 }
 
 LdapClientSearch::LdapClientSearch(const QStringList &attr, QObject *parent)
@@ -157,6 +153,15 @@ void LdapClientSearch::setAttributes(const QStringList &attrs)
         d->mAttributes = attrs;
         d->readConfig();
     }
+}
+
+QStringList LdapClientSearch::defaultAttributes()
+{
+    const QStringList attr{ QStringLiteral("cn")
+                , QStringLiteral("mail")
+                , QStringLiteral("givenname")
+                , QStringLiteral("sn")};
+    return attr;
 }
 
 void LdapClientSearch::Private::readConfig()

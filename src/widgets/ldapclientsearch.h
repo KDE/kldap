@@ -131,6 +131,8 @@ public:
     */
     void setAttributes(const QStringList &);
 
+    static Q_REQUIRED_RESULT QStringList defaultAttributes();
+
 Q_SIGNALS:
     /**
      * This signal is emitted whenever new contacts have been found
