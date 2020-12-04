@@ -55,6 +55,7 @@ public:
     void slotLDAPDone();
     void slotDataTimer();
     void slotFileChanged(const QString &);
+    void init(const QStringList &attributes);
 
     LdapClientSearch *const q;
     QList<LdapClient *> mClients;
@@ -72,33 +73,46 @@ LdapClientSearch::LdapClientSearch(QObject *parent)
     : QObject(parent)
     , d(new Private(this))
 {
-    Kdelibs4ConfigMigrator migrate(QStringLiteral("ldapsettings"));
-    migrate.setConfigFiles(QStringList() << QStringLiteral("kabldaprc"));
-    migrate.migrate();
+    const QStringList attr{ QStringLiteral("cn")
+                , QStringLiteral("mail")
+                , QStringLiteral("givenname")
+                , QStringLiteral("sn")};
+    d->init(attr);
+}
 
-    if (!KProtocolInfo::isKnownProtocol(QUrl(QStringLiteral("ldap://localhost")))) {
-        d->mNoLDAPLookup = true;
-        return;
-    }
-
-    d->mAttributes << QStringLiteral("cn")
-                   << QStringLiteral("mail")
-                   << QStringLiteral("givenname")
-                   << QStringLiteral("sn");
-
-    // Set the filter, to make sure old usage (before 4.14) of this object still works.
-    d->mFilter = QStringLiteral("&(|(objectclass=person)(objectclass=groupOfNames)(mail=*))"
-                                "(|(cn=%1*)(mail=%1*)(givenName=%1*)(sn=%1*))");
-
-    d->readConfig();
-    connect(KDirWatch::self(), &KDirWatch::dirty, this, [this](const QString &filename) {
-        d->slotFileChanged(filename);
-    });
+LdapClientSearch::LdapClientSearch(const QStringList &attr, QObject *parent)
+    : QObject(parent)
+    , d(new Private(this))
+{
+    d->init(attr);
 }
 
 LdapClientSearch::~LdapClientSearch()
 {
     delete d;
+}
+
+void LdapClientSearch::Private::init(const QStringList &attributes)
+{
+    Kdelibs4ConfigMigrator migrate(QStringLiteral("ldapsettings"));
+    migrate.setConfigFiles(QStringList() << QStringLiteral("kabldaprc"));
+    migrate.migrate();
+
+    if (!KProtocolInfo::isKnownProtocol(QUrl(QStringLiteral("ldap://localhost")))) {
+        mNoLDAPLookup = true;
+        return;
+    }
+
+    mAttributes = attributes;
+
+    // Set the filter, to make sure old usage (before 4.14) of this object still works.
+    mFilter = QStringLiteral("&(|(objectclass=person)(objectclass=groupOfNames)(mail=*))"
+                                "(|(cn=%1*)(mail=%1*)(givenName=%1*)(sn=%1*))");
+
+    readConfig();
+    q->connect(KDirWatch::self(), &KDirWatch::dirty, q, [this](const QString &filename) {
+        slotFileChanged(filename);
+    });
 }
 
 void LdapClientSearch::Private::readWeighForClient(LdapClient *client, const KConfigGroup &config, int clientNumber)

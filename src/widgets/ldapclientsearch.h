@@ -62,9 +62,17 @@ public:
     explicit LdapClientSearch(QObject *parent = nullptr);
 
     /**
+     * Creates a new ldap client search object.
+     *
+     * @param attr The attributes.
+     * @param parent The parent object.
+     */
+    explicit LdapClientSearch(const QStringList &attr, QObject *parent = nullptr);
+
+    /**
      * Destroys the ldap client search object.
      */
-    ~LdapClientSearch();
+    ~LdapClientSearch() override;
 
     /**
      * Starts the LDAP search on all configured LDAP clients with the given search @p query.
