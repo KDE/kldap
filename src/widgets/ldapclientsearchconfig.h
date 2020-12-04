@@ -34,6 +34,14 @@ public:
     static KConfig *config();
 
     /**
+     * Reads the LDAP @p server settings from the given config @p group for the
+     * given LDAP @p clientNumber.
+     *
+     * @param active Defines whether the active settings shall be read.
+     */
+    void readConfig(KLDAP::LdapServer &server, KConfigGroup &group, int clientNumber, bool active);
+
+    /**
      * Should LdapClientSearchConfig ask, if it should use the Wallet to store passwords
      */
     void askForWallet(bool askForWallet);
