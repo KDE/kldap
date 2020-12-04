@@ -417,3 +417,13 @@ int LdapServer::completionWeight() const
 {
     return d->mCompletionWeight;
 }
+
+QDebug operator <<(QDebug d, const KLDAP::LdapServer &t)
+{
+    d << "completionWeight " << t.completionWeight();
+    d << "timeout " << t.timeout();
+    d << "timeLimit " << t.timeLimit();
+    d << "sizeLimit " << t.sizeLimit();
+    //TODO
+    return d;
+}

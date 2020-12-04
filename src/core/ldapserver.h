@@ -305,12 +305,13 @@ public:
     Q_REQUIRED_RESULT LdapUrl url() const;
 
     void setCompletionWeight(int value);
-    int completionWeight() const;
+    Q_REQUIRED_RESULT int completionWeight() const;
 
 private:
     class LdapServerPrivate;
     LdapServerPrivate *const d;
 };
 }
+KLDAP_EXPORT QDebug operator <<(QDebug d, const KLDAP::LdapServer &t);
 
 #endif
