@@ -29,8 +29,10 @@ set(KLDAP_LIB_VERSION ${PIM_VERSION})
 find_package(KF5KIO ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5DocTools ${KF5_MIN_VERSION} CONFIG)
+find_package(KF5Wallet ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5KIO ${KF5_MIN_VERSION} CONFIG REQUIRED)
 
+#it will replace kwallet support
 find_package(Qt5Keychain CONFIG)
 set_package_properties(Qt5Keychain PROPERTIES
                                    DESCRIPTION "Provides support for secure credentials storage"

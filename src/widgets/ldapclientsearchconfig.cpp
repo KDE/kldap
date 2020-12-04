@@ -12,6 +12,7 @@
 #include <KConfigGroup>
 #include <KMessageBox>
 #include <KLocalizedString>
+#include <kwallet.h>
 #include <qt5keychain/keychain.h>
 using namespace QKeychain;
 using namespace KLDAP;
@@ -25,7 +26,15 @@ public:
 
     ~Private()
     {
+        if (useWallet) {
+            wallet->deleteLater();
+            wallet = nullptr;
+        }
     }
+
+    KWallet::Wallet *wallet = nullptr;
+    bool useWallet = false;
+    bool askWallet = true;
 };
 
 Q_GLOBAL_STATIC_WITH_ARGS(KConfig, s_config, (QLatin1String("kabldaprc"), KConfig::NoGlobals))
@@ -45,7 +54,7 @@ LdapClientSearchConfig::~LdapClientSearchConfig()
 {
     delete d;
 }
-#if 0 //Port it
+
 void LdapClientSearchConfig::clearWalletPassword()
 {
     if (!d->wallet) {
@@ -61,4 +70,14 @@ void LdapClientSearchConfig::clearWalletPassword()
         }
     }
 }
-#endif
+
+void LdapClientSearchConfig::slotWalletClosed()
+{
+    delete d->wallet;
+    d->wallet = nullptr;
+}
+
+void LdapClientSearchConfig::askForWallet(bool askForWallet)
+{
+    d->askWallet = askForWallet;
+}

@@ -33,6 +33,14 @@ public:
      */
     static KConfig *config();
 
+    /**
+     * Should LdapClientSearchConfig ask, if it should use the Wallet to store passwords
+     */
+    void askForWallet(bool askForWallet);
+
+    void clearWalletPassword();
+private Q_SLOTS:
+    void slotWalletClosed();
 
 private:
     //@cond PRIVATE
