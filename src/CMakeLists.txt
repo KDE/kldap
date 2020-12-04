@@ -88,7 +88,6 @@ PRIVATE
   KF5::I18n
   KF5::WidgetsAddons
   KF5::ConfigCore
-  KF5::Wallet
   KF5::CoreAddons
   KF5::KIOCore
   ${kldap_EXTRA_LIBS}
