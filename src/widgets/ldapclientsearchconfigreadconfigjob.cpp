@@ -180,12 +180,12 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
     const QString pwdBindBNEntry = prefix + QStringLiteral("PwdBind%1").arg(mServerIndex);
 
     auto readJob = new ReadPasswordJob(QStringLiteral("ldapclient"), this);
-    connect(readJob, &Job::finished, this, &LdapClientSearchConfigReadConfigJob::readSieveServerPasswordFinished);
+    connect(readJob, &Job::finished, this, &LdapClientSearchConfigReadConfigJob::readLdapPasswordFinished);
     readJob->setKey(pwdBindBNEntry);
     readJob->start();
 }
 
-void LdapClientSearchConfigReadConfigJob::readSieveServerPasswordFinished(QKeychain::Job *baseJob)
+void LdapClientSearchConfigReadConfigJob::readLdapPasswordFinished(QKeychain::Job *baseJob)
 {
     auto *job = qobject_cast<ReadPasswordJob *>(baseJob);
     Q_ASSERT(job);

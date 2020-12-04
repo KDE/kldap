@@ -37,7 +37,7 @@ Q_SIGNALS:
     void configLoaded(const KLDAP::LdapServer &server);
 
 private:
-    void readSieveServerPasswordFinished(QKeychain::Job *baseJob);
+    void readLdapPasswordFinished(QKeychain::Job *baseJob);
     void readLdapClientConfigFinished();
     void readConfig();
     int mServerIndex = -1;
