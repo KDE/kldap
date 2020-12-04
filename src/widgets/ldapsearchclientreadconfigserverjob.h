@@ -9,10 +9,11 @@
 
 #include <QObject>
 #include <KConfigGroup>
+#include "kldap_export.h"
 namespace KLDAP {
 class LdapClient;
 class LdapServer;
-class LdapSearchClientReadConfigServerJob : public QObject
+class KLDAP_EXPORT LdapSearchClientReadConfigServerJob : public QObject
 {
     Q_OBJECT
 public:
