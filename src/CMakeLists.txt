@@ -77,7 +77,7 @@ ecm_qt_declare_logging_category(kldap_LIB_SRCS HEADER ldapclient_debug.h IDENTIF
 
 
 add_library(KF5Ldap ${kldap_LIB_SRCS})
-if (COMPILE_WITH_CMAKE_SUPPORT)
+if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
     set_target_properties(KF5Ldap PROPERTIES UNITY_BUILD ON)
 endif()
 generate_export_header(KF5Ldap BASE_NAME kldap)
