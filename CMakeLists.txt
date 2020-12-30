@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.5)
+cmake_minimum_required(VERSION 3.5 FATAL_ERROR)
 set(PIM_VERSION "5.16.44")
 
 project(KLdap VERSION ${PIM_VERSION})
