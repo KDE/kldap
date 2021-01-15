@@ -244,11 +244,7 @@ void LdapUrl::parseQuery()
          it != end; ++it, i++) {
         switch (i) {
         case 0:
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-            d->m_attributes = (*it).split(QLatin1Char(','), QString::SkipEmptyParts);
-#else
             d->m_attributes = (*it).split(QLatin1Char(','), Qt::SkipEmptyParts);
-#endif
             break;
         case 1:
             if ((*it) == QLatin1String("sub")) {
@@ -261,11 +257,7 @@ void LdapUrl::parseQuery()
             d->m_filter = fromPercentEncoding((*it).toLatin1());
             break;
         case 3:
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 0)
-            extensions = (*it).split(QLatin1Char(','), QString::SkipEmptyParts);
-#else
             extensions = (*it).split(QLatin1Char(','), Qt::SkipEmptyParts);
-#endif
             break;
         }
     }
