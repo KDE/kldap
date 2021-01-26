@@ -8,21 +8,21 @@
 #include "ldapconfigwidget.h"
 #include "ldapsearch.h"
 
-#include <QProgressDialog>
-#include <QComboBox>
 #include "ldap_debug.h"
 #include <KLocalizedString>
-#include <kmessagebox.h>
 #include <KPasswordLineEdit>
+#include <QComboBox>
+#include <QProgressDialog>
+#include <kmessagebox.h>
 
-#include <QObject>
 #include <QCheckBox>
+#include <QGridLayout>
 #include <QGroupBox>
 #include <QLabel>
+#include <QObject>
 #include <QPushButton>
 #include <QRadioButton>
 #include <QSpinBox>
-#include <QGridLayout>
 using namespace KLDAP;
 
 class Q_DECL_HIDDEN LdapConfigWidget::Private
@@ -222,7 +222,7 @@ void LdapConfigWidget::Private::initWidget()
 
         mainLayout->addWidget(label, row, 0);
         mainLayout->addWidget(mDn, row, 1, 1, 1);
-        //without host query doesn't make sense
+        // without host query doesn't make sense
         if (mHost) {
             QPushButton *dnquery = new QPushButton(i18n("Query Server"), mParent);
             dnquery->setEnabled(false);
@@ -277,23 +277,19 @@ void LdapConfigWidget::Private::initWidget()
     }
 
     if (mFeatures & W_AUTHBOX) {
-        QGroupBox *authbox
-            = new QGroupBox(i18n("Authentication"), mParent);
+        QGroupBox *authbox = new QGroupBox(i18n("Authentication"), mParent);
         auto *vbox = new QVBoxLayout;
         authbox->setLayout(vbox);
         auto *hbox = new QHBoxLayout;
         vbox->addLayout(hbox);
 
-        mAnonymous
-            = new QRadioButton(i18nc("@option:radio anonymous authentication", "Anonymous"), authbox);
+        mAnonymous = new QRadioButton(i18nc("@option:radio anonymous authentication", "Anonymous"), authbox);
         mAnonymous->setObjectName(QStringLiteral("kcfg_ldapanon"));
         hbox->addWidget(mAnonymous);
-        mSimple
-            = new QRadioButton(i18nc("@option:radio simple authentication", "Simple"), authbox);
+        mSimple = new QRadioButton(i18nc("@option:radio simple authentication", "Simple"), authbox);
         mSimple->setObjectName(QStringLiteral("kcfg_ldapsimple"));
         hbox->addWidget(mSimple);
-        mSASL
-            = new QRadioButton(i18nc("@option:radio SASL authentication", "SASL"), authbox);
+        mSASL = new QRadioButton(i18nc("@option:radio SASL authentication", "SASL"), authbox);
         mSASL->setObjectName(QStringLiteral("kcfg_ldapsasl"));
         hbox->addWidget(mSASL);
 
@@ -308,7 +304,7 @@ void LdapConfigWidget::Private::initWidget()
         mMech->addItem(QStringLiteral("PLAIN"));
         hbox->addWidget(mMech);
 
-        //without host query doesn't make sense
+        // without host query doesn't make sense
         if (mHost) {
             mQueryMech = new QPushButton(i18n("Query Server"), authbox);
             hbox->addWidget(mQueryMech);
@@ -414,11 +410,9 @@ void LdapConfigWidget::Private::loadData(LdapSearch *, const LdapObject &object)
     qCDebug(LDAP_LOG) << "object:" << object.toString();
     mProg->setValue(mProg->value() + 1);
     LdapAttrMap::ConstIterator end(object.attributes().constEnd());
-    for (LdapAttrMap::ConstIterator it = object.attributes().constBegin();
-         it != end; ++it) {
+    for (LdapAttrMap::ConstIterator it = object.attributes().constBegin(); it != end; ++it) {
         LdapAttrValue::ConstIterator end2((*it).constEnd());
-        for (LdapAttrValue::ConstIterator it2 = (*it).constBegin();
-             it2 != end2; ++it2) {
+        for (LdapAttrValue::ConstIterator it2 = (*it).constBegin(); it2 != end2; ++it2) {
             mQResult.push_back(QString::fromUtf8(*it2));
         }
     }
@@ -898,9 +892,9 @@ void LdapConfigWidget::setFeatures(LdapConfigWidget::WinFlags features)
     QList<QObject *> ch = children();
     const int numberOfChild(ch.count());
     for (int i = 0; i < numberOfChild; ++i) {
-        QWidget *widget = qobject_cast<QWidget *>(ch[ i ]);
+        QWidget *widget = qobject_cast<QWidget *>(ch[i]);
         if (widget && widget->parent() == this) {
-            delete(widget);
+            delete (widget);
         }
     }
 

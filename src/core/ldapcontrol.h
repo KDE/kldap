@@ -8,16 +8,17 @@
 #ifndef KLDAP_LDAPCONTROL_H
 #define KLDAP_LDAPCONTROL_H
 
+#include <QSharedDataPointer>
 #include <QString>
 #include <QVector>
-#include <QSharedDataPointer>
 class LdapControlPrivate;
 
 #include "kldap_export.h"
 
 // clazy:excludeall=copyable-polymorphic
 
-namespace KLDAP {
+namespace KLDAP
+{
 class LdapControl;
 typedef QVector<LdapControl> LdapControls;
 

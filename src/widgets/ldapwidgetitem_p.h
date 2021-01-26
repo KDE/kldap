@@ -9,7 +9,8 @@
 
 #include <QListWidget>
 #include <kldap/ldapserver.h>
-namespace KLDAP {
+namespace KLDAP
+{
 class LdapWidgetItem : public QListWidgetItem
 {
 public:

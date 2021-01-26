@@ -9,22 +9,22 @@
 #include <QLabel>
 #include <QListWidget>
 #include <QListWidgetItem>
+#include <QPushButton>
 #include <QToolButton>
 #include <QVBoxLayout>
-#include <QPushButton>
 
 #include <KConfig>
 #include <KConfigGroup>
-#include <QDialogButtonBox>
-#include <QHBoxLayout>
 #include <KLocalizedString>
 #include <KMessageBox>
+#include <QDialogButtonBox>
+#include <QHBoxLayout>
 
 #include "ldapclientsearch.h"
-#include "ldapclientsearchconfigwriteconfigjob.h"
-#include "ldapwidgetitemreadconfigserverjob.h"
 #include "ldapclientsearchconfig.h"
+#include "ldapclientsearchconfigwriteconfigjob.h"
 #include "ldapwidgetitem_p.h"
+#include "ldapwidgetitemreadconfigserverjob.h"
 #include <kldap/ldapserver.h>
 
 #include "addhostdialog.h"
@@ -77,7 +77,7 @@ void LdapConfigureWidget::slotAddHost()
     KLDAP::LdapServer server;
     KLDAP::AddHostDialog dlg(&server, this);
 
-    if (dlg.exec() && !server.host().trimmed().isEmpty()) {   //krazy:exclude=crashy
+    if (dlg.exec() && !server.host().trimmed().isEmpty()) { // krazy:exclude=crashy
         auto item = new LdapWidgetItem(mHostListView);
         item->setServer(server);
 
@@ -96,7 +96,7 @@ void LdapConfigureWidget::slotEditHost()
     KLDAP::AddHostDialog dlg(&server, this);
     dlg.setWindowTitle(i18nc("@title:window", "Edit Host"));
 
-    if (dlg.exec() && !server.host().isEmpty()) {   //krazy:exclude=crashy
+    if (dlg.exec() && !server.host().isEmpty()) { // krazy:exclude=crashy
         item->setServer(server);
 
         Q_EMIT changed(true);
@@ -110,7 +110,8 @@ void LdapConfigureWidget::slotRemoveHost()
         return;
     }
     auto *ldapItem = dynamic_cast<LdapWidgetItem *>(item);
-    if (KMessageBox::No == KMessageBox::questionYesNo(this, i18n("Do you want to remove setting for host \"%1\"?", ldapItem->server().host()), i18n("Remove Host"))) {
+    if (KMessageBox::No
+        == KMessageBox::questionYesNo(this, i18n("Do you want to remove setting for host \"%1\"?", ldapItem->server().host()), i18n("Remove Host"))) {
         return;
     }
 
@@ -210,7 +211,6 @@ void LdapConfigureWidget::load()
         job->setConfig(group);
         job->setLdapWidgetItem(item);
         job->start();
-
     }
 
     Q_EMIT changed(false);
@@ -218,7 +218,7 @@ void LdapConfigureWidget::load()
 
 void LdapConfigureWidget::save()
 {
-    //mClientSearchConfig->clearWalletPassword();
+    // mClientSearchConfig->clearWalletPassword();
     KConfig *config = KLDAP::LdapClientSearchConfig::config();
     config->deleteGroup("LDAP");
 
@@ -294,27 +294,24 @@ void LdapConfigureWidget::initGUI()
     mUpButton = new QToolButton(upDownBox);
     upDownBoxVBoxLayout->addWidget(mUpButton);
     mUpButton->setIcon(QIcon::fromTheme(QStringLiteral("go-up")));
-    mUpButton->setEnabled(false);   // b/c no item is selected yet
+    mUpButton->setEnabled(false); // b/c no item is selected yet
 
     mDownButton = new QToolButton(upDownBox);
     upDownBoxVBoxLayout->addWidget(mDownButton);
     mDownButton->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
-    mDownButton->setEnabled(false);   // b/c no item is selected yet
+    mDownButton->setEnabled(false); // b/c no item is selected yet
 
     QWidget *spacer = new QWidget(upDownBox);
     upDownBoxVBoxLayout->addWidget(spacer);
     upDownBoxVBoxLayout->setStretchFactor(spacer, 100);
 
     auto *buttons = new QDialogButtonBox(this);
-    QPushButton *add = buttons->addButton(i18n("&Add Host..."),
-                                          QDialogButtonBox::ActionRole);
+    QPushButton *add = buttons->addButton(i18n("&Add Host..."), QDialogButtonBox::ActionRole);
     connect(add, &QPushButton::clicked, this, &LdapConfigureWidget::slotAddHost);
-    mEditButton = buttons->addButton(i18n("&Edit Host..."),
-                                     QDialogButtonBox::ActionRole);
+    mEditButton = buttons->addButton(i18n("&Edit Host..."), QDialogButtonBox::ActionRole);
     connect(mEditButton, &QPushButton::clicked, this, &LdapConfigureWidget::slotEditHost);
     mEditButton->setEnabled(false);
-    mRemoveButton = buttons->addButton(i18n("&Remove Host"),
-                                       QDialogButtonBox::ActionRole);
+    mRemoveButton = buttons->addButton(i18n("&Remove Host"), QDialogButtonBox::ActionRole);
     connect(mRemoveButton, &QPushButton::clicked, this, &LdapConfigureWidget::slotRemoveHost);
     mRemoveButton->setEnabled(false);
     buttons->layout();

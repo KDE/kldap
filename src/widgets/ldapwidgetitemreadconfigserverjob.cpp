@@ -5,18 +5,16 @@
  */
 
 #include "ldapwidgetitemreadconfigserverjob.h"
-#include "ldapwidgetitem_p.h"
 #include "ldapclientsearchconfigreadconfigjob.h"
+#include "ldapwidgetitem_p.h"
 using namespace KLDAP;
 LdapWidgetItemReadConfigServerJob::LdapWidgetItemReadConfigServerJob(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 LdapWidgetItemReadConfigServerJob::~LdapWidgetItemReadConfigServerJob()
 {
-
 }
 
 void LdapWidgetItemReadConfigServerJob::start()

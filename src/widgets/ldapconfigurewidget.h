@@ -7,7 +7,6 @@
 #ifndef LDAPCONFIGUREWIDGET_H
 #define LDAPCONFIGUREWIDGET_H
 
-
 #include "kldap_export.h"
 
 #include <QWidget>
@@ -17,7 +16,8 @@ class QPushButton;
 class QToolButton;
 class QListWidgetItem;
 
-namespace KLDAP {
+namespace KLDAP
+{
 class LdapClientSearchConfig;
 /**
  * @brief The LdapConfigureWidget class

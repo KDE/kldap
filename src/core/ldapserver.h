@@ -10,13 +10,14 @@
 
 #include <QString>
 
-#include "ldapurl.h"
-#include "ldapdn.h"
 #include "kldap_export.h"
+#include "ldapdn.h"
+#include "ldapurl.h"
 
 // clazy:excludeall=copyable-polymorphic
 
-namespace KLDAP {
+namespace KLDAP
+{
 /**
  * @short A class that contains LDAP server connection settings.
  *
@@ -60,8 +61,8 @@ public:
      */
     typedef enum {
         None, ///< Do not use any encryption.
-        TLS,  ///< Use TLS encryption.
-        SSL   ///< Use SSL encryption.
+        TLS, ///< Use TLS encryption.
+        SSL ///< Use SSL encryption.
     } Security;
 
     /**
@@ -69,22 +70,22 @@ public:
      * for the LDAP connection.
      */
     typedef enum {
-        Anonymous,  ///< Do no authentication.
-        Simple,     ///< Authenticate via login and password.
-        SASL        ///< Azthenticate with the SASL framework.
+        Anonymous, ///< Do no authentication.
+        Simple, ///< Authenticate via login and password.
+        SASL ///< Azthenticate with the SASL framework.
     } Auth;
 
     /**
-      * Describes the certificate request and check behaviour
-      * for TLS/SSL connections.
-      */
+     * Describes the certificate request and check behaviour
+     * for TLS/SSL connections.
+     */
     typedef enum {
         TLSReqCertDefault, ///< Use system defaults
-        TLSReqCertNever,   ///< Do not require any certificates.
-        TLSReqCertDemand,  ///< Use LDAP_OPT_X_TLS_DEMAND.
-        TLSReqCertAllow,   ///< Use LDAP_OPT_X_TLS_ALLOW.
-        TLSReqCertTry,     ///< Use LDAP_OPT_X_TLS_TRY.
-        TLSReqCertHard,    ///< Use LDAP_OPT_X_TLS_HARD.
+        TLSReqCertNever, ///< Do not require any certificates.
+        TLSReqCertDemand, ///< Use LDAP_OPT_X_TLS_DEMAND.
+        TLSReqCertAllow, ///< Use LDAP_OPT_X_TLS_ALLOW.
+        TLSReqCertTry, ///< Use LDAP_OPT_X_TLS_TRY.
+        TLSReqCertHard, ///< Use LDAP_OPT_X_TLS_HARD.
     } TLSRequireCertificate;
 
     /**
@@ -201,23 +202,23 @@ public:
     Q_REQUIRED_RESULT Auth auth() const;
 
     /**
-      * Sets the certificate require mode for TLS/SSL connections
-      */
+     * Sets the certificate require mode for TLS/SSL connections
+     */
     void setTLSRequireCertificate(TLSRequireCertificate reqCert);
 
     /**
-      * Returns the certificate require mode for TLS/SSL connections
-      */
+     * Returns the certificate require mode for TLS/SSL connections
+     */
     Q_REQUIRED_RESULT TLSRequireCertificate tlsRequireCertificate() const;
 
     /**
-      * Sets the CA certificate file for TLS/SSL connections
-      */
+     * Sets the CA certificate file for TLS/SSL connections
+     */
     void setTLSCACertFile(const QString &caCertFile);
 
     /**
-      * Returns the CA certificate file used for TLS/SSL connections.
-      */
+     * Returns the CA certificate file used for TLS/SSL connections.
+     */
     Q_REQUIRED_RESULT QString tlsCACertFile() const;
 
     /**
@@ -312,6 +313,6 @@ private:
     LdapServerPrivate *const d;
 };
 }
-KLDAP_EXPORT QDebug operator <<(QDebug d, const KLDAP::LdapServer &t);
+KLDAP_EXPORT QDebug operator<<(QDebug d, const KLDAP::LdapServer &t);
 
 #endif

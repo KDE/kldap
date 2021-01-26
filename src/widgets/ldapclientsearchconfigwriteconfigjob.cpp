@@ -17,12 +17,10 @@ using namespace KLDAP;
 LdapClientSearchConfigWriteConfigJob::LdapClientSearchConfigWriteConfigJob(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 LdapClientSearchConfigWriteConfigJob::~LdapClientSearchConfigWriteConfigJob()
 {
-
 }
 
 bool LdapClientSearchConfigWriteConfigJob::canStart() const
@@ -39,7 +37,7 @@ void LdapClientSearchConfigWriteConfigJob::writeLdapClientConfigFinished()
 void LdapClientSearchConfigWriteConfigJob::start()
 {
     if (!canStart()) {
-        //Failed !
+        // Failed !
         writeLdapClientConfigFinished();
         return;
     }
@@ -146,4 +144,3 @@ void LdapClientSearchConfigWriteConfigJob::setServer(const KLDAP::LdapServer &se
 {
     mServer = server;
 }
-

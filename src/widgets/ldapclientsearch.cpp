@@ -10,8 +10,8 @@
  */
 
 #include "ldapclientsearch.h"
-#include "ldapclientsearchconfig.h"
 #include "ldapclient_debug.h"
+#include "ldapclientsearchconfig.h"
 #include "ldapsearchclientreadconfigserverjob.h"
 
 #include "ldapclient.h"
@@ -28,8 +28,8 @@
 
 #include <kio/job.h>
 
-#include <QTimer>
 #include <QStandardPaths>
+#include <QTimer>
 
 using namespace KLDAP;
 
@@ -102,8 +102,9 @@ void LdapClientSearch::Private::init(const QStringList &attributes)
     mAttributes = attributes;
 
     // Set the filter, to make sure old usage (before 4.14) of this object still works.
-    mFilter = QStringLiteral("&(|(objectclass=person)(objectclass=groupOfNames)(mail=*))"
-                                "(|(cn=%1*)(mail=%1*)(givenName=%1*)(sn=%1*))");
+    mFilter = QStringLiteral(
+        "&(|(objectclass=person)(objectclass=groupOfNames)(mail=*))"
+        "(|(cn=%1*)(mail=%1*)(givenName=%1*)(sn=%1*))");
 
     readConfig();
     q->connect(KDirWatch::self(), &KDirWatch::dirty, q, [this](const QString &filename) {
@@ -123,7 +124,7 @@ void LdapClientSearch::updateCompletionWeights()
 {
     KConfigGroup config(KLDAP::LdapClientSearchConfig::config(), "LDAP");
     for (int i = 0, total = d->mClients.size(); i < total; ++i) {
-        d->readWeighForClient(d->mClients[ i ], config, i);
+        d->readWeighForClient(d->mClients[i], config, i);
     }
 }
 
@@ -157,10 +158,7 @@ void LdapClientSearch::setAttributes(const QStringList &attrs)
 
 QStringList LdapClientSearch::defaultAttributes()
 {
-    const QStringList attr{ QStringLiteral("cn")
-                , QStringLiteral("mail")
-                , QStringLiteral("givenname")
-                , QStringLiteral("sn")};
+    const QStringList attr{QStringLiteral("cn"), QStringLiteral("mail"), QStringLiteral("givenname"), QStringLiteral("sn")};
     return attr;
 }
 
@@ -190,16 +188,13 @@ void LdapClientSearch::Private::readConfig()
 
             ldapClient->setAttributes(mAttributes);
 
-            q->connect(ldapClient, &LdapClient::result,
-                       q, [this](const LdapClient &client, const KLDAP::LdapObject &obj) {
+            q->connect(ldapClient, &LdapClient::result, q, [this](const LdapClient &client, const KLDAP::LdapObject &obj) {
                 slotLDAPResult(client, obj);
             });
-            q->connect(ldapClient, &LdapClient::done,
-                       q, [this]() {
+            q->connect(ldapClient, &LdapClient::done, q, [this]() {
                 slotLDAPDone();
             });
-            q->connect(ldapClient, qOverload<const QString &>(&LdapClient::error),
-                       q, [this](const QString &str) {
+            q->connect(ldapClient, qOverload<const QString &>(&LdapClient::error), q, [this](const QString &str) {
                 slotLDAPError(str);
             });
 
@@ -328,18 +323,17 @@ void LdapClientSearch::Private::makeSearchData(QStringList &ret, LdapResult::Lis
         bool wasCN = false;
         bool wasDC = false;
 
-        //qCDebug(LDAPCLIENT_LOG) <<"\n\nLdapClientSearch::makeSearchData()";
+        // qCDebug(LDAPCLIENT_LOG) <<"\n\nLdapClientSearch::makeSearchData()";
 
         KLDAP::LdapAttrMap::ConstIterator it2;
-        for (it2 = (*it1).object.attributes().constBegin();
-             it2 != (*it1).object.attributes().constEnd(); ++it2) {
+        for (it2 = (*it1).object.attributes().constBegin(); it2 != (*it1).object.attributes().constEnd(); ++it2) {
             QByteArray val = (*it2).first();
             int len = val.size();
             if (len > 0 && '\0' == val[len - 1]) {
                 --len;
             }
             const QString tmp = QString::fromUtf8(val.constData(), len);
-            //qCDebug(LDAPCLIENT_LOG) <<"      key: \"" << it2.key() <<"\" value: \"" << tmp <<"\"";
+            // qCDebug(LDAPCLIENT_LOG) <<"      key: \"" << it2.key() <<"\" value: \"" << tmp <<"\"";
             if (it2.key() == QLatin1String("cn")) {
                 name = tmp;
                 if (mail.isEmpty()) {
@@ -375,8 +369,7 @@ void LdapClientSearch::Private::makeSearchData(QStringList &ret, LdapResult::Lis
                 givenname = tmp;
             } else if (it2.key() == QLatin1String("sn")) {
                 sn = tmp;
-            } else if (it2.key() == QLatin1String("objectClass")
-                       && (tmp == QLatin1String("groupOfNames") || tmp == QLatin1String("kolabGroupOfNames"))) {
+            } else if (it2.key() == QLatin1String("objectClass") && (tmp == QLatin1String("groupOfNames") || tmp == QLatin1String("kolabGroupOfNames"))) {
                 isDistributionList = true;
             }
         }
@@ -386,7 +379,7 @@ void LdapClientSearch::Private::makeSearchData(QStringList &ret, LdapResult::Lis
                 mails.append(mail);
             }
             if (isDistributionList) {
-                //qCDebug(LDAPCLIENT_LOG) <<"\n\nLdapClientSearch::makeSearchData() found a list:" << name;
+                // qCDebug(LDAPCLIENT_LOG) <<"\n\nLdapClientSearch::makeSearchData() found a list:" << name;
                 ret.append(name);
                 // following lines commented out for bugfixing kolab issue #177:
                 //
@@ -395,13 +388,13 @@ void LdapClientSearch::Private::makeSearchData(QStringList &ret, LdapResult::Lis
                 // The right server is found by the SMTP server instead: Kolab users
                 // must use the correct SMTP server, by definition.
                 //
-                //mail = (*it1).client->base().simplified();
-                //mail.replace( ",dc=", ".", false );
-                //if( mail.startsWith("dc=", false) )
+                // mail = (*it1).client->base().simplified();
+                // mail.replace( ",dc=", ".", false );
+                // if( mail.startsWith("dc=", false) )
                 //  mail.remove(0, 3);
-                //mail.prepend( '@' );
-                //mail.prepend( name );
-                //mail = name;
+                // mail.prepend( '@' );
+                // mail.prepend( name );
+                // mail = name;
             } else {
                 continue; // nothing, bad entry
             }

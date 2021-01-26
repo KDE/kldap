@@ -10,11 +10,12 @@
 
 #include "kldap_export.h"
 
-#include <kldap/ldapobject.h>
 #include <QObject>
 #include <QStringList>
+#include <kldap/ldapobject.h>
 
-namespace KLDAP {
+namespace KLDAP
+{
 class LdapClient;
 
 /**
@@ -35,14 +36,14 @@ struct LdapResultObject {
  */
 struct LdapResult {
     /**
-    * A list of LdapResult objects.
-    */
+     * A list of LdapResult objects.
+     */
     typedef QVector<LdapResult> List;
 
     LdapDN dn;
-    QString name;         ///< The full name of the contact.
-    QStringList email;    ///< The list of emails of the contact.
-    int clientNumber;     ///< The client the contact comes from (used for sorting in a ldap-only lookup).
+    QString name; ///< The full name of the contact.
+    QStringList email; ///< The list of emails of the contact.
+    int clientNumber; ///< The client the contact comes from (used for sorting in a ldap-only lookup).
     int completionWeight; ///< The weight of the contact (used for sorting in a completion list).
 };
 
@@ -125,10 +126,10 @@ public:
     QStringList attributes() const;
 
     /**
-    * Sets the attributes, that are queried the LDAP Server.
-    *
-    * @since 4.14
-    */
+     * Sets the attributes, that are queried the LDAP Server.
+     *
+     * @since 4.14
+     */
     void setAttributes(const QStringList &);
 
     static Q_REQUIRED_RESULT QStringList defaultAttributes();

@@ -6,8 +6,8 @@
 */
 
 #include "ldapsearch.h"
-#include "ldapdn.h"
 #include "ldapdefs.h"
+#include "ldapdn.h"
 
 #include <QTimer>
 
@@ -15,7 +15,7 @@
 #include <KLocalizedString>
 using namespace KLDAP;
 
-//blocking the GUI for xxx milliseconds
+// blocking the GUI for xxx milliseconds
 #define LDAPSEARCH_BLOCKING_TIMEOUT 10
 
 class LdapSearchPrivate
@@ -60,23 +60,20 @@ void LdapSearchPrivate::result()
 
     qCDebug(LDAP_LOG) << "LDAP result:" << res;
 
-    if (res != 0
-        && (res == -1
-            || (mConn->ldapErrorCode() != KLDAP_SUCCESS
-                && mConn->ldapErrorCode() != KLDAP_SASL_BIND_IN_PROGRESS))) {
-        //error happened, but no timeout
+    if (res != 0 && (res == -1 || (mConn->ldapErrorCode() != KLDAP_SUCCESS && mConn->ldapErrorCode() != KLDAP_SASL_BIND_IN_PROGRESS))) {
+        // error happened, but no timeout
         mError = mConn->ldapErrorCode();
         mErrorString = mConn->ldapErrorString();
         Q_EMIT mParent->result(mParent);
         return;
     }
 
-    //binding
+    // binding
     if (res == LdapOperation::RES_BIND) {
         const QByteArray servercc = mOp.serverCred();
 
         qCDebug(LDAP_LOG) << "LdapSearch RES_BIND";
-        if (mConn->ldapErrorCode() == KLDAP_SUCCESS) {   //bind succeeded
+        if (mConn->ldapErrorCode() == KLDAP_SUCCESS) { // bind succeeded
             qCDebug(LDAP_LOG) << "bind succeeded";
             LdapControls savedctrls = mOp.serverControls();
             if (mPageSize) {
@@ -87,7 +84,7 @@ void LdapSearchPrivate::result()
 
             mId = mOp.search(mBase, mScope, mFilter, mAttributes);
             mOp.setServerControls(savedctrls);
-        } else { //next bind step
+        } else { // next bind step
             qCDebug(LDAP_LOG) << "bind next step";
             mId = mOp.bind(servercc);
         }
@@ -108,7 +105,7 @@ void LdapSearchPrivate::result()
         return;
     }
 
-    //End of entries
+    // End of entries
     if (res == LdapOperation::RES_SEARCH_RESULT) {
         if (mPageSize) {
             QByteArray cookie;
@@ -135,7 +132,7 @@ void LdapSearchPrivate::result()
                     Q_EMIT mParent->result(mParent);
                     return;
                 }
-                //continue with the next page
+                // continue with the next page
                 QTimer::singleShot(0, mParent, [this]() {
                     result();
                 });
@@ -147,19 +144,19 @@ void LdapSearchPrivate::result()
         return;
     }
 
-    //Found an entry
+    // Found an entry
     if (res == LdapOperation::RES_SEARCH_ENTRY) {
         Q_EMIT mParent->data(mParent, mOp.object());
         mCount++;
     }
 
-    //If not reached the requested entries, continue
+    // If not reached the requested entries, continue
     if (mMaxCount <= 0 || mCount < mMaxCount) {
         QTimer::singleShot(0, mParent, [this]() {
             result();
         });
     }
-    //If reached the requested entries, indicate it
+    // If reached the requested entries, indicate it
     if (mMaxCount > 0 && mCount == mMaxCount) {
         qCDebug(LDAP_LOG) << mCount << " entries reached";
         Q_EMIT mParent->result(mParent);
@@ -186,11 +183,10 @@ void LdapSearchPrivate::closeConnection()
     }
 }
 
-//This starts the real job
+// This starts the real job
 bool LdapSearchPrivate::startSearch(const LdapDN &base, LdapUrl::Scope scope, const QString &filter, const QStringList &attributes, int pagesize, int count)
 {
-    qCDebug(LDAP_LOG) << "search: base=" << base.toString() << "scope=" << static_cast<int>(scope)
-                      << "filter=" << filter << "attributes=" << attributes
+    qCDebug(LDAP_LOG) << "search: base=" << base.toString() << "scope=" << static_cast<int>(scope) << "filter=" << filter << "attributes=" << attributes
                       << "pagesize=" << pagesize;
     mAbandoned = false;
     mError = 0;
@@ -208,7 +204,7 @@ bool LdapSearchPrivate::startSearch(const LdapDN &base, LdapUrl::Scope scope, co
     LdapControls savedctrls = mOp.serverControls();
     if (pagesize) {
         LdapControls ctrls = savedctrls;
-        mConn->setOption(0x0008, nullptr);   // Disable referals or paging won't work
+        mConn->setOption(0x0008, nullptr); // Disable referals or paging won't work
         LdapControl::insert(ctrls, LdapControl::createPageControl(pagesize));
         mOp.setServerControls(ctrls);
     }
@@ -229,7 +225,7 @@ bool LdapSearchPrivate::startSearch(const LdapDN &base, LdapUrl::Scope scope, co
     }
     qCDebug(LDAP_LOG) << "startSearch msg id=" << mId;
 
-    //maybe do this with threads?- need thread-safe client libs!!!
+    // maybe do this with threads?- need thread-safe client libs!!!
     QTimer::singleShot(0, mParent, [this]() {
         result();
     });
@@ -285,8 +281,7 @@ bool LdapSearch::search(const LdapServer &server, const QStringList &attributes,
             return false;
         }
     }
-    return d->startSearch(server.baseDn(), server.scope(), server.filter(),
-                          attributes, server.pageSize(), count);
+    return d->startSearch(server.baseDn(), server.scope(), server.filter(), attributes, server.pageSize(), count);
 }
 
 bool LdapSearch::search(const LdapUrl &url, int count)
@@ -300,8 +295,7 @@ bool LdapSearch::search(const LdapUrl &url, int count)
     }
     bool critical = true;
     const int pagesize = url.extension(QStringLiteral("x-pagesize"), critical).toInt();
-    return d->startSearch(url.dn(), url.scope(), url.filter(),
-                          url.attributes(), pagesize, count);
+    return d->startSearch(url.dn(), url.scope(), url.filter(), url.attributes(), pagesize, count);
 }
 
 bool LdapSearch::search(const LdapDN &base, LdapUrl::Scope scope, const QString &filter, const QStringList &attributes, int pagesize, int count)

@@ -10,9 +10,9 @@
 
 #include <kldap/ldif.h>
 
-#include <QDebug>
 #include <KLocalizedString>
 #include <QCoreApplication>
+#include <QDebug>
 
 #ifdef Q_OS_WIN
 #include <Winsock2.h>
@@ -34,7 +34,7 @@ int Q_DECL_EXPORT kdemain(int argc, char **argv);
  */
 int kdemain(int argc, char **argv)
 {
-    QCoreApplication app(argc, argv);   // needed for QSocketNotifier
+    QCoreApplication app(argc, argv); // needed for QSocketNotifier
     app.setApplicationName(QStringLiteral("kio_ldap"));
 
     qCDebug(KLDAP_LOG) << "Starting kio_ldap instance";
@@ -83,8 +83,7 @@ void LDAPProtocol::LDAPErr(int err)
         return;
     }
 
-    qDebug() << "error code: " << err << " msg: " << LdapConnection::errorString(err)
-             <<extramsg << "'";
+    qDebug() << "error code: " << err << " msg: " << LdapConnection::errorString(err) << extramsg << "'";
     QString msg;
     msg = mServer.url().toDisplayString();
     if (!extramsg.isEmpty()) {
@@ -158,8 +157,7 @@ void LDAPProtocol::LDAPErr(int err)
 
     default:
         error(ERR_SLAVE_DEFINED,
-              i18n("LDAP server returned the error: %1 %2\nThe LDAP URL was: %3",
-                   LdapConnection::errorString(err), extramsg, mServer.url().toDisplayString()));
+              i18n("LDAP server returned the error: %1 %2\nThe LDAP URL was: %3", LdapConnection::errorString(err), extramsg, mServer.url().toDisplayString()));
     }
 }
 
@@ -172,9 +170,8 @@ void LDAPProtocol::controlsFromMetaData(LdapControls &serverctrls, LdapControls 
     while (hasMetaData(QStringLiteral("SERVER_CTRL%1").arg(i))) {
         QByteArray val = metaData(QStringLiteral("SERVER_CTRL%1").arg(i)).toUtf8();
         Ldif::splitControl(val, oid, critical, value);
-        qCDebug(KLDAP_LOG) << "server ctrl #" << i << " value: " << val
-                           <<" oid: " << oid << " critical: " << critical << " value: "
-                           <<QString::fromUtf8(value.constData(), value.size());
+        qCDebug(KLDAP_LOG) << "server ctrl #" << i << " value: " << val << " oid: " << oid << " critical: " << critical
+                           << " value: " << QString::fromUtf8(value.constData(), value.size());
         LdapControl ctrl(oid, val, critical);
         serverctrls.append(ctrl);
         i++;
@@ -183,9 +180,8 @@ void LDAPProtocol::controlsFromMetaData(LdapControls &serverctrls, LdapControls 
     while (hasMetaData(QStringLiteral("CLIENT_CTRL%1").arg(i))) {
         QByteArray val = metaData(QStringLiteral("CLIENT_CTRL%1").arg(i)).toUtf8();
         Ldif::splitControl(val, oid, critical, value);
-        qCDebug(KLDAP_LOG) << "client ctrl #" << i << " value: " << val
-                           <<" oid: " << oid << " critical: " << critical << " value: "
-                           <<QString::fromUtf8(value.constData(), value.size());
+        qCDebug(KLDAP_LOG) << "client ctrl #" << i << " value: " << val << " oid: " << oid << " critical: " << critical
+                           << " value: " << QString::fromUtf8(value.constData(), value.size());
         LdapControl ctrl(oid, val, critical);
         clientctrls.append(ctrl);
         i++;
@@ -232,19 +228,10 @@ void LDAPProtocol::changeCheck(const LdapUrl &url)
     server.setUrl(url);
 
     if (mConnected) {
-        if (server.host() != mServer.host()
-            || server.port() != mServer.port()
-            || server.baseDn() != mServer.baseDn()
-            || server.user() != mServer.user()
-            || server.bindDn() != mServer.bindDn()
-            || server.realm() != mServer.realm()
-            || server.password() != mServer.password()
-            || server.timeLimit() != mServer.timeLimit()
-            || server.sizeLimit() != mServer.sizeLimit()
-            || server.version() != mServer.version()
-            || server.security() != mServer.security()
-            || server.auth() != mServer.auth()
-            || server.mech() != mServer.mech()) {
+        if (server.host() != mServer.host() || server.port() != mServer.port() || server.baseDn() != mServer.baseDn() || server.user() != mServer.user()
+            || server.bindDn() != mServer.bindDn() || server.realm() != mServer.realm() || server.password() != mServer.password()
+            || server.timeLimit() != mServer.timeLimit() || server.sizeLimit() != mServer.sizeLimit() || server.version() != mServer.version()
+            || server.security() != mServer.security() || server.auth() != mServer.auth() || server.mech() != mServer.mech()) {
             closeConnection();
             mServer = server;
             openConnection();
@@ -257,10 +244,7 @@ void LDAPProtocol::changeCheck(const LdapUrl &url)
 
 void LDAPProtocol::setHost(const QString &host, quint16 port, const QString &user, const QString &password)
 {
-    if (mServer.host() != host
-        || mServer.port() != port
-        || mServer.user() != user
-        || mServer.password() != password) {
+    if (mServer.host() != host || mServer.port() != port || mServer.user() != user || mServer.password() != password) {
         closeConnection();
     }
 
@@ -282,8 +266,7 @@ void LDAPProtocol::setHost(const QString &host, quint16 port, const QString &use
     mServer.setUser(user);
     mServer.setPassword(password);
 
-    qCDebug(KLDAP_LOG) << "setHost: " << host << " port: " << port << " user: "
-                       <<user << " pass: [protected]";
+    qCDebug(KLDAP_LOG) << "setHost: " << host << " port: " << port << " user: " << user << " pass: [protected]";
 }
 
 void LDAPProtocol::openConnection()
@@ -306,8 +289,7 @@ void LDAPProtocol::openConnection()
     info.url.setPort(mServer.port());
     info.url.setUserName(mServer.user());
     info.caption = i18n("LDAP Login");
-    info.comment = QString::fromLatin1(mProtocol) + QLatin1String("://") + mServer.host() + QLatin1Char(':')
-                   +QString::number(mServer.port());
+    info.comment = QString::fromLatin1(mProtocol) + QLatin1String("://") + mServer.host() + QLatin1Char(':') + QString::number(mServer.port());
     info.commentLabel = i18n("site:");
     info.username = mServer.auth() == LdapServer::SASL ? mServer.user() : mServer.bindDn();
     info.password = mServer.password();
@@ -324,9 +306,7 @@ void LDAPProtocol::openConnection()
             connected();
             return;
         }
-        if (retval == KLDAP_INVALID_CREDENTIALS
-            || retval == KLDAP_INSUFFICIENT_ACCESS
-            || retval == KLDAP_INAPPROPRIATE_AUTH
+        if (retval == KLDAP_INVALID_CREDENTIALS || retval == KLDAP_INSUFFICIENT_ACCESS || retval == KLDAP_INAPPROPRIATE_AUTH
             || retval == KLDAP_UNWILLING_TO_PERFORM) {
             if (firstauth && cached) {
                 if (mServer.auth() == LdapServer::SASL) {
@@ -338,11 +318,9 @@ void LDAPProtocol::openConnection()
                 mConn.setServer(mServer);
                 cached = false;
             } else {
-                const int errorCode = firstauth
-                          ? openPasswordDialogV2(info)
-                          : openPasswordDialogV2(info, i18n("Invalid authorization information."));
+                const int errorCode = firstauth ? openPasswordDialogV2(info) : openPasswordDialogV2(info, i18n("Invalid authorization information."));
                 if (!errorCode) {
-                    if (info.keepPassword)  {  // user asked password be save/remembered
+                    if (info.keepPassword) { // user asked password be save/remembered
                         cacheAuthentication(info);
                     }
                 } else {
@@ -416,7 +394,7 @@ void LDAPProtocol::get(const QUrl &_url)
     // tell the mimetype
     mimeType(QStringLiteral("text/plain"));
     // collect the result
-    //QByteArray result;
+    // QByteArray result;
     filesize_t processed_size = 0;
 
     while (true) {
@@ -587,7 +565,7 @@ void LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
             ldif.setLdif(buffer);
         }
         if (result < 0) {
-            //error
+            // error
             return;
         }
         if (result == 0) {
@@ -614,12 +592,9 @@ void LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
                     ldaperr = mOp.del_s(ldif.dn());
                     break;
                 case Ldif::Entry_Modrdn:
-                    qCDebug(KLDAP_LOG) << "kio_ldap_modrdn olddn:" << ldif.dn().toString()
-                                       <<" newRdn: " <<  ldif.newRdn()
-                                       <<" newSuperior: " << ldif.newSuperior()
-                                       <<" deloldrdn: " << ldif.delOldRdn();
-                    ldaperr = mOp.rename_s(ldif.dn(), ldif.newRdn(),
-                                           ldif.newSuperior(), ldif.delOldRdn());
+                    qCDebug(KLDAP_LOG) << "kio_ldap_modrdn olddn:" << ldif.dn().toString() << " newRdn: " << ldif.newRdn()
+                                       << " newSuperior: " << ldif.newSuperior() << " deloldrdn: " << ldif.delOldRdn();
+                    ldaperr = mOp.rename_s(ldif.dn(), ldif.newRdn(), ldif.newSuperior(), ldif.delOldRdn());
                     break;
                 case Ldif::Entry_Mod:
                     qCDebug(KLDAP_LOG) << "kio_ldap_mod";
@@ -648,8 +623,7 @@ void LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
                 break;
             case Ldif::Item:
                 switch (ldif.entryType()) {
-                case Ldif::Entry_Mod:
-                {
+                case Ldif::Entry_Mod: {
                     LdapOperation::ModOp op;
                     op.type = LdapOperation::Mod_None;
                     switch (ldif.modType()) {
@@ -683,8 +657,7 @@ void LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
                     return;
                 }
                 break;
-            case Ldif::Control:
-            {
+            case Ldif::Control: {
                 LdapControl control;
                 control.setControl(ldif.oid(), ldif.value(), ldif.isCritical());
                 serverctrls.append(control);
@@ -692,8 +665,7 @@ void LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
                 break;
             }
             case Ldif::Err:
-                error(ERR_SLAVE_DEFINED,
-                      i18n("Invalid Ldif file in line %1.", ldif.lineNumber()));
+                error(ERR_SLAVE_DEFINED, i18n("Invalid Ldif file in line %1.", ldif.lineNumber()));
                 return;
             }
         } while (ret != Ldif::MoreData);
@@ -761,7 +733,7 @@ void LDAPProtocol::listDir(const QUrl &_url)
 
         LDAPEntry2UDSEntry(mOp.object().dn(), uds, usrc);
         listEntry(uds);
-//      processedSize( total );
+        //      processedSize( total );
         qCDebug(KLDAP_LOG) << " total: " << total << " " << usrc.toDisplayString();
 
         // publish the sub-directories (if dirmode==sub)
@@ -791,7 +763,7 @@ void LDAPProtocol::listDir(const QUrl &_url)
         }
     }
 
-//  totalSize( total );
+    //  totalSize( total );
 
     uds.clear();
     // we are done

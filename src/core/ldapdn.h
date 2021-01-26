@@ -11,7 +11,8 @@
 #include "kldap_export.h"
 #include <QString>
 
-namespace KLDAP {
+namespace KLDAP
+{
 class KLDAP_EXPORT LdapDN
 {
 public:
@@ -59,9 +60,9 @@ public:
      */
     Q_REQUIRED_RESULT int depth() const;
 
-    Q_REQUIRED_RESULT bool operator ==(const LdapDN &rhs) const;
+    Q_REQUIRED_RESULT bool operator==(const LdapDN &rhs) const;
 
-    Q_REQUIRED_RESULT bool operator !=(const LdapDN &rhs) const;
+    Q_REQUIRED_RESULT bool operator!=(const LdapDN &rhs) const;
 
 private:
     class LdapDNPrivate;

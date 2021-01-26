@@ -7,10 +7,11 @@
 #ifndef LDAPSEARCHCLIENTREADCONFIGSERVERJOB_H
 #define LDAPSEARCHCLIENTREADCONFIGSERVERJOB_H
 
-#include <QObject>
-#include <KConfigGroup>
 #include "kldap_export.h"
-namespace KLDAP {
+#include <KConfigGroup>
+#include <QObject>
+namespace KLDAP
+{
 class LdapClient;
 class LdapServer;
 class KLDAP_EXPORT LdapSearchClientReadConfigServerJob : public QObject

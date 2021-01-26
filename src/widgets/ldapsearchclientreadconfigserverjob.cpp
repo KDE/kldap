@@ -6,18 +6,16 @@
 
 #include "ldapsearchclientreadconfigserverjob.h"
 #include "ldapclient.h"
-#include "ldapclientsearchconfigreadconfigjob.h"
 #include "ldapclient_debug.h"
+#include "ldapclientsearchconfigreadconfigjob.h"
 using namespace KLDAP;
 LdapSearchClientReadConfigServerJob::LdapSearchClientReadConfigServerJob(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 LdapSearchClientReadConfigServerJob::~LdapSearchClientReadConfigServerJob()
 {
-
 }
 
 void LdapSearchClientReadConfigServerJob::start()

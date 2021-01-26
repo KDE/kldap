@@ -10,11 +10,12 @@
 
 #include <QString>
 
-#include "ldapurl.h"
-#include "ldapserver.h"
 #include "kldap_export.h"
+#include "ldapserver.h"
+#include "ldapurl.h"
 
-namespace KLDAP {
+namespace KLDAP
+{
 /**
  * @brief
  * This class represents a connection to an LDAP server.
@@ -22,13 +23,7 @@ namespace KLDAP {
 class KLDAP_EXPORT LdapConnection
 {
 public:
-
-    enum SASL_Fields {
-        SASL_Authname = 0x1,
-        SASL_Authzid = 0x2,
-        SASL_Realm = 0x4,
-        SASL_Password = 0x8
-    };
+    enum SASL_Fields { SASL_Authname = 0x1, SASL_Authzid = 0x2, SASL_Realm = 0x4, SASL_Password = 0x8 };
 
     /** Constructs an LdapConnection object */
     LdapConnection();
@@ -88,13 +83,13 @@ public:
     Q_REQUIRED_RESULT int timeLimit() const;
 
     /** Gets an option from the connection. The option value can be client
-      * library specific, so avoid this function if possible
-      * @param option the connection option to return
-      * @param value the value of option to get
-      */
+     * library specific, so avoid this function if possible
+     * @param option the connection option to return
+     * @param value the value of option to get
+     */
     int getOption(int option, void *value) const;
     /** Sets an option in the connection. The option value can be client
-      * library specific, so avoid this function if possible */
+     * library specific, so avoid this function if possible */
     int setOption(int option, void *value);
 
     /** Returns the LDAP error code from the last operation */

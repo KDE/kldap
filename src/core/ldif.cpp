@@ -27,12 +27,14 @@ public:
     QByteArray mLine;
 };
 
-Ldif::Ldif() : d(new LdifPrivate)
+Ldif::Ldif()
+    : d(new LdifPrivate)
 {
     startParsing();
 }
 
-Ldif::Ldif(const Ldif &that) : d(new LdifPrivate)
+Ldif::Ldif(const Ldif &that)
+    : d(new LdifPrivate)
 {
     *d = *that.d;
 
@@ -65,19 +67,16 @@ QByteArray Ldif::assembleLine(const QString &fieldname, const QByteArray &value,
         result = fieldname.toUtf8() + ":< " + value;
     } else {
         isDn = fieldname.toLower() == QLatin1String("dn");
-        //SAFE-INIT-CHAR
-        if (!value.isEmpty() && value[0] > 0 && value[0] != '\n'
-            && value[0] != '\r' && value[0] != ':' && value[0] != '<') {
+        // SAFE-INIT-CHAR
+        if (!value.isEmpty() && value[0] > 0 && value[0] != '\n' && value[0] != '\r' && value[0] != ':' && value[0] != '<') {
             safe = true;
         }
 
-        //SAFE-CHAR
+        // SAFE-CHAR
         if (safe) {
             for (int i = 1; i < value.size(); i++) {
-                //allow utf-8 in Distinguished Names
-                if ((isDn && value[i] == 0)
-                    || (!isDn && value[i] <= 0)
-                    || value[i] == '\r' || value[i] == '\n') {
+                // allow utf-8 in Distinguished Names
+                if ((isDn && value[i] == 0) || (!isDn && value[i] <= 0) || value[i] == '\r' || value[i] == '\n') {
                     safe = false;
                     break;
                 }
@@ -115,21 +114,21 @@ bool Ldif::splitLine(const QByteArray &line, QString &fieldname, QByteArray &val
     int position;
     int linelen;
 
-//  qCDebug(LDAP_LOG) << "line:" << QString::fromUtf8(line);
+    //  qCDebug(LDAP_LOG) << "line:" << QString::fromUtf8(line);
 
     position = line.indexOf(":");
     if (position == -1) {
         // strange: we did not find a fieldname
         fieldname = QLatin1String("");
         value = line.trimmed();
-//    qCDebug(LDAP_LOG) << "value :" << value[0];
+        //    qCDebug(LDAP_LOG) << "value :" << value[0];
         return false;
     }
 
     linelen = line.size();
     fieldname = QString::fromUtf8(line.left(position).trimmed());
 
-    if (linelen > (position + 1) && line[ position + 1 ] == ':') {
+    if (linelen > (position + 1) && line[position + 1] == ':') {
         // String is BASE64 encoded -> decode it now.
         if (linelen <= (position + 3)) {
             value.resize(0);
@@ -139,7 +138,7 @@ bool Ldif::splitLine(const QByteArray &line, QString &fieldname, QByteArray &val
         return false;
     }
 
-    if (linelen > (position + 1) && line[ position + 1 ] == '<') {
+    if (linelen > (position + 1) && line[position + 1] == '<') {
         // String is an URL.
         if (linelen <= (position + 3)) {
             value.resize(0);
@@ -315,9 +314,9 @@ Ldif::ParseValue Ldif::nextItem()
             c = d->mLdif.at(d->mPos);
             d->mPos++;
             if (d->mIsNewLine && c == '\r') {
-                continue; //handle \n\r line end
+                continue; // handle \n\r line end
             }
-            if (d->mIsNewLine && (c == ' ' || c == '\t')) {     //line folding
+            if (d->mIsNewLine && (c == ' ' || c == '\t')) { // line folding
                 d->mIsNewLine = false;
                 continue;
             }

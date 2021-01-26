@@ -9,7 +9,6 @@
 
 #include "ldap_debug.h"
 
-
 using namespace KLDAP;
 
 class Q_DECL_HIDDEN LdapUrl::LdapUrlPrivate
@@ -68,7 +67,7 @@ void LdapUrl::setDn(const LdapDN &dn)
     if (tmp.startsWith(QLatin1Char('/'))) {
         setPath(tmp);
     } else {
-        setPath(QLatin1Char('/')  + tmp);
+        setPath(QLatin1Char('/') + tmp);
     }
 }
 
@@ -144,7 +143,7 @@ QString LdapUrl::extension(const QString &key, bool &critical) const
 
 void LdapUrl::setExtension(const QString &key, const LdapUrl::Extension &ext)
 {
-    d->m_extensions[ key ] = ext;
+    d->m_extensions[key] = ext;
     updateQuery();
 }
 
@@ -240,8 +239,7 @@ void LdapUrl::parseQuery()
 
     int i = 0;
     QStringList::const_iterator end(url_items.constEnd());
-    for (QStringList::const_iterator it = url_items.constBegin();
-         it != end; ++it, i++) {
+    for (QStringList::const_iterator it = url_items.constBegin(); it != end; ++it, i++) {
         switch (i) {
         case 0:
             d->m_attributes = (*it).split(QLatin1Char(','), Qt::SkipEmptyParts);
@@ -264,8 +262,7 @@ void LdapUrl::parseQuery()
 
     QString name, value;
     QStringList::const_iterator end2(extensions.constEnd());
-    for (QStringList::const_iterator it = extensions.constBegin();
-         it != end2; ++it) {
+    for (QStringList::const_iterator it = extensions.constBegin(); it != end2; ++it) {
         ext.critical = false;
         name = fromPercentEncoding((*it).section(QLatin1Char('='), 0, 0).toLatin1()).toLower();
         value = fromPercentEncoding((*it).section(QLatin1Char('='), 1).toLatin1());

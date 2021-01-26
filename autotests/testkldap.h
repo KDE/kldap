@@ -21,7 +21,7 @@ public:
     ~KLdapTest() = default;
 
 private Q_SLOTS:
-    //void testKLdap();
+    // void testKLdap();
 
     void initTestCase();
     void cleanupTestCase();

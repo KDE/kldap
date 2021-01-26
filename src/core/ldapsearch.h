@@ -23,7 +23,8 @@ class LdapSearchPrivate;
 
 // clazy:excludeall=ctor-missing-parent-argument
 
-namespace KLDAP {
+namespace KLDAP
+{
 /**
  * @brief
  * This class starts a search operation on a LDAP server and returns the
@@ -84,8 +85,12 @@ public:
      * Starts a search operation if the LdapConnection object already set
      * in the constructor.
      */
-    Q_REQUIRED_RESULT bool search(const LdapDN &base, LdapUrl::Scope scope = LdapUrl::Sub, const QString &filter = QString(),
-                                  const QStringList &attributes = QStringList(), int pagesize = 0, int count = 0);
+    Q_REQUIRED_RESULT bool search(const LdapDN &base,
+                                  LdapUrl::Scope scope = LdapUrl::Sub,
+                                  const QString &filter = QString(),
+                                  const QStringList &attributes = QStringList(),
+                                  int pagesize = 0,
+                                  int count = 0);
 
     /**
      * Continues the search (if you set count to non-zero in search(), and isFinished() is false)

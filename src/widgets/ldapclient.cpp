@@ -126,12 +126,10 @@ void LdapClient::startQuery(const QString &filter)
     connect(transfertJob, &KIO::TransferJob::data, this, [this](KIO::Job *job, const QByteArray &data) {
         d->slotData(job, data);
     });
-    connect(d->mJob.data(), &KIO::TransferJob::infoMessage, this,
-            [this](KJob *job, const QString &str, const QString &val) {
+    connect(d->mJob.data(), &KIO::TransferJob::infoMessage, this, [this](KJob *job, const QString &str, const QString &val) {
         d->slotInfoMessage(job, str, val);
     });
-    connect(d->mJob.data(), &KIO::TransferJob::result,
-            this, [this]() {
+    connect(d->mJob.data(), &KIO::TransferJob::result, this, [this]() {
         d->slotDone();
     });
 }
@@ -185,8 +183,7 @@ void LdapClient::Private::finishCurrentObject()
     mCurrentObject.setDn(mLdif.dn());
     KLDAP::LdapAttrValue objectclasses;
     const KLDAP::LdapAttrMap::ConstIterator end = mCurrentObject.attributes().constEnd();
-    for (KLDAP::LdapAttrMap::ConstIterator it = mCurrentObject.attributes().constBegin();
-         it != end; ++it) {
+    for (KLDAP::LdapAttrMap::ConstIterator it = mCurrentObject.attributes().constBegin(); it != end; ++it) {
         if (it.key().toLower() == QLatin1String("objectclass")) {
             objectclasses = it.value();
             break;
@@ -195,8 +192,7 @@ void LdapClient::Private::finishCurrentObject()
 
     bool groupofnames = false;
     const KLDAP::LdapAttrValue::ConstIterator endValue(objectclasses.constEnd());
-    for (KLDAP::LdapAttrValue::ConstIterator it = objectclasses.constBegin();
-         it != endValue; ++it) {
+    for (KLDAP::LdapAttrValue::ConstIterator it = objectclasses.constBegin(); it != endValue; ++it) {
         const QByteArray sClass = (*it).toLower();
         if (sClass == "groupofnames" || sClass == "kolabgroupofnames") {
             groupofnames = true;
@@ -234,7 +230,7 @@ void LdapClient::Private::finishCurrentObject()
 
 void LdapClient::Private::parseLDIF(const QByteArray &data)
 {
-    //qCDebug(LDAPCLIENT_LOG) <<"LdapClient::parseLDIF(" << QCString(data.data(), data.size()+1) <<" )";
+    // qCDebug(LDAPCLIENT_LOG) <<"LdapClient::parseLDIF(" << QCString(data.data(), data.size()+1) <<" )";
     if (!data.isEmpty()) {
         mLdif.setLdif(data);
     } else {
@@ -245,8 +241,7 @@ void LdapClient::Private::parseLDIF(const QByteArray &data)
     do {
         ret = mLdif.nextItem();
         switch (ret) {
-        case KLDAP::Ldif::Item:
-        {
+        case KLDAP::Ldif::Item: {
             name = mLdif.attr();
             const QByteArray value = mLdif.value();
             mCurrentObject.addValue(name, value);

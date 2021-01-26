@@ -7,15 +7,15 @@
 #ifndef __LDAP_H__
 #define __LDAP_H__
 
-#include <kio/slavebase.h>
 #include <kio/authinfo.h>
+#include <kio/slavebase.h>
 
-#include <kldap/ldapdefs.h>
-#include <kldap/ldapurl.h>
-#include <kldap/ldapcontrol.h>
 #include <kldap/ldapconnection.h>
+#include <kldap/ldapcontrol.h>
+#include <kldap/ldapdefs.h>
 #include <kldap/ldapdn.h>
 #include <kldap/ldapoperation.h>
+#include <kldap/ldapurl.h>
 
 class LDAPProtocol : public KIO::SlaveBase
 {
@@ -35,7 +35,6 @@ public:
     void put(const QUrl &url, int permissions, KIO::JobFlags flags) override;
 
 private:
-
     KLDAP::LdapConnection mConn;
     KLDAP::LdapOperation mOp;
     KLDAP::LdapServer mServer;

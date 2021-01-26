@@ -7,9 +7,10 @@
 #ifndef LDAPWIDGETITEMREADCONFIGSERVERJOB_H
 #define LDAPWIDGETITEMREADCONFIGSERVERJOB_H
 
-#include <QObject>
 #include <KConfigGroup>
-namespace KLDAP {
+#include <QObject>
+namespace KLDAP
+{
 class LdapWidgetItem;
 class LdapServer;
 class LdapWidgetItemReadConfigServerJob : public QObject

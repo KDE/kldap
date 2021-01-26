@@ -14,22 +14,22 @@
 
 #include <stdlib.h>
 
-//for struct timeval
+// for struct timeval
 #if defined(HAVE_SYS_TIME_H)
-# include <sys/time.h>
+#include <sys/time.h>
 #elif defined(_WIN32)
-# include <winsock2.h>
+#include <winsock2.h>
 #endif
 
 #include <sasl/sasl.h>
 
 #ifdef LDAP_FOUND
-# ifndef HAVE_WINLDAP_H
-#  include <lber.h>
-#  include <ldap.h>
-# else
-#  include <w32-ldap-help.h>
-# endif // HAVE_WINLDAP_H
+#ifndef HAVE_WINLDAP_H
+#include <lber.h>
+#include <ldap.h>
+#else
+#include <w32-ldap-help.h>
+#endif // HAVE_WINLDAP_H
 #endif // LDAP_FOUND
 
 #include "ldapdefs.h"
@@ -261,17 +261,14 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds, SASL_Call
         do {
             if (sdata.isEmpty()) {
                 do {
-                    saslresult = sasl_client_start(saslconn, mech.toLatin1().constData(),
-                                                   &client_interact, &out, &outlen, &mechusing);
+                    saslresult = sasl_client_start(saslconn, mech.toLatin1().constData(), &client_interact, &out, &outlen, &mechusing);
 
                     if (saslresult == SASL_INTERACT) {
                         if (kldap_sasl_interact(client_interact, &sasldata) != KLDAP_SUCCESS) {
                             return KLDAP_SASL_ERROR;
                         }
                     }
-                    qCDebug(LDAP_LOG) << "sasl_client_start mech: "
-                                      << mechusing << " outlen " << outlen
-                                      << " result: " << saslresult;
+                    qCDebug(LDAP_LOG) << "sasl_client_start mech: " << mechusing << " outlen " << outlen << " result: " << saslresult;
                 } while (saslresult == SASL_INTERACT);
                 if (saslresult != SASL_CONTINUE && saslresult != SASL_OK) {
                     return KLDAP_SASL_ERROR;
@@ -279,8 +276,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds, SASL_Call
             } else {
                 qCDebug(LDAP_LOG) << "sasl_client_step";
                 do {
-                    saslresult = sasl_client_step(saslconn, sdata.data(), sdata.size(),
-                                                  &client_interact, &out, &outlen);
+                    saslresult = sasl_client_step(saslconn, sdata.data(), sdata.size(), &client_interact, &out, &outlen);
                     if (saslresult == SASL_INTERACT) {
                         if (kldap_sasl_interact(client_interact, &sasldata) != KLDAP_SUCCESS) {
                             return KLDAP_SASL_ERROR;
@@ -299,18 +295,14 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds, SASL_Call
             if (async) {
                 qCDebug(LDAP_LOG) << "ldap_sasl_bind";
                 int msgid;
-                ret
-                    = ldap_sasl_bind(ld, server.bindDn().toUtf8().constData(), mech.toLatin1().constData(),
-                                     &ccred, nullptr, nullptr, &msgid);
+                ret = ldap_sasl_bind(ld, server.bindDn().toUtf8().constData(), mech.toLatin1().constData(), &ccred, nullptr, nullptr, &msgid);
                 if (ret == 0) {
                     ret = msgid;
                 }
                 qCDebug(LDAP_LOG) << "ldap_sasl_bind msgid" << ret;
             } else {
                 qCDebug(LDAP_LOG) << "ldap_sasl_bind_s";
-                ret
-                    = ldap_sasl_bind_s(ld, server.bindDn().toUtf8().constData(), mech.toLatin1().constData(),
-                                       &ccred, nullptr, nullptr, &scred);
+                ret = ldap_sasl_bind_s(ld, server.bindDn().toUtf8().constData(), mech.toLatin1().constData(), &ccred, nullptr, nullptr, &scred);
                 qCDebug(LDAP_LOG) << "ldap_sasl_bind_s ret" << ret;
                 if (scred) {
                     sdata = QByteArray(scred->bv_val, scred->bv_len);
@@ -324,7 +316,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds, SASL_Call
                     << "(re-compile kldap with cyrus-sasl and OpenLDAP development).";
         return KLDAP_SASL_ERROR;
 #endif
-    } else { //simple auth
+    } else { // simple auth
         QByteArray bindname, pass;
         struct berval ccred;
         if (server.auth() == LdapServer::Simple) {
@@ -360,15 +352,14 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds, SASL_Call
 
 int LdapOperation::LdapOperationPrivate::processResult(int rescode, LDAPMessage *msg)
 {
-    //qCDebug(LDAP_LOG);
+    // qCDebug(LDAP_LOG);
     int retval;
     LDAP *ld = (LDAP *)mConnection->handle();
 
     qCDebug(LDAP_LOG) << "rescode: " << rescode;
     switch (rescode) {
-    case RES_SEARCH_ENTRY:
-    {
-        //qCDebug(LDAP_LOG) << "Found search entry";
+    case RES_SEARCH_ENTRY: {
+        // qCDebug(LDAP_LOG) << "Found search entry";
         mObject.clear();
         LdapAttrMap attrs;
         char *name;
@@ -393,7 +384,7 @@ int LdapOperation::LdapOperationPrivate::processResult(int rescode, LDAPMessage 
                 }
                 ldap_value_free_len(bvals);
             }
-            attrs[ QString::fromLatin1(name) ] = values;
+            attrs[QString::fromLatin1(name)] = values;
             values.clear();
             ldap_memfree(name);
 
@@ -408,8 +399,7 @@ int LdapOperation::LdapOperationPrivate::processResult(int rescode, LDAPMessage 
         // Will only get this if following references is disabled. ignore it
         rescode = 0;
         break;
-    case RES_EXTENDED:
-    {
+    case RES_EXTENDED: {
         char *retoid;
         struct berval *retdata;
         retval = ldap_parse_extended_result(ld, msg, &retoid, &retdata, 0);
@@ -423,8 +413,7 @@ int LdapOperation::LdapOperationPrivate::processResult(int rescode, LDAPMessage 
         ber_bvfree(retdata);
         break;
     }
-    case RES_BIND:
-    {
+    case RES_BIND: {
         struct berval *servercred = nullptr;
 #ifndef HAVE_WINLDAP_H
         // FIXME: Error handling Winldap does not have ldap_parse_sasl_bind_result
@@ -446,18 +435,13 @@ int LdapOperation::LdapOperationPrivate::processResult(int rescode, LDAPMessage 
         }
         break;
     }
-    default:
-    {
+    default: {
         LDAPControl **serverctrls = nullptr;
         char *matcheddn = nullptr, *errmsg = nullptr;
         char **referralsp;
         int errcodep;
-        retval
-            = ldap_parse_result(ld, msg, &errcodep, &matcheddn, &errmsg, &referralsp,
-                                &serverctrls, 0);
-        qCDebug(LDAP_LOG) << "rescode" << rescode << "retval:" << retval
-                          << "matcheddn:" << matcheddn << "errcode:"
-                          << errcodep << "errmsg:" << errmsg;
+        retval = ldap_parse_result(ld, msg, &errcodep, &matcheddn, &errmsg, &referralsp, &serverctrls, 0);
+        qCDebug(LDAP_LOG) << "rescode" << rescode << "retval:" << retval << "matcheddn:" << matcheddn << "errcode:" << errcodep << "errmsg:" << errmsg;
         if (retval != KLDAP_SUCCESS) {
             ldap_msgfree(msg);
             return -1;
@@ -506,31 +490,29 @@ static void addModOp(LDAPMod ***pmods, int mod_type, const QString &attr, const 
 
     if (mods == nullptr) {
         mods = (LDAPMod **)malloc(2 * sizeof(LDAPMod *));
-        mods[ 0 ] = (LDAPMod *)malloc(sizeof(LDAPMod));
-        mods[ 1 ] = nullptr;
-        memset(mods[ 0 ], 0, sizeof(LDAPMod));
+        mods[0] = (LDAPMod *)malloc(sizeof(LDAPMod));
+        mods[1] = nullptr;
+        memset(mods[0], 0, sizeof(LDAPMod));
     } else {
-        while (mods[ i ] != nullptr
-               && (strcmp(attr.toUtf8().constData(), mods[i]->mod_type) != 0
-                   || (mods[ i ]->mod_op & ~LDAP_MOD_BVALUES) != mod_type)) {
+        while (mods[i] != nullptr && (strcmp(attr.toUtf8().constData(), mods[i]->mod_type) != 0 || (mods[i]->mod_op & ~LDAP_MOD_BVALUES) != mod_type)) {
             i++;
         }
 
-        if (mods[ i ] == nullptr) {
+        if (mods[i] == nullptr) {
             mods = (LDAPMod **)realloc(mods, (i + 2) * sizeof(LDAPMod *));
             if (mods == nullptr) {
                 qCritical() << "addModOp: realloc";
                 return;
             }
-            mods[ i + 1 ] = nullptr;
-            mods[ i ] = (LDAPMod *)malloc(sizeof(LDAPMod));
-            memset(mods[ i ], 0, sizeof(LDAPMod));
+            mods[i + 1] = nullptr;
+            mods[i] = (LDAPMod *)malloc(sizeof(LDAPMod));
+            memset(mods[i], 0, sizeof(LDAPMod));
         }
     }
 
-    mods[ i ]->mod_op = mod_type | LDAP_MOD_BVALUES;
-    if (mods[ i ]->mod_type == nullptr) {
-        mods[ i ]->mod_type = strdup(attr.toUtf8().constData());
+    mods[i]->mod_op = mod_type | LDAP_MOD_BVALUES;
+    if (mods[i]->mod_type == nullptr) {
+        mods[i]->mod_type = strdup(attr.toUtf8().constData());
     }
 
     *pmods = mods;
@@ -550,27 +532,24 @@ static void addModOp(LDAPMod ***pmods, int mod_type, const QString &attr, const 
         berval->bv_val = nullptr;
     }
 
-    if (mods[ i ]->mod_vals.modv_bvals == nullptr) {
-        mods[ i ]->mod_vals.modv_bvals
-            = (BerValue **)malloc(sizeof(BerValue *) * 2);
-        mods[ i ]->mod_vals.modv_bvals[ 0 ] = berval;
-        mods[ i ]->mod_vals.modv_bvals[ 1 ] = nullptr;
-//    qCDebug(LDAP_LOG) << "new bervalue struct" << attr << value;
+    if (mods[i]->mod_vals.modv_bvals == nullptr) {
+        mods[i]->mod_vals.modv_bvals = (BerValue **)malloc(sizeof(BerValue *) * 2);
+        mods[i]->mod_vals.modv_bvals[0] = berval;
+        mods[i]->mod_vals.modv_bvals[1] = nullptr;
+        //    qCDebug(LDAP_LOG) << "new bervalue struct" << attr << value;
     } else {
         uint j = 0;
-        while (mods[ i ]->mod_vals.modv_bvals[ j ] != nullptr) {
+        while (mods[i]->mod_vals.modv_bvals[j] != nullptr) {
             j++;
         }
-        mods[ i ]->mod_vals.modv_bvals
-            = (BerValue **)realloc(mods[ i ]->mod_vals.modv_bvals,
-                                   (j + 2) * sizeof(BerValue *));
-        if (mods[ i ]->mod_vals.modv_bvals == nullptr) {
+        mods[i]->mod_vals.modv_bvals = (BerValue **)realloc(mods[i]->mod_vals.modv_bvals, (j + 2) * sizeof(BerValue *));
+        if (mods[i]->mod_vals.modv_bvals == nullptr) {
             qCritical() << "addModOp: realloc";
             free(berval);
             return;
         }
-        mods[ i ]->mod_vals.modv_bvals[ j ] = berval;
-        mods[ i ]->mod_vals.modv_bvals[ j + 1 ] = nullptr;
+        mods[i]->mod_vals.modv_bvals[j] = berval;
+        mods[i]->mod_vals.modv_bvals[j + 1] = nullptr;
         qCDebug(LDAP_LOG) << j << ". new bervalue";
     }
 }
@@ -598,17 +577,16 @@ static void addControlOp(LDAPControl ***pctrls, const QString &oid, const QByteA
 
     if (ctrls == nullptr) {
         ctrls = (LDAPControl **)malloc(2 * sizeof(LDAPControl *));
-        ctrls[ 0 ] = nullptr;
-        ctrls[ 1 ] = nullptr;
+        ctrls[0] = nullptr;
+        ctrls[1] = nullptr;
     } else {
-        while (ctrls[ i ] != nullptr) {
+        while (ctrls[i] != nullptr) {
             i++;
         }
-        ctrls[ i + 1 ] = nullptr;
-        ctrls
-            = (LDAPControl **)realloc(ctrls, (i + 2) * sizeof(LDAPControl *));
+        ctrls[i + 1] = nullptr;
+        ctrls = (LDAPControl **)realloc(ctrls, (i + 2) * sizeof(LDAPControl *));
     }
-    ctrls[ i ] = ctrl;
+    ctrls[i] = ctrl;
     *pctrls = ctrls;
 }
 
@@ -625,10 +603,9 @@ static void extractControls(LdapControls &ctrls, LDAPControl **pctrls)
     int i = 0;
 
     while (pctrls[i]) {
-        LDAPControl *ctrl = pctrls[ i ];
+        LDAPControl *ctrl = pctrls[i];
         control.setOid(QString::fromUtf8(ctrl->ldctl_oid));
-        control.setValue(QByteArray(ctrl->ldctl_value.bv_val,
-                                    ctrl->ldctl_value.bv_len));
+        control.setValue(QByteArray(ctrl->ldctl_value.bv_val, ctrl->ldctl_value.bv_len));
         control.setCritical(ctrl->ldctl_iscritical);
         ctrls.append(control);
         i++;
@@ -679,16 +656,18 @@ int LdapOperation::search(const LdapDN &base, LdapUrl::Scope scope, const QStrin
         break;
     }
 
-    qCDebug(LDAP_LOG) << "asyncSearch() base=\"" << base.toString()
-                      << "\" scope=" << (int)scope
-                      << "filter=\"" << filter
-                      << "\" attrs=" << attributes;
-    int retval
-        = ldap_search_ext(ld, base.toString().toUtf8().data(), lscope,
-                          filter.isEmpty() ? QByteArray("objectClass=*").data()
-                          : filter.toUtf8().data(),
-                          attrs, 0, serverctrls, clientctrls, nullptr,
-                          d->mConnection->sizeLimit(), &msgid);
+    qCDebug(LDAP_LOG) << "asyncSearch() base=\"" << base.toString() << "\" scope=" << (int)scope << "filter=\"" << filter << "\" attrs=" << attributes;
+    int retval = ldap_search_ext(ld,
+                                 base.toString().toUtf8().data(),
+                                 lscope,
+                                 filter.isEmpty() ? QByteArray("objectClass=*").data() : filter.toUtf8().data(),
+                                 attrs,
+                                 0,
+                                 serverctrls,
+                                 clientctrls,
+                                 nullptr,
+                                 d->mConnection->sizeLimit(),
+                                 &msgid);
 
     ldap_controls_free(serverctrls);
     ldap_controls_free(clientctrls);
@@ -719,17 +698,14 @@ int LdapOperation::add(const LdapObject &object)
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
-    for (LdapAttrMap::ConstIterator it = object.attributes().begin();
-         it != object.attributes().end(); ++it) {
+    for (LdapAttrMap::ConstIterator it = object.attributes().begin(); it != object.attributes().end(); ++it) {
         QString attr = it.key();
         for (LdapAttrValue::ConstIterator it2 = (*it).begin(); it2 != (*it).end(); ++it2) {
             addModOp(&lmod, 0, attr, &(*it2));
         }
     }
 
-    int retval
-        = ldap_add_ext(ld, object.dn().toString().toUtf8().data(), lmod, serverctrls,
-                       clientctrls, &msgid);
+    int retval = ldap_add_ext(ld, object.dn().toString().toUtf8().data(), lmod, serverctrls, clientctrls, &msgid);
 
     ldap_controls_free(serverctrls);
     ldap_controls_free(clientctrls);
@@ -751,17 +727,14 @@ int LdapOperation::add_s(const LdapObject &object)
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
-    for (LdapAttrMap::ConstIterator it = object.attributes().begin();
-         it != object.attributes().end(); ++it) {
+    for (LdapAttrMap::ConstIterator it = object.attributes().begin(); it != object.attributes().end(); ++it) {
         QString attr = it.key();
         for (LdapAttrValue::ConstIterator it2 = (*it).begin(); it2 != (*it).end(); ++it2) {
             addModOp(&lmod, 0, attr, &(*it2));
         }
     }
 
-    int retval
-        = ldap_add_ext_s(ld, object.dn().toString().toUtf8().data(), lmod, serverctrls,
-                         clientctrls);
+    int retval = ldap_add_ext_s(ld, object.dn().toString().toUtf8().data(), lmod, serverctrls, clientctrls);
 
     ldap_controls_free(serverctrls);
     ldap_controls_free(clientctrls);
@@ -787,9 +760,7 @@ int LdapOperation::add(const LdapDN &dn, const ModOps &ops)
         }
     }
 
-    int retval
-        = ldap_add_ext(ld, dn.toString().toUtf8().data(), lmod, serverctrls,
-                       clientctrls, &msgid);
+    int retval = ldap_add_ext(ld, dn.toString().toUtf8().data(), lmod, serverctrls, clientctrls, &msgid);
 
     ldap_controls_free(serverctrls);
     ldap_controls_free(clientctrls);
@@ -817,9 +788,7 @@ int LdapOperation::add_s(const LdapDN &dn, const ModOps &ops)
         }
     }
     qCDebug(LDAP_LOG) << dn.toString();
-    int retval
-        = ldap_add_ext_s(ld, dn.toString().toUtf8().data(), lmod, serverctrls,
-                         clientctrls);
+    int retval = ldap_add_ext_s(ld, dn.toString().toUtf8().data(), lmod, serverctrls, clientctrls);
 
     ldap_controls_free(serverctrls);
     ldap_controls_free(clientctrls);
@@ -838,9 +807,14 @@ int LdapOperation::rename(const LdapDN &dn, const QString &newRdn, const QString
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
-    int retval = ldap_rename(ld, dn.toString().toUtf8().data(), newRdn.toUtf8().data(),
+    int retval = ldap_rename(ld,
+                             dn.toString().toUtf8().data(),
+                             newRdn.toUtf8().data(),
                              newSuperior.isEmpty() ? (char *)nullptr : newSuperior.toUtf8().data(),
-                             deleteold, serverctrls, clientctrls, &msgid);
+                             deleteold,
+                             serverctrls,
+                             clientctrls,
+                             &msgid);
 
     ldap_controls_free(serverctrls);
     ldap_controls_free(clientctrls);
@@ -860,9 +834,13 @@ int LdapOperation::rename_s(const LdapDN &dn, const QString &newRdn, const QStri
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
-    int retval = ldap_rename_s(ld, dn.toString().toUtf8().data(), newRdn.toUtf8().data(),
+    int retval = ldap_rename_s(ld,
+                               dn.toString().toUtf8().data(),
+                               newRdn.toUtf8().data(),
                                newSuperior.isEmpty() ? (char *)nullptr : newSuperior.toUtf8().data(),
-                               deleteold, serverctrls, clientctrls);
+                               deleteold,
+                               serverctrls,
+                               clientctrls);
 
     ldap_controls_free(serverctrls);
     ldap_controls_free(clientctrls);
@@ -881,8 +859,7 @@ int LdapOperation::del(const LdapDN &dn)
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
-    int retval
-        = ldap_delete_ext(ld, dn.toString().toUtf8().data(), serverctrls, clientctrls, &msgid);
+    int retval = ldap_delete_ext(ld, dn.toString().toUtf8().data(), serverctrls, clientctrls, &msgid);
 
     ldap_controls_free(serverctrls);
     ldap_controls_free(clientctrls);
@@ -944,8 +921,7 @@ int LdapOperation::modify(const LdapDN &dn, const ModOps &ops)
         }
     }
 
-    int retval
-        = ldap_modify_ext(ld, dn.toString().toUtf8().data(), lmod, serverctrls, clientctrls, &msgid);
+    int retval = ldap_modify_ext(ld, dn.toString().toUtf8().data(), lmod, serverctrls, clientctrls, &msgid);
 
     ldap_controls_free(serverctrls);
     ldap_controls_free(clientctrls);
@@ -989,8 +965,7 @@ int LdapOperation::modify_s(const LdapDN &dn, const ModOps &ops)
         }
     }
 
-    int retval
-        = ldap_modify_ext_s(ld, dn.toString().toUtf8().data(), lmod, serverctrls, clientctrls);
+    int retval = ldap_modify_ext_s(ld, dn.toString().toUtf8().data(), lmod, serverctrls, clientctrls);
 
     ldap_controls_free(serverctrls);
     ldap_controls_free(clientctrls);
@@ -1015,8 +990,7 @@ int LdapOperation::compare(const LdapDN &dn, const QString &attr, const QByteArr
     berval->bv_len = vallen;
     memcpy(berval->bv_val, value.data(), vallen);
 
-    int retval = ldap_compare_ext(ld, dn.toString().toUtf8().data(), attr.toUtf8().data(), berval,
-                                  serverctrls, clientctrls, &msgid);
+    int retval = ldap_compare_ext(ld, dn.toString().toUtf8().data(), attr.toUtf8().data(), berval, serverctrls, clientctrls, &msgid);
 
     ber_bvfree(berval);
     ldap_controls_free(serverctrls);
@@ -1044,8 +1018,7 @@ int LdapOperation::compare_s(const LdapDN &dn, const QString &attr, const QByteA
     berval->bv_len = vallen;
     memcpy(berval->bv_val, value.data(), vallen);
 
-    int retval = ldap_compare_ext_s(ld, dn.toString().toUtf8().data(), attr.toUtf8().data(), berval,
-                                    serverctrls, clientctrls);
+    int retval = ldap_compare_ext_s(ld, dn.toString().toUtf8().data(), attr.toUtf8().data(), berval, serverctrls, clientctrls);
 
     ber_bvfree(berval);
     ldap_controls_free(serverctrls);
@@ -1072,8 +1045,7 @@ int LdapOperation::exop(const QString &oid, const QByteArray &data)
     berval->bv_len = vallen;
     memcpy(berval->bv_val, data.data(), vallen);
 
-    int retval = ldap_extended_operation(ld, oid.toUtf8().data(), berval,
-                                         serverctrls, clientctrls, &msgid);
+    int retval = ldap_extended_operation(ld, oid.toUtf8().data(), berval, serverctrls, clientctrls, &msgid);
 
     ber_bvfree(berval);
     ldap_controls_free(serverctrls);
@@ -1108,8 +1080,7 @@ int LdapOperation::exop_s(const QString &oid, const QByteArray &data)
     berval->bv_len = vallen;
     memcpy(berval->bv_val, data.data(), vallen);
 
-    int retval = ldap_extended_operation_s(ld, oid.toUtf8().data(), berval,
-                                           serverctrls, clientctrls, &retoid, &retdata);
+    int retval = ldap_extended_operation_s(ld, oid.toUtf8().data(), berval, serverctrls, clientctrls, &retoid, &retdata);
 
     ber_bvfree(berval);
     ber_bvfree(retdata);
@@ -1157,9 +1128,7 @@ int LdapOperation::waitForResult(int id, int msecs)
         // Calculate the timeout value to use and assign it to a timeval structure
         // see man select (2) for details
         timeout = kldap_timeout_value(msecs, stopWatch.elapsed());
-        qCDebug(LDAP_LOG) << "(" << id << "," << msecs
-                          << "): Waiting" << timeout
-                          << "msecs for result. Attempt #" << attempt++;
+        qCDebug(LDAP_LOG) << "(" << id << "," << msecs << "): Waiting" << timeout << "msecs for result. Attempt #" << attempt++;
         struct timeval tv;
         tv.tv_sec = timeout / 1000;
         tv.tv_usec = (timeout % 1000) * 1000;
@@ -1176,7 +1145,7 @@ int LdapOperation::waitForResult(int id, int msecs)
         }
     } while (msecs == -1 || stopWatch.elapsed() < msecs);
 
-    return 0; //timeout
+    return 0; // timeout
 }
 
 #else

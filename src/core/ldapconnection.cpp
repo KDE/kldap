@@ -6,33 +6,31 @@
 */
 
 #include "ldapconnection.h"
-#include "ldapdefs.h"
 #include "kldap_config.h" // LDAP_FOUND
+#include "ldapdefs.h"
 
-#include <stdlib.h>
-#include <KLocalizedString>
 #include "ldap_debug.h"
+#include <KLocalizedString>
+#include <stdlib.h>
 
 #include <sasl/sasl.h>
-static const sasl_callback_t callbacks[] = {
-    { SASL_CB_ECHOPROMPT, nullptr, nullptr },
-    { SASL_CB_NOECHOPROMPT, nullptr, nullptr },
-    { SASL_CB_GETREALM, nullptr, nullptr },
-    { SASL_CB_USER, nullptr, nullptr },
-    { SASL_CB_AUTHNAME, nullptr, nullptr },
-    { SASL_CB_PASS, nullptr, nullptr },
-    { SASL_CB_CANON_USER, nullptr, nullptr },
-    { SASL_CB_LIST_END, nullptr, nullptr }
-};
+static const sasl_callback_t callbacks[] = {{SASL_CB_ECHOPROMPT, nullptr, nullptr},
+                                            {SASL_CB_NOECHOPROMPT, nullptr, nullptr},
+                                            {SASL_CB_GETREALM, nullptr, nullptr},
+                                            {SASL_CB_USER, nullptr, nullptr},
+                                            {SASL_CB_AUTHNAME, nullptr, nullptr},
+                                            {SASL_CB_PASS, nullptr, nullptr},
+                                            {SASL_CB_CANON_USER, nullptr, nullptr},
+                                            {SASL_CB_LIST_END, nullptr, nullptr}};
 
 static bool ldapoperation_sasl_initialized = false;
 
 #ifdef LDAP_FOUND
-# ifndef HAVE_WINLDAP_H
-#  include <lber.h>
-#  include <ldap.h>
+#ifndef HAVE_WINLDAP_H
+#include <lber.h>
+#include <ldap.h>
 #else
-# include <w32-ldap-help.h>
+#include <w32-ldap-help.h>
 #endif // HAVE_WINLDAP_H
 
 #ifndef LDAP_OPT_SUCCESS
@@ -120,7 +118,7 @@ void *LdapConnection::saslHandle() const
 
 QString LdapConnection::errorString(int code)
 {
-    //No translated error messages yet
+    // No translated error messages yet
 #ifdef LDAP_FOUND
     return QString::fromUtf8(ldap_err2string(code));
 #else
@@ -257,9 +255,7 @@ int LdapConnection::connect()
     if (timeout) {
         if (setOption(LDAP_OPT_TIMEOUT, &timeout) != LDAP_OPT_SUCCESS) {
             ret = ldapErrorCode();
-            d->mConnectionError = i18np("Cannot set timeout to %1 second.",
-                                        "Cannot set timeout to %1 seconds.",
-                                        timeout);
+            d->mConnectionError = i18np("Cannot set timeout to %1 second.", "Cannot set timeout to %1 seconds.", timeout);
             close();
             return ret;
         }
@@ -353,8 +349,7 @@ int LdapConnection::connect()
     }
 
     qCDebug(LDAP_LOG) << "initializing SASL client";
-    const int saslresult = sasl_client_new("ldap", d->mServer.host().toLatin1().constData(),
-                                     nullptr, nullptr, callbacks, 0, &d->mSASLconn);
+    const int saslresult = sasl_client_new("ldap", d->mServer.host().toLatin1().constData(), nullptr, nullptr, callbacks, 0, &d->mSASLconn);
     if (saslresult != SASL_OK) {
         d->mConnectionError = i18n("Cannot initialize the SASL client.");
         return KLDAP_SASL_ERROR;
@@ -380,7 +375,7 @@ void LdapConnection::close()
     qCDebug(LDAP_LOG) << "connection closed!";
 }
 
-#else //LDAP_FOUND
+#else // LDAP_FOUND
 
 int LdapConnection::getOption(int option, void *value) const
 {
@@ -432,10 +427,10 @@ int LdapConnection::timeLimit() const
 
 int LdapConnection::connect()
 {
-    d->mConnectionError
-        = i18n("LDAP support not compiled in. Please recompile libkldap with the "
-               "OpenLDAP (or compatible) client libraries, or complain to your "
-               "distribution packagers.");
+    d->mConnectionError = i18n(
+        "LDAP support not compiled in. Please recompile libkldap with the "
+        "OpenLDAP (or compatible) client libraries, or complain to your "
+        "distribution packagers.");
     qCritical() << "No LDAP support...";
     return -1;
 }

@@ -11,14 +11,14 @@
 #include <QString>
 #include <QWidget>
 
-#include "ldapdn.h"
 #include "kldap_export.h"
+#include "ldapdn.h"
 #include "ldapobject.h"
 #include "ldapserver.h"
 #include "ldapurl.h"
 
-namespace KLDAP {
-
+namespace KLDAP
+{
 /**
   @brief LDAP Configuration widget
 
@@ -48,7 +48,6 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
     Q_PROPERTY(int pageSize READ pageSize WRITE setPageSize)
 
 public:
-
     enum WinFlag {
         W_USER = 0x1,
         W_BINDDN = 0x2,
@@ -68,14 +67,10 @@ public:
     };
     Q_DECLARE_FLAGS(WinFlags, WinFlag)
 
-    enum Security {
-        None, SSL, TLS
-    };
+    enum Security { None, SSL, TLS };
     Q_ENUM(Security)
 
-    enum Auth {
-        Anonymous, Simple, SASL
-    };
+    enum Auth { Anonymous, Simple, SASL };
     Q_ENUM(Auth)
 
     /** Constructs an empty configuration widget.

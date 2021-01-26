@@ -11,8 +11,8 @@
 #include "kldap_export.h"
 #include "ldapconnection.h"
 #include "ldapcontrol.h"
-#include "ldapobject.h"
 #include "ldapdn.h"
+#include "ldapobject.h"
 #include "ldapserver.h"
 #include "ldapurl.h"
 
@@ -20,7 +20,8 @@
 #include <QList>
 #include <QString>
 
-namespace KLDAP {
+namespace KLDAP
+{
 /**
  * @brief
  * This class allows sending an ldap operation
@@ -29,9 +30,7 @@ namespace KLDAP {
 class KLDAP_EXPORT LdapOperation
 {
 public:
-    typedef enum {
-        Mod_None, Mod_Add, Mod_Replace, Mod_Del
-    } ModType;
+    typedef enum { Mod_None, Mod_Add, Mod_Replace, Mod_Del } ModType;
 
     typedef enum {
         RES_BIND = 0x61,
@@ -55,12 +54,7 @@ public:
 
     typedef QVector<ModOp> ModOps;
 
-    enum SASL_Fields {
-        SASL_Authname = 0x1,
-        SASL_Authzid = 0x2,
-        SASL_Realm = 0x4,
-        SASL_Password = 0x8
-    };
+    enum SASL_Fields { SASL_Authname = 0x1, SASL_Authzid = 0x2, SASL_Realm = 0x4, SASL_Password = 0x8 };
 
     struct SASL_Credentials {
         int fields;
@@ -70,7 +64,7 @@ public:
         QString password;
     };
 
-    typedef int (SASL_Callback_Proc)(SASL_Credentials &cred, void *data);
+    typedef int(SASL_Callback_Proc)(SASL_Credentials &cred, void *data);
 
     struct SASL_Data {
         SASL_Callback_Proc *proc;

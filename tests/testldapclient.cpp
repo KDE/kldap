@@ -12,10 +12,10 @@
 
 #include <QEventLoop>
 
-#include <stdlib.h>
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QStandardPaths>
+#include <stdlib.h>
 
 int main(int argc, char *argv[])
 {
@@ -58,9 +58,11 @@ bool TestLDAPClient::check(const QString &txt, QString a, QString b)
     }
 
     if (a == b) {
-        qDebug() << txt << " : checking '" << a << "' against expected value '" << b << "'..." << "ok";
+        qDebug() << txt << " : checking '" << a << "' against expected value '" << b << "'..."
+                 << "ok";
     } else {
-        qDebug() << txt << " : checking '" << a << "' against expected value '" << b << "'..." << "KO !";
+        qDebug() << txt << " : checking '" << a << "' against expected value '" << b << "'..."
+                 << "KO !";
         cleanup();
         exit(1);
     }
@@ -86,12 +88,13 @@ void TestLDAPClient::testIntevation()
 
     // Same list as in kaddressbook's ldapsearchdialog
     QStringList attrs;
-    attrs << QStringLiteral("l") << QStringLiteral("Company") << QStringLiteral("co") << QStringLiteral("department") << QStringLiteral("description") << QStringLiteral("mail")
-          << QStringLiteral("facsimileTelephoneNumber") << QStringLiteral("cn") << QStringLiteral("homePhone") << QStringLiteral("mobile") << QStringLiteral("o")
-          << QStringLiteral("pager") << QStringLiteral("postalAddress") << QStringLiteral("st") << QStringLiteral("street")
-          << QStringLiteral("title") << QStringLiteral("uid") << QStringLiteral("telephoneNumber") << QStringLiteral("postalCode") << QStringLiteral("objectClass");
+    attrs << QStringLiteral("l") << QStringLiteral("Company") << QStringLiteral("co") << QStringLiteral("department") << QStringLiteral("description")
+          << QStringLiteral("mail") << QStringLiteral("facsimileTelephoneNumber") << QStringLiteral("cn") << QStringLiteral("homePhone")
+          << QStringLiteral("mobile") << QStringLiteral("o") << QStringLiteral("pager") << QStringLiteral("postalAddress") << QStringLiteral("st")
+          << QStringLiteral("street") << QStringLiteral("title") << QStringLiteral("uid") << QStringLiteral("telephoneNumber") << QStringLiteral("postalCode")
+          << QStringLiteral("objectClass");
     // the list from ldapclient.cpp
-    //attrs << "cn" << "mail" << "givenname" << "sn" << "objectClass";
+    // attrs << "cn" << "mail" << "givenname" << "sn" << "objectClass";
     mClient->setAttributes(attrs);
 
     // Taken from LdapSearch
@@ -104,8 +107,9 @@ void TestLDAPClient::testIntevation()
 
     // For some reason a fromUtf8 broke the search for me (no results).
     // But this certainly looks fishy, it might break on non-utf8 systems.
-    QString filter = QStringLiteral("&(|(objectclass=person)(objectclass=groupofnames)(mail=*))"
-                                    "(|(cn=*Ägypten MDK*)(sn=*Ägypten MDK*))");
+    QString filter = QStringLiteral(
+        "&(|(objectclass=person)(objectclass=groupofnames)(mail=*))"
+        "(|(cn=*Ägypten MDK*)(sn=*Ägypten MDK*))");
 
     connect(mClient, &KLDAP::LdapClient::result, this, &TestLDAPClient::slotLDAPResult);
     connect(mClient, &KLDAP::LdapClient::done, this, &TestLDAPClient::slotLDAPDone);
@@ -129,8 +133,8 @@ static QString asUtf8(const QByteArray &val)
 
     const char *data = val.data();
 
-    //QString::fromUtf8() bug workaround
-    if (data[ val.size() - 1 ] == '\0') {
+    // QString::fromUtf8() bug workaround
+    if (data[val.size() - 1] == '\0') {
         return QString::fromUtf8(data, val.size() - 1);
     } else {
         return QString::fromUtf8(data, val.size());
@@ -155,10 +159,10 @@ static QString join(const KLDAP::LdapAttrValue &lst, const QString &sep)
 
 void TestLDAPClient::slotLDAPResult(const KLDAP::LdapClient &, const KLDAP::LdapObject &obj)
 {
-    QString cn = join(obj.attributes()[ QStringLiteral("cn") ], QStringLiteral(", "));
+    QString cn = join(obj.attributes()[QStringLiteral("cn")], QStringLiteral(", "));
     qDebug() << " cn:" << cn;
-    Q_ASSERT(!obj.attributes()[ QStringLiteral("mail") ].isEmpty());
-    QString mail = join(obj.attributes()[ QStringLiteral("mail") ], QStringLiteral(", "));
+    Q_ASSERT(!obj.attributes()[QStringLiteral("mail")].isEmpty());
+    QString mail = join(obj.attributes()[QStringLiteral("mail")], QStringLiteral(", "));
     qDebug() << " mail:" << mail;
     Q_ASSERT(mail.contains(QLatin1Char('@')));
 }

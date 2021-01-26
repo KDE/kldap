@@ -16,7 +16,8 @@ using namespace KLDAP;
 class Q_DECL_HIDDEN LdapDN::LdapDNPrivate
 {
 public:
-    LdapDNPrivate() : m_dn()
+    LdapDNPrivate()
+        : m_dn()
     {
     }
 
@@ -67,9 +68,9 @@ QStringList LdapDN::LdapDNPrivate::splitOnNonEscapedChar(const QString &str, QCh
         const QChar prev = str[std::max(0, index - 1)];
         if (prev != QLatin1Char('\\')) {
             // Found a component of a multi-valued RDN
-            //qCDebug(LDAP_LOG) << "Found" << ch << "at index" << index;
+            // qCDebug(LDAP_LOG) << "Found" << ch << "at index" << index;
             QString tmp = str.mid(strPartStartIndex, index - strPartStartIndex);
-            //qCDebug(LDAP_LOG) << "Adding part:" << tmp;
+            // qCDebug(LDAP_LOG) << "Adding part:" << tmp;
             strParts.append(tmp);
             strPartStartIndex = index + 1;
         }
@@ -79,7 +80,7 @@ QStringList LdapDN::LdapDNPrivate::splitOnNonEscapedChar(const QString &str, QCh
 
     // Add on the part after the last found delimeter
     QString tmp = str.mid(strPartStartIndex);
-    //qCDebug(LDAP_LOG) << "Adding part:" << tmp;
+    // qCDebug(LDAP_LOG) << "Adding part:" << tmp;
     strParts.append(tmp);
 
     return strParts;
@@ -145,7 +146,7 @@ QString LdapDN::toString(int depth) const
         dn += rdns.at(rdns.size() - 1 - i) + QLatin1Char(',');
         qCDebug(LDAP_LOG) << "dn =" << dn;
     }
-    dn.chop(1);   // Strip off the extraneous comma
+    dn.chop(1); // Strip off the extraneous comma
 
     return dn;
 }
@@ -190,12 +191,12 @@ int LdapDN::depth() const
     return rdns.size();
 }
 
-bool LdapDN::operator ==(const LdapDN &rhs) const
+bool LdapDN::operator==(const LdapDN &rhs) const
 {
     return d->m_dn == rhs.d->m_dn;
 }
 
-bool LdapDN::operator !=(const LdapDN &rhs) const
+bool LdapDN::operator!=(const LdapDN &rhs) const
 {
     return d->m_dn != rhs.d->m_dn;
 }

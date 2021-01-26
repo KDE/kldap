@@ -12,7 +12,8 @@
 #include "kldap_export.h"
 #include <QDialog>
 
-namespace KLDAP {
+namespace KLDAP
+{
 class LdapServer;
 class AddHostDialogPrivate;
 /**

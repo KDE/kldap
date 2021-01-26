@@ -12,12 +12,13 @@
 
 #include <QUrl>
 
-#include "ldapdn.h"
 #include "kldap_export.h"
+#include "ldapdn.h"
 
 // clazy:excludeall=copyable-polymorphic
 
-namespace KLDAP {
+namespace KLDAP
+{
 /**
  * @short A special url class for LDAP.
  *
@@ -29,7 +30,6 @@ namespace KLDAP {
 class KLDAP_EXPORT LdapUrl : public QUrl
 {
 public:
-
     /**
      * A class holding the extension name and state whether
      * the extension is critical.
@@ -43,9 +43,9 @@ public:
      * Describes the scope of the LDAP url.
      */
     typedef enum {
-        Base,  ///< Only the same level as the url.
-        One,   ///< The level of the url and the one below.
-        Sub    ///< All levels below the url's level.
+        Base, ///< Only the same level as the url.
+        One, ///< The level of the url and the one below.
+        Sub ///< All levels below the url's level.
     } Scope;
 
     /**

@@ -14,7 +14,8 @@
 class KConfigGroup;
 class KConfig;
 
-namespace KLDAP {
+namespace KLDAP
+{
 class LdapServer;
 class LdapClient;
 /**
@@ -32,7 +33,6 @@ public:
      * Returns the global config object, which stores the LdapClient configurations.
      */
     static KConfig *config();
-
 
 private:
     //@cond PRIVATE

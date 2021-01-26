@@ -11,7 +11,6 @@ QTEST_MAIN(LdapClientSearchConfigReadConfigJobTest)
 LdapClientSearchConfigReadConfigJobTest::LdapClientSearchConfigReadConfigJobTest(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 void LdapClientSearchConfigReadConfigJobTest::shouldHaveDefaultValues()

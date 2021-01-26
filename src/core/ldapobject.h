@@ -14,19 +14,20 @@
 #include <QString>
 class LdapObjectPrivate;
 
-#include "ldapdn.h"
 #include "kldap_export.h"
+#include "ldapdn.h"
 
 // clazy:excludeall=copyable-polymorphic
 
-namespace KLDAP {
+namespace KLDAP
+{
 typedef QList<QByteArray> LdapAttrValue;
-typedef QMap<QString, LdapAttrValue > LdapAttrMap;
+typedef QMap<QString, LdapAttrValue> LdapAttrMap;
 
 /**
  * @brief
  * This class represents an LDAP Object
-*/
+ */
 class KLDAP_EXPORT LdapObject
 {
 public:

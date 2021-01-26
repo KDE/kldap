@@ -10,8 +10,8 @@
 
 #include <KConfig>
 #include <KConfigGroup>
-#include <KMessageBox>
 #include <KLocalizedString>
+#include <KMessageBox>
 #include <qt5keychain/keychain.h>
 using namespace QKeychain;
 using namespace KLDAP;
@@ -45,7 +45,7 @@ LdapClientSearchConfig::~LdapClientSearchConfig()
 {
     delete d;
 }
-#if 0 //Port it
+#if 0 // Port it
 void LdapClientSearchConfig::clearWalletPassword()
 {
     if (!d->wallet) {

@@ -8,15 +8,16 @@
 #ifndef KLDAP_LDIF_H
 #define KLDAP_LDIF_H
 
-#include <QString>
 #include <QByteArray>
+#include <QString>
 
-#include "ldapdn.h"
 #include "kldap_export.h"
+#include "ldapdn.h"
 
 // clazy:excludeall=copyable-polymorphic
 
-namespace KLDAP {
+namespace KLDAP
+{
 /**
  * Ldif
  *
@@ -28,18 +29,11 @@ namespace KLDAP {
 class KLDAP_EXPORT Ldif
 {
 public:
+    typedef enum { None, NewEntry, EndEntry, Item, Control, Err, MoreData } ParseValue;
 
-    typedef enum {
-        None, NewEntry, EndEntry, Item, Control, Err, MoreData
-    } ParseValue;
+    typedef enum { Entry_None, Entry_Add, Entry_Del, Entry_Mod, Entry_Modrdn } EntryType;
 
-    typedef enum {
-        Entry_None, Entry_Add, Entry_Del, Entry_Mod, Entry_Modrdn
-    } EntryType;
-
-    typedef enum {
-        Mod_None, Mod_Add, Mod_Replace, Mod_Del
-    } ModType;
+    typedef enum { Mod_None, Mod_Add, Mod_Replace, Mod_Del } ModType;
 
     Ldif();
 

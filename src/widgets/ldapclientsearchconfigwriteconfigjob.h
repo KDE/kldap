@@ -6,14 +6,16 @@
 
 #ifndef LDAPCLIENTSEARCHCONFIGWRITECONFIGJOB_H
 #define LDAPCLIENTSEARCHCONFIGWRITECONFIGJOB_H
-#include <QObject>
 #include "kldap_export.h"
-#include <KLDAP/LdapServer>
 #include <KConfigGroup>
-namespace QKeychain {
+#include <KLDAP/LdapServer>
+#include <QObject>
+namespace QKeychain
+{
 class Job;
 }
-namespace KLDAP {
+namespace KLDAP
+{
 class KLDAP_EXPORT LdapClientSearchConfigWriteConfigJob : public QObject
 {
     Q_OBJECT

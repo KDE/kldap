@@ -11,7 +11,8 @@
 
 #include "widgets/ldapclient.h"
 
-namespace KLDAP {
+namespace KLDAP
+{
 class LdapClient;
 class LdapObject;
 }

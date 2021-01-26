@@ -18,12 +18,10 @@ using namespace KLDAP;
 LdapClientSearchConfigReadConfigJob::LdapClientSearchConfigReadConfigJob(QObject *parent)
     : QObject(parent)
 {
-
 }
 
 LdapClientSearchConfigReadConfigJob::~LdapClientSearchConfigReadConfigJob()
 {
-
 }
 
 bool LdapClientSearchConfigReadConfigJob::canStart() const
@@ -40,7 +38,7 @@ void LdapClientSearchConfigReadConfigJob::readLdapClientConfigFinished()
 void LdapClientSearchConfigReadConfigJob::start()
 {
     if (!canStart()) {
-        //Failed !
+        // Failed !
         readLdapClientConfigFinished();
         return;
     }
@@ -84,8 +82,7 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
         prefix = QStringLiteral("Selected");
     }
 
-    const QString host = mConfig.readEntry(prefix + QStringLiteral("Host%1").arg(mServerIndex),
-                                          QString()).trimmed();
+    const QString host = mConfig.readEntry(prefix + QStringLiteral("Host%1").arg(mServerIndex), QString()).trimmed();
     if (!host.isEmpty()) {
         mServer.setHost(host);
     }
@@ -93,14 +90,12 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
     const int port = mConfig.readEntry(prefix + QStringLiteral("Port%1").arg(mServerIndex), 389);
     mServer.setPort(port);
 
-    const QString base = mConfig.readEntry(prefix + QStringLiteral("Base%1").arg(mServerIndex),
-                                          QString()).trimmed();
+    const QString base = mConfig.readEntry(prefix + QStringLiteral("Base%1").arg(mServerIndex), QString()).trimmed();
     if (!base.isEmpty()) {
         mServer.setBaseDn(KLDAP::LdapDN(base));
     }
 
-    const QString user = mConfig.readEntry(prefix + QStringLiteral("User%1").arg(mServerIndex),
-                                          QString()).trimmed();
+    const QString user = mConfig.readEntry(prefix + QStringLiteral("User%1").arg(mServerIndex), QString()).trimmed();
     if (!user.isEmpty()) {
         mServer.setUser(user);
     }
@@ -109,7 +104,7 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
     if (!bindDN.isEmpty()) {
         mServer.setBindDn(bindDN);
     }
-#if 0 //Port
+#if 0 // Port
     const QString pwdBindBNEntry = prefix + QStringLiteral("PwdBind%1").arg(mServerIndex);
     QString pwdBindDN = mConfig.readEntry(pwdBindBNEntry, QString());
     if (!pwdBindDN.isEmpty()) {
@@ -155,8 +150,7 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
     mServer.setPageSize(mConfig.readEntry(prefix + QStringLiteral("PageSize%1").arg(mServerIndex), 0));
     mServer.setVersion(mConfig.readEntry(prefix + QStringLiteral("Version%1").arg(mServerIndex), 3));
 
-    QString tmp = mConfig.readEntry(prefix + QStringLiteral("Security%1").arg(mServerIndex),
-                                   QStringLiteral("None"));
+    QString tmp = mConfig.readEntry(prefix + QStringLiteral("Security%1").arg(mServerIndex), QStringLiteral("None"));
     mServer.setSecurity(KLDAP::LdapServer::None);
     if (tmp == QLatin1String("SSL")) {
         mServer.setSecurity(KLDAP::LdapServer::SSL);
@@ -164,8 +158,7 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
         mServer.setSecurity(KLDAP::LdapServer::TLS);
     }
 
-    tmp = mConfig.readEntry(prefix + QStringLiteral("Auth%1").arg(mServerIndex),
-                           QStringLiteral("Anonymous"));
+    tmp = mConfig.readEntry(prefix + QStringLiteral("Auth%1").arg(mServerIndex), QStringLiteral("Anonymous"));
     mServer.setAuth(KLDAP::LdapServer::Anonymous);
     if (tmp == QLatin1String("Simple")) {
         mServer.setAuth(KLDAP::LdapServer::Simple);
@@ -196,4 +189,3 @@ void LdapClientSearchConfigReadConfigJob::readLdapPasswordFinished(QKeychain::Jo
     }
     readLdapClientConfigFinished();
 }
-
