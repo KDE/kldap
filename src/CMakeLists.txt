@@ -86,7 +86,7 @@ add_library(KF5::Ldap ALIAS KF5Ldap)
 
 target_link_libraries(KF5Ldap
 PRIVATE
-  Qt::Widgets
+  Qt5::Widgets
   KF5::I18n
   KF5::WidgetsAddons
   KF5::ConfigCore
