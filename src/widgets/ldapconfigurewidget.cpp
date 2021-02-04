@@ -146,7 +146,7 @@ void LdapConfigureWidget::slotMoveUp()
         return;
     }
 
-    auto *above = static_cast<LdapWidgetItem *>(mHostListView->item(mHostListView->row(item) - 1));
+    auto above = static_cast<LdapWidgetItem *>(mHostListView->item(mHostListView->row(item) - 1));
     if (!above) {
         return;
     }
@@ -171,7 +171,7 @@ void LdapConfigureWidget::slotMoveDown()
         return;
     }
 
-    auto *below = static_cast<LdapWidgetItem *>(mHostListView->item(mHostListView->row(item) + 1));
+    auto below = static_cast<LdapWidgetItem *>(mHostListView->item(mHostListView->row(item) + 1));
     if (!below) {
         return;
     }
@@ -192,7 +192,7 @@ void LdapConfigureWidget::load()
 
     int count = group.readEntry("NumSelectedHosts", 0);
     for (int i = 0; i < count; ++i) {
-        auto *item = new LdapWidgetItem(mHostListView, true);
+        auto item = new LdapWidgetItem(mHostListView, true);
         item->setCheckState(Qt::Checked);
         auto job = new LdapWidgetItemReadConfigServerJob(this);
         job->setCurrentIndex(i);
@@ -261,13 +261,13 @@ void LdapConfigureWidget::save()
 
 void LdapConfigureWidget::initGUI()
 {
-    auto *layout = new QVBoxLayout(this);
+    auto layout = new QVBoxLayout(this);
     layout->setObjectName(QStringLiteral("layout"));
     layout->setContentsMargins(0, 0, 0, 0);
 
     QGroupBox *groupBox = new QGroupBox(i18n("LDAP Servers"));
     layout->addWidget(groupBox);
-    auto *mainLayout = new QVBoxLayout;
+    auto mainLayout = new QVBoxLayout;
     mainLayout->setObjectName(QStringLiteral("mainlayout"));
     groupBox->setLayout(mainLayout);
 
@@ -278,7 +278,7 @@ void LdapConfigureWidget::initGUI()
     QWidget *hBox = new QWidget(this);
     mainLayout->addWidget(hBox);
 
-    auto *hBoxHBoxLayout = new QHBoxLayout(hBox);
+    auto hBoxHBoxLayout = new QHBoxLayout(hBox);
     hBoxHBoxLayout->setContentsMargins(0, 0, 0, 0);
     hBoxHBoxLayout->setSpacing(6);
     // Contents of the hbox: listview and up/down buttons on the right (vbox)
@@ -287,7 +287,7 @@ void LdapConfigureWidget::initGUI()
     mHostListView->setSortingEnabled(false);
 
     QWidget *upDownBox = new QWidget(hBox);
-    auto *upDownBoxVBoxLayout = new QVBoxLayout(upDownBox);
+    auto upDownBoxVBoxLayout = new QVBoxLayout(upDownBox);
     upDownBoxVBoxLayout->setContentsMargins(0, 0, 0, 0);
     hBoxHBoxLayout->addWidget(upDownBox);
     upDownBoxVBoxLayout->setSpacing(6);
@@ -305,7 +305,7 @@ void LdapConfigureWidget::initGUI()
     upDownBoxVBoxLayout->addWidget(spacer);
     upDownBoxVBoxLayout->setStretchFactor(spacer, 100);
 
-    auto *buttons = new QDialogButtonBox(this);
+    auto buttons = new QDialogButtonBox(this);
     QPushButton *add = buttons->addButton(i18n("&Add Host..."), QDialogButtonBox::ActionRole);
     connect(add, &QPushButton::clicked, this, &LdapConfigureWidget::slotAddHost);
     mEditButton = buttons->addButton(i18n("&Edit Host..."), QDialogButtonBox::ActionRole);

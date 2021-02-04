@@ -249,7 +249,7 @@ void LdapConfigWidget::Private::initWidget()
 
     if (mFeatures & W_SECBOX) {
         QGroupBox *btgroup = new QGroupBox(i18n("Security"), mParent);
-        auto *hbox = new QHBoxLayout;
+        auto hbox = new QHBoxLayout;
         btgroup->setLayout(hbox);
         mSecNo = new QRadioButton(i18nc("@option:radio set no security", "No"), btgroup);
         mSecNo->setObjectName(QStringLiteral("kcfg_ldapnosec"));
@@ -278,9 +278,9 @@ void LdapConfigWidget::Private::initWidget()
 
     if (mFeatures & W_AUTHBOX) {
         QGroupBox *authbox = new QGroupBox(i18n("Authentication"), mParent);
-        auto *vbox = new QVBoxLayout;
+        auto vbox = new QVBoxLayout;
         authbox->setLayout(vbox);
-        auto *hbox = new QHBoxLayout;
+        auto hbox = new QHBoxLayout;
         vbox->addLayout(hbox);
 
         mAnonymous = new QRadioButton(i18nc("@option:radio anonymous authentication", "Anonymous"), authbox);

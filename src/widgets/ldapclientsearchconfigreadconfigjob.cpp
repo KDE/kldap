@@ -180,7 +180,7 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
 
 void LdapClientSearchConfigReadConfigJob::readLdapPasswordFinished(QKeychain::Job *baseJob)
 {
-    auto *job = qobject_cast<ReadPasswordJob *>(baseJob);
+    auto job = qobject_cast<ReadPasswordJob *>(baseJob);
     Q_ASSERT(job);
     if (!job->error()) {
         mServer.setPassword(job->textData());

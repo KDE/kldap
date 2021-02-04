@@ -175,7 +175,7 @@ void LdapClientSearch::Private::readConfig()
         mNoLDAPLookup = true;
     } else {
         for (int j = 0; j < numHosts; ++j) {
-            auto *ldapClient = new LdapClient(j, q);
+            auto ldapClient = new LdapClient(j, q);
             auto job = new LdapSearchClientReadConfigServerJob;
             job->setCurrentIndex(j);
             job->setActive(true);
