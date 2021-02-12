@@ -18,7 +18,7 @@ class KLdapTest : public QObject
     Q_OBJECT
 public:
     explicit KLdapTest(QObject *parent = nullptr);
-    ~KLdapTest() = default;
+    ~KLdapTest() override = default;
 
 private Q_SLOTS:
     // void testKLdap();
