@@ -7,9 +7,9 @@
 
 #include "ldapdn.h"
 
-#include <algorithm>
-
 #include "ldap_debug.h"
+#include <QRegularExpression>
+#include <algorithm>
 
 using namespace KLDAP;
 
