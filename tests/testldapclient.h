@@ -4,8 +4,7 @@
    SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef TESTLDAPCLIENT_H
-#define TESTLDAPCLIENT_H
+#pragma once
 
 #include <QObject>
 
@@ -44,4 +43,3 @@ private:
     KLDAP::LdapClient *mClient = nullptr;
 };
 
-#endif

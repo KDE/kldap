@@ -5,8 +5,7 @@
   SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef KLDAP_LDAPOBJECT_H
-#define KLDAP_LDAPOBJECT_H
+#pragma once
 
 #include <QList>
 #include <QMap>
@@ -102,4 +101,3 @@ private:
 typedef QVector<LdapObject> LdapObjects;
 }
 
-#endif

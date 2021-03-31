@@ -6,8 +6,7 @@
   SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef ADDHOSTDIALOG_H
-#define ADDHOSTDIALOG_H
+#pragma once
 
 #include "kldap_export.h"
 #include <QDialog>
@@ -40,4 +39,3 @@ private:
 };
 }
 
-#endif // ADDHOSTDIALOG_H

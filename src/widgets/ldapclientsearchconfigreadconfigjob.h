@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#ifndef LDAPCLIENTSEARCHCONFIGREADCONFIGJOB_H
-#define LDAPCLIENTSEARCHCONFIGREADCONFIGJOB_H
+#pragma once
 #include "kldap_export.h"
 #include <KConfigGroup>
 #include <KLDAP/LdapServer>
@@ -49,4 +48,3 @@ private:
 };
 
 }
-#endif // LDAPCLIENTSEARCHCONFIGREADCONFIGJOB_H

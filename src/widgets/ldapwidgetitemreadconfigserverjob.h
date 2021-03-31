@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#ifndef LDAPWIDGETITEMREADCONFIGSERVERJOB_H
-#define LDAPWIDGETITEMREADCONFIGSERVERJOB_H
+#pragma once
 
 #include <KConfigGroup>
 #include <QObject>
@@ -43,4 +42,3 @@ private:
 };
 }
 
-#endif // LDAPWIDGETITEMREADCONFIGSERVERJOB_H

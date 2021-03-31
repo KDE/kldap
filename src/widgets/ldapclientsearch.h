@@ -5,8 +5,7 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#ifndef LDAPCLIENTSEARCH_H
-#define LDAPCLIENTSEARCH_H
+#pragma once
 
 #include "kldap_export.h"
 
@@ -175,4 +174,3 @@ private:
 Q_DECLARE_TYPEINFO(KLDAP::LdapResult, Q_MOVABLE_TYPE);
 Q_DECLARE_TYPEINFO(KLDAP::LdapResultObject, Q_MOVABLE_TYPE);
 
-#endif // LDAPCLIENTSEARCH_H

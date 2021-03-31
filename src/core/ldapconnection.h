@@ -5,8 +5,7 @@
   SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef KLDAP_LDAPCONNECTION_H
-#define KLDAP_LDAPCONNECTION_H
+#pragma once
 
 #include <QString>
 
@@ -122,4 +121,3 @@ private:
 };
 }
 
-#endif

@@ -5,8 +5,7 @@
   SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef KLDAP_DEFS_H
-#define KLDAP_DEFS_H
+#pragma once
 
 /**
  * LDAP Error codes.
@@ -145,4 +144,3 @@
 
 #define KLDAP_SASL_ERROR -0xff
 
-#endif // KLDAP_DEFS_H

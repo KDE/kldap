@@ -4,8 +4,7 @@
   SPDX-License-Identifier: MIT
 */
 
-#ifndef __LDAP_H__
-#define __LDAP_H__
+#pragma once
 
 #include <kio/authinfo.h>
 #include <kio/slavebase.h>
@@ -47,4 +46,3 @@ private:
     void changeCheck(const KLDAP::LdapUrl &url);
 };
 
-#endif

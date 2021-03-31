@@ -4,8 +4,7 @@
   SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef TESTKLDAP_H
-#define TESTKLDAP_H
+#pragma once
 
 #include <QObject>
 #include <ldapobject.h>
@@ -41,4 +40,3 @@ private:
     LdapObjects m_objects;
 };
 
-#endif

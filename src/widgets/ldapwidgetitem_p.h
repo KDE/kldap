@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#ifndef LDAPWIDGETITEM_H
-#define LDAPWIDGETITEM_H
+#pragma once
 
 #include <QListWidget>
 #include <kldap/ldapserver.h>
@@ -30,4 +29,3 @@ private:
 };
 }
 
-#endif // LDAPWIDGETITEM_H

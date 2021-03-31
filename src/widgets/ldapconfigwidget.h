@@ -5,8 +5,7 @@
   SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef KLDAP_LDAPCONFIGWIDGET_H
-#define KLDAP_LDAPCONFIGWIDGET_H
+#pragma once
 
 #include <QString>
 #include <QWidget>
@@ -256,4 +255,3 @@ private:
 Q_DECLARE_OPERATORS_FOR_FLAGS(LdapConfigWidget::WinFlags)
 }
 
-#endif

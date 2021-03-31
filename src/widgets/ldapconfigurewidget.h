@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#ifndef LDAPCONFIGUREWIDGET_H
-#define LDAPCONFIGUREWIDGET_H
+#pragma once
 
 #include "kldap_export.h"
 
@@ -60,4 +59,3 @@ private:
 };
 }
 
-#endif // LDAPCONFIGUREWIDGET_H

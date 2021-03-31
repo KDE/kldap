@@ -5,8 +5,7 @@
   SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef KLDAP_BER_H
-#define KLDAP_BER_H
+#pragma once
 
 #include <QByteArray>
 
@@ -113,4 +112,3 @@ private:
     BerPrivate *const d;
 };
 }
-#endif

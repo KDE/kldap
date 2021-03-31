@@ -6,8 +6,7 @@
   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-#ifndef W32_LDAP_HELP_H
-#define W32_LDAP_HELP_H
+#pragma once
 
 #include <windows.h>
 #ifdef UNICODE
@@ -87,4 +86,3 @@ typedef ULONG ber_len_t;
 #define win_ldap_parse_result(a, b, c, d, e, f, g, h) ldap_parse_resultA((a), (b), ((ulong *)c), (d), (e), (f), (g), (h))
 #define win_ldap_modify_ext_s(a, b, c, d, e) ldap_modify_ext_sW((a), (b), (c), (d), (e))
 #define win_ldap_compare_ext_s(a, b, c, d, e, f) ldap_compare_ext_sA((a), (b), (c), (d), (e), (f))
-#endif /*W32_LDAP_HELP_H*/

@@ -5,8 +5,7 @@
   SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef KLDAP_LDAPOPERATION_H
-#define KLDAP_LDAPOPERATION_H
+#pragma once
 
 #include "kldap_export.h"
 #include "ldapconnection.h"
@@ -271,4 +270,3 @@ private:
 };
 }
 
-#endif

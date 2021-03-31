@@ -5,8 +5,7 @@
   SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef KLDAP_LDIF_H
-#define KLDAP_LDIF_H
+#pragma once
 
 #include <QByteArray>
 #include <QString>
@@ -174,4 +173,3 @@ private:
 };
 }
 
-#endif

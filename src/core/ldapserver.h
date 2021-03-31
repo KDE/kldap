@@ -5,8 +5,7 @@
   SPDX-License-Identifier: LGPL-2.0-or-later
 */
 
-#ifndef KLDAP_LDAPSERVER_H
-#define KLDAP_LDAPSERVER_H
+#pragma once
 
 #include <QString>
 
@@ -315,4 +314,3 @@ private:
 }
 KLDAP_EXPORT QDebug operator<<(QDebug d, const KLDAP::LdapServer &t);
 
-#endif
