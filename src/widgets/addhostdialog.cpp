@@ -43,7 +43,7 @@ public:
 
 void AddHostDialogPrivate::readConfig()
 {
-    KConfigGroup group(KSharedConfig::openConfig(), "AddHostDialog");
+    KConfigGroup group(KSharedConfig::openStateConfig(), "AddHostDialog");
     const QSize size = group.readEntry("Size", QSize(600, 400));
     if (size.isValid()) {
         q->resize(size);
@@ -52,7 +52,7 @@ void AddHostDialogPrivate::readConfig()
 
 void AddHostDialogPrivate::writeConfig()
 {
-    KConfigGroup group(KSharedConfig::openConfig(), "AddHostDialog");
+    KConfigGroup group(KSharedConfig::openStateConfig(), "AddHostDialog");
     group.writeEntry("Size", q->size());
     group.sync();
 }
