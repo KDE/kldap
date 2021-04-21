@@ -24,7 +24,10 @@
 #include <KConfigGroup>
 #include <KDirWatch>
 #include <KProtocolInfo>
+#include <kcoreaddons_version.h>
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <Kdelibs4ConfigMigrator>
+#endif
 
 #include <kio/job.h>
 
@@ -90,9 +93,11 @@ LdapClientSearch::~LdapClientSearch()
 
 void LdapClientSearch::Private::init(const QStringList &attributes)
 {
+#if KCOREADDONS_VERSION < QT_VERSION_CHECK(6, 0, 0)
     Kdelibs4ConfigMigrator migrate(QStringLiteral("ldapsettings"));
     migrate.setConfigFiles(QStringList() << QStringLiteral("kabldaprc"));
     migrate.migrate();
+#endif
 
     if (!KProtocolInfo::isKnownProtocol(QUrl(QStringLiteral("ldap://localhost")))) {
         mNoLDAPLookup = true;
