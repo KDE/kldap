@@ -19,7 +19,7 @@ class LdapControlPrivate;
 namespace KLDAP
 {
 class LdapControl;
-typedef QVector<LdapControl> LdapControls;
+using LdapControls = QVector<LdapControl>;
 
 /**
   @brief

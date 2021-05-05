@@ -33,19 +33,19 @@ public:
      * A class holding the extension name and state whether
      * the extension is critical.
      */
-    typedef struct {
+    using Extension = struct {
         QString value;
         bool critical;
-    } Extension;
+    };
 
     /**
      * Describes the scope of the LDAP url.
      */
-    typedef enum {
+    using Scope = enum {
         Base, ///< Only the same level as the url.
         One, ///< The level of the url and the one below.
         Sub ///< All levels below the url's level.
-    } Scope;
+    };
 
     /**
      * Constructs an empty LDAP url.

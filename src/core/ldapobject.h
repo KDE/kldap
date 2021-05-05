@@ -20,8 +20,8 @@ class LdapObjectPrivate;
 
 namespace KLDAP
 {
-typedef QList<QByteArray> LdapAttrValue;
-typedef QMap<QString, LdapAttrValue> LdapAttrMap;
+using LdapAttrValue = QList<QByteArray>;
+using LdapAttrMap = QMap<QString, LdapAttrValue>;
 
 /**
  * @brief
@@ -98,6 +98,6 @@ private:
     QSharedDataPointer<LdapObjectPrivate> d;
 };
 
-typedef QVector<LdapObject> LdapObjects;
+using LdapObjects = QVector<LdapObject>;
 }
 

@@ -29,9 +29,9 @@ namespace KLDAP
 class KLDAP_EXPORT LdapOperation
 {
 public:
-    typedef enum { Mod_None, Mod_Add, Mod_Replace, Mod_Del } ModType;
+    using ModType = enum { Mod_None, Mod_Add, Mod_Replace, Mod_Del };
 
-    typedef enum {
+    using ResultType = enum {
         RES_BIND = 0x61,
         RES_SEARCH_ENTRY = 0x64,
         RES_SEARCH_REFERENCE = 0x73,
@@ -43,15 +43,15 @@ public:
         RES_COMPARE = 0x6f,
         RES_EXTENDED = 0x78,
         RES_EXTENDED_PARTIAL = 0x79
-    } ResultType;
+    };
 
-    typedef struct {
+    using ModOp = struct {
         ModType type;
         QString attr;
         QList<QByteArray> values;
-    } ModOp;
+    };
 
-    typedef QVector<ModOp> ModOps;
+    using ModOps = QVector<ModOp>;
 
     enum SASL_Fields { SASL_Authname = 0x1, SASL_Authzid = 0x2, SASL_Realm = 0x4, SASL_Password = 0x8 };
 
@@ -63,7 +63,7 @@ public:
         QString password;
     };
 
-    typedef int(SASL_Callback_Proc)(SASL_Credentials &cred, void *data);
+    using SASL_Callback_Proc = int(SASL_Credentials &, void *);
 
     struct SASL_Data {
         SASL_Callback_Proc *proc;

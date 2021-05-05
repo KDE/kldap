@@ -224,7 +224,7 @@ void LdapConfigWidget::Private::initWidget()
         mainLayout->addWidget(mDn, row, 1, 1, 1);
         // without host query doesn't make sense
         if (mHost) {
-            QPushButton *dnquery = new QPushButton(i18n("Query Server"), mParent);
+            auto dnquery = new QPushButton(i18n("Query Server"), mParent);
             dnquery->setEnabled(false);
             connect(dnquery, &QPushButton::clicked, mParent, [this]() {
                 queryDNClicked();
@@ -248,7 +248,7 @@ void LdapConfigWidget::Private::initWidget()
     }
 
     if (mFeatures & W_SECBOX) {
-        QGroupBox *btgroup = new QGroupBox(i18n("Security"), mParent);
+        auto btgroup = new QGroupBox(i18n("Security"), mParent);
         auto hbox = new QHBoxLayout;
         btgroup->setLayout(hbox);
         mSecNo = new QRadioButton(i18nc("@option:radio set no security", "No"), btgroup);
@@ -277,7 +277,7 @@ void LdapConfigWidget::Private::initWidget()
     }
 
     if (mFeatures & W_AUTHBOX) {
-        QGroupBox *authbox = new QGroupBox(i18n("Authentication"), mParent);
+        auto authbox = new QGroupBox(i18n("Authentication"), mParent);
         auto vbox = new QVBoxLayout;
         authbox->setLayout(vbox);
         auto hbox = new QHBoxLayout;

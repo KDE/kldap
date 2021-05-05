@@ -28,11 +28,11 @@ namespace KLDAP
 class KLDAP_EXPORT Ldif
 {
 public:
-    typedef enum { None, NewEntry, EndEntry, Item, Control, Err, MoreData } ParseValue;
+    using ParseValue = enum { None, NewEntry, EndEntry, Item, Control, Err, MoreData };
 
-    typedef enum { Entry_None, Entry_Add, Entry_Del, Entry_Mod, Entry_Modrdn } EntryType;
+    using EntryType = enum { Entry_None, Entry_Add, Entry_Del, Entry_Mod, Entry_Modrdn };
 
-    typedef enum { Mod_None, Mod_Add, Mod_Replace, Mod_Del } ModType;
+    using ModType = enum { Mod_None, Mod_Add, Mod_Replace, Mod_Del };
 
     Ldif();
 

@@ -63,7 +63,7 @@ AddHostDialog::AddHostDialog(KLDAP::LdapServer *server, QWidget *parent)
 {
     setWindowTitle(i18nc("@title:window", "Add Host"));
     auto mainLayout = new QVBoxLayout(this);
-    QDialogButtonBox *buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
+    auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
     d->mOkButton = buttonBox->button(QDialogButtonBox::Ok);
     d->mOkButton->setDefault(true);
     d->mOkButton->setShortcut(Qt::CTRL | Qt::Key_Return);
@@ -73,7 +73,7 @@ AddHostDialog::AddHostDialog(KLDAP::LdapServer *server, QWidget *parent)
 
     d->mServer = server;
 
-    QWidget *page = new QWidget(this);
+    auto page = new QWidget(this);
     mainLayout->addWidget(page);
     mainLayout->addWidget(buttonBox);
     auto layout = new QHBoxLayout(page);

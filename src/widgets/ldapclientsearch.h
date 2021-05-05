@@ -23,7 +23,7 @@ class LdapClient;
  * @since 4.14
  */
 struct LdapResultObject {
-    typedef QVector<LdapResultObject> List;
+    using List = QVector<LdapResultObject>;
     const LdapClient *client = nullptr;
     KLDAP::LdapObject object;
 };
@@ -37,7 +37,7 @@ struct LdapResult {
     /**
      * A list of LdapResult objects.
      */
-    typedef QVector<LdapResult> List;
+    using List = QVector<LdapResult>;
 
     LdapDN dn;
     QString name; ///< The full name of the contact.

@@ -58,34 +58,34 @@ public:
      * Describes the encryption settings that can be used
      * for the LDAP connection.
      */
-    typedef enum {
+    using Security = enum {
         None, ///< Do not use any encryption.
         TLS, ///< Use TLS encryption.
         SSL ///< Use SSL encryption.
-    } Security;
+    };
 
     /**
      * Describes the authentication method that can be used
      * for the LDAP connection.
      */
-    typedef enum {
+    using Auth = enum {
         Anonymous, ///< Do no authentication.
         Simple, ///< Authenticate via login and password.
         SASL ///< Azthenticate with the SASL framework.
-    } Auth;
+    };
 
     /**
      * Describes the certificate request and check behaviour
      * for TLS/SSL connections.
      */
-    typedef enum {
+    using TLSRequireCertificate = enum {
         TLSReqCertDefault, ///< Use system defaults
         TLSReqCertNever, ///< Do not require any certificates.
         TLSReqCertDemand, ///< Use LDAP_OPT_X_TLS_DEMAND.
         TLSReqCertAllow, ///< Use LDAP_OPT_X_TLS_ALLOW.
         TLSReqCertTry, ///< Use LDAP_OPT_X_TLS_TRY.
         TLSReqCertHard, ///< Use LDAP_OPT_X_TLS_HARD.
-    } TLSRequireCertificate;
+    };
 
     /**
      * Clears all server settings.

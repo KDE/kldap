@@ -61,7 +61,7 @@ void LdapConfigureWidget::slotSelectionChanged(QListWidgetItem *item)
 
 void LdapConfigureWidget::slotItemClicked(QListWidgetItem *item)
 {
-    auto *ldapItem = dynamic_cast<LdapWidgetItem *>(item);
+    auto ldapItem = dynamic_cast<LdapWidgetItem *>(item);
     if (!ldapItem) {
         return;
     }
@@ -87,7 +87,7 @@ void LdapConfigureWidget::slotAddHost()
 
 void LdapConfigureWidget::slotEditHost()
 {
-    auto *item = dynamic_cast<LdapWidgetItem *>(mHostListView->currentItem());
+    auto item = dynamic_cast<LdapWidgetItem *>(mHostListView->currentItem());
     if (!item) {
         return;
     }
@@ -109,7 +109,7 @@ void LdapConfigureWidget::slotRemoveHost()
     if (!item) {
         return;
     }
-    auto *ldapItem = dynamic_cast<LdapWidgetItem *>(item);
+    auto ldapItem = dynamic_cast<LdapWidgetItem *>(item);
     if (KMessageBox::No
         == KMessageBox::questionYesNo(this, i18n("Do you want to remove setting for host \"%1\"?", ldapItem->server().host()), i18n("Remove Host"))) {
         return;
@@ -227,7 +227,7 @@ void LdapConfigureWidget::save()
     int selected = 0;
     int unselected = 0;
     for (int i = 0; i < mHostListView->count(); ++i) {
-        auto *item = dynamic_cast<LdapWidgetItem *>(mHostListView->item(i));
+        auto item = dynamic_cast<LdapWidgetItem *>(mHostListView->item(i));
         if (!item) {
             continue;
         }
@@ -265,17 +265,17 @@ void LdapConfigureWidget::initGUI()
     layout->setObjectName(QStringLiteral("layout"));
     layout->setContentsMargins(0, 0, 0, 0);
 
-    QGroupBox *groupBox = new QGroupBox(i18n("LDAP Servers"));
+    auto groupBox = new QGroupBox(i18n("LDAP Servers"));
     layout->addWidget(groupBox);
     auto mainLayout = new QVBoxLayout;
     mainLayout->setObjectName(QStringLiteral("mainlayout"));
     groupBox->setLayout(mainLayout);
 
     // Contents of the QVGroupBox: label and hbox
-    QLabel *label = new QLabel(i18n("Check all servers that should be used:"));
+    auto label = new QLabel(i18n("Check all servers that should be used:"));
     mainLayout->addWidget(label);
 
-    QWidget *hBox = new QWidget(this);
+    auto hBox = new QWidget(this);
     mainLayout->addWidget(hBox);
 
     auto hBoxHBoxLayout = new QHBoxLayout(hBox);
@@ -286,7 +286,7 @@ void LdapConfigureWidget::initGUI()
     hBoxHBoxLayout->addWidget(mHostListView);
     mHostListView->setSortingEnabled(false);
 
-    QWidget *upDownBox = new QWidget(hBox);
+    auto upDownBox = new QWidget(hBox);
     auto upDownBoxVBoxLayout = new QVBoxLayout(upDownBox);
     upDownBoxVBoxLayout->setContentsMargins(0, 0, 0, 0);
     hBoxHBoxLayout->addWidget(upDownBox);
@@ -301,7 +301,7 @@ void LdapConfigureWidget::initGUI()
     mDownButton->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
     mDownButton->setEnabled(false); // b/c no item is selected yet
 
-    QWidget *spacer = new QWidget(upDownBox);
+    auto spacer = new QWidget(upDownBox);
     upDownBoxVBoxLayout->addWidget(spacer);
     upDownBoxVBoxLayout->setStretchFactor(spacer, 100);
 
