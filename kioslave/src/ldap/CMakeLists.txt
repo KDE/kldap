@@ -1,12 +1,12 @@
+add_library(kio_ldap MODULE)
 
-set(kio_ldap_PART_SRCS kio_ldap.cpp)
-ecm_qt_declare_logging_category(kio_ldap_PART_SRCS HEADER kldap_debug.h IDENTIFIER KLDAP_LOG CATEGORY_NAME org.kde.pim.kldap
+target_sources(kio_ldap PRIVATE kio_ldap.cpp)
+ecm_qt_declare_logging_category(kio_ldap HEADER kldap_debug.h IDENTIFIER KLDAP_LOG CATEGORY_NAME org.kde.pim.kldap
         DESCRIPTION "kioslave (kldap)"
         OLD_CATEGORY_NAMES log_kldap
         EXPORT KLDAP
     )
 
-add_library(kio_ldap MODULE ${kio_ldap_PART_SRCS})
 
 target_link_libraries(kio_ldap Qt::Network KF5::KIOCore KF5::I18n KF5::Ldap)
 if (WIN32)

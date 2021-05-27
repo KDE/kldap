@@ -30,7 +30,10 @@ configure_file(kldap_config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/kldap_config.h)
 
 ########### next target ###############
 
-set(kldap_LIB_core_SRCS
+add_library(KF5Ldap)
+add_library(KF5::Ldap ALIAS KF5Ldap)
+
+target_sources(KF5Ldap PRIVATE
   core/ber.cpp
   core/ldif.cpp
   core/ldapurl.cpp
@@ -41,9 +44,7 @@ set(kldap_LIB_core_SRCS
   core/ldapcontrol.cpp
   core/ldapsearch.cpp
   core/ldapdn.cpp
-)
 
-set(kldap_LIB_widgets_SRCS
   widgets/ldapconfigwidget.cpp
   widgets/addhostdialog.cpp
   widgets/ldapclient.cpp
@@ -57,32 +58,24 @@ set(kldap_LIB_widgets_SRCS
   widgets/ldapsearchclientreadconfigserverjob.cpp
  )
  
- set(kldap_LIB_SRCS
-      ${kldap_LIB_core_SRCS}
-      ${kldap_LIB_widgets_SRCS}
-      )
- 
-ecm_qt_declare_logging_category(kldap_LIB_SRCS HEADER ldap_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME org.kde.pim.ldap
+ecm_qt_declare_logging_category(KF5Ldap HEADER ldap_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME org.kde.pim.ldap
         DESCRIPTION "kldaplib (kldap)"
         OLD_CATEGORY_NAMES log_ldap
         EXPORT KLDAP
     )
 
-ecm_qt_declare_logging_category(kldap_LIB_SRCS HEADER ldapclient_debug.h IDENTIFIER LDAPCLIENT_LOG CATEGORY_NAME org.kde.pim.ldapclient
+ecm_qt_declare_logging_category(KF5Ldap HEADER ldapclient_debug.h IDENTIFIER LDAPCLIENT_LOG CATEGORY_NAME org.kde.pim.ldapclient
         DESCRIPTION "ldapclient (libkdepim)"
         OLD_CATEGORY_NAMES log_ldapclient
         EXPORT KLDAP
     )
 
-
-
-add_library(KF5Ldap ${kldap_LIB_SRCS})
 if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
     set_target_properties(KF5Ldap PROPERTIES UNITY_BUILD ON)
 endif()
 generate_export_header(KF5Ldap BASE_NAME kldap)
 
-add_library(KF5::Ldap ALIAS KF5Ldap)
+
 
 target_link_libraries(KF5Ldap
 PRIVATE
