@@ -45,4 +45,3 @@ private:
     void LDAPErr(int err = KLDAP_SUCCESS);
     void changeCheck(const KLDAP::LdapUrl &url);
 };
-
