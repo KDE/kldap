@@ -14,8 +14,3 @@ if (WIN32)
 endif()
 set_target_properties(kio_ldap PROPERTIES OUTPUT_NAME "ldap")
 install(TARGETS kio_ldap  DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/kio)
-
-
-########### install files ###############
-
-install( FILES ldap.protocol ldaps.protocol  DESTINATION  ${KDE_INSTALL_KSERVICES5DIR} )
