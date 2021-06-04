@@ -25,6 +25,13 @@
 using namespace KIO;
 using namespace KLDAP;
 
+// Pseudo plugin class to embed meta data
+class KIOPluginForMetaData : public QObject
+{
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.kde.kio.slave.ldap" FILE "ldap.json")
+};
+
 extern "C" {
 int Q_DECL_EXPORT kdemain(int argc, char **argv);
 }
@@ -769,3 +776,5 @@ void LDAPProtocol::listDir(const QUrl &_url)
     // we are done
     finished();
 }
+
+#include "kio_ldap.moc"
