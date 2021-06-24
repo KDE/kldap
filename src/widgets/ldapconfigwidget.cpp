@@ -9,6 +9,7 @@
 #include "ldapsearch.h"
 
 #include "ldap_debug.h"
+#include <KAuthorized>
 #include <KLocalizedString>
 #include <KPasswordLineEdit>
 #include <QComboBox>
@@ -129,6 +130,7 @@ void LdapConfigWidget::Private::initWidget()
         label = new QLabel(i18n("Password:"), mParent);
         mPassword = new KPasswordLineEdit(mParent);
         mPassword->setObjectName(QStringLiteral("kcfg_ldappassword"));
+        mPassword->setRevealPasswordAvailable(KAuthorized::authorize(QStringLiteral("lineedit_reveal_password")));
 
         mainLayout->addWidget(label, row, 0);
         mainLayout->addWidget(mPassword, row, 1, 1, 3);
