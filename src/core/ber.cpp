@@ -131,7 +131,7 @@ int Ber::printf(QString format, ...)
             break;
         }
         case 'B': {
-            // FIXME: QBitArray vould be logical, but how to access the bits?
+            // FIXME: QBitArray would be logical, but how to access the bits?
             QByteArray *B = va_arg(args, QByteArray *);
             int Bc = va_arg(args, int);
             ret = ber_printf(d->mBer, fmt, B->data(), Bc);
@@ -229,7 +229,7 @@ int Ber::scanf(QString format, ...)
             break;
         }
         case 'B': {
-            // FIXME: QBitArray vould be logical, but how to access the bits?
+            // FIXME: QBitArray would be logical, but how to access the bits?
             QByteArray *B = va_arg(args, QByteArray *);
             int *Bc = va_arg(args, int *);
             char *c;

@@ -80,7 +80,7 @@ QStringList LdapDN::LdapDNPrivate::splitOnNonEscapedChar(const QString &str, QCh
         searchFrom = index + 1;
     }
 
-    // Add on the part after the last found delimeter
+    // Add on the part after the last found delimiter
     QString tmp = str.mid(strPartStartIndex);
     // qCDebug(LDAP_LOG) << "Adding part:" << tmp;
     strParts.append(tmp);
