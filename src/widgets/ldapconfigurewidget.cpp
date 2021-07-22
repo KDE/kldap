@@ -261,15 +261,9 @@ void LdapConfigureWidget::save()
 
 void LdapConfigureWidget::initGUI()
 {
-    auto layout = new QVBoxLayout(this);
-    layout->setObjectName(QStringLiteral("layout"));
-    layout->setContentsMargins(0, 0, 0, 0);
-
-    auto groupBox = new QGroupBox(i18n("LDAP Servers"));
-    layout->addWidget(groupBox);
-    auto mainLayout = new QVBoxLayout;
-    mainLayout->setObjectName(QStringLiteral("mainlayout"));
-    groupBox->setLayout(mainLayout);
+    auto mainLayout = new QVBoxLayout(this);
+    mainLayout->setObjectName(QStringLiteral("layout"));
+    mainLayout->setContentsMargins(5, 5, 5, 5);
 
     // Contents of the QVGroupBox: label and hbox
     auto label = new QLabel(i18n("Check all servers that should be used:"));
@@ -314,7 +308,6 @@ void LdapConfigureWidget::initGUI()
     mRemoveButton = buttons->addButton(i18n("&Remove Host"), QDialogButtonBox::ActionRole);
     connect(mRemoveButton, &QPushButton::clicked, this, &LdapConfigureWidget::slotRemoveHost);
     mRemoveButton->setEnabled(false);
-    buttons->layout();
 
-    layout->addWidget(buttons);
+    mainLayout->addWidget(buttons);
 }
