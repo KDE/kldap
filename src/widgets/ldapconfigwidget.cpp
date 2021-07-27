@@ -239,7 +239,7 @@ void LdapConfigWidget::Private::initWidget()
         mSASL = new QRadioButton(i18nc("@option:radio SASL authentication", "SASL"), authbox);
         mSASL->setObjectName(QStringLiteral("kcfg_ldapsasl"));
         hbox->addWidget(mSASL);
-        mainLayout->addRow(i18n("Authentification:"), authbox);
+        mainLayout->addRow(i18n("Authentication:"), authbox);
 
         hbox = new QHBoxLayout;
         mMech = new QComboBox(mParent);
