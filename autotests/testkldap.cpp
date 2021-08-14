@@ -48,16 +48,28 @@ void KLdapTest::initTestCase()
 
 void KLdapTest::testBer()
 {
-    Ber ber1, ber2, ber3, ber4, ber5, ber6, ber7;
+    Ber ber1;
+    Ber ber2;
+    Ber ber3;
+    Ber ber4;
+    Ber ber5;
+    Ber ber6;
+    Ber ber7;
     Ber bber;
 
     int ainteger;
-    QByteArray aoctetString1, aoctetString2, aoctetString3;
-    QList<QByteArray> alist1, alist2;
+    QByteArray aoctetString1;
+    QByteArray aoctetString2;
+    QByteArray aoctetString3;
+    QList<QByteArray> alist1;
+    QList<QByteArray> alist2;
 
     int binteger;
-    QByteArray boctetString1, boctetString2, boctetString3;
-    QList<QByteArray> blist1, blist2;
+    QByteArray boctetString1;
+    QByteArray boctetString2;
+    QByteArray boctetString3;
+    QList<QByteArray> blist1;
+    QList<QByteArray> blist2;
 
     aoctetString1 = "KDE";
     aoctetString2 = "the";

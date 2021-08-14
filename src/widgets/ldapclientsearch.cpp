@@ -322,7 +322,10 @@ void LdapClientSearch::Private::makeSearchData(QStringList &ret, LdapResult::Lis
     LdapResultObject::List::ConstIterator it1(mResults.constBegin());
     const LdapResultObject::List::ConstIterator end1(mResults.constEnd());
     for (; it1 != end1; ++it1) {
-        QString name, mail, givenname, sn;
+        QString name;
+        QString mail;
+        QString givenname;
+        QString sn;
         QStringList mails;
         bool isDistributionList = false;
         bool wasCN = false;

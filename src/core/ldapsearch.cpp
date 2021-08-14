@@ -119,7 +119,8 @@ void LdapSearchPrivate::result()
             }
             qCDebug(LDAP_LOG) << " estimated size:" << estsize;
             if (estsize != -1 && !cookie.isEmpty()) {
-                LdapControls ctrls, savedctrls;
+                LdapControls ctrls;
+                LdapControls savedctrls;
                 savedctrls = mOp.serverControls();
                 ctrls = savedctrls;
                 LdapControl::insert(ctrls, LdapControl::createPageControl(mPageSize, cookie));

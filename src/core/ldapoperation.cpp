@@ -240,7 +240,8 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds, SASL_Call
         const char *out = nullptr;
         uint outlen;
         const char *mechusing = nullptr;
-        struct berval ccred, *scred;
+        struct berval ccred;
+        struct berval *scred;
         int saslresult;
         QByteArray sdata = creds;
 
@@ -317,7 +318,8 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds, SASL_Call
         return KLDAP_SASL_ERROR;
 #endif
     } else { // simple auth
-        QByteArray bindname, pass;
+        QByteArray bindname;
+        QByteArray pass;
         struct berval ccred;
         if (server.auth() == LdapServer::Simple) {
             bindname = server.bindDn().toUtf8();
@@ -437,7 +439,8 @@ int LdapOperation::LdapOperationPrivate::processResult(int rescode, LDAPMessage 
     }
     default: {
         LDAPControl **serverctrls = nullptr;
-        char *matcheddn = nullptr, *errmsg = nullptr;
+        char *matcheddn = nullptr;
+        char *errmsg = nullptr;
         char **referralsp;
         int errcodep;
         retval = ldap_parse_result(ld, msg, &errcodep, &matcheddn, &errmsg, &referralsp, &serverctrls, 0);
@@ -630,7 +633,8 @@ int LdapOperation::search(const LdapDN &base, LdapUrl::Scope scope, const QStrin
     char **attrs = nullptr;
     int msgid;
 
-    LDAPControl **serverctrls = nullptr, **clientctrls = nullptr;
+    LDAPControl **serverctrls = nullptr;
+    LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -694,7 +698,8 @@ int LdapOperation::add(const LdapObject &object)
     int msgid;
     LDAPMod **lmod = nullptr;
 
-    LDAPControl **serverctrls = nullptr, **clientctrls = nullptr;
+    LDAPControl **serverctrls = nullptr;
+    LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -723,7 +728,8 @@ int LdapOperation::add_s(const LdapObject &object)
 
     LDAPMod **lmod = nullptr;
 
-    LDAPControl **serverctrls = nullptr, **clientctrls = nullptr;
+    LDAPControl **serverctrls = nullptr;
+    LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -750,7 +756,8 @@ int LdapOperation::add(const LdapDN &dn, const ModOps &ops)
     int msgid;
     LDAPMod **lmod = nullptr;
 
-    LDAPControl **serverctrls = nullptr, **clientctrls = nullptr;
+    LDAPControl **serverctrls = nullptr;
+    LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -778,7 +785,8 @@ int LdapOperation::add_s(const LdapDN &dn, const ModOps &ops)
 
     LDAPMod **lmod = nullptr;
 
-    LDAPControl **serverctrls = nullptr, **clientctrls = nullptr;
+    LDAPControl **serverctrls = nullptr;
+    LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -803,7 +811,8 @@ int LdapOperation::rename(const LdapDN &dn, const QString &newRdn, const QString
 
     int msgid;
 
-    LDAPControl **serverctrls = nullptr, **clientctrls = nullptr;
+    LDAPControl **serverctrls = nullptr;
+    LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -830,7 +839,8 @@ int LdapOperation::rename_s(const LdapDN &dn, const QString &newRdn, const QStri
     Q_ASSERT(d->mConnection);
     LDAP *ld = (LDAP *)d->mConnection->handle();
 
-    LDAPControl **serverctrls = nullptr, **clientctrls = nullptr;
+    LDAPControl **serverctrls = nullptr;
+    LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -855,7 +865,8 @@ int LdapOperation::del(const LdapDN &dn)
 
     int msgid;
 
-    LDAPControl **serverctrls = nullptr, **clientctrls = nullptr;
+    LDAPControl **serverctrls = nullptr;
+    LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -875,7 +886,8 @@ int LdapOperation::del_s(const LdapDN &dn)
     Q_ASSERT(d->mConnection);
     LDAP *ld = (LDAP *)d->mConnection->handle();
 
-    LDAPControl **serverctrls = nullptr, **clientctrls = nullptr;
+    LDAPControl **serverctrls = nullptr;
+    LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -895,7 +907,8 @@ int LdapOperation::modify(const LdapDN &dn, const ModOps &ops)
     int msgid;
     LDAPMod **lmod = nullptr;
 
-    LDAPControl **serverctrls = nullptr, **clientctrls = nullptr;
+    LDAPControl **serverctrls = nullptr;
+    LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -939,7 +952,8 @@ int LdapOperation::modify_s(const LdapDN &dn, const ModOps &ops)
 
     LDAPMod **lmod = nullptr;
 
-    LDAPControl **serverctrls = nullptr, **clientctrls = nullptr;
+    LDAPControl **serverctrls = nullptr;
+    LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -979,7 +993,8 @@ int LdapOperation::compare(const LdapDN &dn, const QString &attr, const QByteArr
     LDAP *ld = (LDAP *)d->mConnection->handle();
     int msgid;
 
-    LDAPControl **serverctrls = nullptr, **clientctrls = nullptr;
+    LDAPControl **serverctrls = nullptr;
+    LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -1007,7 +1022,8 @@ int LdapOperation::compare_s(const LdapDN &dn, const QString &attr, const QByteA
     Q_ASSERT(d->mConnection);
     LDAP *ld = (LDAP *)d->mConnection->handle();
 
-    LDAPControl **serverctrls = nullptr, **clientctrls = nullptr;
+    LDAPControl **serverctrls = nullptr;
+    LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -1034,7 +1050,8 @@ int LdapOperation::exop(const QString &oid, const QByteArray &data)
     LDAP *ld = (LDAP *)d->mConnection->handle();
     int msgid;
 
-    LDAPControl **serverctrls = nullptr, **clientctrls = nullptr;
+    LDAPControl **serverctrls = nullptr;
+    LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -1069,7 +1086,8 @@ int LdapOperation::exop_s(const QString &oid, const QByteArray &data)
     BerValue *retdata;
     char *retoid;
 
-    LDAPControl **serverctrls = nullptr, **clientctrls = nullptr;
+    LDAPControl **serverctrls = nullptr;
+    LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 
@@ -1100,7 +1118,8 @@ int LdapOperation::abandon(int id)
     Q_ASSERT(d->mConnection);
     LDAP *ld = (LDAP *)d->mConnection->handle();
 
-    LDAPControl **serverctrls = nullptr, **clientctrls = nullptr;
+    LDAPControl **serverctrls = nullptr;
+    LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
     createControls(&serverctrls, d->mClientCtrls);
 

@@ -374,14 +374,16 @@ void LDAPProtocol::get(const QUrl &_url)
     qCDebug(KLDAP_LOG) << "get(" << _url << ")";
 
     LdapUrl usrc(_url);
-    int ret, id;
+    int ret;
+    int id;
 
     changeCheck(usrc);
     if (!mConnected) {
         return;
     }
 
-    LdapControls serverctrls, clientctrls;
+    LdapControls serverctrls;
+    LdapControls clientctrls;
     controlsFromMetaData(serverctrls, clientctrls);
     if (mServer.pageSize()) {
         LdapControls ctrls = serverctrls;
@@ -461,9 +463,11 @@ void LDAPProtocol::stat(const QUrl &_url)
 {
     qCDebug(KLDAP_LOG) << "stat(" << _url << ")";
 
-    QStringList att, saveatt;
+    QStringList att;
+    QStringList saveatt;
     LdapUrl usrc(_url);
-    int ret, id;
+    int ret;
+    int id;
 
     changeCheck(usrc);
     if (!mConnected) {
@@ -513,14 +517,16 @@ void LDAPProtocol::del(const QUrl &_url, bool)
     qCDebug(KLDAP_LOG) << "del(" << _url << ")";
 
     LdapUrl usrc(_url);
-    int id, ret;
+    int id;
+    int ret;
 
     changeCheck(usrc);
     if (!mConnected) {
         return;
     }
 
-    LdapControls serverctrls, clientctrls;
+    LdapControls serverctrls;
+    LdapControls clientctrls;
     controlsFromMetaData(serverctrls, clientctrls);
     mOp.setServerControls(serverctrls);
     mOp.setClientControls(clientctrls);
@@ -551,7 +557,8 @@ void LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
         return;
     }
 
-    LdapControls serverctrls, clientctrls;
+    LdapControls serverctrls;
+    LdapControls clientctrls;
     controlsFromMetaData(serverctrls, clientctrls);
     mOp.setServerControls(serverctrls);
     mOp.setClientControls(clientctrls);
@@ -686,10 +693,15 @@ void LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
  */
 void LDAPProtocol::listDir(const QUrl &_url)
 {
-    int ret, ret2, id, id2;
+    int ret;
+    int ret2;
+    int id;
+    int id2;
     unsigned long total = 0;
-    QStringList att, saveatt;
-    LdapUrl usrc(_url), usrc2;
+    QStringList att;
+    QStringList saveatt;
+    LdapUrl usrc(_url);
+    LdapUrl usrc2;
     bool critical = true;
     bool isSub = (usrc.extension(QStringLiteral("x-dir"), critical) == QLatin1String("sub"));
 

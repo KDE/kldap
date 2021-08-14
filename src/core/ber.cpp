@@ -118,7 +118,8 @@ int Ber::printf(QString format, ...)
     va_start(args, format);
     fmt[1] = '\0';
 
-    int i = 0, ret = 0;
+    int i = 0;
+    int ret = 0;
     while (i < format.length()) {
         fmt[0] = format[i].toLatin1();
         i++;
@@ -215,7 +216,8 @@ int Ber::scanf(QString format, ...)
     va_start(args, format);
     fmt[1] = '\0';
 
-    int i = 0, ret = 0;
+    int i = 0;
+    int ret = 0;
     while (i < format.length()) {
         fmt[0] = format[i].toLatin1();
         i++;
@@ -300,7 +302,8 @@ int Ber::scanf(QString format, ...)
         }
         case 'v': {
             QList<QByteArray> *v = va_arg(args, QList<QByteArray> *);
-            char **c, **c2;
+            char **c;
+            char **c2;
             ret = ber_scanf(d->mBer, fmt, &c);
             if (ret != -1 && c) {
                 c2 = c;
@@ -315,7 +318,8 @@ int Ber::scanf(QString format, ...)
         }
         case 'V': {
             QList<QByteArray> *v = va_arg(args, QList<QByteArray> *);
-            struct berval **bv, **bv2;
+            struct berval **bv;
+            struct berval **bv2;
             ret = ber_scanf(d->mBer, fmt, &bv);
             if (ret != -1 && bv) {
                 bv2 = bv;

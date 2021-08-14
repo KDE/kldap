@@ -260,7 +260,8 @@ void LdapUrl::parseQuery()
         }
     }
 
-    QString name, value;
+    QString name;
+    QString value;
     QStringList::const_iterator end2(extensions.constEnd());
     for (QStringList::const_iterator it = extensions.constBegin(); it != end2; ++it) {
         ext.critical = false;
