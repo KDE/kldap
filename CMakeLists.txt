@@ -11,7 +11,6 @@ set(CMAKE_MODULE_PATH ${KLdap_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
-set(KDE_COMPILERSETTINGS_LEVEL 5.85.0)
 include(KDEFrameworkCompilerSettings NO_POLICY_SCOPE)
 
 include(GenerateExportHeader)
@@ -23,8 +22,6 @@ include(FeatureSummary)
 include(KDEGitCommitHooks)
 include(ECMQtDeclareLoggingCategory)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(KLDAP_LIB_VERSION ${PIM_VERSION})
 
