@@ -46,12 +46,8 @@ bool LdapDN::LdapDNPrivate::isValidRDNString(const QString &rdn) const
         }
         return true;
     }
-#if QT_VERSION < QT_VERSION_CHECK(5, 15, 2)
-    const QVector<QStringRef> components = rdn.splitRef(QLatin1Char('='));
-#else
     // Split the rdn into the attribute name and value parts
     const auto components = QStringView(rdn).split(QLatin1Char('='));
-#endif
     // We should have exactly two parts
     if (components.size() != 2) {
         return false;
