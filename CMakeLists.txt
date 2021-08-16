@@ -21,7 +21,7 @@ include(ECMSetupVersion)
 include(FeatureSummary)
 include(KDEGitCommitHooks)
 include(ECMQtDeclareLoggingCategory)
-
+include(ECMAddQch)
 
 set(KLDAP_LIB_VERSION ${PIM_VERSION})
 
@@ -46,8 +46,12 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KLDAP
                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KF5LdapConfigVersion.cmake"
                         SOVERSION 5
 )
-option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)
 
+option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
+add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)")
+
+
+option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)
 set(COMPILE_WITH_UNITY_CMAKE_SUPPORT OFF)
 if (USE_UNITY_CMAKE_SUPPORT)
     set(COMPILE_WITH_UNITY_CMAKE_SUPPORT ON)
@@ -118,4 +122,15 @@ ki18n_install(po)
 if(KF5DocTools_FOUND)
     kdoctools_install(po)
 endif()
+
+if (BUILD_QCH)
+    ecm_install_qch_export(
+        TARGETS KF5LDap_QCH
+        FILE KF5LDapQchTargets.cmake
+        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+        COMPONENT Devel
+    )
+    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KF5LDapQchTargets.cmake\")")
+endif()
+
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
