@@ -158,7 +158,9 @@ if (BUILD_QCH)
         BASE_NAME KF5LDap
         VERSION ${PIM_VERSION}
         ORG_DOMAIN org.kde
+
         SOURCES # using only public headers, to cover only public API
+            ${KLdapCore_HEADERS}
             ${KLdapWidgets_HEADERS}
         MD_MAINPAGE "${CMAKE_SOURCE_DIR}/README.md"
         #IMAGE_DIRS "${CMAKE_SOURCE_DIR}/docs/pics"
