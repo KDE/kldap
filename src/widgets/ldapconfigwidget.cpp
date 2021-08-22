@@ -305,7 +305,7 @@ void LdapConfigWidget::Private::sendQuery()
         return;
     }
 
-    if (mProg == nullptr) {
+    if (!mProg) {
         mProg = new QProgressDialog(mParent);
         mProg->setWindowTitle(i18nc("@title:window", "LDAP Query"));
         mProg->setModal(true);

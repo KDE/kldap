@@ -55,7 +55,7 @@ private:
 
     QToolButton *mUpButton = nullptr;
     QToolButton *mDownButton = nullptr;
-    KLDAP::LdapClientSearchConfig *mClientSearchConfig = nullptr;
+    KLDAP::LdapClientSearchConfig *const mClientSearchConfig;
 };
 }
 

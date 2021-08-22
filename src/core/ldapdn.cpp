@@ -17,7 +17,6 @@ class Q_DECL_HIDDEN LdapDN::LdapDNPrivate
 {
 public:
     LdapDNPrivate()
-        : m_dn()
     {
     }
 
@@ -25,8 +24,8 @@ public:
     {
     }
 
-    bool isValidRDNString(const QString &rdn) const;
-    QStringList splitOnNonEscapedChar(const QString &rdn, QChar ch) const;
+    Q_REQUIRED_RESULT bool isValidRDNString(const QString &rdn) const;
+    Q_REQUIRED_RESULT QStringList splitOnNonEscapedChar(const QString &rdn, QChar ch) const;
 
     QString m_dn;
 };

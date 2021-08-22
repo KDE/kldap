@@ -323,7 +323,7 @@ void LdapServer::setUrl(const LdapUrl &url)
         d->mAuth = Simple;
         d->mBindDn = url.extension(QStringLiteral("bindname"), critical);
     } else {
-        QString user = url.userName();
+        const QString user = url.userName();
         if (user.isEmpty()) {
             d->mAuth = Anonymous;
         } else {

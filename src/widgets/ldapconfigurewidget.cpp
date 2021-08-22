@@ -33,8 +33,8 @@ using namespace KLDAP;
 
 LdapConfigureWidget::LdapConfigureWidget(QWidget *parent)
     : QWidget(parent)
+    , mClientSearchConfig(new KLDAP::LdapClientSearchConfig)
 {
-    mClientSearchConfig = new KLDAP::LdapClientSearchConfig;
     initGUI();
 
     connect(mHostListView, &QListWidget::currentItemChanged, this, &LdapConfigureWidget::slotSelectionChanged);
