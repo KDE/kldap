@@ -4,7 +4,7 @@ set(PIM_VERSION "5.18.40")
 project(KLdap VERSION ${PIM_VERSION})
 
 # ECM setup
-set(KF5_MIN_VERSION "5.85.0")
+set(KF5_MIN_VERSION "5.86.0")
 
 find_package(ECM ${KF5_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${KLdap_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
@@ -61,7 +61,7 @@ endif()
 find_package(KF5WidgetsAddons ${KF5_MIN_VERSION} CONFIG REQUIRED)
 
 add_definitions(-DQT_DISABLE_DEPRECATED_BEFORE=0x050f02)
-add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055600)
+add_definitions(-DKF_DISABLE_DEPRECATED_BEFORE_AND_AT=0x055700)
 
 find_package(Ldap)
 set_package_properties(Ldap PROPERTIES
