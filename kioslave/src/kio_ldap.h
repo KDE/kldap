@@ -6,8 +6,8 @@
 
 #pragma once
 
-#include <kio/authinfo.h>
-#include <kio/slavebase.h>
+#include <KIO/AuthInfo>
+#include <KIO/SlaveBase>
 
 #include <kldap/ldapconnection.h>
 #include <kldap/ldapcontrol.h>

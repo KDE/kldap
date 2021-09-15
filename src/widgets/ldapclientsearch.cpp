@@ -29,7 +29,7 @@
 #include <Kdelibs4ConfigMigrator>
 #endif
 
-#include <kio/job.h>
+#include <KIO/Job>
 
 #include <QStandardPaths>
 #include <QTimer>
