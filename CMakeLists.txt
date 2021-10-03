@@ -32,7 +32,6 @@ set(KLDAP_LIB_VERSION ${PIM_VERSION})
 find_package(KF5KIO ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5DocTools ${KF5_MIN_VERSION} CONFIG)
-find_package(KF5KIO ${KF5_MIN_VERSION} CONFIG REQUIRED)
 
 find_package(Qt5Keychain CONFIG)
 set_package_properties(Qt5Keychain PROPERTIES
