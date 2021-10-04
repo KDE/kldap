@@ -5,7 +5,6 @@
  */
 
 #include "ldapconfigurewidget.h"
-#include <QGroupBox>
 #include <QLabel>
 #include <QListWidget>
 #include <QListWidgetItem>

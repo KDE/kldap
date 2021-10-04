@@ -18,7 +18,6 @@
 
 #include <QCheckBox>
 #include <QFormLayout>
-#include <QGroupBox>
 #include <QObject>
 #include <QPushButton>
 #include <QRadioButton>

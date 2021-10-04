@@ -9,9 +9,6 @@
 #include <kldap/ldapserver.h>
 
 #include <KConfig>
-#include <KConfigGroup>
-#include <KLocalizedString>
-#include <KMessageBox>
 #include <qt5keychain/keychain.h>
 using namespace QKeychain;
 using namespace KLDAP;
