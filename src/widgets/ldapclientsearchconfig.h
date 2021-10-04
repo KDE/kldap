@@ -10,12 +10,10 @@
 
 #include <QObject>
 
-class KConfigGroup;
 class KConfig;
 
 namespace KLDAP
 {
-class LdapServer;
 class LdapClient;
 /**
  * @brief The LdapClientSearchConfig class
