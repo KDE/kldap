@@ -150,7 +150,6 @@ int Ber::printf(QString format, ...)
             bv.bv_len = O->size();
             ret = ber_printf(d->mBer, fmt, &bv);
             break;
-            break;
         }
         case 's': {
             QByteArray *s = va_arg(args, QByteArray *);
@@ -161,7 +160,6 @@ int Ber::printf(QString format, ...)
         case 't': {
             unsigned int t = va_arg(args, unsigned int);
             ret = ber_printf(d->mBer, fmt, t);
-            break;
             break;
         }
         case 'v': {
@@ -261,7 +259,6 @@ int Ber::scanf(QString format, ...)
                 ber_bvfree(bv);
             }
             break;
-            break;
         }
         case 'm': { // the same as 'O', just *bv should not be freed.
             QByteArray *m = va_arg(args, QByteArray *);
@@ -297,7 +294,6 @@ int Ber::scanf(QString format, ...)
         case 'T': {
             unsigned int *t = va_arg(args, unsigned int *);
             ret = ber_scanf(d->mBer, fmt, t);
-            break;
             break;
         }
         case 'v': {

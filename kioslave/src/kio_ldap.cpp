@@ -304,10 +304,9 @@ void LDAPProtocol::openConnection()
     bool cached = checkCachedAuthentication(info);
 
     bool firstauth = true;
-    int retval;
 
     while (true) {
-        retval = mOp.bind_s();
+        int retval = mOp.bind_s();
         if (retval == 0) {
             qCDebug(KLDAP_LOG) << "connected!";
             connected();
@@ -374,8 +373,6 @@ void LDAPProtocol::get(const QUrl &_url)
     qCDebug(KLDAP_LOG) << "get(" << _url << ")";
 
     LdapUrl usrc(_url);
-    int ret;
-    int id;
 
     changeCheck(usrc);
     if (!mConnected) {
@@ -394,7 +391,8 @@ void LDAPProtocol::get(const QUrl &_url)
         mOp.setServerControls(serverctrls);
     }
     mOp.setClientControls(clientctrls);
-
+    int ret;
+    int id;
     if ((id = mOp.search(usrc.dn(), usrc.scope(), usrc.filter(), usrc.attributes())) == -1) {
         LDAPErr();
         return;

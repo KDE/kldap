@@ -21,10 +21,10 @@ public:
 
     LdapControlPrivate(const LdapControlPrivate &other)
         : QSharedData(other)
+        , mOid(other.mOid)
+        , mValue(other.mValue)
+        , mCritical(other.mCritical)
     {
-        mOid = other.mOid;
-        mValue = other.mValue;
-        mCritical = other.mCritical;
     }
 
     QString mOid;
