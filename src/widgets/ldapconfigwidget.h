@@ -248,8 +248,8 @@ Q_SIGNALS:
     void hostNameChanged(const QString &);
 
 private:
-    class Private;
-    Private *const d;
+    class LdapConfigWidgetPrivate;
+    std::unique_ptr<LdapConfigWidgetPrivate> const d;
 };
 
 Q_DECLARE_OPERATORS_FOR_FLAGS(LdapConfigWidget::WinFlags)

@@ -128,10 +128,7 @@ AddHostDialog::AddHostDialog(KLDAP::LdapServer *server, QWidget *parent)
     d->readConfig();
 }
 
-AddHostDialog::~AddHostDialog()
-{
-    delete d;
-}
+AddHostDialog::~AddHostDialog() = default;
 
 void AddHostDialog::slotHostEditChanged(const QString &text)
 {

@@ -169,7 +169,7 @@ public:
 
 private:
     class LdifPrivate;
-    LdifPrivate *const d;
+    std::unique_ptr<LdifPrivate> const d;
 };
 }
 

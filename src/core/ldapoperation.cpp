@@ -85,10 +85,7 @@ LdapOperation::LdapOperation(LdapConnection &conn)
     setConnection(conn);
 }
 
-LdapOperation::~LdapOperation()
-{
-    delete d;
-}
+LdapOperation::~LdapOperation() = default;
 
 void LdapOperation::setConnection(LdapConnection &conn)
 {

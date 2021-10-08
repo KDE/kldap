@@ -36,15 +36,15 @@
 
 using namespace KLDAP;
 
-class Q_DECL_HIDDEN LdapClientSearch::Private
+class Q_DECL_HIDDEN LdapClientSearch::LdapClientSearchPrivate
 {
 public:
-    Private(LdapClientSearch *qq)
+    LdapClientSearchPrivate(LdapClientSearch *qq)
         : q(qq)
     {
     }
 
-    ~Private()
+    ~LdapClientSearchPrivate()
     {
     }
 
@@ -74,24 +74,21 @@ public:
 
 LdapClientSearch::LdapClientSearch(QObject *parent)
     : QObject(parent)
-    , d(new Private(this))
+    , d(new LdapClientSearchPrivate(this))
 {
     d->init(LdapClientSearch::defaultAttributes());
 }
 
 LdapClientSearch::LdapClientSearch(const QStringList &attr, QObject *parent)
     : QObject(parent)
-    , d(new Private(this))
+    , d(new LdapClientSearchPrivate(this))
 {
     d->init(attr);
 }
 
-LdapClientSearch::~LdapClientSearch()
-{
-    delete d;
-}
+LdapClientSearch::~LdapClientSearch() = default;
 
-void LdapClientSearch::Private::init(const QStringList &attributes)
+void LdapClientSearch::LdapClientSearchPrivate::init(const QStringList &attributes)
 {
 #if KCOREADDONS_VERSION < QT_VERSION_CHECK(6, 0, 0)
     Kdelibs4ConfigMigrator migrate(QStringLiteral("ldapsettings"));
@@ -117,7 +114,7 @@ void LdapClientSearch::Private::init(const QStringList &attributes)
     });
 }
 
-void LdapClientSearch::Private::readWeighForClient(LdapClient *client, const KConfigGroup &config, int clientNumber)
+void LdapClientSearch::LdapClientSearchPrivate::readWeighForClient(LdapClient *client, const KConfigGroup &config, int clientNumber)
 {
     const int completionWeight = config.readEntry(QStringLiteral("SelectedCompletionWeight%1").arg(clientNumber), -1);
     if (completionWeight != -1) {
@@ -167,7 +164,7 @@ QStringList LdapClientSearch::defaultAttributes()
     return attr;
 }
 
-void LdapClientSearch::Private::readConfig()
+void LdapClientSearch::LdapClientSearchPrivate::readConfig()
 {
     q->cancelSearch();
     qDeleteAll(mClients);
@@ -214,7 +211,7 @@ void LdapClientSearch::Private::readConfig()
     KDirWatch::self()->addFile(mConfigFile);
 }
 
-void LdapClientSearch::Private::slotFileChanged(const QString &file)
+void LdapClientSearch::LdapClientSearchPrivate::slotFileChanged(const QString &file)
 {
     if (file == mConfigFile) {
         readConfig();
@@ -266,7 +263,7 @@ void LdapClientSearch::cancelSearch()
     d->mResults.clear();
 }
 
-void LdapClientSearch::Private::slotLDAPResult(const LdapClient &client, const KLDAP::LdapObject &obj)
+void LdapClientSearch::LdapClientSearchPrivate::slotLDAPResult(const LdapClient &client, const KLDAP::LdapObject &obj)
 {
     LdapResultObject result;
     result.client = &client;
@@ -279,12 +276,12 @@ void LdapClientSearch::Private::slotLDAPResult(const LdapClient &client, const K
     }
 }
 
-void LdapClientSearch::Private::slotLDAPError(const QString &)
+void LdapClientSearch::LdapClientSearchPrivate::slotLDAPError(const QString &)
 {
     slotLDAPDone();
 }
 
-void LdapClientSearch::Private::slotLDAPDone()
+void LdapClientSearch::LdapClientSearchPrivate::slotLDAPDone()
 {
     if (--mActiveClients > 0) {
         return;
@@ -293,7 +290,7 @@ void LdapClientSearch::Private::slotLDAPDone()
     finish();
 }
 
-void LdapClientSearch::Private::slotDataTimer()
+void LdapClientSearch::LdapClientSearchPrivate::slotDataTimer()
 {
     QStringList lst;
     LdapResult::List reslist;
@@ -309,7 +306,7 @@ void LdapClientSearch::Private::slotDataTimer()
     }
 }
 
-void LdapClientSearch::Private::finish()
+void LdapClientSearch::LdapClientSearchPrivate::finish()
 {
     mDataTimer.stop();
 
@@ -317,7 +314,7 @@ void LdapClientSearch::Private::finish()
     Q_EMIT q->searchDone();
 }
 
-void LdapClientSearch::Private::makeSearchData(QStringList &ret, LdapResult::List &resList)
+void LdapClientSearch::LdapClientSearchPrivate::makeSearchData(QStringList &ret, LdapResult::List &resList)
 {
     LdapResultObject::List::ConstIterator it1(mResults.constBegin());
     const LdapResultObject::List::ConstIterator end1(mResults.constEnd());

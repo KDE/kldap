@@ -8,6 +8,7 @@
 #pragma once
 
 #include <QString>
+#include <memory>
 
 #include "kldap_export.h"
 #include "ldapserver.h"
@@ -115,7 +116,7 @@ public:
 
 private:
     class LdapConnectionPrivate;
-    LdapConnectionPrivate *const d;
+    std::unique_ptr<LdapConnectionPrivate> const d;
 
     Q_DISABLE_COPY(LdapConnection)
 };

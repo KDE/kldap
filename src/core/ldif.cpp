@@ -52,10 +52,7 @@ Ldif &Ldif::operator=(const Ldif &that)
     return *this;
 }
 
-Ldif::~Ldif()
-{
-    delete d;
-}
+Ldif::~Ldif() = default;
 
 QByteArray Ldif::assembleLine(const QString &fieldname, const QByteArray &value, uint linelen, bool url)
 {

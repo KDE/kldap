@@ -35,7 +35,7 @@ private Q_SLOTS:
     void slotOk();
 
 private:
-    AddHostDialogPrivate *const d;
+    std::unique_ptr<AddHostDialogPrivate> const d;
 };
 }
 

@@ -10,7 +10,7 @@
 #include <QByteArray>
 
 #include "kldap_export.h"
-
+#include <memory>
 // clazy:excludeall=copyable-polymorphic
 
 namespace KLDAP
@@ -109,6 +109,6 @@ public:
 
 private:
     class BerPrivate;
-    BerPrivate *const d;
+    std::unique_ptr<BerPrivate> const d;
 };
 }

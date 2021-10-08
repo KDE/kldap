@@ -126,7 +126,7 @@ Q_SIGNALS:
     void result(KLDAP::LdapSearch *search);
 
 private:
-    LdapSearchPrivate *const d;
+    std::unique_ptr<LdapSearchPrivate> const d;
     Q_DISABLE_COPY(LdapSearch)
 };
 }

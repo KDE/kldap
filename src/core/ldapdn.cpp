@@ -109,10 +109,7 @@ LdapDN &LdapDN::operator=(const LdapDN &that)
     return *this;
 }
 
-LdapDN::~LdapDN()
-{
-    delete d;
-}
+LdapDN::~LdapDN() = default;
 
 void LdapDN::clear()
 {

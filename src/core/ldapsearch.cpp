@@ -253,7 +253,6 @@ LdapSearch::LdapSearch(LdapConnection &connection)
 LdapSearch::~LdapSearch()
 {
     d->closeConnection();
-    delete d;
 }
 
 void LdapSearch::setConnection(LdapConnection &connection)

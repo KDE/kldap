@@ -9,7 +9,7 @@
 #include "kldap_export.h"
 
 #include <QObject>
-
+#include <memory>
 class KConfig;
 
 namespace KLDAP
@@ -33,8 +33,8 @@ public:
 
 private:
     //@cond PRIVATE
-    class Private;
-    Private *const d;
+    class LdapClientSearchConfigPrivate;
+    std::unique_ptr<LdapClientSearchConfigPrivate> const d;
 };
 }
 

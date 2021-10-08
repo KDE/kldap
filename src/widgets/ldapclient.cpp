@@ -21,15 +21,15 @@
 
 using namespace KLDAP;
 
-class Q_DECL_HIDDEN LdapClient::Private
+class Q_DECL_HIDDEN LdapClient::LdapClientPrivate
 {
 public:
-    Private(LdapClient *qq)
+    LdapClientPrivate(LdapClient *qq)
         : q(qq)
     {
     }
 
-    ~Private()
+    ~LdapClientPrivate()
     {
         q->cancelQuery();
     }
@@ -60,16 +60,13 @@ public:
 
 LdapClient::LdapClient(int clientNumber, QObject *parent)
     : QObject(parent)
-    , d(new Private(this))
+    , d(new LdapClientPrivate(this))
 {
     d->mClientNumber = clientNumber;
     d->mCompletionWeight = 50 - d->mClientNumber;
 }
 
-LdapClient::~LdapClient()
-{
-    delete d;
-}
+LdapClient::~LdapClient() = default;
 
 bool LdapClient::isActive() const
 {
@@ -144,17 +141,17 @@ void LdapClient::cancelQuery()
     d->mActive = false;
 }
 
-void LdapClient::Private::slotData(KIO::Job *, const QByteArray &data)
+void LdapClient::LdapClientPrivate::slotData(KIO::Job *, const QByteArray &data)
 {
     parseLDIF(data);
 }
 
-void LdapClient::Private::slotInfoMessage(KJob *, const QString &info, const QString &)
+void LdapClient::LdapClientPrivate::slotInfoMessage(KJob *, const QString &info, const QString &)
 {
     qCDebug(LDAPCLIENT_LOG) << "Job said :" << info;
 }
 
-void LdapClient::Private::slotDone()
+void LdapClient::LdapClientPrivate::slotDone()
 {
     endParseLDIF();
     mActive = false;
@@ -168,17 +165,17 @@ void LdapClient::Private::slotDone()
     Q_EMIT q->done();
 }
 
-void LdapClient::Private::startParseLDIF()
+void LdapClient::LdapClientPrivate::startParseLDIF()
 {
     mCurrentObject.clear();
     mLdif.startParsing();
 }
 
-void LdapClient::Private::endParseLDIF()
+void LdapClient::LdapClientPrivate::endParseLDIF()
 {
 }
 
-void LdapClient::Private::finishCurrentObject()
+void LdapClient::LdapClientPrivate::finishCurrentObject()
 {
     mCurrentObject.setDn(mLdif.dn());
     KLDAP::LdapAttrValue objectclasses;
@@ -228,7 +225,7 @@ void LdapClient::Private::finishCurrentObject()
     mCurrentObject.clear();
 }
 
-void LdapClient::Private::parseLDIF(const QByteArray &data)
+void LdapClient::LdapClientPrivate::parseLDIF(const QByteArray &data)
 {
     // qCDebug(LDAPCLIENT_LOG) <<"LdapClient::parseLDIF(" << QCString(data.data(), data.size()+1) <<" )";
     if (!data.isEmpty()) {

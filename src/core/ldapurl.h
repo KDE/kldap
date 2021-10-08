@@ -162,7 +162,7 @@ public:
 
 private:
     class LdapUrlPrivate;
-    LdapUrlPrivate *const d;
+    std::unique_ptr<LdapUrlPrivate> const d;
 };
 }
 

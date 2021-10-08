@@ -8,9 +8,9 @@
 #pragma once
 
 #include "kldap_export.h"
-
 #include <QObject>
 #include <QStringList>
+#include <memory>
 
 namespace KLDAP
 {
@@ -132,8 +132,8 @@ Q_SIGNALS:
 
 private:
     //@cond PRIVATE
-    class Private;
-    Private *const d;
+    class LdapClientPrivate;
+    std::unique_ptr<LdapClientPrivate> const d;
     //@endcond
 };
 }

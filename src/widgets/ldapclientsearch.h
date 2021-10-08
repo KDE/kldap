@@ -166,8 +166,8 @@ Q_SIGNALS:
 
 private:
     //@cond PRIVATE
-    class Private;
-    Private *const d;
+    class LdapClientSearchPrivate;
+    std::unique_ptr<LdapClientSearchPrivate> const d;
     //@endcond
 };
 }

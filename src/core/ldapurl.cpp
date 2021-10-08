@@ -56,10 +56,7 @@ LdapUrl &LdapUrl::operator=(const LdapUrl &that)
     return *this;
 }
 
-LdapUrl::~LdapUrl()
-{
-    delete d;
-}
+LdapUrl::~LdapUrl() = default;
 
 void LdapUrl::setDn(const LdapDN &dn)
 {

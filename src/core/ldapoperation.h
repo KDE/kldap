@@ -19,6 +19,8 @@
 #include <QList>
 #include <QString>
 
+#include <memory>
+
 namespace KLDAP
 {
 /**
@@ -264,7 +266,7 @@ public:
 
 private:
     class LdapOperationPrivate;
-    LdapOperationPrivate *const d;
+    std::unique_ptr<LdapOperationPrivate> const d;
 
     Q_DISABLE_COPY(LdapOperation)
 };

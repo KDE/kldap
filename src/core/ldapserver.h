@@ -309,7 +309,7 @@ public:
 
 private:
     class LdapServerPrivate;
-    LdapServerPrivate *const d;
+    std::unique_ptr<LdapServerPrivate> const d;
 };
 }
 KLDAP_EXPORT QDebug operator<<(QDebug d, const KLDAP::LdapServer &t);

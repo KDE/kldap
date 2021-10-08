@@ -9,7 +9,7 @@
 
 #include "kldap_export.h"
 #include <QString>
-
+#include <memory>
 namespace KLDAP
 {
 class KLDAP_EXPORT LdapDN
@@ -65,7 +65,7 @@ public:
 
 private:
     class LdapDNPrivate;
-    LdapDNPrivate *const d;
+    std::unique_ptr<LdapDNPrivate> const d;
 };
 }
 

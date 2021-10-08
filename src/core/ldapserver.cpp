@@ -67,10 +67,7 @@ LdapServer &LdapServer::operator=(const LdapServer &that)
     return *this;
 }
 
-LdapServer::~LdapServer()
-{
-    delete d;
-}
+LdapServer::~LdapServer() = default;
 
 void LdapServer::clear()
 {

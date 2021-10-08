@@ -73,7 +73,6 @@ Ber::Ber(const QByteArray &value)
 Ber::~Ber()
 {
     ber_free(d->mBer, 1);
-    delete d;
 }
 
 Ber::Ber(const Ber &that)

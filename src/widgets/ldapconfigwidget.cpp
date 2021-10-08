@@ -25,10 +25,10 @@
 
 using namespace KLDAP;
 
-class Q_DECL_HIDDEN LdapConfigWidget::Private
+class Q_DECL_HIDDEN LdapConfigWidget::LdapConfigWidgetPrivate
 {
 public:
-    Private(LdapConfigWidget *parent)
+    LdapConfigWidgetPrivate(LdapConfigWidget *parent)
         : mParent(parent)
     {
         mainLayout = new QFormLayout(mParent);
@@ -81,7 +81,7 @@ public:
     bool mCancelled = false;
 };
 
-void LdapConfigWidget::Private::initWidget()
+void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
 {
     if (mFeatures & W_USER) {
         mUser = new QLineEdit(mParent);
@@ -272,7 +272,7 @@ void LdapConfigWidget::Private::initWidget()
     }
 }
 
-void LdapConfigWidget::Private::sendQuery()
+void LdapConfigWidget::LdapConfigWidgetPrivate::sendQuery()
 {
     LdapServer _server(mParent->server());
 
@@ -328,7 +328,7 @@ void LdapConfigWidget::Private::sendQuery()
     }
 }
 
-void LdapConfigWidget::Private::queryMechClicked()
+void LdapConfigWidget::LdapConfigWidgetPrivate::queryMechClicked()
 {
     mAttr = QStringLiteral("supportedsaslmechanisms");
     sendQuery();
@@ -339,7 +339,7 @@ void LdapConfigWidget::Private::queryMechClicked()
     }
 }
 
-void LdapConfigWidget::Private::queryDNClicked()
+void LdapConfigWidget::LdapConfigWidgetPrivate::queryDNClicked()
 {
     mAttr = QStringLiteral("namingcontexts");
     sendQuery();
@@ -348,7 +348,7 @@ void LdapConfigWidget::Private::queryDNClicked()
     }
 }
 
-void LdapConfigWidget::Private::loadData(LdapSearch *, const LdapObject &object)
+void LdapConfigWidget::LdapConfigWidgetPrivate::loadData(LdapSearch *, const LdapObject &object)
 {
     qCDebug(LDAP_LOG) << "object:" << object.toString();
     mProg->setValue(mProg->value() + 1);
@@ -361,14 +361,14 @@ void LdapConfigWidget::Private::loadData(LdapSearch *, const LdapObject &object)
     }
 }
 
-void LdapConfigWidget::Private::loadResult(LdapSearch *search)
+void LdapConfigWidget::LdapConfigWidgetPrivate::loadResult(LdapSearch *search)
 {
     Q_UNUSED(search)
     mCancelled = false;
     mProg->close();
 }
 
-void LdapConfigWidget::Private::setAnonymous(bool on)
+void LdapConfigWidget::LdapConfigWidgetPrivate::setAnonymous(bool on)
 {
     if (!on) {
         return;
@@ -393,7 +393,7 @@ void LdapConfigWidget::Private::setAnonymous(bool on)
     }
 }
 
-void LdapConfigWidget::Private::setSimple(bool on)
+void LdapConfigWidget::LdapConfigWidgetPrivate::setSimple(bool on)
 {
     if (!on) {
         return;
@@ -418,7 +418,7 @@ void LdapConfigWidget::Private::setSimple(bool on)
     }
 }
 
-void LdapConfigWidget::Private::setSASL(bool on)
+void LdapConfigWidget::LdapConfigWidgetPrivate::setSASL(bool on)
 {
     if (!on) {
         return;
@@ -443,14 +443,14 @@ void LdapConfigWidget::Private::setSASL(bool on)
     }
 }
 
-void LdapConfigWidget::Private::setLDAPPort()
+void LdapConfigWidget::LdapConfigWidgetPrivate::setLDAPPort()
 {
     if (mPort) {
         mPort->setValue(389);
     }
 }
 
-void LdapConfigWidget::Private::setLDAPSPort()
+void LdapConfigWidget::LdapConfigWidgetPrivate::setLDAPSPort()
 {
     if (mPort) {
         mPort->setValue(636);
@@ -459,23 +459,20 @@ void LdapConfigWidget::Private::setLDAPSPort()
 
 LdapConfigWidget::LdapConfigWidget(QWidget *parent, Qt::WindowFlags fl)
     : QWidget(parent, fl)
-    , d(new Private(this))
+    , d(new LdapConfigWidgetPrivate(this))
 {
 }
 
 LdapConfigWidget::LdapConfigWidget(LdapConfigWidget::WinFlags flags, QWidget *parent, Qt::WindowFlags fl)
     : QWidget(parent, fl)
-    , d(new Private(this))
+    , d(new LdapConfigWidgetPrivate(this))
 {
     d->mFeatures = flags;
 
     d->initWidget();
 }
 
-LdapConfigWidget::~LdapConfigWidget()
-{
-    delete d;
-}
+LdapConfigWidget::~LdapConfigWidget() = default;
 
 LdapUrl LdapConfigWidget::url() const
 {

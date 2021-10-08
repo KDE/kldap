@@ -13,14 +13,14 @@
 using namespace QKeychain;
 using namespace KLDAP;
 
-class Q_DECL_HIDDEN LdapClientSearchConfig::Private
+class Q_DECL_HIDDEN LdapClientSearchConfig::LdapClientSearchConfigPrivate
 {
 public:
-    Private()
+    LdapClientSearchConfigPrivate()
     {
     }
 
-    ~Private()
+    ~LdapClientSearchConfigPrivate()
     {
     }
 };
@@ -34,14 +34,12 @@ KConfig *LdapClientSearchConfig::config()
 
 LdapClientSearchConfig::LdapClientSearchConfig(QObject *parent)
     : QObject(parent)
-    , d(new LdapClientSearchConfig::Private())
+    , d(new LdapClientSearchConfig::LdapClientSearchConfigPrivate())
 {
 }
 
-LdapClientSearchConfig::~LdapClientSearchConfig()
-{
-    delete d;
-}
+LdapClientSearchConfig::~LdapClientSearchConfig() = default;
+
 #if 0 // Port it
 void LdapClientSearchConfig::clearWalletPassword()
 {
