@@ -47,7 +47,7 @@ public:
      */
     explicit LdapSearch(LdapConnection &connection);
 
-    ~LdapSearch();
+    ~LdapSearch() override;
 
     /**
      * Sets the connection for this object to use for searches from now

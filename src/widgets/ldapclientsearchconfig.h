@@ -24,7 +24,7 @@ class KLDAP_EXPORT LdapClientSearchConfig : public QObject
     Q_OBJECT
 public:
     explicit LdapClientSearchConfig(QObject *parent = nullptr);
-    ~LdapClientSearchConfig();
+    ~LdapClientSearchConfig() override;
 
     /**
      * Returns the global config object, which stores the LdapClient configurations.

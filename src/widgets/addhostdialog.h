@@ -25,7 +25,7 @@ class KLDAP_EXPORT AddHostDialog : public QDialog
 
 public:
     explicit AddHostDialog(KLDAP::LdapServer *server, QWidget *parent = nullptr);
-    ~AddHostDialog();
+    ~AddHostDialog() override;
 
 Q_SIGNALS:
     void changed(bool);

@@ -27,7 +27,7 @@ class KLDAP_EXPORT LdapConfigureWidget : public QWidget
     Q_OBJECT
 public:
     explicit LdapConfigureWidget(QWidget *parent = nullptr);
-    ~LdapConfigureWidget();
+    ~LdapConfigureWidget() override;
 
     void load();
     void save();
