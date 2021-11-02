@@ -8,7 +8,6 @@
 #include "ldapclient_debug.h"
 
 #include <KConfig>
-#include <KConfigGroup>
 #include <KLocalizedString>
 #include <kldap/ldapdn.h>
 #include <qt5keychain/keychain.h>
