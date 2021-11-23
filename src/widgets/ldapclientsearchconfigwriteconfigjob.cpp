@@ -18,9 +18,7 @@ LdapClientSearchConfigWriteConfigJob::LdapClientSearchConfigWriteConfigJob(QObje
 {
 }
 
-LdapClientSearchConfigWriteConfigJob::~LdapClientSearchConfigWriteConfigJob()
-{
-}
+LdapClientSearchConfigWriteConfigJob::~LdapClientSearchConfigWriteConfigJob() = default;
 
 bool LdapClientSearchConfigWriteConfigJob::canStart() const
 {

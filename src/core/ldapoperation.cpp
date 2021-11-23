@@ -12,7 +12,7 @@
 
 #include <QElapsedTimer>
 
-#include <stdlib.h>
+#include <cstdlib>
 
 // for struct timeval
 #if defined(HAVE_SYS_TIME_H)
@@ -152,13 +152,9 @@ QByteArray LdapOperation::serverCred() const
     return d->mServerCred;
 }
 
-LdapOperation::LdapOperationPrivate::LdapOperationPrivate()
-{
-}
+LdapOperation::LdapOperationPrivate::LdapOperationPrivate() = default;
 
-LdapOperation::LdapOperationPrivate::~LdapOperationPrivate()
-{
-}
+LdapOperation::LdapOperationPrivate::~LdapOperationPrivate() = default;
 
 #ifdef LDAP_FOUND
 

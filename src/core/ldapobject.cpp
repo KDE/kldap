@@ -15,9 +15,7 @@ using namespace KLDAP;
 class LdapObjectPrivate : public QSharedData
 {
 public:
-    LdapObjectPrivate()
-    {
-    }
+    LdapObjectPrivate() = default;
 
     LdapObjectPrivate(const LdapObjectPrivate &other)
         : QSharedData(other)
@@ -41,14 +39,11 @@ LdapObject::LdapObject(const QString &dn)
     d->mDn = LdapDN(dn);
 }
 
-LdapObject::~LdapObject()
-{
-}
+LdapObject::~LdapObject() = default;
 
 LdapObject::LdapObject(const LdapObject &that)
-    : d(that.d)
-{
-}
+
+    = default;
 
 LdapObject &LdapObject::operator=(const LdapObject &that)
 {
@@ -119,7 +114,7 @@ LdapAttrValue LdapObject::values(const QString &attributeName) const
     if (hasAttribute(attributeName)) {
         return d->mAttrs.value(attributeName);
     } else {
-        return LdapAttrValue();
+        return {};
     }
 }
 
@@ -128,7 +123,7 @@ QByteArray LdapObject::value(const QString &attributeName) const
     if (hasAttribute(attributeName)) {
         return d->mAttrs.value(attributeName).first();
     } else {
-        return QByteArray();
+        return {};
     }
 }
 

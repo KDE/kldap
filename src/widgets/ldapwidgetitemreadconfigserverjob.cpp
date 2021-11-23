@@ -13,9 +13,7 @@ LdapWidgetItemReadConfigServerJob::LdapWidgetItemReadConfigServerJob(QObject *pa
 {
 }
 
-LdapWidgetItemReadConfigServerJob::~LdapWidgetItemReadConfigServerJob()
-{
-}
+LdapWidgetItemReadConfigServerJob::~LdapWidgetItemReadConfigServerJob() = default;
 
 void LdapWidgetItemReadConfigServerJob::start()
 {

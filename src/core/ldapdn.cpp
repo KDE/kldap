@@ -15,13 +15,9 @@ using namespace KLDAP;
 class Q_DECL_HIDDEN LdapDN::LdapDNPrivate
 {
 public:
-    LdapDNPrivate()
-    {
-    }
+    LdapDNPrivate() = default;
 
-    ~LdapDNPrivate()
-    {
-    }
+    ~LdapDNPrivate() = default;
 
     Q_REQUIRED_RESULT bool isValidRDNString(const QString &rdn) const;
     Q_REQUIRED_RESULT QStringList splitOnNonEscapedChar(const QString &rdn, QChar ch) const;
@@ -130,7 +126,7 @@ QString LdapDN::toString(int depth) const
 {
     const QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, QLatin1Char(','));
     if (depth >= rdns.size()) {
-        return QString();
+        return {};
     }
 
     // Construct a DN down to the requested depth
@@ -155,7 +151,7 @@ QString LdapDN::rdnString(int depth) const
 {
     const QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, QLatin1Char(','));
     if (depth >= rdns.size()) {
-        return QString();
+        return {};
     }
     return rdns.at(rdns.size() - 1 - depth);
 }

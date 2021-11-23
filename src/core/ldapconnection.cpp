@@ -11,7 +11,7 @@
 
 #include "ldap_debug.h"
 #include <KLocalizedString>
-#include <stdlib.h>
+#include <cstdlib>
 
 #include <sasl/sasl.h>
 static const sasl_callback_t callbacks[] = {{SASL_CB_ECHOPROMPT, nullptr, nullptr},

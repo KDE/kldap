@@ -15,7 +15,7 @@
 #include <QApplication>
 #include <QCommandLineParser>
 #include <QStandardPaths>
-#include <stdlib.h>
+#include <cstdlib>
 
 int main(int argc, char *argv[])
 {
@@ -34,9 +34,7 @@ int main(int argc, char *argv[])
     return 0;
 }
 
-TestLDAPClient::TestLDAPClient()
-{
-}
+TestLDAPClient::TestLDAPClient() = default;
 
 void TestLDAPClient::setup()
 {
@@ -128,7 +126,7 @@ void TestLDAPClient::testIntevation()
 static QString asUtf8(const QByteArray &val)
 {
     if (val.isEmpty()) {
-        return QString();
+        return {};
     }
 
     const char *data = val.data();

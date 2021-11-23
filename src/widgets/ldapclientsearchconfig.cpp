@@ -16,13 +16,9 @@ using namespace KLDAP;
 class Q_DECL_HIDDEN LdapClientSearchConfig::LdapClientSearchConfigPrivate
 {
 public:
-    LdapClientSearchConfigPrivate()
-    {
-    }
+    LdapClientSearchConfigPrivate() = default;
 
-    ~LdapClientSearchConfigPrivate()
-    {
-    }
+    ~LdapClientSearchConfigPrivate() = default;
 };
 
 Q_GLOBAL_STATIC_WITH_ARGS(KConfig, s_config, (QLatin1String("kabldaprc"), KConfig::NoGlobals))

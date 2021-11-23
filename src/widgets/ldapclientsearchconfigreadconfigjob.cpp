@@ -19,9 +19,7 @@ LdapClientSearchConfigReadConfigJob::LdapClientSearchConfigReadConfigJob(QObject
 {
 }
 
-LdapClientSearchConfigReadConfigJob::~LdapClientSearchConfigReadConfigJob()
-{
-}
+LdapClientSearchConfigReadConfigJob::~LdapClientSearchConfigReadConfigJob() = default;
 
 bool LdapClientSearchConfigReadConfigJob::canStart() const
 {

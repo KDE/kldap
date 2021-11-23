@@ -44,9 +44,7 @@ public:
     {
     }
 
-    ~LdapClientSearchPrivate()
-    {
-    }
+    ~LdapClientSearchPrivate() = default;
 
     void readWeighForClient(LdapClient *client, const KConfigGroup &config, int clientNumber);
     void readConfig();

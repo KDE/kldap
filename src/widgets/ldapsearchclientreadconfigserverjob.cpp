@@ -14,9 +14,7 @@ LdapSearchClientReadConfigServerJob::LdapSearchClientReadConfigServerJob(QObject
 {
 }
 
-LdapSearchClientReadConfigServerJob::~LdapSearchClientReadConfigServerJob()
-{
-}
+LdapSearchClientReadConfigServerJob::~LdapSearchClientReadConfigServerJob() = default;
 
 void LdapSearchClientReadConfigServerJob::start()
 {

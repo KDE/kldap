@@ -15,17 +15,11 @@ using namespace KLDAP;
 class LdapControlPrivate : public QSharedData
 {
 public:
-    LdapControlPrivate()
-    {
-    }
+    LdapControlPrivate() = default;
 
     LdapControlPrivate(const LdapControlPrivate &other)
-        : QSharedData(other)
-        , mOid(other.mOid)
-        , mValue(other.mValue)
-        , mCritical(other.mCritical)
-    {
-    }
+
+        = default;
 
     QString mOid;
     QByteArray mValue;
@@ -61,9 +55,7 @@ LdapControl &LdapControl::operator=(const LdapControl &that)
     return *this;
 }
 
-LdapControl::~LdapControl()
-{
-}
+LdapControl::~LdapControl() = default;
 
 void LdapControl::setControl(const QString &oid, const QByteArray &value, bool critical)
 {
