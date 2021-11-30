@@ -7,4 +7,7 @@ Dependencies:
     'frameworks/extra-cmake-modules': '@latest'
     'frameworks/kio': '@stable'
     'frameworks/ki18n': '@stable'
-    'frameworks/kdoctools': '@stable'
+
+- 'on': ['Linux', 'FreeBSD', 'Windows', 'macOS']
+  'require':
+    'frameworks/kdoctools' : '@stable'      
