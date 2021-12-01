@@ -1,3 +1,5 @@
+# SPDX-FileCopyrightText: none
+# SPDX-License-Identifier: BSD-3-Clause
 add_library(kio_ldap MODULE)
 
 target_sources(kio_ldap PRIVATE kio_ldap.cpp kio_ldap.h)
