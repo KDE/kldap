@@ -691,11 +691,6 @@ void LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
  */
 void LDAPProtocol::listDir(const QUrl &_url)
 {
-    int ret;
-    int ret2;
-    int id;
-    int id2;
-    unsigned long total = 0;
     QStringList att;
     QStringList saveatt;
     LdapUrl usrc(_url);
@@ -720,6 +715,7 @@ void LDAPProtocol::listDir(const QUrl &_url)
     if (_url.query().isEmpty()) {
         usrc.setScope(LdapUrl::One);
     }
+    int id;
 
     if ((id = mOp.search(usrc.dn(), usrc.scope(), usrc.filter(), usrc.attributes())) == -1) {
         LDAPErr();
@@ -730,6 +726,11 @@ void LDAPProtocol::listDir(const QUrl &_url)
     usrc.setExtension(QStringLiteral("x-dir"), QStringLiteral("base"));
     // publish the results
     UDSEntry uds;
+
+    int ret;
+    int ret2;
+    int id2;
+    unsigned long total = 0;
 
     while (true) {
         ret = mOp.waitForResult(id, -1);
