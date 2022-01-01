@@ -33,7 +33,7 @@
 #
 #=============================================================================
 # SPDX-FileCopyrightText: 2006 Szombathelyi György <gyurco@freemail.hu>
-# SPDX-FileCopyrightText: 2007-2021 Laurent Montel <montel@kde.org>
+# SPDX-FileCopyrightText: 2007-2022 Laurent Montel <montel@kde.org>
 #
 # SPDX-License-Identifier: BSD-3-Clause
 #=============================================================================
