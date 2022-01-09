@@ -35,8 +35,8 @@ find_package(KF5KIO ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF5DocTools ${KF5_MIN_VERSION} CONFIG)
 
-find_package(Qt5Keychain CONFIG)
-set_package_properties(Qt5Keychain PROPERTIES
+find_package(Qt${QT_MAJOR_VERSION}Keychain CONFIG)
+set_package_properties(Qt${QT_MAJOR_VERSION}Keychain PROPERTIES
                                    DESCRIPTION "Provides support for secure credentials storage"
                                    URL "https://github.com/frankosterfeld/qtkeychain"
 				   TYPE REQUIRED)
@@ -104,7 +104,7 @@ install(EXPORT KF5LdapTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF5L
 
 install(FILES
    ${CMAKE_CURRENT_BINARY_DIR}/kldap_version.h
-   DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}
+   DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}
    COMPONENT Devel
 )
 

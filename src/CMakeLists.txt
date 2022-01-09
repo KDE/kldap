@@ -105,17 +105,22 @@ generate_export_header(KF5Ldap BASE_NAME kldap)
 
 target_link_libraries(KF5Ldap
 PRIVATE
-  Qt::Widgets
+  Qt${QT_MAJOR_VERSION}::Widgets
   KF5::I18n
   KF5::WidgetsAddons
   KF5::ConfigCore
   KF5::CoreAddons
   KF5::KIOCore
   ${kldap_EXTRA_LIBS}
-  qt5keychain
 )
 
-target_include_directories(KF5Ldap INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF5}/KLDAP>")
+if (QT_MAJOR_VERSION STREQUAL "6")
+    target_link_libraries(KF5Ldap PRIVATE qt6keychain)
+else()
+    target_link_libraries(KF5Ldap PRIVATE qt5keychain)
+endif()
+
+target_include_directories(KF5Ldap INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/KLDAP>")
 target_include_directories(KF5Ldap PUBLIC "$<BUILD_INTERFACE:${KLdap_SOURCE_DIR}/src/core;${KLdap_BINARY_DIR}/src>")
 
 set_target_properties(KF5Ldap PROPERTIES
@@ -166,14 +171,14 @@ install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/kldap_export.h
     ${KLdapCore_HEADERS}
     ${KLdapWidgets_HEADERS}
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KLDAP/kldap
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KLDAP/kldap
     COMPONENT Devel
 )
 
 install(FILES
     ${KLdapCore_CamelCase_HEADERS}
     ${KLdapWidgets_CamelCase_HEADERS}
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF5}/KLDAP/KLDAP/
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KLDAP/KLDAP/
     COMPONENT Devel
 )
 
@@ -204,6 +209,6 @@ if (BUILD_QCH)
     )
 endif()
 
-ecm_generate_pri_file(BASE_NAME Ldap LIB_NAME KF5Ldap FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF5}/KLDAP/)
+ecm_generate_pri_file(BASE_NAME Ldap LIB_NAME KF5Ldap FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR_KF}/KLDAP/)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
 
