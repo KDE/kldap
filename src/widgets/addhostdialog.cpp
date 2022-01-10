@@ -66,7 +66,11 @@ AddHostDialog::AddHostDialog(KLDAP::LdapServer *server, QWidget *parent)
     auto buttonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel, this);
     d->mOkButton = buttonBox->button(QDialogButtonBox::Ok);
     d->mOkButton->setDefault(true);
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     d->mOkButton->setShortcut(Qt::CTRL | Qt::Key_Return);
+#else
+    d->mOkButton->setShortcut({Qt::CTRL, Qt::Key_Return});
+#endif
     connect(buttonBox, &QDialogButtonBox::rejected, this, &AddHostDialog::reject);
 
     setModal(true);

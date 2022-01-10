@@ -24,8 +24,7 @@
 #include <KConfigGroup>
 #include <KDirWatch>
 #include <KProtocolInfo>
-#include <kcoreaddons_version.h>
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
 #include <Kdelibs4ConfigMigrator>
 #endif
 
@@ -88,7 +87,7 @@ LdapClientSearch::~LdapClientSearch() = default;
 
 void LdapClientSearch::LdapClientSearchPrivate::init(const QStringList &attributes)
 {
-#if KCOREADDONS_VERSION < QT_VERSION_CHECK(6, 0, 0)
+#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     Kdelibs4ConfigMigrator migrate(QStringLiteral("ldapsettings"));
     migrate.setConfigFiles(QStringList() << QStringLiteral("kabldaprc"));
     migrate.migrate();
