@@ -104,7 +104,7 @@ install(EXPORT KF5LdapTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KF5L
 
 install(FILES
    ${CMAKE_CURRENT_BINARY_DIR}/kldap_version.h
-   DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}
+   DESTINATION ${KDE_INSTALL_INCLUDEDIR_KF}/KLDAP
    COMPONENT Devel
 )
 
@@ -125,7 +125,7 @@ ecm_qt_install_logging_categories(
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 ki18n_install(po)
 if(KF5DocTools_FOUND)
-    kdoctools_install(po)
+	#kdoctools_install(po)
 endif()
 
 if (BUILD_QCH)
