@@ -5,7 +5,7 @@
             "X-DocPath": "kioslave5/ldap/index.html",
             "deleting": true,
             "determineMimetypeFromExtension": false,
-            "exec": "kf5/kio/ldap",
+            "exec": "kf@QT_MAJOR_VERSION@/kio/ldap",
             "input": "none",
             "listing": [
                 "Name"
@@ -21,7 +21,7 @@
             "X-DocPath": "kioslave5/ldap/index.html",
             "deleting": true,
             "determineMimetypeFromExtension": false,
-            "exec": "kf5/kio/ldap",
+            "exec": "kf@QT_MAJOR_VERSION@/kio/ldap",
             "input": "none",
             "listing": [
                 "Name"

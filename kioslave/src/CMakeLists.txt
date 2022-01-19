@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: none
 # SPDX-License-Identifier: BSD-3-Clause
 add_library(kio_ldap MODULE)
-
+configure_file(ldap.json.cmake ${CMAKE_CURRENT_BINARY_DIR}/ldap.json )
 target_sources(kio_ldap PRIVATE kio_ldap.cpp kio_ldap.h)
 ecm_qt_declare_logging_category(kio_ldap HEADER kldap_debug.h IDENTIFIER KLDAP_LOG CATEGORY_NAME org.kde.pim.kldap
         DESCRIPTION "kioslave (kldap)"
@@ -15,4 +15,4 @@ if (WIN32)
     target_link_libraries(kio_ldap ws2_32)
 endif()
 set_target_properties(kio_ldap PROPERTIES OUTPUT_NAME "ldap")
-install(TARGETS kio_ldap  DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf5/kio)
+install(TARGETS kio_ldap  DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf${QT_MAJOR_VERSION}/kio)
