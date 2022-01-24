@@ -31,9 +31,11 @@ public:
 
     ~LdapClientPrivate()
     {
-        q->cancelQuery();
+        cancelQuery();
     }
 
+    void cancelQuery();
+    
     void startParseLDIF();
     void parseLDIF(const QByteArray &data);
     void endParseLDIF();
@@ -133,12 +135,17 @@ void LdapClient::startQuery(const QString &filter)
 
 void LdapClient::cancelQuery()
 {
-    if (d->mJob) {
-        d->mJob->kill();
-        d->mJob = nullptr;
+    d->cancelQuery();
+}
+
+void LdapClient::LdapClientPrivate::cancelQuery()
+{
+    if (mJob) {
+        mJob->kill();
+        mJob = nullptr;
     }
 
-    d->mActive = false;
+    mActive = false;
 }
 
 void LdapClient::LdapClientPrivate::slotData(KIO::Job *, const QByteArray &data)
