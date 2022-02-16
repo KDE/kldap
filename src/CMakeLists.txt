@@ -46,6 +46,19 @@ target_sources(KF5Ldap PRIVATE
   core/ldapcontrol.cpp
   core/ldapsearch.cpp
   core/ldapdn.cpp
+  core/ldif.h
+  core/ldapsearch.h
+  core/w32-ldap-help.h
+  core/ldapurl.h
+  core/ldapcontrol.h
+  core/ber.h
+  core/ldapdefs.h
+  core/ldapconnection.h
+  core/ldapdn.h
+  core/ldapoperation.h
+  core/ldapserver.h
+  core/ldapobject.h
+
 
   widgets/ldapconfigwidget.cpp
   widgets/addhostdialog.cpp
@@ -70,19 +83,7 @@ target_sources(KF5Ldap PRIVATE
   widgets/ldapconfigurewidget.h
   widgets/ldapsearchclientreadconfigserverjob.h
   widgets/ldapwidgetitemreadconfigserverjob.h
-  core/ldif.h
-  core/ldapsearch.h
-  core/w32-ldap-help.h
-  core/ldapurl.h
-  core/ldapcontrol.h
-  core/ber.h
-  core/ldapdefs.h
-  core/ldapconnection.h
-  core/ldapdn.h
-  core/ldapoperation.h
-  core/ldapserver.h
-  core/ldapobject.h
- )
+   )
  
 ecm_qt_declare_logging_category(KF5Ldap HEADER ldap_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME org.kde.pim.ldap
         DESCRIPTION "kldaplib (kldap)"
