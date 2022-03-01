@@ -115,11 +115,7 @@ PRIVATE
   ${kldap_EXTRA_LIBS}
 )
 
-if (QT_MAJOR_VERSION STREQUAL "6")
-    target_link_libraries(KF5Ldap PRIVATE qt6keychain)
-else()
-    target_link_libraries(KF5Ldap PRIVATE qt5keychain)
-endif()
+target_link_libraries(KF5Ldap PRIVATE qt${QT_MAJOR_VERSION}keychain)
 
 target_include_directories(KF5Ldap INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR_KF}/KLDAP>")
 target_include_directories(KF5Ldap PUBLIC "$<BUILD_INTERFACE:${KLdap_SOURCE_DIR}/src/core;${KLdap_BINARY_DIR}/src>")
