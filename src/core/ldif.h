@@ -172,4 +172,3 @@ private:
     std::unique_ptr<LdifPrivate> const d;
 };
 }
-

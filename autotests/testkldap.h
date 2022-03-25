@@ -39,4 +39,3 @@ private:
     LdapSearch *m_search = nullptr;
     LdapObjects m_objects;
 };
-

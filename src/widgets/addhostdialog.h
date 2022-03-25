@@ -38,4 +38,3 @@ private:
     std::unique_ptr<AddHostDialogPrivate> const d;
 };
 }
-

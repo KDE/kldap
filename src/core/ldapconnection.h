@@ -121,4 +121,3 @@ private:
     Q_DISABLE_COPY(LdapConnection)
 };
 }
-

@@ -143,4 +143,3 @@
  */
 
 #define KLDAP_SASL_ERROR -0xff
-

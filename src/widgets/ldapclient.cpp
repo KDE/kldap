@@ -35,7 +35,7 @@ public:
     }
 
     void cancelQuery();
-    
+
     void startParseLDIF();
     void parseLDIF(const QByteArray &data);
     void endParseLDIF();

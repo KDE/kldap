@@ -271,4 +271,3 @@ private:
     Q_DISABLE_COPY(LdapOperation)
 };
 }
-

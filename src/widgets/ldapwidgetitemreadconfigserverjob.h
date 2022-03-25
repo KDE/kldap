@@ -41,4 +41,3 @@ private:
     bool mActive = false;
 };
 }
-

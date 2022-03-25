@@ -58,4 +58,3 @@ private:
     KLDAP::LdapClientSearchConfig *const mClientSearchConfig;
 };
 }
-

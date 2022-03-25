@@ -42,4 +42,3 @@ private:
 
     KLDAP::LdapClient *mClient = nullptr;
 };
-

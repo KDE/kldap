@@ -165,4 +165,3 @@ private:
     std::unique_ptr<LdapUrlPrivate> const d;
 };
 }
-

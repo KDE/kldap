@@ -100,4 +100,3 @@ private:
 
 using LdapObjects = QVector<LdapObject>;
 }
-

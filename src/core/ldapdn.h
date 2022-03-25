@@ -68,4 +68,3 @@ private:
     std::unique_ptr<LdapDNPrivate> const d;
 };
 }
-

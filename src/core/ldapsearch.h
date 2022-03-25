@@ -130,4 +130,3 @@ private:
     Q_DISABLE_COPY(LdapSearch)
 };
 }
-
