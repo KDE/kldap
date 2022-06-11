@@ -15,13 +15,13 @@
 
 #include <cstdarg>
 
-#ifdef LDAP_FOUND
+#if LDAP_FOUND
 
 #ifdef Q_OS_SOLARIS // krazy:exclude=cpp
 #define BC31 1
 #endif
 
-#ifndef HAVE_WINLDAP_H
+#if !HAVE_WINLDAP_H
 #include <lber.h>
 #include <ldap.h>
 #else
@@ -32,8 +32,8 @@
 #define LBER_USE_DER 1
 #endif
 
-#ifndef HAVE_BER_MEMFREE
-#ifndef HAVE_WINLDAP_H
+#if !HAVE_BER_MEMFREE
+#if !HAVE_WINLDAP_H
 #define ber_memfree(x) ldap_memfree(x)
 #else
 #define ber_memfree(x) win_ldap_memfree(x)
@@ -47,12 +47,12 @@ using namespace KLDAP;
 class Q_DECL_HIDDEN Ber::BerPrivate
 {
 public:
-#ifdef LDAP_FOUND
+#if LDAP_FOUND
     BerElement *mBer = nullptr;
 #endif
 };
 
-#ifdef LDAP_FOUND
+#if LDAP_FOUND
 Ber::Ber()
     : d(new BerPrivate)
 {

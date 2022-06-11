@@ -25,8 +25,8 @@ static const sasl_callback_t callbacks[] = {{SASL_CB_ECHOPROMPT, nullptr, nullpt
 
 static bool ldapoperation_sasl_initialized = false;
 
-#ifdef LDAP_FOUND
-#ifndef HAVE_WINLDAP_H
+#if LDAP_FOUND
+#if !HAVE_WINLDAP_H
 #include <lber.h>
 #include <ldap.h>
 #else
@@ -48,7 +48,7 @@ public:
     LdapServer mServer;
     QString mConnectionError;
 
-#ifdef LDAP_FOUND
+#if LDAP_FOUND
     LDAP *mLDAP;
 #else
     void *mLDAP;
@@ -118,7 +118,7 @@ void *LdapConnection::saslHandle() const
 QString LdapConnection::errorString(int code)
 {
     // No translated error messages yet
-#ifdef LDAP_FOUND
+#if LDAP_FOUND
     return QString::fromUtf8(ldap_err2string(code));
 #else
     return i18n("No LDAP Support...");
@@ -137,7 +137,7 @@ QString LdapConnection::connectionError() const
     return d->mConnectionError;
 }
 
-#ifdef LDAP_FOUND
+#if LDAP_FOUND
 int LdapConnection::getOption(int option, void *value) const
 {
     Q_ASSERT(d->mLDAP);
@@ -225,7 +225,7 @@ int LdapConnection::connect()
     url += QLatin1Char(':');
     url += QString::number(d->mServer.port());
     qCDebug(LDAP_LOG) << "ldap url:" << url;
-#ifdef HAVE_LDAP_INITIALIZE
+#if HAVE_LDAP_INITIALIZE
     ret = ldap_initialize(&d->mLDAP, url.toLatin1().constData());
 #else
     d->mLDAP = ldap_init(d->mServer.host().toLatin1().data(), d->mServer.port());
@@ -314,7 +314,7 @@ int LdapConnection::connect()
     if (d->mServer.security() == LdapServer::TLS) {
         qCDebug(LDAP_LOG) << "start TLS";
 
-#ifdef HAVE_LDAP_START_TLS_S
+#if HAVE_LDAP_START_TLS_S
         if ((ret = ldap_start_tls_s(d->mLDAP, nullptr, nullptr)) != LDAP_SUCCESS) {
             d->mConnectionError = ldapErrorString();
             close();
@@ -360,7 +360,7 @@ int LdapConnection::connect()
 void LdapConnection::close()
 {
     if (d->mLDAP) {
-#ifdef HAVE_LDAP_UNBIND_EXT
+#if HAVE_LDAP_UNBIND_EXT
         ldap_unbind_ext(d->mLDAP, nullptr, nullptr);
 #else
         ldap_unbind(d->mLDAP);

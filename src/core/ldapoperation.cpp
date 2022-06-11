@@ -15,7 +15,7 @@
 #include <cstdlib>
 
 // for struct timeval
-#if defined(HAVE_SYS_TIME_H)
+#if HAVE_SYS_TIME_H
 #include <sys/time.h>
 #elif defined(_WIN32)
 #include <winsock2.h>
@@ -23,8 +23,8 @@
 
 #include <sasl/sasl.h>
 
-#ifdef LDAP_FOUND
-#ifndef HAVE_WINLDAP_H
+#if LDAP_FOUND
+#if !HAVE_WINLDAP_H
 #include <lber.h>
 #include <ldap.h>
 #else
@@ -36,7 +36,7 @@
 
 using namespace KLDAP;
 
-#ifdef LDAP_FOUND
+#if LDAP_FOUND
 static void extractControls(LdapControls &ctrls, LDAPControl **pctrls);
 #endif // LDAP_FOUND
 
@@ -59,7 +59,7 @@ class Q_DECL_HIDDEN LdapOperation::LdapOperationPrivate
 public:
     LdapOperationPrivate();
     ~LdapOperationPrivate();
-#ifdef LDAP_FOUND
+#if LDAP_FOUND
     int processResult(int rescode, LDAPMessage *msg);
     int bind(const QByteArray &creds, SASL_Callback_Proc *saslproc, void *data, bool async);
 #endif
@@ -156,7 +156,7 @@ LdapOperation::LdapOperationPrivate::LdapOperationPrivate() = default;
 
 LdapOperation::LdapOperationPrivate::~LdapOperationPrivate() = default;
 
-#ifdef LDAP_FOUND
+#if LDAP_FOUND
 
 static int kldap_sasl_interact(sasl_interact_t *interact, LdapOperation::SASL_Data *data)
 {
@@ -324,7 +324,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds, SASL_Call
 
         if (async) {
             qCDebug(LDAP_LOG) << "ldap_sasl_bind (simple)";
-#ifndef HAVE_WINLDAP_H
+#if !HAVE_WINLDAP_H
             int msgid = 0;
             ret = ldap_sasl_bind(ld, bindname.data(), nullptr, &ccred, nullptr, nullptr, &msgid);
             if (ret == 0) {
@@ -335,7 +335,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds, SASL_Call
 #endif
         } else {
             qCDebug(LDAP_LOG) << "ldap_sasl_bind_s (simple)";
-#ifndef HAVE_WINLDAP_H
+#if !HAVE_WINLDAP_H
             ret = ldap_sasl_bind_s(ld, bindname.data(), nullptr, &ccred, nullptr, nullptr, nullptr);
 #else
             ret = ldap_simple_bind_s(ld, bindname.data(), pass.data());
@@ -410,7 +410,7 @@ int LdapOperation::LdapOperationPrivate::processResult(int rescode, LDAPMessage 
     }
     case RES_BIND: {
         struct berval *servercred = nullptr;
-#ifndef HAVE_WINLDAP_H
+#if !HAVE_WINLDAP_H
         // FIXME: Error handling Winldap does not have ldap_parse_sasl_bind_result
         retval = ldap_parse_sasl_bind_result(ld, msg, &servercred, 0);
 #else
