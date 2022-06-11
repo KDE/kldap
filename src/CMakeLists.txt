@@ -21,8 +21,6 @@ if(Ldap_FOUND)
   check_function_exists(ldap_unbind_ext HAVE_LDAP_UNBIND_EXT)
   check_function_exists(ldap_extended_operation HAVE_LDAP_EXTENDED_OPERATION)
   check_function_exists(ldap_extended_operation_s HAVE_LDAP_EXTENDED_OPERATION_S)
-  check_symbol_exists(ldap_extended_operation ldap.h HAVE_LDAP_EXTENDED_OPERATION_PROTOTYPE)
-  check_symbol_exists(ldap_extended_operation_s ldap.h HAVE_LDAP_EXTENDED_OPERATION_S_PROTOTYPE)
 endif()
 
 set(kldap_EXTRA_LIBS ${kldap_EXTRA_LIBS} Sasl2::Sasl2)
