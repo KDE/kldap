@@ -13,7 +13,6 @@
 #include <KLocalizedString>
 #include <QCoreApplication>
 #include <QDebug>
-#include <kio_version.h>
 
 #ifdef Q_OS_WIN
 #include <Winsock2.h>
@@ -164,13 +163,8 @@ void LDAPProtocol::LDAPErr(int err)
         break;
 
     default:
-#if KIO_VERSION >= QT_VERSION_CHECK(5, 96, 0)
         error(KIO::ERR_WORKER_DEFINED,
               i18n("LDAP server returned the error: %1 %2\nThe LDAP URL was: %3", LdapConnection::errorString(err), extramsg, mServer.url().toDisplayString()));
-#else
-        error(ERR_SLAVE_DEFINED,
-              i18n("LDAP server returned the error: %1 %2\nThe LDAP URL was: %3", LdapConnection::errorString(err), extramsg, mServer.url().toDisplayString()));
-#endif
     }
 }
 
@@ -683,11 +677,7 @@ void LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
                 break;
             }
             case Ldif::Err:
-#if KIO_VERSION >= QT_VERSION_CHECK(5, 96, 0)
                 error(KIO::ERR_WORKER_DEFINED, i18n("Invalid Ldif file in line %1.", ldif.lineNumber()));
-#else
-                error(ERR_SLAVE_DEFINED, i18n("Invalid Ldif file in line %1.", ldif.lineNumber()));
-#endif
                 return;
             }
         } while (ret != Ldif::MoreData);
