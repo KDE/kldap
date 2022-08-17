@@ -9,7 +9,7 @@ ecm_qt_declare_logging_category(kio_ldap HEADER kldap_debug.h IDENTIFIER KLDAP_L
     )
 
 
-target_link_libraries(kio_ldap Qt${QT_MAJOR_VERSION}::Network KF5::KIOCore KF5::I18n KF5::Ldap)
+target_link_libraries(kio_ldap Qt::Network KF5::KIOCore KF5::I18n KF5::Ldap)
 if (WIN32)
     target_link_libraries(kio_ldap ws2_32)
 endif()

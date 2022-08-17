@@ -103,7 +103,7 @@ generate_export_header(KF5Ldap BASE_NAME kldap)
 
 target_link_libraries(KF5Ldap
 PRIVATE
-  Qt${QT_MAJOR_VERSION}::Widgets
+  Qt::Widgets
   KF5::I18n
   KF5::WidgetsAddons
   KF5::ConfigCore
