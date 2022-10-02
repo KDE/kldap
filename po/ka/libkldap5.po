@@ -1,0 +1,305 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kldap package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kldap\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-11 00:44+0000\n"
+"PO-Revision-Date: 2022-09-12 20:33+0200\n"
+"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
+"Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
+"Language: ka\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.1.1\n"
+
+#: core/ldapconnection.cpp:124
+#, kde-format
+msgid "No LDAP Support..."
+msgstr "LDAP-ის მხარდაჭერის გარეშე..."
+
+#: core/ldapconnection.cpp:239
+#, kde-format
+msgid "An error occurred during the connection initialization phase."
+msgstr "შეერთების ინიციალიზაციის ფაზის შეცდომა."
+
+#: core/ldapconnection.cpp:246
+#, kde-format
+msgid "Cannot set protocol version to %1."
+msgstr "პროტოკოლის ვერსიის დაყენების შეცდომა: %1."
+
+#: core/ldapconnection.cpp:257
+#, kde-format
+msgid "Cannot set timeout to %1 second."
+msgid_plural "Cannot set timeout to %1 seconds."
+msgstr[0] "ვადის %1 წამზე დაყენების შეცდომა."
+msgstr[1] "ვადის %1 წამზე დაყენების შეცდომა."
+
+#: core/ldapconnection.cpp:269
+#, kde-format
+msgid "Could not set CA certificate file."
+msgstr "CA სერტიფიკატის აფილის დაყენების შეცდომა."
+
+#: core/ldapconnection.cpp:294
+#, kde-format
+msgid "Invalid TLS require certificate mode."
+msgstr "TLS-ის მიერ სერტიფიკატის მოთხოვნის რეჟიმი არასწორია."
+
+#: core/ldapconnection.cpp:299
+#, kde-format
+msgid "Could not set TLS require certificate mode."
+msgstr "TLS-ის მიერ სერტიფიკატის მოთხოვნის რეჟიმის დაყენების შეცდომა."
+
+#: core/ldapconnection.cpp:308
+#, kde-format
+msgid "Could not initialize new TLS context."
+msgstr "ახალი TLS კონტექსტის ინიციალიზაციის შეცდომა."
+
+#: core/ldapconnection.cpp:325
+#, kde-format
+msgid "TLS support not available in the LDAP client libraries."
+msgstr "LDAP-ის კლიენტის ბიბლიოთეკებში TLS-ის მხარდაჭერა არ არსებობს."
+
+#: core/ldapconnection.cpp:335
+#, kde-format
+msgid "Cannot set size limit."
+msgstr "ზომის ზღვრის დაყენება შეუძლებელია."
+
+#: core/ldapconnection.cpp:345
+#, kde-format
+msgid "Cannot set time limit."
+msgstr "დროის ზღვრის დაყენება შეუძლებელია."
+
+#: core/ldapconnection.cpp:353
+#, kde-format
+msgid "Cannot initialize the SASL client."
+msgstr "SASL კლიენტის ინიციალიზაციის შეცდომა."
+
+#: core/ldapconnection.cpp:430
+#, kde-format
+msgid ""
+"LDAP support not compiled in. Please recompile libkldap with the OpenLDAP "
+"(or compatible) client libraries, or complain to your distribution packagers."
+msgstr ""
+"LDAP-ის მხარდაჭერა აგებული არაა. ააგეთ libkldap OpenLDAP(ან თავსებადი)-ის "
+"კლიენტის ბიბლიოთეკებით ან პაკეტების მომწოდებელს მიწერეთ."
+
+#: core/ldapsearch.cpp:222
+#, kde-format
+msgid "Cannot access to server. Please reconfigure it."
+msgstr "სერვერთან წვდომის შეცდომა. საჭიროა მისი თავიდან მორგება."
+
+#: widgets/addhostdialog.cpp:64
+#, kde-format
+msgctxt "@title:window"
+msgid "Add Host"
+msgstr "ჰოსტის დამატება"
+
+#: widgets/ldapclientsearchconfigreadconfigjob.cpp:112
+#, kde-format
+msgid ""
+"LDAP password is stored as clear text, do you want to store it in kwallet?"
+msgstr ""
+"LDAP პაროლი შენახულია როგორც უბრალო ტექსტი. გნებავთ მისი kwallet-ში შენახვა?"
+
+#: widgets/ldapclientsearchconfigreadconfigjob.cpp:113
+#, kde-format
+msgid "Store clear text password in Wallet"
+msgstr "პაროლის საფულეში დაუშიფრავად შენახვა"
+
+#: widgets/ldapconfigurewidget.cpp:96
+#, kde-format
+msgctxt "@title:window"
+msgid "Edit Host"
+msgstr "ჰოსტის ჩასწორება"
+
+#: widgets/ldapconfigurewidget.cpp:113
+#, kde-format
+msgid "Do you want to remove setting for host \"%1\"?"
+msgstr "გნებავთ ჰოსტის (%1) პარამეტრების წაშლა?"
+
+#: widgets/ldapconfigurewidget.cpp:114
+#, kde-format
+msgid "Remove Host"
+msgstr "ჰოსტის წაშლა"
+
+#: widgets/ldapconfigurewidget.cpp:272
+#, kde-format
+msgid "Check all servers that should be used:"
+msgstr "მონიშნეთ ყველა სერვერი, რომლის გამოყენებაც გნებავთ:"
+
+#: widgets/ldapconfigurewidget.cpp:306
+#, kde-format
+msgid "&Add Host..."
+msgstr "&ჰოსტის დამატება..."
+
+#: widgets/ldapconfigurewidget.cpp:308
+#, kde-format
+msgid "&Edit Host..."
+msgstr "&ჰოსტის ჩასწორება..."
+
+#: widgets/ldapconfigurewidget.cpp:311
+#, kde-format
+msgid "&Remove Host"
+msgstr "&ჰოსტის წაშლა"
+
+#: widgets/ldapconfigwidget.cpp:90
+#, kde-format
+msgid "User:"
+msgstr "მომხმარებელი:"
+
+#: widgets/ldapconfigwidget.cpp:97
+#, kde-format
+msgid "Bind DN:"
+msgstr "მისამაგრებელი DN:"
+
+#: widgets/ldapconfigwidget.cpp:104
+#, kde-format
+msgid "Realm:"
+msgstr "რეალმი:"
+
+#: widgets/ldapconfigwidget.cpp:112
+#, kde-format
+msgid "Password:"
+msgstr "პაროლი:"
+
+#: widgets/ldapconfigwidget.cpp:119
+#, kde-format
+msgid "Host:"
+msgstr "ჰოსტი:"
+
+#: widgets/ldapconfigwidget.cpp:128
+#, kde-format
+msgid "Port:"
+msgstr "პორტი:"
+
+#: widgets/ldapconfigwidget.cpp:136
+#, kde-format
+msgid "LDAP version:"
+msgstr "LDAP-ის ვერსია:"
+
+#: widgets/ldapconfigwidget.cpp:144
+#, kde-format
+msgctxt "default ldap size limit"
+msgid "Default"
+msgstr "ნაგულისხმები"
+
+#: widgets/ldapconfigwidget.cpp:145
+#, kde-format
+msgid "Size limit:"
+msgstr "ზომის ლიმიტი:"
+
+#: widgets/ldapconfigwidget.cpp:153
+#, kde-format
+msgid " sec"
+msgstr " წმ"
+
+#: widgets/ldapconfigwidget.cpp:154
+#, kde-format
+msgctxt "default ldap time limit"
+msgid "Default"
+msgstr "ნაგულისხმები"
+
+#: widgets/ldapconfigwidget.cpp:155
+#, kde-format
+msgid "Time limit:"
+msgstr "დროის ლიმიტი:"
+
+#: widgets/ldapconfigwidget.cpp:163
+#, kde-format
+msgid "No paging"
+msgstr "პეიჯინგის გარეშე"
+
+#: widgets/ldapconfigwidget.cpp:164
+#, kde-format
+msgid "Page size:"
+msgstr "გვერდის ზომა:"
+
+#: widgets/ldapconfigwidget.cpp:175 widgets/ldapconfigwidget.cpp:253
+#, kde-format
+msgid "Query Server"
+msgstr "მოთხოვნა სერვერიდან"
+
+#: widgets/ldapconfigwidget.cpp:185
+#, kde-format
+msgctxt "Distinguished Name"
+msgid "DN:"
+msgstr "DN:"
+
+#: widgets/ldapconfigwidget.cpp:192
+#, kde-format
+msgid "Filter:"
+msgstr "ფილტრი:"
+
+#: widgets/ldapconfigwidget.cpp:201
+#, kde-format
+msgctxt "@option:radio set no security"
+msgid "No"
+msgstr "არა"
+
+#: widgets/ldapconfigwidget.cpp:204
+#, kde-format
+msgctxt "@option:radio use TLS security"
+msgid "TLS"
+msgstr "TLS"
+
+#: widgets/ldapconfigwidget.cpp:207
+#, kde-format
+msgctxt "@option:radio use SSL security"
+msgid "SSL"
+msgstr "SSL"
+
+#: widgets/ldapconfigwidget.cpp:222
+#, kde-format
+msgid "Security:"
+msgstr "უსაფრთხოება:"
+
+#: widgets/ldapconfigwidget.cpp:232
+#, kde-format
+msgctxt "@option:radio anonymous authentication"
+msgid "Anonymous"
+msgstr "ანონიმურად"
+
+#: widgets/ldapconfigwidget.cpp:235
+#, kde-format
+msgctxt "@option:radio simple authentication"
+msgid "Simple"
+msgstr "მარტივი"
+
+#: widgets/ldapconfigwidget.cpp:238
+#, kde-format
+msgctxt "@option:radio SASL authentication"
+msgid "SASL"
+msgstr "SASL"
+
+#: widgets/ldapconfigwidget.cpp:241
+#, kde-format
+msgid "Authentication:"
+msgstr "ავთენტიფიკაცია:"
+
+#: widgets/ldapconfigwidget.cpp:259
+#, kde-format
+msgid "SASL mechanism:"
+msgstr "SASL-ის მექანიზმი:"
+
+#: widgets/ldapconfigwidget.cpp:303
+#, kde-format
+msgid "Check server"
+msgstr "სერვერის შემოწმება"
+
+#: widgets/ldapconfigwidget.cpp:309
+#, kde-format
+msgctxt "@title:window"
+msgid "LDAP Query"
+msgstr "LDAP მოთხოვნა"
+
+#: widgets/ldapconfigwidget.cpp:323
+#, kde-format
+msgctxt "%1 is a url to ldap server"
+msgid "Unknown error connecting %1"
+msgstr "%1-სთან შეერთების უცნობი შეცდომა"

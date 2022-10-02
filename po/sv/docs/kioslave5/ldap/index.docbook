@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE article PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
+"dtd/kdedbx45.dtd" [
+<!ENTITY % addindex "IGNORE">
+<!ENTITY % Swedish "INCLUDE"
+> <!-- change language only here -->
+]>
+	
+<article lang="&language;" id="ldap">
+<title
+>ldap</title>
+<articleinfo>
+<authorgroup>
+<author
+>&Lauri.Watts; &Lauri.Watts.mail;</author>
+<othercredit role="translator"
+> <firstname
+>Stefan</firstname
+> <surname
+>Asserhäll</surname
+> <affiliation
+><address
+><email
+>stefan.asserhall@bredband.net</email
+></address
+></affiliation
+> <contrib
+>Översättare</contrib
+></othercredit
+> 
+</authorgroup>
+</articleinfo>
+
+<para
+><acronym
+>ldap</acronym
+> är det lättviktiga katalogåtkomstprotokollet. Det ger möjlighet att komma åt en X.500-katalog, eller en ensam <acronym
+>LDAP</acronym
+>-server.</para>
+
+<para
+>Du kan använda I/O-slaven ldap som följer:</para>
+
+<para
+><userinput
+>ldap://värddator:port/ou=People,o=where,c=de??sub</userinput
+> får en delträdsförfrågan</para>
+
+<para
+>eller <userinput
+>ldap://värddator:port/cn=MM,ou=People,o=where,c=de??bas</userinput
+> får en fullständig gren.</para>
+
+</article>

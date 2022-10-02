@@ -1,0 +1,62 @@
+# Kristóf Kiszel <ulysses@kubuntu.org>, 2010.
+msgid ""
+msgstr ""
+"Project-Id-Version: KDE 4.0\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-29 00:47+0000\n"
+"PO-Revision-Date: 2010-12-15 23:18+0100\n"
+"Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
+"Language-Team: Hungarian <kde-lista@sophia.jpte.hu>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: kio_ldap.cpp:86
+#, kde-format
+msgid ""
+"\n"
+"Additional info: "
+msgstr ""
+"\n"
+"További információ: "
+
+#: kio_ldap.cpp:167
+#, kde-format
+msgid ""
+"LDAP server returned the error: %1 %2\n"
+"The LDAP URL was: %3"
+msgstr ""
+"Az LDAP-kiszolgáló hibát jelzett: %1 %2\n"
+"LDAP URL: %3"
+
+#: kio_ldap.cpp:298
+#, kde-format
+msgid "LDAP Login"
+msgstr "LDAP-bejelentkezés"
+
+#: kio_ldap.cpp:300
+#, kde-format
+msgid "site:"
+msgstr "Alapcím:"
+
+#: kio_ldap.cpp:327
+#, kde-format
+msgid "Invalid authorization information."
+msgstr "Érvénytelenek a felhasználóazonosítási adatok."
+
+#: kio_ldap.cpp:334
+#, kde-format
+msgid "LDAP connection canceled."
+msgstr "Az LDAP-kapcsolat megszakadt."
+
+#: kio_ldap.cpp:600 kio_ldap.cpp:668
+#, kde-format
+msgid "The Ldif parser failed."
+msgstr "Az LDIF-feldolgozó hibát jelzett."
+
+#: kio_ldap.cpp:680
+#, kde-format
+msgid "Invalid Ldif file in line %1."
+msgstr "Hiba az LDIF-fájl %1. sorában."

@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE article PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
+"dtd/kdebx45.dtd" [
+<!ENTITY % addindex "IGNORE">
+<!ENTITY % Estonian  "INCLUDE"
+> <!-- change language only here -->
+]>
+	
+<article lang="&language;" id="ldap">
+<title
+>ldap</title>
+<articleinfo>
+<authorgroup>
+<author
+>&Lauri.Watts; &Lauri.Watts.mail;</author>
+<othercredit role="translator"
+><firstname
+>Marek</firstname
+><surname
+>Laane</surname
+><affiliation
+><address
+><email
+>bald@online.ee</email
+></address
+></affiliation
+><contrib
+>Tõlge eesti keelde</contrib
+></othercredit
+> 
+</authorgroup>
+</articleinfo>
+
+<para
+><acronym
+>ldap</acronym
+> tähendab lihtsustatud kataloogisirvimise protokoll (inglise keeles lightweight directory access protocol). See võimaldab ligipääsu X.500 kataloogile või autonoomsele <acronym
+>LDAP</acronym
+> serverile.</para>
+
+<para
+>KIO moodulit ldap saab kasutada nii:</para>
+
+<para
+><userinput
+>ldap://masin:port/ou=People,o=where,c=de??sub</userinput
+> alampuu päringuks</para>
+
+<para
+>või <userinput
+>ldap://masin:port/cn=MM,ou=People,o=where,c=de??base</userinput
+> kogu haru päringuks.</para>
+
+</article>

@@ -1,0 +1,67 @@
+# translation of kio_ldap.po to greek
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Toussis Manolis <manolis@koppermind.homelinux.org>, 2007, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: kio_ldap\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-29 00:47+0000\n"
+"PO-Revision-Date: 2008-11-15 09:22+0200\n"
+"Last-Translator: Toussis Manolis <manolis@koppermind.homelinux.org>\n"
+"Language-Team: Greek <kde-i18n-el@kde.org>\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 0.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: kio_ldap.cpp:86
+#, kde-format
+msgid ""
+"\n"
+"Additional info: "
+msgstr ""
+"\n"
+"Επιπλέον πληροφορίες: "
+
+#: kio_ldap.cpp:167
+#, kde-format
+msgid ""
+"LDAP server returned the error: %1 %2\n"
+"The LDAP URL was: %3"
+msgstr ""
+"H URL του εξυπηρετητής LDAP επέστρεψε το ακόλουθο σφάλμα: %1 %2\n"
+"H URL του εξυπηρετητή LDAP ήταν: %3"
+
+#: kio_ldap.cpp:298
+#, kde-format
+msgid "LDAP Login"
+msgstr "Σύνδεση LDAP"
+
+#: kio_ldap.cpp:300
+#, kde-format
+msgid "site:"
+msgstr "τοποθεσία:"
+
+#: kio_ldap.cpp:327
+#, kde-format
+msgid "Invalid authorization information."
+msgstr "Μη έγκυρες πληροφορίες εξουσιοδότησης."
+
+#: kio_ldap.cpp:334
+#, kde-format
+msgid "LDAP connection canceled."
+msgstr "Η σύνδεση LDAP ακυρώθηκε."
+
+#: kio_ldap.cpp:600 kio_ldap.cpp:668
+#, kde-format
+msgid "The Ldif parser failed."
+msgstr "O μεταφραστής LDIF απέτυχε."
+
+#: kio_ldap.cpp:680
+#, kde-format
+msgid "Invalid Ldif file in line %1."
+msgstr "Μη έγκυρο αρχείο LDIF στη γραμμή %1."

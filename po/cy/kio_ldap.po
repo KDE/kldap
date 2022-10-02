@@ -1,0 +1,72 @@
+# translation of kio_ldap.po to Cymraeg
+# KD at KGyfieithu <kyfieithu@dotmon.com>, 2004.
+msgid ""
+msgstr ""
+"Project-Id-Version: kio_ldap\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-29 00:47+0000\n"
+"PO-Revision-Date: 2004-07-04 12:02+0100\n"
+"Last-Translator: KD at KGyfieithu <kyfieithu@dotmon.com>\n"
+"Language-Team: Cymraeg <cy@li.org>\n"
+"Language: cy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.2\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: kio_ldap.cpp:86
+#, kde-format
+msgid ""
+"\n"
+"Additional info: "
+msgstr ""
+
+#: kio_ldap.cpp:167
+#, fuzzy, kde-format
+msgid ""
+"LDAP server returned the error: %1 %2\n"
+"The LDAP URL was: %3"
+msgstr "Dychwelodd y gweinydd LDAP y gwall dilynnol: %1"
+
+#: kio_ldap.cpp:298
+#, kde-format
+msgid "LDAP Login"
+msgstr "Mewngofnodi LDAP"
+
+#: kio_ldap.cpp:300
+#, kde-format
+msgid "site:"
+msgstr "safle:"
+
+#: kio_ldap.cpp:327
+#, kde-format
+msgid "Invalid authorization information."
+msgstr "Gwybodaeth ddilysiant annilys."
+
+#: kio_ldap.cpp:334
+#, kde-format
+msgid "LDAP connection canceled."
+msgstr ""
+
+#: kio_ldap.cpp:600 kio_ldap.cpp:668
+#, fuzzy, kde-format
+msgid "The Ldif parser failed."
+msgstr "Methodd y dadansoddydd LDIF."
+
+#: kio_ldap.cpp:680
+#, fuzzy, kde-format
+msgid "Invalid Ldif file in line %1."
+msgstr "Ffeil LDIF annilys yn llinell %1."
+
+#~ msgid "Cannot set LDAP protocol version %1"
+#~ msgstr "Methu gosod protocol LDAP fersiwn %1"
+
+#~ msgid "Cannot set size limit."
+#~ msgstr "Methu gosod cyfwng maint"
+
+#~ msgid "Cannot set time limit."
+#~ msgstr "Methu gosod cyfwng amser"
+
+#~ msgid "SASL authentication not compiled into the ldap ioslave."
+#~ msgstr "Ni chrynhowyd dilysiant SASL i mewn i'r ioslave ldap."

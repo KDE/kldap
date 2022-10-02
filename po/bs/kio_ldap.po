@@ -1,0 +1,69 @@
+# Bosnian translation for kdepimlibs
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the kdepimlibs package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdepimlibs\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-29 00:47+0000\n"
+"PO-Revision-Date: 2012-09-03 14:47+0000\n"
+"Last-Translator: Samir Ribić <Unknown>\n"
+"Language-Team: Bosnian <bs@li.org>\n"
+"Language: bs\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-12-21 01:36+0000\n"
+"X-Generator: Launchpad (build 16378)\n"
+"Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#: kio_ldap.cpp:86
+#, kde-format
+msgid ""
+"\n"
+"Additional info: "
+msgstr ""
+"\n"
+"Dodatne informacije: "
+
+#: kio_ldap.cpp:167
+#, kde-format
+msgid ""
+"LDAP server returned the error: %1 %2\n"
+"The LDAP URL was: %3"
+msgstr ""
+"LDAP server je vratio sljedeću grešku: %1 %2\n"
+"LDAP URL je bio: %3"
+
+#: kio_ldap.cpp:298
+#, kde-format
+msgid "LDAP Login"
+msgstr "LDAP prijava"
+
+#: kio_ldap.cpp:300
+#, kde-format
+msgid "site:"
+msgstr "sajt:"
+
+#: kio_ldap.cpp:327
+#, kde-format
+msgid "Invalid authorization information."
+msgstr "Neispravne informacije o identitetu."
+
+#: kio_ldap.cpp:334
+#, kde-format
+msgid "LDAP connection canceled."
+msgstr "LDAP konekcija otkazana."
+
+#: kio_ldap.cpp:600 kio_ldap.cpp:668
+#, kde-format
+msgid "The Ldif parser failed."
+msgstr "Ldif parser nije uspio."
+
+#: kio_ldap.cpp:680
+#, kde-format
+msgid "Invalid Ldif file in line %1."
+msgstr "Nevažeća Ldif datoteka u liniji %1."

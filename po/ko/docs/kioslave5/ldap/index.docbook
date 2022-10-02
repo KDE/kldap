@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE article PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
+"dtd/kdedbx45.dtd" [
+<!ENTITY % addindex "IGNORE">
+<!ENTITY % Korean "INCLUDE"
+> <!-- change language only here -->
+]>
+	
+<article lang="&language;" id="ldap">
+<title
+>LDAP</title>
+<articleinfo>
+<authorgroup>
+<author
+>&Lauri.Watts; &Lauri.Watts.mail;</author>
+<othercredit lang="ko" role="translator"
+><surname
+>박</surname
+><firstname
+>신조</firstname
+><affiliation
+><address
+><email
+>kde@peremen.name</email
+></address
+></affiliation
+><contrib
+>한국어 번역</contrib
+></othercredit
+> 
+</authorgroup>
+</articleinfo>
+
+<para
+><acronym
+>LDAP</acronym
+>(Lightweight Directory Access Protocol)은 디렉터리 서비스용 프로토콜입니다. X.500 디렉터리에 접근하거나 단독 <acronym
+>LDAP</acronym
+> 서버에 접근할 수 있습니다.</para>
+
+<para
+>다음과 같이 LDAP KIO 슬레이브를 사용할 수 있습니다:</para>
+
+<para
+>하위 트리 질의: <userinput
+>ldap://host:port/ou=People,o=where,c=de??sub</userinput
+></para>
+
+<para
+>완전한 브랜치 질의: <userinput
+>ldap://host:port/cn=MM,ou=People,o=where,c=de??base</userinput
+></para>
+
+</article>

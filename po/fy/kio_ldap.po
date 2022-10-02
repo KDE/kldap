@@ -1,0 +1,80 @@
+# translation of kio_ldap.po to Dutch
+# translation of kio_ldap.po to
+#
+# Rinse de Vries <rinsedevries@kde.nl>, 2005, 2006.
+msgid ""
+msgstr ""
+"Project-Id-Version: kio_ldap\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-29 00:47+0000\n"
+"PO-Revision-Date: 2006-01-30 09:07+0100\n"
+"Last-Translator: Berend Ytsma <berendy@bigfoot.com>\n"
+"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
+"Language: fy\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.1\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#: kio_ldap.cpp:86
+#, kde-format
+msgid ""
+"\n"
+"Additional info: "
+msgstr ""
+"\n"
+"Oanfoljende ynformaasje:"
+
+#: kio_ldap.cpp:167
+#, kde-format
+msgid ""
+"LDAP server returned the error: %1 %2\n"
+"The LDAP URL was: %3"
+msgstr ""
+"De LDAP-tjinner kaam mei de folgjende flater: %1 %2\n"
+"De LDAP URL wie: %3"
+
+#: kio_ldap.cpp:298
+#, kde-format
+msgid "LDAP Login"
+msgstr "LDAP-oanmelde"
+
+#: kio_ldap.cpp:300
+#, kde-format
+msgid "site:"
+msgstr "side:"
+
+#: kio_ldap.cpp:327
+#, kde-format
+msgid "Invalid authorization information."
+msgstr "Unjildige autorisaasje-ynformaasje."
+
+#: kio_ldap.cpp:334
+#, kde-format
+msgid "LDAP connection canceled."
+msgstr ""
+
+#: kio_ldap.cpp:600 kio_ldap.cpp:668
+#, fuzzy, kde-format
+#| msgid "The LDIF parser failed."
+msgid "The Ldif parser failed."
+msgstr "De LDIF-ûntleding is mislearre."
+
+#: kio_ldap.cpp:680
+#, fuzzy, kde-format
+#| msgid "Invalid LDIF file in line %1."
+msgid "Invalid Ldif file in line %1."
+msgstr "Unjildige LDIF-triem op rigel %1."
+
+#~ msgid "Cannot set LDAP protocol version %1"
+#~ msgstr "LDAP-protokol ferzje %1 kin net ynsteld wurde"
+
+#~ msgid "Cannot set size limit."
+#~ msgstr "It gruttelimyt kinnet ynsteld wurde."
+
+#~ msgid "Cannot set time limit."
+#~ msgstr "It tiidslimyt kinnet ynsteld wurde."
+
+#~ msgid "SASL authentication not compiled into the ldap ioslave."
+#~ msgstr "De io-slave ldap befettet gjin SASL-ferifikaasje."

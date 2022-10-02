@@ -1,0 +1,72 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Translators:
+# Cemil MUTLU <mawilos@gmail.com>, 2005.
+# Görkem Çetin <gorkem@gorkemcetin.com>, 2004.
+# Görkem Çetin <gorkem@kde.org>, 2004.
+# obsoleteman <tulliana@gmail.com>, 2008.
+# Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdepimlibs-kde4\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-29 00:47+0000\n"
+"PO-Revision-Date: 2014-11-12 01:06+0200\n"
+"Last-Translator: Kaan Ozdincer <kaanozdincer@gmail.com>\n"
+"Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 1.4\n"
+"(http: //www.transifex.com/projects/p/kdepimlibs-k-tr/language/tr/)\n"
+
+#: kio_ldap.cpp:86
+#, kde-format
+msgid ""
+"\n"
+"Additional info: "
+msgstr ""
+"\n"
+"Ek bilgiler: "
+
+#: kio_ldap.cpp:167
+#, kde-format
+msgid ""
+"LDAP server returned the error: %1 %2\n"
+"The LDAP URL was: %3"
+msgstr ""
+"LDAP sunucusu hatası döndürdü :%1 %2\n"
+"LDAP Adresi şöyleydi: %3"
+
+#: kio_ldap.cpp:298
+#, kde-format
+msgid "LDAP Login"
+msgstr "LDAP Giriş"
+
+#: kio_ldap.cpp:300
+#, kde-format
+msgid "site:"
+msgstr "site:"
+
+#: kio_ldap.cpp:327
+#, kde-format
+msgid "Invalid authorization information."
+msgstr "Geçersiz kimlik doğrulama bilgisi."
+
+#: kio_ldap.cpp:334
+#, kde-format
+msgid "LDAP connection canceled."
+msgstr "LDAP bağlantısı iptal edildi."
+
+#: kio_ldap.cpp:600 kio_ldap.cpp:668
+#, kde-format
+msgid "The Ldif parser failed."
+msgstr "Ldif ayrıştırıcı başarısız oldu."
+
+#: kio_ldap.cpp:680
+#, kde-format
+msgid "Invalid Ldif file in line %1."
+msgstr "%1 satırında geçersiz Ldif dosyası."

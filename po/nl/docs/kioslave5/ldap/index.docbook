@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<!DOCTYPE article PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
+"dtd/kdedbx45.dtd" [
+<!ENTITY % addindex "IGNORE">
+<!ENTITY % Dutch "INCLUDE"
+> <!-- change language only here -->
+]>
+	
+<article lang="&language;" id="ldap">
+<title
+>ldap</title>
+<articleinfo>
+<authorgroup>
+<author
+>&Lauri.Watts; &Lauri.Watts.mail;</author>
+&Otto.Bruggeman;&Rinse.Devries; 
+</authorgroup>
+</articleinfo>
+
+<para
+><acronym
+>ldap</acronym
+> is het lichtgewicht directory acces protocol. Het biedt toegang tot een X.500-directory of naar een alleenstaande <acronym
+>LDAP</acronym
+>-server.</para>
+
+<para
+>U kunt deze io-slave als volgt gebruiken:</para>
+
+<para
+><userinput
+>ldap://host:poort/ou=People,o=waar,c=de??sub</userinput
+> voor een zoekopdracht in een sub-boomstructuur</para>
+
+<para
+>of <userinput
+>ldap://host:poort/cn=MM,ou=People,o=waar,c=de??basis</userinput
+> voor een complete boomstructuur.</para>
+
+</article>

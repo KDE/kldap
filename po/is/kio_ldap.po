@@ -1,0 +1,80 @@
+# translation of kio_ldap.po to Icelandic
+# Íslensk þýðing kio_ldap.po
+# Richard Allen <ra@ra.is>, 2004.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kio_ldap\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-29 00:47+0000\n"
+"PO-Revision-Date: 2005-12-03 13:32+0100\n"
+"Last-Translator: Arnar Leosson <leosson@frisurf.no>\n"
+"Language-Team: Icelandic <kde-isl@molar.is>\n"
+"Language: is\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11\n"
+"Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
+"\n"
+"\n"
+
+#: kio_ldap.cpp:86
+#, kde-format
+msgid ""
+"\n"
+"Additional info: "
+msgstr ""
+"\n"
+"Viðbótarupplýsingar: "
+
+#: kio_ldap.cpp:167
+#, kde-format
+msgid ""
+"LDAP server returned the error: %1 %2\n"
+"The LDAP URL was: %3"
+msgstr ""
+"LDAP þjónninn skilaði eftirfarandi villu: %1 %2\n"
+"LDAP slóðin var: %3"
+
+#: kio_ldap.cpp:298
+#, kde-format
+msgid "LDAP Login"
+msgstr "LDAP auðkenni"
+
+#: kio_ldap.cpp:300
+#, kde-format
+msgid "site:"
+msgstr "staðsetning:"
+
+#: kio_ldap.cpp:327
+#, kde-format
+msgid "Invalid authorization information."
+msgstr "Ógildar auðkenniupplýsingar."
+
+#: kio_ldap.cpp:334
+#, kde-format
+msgid "LDAP connection canceled."
+msgstr ""
+
+#: kio_ldap.cpp:600 kio_ldap.cpp:668
+#, fuzzy, kde-format
+msgid "The Ldif parser failed."
+msgstr "LDIF þáttarinn brást."
+
+#: kio_ldap.cpp:680
+#, fuzzy, kde-format
+msgid "Invalid Ldif file in line %1."
+msgstr "Ógild LDIF skrá í línu %1."
+
+#~ msgid "Cannot set LDAP protocol version %1"
+#~ msgstr "Get ekki sett á LDAP samskiptamáta %1"
+
+#~ msgid "Cannot set size limit."
+#~ msgstr "Get ekki sett stærðartakmörkun."
+
+#~ msgid "Cannot set time limit."
+#~ msgstr "Get ekki sett tímatakmörkun."
+
+#~ msgid "SASL authentication not compiled into the ldap ioslave."
+#~ msgstr "SASL auðkenning er ekki þýdd inn í ldap ioslave forritið."

@@ -1,0 +1,67 @@
+# translation of kio_ldap.po to Chinese Traditional
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Franklin Weng <franklin at goodhorse dot idv dot tw>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: kio_ldap\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-29 00:47+0000\n"
+"PO-Revision-Date: 2007-09-12 18:44+0800\n"
+"Last-Translator: Franklin Weng <franklin at goodhorse dot idv dot tw>\n"
+"Language-Team: Chinese Traditional <zh-l10n@lists.linux.org.tw>\n"
+"Language: zh_TW\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#: kio_ldap.cpp:86
+#, kde-format
+msgid ""
+"\n"
+"Additional info: "
+msgstr ""
+"\n"
+"額外資訊："
+
+#: kio_ldap.cpp:167
+#, kde-format
+msgid ""
+"LDAP server returned the error: %1 %2\n"
+"The LDAP URL was: %3"
+msgstr ""
+"LDAP 伺服器回應錯誤：%1 %2\n"
+"LDAP URL 為：%3"
+
+#: kio_ldap.cpp:298
+#, kde-format
+msgid "LDAP Login"
+msgstr "LDAP 登入"
+
+#: kio_ldap.cpp:300
+#, kde-format
+msgid "site:"
+msgstr "站台："
+
+#: kio_ldap.cpp:327
+#, kde-format
+msgid "Invalid authorization information."
+msgstr "不合法的認證資訊。"
+
+#: kio_ldap.cpp:334
+#, kde-format
+msgid "LDAP connection canceled."
+msgstr "LDAP 連線取消。"
+
+#: kio_ldap.cpp:600 kio_ldap.cpp:668
+#, kde-format
+msgid "The Ldif parser failed."
+msgstr "LDIF 解析器失敗。"
+
+#: kio_ldap.cpp:680
+#, kde-format
+msgid "Invalid Ldif file in line %1."
+msgstr "LDIF 檔案內容第 %1 行語法錯誤。"

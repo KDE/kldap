@@ -1,0 +1,338 @@
+# translation of libkldap.po to Slovenian
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Andrej Vernekar <andrej.vernekar@moj.net>, 2007, 2008.
+# Jure Repinc <jlp@holodeck1.com>, 2012.
+# Andrej Mernik <andrejm@ubuntu.si>, 2014, 2018.
+# Matjaž Jeran <matjaz.jeran@amis.net>, 2019, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkldap\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-11 00:44+0000\n"
+"PO-Revision-Date: 2021-08-02 11:23+0200\n"
+"Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
+"Language-Team: Slovenian <lugos-slo@lugos.si>\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
+"X-Generator: Poedit 3.0\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
+"%100==4 ? 3 : 0);\n"
+
+#: core/ldapconnection.cpp:124
+#, kde-format
+msgid "No LDAP Support..."
+msgstr "Ni podpore za LDAP..."
+
+#: core/ldapconnection.cpp:239
+#, kde-format
+msgid "An error occurred during the connection initialization phase."
+msgstr "Med začetnim nastavljanjem povezave je prišlo do napake."
+
+#: core/ldapconnection.cpp:246
+#, kde-format
+msgid "Cannot set protocol version to %1."
+msgstr "Različice protokola ni mogoče nastaviti na %1."
+
+#: core/ldapconnection.cpp:257
+#, kde-format
+msgid "Cannot set timeout to %1 second."
+msgid_plural "Cannot set timeout to %1 seconds."
+msgstr[0] "Časovne omejitve ni mogoče nastaviti na %1 sekundo."
+msgstr[1] "Časovne omejitve ni mogoče nastaviti na %1 sekundi."
+msgstr[2] "Časovne omejitve ni mogoče nastaviti na %1 sekunde."
+msgstr[3] "Časovne omejitve ni mogoče nastaviti na %1 sekund."
+
+#: core/ldapconnection.cpp:269
+#, kde-format
+msgid "Could not set CA certificate file."
+msgstr "Ni bilo mogoče nastaviti datoteko potrdil CA."
+
+#: core/ldapconnection.cpp:294
+#, kde-format
+msgid "Invalid TLS require certificate mode."
+msgstr "Neveljaven TLS zahteva način delovanja s potrdilom."
+
+#: core/ldapconnection.cpp:299
+#, kde-format
+msgid "Could not set TLS require certificate mode."
+msgstr "Ni bilo mogoče nastaviti TSL, ki zahteva delovanje s potrdilom."
+
+#: core/ldapconnection.cpp:308
+#, kde-format
+msgid "Could not initialize new TLS context."
+msgstr "Ni bilo mogoče postaviti začetnega konteksta TLS."
+
+#: core/ldapconnection.cpp:325
+#, kde-format
+msgid "TLS support not available in the LDAP client libraries."
+msgstr "V knjižnicah odjemalca LDAP ni podpore za TLS."
+
+#: core/ldapconnection.cpp:335
+#, kde-format
+msgid "Cannot set size limit."
+msgstr "Ni mogoče nastaviti omejitve velikosti."
+
+#: core/ldapconnection.cpp:345
+#, kde-format
+msgid "Cannot set time limit."
+msgstr "Ni mogoče nastaviti časovne omejitve."
+
+#: core/ldapconnection.cpp:353
+#, kde-format
+msgid "Cannot initialize the SASL client."
+msgstr "Začetna nastavitev odjemalca SASL ni uspela."
+
+#: core/ldapconnection.cpp:430
+#, kde-format
+msgid ""
+"LDAP support not compiled in. Please recompile libkldap with the OpenLDAP "
+"(or compatible) client libraries, or complain to your distribution packagers."
+msgstr ""
+"Podpora za LDAP ni na voljo. Pritožite se izdelovalcem paketov za vašo "
+"distribucijo ali znova prevedite izvorno kodo libkldap s knjižnicami "
+"odjemalca OpenLDAP (ali združljivimi)."
+
+#: core/ldapsearch.cpp:222
+#, kde-format
+msgid "Cannot access to server. Please reconfigure it."
+msgstr "Do strežnika ni mogoče dostopati. Preverite nastavitve."
+
+#: widgets/addhostdialog.cpp:64
+#, kde-format
+msgctxt "@title:window"
+msgid "Add Host"
+msgstr "Dodaj gostitelja"
+
+#: widgets/ldapclientsearchconfigreadconfigjob.cpp:112
+#, kde-format
+msgid ""
+"LDAP password is stored as clear text, do you want to store it in kwallet?"
+msgstr ""
+"Geslo LDAP je shranjeno kot odprto besedilo, ali ga želite shraniti v "
+"kwallet?"
+
+#: widgets/ldapclientsearchconfigreadconfigjob.cpp:113
+#, kde-format
+msgid "Store clear text password in Wallet"
+msgstr "Shrani odprto besedilo gesla v listnico"
+
+#: widgets/ldapconfigurewidget.cpp:96
+#, kde-format
+msgctxt "@title:window"
+msgid "Edit Host"
+msgstr "Uredi gostitelja"
+
+#: widgets/ldapconfigurewidget.cpp:113
+#, kde-format
+msgid "Do you want to remove setting for host \"%1\"?"
+msgstr "Ali želite odstraniti nastavitev za gostitelja \"%1\"?"
+
+#: widgets/ldapconfigurewidget.cpp:114
+#, kde-format
+msgid "Remove Host"
+msgstr "Odstrani gostitelja"
+
+#: widgets/ldapconfigurewidget.cpp:272
+#, kde-format
+msgid "Check all servers that should be used:"
+msgstr "Preverite vse strežnike, ki bi jih bilo treba uporabiti:"
+
+#: widgets/ldapconfigurewidget.cpp:306
+#, kde-format
+msgid "&Add Host..."
+msgstr "Dodaj gostitelja..."
+
+#: widgets/ldapconfigurewidget.cpp:308
+#, kde-format
+msgid "&Edit Host..."
+msgstr "uredi gostitelja..."
+
+#: widgets/ldapconfigurewidget.cpp:311
+#, kde-format
+msgid "&Remove Host"
+msgstr "Odstrani gostitelja"
+
+#: widgets/ldapconfigwidget.cpp:90
+#, kde-format
+msgid "User:"
+msgstr "Uporabnik:"
+
+#: widgets/ldapconfigwidget.cpp:97
+#, kde-format
+msgid "Bind DN:"
+msgstr "Razločevalno ime Bind:"
+
+#: widgets/ldapconfigwidget.cpp:104
+#, kde-format
+msgid "Realm:"
+msgstr "Področje:"
+
+#: widgets/ldapconfigwidget.cpp:112
+#, kde-format
+msgid "Password:"
+msgstr "Geslo:"
+
+#: widgets/ldapconfigwidget.cpp:119
+#, kde-format
+msgid "Host:"
+msgstr "Gostitelj:"
+
+#: widgets/ldapconfigwidget.cpp:128
+#, kde-format
+msgid "Port:"
+msgstr "Vrata:"
+
+#: widgets/ldapconfigwidget.cpp:136
+#, kde-format
+msgid "LDAP version:"
+msgstr "Različica LDAP:"
+
+#: widgets/ldapconfigwidget.cpp:144
+#, kde-format
+msgctxt "default ldap size limit"
+msgid "Default"
+msgstr "Privzeta"
+
+#: widgets/ldapconfigwidget.cpp:145
+#, kde-format
+msgid "Size limit:"
+msgstr "Omejitev velikosti:"
+
+#: widgets/ldapconfigwidget.cpp:153
+#, kde-format
+msgid " sec"
+msgstr " sek"
+
+#: widgets/ldapconfigwidget.cpp:154
+#, kde-format
+msgctxt "default ldap time limit"
+msgid "Default"
+msgstr "Privzeta"
+
+#: widgets/ldapconfigwidget.cpp:155
+#, kde-format
+msgid "Time limit:"
+msgstr "Časovna omejitev:"
+
+#: widgets/ldapconfigwidget.cpp:163
+#, kde-format
+msgid "No paging"
+msgstr "Brez strani"
+
+#: widgets/ldapconfigwidget.cpp:164
+#, kde-format
+msgid "Page size:"
+msgstr "Velikost strani:"
+
+#: widgets/ldapconfigwidget.cpp:175 widgets/ldapconfigwidget.cpp:253
+#, kde-format
+msgid "Query Server"
+msgstr "Poizvedovalni strežnik"
+
+#: widgets/ldapconfigwidget.cpp:185
+#, kde-format
+msgctxt "Distinguished Name"
+msgid "DN:"
+msgstr "Razločevalno ime:"
+
+#: widgets/ldapconfigwidget.cpp:192
+#, kde-format
+msgid "Filter:"
+msgstr "Filter:"
+
+#: widgets/ldapconfigwidget.cpp:201
+#, kde-format
+msgctxt "@option:radio set no security"
+msgid "No"
+msgstr "Brez"
+
+#: widgets/ldapconfigwidget.cpp:204
+#, kde-format
+msgctxt "@option:radio use TLS security"
+msgid "TLS"
+msgstr "TLS"
+
+#: widgets/ldapconfigwidget.cpp:207
+#, kde-format
+msgctxt "@option:radio use SSL security"
+msgid "SSL"
+msgstr "SSL"
+
+#: widgets/ldapconfigwidget.cpp:222
+#, kde-format
+msgid "Security:"
+msgstr "Varnost:"
+
+#: widgets/ldapconfigwidget.cpp:232
+#, kde-format
+msgctxt "@option:radio anonymous authentication"
+msgid "Anonymous"
+msgstr "Anonimno"
+
+#: widgets/ldapconfigwidget.cpp:235
+#, kde-format
+msgctxt "@option:radio simple authentication"
+msgid "Simple"
+msgstr "Preprosto"
+
+#: widgets/ldapconfigwidget.cpp:238
+#, kde-format
+msgctxt "@option:radio SASL authentication"
+msgid "SASL"
+msgstr "SASL"
+
+#: widgets/ldapconfigwidget.cpp:241
+#, kde-format
+msgid "Authentication:"
+msgstr "Preverjanje pristnosti:"
+
+#: widgets/ldapconfigwidget.cpp:259
+#, kde-format
+msgid "SASL mechanism:"
+msgstr "Mehanizem SASL:"
+
+#: widgets/ldapconfigwidget.cpp:303
+#, kde-format
+msgid "Check server"
+msgstr "Preveri strežnik"
+
+#: widgets/ldapconfigwidget.cpp:309
+#, kde-format
+msgctxt "@title:window"
+msgid "LDAP Query"
+msgstr "Poizvedba LDAP"
+
+#: widgets/ldapconfigwidget.cpp:323
+#, kde-format
+msgctxt "%1 is a url to ldap server"
+msgid "Unknown error connecting %1"
+msgstr "Neznana napaka med povezovanjem s %1"
+
+#~ msgid "LDAP Servers"
+#~ msgstr "Strežniki LDAP"
+
+#~ msgid "Attribute"
+#~ msgstr "Atribut"
+
+#~ msgid "Value"
+#~ msgstr "Vrednost"
+
+#~ msgid "Distinguished Name"
+#~ msgstr "Razločevalno ime"
+
+#~ msgid ""
+#~ "SASL support is not available. Please recompile libkldap with the Cyrus-"
+#~ "SASL (or compatible) client libraries, or complain to your distribution "
+#~ "packagers."
+#~ msgstr ""
+#~ "Podpora za SASL ni na voljo. Pritožite se izdelovalcem paketov za vašo "
+#~ "distribucijo ali znova prevedite izvorno kodo libkldap s knjižnicami "
+#~ "odjemalca Cyrus-SASL (ali združljivimi)."
+
+#~ msgid "LDAP Operations error"
+#~ msgstr "Napaka opravil LDAP"

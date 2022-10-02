@@ -1,0 +1,506 @@
+# Translation of libkldap5.po to Ukrainian
+# Copyright (C) 2018-2020 This_file_is_part_of_KDE
+# This file is distributed under the license LGPL version 2.1 or
+# version 3 or later versions approved by the membership of KDE e.V.
+#
+# Ivan Petrouchtchak <fr.ivan@ukrainian-orthodox.org>, 2007, 2008.
+# Yuri Chornoivan <yurchor@ukr.net>, 2008, 2009, 2010, 2014, 2017, 2018, 2019, 2020, 2021.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkldap5\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-11 00:44+0000\n"
+"PO-Revision-Date: 2021-07-28 10:12+0300\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
+"Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
+"Language: uk\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 20.12.0\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+
+#: core/ldapconnection.cpp:124
+#, kde-format
+msgid "No LDAP Support..."
+msgstr "Немає підтримки LDAP..."
+
+#: core/ldapconnection.cpp:239
+#, kde-format
+msgid "An error occurred during the connection initialization phase."
+msgstr "Під час фази ініціалізації з’єднання сталася помилка."
+
+#: core/ldapconnection.cpp:246
+#, kde-format
+msgid "Cannot set protocol version to %1."
+msgstr "Неможливо встановити версію протоколу до %1."
+
+#: core/ldapconnection.cpp:257
+#, kde-format
+msgid "Cannot set timeout to %1 second."
+msgid_plural "Cannot set timeout to %1 seconds."
+msgstr[0] "Не вдається встановити тайм-аут у %1 секунду."
+msgstr[1] "Не вдається встановити тайм-аут у %1 секунди."
+msgstr[2] "Не вдається встановити тайм-аут у %1 секунд."
+msgstr[3] "Не вдається встановити тайм-аут у %1 секунду."
+
+#: core/ldapconnection.cpp:269
+#, kde-format
+msgid "Could not set CA certificate file."
+msgstr "Не вдалося встановити файл сертифіката CA."
+
+#: core/ldapconnection.cpp:294
+#, kde-format
+msgid "Invalid TLS require certificate mode."
+msgstr "Некоректна вимога TLS щодо режиму сертифікації."
+
+#: core/ldapconnection.cpp:299
+#, kde-format
+msgid "Could not set TLS require certificate mode."
+msgstr "Не вдалося встановити запитаний TLS режим сертифікації."
+
+#: core/ldapconnection.cpp:308
+#, kde-format
+msgid "Could not initialize new TLS context."
+msgstr "Не вдалося ініціалізувати новий контекст TLS."
+
+#: core/ldapconnection.cpp:325
+#, kde-format
+msgid "TLS support not available in the LDAP client libraries."
+msgstr "Немає підтримки TLS в бібліотеках клієнта LDAP."
+
+#: core/ldapconnection.cpp:335
+#, kde-format
+msgid "Cannot set size limit."
+msgstr "Не вдається встановити обмеження на розмір."
+
+#: core/ldapconnection.cpp:345
+#, kde-format
+msgid "Cannot set time limit."
+msgstr "Не вдається встановити обмеження на час."
+
+#: core/ldapconnection.cpp:353
+#, kde-format
+msgid "Cannot initialize the SASL client."
+msgstr "Неможливо започаткувати клієнт SASL."
+
+#: core/ldapconnection.cpp:430
+#, kde-format
+msgid ""
+"LDAP support not compiled in. Please recompile libkldap with the OpenLDAP "
+"(or compatible) client libraries, or complain to your distribution packagers."
+msgstr ""
+"Бібліотеку зібрано без підтримки LDAP. Будь ласка, зберіть libkldap ще раз з "
+"клієнтськими бібліотеками OpenLDAP (або сумісними з ними), або надішліть "
+"скаргу особі, що готувала пакунок вашого дистрибутива."
+
+#: core/ldapsearch.cpp:222
+#, kde-format
+msgid "Cannot access to server. Please reconfigure it."
+msgstr ""
+"Не вдалося отримати доступ до сервера. Будь ласка, виконайте повторне "
+"налаштування."
+
+#: widgets/addhostdialog.cpp:64
+#, kde-format
+msgctxt "@title:window"
+msgid "Add Host"
+msgstr "Додавання вузла"
+
+#: widgets/ldapclientsearchconfigreadconfigjob.cpp:112
+#, kde-format
+msgid ""
+"LDAP password is stored as clear text, do you want to store it in kwallet?"
+msgstr ""
+"Пароль до LDAP зберігається у незашифрованому форматі, хочете зберегти його "
+"у kwallet?"
+
+#: widgets/ldapclientsearchconfigreadconfigjob.cpp:113
+#, kde-format
+msgid "Store clear text password in Wallet"
+msgstr "Зберегти незашифрований пароль у торбинці"
+
+#: widgets/ldapconfigurewidget.cpp:96
+#, kde-format
+msgctxt "@title:window"
+msgid "Edit Host"
+msgstr "Зміна вузла"
+
+#: widgets/ldapconfigurewidget.cpp:113
+#, kde-format
+msgid "Do you want to remove setting for host \"%1\"?"
+msgstr "Хочете вилучити запис для вузла «%1»?"
+
+#: widgets/ldapconfigurewidget.cpp:114
+#, kde-format
+msgid "Remove Host"
+msgstr "Вилучення вузла"
+
+#: widgets/ldapconfigurewidget.cpp:272
+#, kde-format
+msgid "Check all servers that should be used:"
+msgstr "Позначте всі сервери, які слід використовувати:"
+
+#: widgets/ldapconfigurewidget.cpp:306
+#, kde-format
+msgid "&Add Host..."
+msgstr "&Додати вузол…"
+
+#: widgets/ldapconfigurewidget.cpp:308
+#, kde-format
+msgid "&Edit Host..."
+msgstr "&Змінити вузол…"
+
+#: widgets/ldapconfigurewidget.cpp:311
+#, kde-format
+msgid "&Remove Host"
+msgstr "&Вилучити вузол"
+
+#: widgets/ldapconfigwidget.cpp:90
+#, kde-format
+msgid "User:"
+msgstr "Користувач:"
+
+#: widgets/ldapconfigwidget.cpp:97
+#, kde-format
+msgid "Bind DN:"
+msgstr "DN для прив'язки:"
+
+#: widgets/ldapconfigwidget.cpp:104
+#, kde-format
+msgid "Realm:"
+msgstr "Область:"
+
+#: widgets/ldapconfigwidget.cpp:112
+#, kde-format
+msgid "Password:"
+msgstr "Пароль:"
+
+#: widgets/ldapconfigwidget.cpp:119
+#, kde-format
+msgid "Host:"
+msgstr "Вузол:"
+
+#: widgets/ldapconfigwidget.cpp:128
+#, kde-format
+msgid "Port:"
+msgstr "Порт:"
+
+#: widgets/ldapconfigwidget.cpp:136
+#, kde-format
+msgid "LDAP version:"
+msgstr "Версія LDAP:"
+
+#: widgets/ldapconfigwidget.cpp:144
+#, kde-format
+msgctxt "default ldap size limit"
+msgid "Default"
+msgstr "Типовий"
+
+#: widgets/ldapconfigwidget.cpp:145
+#, kde-format
+msgid "Size limit:"
+msgstr "Обмеження розміру:"
+
+#: widgets/ldapconfigwidget.cpp:153
+#, kde-format
+msgid " sec"
+msgstr " с"
+
+#: widgets/ldapconfigwidget.cpp:154
+#, kde-format
+msgctxt "default ldap time limit"
+msgid "Default"
+msgstr "Типовий"
+
+#: widgets/ldapconfigwidget.cpp:155
+#, kde-format
+msgid "Time limit:"
+msgstr "Обмеження часу:"
+
+#: widgets/ldapconfigwidget.cpp:163
+#, kde-format
+msgid "No paging"
+msgstr "Без розбиття на сторінки"
+
+#: widgets/ldapconfigwidget.cpp:164
+#, kde-format
+msgid "Page size:"
+msgstr "Розмір сторінки:"
+
+#: widgets/ldapconfigwidget.cpp:175 widgets/ldapconfigwidget.cpp:253
+#, kde-format
+msgid "Query Server"
+msgstr "Опитати сервер"
+
+#: widgets/ldapconfigwidget.cpp:185
+#, kde-format
+msgctxt "Distinguished Name"
+msgid "DN:"
+msgstr "DN:"
+
+#: widgets/ldapconfigwidget.cpp:192
+#, kde-format
+msgid "Filter:"
+msgstr "Фільтр:"
+
+#: widgets/ldapconfigwidget.cpp:201
+#, kde-format
+msgctxt "@option:radio set no security"
+msgid "No"
+msgstr "Немає"
+
+#: widgets/ldapconfigwidget.cpp:204
+#, kde-format
+msgctxt "@option:radio use TLS security"
+msgid "TLS"
+msgstr "TLS"
+
+#: widgets/ldapconfigwidget.cpp:207
+#, kde-format
+msgctxt "@option:radio use SSL security"
+msgid "SSL"
+msgstr "SSL"
+
+#: widgets/ldapconfigwidget.cpp:222
+#, kde-format
+msgid "Security:"
+msgstr "Захист:"
+
+#: widgets/ldapconfigwidget.cpp:232
+#, kde-format
+msgctxt "@option:radio anonymous authentication"
+msgid "Anonymous"
+msgstr "Анонімна"
+
+#: widgets/ldapconfigwidget.cpp:235
+#, kde-format
+msgctxt "@option:radio simple authentication"
+msgid "Simple"
+msgstr "Проста"
+
+#: widgets/ldapconfigwidget.cpp:238
+#, kde-format
+msgctxt "@option:radio SASL authentication"
+msgid "SASL"
+msgstr "SASL"
+
+#: widgets/ldapconfigwidget.cpp:241
+#, kde-format
+msgid "Authentication:"
+msgstr "Розпізнавання:"
+
+#: widgets/ldapconfigwidget.cpp:259
+#, kde-format
+msgid "SASL mechanism:"
+msgstr "Механізм SASL:"
+
+#: widgets/ldapconfigwidget.cpp:303
+#, kde-format
+msgid "Check server"
+msgstr "Перевірити сервер"
+
+#: widgets/ldapconfigwidget.cpp:309
+#, kde-format
+msgctxt "@title:window"
+msgid "LDAP Query"
+msgstr "Опитування LDAP"
+
+#: widgets/ldapconfigwidget.cpp:323
+#, kde-format
+msgctxt "%1 is a url to ldap server"
+msgid "Unknown error connecting %1"
+msgstr "Невідома помилка під час спроби встановлення зв’язку із %1"
+
+#~ msgid "LDAP Servers"
+#~ msgstr "Сервери LDAP"
+
+#~ msgid "Attribute"
+#~ msgstr "Атрибут"
+
+#~ msgid "Value"
+#~ msgstr "Значення"
+
+#~ msgid "Distinguished Name"
+#~ msgstr "Титул"
+
+#~ msgid ""
+#~ "SASL support is not available. Please recompile libkldap with the Cyrus-"
+#~ "SASL (or compatible) client libraries, or complain to your distribution "
+#~ "packagers."
+#~ msgstr ""
+#~ "Немає підтримки SASL... Будь ласка, ще раз зберіть libkldap з "
+#~ "клієнтськими бібліотеками Cyrus-SASL (або сумісними з ними), або "
+#~ "надішліть скаргу особі, що готувала пакунок вашого дистрибутива."
+
+#~ msgid "LDAP Operations error"
+#~ msgstr "Помилка дій LDAP"
+
+#~ msgid "kcmldap"
+#~ msgstr "kcmldap"
+
+#~ msgid "LDAP Server Settings"
+#~ msgstr "Параметри серверів LDAP"
+
+#~ msgid "(c) 2009 - 2010 Tobias Koenig"
+#~ msgstr "© Tobias Koenig, 2009–2010"
+
+#~ msgid "Tobias Koenig"
+#~ msgstr "Tobias Koenig"
+
+#~ msgctxt "@item LDAP search key"
+#~ msgid "Title"
+#~ msgstr "Звертання"
+
+#~ msgid "Full Name"
+#~ msgstr "Повне ім'я"
+
+#~ msgctxt "@item LDAP search key"
+#~ msgid "Email"
+#~ msgstr "Електронна пошта"
+
+#~ msgid "Home Number"
+#~ msgstr "Домашній телефон"
+
+#~ msgid "Work Number"
+#~ msgstr "Робочий телефон"
+
+#~ msgid "Mobile Number"
+#~ msgstr "Мобільний телефон"
+
+#~ msgid "Fax Number"
+#~ msgstr "Номер факсу"
+
+#~ msgid "Pager"
+#~ msgstr "Пейджер"
+
+#~ msgid "Street"
+#~ msgstr "Вулиця"
+
+#~ msgctxt "@item LDAP search key"
+#~ msgid "State"
+#~ msgstr "Область"
+
+#~ msgid "Country"
+#~ msgstr "Країна"
+
+#~ msgid "City"
+#~ msgstr "Місто"
+
+#~ msgid "Organization"
+#~ msgstr "Установа"
+
+#~ msgid "Company"
+#~ msgstr "Компанія"
+
+#~ msgid "Department"
+#~ msgstr "Відділ"
+
+#~ msgid "Zip Code"
+#~ msgstr "Поштовий код"
+
+#~ msgid "Postal Address"
+#~ msgstr "Поштова адреса"
+
+#~ msgid "Description"
+#~ msgstr "Опис"
+
+#~ msgid "User ID"
+#~ msgstr "ІД користувача:"
+
+#~ msgctxt "Search attribute: Name of contact"
+#~ msgid "Name"
+#~ msgstr "Ім'я"
+
+#~ msgctxt "Search attribute: Email of the contact"
+#~ msgid "Email"
+#~ msgstr "Електронна пошта"
+
+#~ msgctxt "@title:column Column containing email addresses"
+#~ msgid "Email"
+#~ msgstr "Електронна пошта"
+
+#~ msgctxt ""
+#~ "@title:column Column containing the residential state of the address"
+#~ msgid "State"
+#~ msgstr "Область"
+
+#~ msgctxt "@title:column Column containing title of the person"
+#~ msgid "Title"
+#~ msgstr "Звертання"
+
+#~ msgid "Import Contacts from LDAP"
+#~ msgstr "Імпортувати контакти з LDAP"
+
+#~ msgid "Search for Addresses in Directory"
+#~ msgstr "Шукати на адреси у каталозі"
+
+#~ msgid "Search for:"
+#~ msgstr "Шукати за:"
+
+#~ msgctxt "In LDAP attribute"
+#~ msgid "in"
+#~ msgstr "у"
+
+#~ msgctxt "@item:inlistbox Name of the contact"
+#~ msgid "Name"
+#~ msgstr "Ім’я"
+
+#~ msgctxt "@item:inlistbox email address of the contact"
+#~ msgid "Email"
+#~ msgstr "Електронна пошта"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Home Number"
+#~ msgstr "Домашній телефон"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Work Number"
+#~ msgstr "Робочий телефон"
+
+#~ msgid "Stop"
+#~ msgstr "Зупинити"
+
+#~ msgctxt "@action:button Start searching"
+#~ msgid "&Search"
+#~ msgstr "&Шукати"
+
+#~ msgid "Recursive search"
+#~ msgstr "Рекурсивний пошук"
+
+#~ msgid "Contains"
+#~ msgstr "містить"
+
+#~ msgid "Starts With"
+#~ msgstr "починається з"
+
+#~ msgid "Select All"
+#~ msgstr "Позначити все"
+
+#~ msgid "Unselect All"
+#~ msgstr "Скасувати позначення"
+
+#~ msgid "Add Selected"
+#~ msgstr "Додати позначені"
+
+#~ msgid "Configure LDAP Servers..."
+#~ msgstr "Налаштувати сервери LDAP…"
+
+#~ msgid "You must select an LDAP server before searching."
+#~ msgstr "Перед виконанням пошуку вам слід обрати сервер LDAP."
+
+#~ msgctxt "arguments are host name, datetime"
+#~ msgid "Imported from LDAP directory %1 on %2"
+#~ msgstr "Імпортовано з каталогу LDAP %1 на %2"
+
+#~ msgid "Configure the Address Book LDAP Settings"
+#~ msgstr "Налаштування параметрів LDAP адресної книги"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Юрій Чорноіван"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "yurchor@ukr.net"

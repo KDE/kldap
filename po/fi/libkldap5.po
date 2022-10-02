@@ -1,0 +1,332 @@
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Tommi Nieminen <translator@legisign.org>, 2010, 2015, 2017, 2018, 2020, 2021.
+# Lasse Liehu <lasse.liehu@gmail.com>, 2013, 2014.
+#
+# KDE Finnish translation sprint participants:
+# Author: Artnay
+msgid ""
+msgstr ""
+"Project-Id-Version: libkldap\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-11 00:44+0000\n"
+"PO-Revision-Date: 2021-08-22 21:01+0300\n"
+"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
+"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
+"Language: fi\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-POT-Import-Date: 2012-12-01 22:25:20+0000\n"
+"X-Generator: Lokalize 20.04.2\n"
+
+#: core/ldapconnection.cpp:124
+#, kde-format
+msgid "No LDAP Support..."
+msgstr "Ei LDAP-tukea…"
+
+#: core/ldapconnection.cpp:239
+#, kde-format
+msgid "An error occurred during the connection initialization phase."
+msgstr "Sattui virhe alustettaessa yhteyttä."
+
+#: core/ldapconnection.cpp:246
+#, kde-format
+msgid "Cannot set protocol version to %1."
+msgstr "Yhteyskäytännön versioksi ei voi asettaa %1."
+
+#: core/ldapconnection.cpp:257
+#, kde-format
+msgid "Cannot set timeout to %1 second."
+msgid_plural "Cannot set timeout to %1 seconds."
+msgstr[0] "Aikakatkaisua ei voi asettaa %1 sekuntiin."
+msgstr[1] "Aikakatkaisua ei voi asettaa %1 sekuntiin."
+
+#: core/ldapconnection.cpp:269
+#, kde-format
+msgid "Could not set CA certificate file."
+msgstr "CA-varmennetiedostoa ei voitu asettaa."
+
+#: core/ldapconnection.cpp:294
+#, kde-format
+msgid "Invalid TLS require certificate mode."
+msgstr "Virheellinen TLS:n vaatima varmennetila."
+
+#: core/ldapconnection.cpp:299
+#, kde-format
+msgid "Could not set TLS require certificate mode."
+msgstr "TLS:n vaatimaa varmennetilaa ei voitu asettaa."
+
+#: core/ldapconnection.cpp:308
+#, kde-format
+msgid "Could not initialize new TLS context."
+msgstr "Uutta TLS-kontekstia ei voitu alustaa."
+
+#: core/ldapconnection.cpp:325
+#, kde-format
+msgid "TLS support not available in the LDAP client libraries."
+msgstr "TLS-tukea ei ole saatavilla LDAP-asiakaskirjastoissa."
+
+#: core/ldapconnection.cpp:335
+#, kde-format
+msgid "Cannot set size limit."
+msgstr "Kokorajoitusta ei voi asettaa."
+
+#: core/ldapconnection.cpp:345
+#, kde-format
+msgid "Cannot set time limit."
+msgstr "Aikarajoitusta ei voi asettaa."
+
+#: core/ldapconnection.cpp:353
+#, kde-format
+msgid "Cannot initialize the SASL client."
+msgstr "SASL-asiakasta ei voi alustaa."
+
+#: core/ldapconnection.cpp:430
+#, kde-format
+msgid ""
+"LDAP support not compiled in. Please recompile libkldap with the OpenLDAP "
+"(or compatible) client libraries, or complain to your distribution packagers."
+msgstr ""
+"LDAP-tukea ei ole käännetty. Käännä libkldap uudelleen OpenLDAP- tai "
+"yhteensopivalla asiakaskirjastolla tai valita jakelusi paketoijille."
+
+#: core/ldapsearch.cpp:222
+#, kde-format
+msgid "Cannot access to server. Please reconfigure it."
+msgstr "Palvelimeen ei saa yhteyttä: määritä sen asetukset uudelleen."
+
+#: widgets/addhostdialog.cpp:64
+#, kde-format
+msgctxt "@title:window"
+msgid "Add Host"
+msgstr "Lisää palvelin"
+
+#: widgets/ldapclientsearchconfigreadconfigjob.cpp:112
+#, kde-format
+msgid ""
+"LDAP password is stored as clear text, do you want to store it in kwallet?"
+msgstr ""
+"LDAP-salasana tallennetaan salaamattomana tekstinä: haluatko tallentaa sen "
+"lompakkoon?"
+
+#: widgets/ldapclientsearchconfigreadconfigjob.cpp:113
+#, kde-format
+msgid "Store clear text password in Wallet"
+msgstr "Tallenna salasana salaamattomana lompakkoon"
+
+#: widgets/ldapconfigurewidget.cpp:96
+#, kde-format
+msgctxt "@title:window"
+msgid "Edit Host"
+msgstr "Muokkaa palvelinta"
+
+#: widgets/ldapconfigurewidget.cpp:113
+#, kde-format
+msgid "Do you want to remove setting for host \"%1\"?"
+msgstr "Haluatko poistaa asetuksen palvelimelta ”%1”?"
+
+#: widgets/ldapconfigurewidget.cpp:114
+#, kde-format
+msgid "Remove Host"
+msgstr "Poista palvelin"
+
+#: widgets/ldapconfigurewidget.cpp:272
+#, kde-format
+msgid "Check all servers that should be used:"
+msgstr "Valitse kaikki palvelimet, joita tulisi käyttää:"
+
+#: widgets/ldapconfigurewidget.cpp:306
+#, kde-format
+msgid "&Add Host..."
+msgstr "L&isää palvelin…"
+
+#: widgets/ldapconfigurewidget.cpp:308
+#, kde-format
+msgid "&Edit Host..."
+msgstr "&Muokkaa palvelinta…"
+
+#: widgets/ldapconfigurewidget.cpp:311
+#, kde-format
+msgid "&Remove Host"
+msgstr "P&oista palvelin"
+
+#: widgets/ldapconfigwidget.cpp:90
+#, kde-format
+msgid "User:"
+msgstr "Käyttäjä:"
+
+#: widgets/ldapconfigwidget.cpp:97
+#, kde-format
+msgid "Bind DN:"
+msgstr "Bind DN:"
+
+#: widgets/ldapconfigwidget.cpp:104
+#, kde-format
+msgid "Realm:"
+msgstr "Alue:"
+
+#: widgets/ldapconfigwidget.cpp:112
+#, kde-format
+msgid "Password:"
+msgstr "Salasana:"
+
+#: widgets/ldapconfigwidget.cpp:119
+#, kde-format
+msgid "Host:"
+msgstr "Palvelin:"
+
+#: widgets/ldapconfigwidget.cpp:128
+#, kde-format
+msgid "Port:"
+msgstr "Portti:"
+
+#: widgets/ldapconfigwidget.cpp:136
+#, kde-format
+msgid "LDAP version:"
+msgstr "LDAP-versio:"
+
+#: widgets/ldapconfigwidget.cpp:144
+#, kde-format
+msgctxt "default ldap size limit"
+msgid "Default"
+msgstr "Oletus"
+
+#: widgets/ldapconfigwidget.cpp:145
+#, kde-format
+msgid "Size limit:"
+msgstr "Kokorajoitus:"
+
+#: widgets/ldapconfigwidget.cpp:153
+#, kde-format
+msgid " sec"
+msgstr " s"
+
+#: widgets/ldapconfigwidget.cpp:154
+#, kde-format
+msgctxt "default ldap time limit"
+msgid "Default"
+msgstr "Oletus"
+
+#: widgets/ldapconfigwidget.cpp:155
+#, kde-format
+msgid "Time limit:"
+msgstr "Aikarajoitus:"
+
+#: widgets/ldapconfigwidget.cpp:163
+#, kde-format
+msgid "No paging"
+msgstr "Ei sivutusta"
+
+#: widgets/ldapconfigwidget.cpp:164
+#, kde-format
+msgid "Page size:"
+msgstr "Sivutuksen koko:"
+
+#: widgets/ldapconfigwidget.cpp:175 widgets/ldapconfigwidget.cpp:253
+#, kde-format
+msgid "Query Server"
+msgstr "Kysy palvelimelta"
+
+#: widgets/ldapconfigwidget.cpp:185
+#, kde-format
+msgctxt "Distinguished Name"
+msgid "DN:"
+msgstr "DN:"
+
+#: widgets/ldapconfigwidget.cpp:192
+#, kde-format
+msgid "Filter:"
+msgstr "Suodatin:"
+
+#: widgets/ldapconfigwidget.cpp:201
+#, kde-format
+msgctxt "@option:radio set no security"
+msgid "No"
+msgstr "Ei"
+
+#: widgets/ldapconfigwidget.cpp:204
+#, kde-format
+msgctxt "@option:radio use TLS security"
+msgid "TLS"
+msgstr "TLS"
+
+#: widgets/ldapconfigwidget.cpp:207
+#, kde-format
+msgctxt "@option:radio use SSL security"
+msgid "SSL"
+msgstr "SSL"
+
+#: widgets/ldapconfigwidget.cpp:222
+#, kde-format
+msgid "Security:"
+msgstr "Salaus:"
+
+#: widgets/ldapconfigwidget.cpp:232
+#, kde-format
+msgctxt "@option:radio anonymous authentication"
+msgid "Anonymous"
+msgstr "Nimetön"
+
+#: widgets/ldapconfigwidget.cpp:235
+#, kde-format
+msgctxt "@option:radio simple authentication"
+msgid "Simple"
+msgstr "Yksinkertainen"
+
+#: widgets/ldapconfigwidget.cpp:238
+#, kde-format
+msgctxt "@option:radio SASL authentication"
+msgid "SASL"
+msgstr "SASL"
+
+#: widgets/ldapconfigwidget.cpp:241
+#, kde-format
+msgid "Authentication:"
+msgstr "Todennus:"
+
+#: widgets/ldapconfigwidget.cpp:259
+#, kde-format
+msgid "SASL mechanism:"
+msgstr "SASL-mekanismi:"
+
+#: widgets/ldapconfigwidget.cpp:303
+#, kde-format
+msgid "Check server"
+msgstr "Tarkista palvelin"
+
+#: widgets/ldapconfigwidget.cpp:309
+#, kde-format
+msgctxt "@title:window"
+msgid "LDAP Query"
+msgstr "LDAP-kysely"
+
+#: widgets/ldapconfigwidget.cpp:323
+#, kde-format
+msgctxt "%1 is a url to ldap server"
+msgid "Unknown error connecting %1"
+msgstr "Tuntematon virhe yhdistettäessä palvelimeen %1"
+
+#~ msgid "LDAP Servers"
+#~ msgstr "LDAP-palvelimet"
+
+#~ msgid "Attribute"
+#~ msgstr "Määrite"
+
+#~ msgid "Value"
+#~ msgstr "Arvo"
+
+#~ msgid "Distinguished Name"
+#~ msgstr "DN-nimi"
+
+#~ msgid ""
+#~ "SASL support is not available. Please recompile libkldap with the Cyrus-"
+#~ "SASL (or compatible) client libraries, or complain to your distribution "
+#~ "packagers."
+#~ msgstr ""
+#~ "SASL-tukea ei ole saatavilla. Käännä libkldap uudelleen Cyrus-SASL- tai "
+#~ "yhteensopivalla asiakaskirjastolla tai valita jakelusi paketoijille."
+
+#~ msgid "LDAP Operations error"
+#~ msgstr "LDAP-toimenpiteen virhe"

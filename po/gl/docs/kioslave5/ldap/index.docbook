@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE article PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
+"dtd/kdedbx45.dtd" [
+<!ENTITY % addindex "IGNORE">
+<!ENTITY % Galician  "INCLUDE"
+> <!-- change language only here -->
+]>
+	
+<article lang="&language;" id="ldap">
+<title
+>ldap</title>
+<articleinfo>
+<authorgroup>
+<author
+>&Lauri.Watts; &Lauri.Watts.mail;</author>
+<othercredit role="translator"
+><firstname
+>Marce</firstname
+><surname
+>Villarino</surname
+><affiliation
+><address
+><email
+>mvillarino@users.sourceforge.net</email
+></address
+></affiliation
+><contrib
+>Tradutor do proxecto Trasno</contrib
+></othercredit
+> 
+</authorgroup>
+</articleinfo>
+
+<para
+><acronym
+>ldap</acronym
+> é o lightweight directory access protocol. Fornece acceso a un directorio X.500, ou a un servidor <acronym
+>LDAP</acronym
+> independente.</para>
+
+<para
+>Pode empregar o kioslave ldap como segue:</para>
+
+<para
+><userinput
+>ldap://servidor:porto/ou=People,o=where,c=de??sub</userinput
+> para pesquisar nunha sub-árbore</para>
+
+<para
+>ou <userinput
+>ldap://servidor:porto/cn=MM,ou=People,o=where,c=de??base</userinput
+> para unha galla completa.</para>
+
+</article>

@@ -1,0 +1,69 @@
+# translation of kio_ldap.po to Punjabi
+# Amanpreet Singh Alam <aalam@redhat.com>, 2004, 2005.
+# Amanpreet Singh Brar <aalam@redhat.com>, 2005.
+# AP S Alam <aalam@users.sf.net>, 2007.
+# A S Alam <aalam@users.sf.net>, 2007.
+msgid ""
+msgstr ""
+"Project-Id-Version: kio_ldap\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-29 00:47+0000\n"
+"PO-Revision-Date: 2007-08-06 21:07+0530\n"
+"Last-Translator: A S Alam <aalam@users.sf.net>\n"
+"Language-Team: Punjabi <punjabi-l10n@users.sf.net>\n"
+"Language: pa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: KBabel 1.11.4\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"\n"
+"\n"
+
+#: kio_ldap.cpp:86
+#, kde-format
+msgid ""
+"\n"
+"Additional info: "
+msgstr ""
+"\n"
+"ਹੋਰ ਜਾਣਕਾਰੀ: "
+
+#: kio_ldap.cpp:167
+#, kde-format
+msgid ""
+"LDAP server returned the error: %1 %2\n"
+"The LDAP URL was: %3"
+msgstr ""
+"LDAP ਸਰਵਰ ਨੇ ਇਹ ਗਲਤੀ ਭੇਜੀ ਹੈ: %1 %2\n"
+"LDAP URL ਸੀ: %3"
+
+#: kio_ldap.cpp:298
+#, kde-format
+msgid "LDAP Login"
+msgstr "LDAP ਲਾਗਇਨ"
+
+#: kio_ldap.cpp:300
+#, kde-format
+msgid "site:"
+msgstr "ਸਾਇਟ:"
+
+#: kio_ldap.cpp:327
+#, kde-format
+msgid "Invalid authorization information."
+msgstr "ਗਲਤ ਪਰਮਾਣਕਤਾ ਜਾਣਕਾਰੀ ਹੈ।"
+
+#: kio_ldap.cpp:334
+#, kde-format
+msgid "LDAP connection canceled."
+msgstr "LDAP ਕੁਨੈਕਸ਼ਨ ਰੱਦ ਕੀਤਾ ਗਿਆ।"
+
+#: kio_ldap.cpp:600 kio_ldap.cpp:668
+#, kde-format
+msgid "The Ldif parser failed."
+msgstr "Ldif ਪਾਰਸਰ ਅਸਫ਼ਲ ਹੈ।"
+
+#: kio_ldap.cpp:680
+#, kde-format
+msgid "Invalid Ldif file in line %1."
+msgstr "%1 ਲਾਇਨ ਵਿੱਚ ਗਲਤ Ldif ਫਾਇਲ ਹੈ।"

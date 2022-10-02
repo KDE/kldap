@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE article PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
+"dtd/kdedbx45.dtd" [
+<!ENTITY % addindex "IGNORE">
+<!ENTITY % Portuguese "INCLUDE"
+> <!-- change language only here -->
+]>
+	
+<article lang="&language;" id="ldap">
+<title
+>ldap</title>
+<articleinfo>
+<authorgroup>
+<author
+>&Lauri.Watts; &Lauri.Watts.mail;</author>
+<othercredit role="translator"
+><firstname
+>José</firstname
+><surname
+>Pires</surname
+><affiliation
+><address
+><email
+>zepires@gmail.com</email
+></address
+></affiliation
+><contrib
+>Tradução</contrib
+></othercredit
+> 
+</authorgroup>
+</articleinfo>
+
+<para
+>O <acronym
+>LDAP</acronym
+> é o protocolo simples de acesso a directórios. Providencia o acesso a um directório de X.500 ou a um servidor de <acronym
+>LDAP</acronym
+> autónomo.</para>
+
+<para
+>Poderá usar o 'kioslave' de LDAP da seguinte maneira:</para>
+
+<para
+><userinput
+>ldap://maquina:porto/ou=Pessoas,o=onde,c=de??sub</userinput
+> para uma pesquisa na sub-árvore.</para>
+
+<para
+>ou <userinput
+>ldap://maquina:porto/cn=MM,ou=Pessoas,o=onde,c=de??base</userinput
+> para um ramo completo.</para>
+
+</article>

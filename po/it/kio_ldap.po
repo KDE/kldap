@@ -1,0 +1,65 @@
+# translation of kio_ldap.po to Italian
+# Andrea RIZZI <arizzi@pi.infn.it>, 2004.
+# Andrea Rizzi <rizzi@kde.org>, 2005.
+# Nicola Ruggero <nicola@nxnt.org>, 2008.
+msgid ""
+msgstr ""
+"Project-Id-Version: kio_ldap\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-07-29 00:47+0000\n"
+"PO-Revision-Date: 2008-01-01 17:26+0100\n"
+"Last-Translator: Nicola Ruggero <nicola@nxnt.org>\n"
+"Language-Team: Italian <kde-i18n-it@kde.org>\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: kio_ldap.cpp:86
+#, kde-format
+msgid ""
+"\n"
+"Additional info: "
+msgstr ""
+"\n"
+"Informazioni aggiuntive: "
+
+#: kio_ldap.cpp:167
+#, kde-format
+msgid ""
+"LDAP server returned the error: %1 %2\n"
+"The LDAP URL was: %3"
+msgstr ""
+"Il server LDAP ha dato il seguente errore: %1%2\n"
+"L'URL LDAP era: %3"
+
+#: kio_ldap.cpp:298
+#, kde-format
+msgid "LDAP Login"
+msgstr "Accesso LDAP"
+
+#: kio_ldap.cpp:300
+#, kde-format
+msgid "site:"
+msgstr "sito:"
+
+#: kio_ldap.cpp:327
+#, kde-format
+msgid "Invalid authorization information."
+msgstr "Informazioni di autorizzazione non valide."
+
+#: kio_ldap.cpp:334
+#, kde-format
+msgid "LDAP connection canceled."
+msgstr "Connessione LDAP annullata."
+
+#: kio_ldap.cpp:600 kio_ldap.cpp:668
+#, kde-format
+msgid "The Ldif parser failed."
+msgstr "L'analizzatore LDIF non ha funzionato."
+
+#: kio_ldap.cpp:680
+#, kde-format
+msgid "Invalid Ldif file in line %1."
+msgstr "File LDIF non valido alla riga %1."

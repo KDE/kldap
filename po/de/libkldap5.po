@@ -1,0 +1,498 @@
+# Stephan Johach <hunsum@gmx.de>, 2007.
+# Burkhard Lück <lueck@hube-lueck.de>, 2009, 2017, 2018, 2020, 2021.
+# Thomas Reitelbach <tr@erdfunkstelle.de>, 2009.
+# Frederik Schwarzer <schwarzer@kde.org>, 2010, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: libkldap\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-01-11 00:44+0000\n"
+"PO-Revision-Date: 2021-08-25 15:54+0200\n"
+"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"Language-Team: German <kde-i18n-de@kde.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 19.12.3\n"
+
+#: core/ldapconnection.cpp:124
+#, kde-format
+msgid "No LDAP Support..."
+msgstr "Keine LDAP-Unterstützung ..."
+
+#: core/ldapconnection.cpp:239
+#, kde-format
+msgid "An error occurred during the connection initialization phase."
+msgstr "Bei Aufbau der Verbindung ist ein Fehler aufgetreten."
+
+#: core/ldapconnection.cpp:246
+#, kde-format
+msgid "Cannot set protocol version to %1."
+msgstr "Die Protokollversion kann nicht auf %1 gesetzt werden."
+
+#: core/ldapconnection.cpp:257
+#, kde-format
+msgid "Cannot set timeout to %1 second."
+msgid_plural "Cannot set timeout to %1 seconds."
+msgstr[0] "Das Zeitlimit kann nicht auf %1 Sekunde gesetzt werden."
+msgstr[1] "Das Zeitlimit kann nicht auf %1 Sekunden gesetzt werden."
+
+#: core/ldapconnection.cpp:269
+#, kde-format
+msgid "Could not set CA certificate file."
+msgstr "Die CA-Zertifikatsdatei kann nicht festgelegt werden."
+
+#: core/ldapconnection.cpp:294
+#, kde-format
+msgid "Invalid TLS require certificate mode."
+msgstr "Ungültiger Modus „TLS erfordert ein Zertifikat“."
+
+#: core/ldapconnection.cpp:299
+#, kde-format
+msgid "Could not set TLS require certificate mode."
+msgstr "Modus „TLS erfordert ein Zertifikat“ kann nicht festgelegt werden."
+
+#: core/ldapconnection.cpp:308
+#, kde-format
+msgid "Could not initialize new TLS context."
+msgstr "Neuer TLS-Kontext kann nicht initialisiert werden."
+
+#: core/ldapconnection.cpp:325
+#, kde-format
+msgid "TLS support not available in the LDAP client libraries."
+msgstr ""
+"In den LDAP-Bibliotheken des Clients ist keine Unterstützung für TLS "
+"vorhanden."
+
+#: core/ldapconnection.cpp:335
+#, kde-format
+msgid "Cannot set size limit."
+msgstr "Maximale Größe kann nicht gesetzt werden."
+
+#: core/ldapconnection.cpp:345
+#, kde-format
+msgid "Cannot set time limit."
+msgstr "Zeitlimit kann nicht gesetzt werden."
+
+#: core/ldapconnection.cpp:353
+#, kde-format
+msgid "Cannot initialize the SASL client."
+msgstr "Der SASL-Client kann nicht initialisiert werden."
+
+#: core/ldapconnection.cpp:430
+#, kde-format
+msgid ""
+"LDAP support not compiled in. Please recompile libkldap with the OpenLDAP "
+"(or compatible) client libraries, or complain to your distribution packagers."
+msgstr ""
+"Bei der Kompilierung wurde keine Unterstützung für LDAP vorgesehen. Bitte "
+"kompilieren Sie libkldap mit den Client-Bibliotheken von OpenLDAP (oder "
+"kompatiblen) oder erkundigen Sie sich beim Ersteller der installierten "
+"Pakete."
+
+#: core/ldapsearch.cpp:222
+#, kde-format
+msgid "Cannot access to server. Please reconfigure it."
+msgstr ""
+"Kein Zugriff auf den Server möglich. Bitte korrigieren Sie die Einstellungen."
+
+#: widgets/addhostdialog.cpp:64
+#, kde-format
+msgctxt "@title:window"
+msgid "Add Host"
+msgstr "Rechner hinzufügen"
+
+#: widgets/ldapclientsearchconfigreadconfigjob.cpp:112
+#, kde-format
+msgid ""
+"LDAP password is stored as clear text, do you want to store it in kwallet?"
+msgstr ""
+"Das LDAP-Passwort wird als Klartext gespeichert, möchten Sie es in KWallet "
+"speichern?"
+
+#: widgets/ldapclientsearchconfigreadconfigjob.cpp:113
+#, kde-format
+msgid "Store clear text password in Wallet"
+msgstr "Klartext-Passwort im Passwortspeicher speichern"
+
+#: widgets/ldapconfigurewidget.cpp:96
+#, kde-format
+msgctxt "@title:window"
+msgid "Edit Host"
+msgstr "Rechner bearbeiten"
+
+#: widgets/ldapconfigurewidget.cpp:113
+#, kde-format
+msgid "Do you want to remove setting for host \"%1\"?"
+msgstr "Möchten Sie die Einstellungen für den Rechner „%1“ entfernen?"
+
+#: widgets/ldapconfigurewidget.cpp:114
+#, kde-format
+msgid "Remove Host"
+msgstr "Rechner entfernen"
+
+#: widgets/ldapconfigurewidget.cpp:272
+#, kde-format
+msgid "Check all servers that should be used:"
+msgstr "Alle Rechner auswählen, die verwendet werden sollen:"
+
+#: widgets/ldapconfigurewidget.cpp:306
+#, kde-format
+msgid "&Add Host..."
+msgstr "Rechner &hinzufügen ..."
+
+#: widgets/ldapconfigurewidget.cpp:308
+#, kde-format
+msgid "&Edit Host..."
+msgstr "&Rechner bearbeiten ..."
+
+#: widgets/ldapconfigurewidget.cpp:311
+#, kde-format
+msgid "&Remove Host"
+msgstr "Rechner &entfernen"
+
+#: widgets/ldapconfigwidget.cpp:90
+#, kde-format
+msgid "User:"
+msgstr "Benutzer:"
+
+#: widgets/ldapconfigwidget.cpp:97
+#, kde-format
+msgid "Bind DN:"
+msgstr "Bind-DN:"
+
+#: widgets/ldapconfigwidget.cpp:104
+#, kde-format
+msgid "Realm:"
+msgstr "Bereich:"
+
+#: widgets/ldapconfigwidget.cpp:112
+#, kde-format
+msgid "Password:"
+msgstr "Passwort:"
+
+#: widgets/ldapconfigwidget.cpp:119
+#, kde-format
+msgid "Host:"
+msgstr "Rechner:"
+
+#: widgets/ldapconfigwidget.cpp:128
+#, kde-format
+msgid "Port:"
+msgstr "Port:"
+
+#: widgets/ldapconfigwidget.cpp:136
+#, kde-format
+msgid "LDAP version:"
+msgstr "LDAP-Version:"
+
+#: widgets/ldapconfigwidget.cpp:144
+#, kde-format
+msgctxt "default ldap size limit"
+msgid "Default"
+msgstr "Voreinstellung"
+
+#: widgets/ldapconfigwidget.cpp:145
+#, kde-format
+msgid "Size limit:"
+msgstr "Max. Größe:"
+
+#: widgets/ldapconfigwidget.cpp:153
+#, kde-format
+msgid " sec"
+msgstr " s"
+
+#: widgets/ldapconfigwidget.cpp:154
+#, kde-format
+msgctxt "default ldap time limit"
+msgid "Default"
+msgstr "Voreinstellung"
+
+#: widgets/ldapconfigwidget.cpp:155
+#, kde-format
+msgid "Time limit:"
+msgstr "Zeitlimit:"
+
+#: widgets/ldapconfigwidget.cpp:163
+#, kde-format
+msgid "No paging"
+msgstr "Kein Paging"
+
+#: widgets/ldapconfigwidget.cpp:164
+#, kde-format
+msgid "Page size:"
+msgstr "Seitengröße:"
+
+#: widgets/ldapconfigwidget.cpp:175 widgets/ldapconfigwidget.cpp:253
+#, kde-format
+msgid "Query Server"
+msgstr "Server abfragen"
+
+#: widgets/ldapconfigwidget.cpp:185
+#, kde-format
+msgctxt "Distinguished Name"
+msgid "DN:"
+msgstr "DN:"
+
+#: widgets/ldapconfigwidget.cpp:192
+#, kde-format
+msgid "Filter:"
+msgstr "Filter:"
+
+#: widgets/ldapconfigwidget.cpp:201
+#, kde-format
+msgctxt "@option:radio set no security"
+msgid "No"
+msgstr "Keine"
+
+#: widgets/ldapconfigwidget.cpp:204
+#, kde-format
+msgctxt "@option:radio use TLS security"
+msgid "TLS"
+msgstr "TLS"
+
+#: widgets/ldapconfigwidget.cpp:207
+#, kde-format
+msgctxt "@option:radio use SSL security"
+msgid "SSL"
+msgstr "SSL"
+
+#: widgets/ldapconfigwidget.cpp:222
+#, kde-format
+msgid "Security:"
+msgstr "Sicherheit:"
+
+#: widgets/ldapconfigwidget.cpp:232
+#, kde-format
+msgctxt "@option:radio anonymous authentication"
+msgid "Anonymous"
+msgstr "Anonym"
+
+#: widgets/ldapconfigwidget.cpp:235
+#, kde-format
+msgctxt "@option:radio simple authentication"
+msgid "Simple"
+msgstr "Einfach"
+
+#: widgets/ldapconfigwidget.cpp:238
+#, kde-format
+msgctxt "@option:radio SASL authentication"
+msgid "SASL"
+msgstr "SASL"
+
+#: widgets/ldapconfigwidget.cpp:241
+#, kde-format
+msgid "Authentication:"
+msgstr "Authentifizierung:"
+
+#: widgets/ldapconfigwidget.cpp:259
+#, kde-format
+msgid "SASL mechanism:"
+msgstr "SASL-Mechanismus:"
+
+#: widgets/ldapconfigwidget.cpp:303
+#, kde-format
+msgid "Check server"
+msgstr "Server überprüfen"
+
+#: widgets/ldapconfigwidget.cpp:309
+#, kde-format
+msgctxt "@title:window"
+msgid "LDAP Query"
+msgstr "LDAP-Abfrage"
+
+#: widgets/ldapconfigwidget.cpp:323
+#, kde-format
+msgctxt "%1 is a url to ldap server"
+msgid "Unknown error connecting %1"
+msgstr "Unbekannter Fehler beim Verbinden mit %1"
+
+#~ msgid "LDAP Servers"
+#~ msgstr "LDAP-Server"
+
+#~ msgid "Attribute"
+#~ msgstr "Attribut"
+
+#~ msgid "Value"
+#~ msgstr "Wert"
+
+#~ msgid "Distinguished Name"
+#~ msgstr "Distinguished Name"
+
+#~ msgid ""
+#~ "SASL support is not available. Please recompile libkldap with the Cyrus-"
+#~ "SASL (or compatible) client libraries, or complain to your distribution "
+#~ "packagers."
+#~ msgstr ""
+#~ "Unterstützung für SASL ist nicht verfügbar. Bitte kompilieren Sie "
+#~ "libkldap mit den Client-Bibliotheken von Cyrus-SASL (oder kompatiblen) "
+#~ "oder erkundigen Sie sich beim Ersteller der installierten Pakete."
+
+#~ msgid "LDAP Operations error"
+#~ msgstr "LDAP-Fehler"
+
+#~ msgid "kcmldap"
+#~ msgstr "kcmldap"
+
+#~ msgid "LDAP Server Settings"
+#~ msgstr "LDAP-Server-Einstellungen"
+
+#~ msgid "(c) 2009 - 2010 Tobias Koenig"
+#~ msgstr "© 2009–2010 Tobias Koenig"
+
+#~ msgid "Tobias Koenig"
+#~ msgstr "Tobias Koenig"
+
+#~ msgctxt "@item LDAP search key"
+#~ msgid "Title"
+#~ msgstr "Titel "
+
+#~ msgid "Full Name"
+#~ msgstr "Vollständiger Name"
+
+#~ msgctxt "@item LDAP search key"
+#~ msgid "Email"
+#~ msgstr "E-Mail-Adresse"
+
+#~ msgid "Home Number"
+#~ msgstr "Telefonnummer (privat)"
+
+#~ msgid "Work Number"
+#~ msgstr "Telefonnummer (dienstlich)"
+
+#~ msgid "Mobile Number"
+#~ msgstr "Telefonnummer (mobil)"
+
+#~ msgid "Fax Number"
+#~ msgstr "Faxnummer"
+
+#~ msgid "Pager"
+#~ msgstr "Pager"
+
+#~ msgid "Street"
+#~ msgstr "Straße"
+
+#~ msgctxt "@item LDAP search key"
+#~ msgid "State"
+#~ msgstr "Bundesland"
+
+#~ msgid "Country"
+#~ msgstr "Land"
+
+#~ msgid "City"
+#~ msgstr "Stadt"
+
+#~ msgid "Organization"
+#~ msgstr "Organisation"
+
+#~ msgid "Company"
+#~ msgstr "Firma"
+
+#~ msgid "Department"
+#~ msgstr "Abteilung"
+
+#~ msgid "Zip Code"
+#~ msgstr "Postleitzahl"
+
+#~ msgid "Postal Address"
+#~ msgstr "Postanschrift"
+
+#~ msgid "Description"
+#~ msgstr "Beschreibung"
+
+#~ msgid "User ID"
+#~ msgstr "Benutzerkennung"
+
+#~ msgctxt "Search attribute: Name of contact"
+#~ msgid "Name"
+#~ msgstr "Name"
+
+#~ msgctxt "Search attribute: Email of the contact"
+#~ msgid "Email"
+#~ msgstr "E-Mail-Adresse"
+
+#~ msgctxt "@title:column Column containing email addresses"
+#~ msgid "Email"
+#~ msgstr "E-Mail-Adresse"
+
+#~ msgctxt ""
+#~ "@title:column Column containing the residential state of the address"
+#~ msgid "State"
+#~ msgstr "Bundesland"
+
+#~ msgctxt "@title:column Column containing title of the person"
+#~ msgid "Title"
+#~ msgstr "Titel "
+
+#~ msgid "Import Contacts from LDAP"
+#~ msgstr "Kontakte aus LDAP importieren"
+
+#~ msgid "Search for Addresses in Directory"
+#~ msgstr "Nach Adressen im Verzeichnis suchen"
+
+#~ msgid "Search for:"
+#~ msgstr "Suchen nach:"
+
+#~ msgctxt "@item:inlistbox Name of the contact"
+#~ msgid "Name"
+#~ msgstr "Name"
+
+#~ msgctxt "@item:inlistbox email address of the contact"
+#~ msgid "Email"
+#~ msgstr "E-Mail-Adresse"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Home Number"
+#~ msgstr "Telefonnummer (privat)"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Work Number"
+#~ msgstr "Telefonnummer (dienstlich)"
+
+#~ msgid "Stop"
+#~ msgstr "Anhalten"
+
+#~ msgctxt "@action:button Start searching"
+#~ msgid "&Search"
+#~ msgstr "&Suchen"
+
+#~ msgid "Recursive search"
+#~ msgstr "Rekursive Suche"
+
+#~ msgid "Contains"
+#~ msgstr "Enthält"
+
+#~ msgid "Starts With"
+#~ msgstr "Beginnt mit"
+
+#~ msgid "Select All"
+#~ msgstr "Alle auswählen"
+
+#~ msgid "Unselect All"
+#~ msgstr "Auswahl aufheben"
+
+#~ msgid "Add Selected"
+#~ msgstr "Ausgewählte hinzufügen"
+
+#~ msgid "Configure LDAP Servers..."
+#~ msgstr "LDAP-Server einrichten ..."
+
+#~ msgid "You must select an LDAP server before searching."
+#~ msgstr "Sie müssen vor der Suche einen LDAP-Server auswählen."
+
+#~ msgctxt "arguments are host name, datetime"
+#~ msgid "Imported from LDAP directory %1 on %2"
+#~ msgstr "Importiert aus LDAP-Verzeichnis %1 am %2"
+
+#~ msgctxt "NAME OF TRANSLATORS"
+#~ msgid "Your names"
+#~ msgstr "Frederik Schwarzer"
+
+#~ msgctxt "EMAIL OF TRANSLATORS"
+#~ msgid "Your emails"
+#~ msgstr "schwarzer@kde.org"
+
+#~ msgid "Cannot start TLS."
+#~ msgstr "TLS kann nicht gestartet werden."

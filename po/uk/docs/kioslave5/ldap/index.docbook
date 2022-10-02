@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE article PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
+"dtd/kdedbx45.dtd" [
+<!ENTITY % addindex "IGNORE">
+<!ENTITY % Ukrainian "INCLUDE"
+> <!-- change language only here -->
+]>
+	
+<article lang="&language;" id="ldap">
+<title
+>ldap</title>
+<articleinfo>
+<authorgroup>
+<author
+>&Lauri.Watts; &Lauri.Watts.mail;</author>
+<othercredit role="translator"
+><firstname
+>Юрій</firstname
+><surname
+>Чорноіван</surname
+><affiliation
+><address
+><email
+>yurchor@ukr.net</email
+></address
+></affiliation
+><contrib
+>Переклад українською</contrib
+></othercredit
+> 
+</authorgroup>
+</articleinfo>
+
+<para
+><acronym
+>ldap</acronym
+> — це абревіатура від lightweight directory access protocol (полегшений протокол доступу до каталогів). Цей протокол надає доступ до каталогу X.500 або до окремого сервера <acronym
+>LDAP</acronym
+>.</para>
+
+<para
+>Використовувати kioslave ldap можна так:</para>
+
+<para
+><userinput
+>ldap://host:port/ou=People,o=where,c=de??sub</userinput
+> для запиту у піддереві</para>
+
+<para
+>або <userinput
+>ldap://вузол:порт/cn=MM,ou=People,o=where,c=de??base</userinput
+> для всієї гілки.</para>
+
+</article>

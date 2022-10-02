@@ -1,0 +1,68 @@
+<?xml version="1.0" ?>
+<!DOCTYPE article PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
+"dtd/kdedbx45.dtd" [
+<!ENTITY % addindex "IGNORE">
+<!ENTITY % Spanish "INCLUDE"
+> <!-- change language only here -->
+]>
+	
+<article lang="&language;" id="ldap">
+<title
+>ldap</title>
+<articleinfo>
+<authorgroup>
+<author
+>&Lauri.Watts; &Lauri.Watts.mail;</author>
+<othercredit role="translator"
+> <firstname
+>Marcos</firstname
+> <surname
+>Fouces Lago</surname
+> <affiliation
+><address
+><email
+>mfouces@yahoo.es</email
+></address
+></affiliation
+> <contrib
+>Traductor</contrib
+> </othercredit
+> <othercredit role="translator"
+><firstname
+>Javier</firstname
+><surname
+>Viñal</surname
+><affiliation
+><address
+><email
+>fjvinal@gmail.com</email
+></address
+></affiliation
+><contrib
+>Traductor</contrib
+></othercredit
+> 
+</authorgroup>
+</articleinfo>
+
+<para
+><acronym
+>ldap</acronym
+> es un protocolo ligero de acceso a directorios. Proporciona acceso a un directorio X.500, o a un servidor <acronym
+>LDAP</acronym
+>.</para>
+
+<para
+>Puede utilizar el ioslave ldap del siguiente modo:</para>
+
+<para
+><userinput
+>ldap://maquina:puerto/ou=People,o=where,c=de??sub</userinput
+> para una petición de un subárbol</para>
+
+<para
+>o <userinput
+>ldap://maquina:puerto/cn=MM,ou=People,o=where,c=de??base</userinput
+> para obtener una rama completa.</para>
+
+</article>
