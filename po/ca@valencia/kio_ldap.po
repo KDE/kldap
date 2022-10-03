@@ -68,4 +68,4 @@ msgstr "No s'ha pogut executar l'analitzador LDIF."
 #: kio_ldap.cpp:680
 #, kde-format
 msgid "Invalid Ldif file in line %1."
-msgstr "Fitxer LDIF no vàlid a la línia %1."
+msgstr "Fitxer LDIF no vàlid en la línia %1."

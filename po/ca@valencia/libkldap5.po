@@ -117,7 +117,7 @@ msgstr ""
 #: widgets/ldapclientsearchconfigreadconfigjob.cpp:113
 #, kde-format
 msgid "Store clear text password in Wallet"
-msgstr "Guarda la contrasenya de text a la Cartera"
+msgstr "Guarda la contrasenya de text en la Cartera"
 
 #: widgets/ldapconfigurewidget.cpp:96
 #, kde-format
