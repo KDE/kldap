@@ -143,7 +143,7 @@ msgstr "Marqueu tots els servidors que s'haurien d'utilitzar:"
 #: widgets/ldapconfigurewidget.cpp:306
 #, kde-format
 msgid "&Add Host..."
-msgstr "&Afig una màquina..."
+msgstr "Afi&g una màquina..."
 
 #: widgets/ldapconfigurewidget.cpp:308
 #, kde-format
