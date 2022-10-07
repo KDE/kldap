@@ -308,8 +308,3 @@ msgstr "LDAP クエリ"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr ""
-
-#, fuzzy
-#~| msgid "LDAP version:"
-#~ msgid "LDAP Servers"
-#~ msgstr "LDAP バージョン:"
