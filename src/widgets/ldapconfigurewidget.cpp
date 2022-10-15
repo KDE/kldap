@@ -18,6 +18,7 @@
 #include <KMessageBox>
 #include <QDialogButtonBox>
 #include <QHBoxLayout>
+#include <kwidgetsaddons_version.h>
 
 #include "ldapclientsearch.h"
 #include "ldapclientsearchconfig.h"
@@ -109,12 +110,20 @@ void LdapConfigureWidget::slotRemoveHost()
         return;
     }
     auto ldapItem = dynamic_cast<LdapWidgetItem *>(item);
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+    const int answer = KMessageBox::questionTwoActions(this,
+#else
     const int answer = KMessageBox::questionYesNo(this,
-                                                  i18n("Do you want to remove setting for host \"%1\"?", ldapItem->server().host()),
-                                                  i18n("Remove Host"),
-                                                  KStandardGuiItem::remove(),
-                                                  KStandardGuiItem::cancel());
+#endif
+                                                       i18n("Do you want to remove setting for host \"%1\"?", ldapItem->server().host()),
+                                                       i18n("Remove Host"),
+                                                       KStandardGuiItem::remove(),
+                                                       KStandardGuiItem::cancel());
+#if KWIDGETSADDONS_VERSION >= QT_VERSION_CHECK(5, 100, 0)
+    if (answer == KMessageBox::SecondaryAction) {
+#else
     if (answer == KMessageBox::No) {
+#endif
         return;
     }
 
