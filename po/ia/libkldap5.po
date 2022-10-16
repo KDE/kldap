@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-01-11 00:44+0000\n"
+"POT-Creation-Date: 2022-10-16 00:47+0000\n"
 "PO-Revision-Date: 2021-07-29 22:39+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -113,38 +113,38 @@ msgstr ""
 msgid "Store clear text password in Wallet"
 msgstr "Immagazina contrasigno de texto clar in Wallet"
 
-#: widgets/ldapconfigurewidget.cpp:96
+#: widgets/ldapconfigurewidget.cpp:97
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "Modifica hospite"
 
-#: widgets/ldapconfigurewidget.cpp:113
+#: widgets/ldapconfigurewidget.cpp:118
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Tu vole remover preferntias pro hospite \"%1\"?"
 
-#: widgets/ldapconfigurewidget.cpp:114
+#: widgets/ldapconfigurewidget.cpp:119
 #, kde-format
 msgid "Remove Host"
 msgstr "Remove hospite"
 
-#: widgets/ldapconfigurewidget.cpp:272
+#: widgets/ldapconfigurewidget.cpp:281
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Marca tote servitores que on deberea usar:"
 
-#: widgets/ldapconfigurewidget.cpp:306
+#: widgets/ldapconfigurewidget.cpp:315
 #, kde-format
 msgid "&Add Host..."
 msgstr "&Adde hospite..."
 
-#: widgets/ldapconfigurewidget.cpp:308
+#: widgets/ldapconfigurewidget.cpp:317
 #, kde-format
 msgid "&Edit Host..."
 msgstr "&Modifica hospite..."
 
-#: widgets/ldapconfigurewidget.cpp:311
+#: widgets/ldapconfigurewidget.cpp:320
 #, kde-format
 msgid "&Remove Host"
 msgstr "&Remove hospite"
