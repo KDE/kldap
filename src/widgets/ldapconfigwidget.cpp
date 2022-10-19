@@ -11,10 +11,10 @@
 #include "ldap_debug.h"
 #include <KAuthorized>
 #include <KLocalizedString>
+#include <KMessageBox>
 #include <KPasswordLineEdit>
 #include <QComboBox>
 #include <QProgressDialog>
-#include <kmessagebox.h>
 
 #include <QCheckBox>
 #include <QFormLayout>
