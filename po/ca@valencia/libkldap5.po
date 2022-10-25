@@ -112,7 +112,7 @@ msgstr "Afig una màquina"
 msgid ""
 "LDAP password is stored as clear text, do you want to store it in kwallet?"
 msgstr ""
-"La contrasenya LDAP s'emmagatzema com a text, voleu guardar-la a KWallet?"
+"La contrasenya LDAP s'emmagatzema com a text, voleu guardar-la en KWallet?"
 
 #: widgets/ldapclientsearchconfigreadconfigjob.cpp:113
 #, kde-format
