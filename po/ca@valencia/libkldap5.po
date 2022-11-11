@@ -68,7 +68,7 @@ msgstr "No s'ha pogut restablir el nou context TLS."
 #, kde-format
 msgid "TLS support not available in the LDAP client libraries."
 msgstr ""
-"La implementació de TLS no està disponible a les biblioteques del client "
+"La implementació de TLS no està disponible en les biblioteques del client "
 "LDAP."
 
 #: core/ldapconnection.cpp:335
