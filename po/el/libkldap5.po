@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-16 00:47+0000\n"
+"POT-Creation-Date: 2022-11-16 00:47+0000\n"
 "PO-Revision-Date: 2021-07-29 08:41+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -117,38 +117,38 @@ msgstr ""
 msgid "Store clear text password in Wallet"
 msgstr "Να αποθηκευθεί το απλό κείμενο του κωδικού πρόσβασης στο πορτοφόλι"
 
-#: widgets/ldapconfigurewidget.cpp:97
+#: widgets/ldapconfigurewidget.cpp:96
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "Επεξεργασία υπολογιστή"
 
-#: widgets/ldapconfigurewidget.cpp:118
+#: widgets/ldapconfigurewidget.cpp:113
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Θέλετε να διαγράψετε τη ρύθμιση για τον υπολογιστή «%1»;"
 
-#: widgets/ldapconfigurewidget.cpp:119
+#: widgets/ldapconfigurewidget.cpp:114
 #, kde-format
 msgid "Remove Host"
 msgstr "Διαγραφή υπολογιστή"
 
-#: widgets/ldapconfigurewidget.cpp:281
+#: widgets/ldapconfigurewidget.cpp:272
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Να επιλεγούν όλοι οι εξυπηρετητές που θα χρησιμοποιηθούν:"
 
-#: widgets/ldapconfigurewidget.cpp:315
+#: widgets/ldapconfigurewidget.cpp:306
 #, kde-format
 msgid "&Add Host..."
 msgstr "&Προσθήκη υπολογιστή..."
 
-#: widgets/ldapconfigurewidget.cpp:317
+#: widgets/ldapconfigurewidget.cpp:308
 #, kde-format
 msgid "&Edit Host..."
 msgstr "&Επεξεργασία υπολογιατή..."
 
-#: widgets/ldapconfigurewidget.cpp:320
+#: widgets/ldapconfigurewidget.cpp:311
 #, kde-format
 msgid "&Remove Host"
 msgstr "Διαγ&ραφή υπολογιστή"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-16 00:47+0000\n"
+"POT-Creation-Date: 2022-11-16 00:47+0000\n"
 "PO-Revision-Date: 2022-09-12 20:33+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -112,38 +112,38 @@ msgstr ""
 msgid "Store clear text password in Wallet"
 msgstr "პაროლის საფულეში დაუშიფრავად შენახვა"
 
-#: widgets/ldapconfigurewidget.cpp:97
+#: widgets/ldapconfigurewidget.cpp:96
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "ჰოსტის ჩასწორება"
 
-#: widgets/ldapconfigurewidget.cpp:118
+#: widgets/ldapconfigurewidget.cpp:113
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "გნებავთ ჰოსტის (%1) პარამეტრების წაშლა?"
 
-#: widgets/ldapconfigurewidget.cpp:119
+#: widgets/ldapconfigurewidget.cpp:114
 #, kde-format
 msgid "Remove Host"
 msgstr "ჰოსტის წაშლა"
 
-#: widgets/ldapconfigurewidget.cpp:281
+#: widgets/ldapconfigurewidget.cpp:272
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "მონიშნეთ ყველა სერვერი, რომლის გამოყენებაც გნებავთ:"
 
-#: widgets/ldapconfigurewidget.cpp:315
+#: widgets/ldapconfigurewidget.cpp:306
 #, kde-format
 msgid "&Add Host..."
 msgstr "&ჰოსტის დამატება..."
 
-#: widgets/ldapconfigurewidget.cpp:317
+#: widgets/ldapconfigurewidget.cpp:308
 #, kde-format
 msgid "&Edit Host..."
 msgstr "&ჰოსტის ჩასწორება..."
 
-#: widgets/ldapconfigurewidget.cpp:320
+#: widgets/ldapconfigurewidget.cpp:311
 #, kde-format
 msgid "&Remove Host"
 msgstr "&ჰოსტის წაშლა"

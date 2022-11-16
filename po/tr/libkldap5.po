@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-16 00:47+0000\n"
+"POT-Creation-Date: 2022-11-16 00:47+0000\n"
 "PO-Revision-Date: 2022-04-12 11:17+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -117,38 +117,38 @@ msgstr ""
 msgid "Store clear text password in Wallet"
 msgstr "Düz metin parolayı KWallet'ta depola"
 
-#: widgets/ldapconfigurewidget.cpp:97
+#: widgets/ldapconfigurewidget.cpp:96
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "Makineyi Düzenle"
 
-#: widgets/ldapconfigurewidget.cpp:118
+#: widgets/ldapconfigurewidget.cpp:113
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "\"%1\" makinesi için ayarı kaldırmak istiyor musunuz?"
 
-#: widgets/ldapconfigurewidget.cpp:119
+#: widgets/ldapconfigurewidget.cpp:114
 #, kde-format
 msgid "Remove Host"
 msgstr "Makineyi Kaldır"
 
-#: widgets/ldapconfigurewidget.cpp:281
+#: widgets/ldapconfigurewidget.cpp:272
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Kullanılması gereken tüm sunucuları denetle:"
 
-#: widgets/ldapconfigurewidget.cpp:315
+#: widgets/ldapconfigurewidget.cpp:306
 #, kde-format
 msgid "&Add Host..."
 msgstr "Makine &Ekle..."
 
-#: widgets/ldapconfigurewidget.cpp:317
+#: widgets/ldapconfigurewidget.cpp:308
 #, kde-format
 msgid "&Edit Host..."
 msgstr "&Makineyi Düzenle..."
 
-#: widgets/ldapconfigurewidget.cpp:320
+#: widgets/ldapconfigurewidget.cpp:311
 #, kde-format
 msgid "&Remove Host"
 msgstr "Maki&neyi Kaldır"

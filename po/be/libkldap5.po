@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-16 00:47+0000\n"
+"POT-Creation-Date: 2022-11-16 00:47+0000\n"
 "PO-Revision-Date: 2007-05-25 12:24+0300\n"
 "Last-Translator: Darafei Praliaskouski <komzpa@licei2.com>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -113,40 +113,40 @@ msgstr ""
 msgid "Store clear text password in Wallet"
 msgstr ""
 
-#: widgets/ldapconfigurewidget.cpp:97
+#: widgets/ldapconfigurewidget.cpp:96
 #, fuzzy, kde-format
 #| msgid "Host:"
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "Вузел:"
 
-#: widgets/ldapconfigurewidget.cpp:118
+#: widgets/ldapconfigurewidget.cpp:113
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr ""
 
-#: widgets/ldapconfigurewidget.cpp:119
+#: widgets/ldapconfigurewidget.cpp:114
 #, kde-format
 msgid "Remove Host"
 msgstr ""
 
-#: widgets/ldapconfigurewidget.cpp:281
+#: widgets/ldapconfigurewidget.cpp:272
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr ""
 
-#: widgets/ldapconfigurewidget.cpp:315
+#: widgets/ldapconfigurewidget.cpp:306
 #, fuzzy, kde-format
 #| msgid "Host:"
 msgid "&Add Host..."
 msgstr "Вузел:"
 
-#: widgets/ldapconfigurewidget.cpp:317
+#: widgets/ldapconfigurewidget.cpp:308
 #, kde-format
 msgid "&Edit Host..."
 msgstr ""
 
-#: widgets/ldapconfigurewidget.cpp:320
+#: widgets/ldapconfigurewidget.cpp:311
 #, kde-format
 msgid "&Remove Host"
 msgstr ""
