@@ -33,7 +33,7 @@ typedef ULONG ber_len_t;
 
 /* Redirect used ldap functions to functions with win_ prefix
  * to further redirect those depending on the Windows Flavour */
-//#define ldap_err2string(a) win_ldap_err2string(a)
+// #define ldap_err2string(a) win_ldap_err2string(a)
 #define ldap_init(a, b) win_ldap_init(a, b)
 #define ldap_sasl_bind(a, b, c, d, e, f, g) win_ldap_sasl_bind(a, b, c, d, e, f, g)
 #define ldap_sasl_bind_s(a, b, c, d, e, f, g) win_ldap_sasl_bind_s(a, b, c, d, e, f, g)
