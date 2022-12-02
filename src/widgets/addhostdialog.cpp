@@ -12,14 +12,20 @@
 #include <KConfigGroup>
 #include <KLocalizedString>
 #include <KSharedConfig>
+#include <KWindowConfig>
 #include <QDialogButtonBox>
 #include <QHBoxLayout>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QWindow>
 #include <kldap/ldapconfigwidget.h>
 #include <kldap/ldapserver.h>
 
 using namespace KLDAP;
+namespace
+{
+static const char myAddHostDialogPrivateGroupName[] = "AddHostDialog";
+}
 class KLDAP::AddHostDialogPrivate
 {
 public:
@@ -30,30 +36,27 @@ public:
 
     ~AddHostDialogPrivate()
     {
-        writeConfig();
     }
 
-    void readConfig();
-    void writeConfig();
     KLDAP::LdapConfigWidget *mCfg = nullptr;
     KLDAP::LdapServer *mServer = nullptr;
     QPushButton *mOkButton = nullptr;
     AddHostDialog *const q;
 };
 
-void AddHostDialogPrivate::readConfig()
+void AddHostDialog::readConfig()
 {
-    KConfigGroup group(KSharedConfig::openStateConfig(), "AddHostDialog");
-    const QSize size = group.readEntry("Size", QSize(600, 400));
-    if (size.isValid()) {
-        q->resize(size);
-    }
+    create(); // ensure a window is created
+    windowHandle()->resize(QSize(600, 400));
+    KConfigGroup group(KSharedConfig::openStateConfig(), myAddHostDialogPrivateGroupName);
+    KWindowConfig::restoreWindowSize(windowHandle(), group);
+    resize(windowHandle()->size()); // workaround for QTBUG-40584
 }
 
-void AddHostDialogPrivate::writeConfig()
+void AddHostDialog::writeConfig()
 {
-    KConfigGroup group(KSharedConfig::openStateConfig(), "AddHostDialog");
-    group.writeEntry("Size", q->size());
+    KConfigGroup group(KSharedConfig::openStateConfig(), myAddHostDialogPrivateGroupName);
+    KWindowConfig::saveWindowSize(windowHandle(), group);
     group.sync();
 }
 
@@ -129,10 +132,13 @@ AddHostDialog::AddHostDialog(KLDAP::LdapServer *server, QWidget *parent)
     connect(d->mCfg, &KLDAP::LdapConfigWidget::hostNameChanged, this, &AddHostDialog::slotHostEditChanged);
     connect(d->mOkButton, &QPushButton::clicked, this, &AddHostDialog::slotOk);
     d->mOkButton->setEnabled(!d->mServer->host().isEmpty());
-    d->readConfig();
+    readConfig();
 }
 
-AddHostDialog::~AddHostDialog() = default;
+AddHostDialog::~AddHostDialog()
+{
+    writeConfig();
+}
 
 void AddHostDialog::slotHostEditChanged(const QString &text)
 {

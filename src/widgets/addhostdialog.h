@@ -35,6 +35,8 @@ private Q_SLOTS:
     void slotOk();
 
 private:
+    void readConfig();
+    void writeConfig();
     std::unique_ptr<AddHostDialogPrivate> const d;
 };
 }

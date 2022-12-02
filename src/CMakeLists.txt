@@ -109,6 +109,7 @@ PRIVATE
   KF5::ConfigCore
   KF5::CoreAddons
   KF5::KIOCore
+  KF5::ConfigGui
   ${kldap_EXTRA_LIBS}
 )
 
