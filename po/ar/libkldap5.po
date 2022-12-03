@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-16 00:47+0000\n"
+"POT-Creation-Date: 2022-12-03 00:47+0000\n"
 "PO-Revision-Date: 2007-10-14 15:58+0000\n"
 "Last-Translator: Youssef Chahibi <chahibi@gmail.com>\n"
 "Language-Team: <en@li.org>\n"
@@ -102,7 +102,7 @@ msgstr "LDAP دعم ليس بوصة رجاء مع أو متوافق عميل أ�
 msgid "Cannot access to server. Please reconfigure it."
 msgstr ""
 
-#: widgets/addhostdialog.cpp:64
+#: widgets/addhostdialog.cpp:67
 #, fuzzy, kde-format
 msgctxt "@title:window"
 msgid "Add Host"

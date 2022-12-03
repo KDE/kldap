@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-16 00:47+0000\n"
+"POT-Creation-Date: 2022-12-03 00:47+0000\n"
 "PO-Revision-Date: 2022-10-02 14:59+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -108,7 +108,7 @@ msgstr ""
 msgid "Cannot access to server. Please reconfigure it."
 msgstr "Не удалось получить доступ к серверу, настройте его."
 
-#: widgets/addhostdialog.cpp:64
+#: widgets/addhostdialog.cpp:67
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Host"

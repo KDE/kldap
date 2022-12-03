@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-16 00:47+0000\n"
+"POT-Creation-Date: 2022-12-03 00:47+0000\n"
 "PO-Revision-Date: 2021-07-31 15:54+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -92,7 +92,7 @@ msgstr ""
 msgid "Cannot access to server. Please reconfigure it."
 msgstr "서버에 접근할 수 없습니다. 다시 설정하십시오."
 
-#: widgets/addhostdialog.cpp:64
+#: widgets/addhostdialog.cpp:67
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Host"

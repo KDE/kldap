@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-16 00:47+0000\n"
+"POT-Creation-Date: 2022-12-03 00:47+0000\n"
 "PO-Revision-Date: 2021-07-28 17:00+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -99,7 +99,7 @@ msgstr ""
 msgid "Cannot access to server. Please reconfigure it."
 msgstr "Kan de server niet benaderen. Doe een herconfiguratie."
 
-#: widgets/addhostdialog.cpp:64
+#: widgets/addhostdialog.cpp:67
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Host"
