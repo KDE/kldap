@@ -8,6 +8,7 @@ Dependencies:
     'frameworks/kio': '@stable'
     'frameworks/ki18n': '@stable'
     'frameworks/kdoctools': '@stable'
+    'third-party/qtkeychain': '@latest'
 
 Options:
   require-passing-tests-on: [ 'Linux', 'FreeBSD', 'Windows' ]      
