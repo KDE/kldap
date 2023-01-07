@@ -29,7 +29,7 @@ using namespace KLDAP;
 class KIOPluginForMetaData : public QObject
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.kio.slave.ldap" FILE "ldap.json")
+    Q_PLUGIN_METADATA(IID "org.kde.kio.worker.ldap" FILE "ldap.json")
 };
 
 extern "C" {
@@ -52,18 +52,19 @@ int kdemain(int argc, char **argv)
     }
 
     // let the protocol class do its work
-    LDAPProtocol slave(argv[1], argv[2], argv[3]);
-    slave.dispatchLoop();
+    LDAPProtocol worker(argv[1], argv[2], argv[3]);
+    worker.dispatchLoop();
 
     qCDebug(KLDAP_LOG) << "Done";
     return 0;
 }
 
 /**
- * Initialize the ldap slave
+ * Initialize the ldap worker
  */
 LDAPProtocol::LDAPProtocol(const QByteArray &protocol, const QByteArray &pool, const QByteArray &app)
-    : SlaveBase(protocol, pool, app)
+    : WorkerBase(protocol, pool, app)
+    , mProtocol(protocol)
 {
     mConnected = false;
     mOp.setConnection(mConn);
@@ -75,7 +76,7 @@ LDAPProtocol::~LDAPProtocol()
     closeConnection();
 }
 
-void LDAPProtocol::LDAPErr(int err)
+KIO::WorkerResult LDAPProtocol::LDAPErr(int err)
 {
     QString extramsg;
     if (mConnected) {
@@ -87,7 +88,7 @@ void LDAPProtocol::LDAPErr(int err)
         }
     }
     if (err == KLDAP_SUCCESS) {
-        return;
+        return KIO::WorkerResult::pass();
     }
 
     qDebug() << "error code: " << err << " msg: " << LdapConnection::errorString(err) << extramsg << "'";
@@ -140,31 +141,25 @@ void LDAPProtocol::LDAPErr(int err)
     case KLDAP_AUTH_UNKNOWN:
     case KLDAP_INVALID_CREDENTIALS:
     case KLDAP_STRONG_AUTH_NOT_SUPPORTED:
-        error(ERR_CANNOT_AUTHENTICATE, msg);
-        break;
+        return KIO::WorkerResult::fail(ERR_CANNOT_AUTHENTICATE, msg);
     case KLDAP_ALREADY_EXISTS:
-        error(ERR_FILE_ALREADY_EXIST, msg);
-        break;
+        return KIO::WorkerResult::fail(ERR_FILE_ALREADY_EXIST, msg);
     case KLDAP_INSUFFICIENT_ACCESS:
-        error(ERR_ACCESS_DENIED, msg);
-        break;
+        return KIO::WorkerResult::fail(ERR_ACCESS_DENIED, msg);
     case KLDAP_CONNECT_ERROR:
     case KLDAP_SERVER_DOWN:
-        error(ERR_CANNOT_CONNECT, msg);
-        break;
+        return KIO::WorkerResult::fail(ERR_CANNOT_CONNECT, msg);
     case KLDAP_TIMEOUT:
-        error(ERR_SERVER_TIMEOUT, msg);
-        break;
+        return KIO::WorkerResult::fail(ERR_SERVER_TIMEOUT, msg);
     case KLDAP_PARAM_ERROR:
-        error(ERR_INTERNAL, msg);
-        break;
+        return KIO::WorkerResult::fail(ERR_INTERNAL, msg);
     case KLDAP_NO_MEMORY:
-        error(ERR_OUT_OF_MEMORY, msg);
-        break;
+        return KIO::WorkerResult::fail(ERR_OUT_OF_MEMORY, msg);
 
     default:
-        error(KIO::ERR_WORKER_DEFINED,
-              i18n("LDAP server returned the error: %1 %2\nThe LDAP URL was: %3", LdapConnection::errorString(err), extramsg, mServer.url().toDisplayString()));
+        return KIO::WorkerResult::fail(
+            KIO::ERR_WORKER_DEFINED,
+            i18n("LDAP server returned the error: %1 %2\nThe LDAP URL was: %3", LdapConnection::errorString(err), extramsg, mServer.url().toDisplayString()));
     }
 }
 
@@ -229,7 +224,7 @@ void LDAPProtocol::LDAPEntry2UDSEntry(const LdapDN &dn, UDSEntry &entry, const L
     entry.fastInsert(KIO::UDSEntry::UDS_URL, url.toDisplayString());
 }
 
-void LDAPProtocol::changeCheck(const LdapUrl &url)
+KIO::WorkerResult LDAPProtocol::changeCheck(const LdapUrl &url)
 {
     LdapServer server;
     server.setUrl(url);
@@ -241,12 +236,13 @@ void LDAPProtocol::changeCheck(const LdapUrl &url)
             || server.security() != mServer.security() || server.auth() != mServer.auth() || server.mech() != mServer.mech()) {
             closeConnection();
             mServer = server;
-            openConnection();
+            return openConnection();
         }
-    } else {
-        mServer = server;
-        openConnection();
+        return KIO::WorkerResult::pass();
     }
+
+    mServer = server;
+    return openConnection();
 }
 
 void LDAPProtocol::setHost(const QString &host, quint16 port, const QString &user, const QString &password)
@@ -276,16 +272,15 @@ void LDAPProtocol::setHost(const QString &host, quint16 port, const QString &use
     qCDebug(KLDAP_LOG) << "setHost: " << host << " port: " << port << " user: " << user << " pass: [protected]";
 }
 
-void LDAPProtocol::openConnection()
+KIO::WorkerResult LDAPProtocol::openConnection()
 {
     if (mConnected) {
-        return;
+        return KIO::WorkerResult::pass();
     }
 
     mConn.setServer(mServer);
     if (mConn.connect() != 0) {
-        error(ERR_CANNOT_CONNECT, mConn.connectionError());
-        return;
+        return KIO::WorkerResult::fail(ERR_CANNOT_CONNECT, mConn.connectionError());
     }
 
     mConnected = true;
@@ -308,9 +303,7 @@ void LDAPProtocol::openConnection()
     while (true) {
         int retval = mOp.bind_s();
         if (retval == 0) {
-            qCDebug(KLDAP_LOG) << "connected!";
-            connected();
-            return;
+            break;
         }
         if (retval == KLDAP_INVALID_CREDENTIALS || retval == KLDAP_INSUFFICIENT_ACCESS || retval == KLDAP_INAPPROPRIATE_AUTH
             || retval == KLDAP_UNWILLING_TO_PERFORM) {
@@ -324,19 +317,17 @@ void LDAPProtocol::openConnection()
                 mConn.setServer(mServer);
                 cached = false;
             } else {
-                const int errorCode = firstauth ? openPasswordDialogV2(info) : openPasswordDialogV2(info, i18n("Invalid authorization information."));
+                const int errorCode = firstauth ? openPasswordDialog(info) : openPasswordDialog(info, i18n("Invalid authorization information."));
                 if (!errorCode) {
                     if (info.keepPassword) { // user asked password be save/remembered
                         cacheAuthentication(info);
                     }
                 } else {
-                    if (errorCode == ERR_USER_CANCELED) {
-                        error(ERR_USER_CANCELED, i18n("LDAP connection canceled."));
-                    } else {
-                        error(errorCode, QString());
-                    }
                     closeConnection();
-                    return;
+                    if (errorCode == ERR_USER_CANCELED) {
+                        return KIO::WorkerResult::fail(ERR_USER_CANCELED, i18n("LDAP connection canceled."));
+                    }
+                    return KIO::WorkerResult::fail(errorCode, QString());
                 }
                 if (mServer.auth() == LdapServer::SASL) {
                     mServer.setUser(info.username);
@@ -348,11 +339,15 @@ void LDAPProtocol::openConnection()
                 mConn.setServer(mServer);
             }
         } else {
-            LDAPErr(retval);
+            const KIO::WorkerResult errorResult = LDAPErr(retval);
+            // TODO: ensure that LDAPErr(retval) always closes the connection, avoiding the explicit call
             closeConnection();
-            return;
+            return errorResult;
         }
     }
+
+    qCDebug(KLDAP_LOG) << "connected!";
+    return KIO::WorkerResult::pass();
 }
 
 void LDAPProtocol::closeConnection()
@@ -368,15 +363,15 @@ void LDAPProtocol::closeConnection()
 /**
  * Get the information contained in the URL.
  */
-void LDAPProtocol::get(const QUrl &_url)
+KIO::WorkerResult LDAPProtocol::get(const QUrl &_url)
 {
     qCDebug(KLDAP_LOG) << "get(" << _url << ")";
 
     LdapUrl usrc(_url);
 
-    changeCheck(usrc);
-    if (!mConnected) {
-        return;
+    const KIO::WorkerResult checkResult = changeCheck(usrc);
+    if (!checkResult.success()) {
+        return checkResult;
     }
 
     LdapControls serverctrls;
@@ -393,8 +388,7 @@ void LDAPProtocol::get(const QUrl &_url)
     mOp.setClientControls(clientctrls);
     int id;
     if ((id = mOp.search(usrc.dn(), usrc.scope(), usrc.filter(), usrc.attributes())) == -1) {
-        LDAPErr();
-        return;
+        return LDAPErr();
     }
 
     // tell the mimetype
@@ -407,8 +401,7 @@ void LDAPProtocol::get(const QUrl &_url)
     while (true) {
         ret = mOp.waitForResult(id, -1);
         if (ret == -1 || mConn.ldapErrorCode() != KLDAP_SUCCESS) {
-            LDAPErr();
-            return;
+            return LDAPErr();
         }
         qCDebug(KLDAP_LOG) << " ldap_result: " << ret;
         if (ret == LdapOperation::RES_SEARCH_RESULT) {
@@ -429,8 +422,7 @@ void LDAPProtocol::get(const QUrl &_url)
                     ctrls.append(LdapControl::createPageControl(mServer.pageSize(), cookie));
                     mOp.setServerControls(ctrls);
                     if ((id = mOp.search(usrc.dn(), usrc.scope(), usrc.filter(), usrc.attributes())) == -1) {
-                        LDAPErr();
-                        return;
+                        return LDAPErr();
                     }
                     continue;
                 }
@@ -451,13 +443,13 @@ void LDAPProtocol::get(const QUrl &_url)
 
     // tell we are finished
     data(QByteArray());
-    finished();
+    return KIO::WorkerResult::pass();
 }
 
 /**
  * Test if the url contains a directory or a file.
  */
-void LDAPProtocol::stat(const QUrl &_url)
+KIO::WorkerResult LDAPProtocol::stat(const QUrl &_url)
 {
     qCDebug(KLDAP_LOG) << "stat(" << _url << ")";
 
@@ -467,9 +459,9 @@ void LDAPProtocol::stat(const QUrl &_url)
     int ret;
     int id;
 
-    changeCheck(usrc);
-    if (!mConnected) {
-        return;
+    const KIO::WorkerResult checkResult = changeCheck(usrc);
+    if (!checkResult.success()) {
+        return checkResult;
     }
 
     // look how many entries match
@@ -477,20 +469,17 @@ void LDAPProtocol::stat(const QUrl &_url)
     att.append(QStringLiteral("dn"));
 
     if ((id = mOp.search(usrc.dn(), usrc.scope(), usrc.filter(), att)) == -1) {
-        LDAPErr();
-        return;
+        return LDAPErr();
     }
 
     qCDebug(KLDAP_LOG) << "stat() getting result";
     do {
         ret = mOp.waitForResult(id, -1);
         if (ret == -1 || mConn.ldapErrorCode() != KLDAP_SUCCESS) {
-            LDAPErr();
-            return;
+            return LDAPErr();
         }
         if (ret == LdapOperation::RES_SEARCH_RESULT) {
-            error(ERR_DOES_NOT_EXIST, _url.toDisplayString());
-            return;
+            return KIO::WorkerResult::fail(ERR_DOES_NOT_EXIST, _url.toDisplayString());
         }
     } while (ret != LdapOperation::RES_SEARCH_ENTRY);
 
@@ -504,13 +493,13 @@ void LDAPProtocol::stat(const QUrl &_url)
 
     statEntry(uds);
     // we are done
-    finished();
+    return KIO::WorkerResult::pass();
 }
 
 /**
  * Deletes one entry;
  */
-void LDAPProtocol::del(const QUrl &_url, bool)
+KIO::WorkerResult LDAPProtocol::del(const QUrl &_url, bool)
 {
     qCDebug(KLDAP_LOG) << "del(" << _url << ")";
 
@@ -518,9 +507,9 @@ void LDAPProtocol::del(const QUrl &_url, bool)
     int id;
     int ret;
 
-    changeCheck(usrc);
-    if (!mConnected) {
-        return;
+    const KIO::WorkerResult checkResult = changeCheck(usrc);
+    if (!checkResult.success()) {
+        return checkResult;
     }
 
     LdapControls serverctrls;
@@ -532,27 +521,25 @@ void LDAPProtocol::del(const QUrl &_url, bool)
     qCDebug(KLDAP_LOG) << " del: " << usrc.dn().toString().toUtf8();
 
     if ((id = mOp.del(usrc.dn())) == -1) {
-        LDAPErr();
-        return;
+        return LDAPErr();
     }
     ret = mOp.waitForResult(id, -1);
     if (ret == -1 || mConn.ldapErrorCode() != KLDAP_SUCCESS) {
-        LDAPErr();
-        return;
+        return LDAPErr();
     }
 
-    finished();
+    return KIO::WorkerResult::pass();
 }
 
-void LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
+KIO::WorkerResult LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
 {
     qCDebug(KLDAP_LOG) << "put(" << _url << ")";
 
     LdapUrl usrc(_url);
 
-    changeCheck(usrc);
-    if (!mConnected) {
-        return;
+    const KIO::WorkerResult checkResult = changeCheck(usrc);
+    if (!checkResult.success()) {
+        return checkResult;
     }
 
     LdapControls serverctrls;
@@ -578,7 +565,7 @@ void LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
         }
         if (result < 0) {
             // error
-            return;
+            return KIO::WorkerResult::fail();
         }
         if (result == 0) {
             qCDebug(KLDAP_LOG) << "EOF!";
@@ -597,8 +584,7 @@ void LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
                 ldaperr = KLDAP_SUCCESS;
                 switch (ldif.entryType()) {
                 case Ldif::Entry_None:
-                    error(ERR_INTERNAL, i18n("The Ldif parser failed."));
-                    return;
+                    return KIO::WorkerResult::fail(ERR_INTERNAL, i18n("The Ldif parser failed."));
                 case Ldif::Entry_Del:
                     qCDebug(KLDAP_LOG) << "kio_ldap_del";
                     ldaperr = mOp.del_s(ldif.dn());
@@ -629,8 +615,7 @@ void LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
                 }
                 if (ldaperr != KLDAP_SUCCESS) {
                     qCDebug(KLDAP_LOG) << "put ldap error: " << ldaperr;
-                    LDAPErr(ldaperr);
-                    return;
+                    return LDAPErr(ldaperr);
                 }
                 break;
             case Ldif::Item:
@@ -665,8 +650,7 @@ void LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
                     }
                     break;
                 default:
-                    error(ERR_INTERNAL, i18n("The Ldif parser failed."));
-                    return;
+                    return KIO::WorkerResult::fail(ERR_INTERNAL, i18n("The Ldif parser failed."));
                 }
                 break;
             case Ldif::Control: {
@@ -677,19 +661,18 @@ void LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
                 break;
             }
             case Ldif::Err:
-                error(KIO::ERR_WORKER_DEFINED, i18n("Invalid Ldif file in line %1.", ldif.lineNumber()));
-                return;
+                return KIO::WorkerResult::fail(KIO::ERR_WORKER_DEFINED, i18n("Invalid Ldif file in line %1.", ldif.lineNumber()));
             }
         } while (ret != Ldif::MoreData);
     } while (result > 0);
 
-    finished();
+    return KIO::WorkerResult::pass();
 }
 
 /**
  * List the contents of a directory.
  */
-void LDAPProtocol::listDir(const QUrl &_url)
+KIO::WorkerResult LDAPProtocol::listDir(const QUrl &_url)
 {
     QStringList att;
     QStringList saveatt;
@@ -700,10 +683,11 @@ void LDAPProtocol::listDir(const QUrl &_url)
 
     qCDebug(KLDAP_LOG) << "listDir(" << _url << ")";
 
-    changeCheck(usrc);
-    if (!mConnected) {
-        return;
+    const KIO::WorkerResult checkResult = changeCheck(usrc);
+    if (!checkResult.success()) {
+        return checkResult;
     }
+
     usrc2 = usrc;
 
     saveatt = usrc.attributes();
@@ -718,8 +702,7 @@ void LDAPProtocol::listDir(const QUrl &_url)
     int id;
 
     if ((id = mOp.search(usrc.dn(), usrc.scope(), usrc.filter(), usrc.attributes())) == -1) {
-        LDAPErr();
-        return;
+        return LDAPErr();
     }
 
     usrc.setAttributes(QStringList() << QLatin1String(""));
@@ -735,8 +718,7 @@ void LDAPProtocol::listDir(const QUrl &_url)
     while (true) {
         ret = mOp.waitForResult(id, -1);
         if (ret == -1 || mConn.ldapErrorCode() != KLDAP_SUCCESS) {
-            LDAPErr();
-            return;
+            return LDAPErr();
         }
         if (ret == LdapOperation::RES_SEARCH_RESULT) {
             break;
@@ -785,7 +767,7 @@ void LDAPProtocol::listDir(const QUrl &_url)
 
     uds.clear();
     // we are done
-    finished();
+    return KIO::WorkerResult::pass();
 }
 
 #include "kio_ldap.moc"

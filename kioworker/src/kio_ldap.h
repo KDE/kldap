@@ -7,7 +7,7 @@
 #pragma once
 
 #include <KIO/AuthInfo>
-#include <KIO/SlaveBase>
+#include <KIO/WorkerBase>
 
 #include <kldap/ldapconnection.h>
 #include <kldap/ldapcontrol.h>
@@ -16,7 +16,7 @@
 #include <kldap/ldapoperation.h>
 #include <kldap/ldapurl.h>
 
-class LDAPProtocol : public KIO::SlaveBase
+class LDAPProtocol : public KIO::WorkerBase
 {
 public:
     LDAPProtocol(const QByteArray &protocol, const QByteArray &pool, const QByteArray &app);
@@ -24,16 +24,17 @@ public:
 
     void setHost(const QString &host, quint16 port, const QString &user, const QString &pass) override;
 
-    void openConnection() override;
+    KIO::WorkerResult openConnection() override;
     void closeConnection() override;
 
-    void get(const QUrl &url) override;
-    void stat(const QUrl &url) override;
-    void listDir(const QUrl &url) override;
-    void del(const QUrl &url, bool isfile) override;
-    void put(const QUrl &url, int permissions, KIO::JobFlags flags) override;
+    KIO::WorkerResult get(const QUrl &url) override;
+    KIO::WorkerResult stat(const QUrl &url) override;
+    KIO::WorkerResult listDir(const QUrl &url) override;
+    KIO::WorkerResult del(const QUrl &url, bool isfile) override;
+    KIO::WorkerResult put(const QUrl &url, int permissions, KIO::JobFlags flags) override;
 
 private:
+    QByteArray mProtocol;
     KLDAP::LdapConnection mConn;
     KLDAP::LdapOperation mOp;
     KLDAP::LdapServer mServer;
@@ -42,6 +43,6 @@ private:
     void controlsFromMetaData(KLDAP::LdapControls &serverctrls, KLDAP::LdapControls &clientctrls);
     void LDAPEntry2UDSEntry(const KLDAP::LdapDN &dn, KIO::UDSEntry &entry, const KLDAP::LdapUrl &usrc, bool dir = false);
 
-    void LDAPErr(int err = KLDAP_SUCCESS);
-    void changeCheck(const KLDAP::LdapUrl &url);
+    KIO::WorkerResult LDAPErr(int err = KLDAP_SUCCESS);
+    KIO::WorkerResult changeCheck(const KLDAP::LdapUrl &url);
 };
