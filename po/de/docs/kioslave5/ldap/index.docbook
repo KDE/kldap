@@ -2,29 +2,53 @@
 <!DOCTYPE article PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
 "dtd/kdedbx45.dtd" [
 <!ENTITY % addindex "IGNORE">
-<!ENTITY % English "INCLUDE" > <!-- change language only here -->
+<!ENTITY % German "INCLUDE"
+> <!-- change language only here -->
 ]>
 	
 <article lang="&language;" id="ldap">
-<title>ldap</title>
+<title
+>ldap</title>
 <articleinfo>
 <authorgroup>
-<author>&Lauri.Watts; &Lauri.Watts.mail;</author>
-<!-- TRANS:ROLES_OF_TRANSLATORS -->
+<author
+>&Lauri.Watts; &Lauri.Watts.mail;</author>
+<othercredit role="translator"
+><firstname
+>Marco</firstname
+><surname
+>Wegner</surname
+><affiliation
+><address
+><email
+>mail@marcowegner.de</email
+></address
+></affiliation
+><contrib
+>Übersetzer</contrib
+></othercredit
+> 
 </authorgroup>
 </articleinfo>
 
-<para><acronym>ldap</acronym> is the lightweight directory access
-protocol.  It provides access to an X.500 directory, or to a stand-alone
-<acronym>LDAP</acronym> server.</para>
+<para
+><acronym
+>ldap</acronym
+> ist das Lightweight Directory Access Protocol. Es bietet Zugriff auf X.500-Verzeichnisse oder <acronym
+>LDAP</acronym
+>-Server.</para>
 
-<para>You can use the ldap kioslave as follows:</para>
+<para
+>Sie können das ldap-Modul folgendermaßen nutzen:</para>
 
-<para><userinput>ldap://host:port/ou=People,o=where,c=de??sub</userinput>
-for a subtree-query</para>
+<para
+><userinput
+>ldap://host:port/ou=People,o=where,c=de??sub</userinput
+> für eine Suche in Unterverzeichnissen</para>
 
-<para>or
-<userinput>ldap://host:port/cn=MM,ou=People,o=where,c=de??base</userinput>
-for a complete branch.</para>
+<para
+>oder <userinput
+>ldap://host:port/cn=MM,ou=People,o=where,c=de??base</userinput
+> für einen kompletten Zweig.</para>
 
 </article>

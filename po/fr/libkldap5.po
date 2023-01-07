@@ -8,20 +8,21 @@
 # Vincent Pinon <vpinon@kde.org>, 2017, 2018.
 # Simon Depiets <sdepiets@gmail.com>, 2018, 2019.
 #
+# Xavier BESNARD <xavier.besnard]neuf.fr>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-03 00:47+0000\n"
-"PO-Revision-Date: 2021-07-29 18:04+0200\n"
-"Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
-"Language-Team: French <kde-francophone@kde.org>\n"
+"PO-Revision-Date: 2023-01-06 11:29+0100\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
+"Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 21.07.80\n"
+"X-Generator: Lokalize 22.12.0\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -62,7 +63,7 @@ msgstr "Mode de certificat exigé par TLS non valable."
 #: core/ldapconnection.cpp:299
 #, kde-format
 msgid "Could not set TLS require certificate mode."
-msgstr "Impossible de définir le mode de certificat exigé par TLS."
+msgstr "Impossible de définir le mode de certificat exigé par « TLS »."
 
 #: core/ldapconnection.cpp:308
 #, kde-format
@@ -99,7 +100,7 @@ msgstr ""
 "La gestion du LDAP n'a pas été compilée avec cette application. Veuillez re-"
 "compiler « libkldap » avec les bibliothèques du client « OpenLDAP » (ou "
 "compatible) ou reporter ce souci aux responsables de paquets de votre "
-"distribution."
+"distribution.kcm_bluetooth.po"
 
 #: core/ldapsearch.cpp:222
 #, kde-format
@@ -118,7 +119,7 @@ msgid ""
 "LDAP password is stored as clear text, do you want to store it in kwallet?"
 msgstr ""
 "Le mot de passe « LDAP » est enregistré comme texte en clair. Voulez-vous "
-"l'enregistrer dans « kwallet » ?"
+"l'enregistrer dans KWallet ?"
 
 #: widgets/ldapclientsearchconfigreadconfigjob.cpp:113
 #, kde-format
