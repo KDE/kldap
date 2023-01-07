@@ -2,9 +2,12 @@
 # SPDX-License-Identifier: BSD-3-Clause
 add_library(kio_ldap MODULE)
 target_sources(kio_ldap PRIVATE kio_ldap.cpp kio_ldap.h)
-ecm_qt_declare_logging_category(kio_ldap HEADER kldap_debug.h IDENTIFIER KLDAP_LOG CATEGORY_NAME org.kde.pim.kldap
+ecm_qt_declare_logging_category(kio_ldap
+        HEADER kldap_debug.h
+        IDENTIFIER KLDAP_LOG
+        CATEGORY_NAME kf.kio.workers.ldap
         DESCRIPTION "ldap KIO worker"
-        OLD_CATEGORY_NAMES log_kldap
+        OLD_CATEGORY_NAMES log_kldap org.kde.pim.kldap
         EXPORT KLDAP
     )
 
