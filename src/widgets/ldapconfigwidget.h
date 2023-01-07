@@ -222,7 +222,7 @@ public:
 
     /**
      * Returns a LDAP Url constructed from the settings given.
-     * Extensions are filled for use in the LDAP ioslave
+     * Extensions are filled for use in the LDAP KIO worker.
      */
     Q_REQUIRED_RESULT LdapUrl url() const;
     /**

@@ -18,7 +18,7 @@
 protocol.  It provides access to an X.500 directory, or to a stand-alone
 <acronym>LDAP</acronym> server.</para>
 
-<para>You can use the ldap kioslave as follows:</para>
+<para>You can use the ldap KIO worker as follows:</para>
 
 <para><userinput>ldap://host:port/ou=People,o=where,c=de??sub</userinput>
 for a subtree-query</para>
