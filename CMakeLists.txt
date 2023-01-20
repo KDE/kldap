@@ -6,9 +6,9 @@ set(PIM_VERSION "5.22.40")
 project(KLdap VERSION ${PIM_VERSION})
 
 # ECM setup
-set(KF5_MIN_VERSION "5.102.0")
+set(KF_MIN_VERSION "5.102.0")
 
-find_package(ECM ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${KLdap_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
 
 include(KDEInstallDirs)
@@ -32,9 +32,9 @@ include(ECMAddQch)
 
 set(KLDAP_LIB_VERSION ${PIM_VERSION})
 
-find_package(KF5KIO ${KF5_MIN_VERSION} CONFIG REQUIRED)
-find_package(KF5I18n ${KF5_MIN_VERSION} CONFIG REQUIRED)
-find_package(KF5DocTools ${KF5_MIN_VERSION} CONFIG)
+find_package(KF5KIO ${KF_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5I18n ${KF_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5DocTools ${KF_MIN_VERSION} CONFIG)
 
 find_package(Qt${QT_MAJOR_VERSION}Keychain CONFIG)
 set_package_properties(Qt${QT_MAJOR_VERSION}Keychain PROPERTIES
@@ -64,7 +64,7 @@ if (USE_UNITY_CMAKE_SUPPORT)
 endif()
 
 ########### Find packages ###########
-find_package(KF5WidgetsAddons ${KF5_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF5WidgetsAddons ${KF_MIN_VERSION} CONFIG REQUIRED)
 
 ecm_set_disabled_deprecation_versions(QT 5.15.2  KF 5.102.0)
 
