@@ -1,15 +1,13 @@
-# translation of kio_ldap.po to Belarusian
-#
 # Darafei Praliaskouski <symbol@akeeri.tk>, 2006.
 # Darafei Praliaskouski <komzpa@licei2.com>, 2007.
 msgid ""
 msgstr ""
-"Project-Id-Version: kio_ldap\n"
+"Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-29 00:47+0000\n"
-"PO-Revision-Date: 2007-08-10 14:11+0000\n"
+"PO-Revision-Date: 2023-01-19 13:17\n"
 "Last-Translator: Darafei Praliaskouski <komzpa@licei2.com>\n"
-"Language-Team: Belarusian <i18n@mova.org>\n"
+"Language-Team: Belarusian\n"
 "Language: be\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -18,6 +16,11 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<12 || n%100>14) ? 1 : n%10==0 || n%10>=5 && n%10<=9 || n"
 "%100>=11 && n%100<=14 ? 2 : 3);\n"
+"X-Crowdin-Project: 86ff119b1606fcaa910d6b44fc14b611\n"
+"X-Crowdin-Project-ID: 127\n"
+"X-Crowdin-Language: be\n"
+"X-Crowdin-File: /main/be/kldap/kio_ldap.po\n"
+"X-Crowdin-File-ID: 8055\n"
 
 #: kio_ldap.cpp:86
 #, kde-format
@@ -26,7 +29,7 @@ msgid ""
 "Additional info: "
 msgstr ""
 "\n"
-"Іншыя звесткі: "
+"Дадатковыя звесткі: "
 
 #: kio_ldap.cpp:167
 #, kde-format
@@ -40,17 +43,17 @@ msgstr ""
 #: kio_ldap.cpp:298
 #, kde-format
 msgid "LDAP Login"
-msgstr "LDAP уваход"
+msgstr "Уваход LDAP"
 
 #: kio_ldap.cpp:300
 #, kde-format
 msgid "site:"
-msgstr "пляцоўка:"
+msgstr "сайт:"
 
 #: kio_ldap.cpp:327
 #, kde-format
 msgid "Invalid authorization information."
-msgstr "Несапраўдныя аўтарызацыйныя звесткі."
+msgstr "Хібныя звесткі для аўтарызацыі."
 
 #: kio_ldap.cpp:334
 #, kde-format
@@ -60,9 +63,9 @@ msgstr "Злучэнне LDAP скасавана."
 #: kio_ldap.cpp:600 kio_ldap.cpp:668
 #, kde-format
 msgid "The Ldif parser failed."
-msgstr "Разбор Ldif схібіў."
+msgstr "Не атрымалася апрацаваць Ldif."
 
 #: kio_ldap.cpp:680
 #, kde-format
 msgid "Invalid Ldif file in line %1."
-msgstr "Недапушчальны Ldif файл у радку %1."
+msgstr "Хібны файл Ldif у радку %1."
