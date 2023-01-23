@@ -11,5 +11,5 @@ endif()
 add_executable(ldapclientsearchconfigreadconfigjobtest ldapclientsearchconfigreadconfigjobtest.cpp)
 add_test(NAME ldapclientsearchconfigreadconfigjobtest COMMAND ldapclientsearchconfigreadconfigjobtest)
 ecm_mark_as_test(ldapclientsearchconfigreadconfigjobtest)
-target_link_libraries(ldapclientsearchconfigreadconfigjobtest Qt::Test KF5::Ldap KF5::ConfigCore)
+target_link_libraries(ldapclientsearchconfigreadconfigjobtest Qt::Test KF5::Ldap KF${KF_MAJOR_VERSION}::ConfigCore)
 

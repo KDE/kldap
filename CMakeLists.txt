@@ -30,11 +30,19 @@ include(ECMQtDeclareLoggingCategory)
 include(ECMDeprecationSettings)
 include(ECMAddQch)
 
+if (QT_MAJOR_VERSION STREQUAL "6")
+    set(QT_MIN_VERSION "6.4.0")
+    set(KF_MIN_VERSION "5.240.0")
+    set(KF_MAJOR_VERSION "6")
+else()
+    set(KF_MAJOR_VERSION "5")
+endif()
+
 set(KLDAP_LIB_VERSION ${PIM_VERSION})
 
-find_package(KF5KIO ${KF_MIN_VERSION} CONFIG REQUIRED)
-find_package(KF5I18n ${KF_MIN_VERSION} CONFIG REQUIRED)
-find_package(KF5DocTools ${KF_MIN_VERSION} CONFIG)
+find_package(KF${KF_MAJOR_VERSION}KIO ${KF_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF${KF_MAJOR_VERSION}I18n ${KF_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF${KF_MAJOR_VERSION}DocTools ${KF_MIN_VERSION} CONFIG)
 
 find_package(Qt${QT_MAJOR_VERSION}Keychain CONFIG)
 set_package_properties(Qt${QT_MAJOR_VERSION}Keychain PROPERTIES
@@ -43,7 +51,7 @@ set_package_properties(Qt${QT_MAJOR_VERSION}Keychain PROPERTIES
 				   TYPE REQUIRED)
 
 # tell what is missing without doctools
-set_package_properties(KF5DocTools PROPERTIES DESCRIPTION "Provides tools to generate documentation in various format from DocBook files"
+set_package_properties(KF${KF_MAJOR_VERSION}DocTools PROPERTIES DESCRIPTION "Provides tools to generate documentation in various format from DocBook files"
                        TYPE OPTIONAL
                        PURPOSE "Required to build documentation")
 
@@ -64,7 +72,7 @@ if (USE_UNITY_CMAKE_SUPPORT)
 endif()
 
 ########### Find packages ###########
-find_package(KF5WidgetsAddons ${KF_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF${KF_MAJOR_VERSION}WidgetsAddons ${KF_MIN_VERSION} CONFIG REQUIRED)
 
 ecm_set_disabled_deprecation_versions(QT 5.15.2  KF 5.102.0)
 
