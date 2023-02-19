@@ -36,7 +36,7 @@ public:
      *
      * @param url The LDAP url of the server.
      */
-    LdapServer(const LdapUrl &url);
+    explicit LdapServer(const LdapUrl &url);
 
     /**
      * Creates a new LDAP server object from an @p other object.

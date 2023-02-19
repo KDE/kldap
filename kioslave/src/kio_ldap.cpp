@@ -391,7 +391,6 @@ void LDAPProtocol::get(const QUrl &_url)
         mOp.setServerControls(serverctrls);
     }
     mOp.setClientControls(clientctrls);
-    int ret;
     int id;
     if ((id = mOp.search(usrc.dn(), usrc.scope(), usrc.filter(), usrc.attributes())) == -1) {
         LDAPErr();
@@ -404,6 +403,7 @@ void LDAPProtocol::get(const QUrl &_url)
     // QByteArray result;
     filesize_t processed_size = 0;
 
+    int ret;
     while (true) {
         ret = mOp.waitForResult(id, -1);
         if (ret == -1 || mConn.ldapErrorCode() != KLDAP_SUCCESS) {
@@ -727,11 +727,11 @@ void LDAPProtocol::listDir(const QUrl &_url)
     // publish the results
     UDSEntry uds;
 
-    int ret;
     int ret2;
     int id2;
     unsigned long total = 0;
 
+    int ret;
     while (true) {
         ret = mOp.waitForResult(id, -1);
         if (ret == -1 || mConn.ldapErrorCode() != KLDAP_SUCCESS) {

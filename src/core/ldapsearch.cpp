@@ -21,7 +21,7 @@ using namespace KLDAP;
 class LdapSearchPrivate
 {
 public:
-    LdapSearchPrivate(LdapSearch *parent)
+    explicit LdapSearchPrivate(LdapSearch *parent)
         : mParent(parent)
     {
     }

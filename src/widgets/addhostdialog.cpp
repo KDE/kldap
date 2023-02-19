@@ -29,7 +29,7 @@ static const char myAddHostDialogPrivateGroupName[] = "AddHostDialog";
 class KLDAP::AddHostDialogPrivate
 {
 public:
-    AddHostDialogPrivate(AddHostDialog *qq)
+    explicit AddHostDialogPrivate(AddHostDialog *qq)
         : q(qq)
     {
     }

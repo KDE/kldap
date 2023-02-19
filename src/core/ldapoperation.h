@@ -74,7 +74,7 @@ public:
     };
 
     LdapOperation();
-    LdapOperation(LdapConnection &conn);
+    explicit LdapOperation(LdapConnection &conn);
     ~LdapOperation();
 
     /**
