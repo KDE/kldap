@@ -3,6 +3,6 @@
 ########## next target ###############
 add_executable(testldapclient testldapclient.cpp testldapclient.h)
 
-target_link_libraries(testldapclient KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::Completion KF5::Ldap KF${KF_MAJOR_VERSION}::CoreAddons)
+target_link_libraries(testldapclient KF${KF_MAJOR_VERSION}::I18n KF${KF_MAJOR_VERSION}::Completion KPim${KF_MAJOR_VERSION}::Ldap KF${KF_MAJOR_VERSION}::CoreAddons)
 
 #ldapclientsearchconfigreadconfigjobtest.cpp
