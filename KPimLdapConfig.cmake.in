@@ -4,4 +4,14 @@
 
 @PACKAGE_INIT@
 
+if (@KLDAP_KF5_COMPAT@)
+    message(WARNING "\n"
+                    "************* DEPRECATION WARNING *************\n"
+		    "Using find_package(KF5LDap) and KF5::KLdap targets is deprecated. "
+		    "Please use find_package(KPim@KF_MAJOR_VERSION@Ldap) and KPim@KF_MAJOR_VERSION@::Ldap instead. This backwards "
+                    "compatibility will be removed in the next major version.\n"
+                    "***********************************************\n")
+endif()
+
+
 include("${CMAKE_CURRENT_LIST_DIR}/KPim@KF_MAJOR_VERSION@LdapTargets.cmake")
