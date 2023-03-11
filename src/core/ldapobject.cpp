@@ -19,9 +19,9 @@ public:
 
     LdapObjectPrivate(const LdapObjectPrivate &other)
         : QSharedData(other)
+        , mDn(other.mDn)
+        , mAttrs(other.mAttrs)
     {
-        mDn = other.mDn;
-        mAttrs = other.mAttrs;
     }
 
     LdapDN mDn;
