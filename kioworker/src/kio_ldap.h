@@ -38,7 +38,7 @@ private:
     KLDAP::LdapConnection mConn;
     KLDAP::LdapOperation mOp;
     KLDAP::LdapServer mServer;
-    bool mConnected;
+    bool mConnected = false;
 
     void controlsFromMetaData(KLDAP::LdapControls &serverctrls, KLDAP::LdapControls &clientctrls);
     void LDAPEntry2UDSEntry(const KLDAP::LdapDN &dn, KIO::UDSEntry &entry, const KLDAP::LdapUrl &usrc, bool dir = false);

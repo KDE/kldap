@@ -66,7 +66,6 @@ LDAPProtocol::LDAPProtocol(const QByteArray &protocol, const QByteArray &pool, c
     : WorkerBase(protocol, pool, app)
     , mProtocol(protocol)
 {
-    mConnected = false;
     mOp.setConnection(mConn);
     qCDebug(KLDAP_LOG) << "LDAPProtocol::LDAPProtocol (" << protocol << ")";
 }
