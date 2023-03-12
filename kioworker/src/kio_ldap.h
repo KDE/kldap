@@ -24,7 +24,7 @@ public:
 
     void setHost(const QString &host, quint16 port, const QString &user, const QString &pass) override;
 
-    KIO::WorkerResult openConnection() override;
+    Q_REQUIRED_RESULT KIO::WorkerResult openConnection() override;
     void closeConnection() override;
 
     KIO::WorkerResult get(const QUrl &url) override;
