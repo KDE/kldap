@@ -74,7 +74,7 @@ LdapDN LdapUrl::dn() const
     if (tmp.startsWith(QLatin1Char('/'))) {
         tmp = tmp.mid(1);
     }
-    LdapDN tmpDN(tmp);
+    const LdapDN tmpDN(tmp);
     return tmpDN;
 }
 
