@@ -91,7 +91,7 @@ KIO::WorkerResult LDAPProtocol::LDAPErr(int err)
         return KIO::WorkerResult::pass();
     }
 
-    qDebug() << "error code: " << err << " msg: " << LdapConnection::errorString(err) << extramsg << "'";
+    qCDebug(KLDAP_LOG) << "error code: " << err << " msg: " << LdapConnection::errorString(err) << extramsg << "'";
     QString msg;
     msg = mServer.url().toDisplayString();
     if (!extramsg.isEmpty()) {
