@@ -5,7 +5,6 @@
  */
 
 #include "ldapclientsearchconfig.h"
-#include "ldapclient_debug.h"
 #include <kldap/ldapserver.h>
 
 #include <KConfig>
