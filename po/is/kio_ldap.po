@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kio_ldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-29 00:47+0000\n"
+"POT-Creation-Date: 2023-03-12 00:47+0000\n"
 "PO-Revision-Date: 2023-01-26 15:36+0000\n"
 "Last-Translator: gummi <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "\n"
 "\n"
 
-#: kio_ldap.cpp:86
+#: kio_ldap.cpp:87
 #, kde-format
 msgid ""
 "\n"
@@ -29,7 +29,7 @@ msgstr ""
 "\n"
 "Viðbótarupplýsingar: "
 
-#: kio_ldap.cpp:167
+#: kio_ldap.cpp:162
 #, kde-format
 msgid ""
 "LDAP server returned the error: %1 %2\n"
@@ -38,32 +38,32 @@ msgstr ""
 "LDAP-þjónninn skilaði eftirfarandi villu: %1 %2\n"
 "LDAP-slóðin var: %3"
 
-#: kio_ldap.cpp:298
+#: kio_ldap.cpp:293
 #, kde-format
 msgid "LDAP Login"
 msgstr "LDAP-innskráning"
 
-#: kio_ldap.cpp:300
+#: kio_ldap.cpp:295
 #, kde-format
 msgid "site:"
 msgstr "staðsetning:"
 
-#: kio_ldap.cpp:327
+#: kio_ldap.cpp:320
 #, kde-format
 msgid "Invalid authorization information."
 msgstr "Ógildar auðkenniupplýsingar."
 
-#: kio_ldap.cpp:334
+#: kio_ldap.cpp:328
 #, kde-format
 msgid "LDAP connection canceled."
 msgstr "Hætt við LDAP-tengingu"
 
-#: kio_ldap.cpp:600 kio_ldap.cpp:668
+#: kio_ldap.cpp:587 kio_ldap.cpp:653
 #, kde-format
 msgid "The Ldif parser failed."
 msgstr "Ldif-þáttarinn brást."
 
-#: kio_ldap.cpp:680
+#: kio_ldap.cpp:664
 #, kde-format
 msgid "Invalid Ldif file in line %1."
 msgstr "Ógild Ldif-skrá í línu %1."

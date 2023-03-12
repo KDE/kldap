@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kio_ldap stable\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-29 00:47+0000\n"
+"POT-Creation-Date: 2023-03-12 00:47+0000\n"
 "PO-Revision-Date: 2005-11-24 08:45+0200\n"
 "Last-Translator: Kobus Venter <kabousv@therugby.co.za>\n"
 "Language-Team: AFRIKAANS <translate-discuss-af@lists.sourceforge.net>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: KBabel 1.10\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: kio_ldap.cpp:86
+#: kio_ldap.cpp:87
 #, kde-format
 msgid ""
 "\n"
@@ -27,7 +27,7 @@ msgstr ""
 "\n"
 "Adisionele inligting"
 
-#: kio_ldap.cpp:167
+#: kio_ldap.cpp:162
 #, kde-format
 msgid ""
 "LDAP server returned the error: %1 %2\n"
@@ -36,32 +36,32 @@ msgstr ""
 "LDAP bediener het die volgende fout terug gestuur: %1 %2\n"
 "Die LDAP URL was: %3"
 
-#: kio_ldap.cpp:298
+#: kio_ldap.cpp:293
 #, kde-format
 msgid "LDAP Login"
 msgstr "LDAP aanmeld"
 
-#: kio_ldap.cpp:300
+#: kio_ldap.cpp:295
 #, kde-format
 msgid "site:"
 msgstr "webruimte:"
 
-#: kio_ldap.cpp:327
+#: kio_ldap.cpp:320
 #, kde-format
 msgid "Invalid authorization information."
 msgstr "Ongeldige magtiging informasie."
 
-#: kio_ldap.cpp:334
+#: kio_ldap.cpp:328
 #, kde-format
 msgid "LDAP connection canceled."
 msgstr ""
 
-#: kio_ldap.cpp:600 kio_ldap.cpp:668
+#: kio_ldap.cpp:587 kio_ldap.cpp:653
 #, fuzzy, kde-format
 msgid "The Ldif parser failed."
 msgstr "Die LDIF lettergreepmaking het misluk"
 
-#: kio_ldap.cpp:680
+#: kio_ldap.cpp:664
 #, fuzzy, kde-format
 msgid "Invalid Ldif file in line %1."
 msgstr "Ongeldige LDIF lêer in lyn %1."

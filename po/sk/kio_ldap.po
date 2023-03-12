@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kio_ldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-29 00:47+0000\n"
+"POT-Creation-Date: 2023-03-12 00:47+0000\n"
 "PO-Revision-Date: 2012-04-18 10:58+0100\n"
 "Last-Translator: Roman Paholík <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -16,7 +16,7 @@ msgstr ""
 "X-Generator: KBabel 1.11.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: kio_ldap.cpp:86
+#: kio_ldap.cpp:87
 #, kde-format
 msgid ""
 "\n"
@@ -25,7 +25,7 @@ msgstr ""
 "\n"
 "Dodatočné informácie: "
 
-#: kio_ldap.cpp:167
+#: kio_ldap.cpp:162
 #, kde-format
 msgid ""
 "LDAP server returned the error: %1 %2\n"
@@ -34,32 +34,32 @@ msgstr ""
 "Server LDAP vrátil túto chybu: %1 %2\n"
 "LDAP URL bolo: %3"
 
-#: kio_ldap.cpp:298
+#: kio_ldap.cpp:293
 #, kde-format
 msgid "LDAP Login"
 msgstr "Prihlásenie LDAP"
 
-#: kio_ldap.cpp:300
+#: kio_ldap.cpp:295
 #, kde-format
 msgid "site:"
 msgstr "server:"
 
-#: kio_ldap.cpp:327
+#: kio_ldap.cpp:320
 #, kde-format
 msgid "Invalid authorization information."
 msgstr "Neplatná informácie prihlásenia."
 
-#: kio_ldap.cpp:334
+#: kio_ldap.cpp:328
 #, kde-format
 msgid "LDAP connection canceled."
 msgstr "LDAP pripojenie zrušené."
 
-#: kio_ldap.cpp:600 kio_ldap.cpp:668
+#: kio_ldap.cpp:587 kio_ldap.cpp:653
 #, kde-format
 msgid "The Ldif parser failed."
 msgstr "Parser Ldif zlyhal."
 
-#: kio_ldap.cpp:680
+#: kio_ldap.cpp:664
 #, kde-format
 msgid "Invalid Ldif file in line %1."
 msgstr "Neplatný Ldif súbor v riadku %1."
