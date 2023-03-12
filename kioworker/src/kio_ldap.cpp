@@ -169,7 +169,7 @@ void LDAPProtocol::controlsFromMetaData(LdapControls &serverctrls, LdapControls 
     QByteArray value;
     int i = 0;
     while (hasMetaData(QStringLiteral("SERVER_CTRL%1").arg(i))) {
-        QByteArray val = metaData(QStringLiteral("SERVER_CTRL%1").arg(i)).toUtf8();
+        const QByteArray val = metaData(QStringLiteral("SERVER_CTRL%1").arg(i)).toUtf8();
         Ldif::splitControl(val, oid, critical, value);
         qCDebug(KLDAP_LOG) << "server ctrl #" << i << " value: " << val << " oid: " << oid << " critical: " << critical
                            << " value: " << QString::fromUtf8(value.constData(), value.size());
@@ -179,7 +179,7 @@ void LDAPProtocol::controlsFromMetaData(LdapControls &serverctrls, LdapControls 
     }
     i = 0;
     while (hasMetaData(QStringLiteral("CLIENT_CTRL%1").arg(i))) {
-        QByteArray val = metaData(QStringLiteral("CLIENT_CTRL%1").arg(i)).toUtf8();
+        const QByteArray val = metaData(QStringLiteral("CLIENT_CTRL%1").arg(i)).toUtf8();
         Ldif::splitControl(val, oid, critical, value);
         qCDebug(KLDAP_LOG) << "client ctrl #" << i << " value: " << val << " oid: " << oid << " critical: " << critical
                            << " value: " << QString::fromUtf8(value.constData(), value.size());
@@ -452,20 +452,18 @@ KIO::WorkerResult LDAPProtocol::stat(const QUrl &_url)
 {
     qCDebug(KLDAP_LOG) << "stat(" << _url << ")";
 
-    QStringList att;
-    QStringList saveatt;
     LdapUrl usrc(_url);
-    int ret;
-    int id;
 
     const KIO::WorkerResult checkResult = changeCheck(usrc);
     if (!checkResult.success()) {
         return checkResult;
     }
 
+    int ret;
+    int id;
     // look how many entries match
-    saveatt = usrc.attributes();
-    att.append(QStringLiteral("dn"));
+    const QStringList saveatt = usrc.attributes();
+    QStringList att{QStringLiteral("dn")};
 
     if ((id = mOp.search(usrc.dn(), usrc.scope(), usrc.filter(), att)) == -1) {
         return LDAPErr();
@@ -503,8 +501,6 @@ KIO::WorkerResult LDAPProtocol::del(const QUrl &_url, bool)
     qCDebug(KLDAP_LOG) << "del(" << _url << ")";
 
     LdapUrl usrc(_url);
-    int id;
-    int ret;
 
     const KIO::WorkerResult checkResult = changeCheck(usrc);
     if (!checkResult.success()) {
@@ -518,6 +514,8 @@ KIO::WorkerResult LDAPProtocol::del(const QUrl &_url, bool)
     mOp.setClientControls(clientctrls);
 
     qCDebug(KLDAP_LOG) << " del: " << usrc.dn().toString().toUtf8();
+    int id;
+    int ret;
 
     if ((id = mOp.del(usrc.dn())) == -1) {
         return LDAPErr();
@@ -674,11 +672,7 @@ KIO::WorkerResult LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
 KIO::WorkerResult LDAPProtocol::listDir(const QUrl &_url)
 {
     QStringList att;
-    QStringList saveatt;
     LdapUrl usrc(_url);
-    LdapUrl usrc2;
-    bool critical = true;
-    bool isSub = (usrc.extension(QStringLiteral("x-dir"), critical) == QLatin1String("sub"));
 
     qCDebug(KLDAP_LOG) << "listDir(" << _url << ")";
 
@@ -687,9 +681,11 @@ KIO::WorkerResult LDAPProtocol::listDir(const QUrl &_url)
         return checkResult;
     }
 
-    usrc2 = usrc;
+    LdapUrl usrc2 = usrc;
 
-    saveatt = usrc.attributes();
+    const QStringList saveatt = usrc.attributes();
+    bool critical = true;
+    bool isSub = (usrc.extension(QStringLiteral("x-dir"), critical) == QLatin1String("sub"));
     // look up the entries
     if (isSub) {
         att.append(QStringLiteral("dn"));
