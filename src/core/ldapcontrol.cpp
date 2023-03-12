@@ -17,9 +17,7 @@ class LdapControlPrivate : public QSharedData
 public:
     LdapControlPrivate() = default;
 
-    LdapControlPrivate(const LdapControlPrivate &other)
-
-        = default;
+    LdapControlPrivate(const LdapControlPrivate &other) = default;
 
     QString mOid;
     QByteArray mValue;
