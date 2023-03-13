@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kio_ldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-12 00:47+0000\n"
+"POT-Creation-Date: 2023-03-13 00:50+0000\n"
 "PO-Revision-Date: 2007-07-09 11:34+0530\n"
 "Last-Translator: Umesh Rudrapatna <urudrapatna@yahoo.com>\n"
 "Language-Team: Kannada <kde-l10n-kn@kde.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: KBabel 1.11.1\n"
 
-#: kio_ldap.cpp:87
+#: kio_ldap.cpp:86
 #, kde-format
 msgid ""
 "\n"
@@ -27,7 +27,7 @@ msgstr ""
 "\n"
 "ಹೆಚ್ಚುವರಿ ಮಾಹಿತಿ: "
 
-#: kio_ldap.cpp:162
+#: kio_ldap.cpp:161
 #, kde-format
 msgid ""
 "LDAP server returned the error: %1 %2\n"
@@ -36,32 +36,32 @@ msgstr ""
 "LDAP ಪರಿಚಾರಕವು (server) ಈ ದೋಷ ಹಿಂದಿರುಗಿಸಿತು: %1 %2\n"
 "LDAP ನ URL ಇದಾಗಿತ್ತು: %3"
 
-#: kio_ldap.cpp:293
+#: kio_ldap.cpp:292
 #, kde-format
 msgid "LDAP Login"
 msgstr "LDAP ಪ್ರವೇಶಪದ (Login)"
 
-#: kio_ldap.cpp:295
+#: kio_ldap.cpp:294
 #, kde-format
 msgid "site:"
 msgstr "ತಾಣ (site):"
 
-#: kio_ldap.cpp:320
+#: kio_ldap.cpp:319
 #, kde-format
 msgid "Invalid authorization information."
 msgstr "ಅಮಾನ್ಯವಾದ ದೃಢೀಕರಣ (authorization) ಮಾಹಿತಿ."
 
-#: kio_ldap.cpp:328
+#: kio_ldap.cpp:327
 #, kde-format
 msgid "LDAP connection canceled."
 msgstr "LDAP ಸಂಪರ್ಕವನ್ನು ರದ್ದುಗೊಳಿಸಲಾಗಿದೆ."
 
-#: kio_ldap.cpp:587 kio_ldap.cpp:653
+#: kio_ldap.cpp:584 kio_ldap.cpp:650
 #, kde-format
 msgid "The Ldif parser failed."
 msgstr "Ldif ಪದಚ್ಛೇದಕ (parser) ವಿಫಲವಾಯಿತು."
 
-#: kio_ldap.cpp:664
+#: kio_ldap.cpp:661
 #, kde-format
 msgid "Invalid Ldif file in line %1."
 msgstr "%1 ಸಾಲಿನಲ್ಲಿ ಅಮಾನ್ಯ Ldif ಕಡತವನ್ನು ನಿರ್ದೇಶಿಸಲಾಗಿದೆ."

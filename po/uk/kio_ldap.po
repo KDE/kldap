@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kio_ldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-12 00:47+0000\n"
+"POT-Creation-Date: 2023-03-13 00:50+0000\n"
 "PO-Revision-Date: 2016-04-04 17:41+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: kio_ldap.cpp:87
+#: kio_ldap.cpp:86
 #, kde-format
 msgid ""
 "\n"
@@ -29,7 +29,7 @@ msgstr ""
 "\n"
 "Додаткова інформація: "
 
-#: kio_ldap.cpp:162
+#: kio_ldap.cpp:161
 #, kde-format
 msgid ""
 "LDAP server returned the error: %1 %2\n"
@@ -38,32 +38,32 @@ msgstr ""
 "Сервер LDAP повернув наступну помилку: %1 %2\n"
 "Адреса LDAP: %3"
 
-#: kio_ldap.cpp:293
+#: kio_ldap.cpp:292
 #, kde-format
 msgid "LDAP Login"
 msgstr "Вхід LDAP"
 
-#: kio_ldap.cpp:295
+#: kio_ldap.cpp:294
 #, kde-format
 msgid "site:"
 msgstr "сайт:"
 
-#: kio_ldap.cpp:320
+#: kio_ldap.cpp:319
 #, kde-format
 msgid "Invalid authorization information."
 msgstr "Неправильна інформація для авторизації."
 
-#: kio_ldap.cpp:328
+#: kio_ldap.cpp:327
 #, kde-format
 msgid "LDAP connection canceled."
 msgstr "З’єднання з LDAP скасовано."
 
-#: kio_ldap.cpp:587 kio_ldap.cpp:653
+#: kio_ldap.cpp:584 kio_ldap.cpp:650
 #, kde-format
 msgid "The Ldif parser failed."
 msgstr "Помилка аналізатора Ldif."
 
-#: kio_ldap.cpp:664
+#: kio_ldap.cpp:661
 #, kde-format
 msgid "Invalid Ldif file in line %1."
 msgstr "Неправильний файл Ldif в рядку %1."

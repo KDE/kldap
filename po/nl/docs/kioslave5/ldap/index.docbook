@@ -25,7 +25,7 @@
 >-server.</para>
 
 <para
->U kunt deze io-slave als volgt gebruiken:</para>
+>U kunt de ldap KIO-worker als volgt gebruiken:</para>
 
 <para
 ><userinput
