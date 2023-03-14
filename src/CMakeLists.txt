@@ -124,7 +124,7 @@ set_target_properties(KPim${KF_MAJOR_VERSION}Ldap PROPERTIES
     EXPORT_NAME Ldap
 )
 
-install(TARGETS KPim${KF_MAJOR_VERSION}Ldap EXPORT KPim${KF_MAJOR_VERSION}LdapTargets ${KF_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KPim${KF_MAJOR_VERSION}Ldap EXPORT KPim${KF_MAJOR_VERSION}LdapTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 
