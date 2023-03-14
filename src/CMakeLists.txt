@@ -31,7 +31,6 @@ configure_file(kldap_config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/kldap_config.h)
 
 add_library(KPim${KF_MAJOR_VERSION}Ldap)
 add_library(KPim${KF_MAJOR_VERSION}::Ldap ALIAS KPim${KF_MAJOR_VERSION}Ldap)
-add_library(KF5::Ldap ALIAS KPim${KF_MAJOR_VERSION}Ldap)
 
 target_sources(KPim${KF_MAJOR_VERSION}Ldap PRIVATE
   core/ber.cpp
