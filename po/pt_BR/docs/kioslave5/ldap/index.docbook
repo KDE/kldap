@@ -53,7 +53,7 @@
 > independente.</para>
 
 <para
->Você pode usar o kioslave do ldap da seguinte forma:</para>
+>Você pode usar o KIO worker do ldap da seguinte forma:</para>
 
 <para
 ><userinput
