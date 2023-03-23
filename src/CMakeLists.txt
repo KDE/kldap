@@ -179,9 +179,9 @@ install(FILES
 
 if (BUILD_QCH)
     ecm_add_qch(
-        KPim${KF_MAJOR_VERSION}LDap_QCH
-        NAME KLDap
-        BASE_NAME KPim${KF_MAJOR_VERSION}LDap
+        KPim${KF_MAJOR_VERSION}Ldap_QCH
+        NAME KLdap
+        BASE_NAME KPim${KF_MAJOR_VERSION}Ldap
         VERSION ${PIM_VERSION}
         ORG_DOMAIN org.kde
 
