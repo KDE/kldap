@@ -96,18 +96,6 @@ add_definitions(-DTRANSLATION_DOMAIN=\"libkldap5\")
 ########### CMake Config Files ###########
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim${KF_MAJOR_VERSION}Ldap")
 set(KLDAP_KF5_COMPAT FALSE)
-configure_package_config_file(
-  "${CMAKE_CURRENT_SOURCE_DIR}/KPimLdapConfig.cmake.in"
-  "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}LdapConfig.cmake"
-  INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
-)
-
-install(FILES
-  "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}LdapConfig.cmake"
-  "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}LdapConfigVersion.cmake"
-  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-  COMPONENT Devel
-)
 
 install(EXPORT KPim${KF_MAJOR_VERSION}LdapTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KPim${KF_MAJOR_VERSION}LdapTargets.cmake NAMESPACE KPim${KF_MAJOR_VERSION}::)
 
@@ -139,13 +127,25 @@ endif()
 
 if (BUILD_QCH)
     ecm_install_qch_export(
-        TARGETS KPim${KF_MAJOR_VERSION}LDap_QCH
-        FILE KPim${KF_MAJOR_VERSION}LDapQchTargets.cmake
+        TARGETS KPim${KF_MAJOR_VERSION}Ldap_QCH
+        FILE KPim${KF_MAJOR_VERSION}LdapQchTargets.cmake
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
     )
-    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim${KF_MAJOR_VERSION}LDapQchTargets.cmake\")")
+    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim${KF_MAJOR_VERSION}LdapQchTargets.cmake\")")
 endif()
+configure_package_config_file(
+  "${CMAKE_CURRENT_SOURCE_DIR}/KPimLdapConfig.cmake.in"
+  "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}LdapConfig.cmake"
+  INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
+)
+
+install(FILES
+  "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}LdapConfig.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}LdapConfigVersion.cmake"
+  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  COMPONENT Devel
+)
 
 if (BUILD_WITH_COMPAT_LIBS)
 if (QT_MAJOR_VERSION STREQUAL "5")
@@ -176,6 +176,14 @@ install(EXPORT KPim${KF_MAJOR_VERSION}LdapTargets
     FILE KPim${KF_MAJOR_VERSION}LdapTargets.cmake
     NAMESPACE KF5::
 )
+if (BUILD_QCH)
+    install(FILES
+	    "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}LdapQchTargets.cmake"
+        DESTINATION "${CMAKECONFIG_INSTALL_DIR_KF5}"
+        COMPONENT Devel
+    )
+endif()
+
 endif()
 endif()
 
