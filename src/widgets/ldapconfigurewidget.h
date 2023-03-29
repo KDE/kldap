@@ -45,7 +45,7 @@ Q_SIGNALS:
     void changed(bool);
 
 private:
-    void initGUI();
+    KLDAP_NO_EXPORT void initGUI();
 
     QListWidget *mHostListView = nullptr;
 

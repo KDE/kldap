@@ -36,7 +36,7 @@ public:
     void setLdapClient(LdapClient *ldapClient);
 
 private:
-    void slotConfigLoaded(const KLDAP::LdapServer &server);
+    KLDAP_NO_EXPORT void slotConfigLoaded(const KLDAP::LdapServer &server);
     LdapClient *mLdapClient = nullptr;
     KConfigGroup mConfig;
     int mCurrentIndex = -1;

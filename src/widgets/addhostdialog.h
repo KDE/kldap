@@ -31,12 +31,12 @@ Q_SIGNALS:
     void changed(bool);
 
 private Q_SLOTS:
-    void slotHostEditChanged(const QString &);
-    void slotOk();
+    KLDAP_NO_EXPORT void slotHostEditChanged(const QString &);
+    KLDAP_NO_EXPORT void slotOk();
 
 private:
-    void readConfig();
-    void writeConfig();
+    KLDAP_NO_EXPORT void readConfig();
+    KLDAP_NO_EXPORT void writeConfig();
     std::unique_ptr<AddHostDialogPrivate> const d;
 };
 }

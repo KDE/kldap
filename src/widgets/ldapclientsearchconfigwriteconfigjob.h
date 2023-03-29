@@ -41,8 +41,8 @@ Q_SIGNALS:
     void configSaved();
 
 private:
-    void writeLdapClientConfigFinished();
-    void writeConfig();
+    KLDAP_NO_EXPORT void writeLdapClientConfigFinished();
+    KLDAP_NO_EXPORT void writeConfig();
     int mServerIndex = -1;
     KConfigGroup mConfig;
     bool mActive = false;
