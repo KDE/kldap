@@ -9,8 +9,8 @@ deprecated: false
 release: false
 libraries:
  - qmake: Ldap 
-   cmake: "KF5::Ldap"
-cmakename: KF5Ldap
+   cmake: "KPim6::Ldap"
+cmakename: KPim6Ldap
 
 public_lib: true
 group: kdepim

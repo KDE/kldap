@@ -4,5 +4,5 @@
 
 @PACKAGE_INIT@
 
-include("${CMAKE_CURRENT_LIST_DIR}/KPim@KF_MAJOR_VERSION@LdapTargets.cmake")
+include("${CMAKE_CURRENT_LIST_DIR}/KPim6LdapTargets.cmake")
 @PACKAGE_INCLUDE_QCHTARGETS@

@@ -6,7 +6,7 @@ set(PIM_VERSION "5.23.40")
 project(KLdap VERSION ${PIM_VERSION})
 
 # ECM setup
-set(KF_MIN_VERSION "5.105.0")
+set(KF_MIN_VERSION "5.240.0")
 
 find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${KLdap_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
@@ -40,25 +40,25 @@ endif()
 
 set(KLDAP_LIB_VERSION ${PIM_VERSION})
 
-find_package(KF${KF_MAJOR_VERSION}KIO ${KF_MIN_VERSION} CONFIG REQUIRED)
-find_package(KF${KF_MAJOR_VERSION}I18n ${KF_MIN_VERSION} CONFIG REQUIRED)
-find_package(KF${KF_MAJOR_VERSION}DocTools ${KF_MIN_VERSION} CONFIG)
+find_package(KF6KIO ${KF_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF6I18n ${KF_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF6DocTools ${KF_MIN_VERSION} CONFIG)
 
-find_package(Qt${QT_MAJOR_VERSION}Keychain CONFIG)
-set_package_properties(Qt${QT_MAJOR_VERSION}Keychain PROPERTIES
+find_package(Qt6Keychain CONFIG)
+set_package_properties(Qt6Keychain PROPERTIES
                                    DESCRIPTION "Provides support for secure credentials storage"
                                    URL "https://github.com/frankosterfeld/qtkeychain"
 				   TYPE REQUIRED)
 
 # tell what is missing without doctools
-set_package_properties(KF${KF_MAJOR_VERSION}DocTools PROPERTIES DESCRIPTION "Provides tools to generate documentation in various format from DocBook files"
+set_package_properties(KF6DocTools PROPERTIES DESCRIPTION "Provides tools to generate documentation in various format from DocBook files"
                        TYPE OPTIONAL
                        PURPOSE "Required to build documentation")
 
 ecm_setup_version(PROJECT VARIABLE_PREFIX KLDAP
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kldap_version.h"
-                        PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}LdapConfigVersion.cmake"
-                        SOVERSION 5
+                        PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapConfigVersion.cmake"
+                        SOVERSION 6
 )
 option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
 add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)")
@@ -71,7 +71,7 @@ if (USE_UNITY_CMAKE_SUPPORT)
 endif()
 
 ########### Find packages ###########
-find_package(KF${KF_MAJOR_VERSION}WidgetsAddons ${KF_MIN_VERSION} CONFIG REQUIRED)
+find_package(KF6WidgetsAddons ${KF_MIN_VERSION} CONFIG REQUIRED)
 
 ecm_set_disabled_deprecation_versions(QT 6.4  KF 5.105.0)
 
@@ -93,13 +93,13 @@ add_definitions(-DTRANSLATION_DOMAIN=\"libkldap5\")
 
 
 ########### CMake Config Files ###########
-set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim${KF_MAJOR_VERSION}Ldap")
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim6Ldap")
 
-install(EXPORT KPim${KF_MAJOR_VERSION}LdapTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KPim${KF_MAJOR_VERSION}LdapTargets.cmake NAMESPACE KPim${KF_MAJOR_VERSION}::)
+install(EXPORT KPim6LdapTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KPim6LdapTargets.cmake NAMESPACE KPim6::)
 
 install(FILES
    ${CMAKE_CURRENT_BINARY_DIR}/kldap_version.h
-   DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim${KF_MAJOR_VERSION}/KLDAP
+   DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAP
    COMPONENT Devel
 )
 
@@ -119,28 +119,28 @@ ecm_qt_install_logging_categories(
 
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 ki18n_install(po)
-if(KF${KF_MAJOR_VERSION}DocTools_FOUND)
+if(KF6DocTools_FOUND)
 	kdoctools_install(po)
 endif()
 
 if (BUILD_QCH)
     ecm_install_qch_export(
-        TARGETS KPim${KF_MAJOR_VERSION}Ldap_QCH
-        FILE KPim${KF_MAJOR_VERSION}LdapQchTargets.cmake
+        TARGETS KPim6Ldap_QCH
+        FILE KPim6LdapQchTargets.cmake
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
     )
-    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim${KF_MAJOR_VERSION}LdapQchTargets.cmake\")")
+    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6LdapQchTargets.cmake\")")
 endif()
 configure_package_config_file(
   "${CMAKE_CURRENT_SOURCE_DIR}/KPimLdapConfig.cmake.in"
-  "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}LdapConfig.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapConfig.cmake"
   INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
 )
 
 install(FILES
-  "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}LdapConfig.cmake"
-  "${CMAKE_CURRENT_BINARY_DIR}/KPim${KF_MAJOR_VERSION}LdapConfigVersion.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapConfig.cmake"
+  "${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapConfigVersion.cmake"
   DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
   COMPONENT Devel
 )

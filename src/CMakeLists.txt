@@ -29,10 +29,10 @@ configure_file(kldap_config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/kldap_config.h)
 
 ########### next target ###############
 
-add_library(KPim${KF_MAJOR_VERSION}Ldap)
-add_library(KPim${KF_MAJOR_VERSION}::Ldap ALIAS KPim${KF_MAJOR_VERSION}Ldap)
+add_library(KPim6Ldap)
+add_library(KPim6::Ldap ALIAS KPim6Ldap)
 
-target_sources(KPim${KF_MAJOR_VERSION}Ldap PRIVATE
+target_sources(KPim6Ldap PRIVATE
   core/ber.cpp
   core/ldif.cpp
   core/ldapurl.cpp
@@ -82,49 +82,49 @@ target_sources(KPim${KF_MAJOR_VERSION}Ldap PRIVATE
   widgets/ldapwidgetitemreadconfigserverjob.h
    )
  
-ecm_qt_declare_logging_category(KPim${KF_MAJOR_VERSION}Ldap HEADER ldap_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME org.kde.pim.ldap
+ecm_qt_declare_logging_category(KPim6Ldap HEADER ldap_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME org.kde.pim.ldap
         DESCRIPTION "kldaplib (kldap)"
         OLD_CATEGORY_NAMES log_ldap
         EXPORT KLDAP
     )
 
-ecm_qt_declare_logging_category(KPim${KF_MAJOR_VERSION}Ldap HEADER ldapclient_debug.h IDENTIFIER LDAPCLIENT_LOG CATEGORY_NAME org.kde.pim.ldapclient
+ecm_qt_declare_logging_category(KPim6Ldap HEADER ldapclient_debug.h IDENTIFIER LDAPCLIENT_LOG CATEGORY_NAME org.kde.pim.ldapclient
         DESCRIPTION "ldapclient (libkdepim)"
         OLD_CATEGORY_NAMES log_ldapclient
         EXPORT KLDAP
     )
 
 if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
-    set_target_properties(KPim${KF_MAJOR_VERSION}Ldap PROPERTIES UNITY_BUILD ON)
+    set_target_properties(KPim6Ldap PROPERTIES UNITY_BUILD ON)
 endif()
-generate_export_header(KPim${KF_MAJOR_VERSION}Ldap BASE_NAME kldap)
+generate_export_header(KPim6Ldap BASE_NAME kldap)
 
 
 
-target_link_libraries(KPim${KF_MAJOR_VERSION}Ldap
+target_link_libraries(KPim6Ldap
 PRIVATE
   Qt::Widgets
-  KF${KF_MAJOR_VERSION}::I18n
-  KF${KF_MAJOR_VERSION}::WidgetsAddons
-  KF${KF_MAJOR_VERSION}::ConfigCore
-  KF${KF_MAJOR_VERSION}::CoreAddons
-  KF${KF_MAJOR_VERSION}::KIOCore
-  KF${KF_MAJOR_VERSION}::ConfigGui
+  KF6::I18n
+  KF6::WidgetsAddons
+  KF6::ConfigCore
+  KF6::CoreAddons
+  KF6::KIOCore
+  KF6::ConfigGui
   ${kldap_EXTRA_LIBS}
 )
 
-target_link_libraries(KPim${KF_MAJOR_VERSION}Ldap PRIVATE qt${QT_MAJOR_VERSION}keychain)
+target_link_libraries(KPim6Ldap PRIVATE qt${QT_MAJOR_VERSION}keychain)
 
-target_include_directories(KPim${KF_MAJOR_VERSION}Ldap INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KPim${KF_MAJOR_VERSION}/KLDAP>")
-target_include_directories(KPim${KF_MAJOR_VERSION}Ldap PUBLIC "$<BUILD_INTERFACE:${KLdap_SOURCE_DIR}/src/core;${KLdap_BINARY_DIR}/src>")
+target_include_directories(KPim6Ldap INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAP>")
+target_include_directories(KPim6Ldap PUBLIC "$<BUILD_INTERFACE:${KLdap_SOURCE_DIR}/src/core;${KLdap_BINARY_DIR}/src>")
 
-set_target_properties(KPim${KF_MAJOR_VERSION}Ldap PROPERTIES
+set_target_properties(KPim6Ldap PROPERTIES
     VERSION ${KLDAP_VERSION}
     SOVERSION ${KLDAP_SOVERSION}
     EXPORT_NAME Ldap
 )
 
-install(TARGETS KPim${KF_MAJOR_VERSION}Ldap EXPORT KPim${KF_MAJOR_VERSION}LdapTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+install(TARGETS KPim6Ldap EXPORT KPim6LdapTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 
@@ -166,22 +166,22 @@ install(FILES
     ${CMAKE_CURRENT_BINARY_DIR}/kldap_export.h
     ${KLdapCore_HEADERS}
     ${KLdapWidgets_HEADERS}
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim${KF_MAJOR_VERSION}/KLDAP/kldap
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAP/kldap
     COMPONENT Devel
 )
 
 install(FILES
     ${KLdapCore_CamelCase_HEADERS}
     ${KLdapWidgets_CamelCase_HEADERS}
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim${KF_MAJOR_VERSION}/KLDAP/KLDAP/
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAP/KLDAP/
     COMPONENT Devel
 )
 
 if (BUILD_QCH)
     ecm_add_qch(
-        KPim${KF_MAJOR_VERSION}Ldap_QCH
+        KPim6Ldap_QCH
         NAME KLdap
-        BASE_NAME KPim${KF_MAJOR_VERSION}Ldap
+        BASE_NAME KPim6Ldap
         VERSION ${PIM_VERSION}
         ORG_DOMAIN org.kde
 
@@ -191,9 +191,9 @@ if (BUILD_QCH)
         MD_MAINPAGE "${CMAKE_SOURCE_DIR}/README.md"
         #IMAGE_DIRS "${CMAKE_SOURCE_DIR}/docs/pics"
         LINK_QCHS
-            Qt${QT_MAJOR_VERSION}Core_QCH
-            Qt${QT_MAJOR_VERSION}Gui_QCH
-            Qt${QT_MAJOR_VERSION}Widgets_QCH
+            Qt6Core_QCH
+            Qt6Gui_QCH
+            Qt6Widgets_QCH
         INCLUDE_DIRS
             ${CMAKE_CURRENT_BINARY_DIR}
         BLANK_MACROS
@@ -204,6 +204,6 @@ if (BUILD_QCH)
     )
 endif()
 
-ecm_generate_pri_file(BASE_NAME Ldap LIB_NAME KPim${KF_MAJOR_VERSION}Ldap FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR}/KPim${KF_MAJOR_VERSION}/KLDAP/)
+ecm_generate_pri_file(BASE_NAME Ldap LIB_NAME KPim6Ldap FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAP/)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
 

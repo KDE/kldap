@@ -12,7 +12,7 @@ ecm_qt_declare_logging_category(kio_ldap
     )
 
 
-target_link_libraries(kio_ldap Qt::Network KF${KF_MAJOR_VERSION}::KIOCore KF${KF_MAJOR_VERSION}::I18n KPim${KF_MAJOR_VERSION}::Ldap)
+target_link_libraries(kio_ldap Qt::Network KF6::KIOCore KF6::I18n KPim6::Ldap)
 if (WIN32)
     target_link_libraries(kio_ldap ws2_32)
 endif()
