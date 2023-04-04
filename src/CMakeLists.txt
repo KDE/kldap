@@ -113,7 +113,7 @@ PRIVATE
   ${kldap_EXTRA_LIBS}
 )
 
-target_link_libraries(KPim6Ldap PRIVATE qt${QT_MAJOR_VERSION}keychain)
+target_link_libraries(KPim6Ldap PRIVATE qt6keychain)
 
 target_include_directories(KPim6Ldap INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAP>")
 target_include_directories(KPim6Ldap PUBLIC "$<BUILD_INTERFACE:${KLdap_SOURCE_DIR}/src/core;${KLdap_BINARY_DIR}/src>")
