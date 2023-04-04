@@ -7,9 +7,9 @@
 
 #pragma once
 
+#include <QList>
 #include <QSharedDataPointer>
 #include <QString>
-#include <QVector>
 class LdapControlPrivate;
 
 #include "kldap_export.h"
@@ -19,7 +19,7 @@ class LdapControlPrivate;
 namespace KLDAP
 {
 class LdapControl;
-using LdapControls = QVector<LdapControl>;
+using LdapControls = QList<LdapControl>;
 
 /**
   @brief

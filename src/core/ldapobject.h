@@ -98,5 +98,5 @@ private:
     QSharedDataPointer<LdapObjectPrivate> d;
 };
 
-using LdapObjects = QVector<LdapObject>;
+using LdapObjects = QList<LdapObject>;
 }

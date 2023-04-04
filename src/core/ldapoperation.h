@@ -53,7 +53,7 @@ public:
         QList<QByteArray> values;
     };
 
-    using ModOps = QVector<ModOp>;
+    using ModOps = QList<ModOp>;
 
     enum SASL_Fields { SASL_Authname = 0x1, SASL_Authzid = 0x2, SASL_Realm = 0x4, SASL_Password = 0x8 };
 
