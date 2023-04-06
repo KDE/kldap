@@ -56,6 +56,8 @@ generate_export_header(KPim6LdapWidgets BASE_NAME kldapwidgets)
 
 
 target_link_libraries(KPim6LdapWidgets
+PUBLIC
+	KPim6::LdapCore
 PRIVATE
   Qt::Widgets
   KF6::I18n
@@ -64,7 +66,6 @@ PRIVATE
   KF6::CoreAddons
   KF6::KIOCore
   KF6::ConfigGui
-  KPim6::LdapCore
 )
 
 target_link_libraries(KPim6LdapWidgets PRIVATE qt6keychain)
@@ -149,6 +150,7 @@ install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
 
 if(BUILD_TESTING)
     add_subdirectory(tests)
+    add_subdirectory(autotests)
 endif()
 
 configure_package_config_file(

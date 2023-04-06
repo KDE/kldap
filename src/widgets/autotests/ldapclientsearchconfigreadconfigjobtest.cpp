@@ -5,7 +5,7 @@
  */
 
 #include "ldapclientsearchconfigreadconfigjobtest.h"
-#include "widgets/ldapclientsearchconfigreadconfigjob.h"
+#include "ldapclientsearchconfigreadconfigjob.h"
 #include <QTest>
 QTEST_MAIN(LdapClientSearchConfigReadConfigJobTest)
 LdapClientSearchConfigReadConfigJobTest::LdapClientSearchConfigReadConfigJobTest(QObject *parent)
@@ -15,7 +15,7 @@ LdapClientSearchConfigReadConfigJobTest::LdapClientSearchConfigReadConfigJobTest
 
 void LdapClientSearchConfigReadConfigJobTest::shouldHaveDefaultValues()
 {
-    KLDAP::LdapClientSearchConfigReadConfigJob job;
+    KLDAPWidgets::LdapClientSearchConfigReadConfigJob job;
     QVERIFY(!job.active());
     QCOMPARE(job.serverIndex(), -1);
     QVERIFY(!job.canStart());
