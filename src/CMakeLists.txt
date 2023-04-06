@@ -89,7 +89,7 @@ ecm_qt_declare_logging_category(KPim${KF_MAJOR_VERSION}Ldap HEADER ldap_debug.h 
     )
 
 ecm_qt_declare_logging_category(KPim${KF_MAJOR_VERSION}Ldap HEADER ldapclient_debug.h IDENTIFIER LDAPCLIENT_LOG CATEGORY_NAME org.kde.pim.ldapclient
-        DESCRIPTION "ldapclient (libkdepim)"
+        DESCRIPTION "ldapclient (kldap)"
         OLD_CATEGORY_NAMES log_ldapclient
         EXPORT KLDAP
     )
