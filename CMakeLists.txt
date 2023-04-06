@@ -88,10 +88,6 @@ install(EXPORT KPim6LdapCoreTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FIL
 ########### Targets ###########
 add_subdirectory(src)
 add_subdirectory(kioworker)
-if(BUILD_TESTING)
-    add_subdirectory(autotests)
-    add_subdirectory(tests)
-endif()
 
 ecm_qt_install_logging_categories(
         EXPORT KLDAP

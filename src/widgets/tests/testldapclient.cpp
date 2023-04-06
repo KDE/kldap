@@ -8,7 +8,7 @@
 
 #include <QDebug>
 
-#include <kldap/ldapobject.h>
+#include <KLDAPCore/LdapObject>
 
 #include <QEventLoop>
 
@@ -76,7 +76,7 @@ void TestLDAPClient::cleanup()
 void TestLDAPClient::testIntevation()
 {
     qDebug();
-    mClient = new KLDAP::LdapClient(0, this);
+    mClient = new KLDAPWidgets::LdapClient(0, this);
 
 #if 0
     mClient->setHost("ca.intevation.de");
@@ -109,9 +109,9 @@ void TestLDAPClient::testIntevation()
         "&(|(objectclass=person)(objectclass=groupofnames)(mail=*))"
         "(|(cn=*Ägypten MDK*)(sn=*Ägypten MDK*))");
 
-    connect(mClient, &KLDAP::LdapClient::result, this, &TestLDAPClient::slotLDAPResult);
-    connect(mClient, &KLDAP::LdapClient::done, this, &TestLDAPClient::slotLDAPDone);
-    connect(mClient, &KLDAP::LdapClient::error, this, &TestLDAPClient::slotLDAPError);
+    connect(mClient, &KLDAPWidgets::LdapClient::result, this, &TestLDAPClient::slotLDAPResult);
+    connect(mClient, &KLDAPWidgets::LdapClient::done, this, &TestLDAPClient::slotLDAPDone);
+    connect(mClient, &KLDAPWidgets::LdapClient::error, this, &TestLDAPClient::slotLDAPError);
     mClient->startQuery(filter);
 
     QEventLoop eventLoop;
@@ -139,11 +139,11 @@ static QString asUtf8(const QByteArray &val)
     }
 }
 
-static QString join(const KLDAP::LdapAttrValue &lst, const QString &sep)
+static QString join(const KLDAPCore::LdapAttrValue &lst, const QString &sep)
 {
     QString res;
     bool already = false;
-    for (KLDAP::LdapAttrValue::ConstIterator it = lst.begin(); it != lst.end(); ++it) {
+    for (KLDAPCore::LdapAttrValue::ConstIterator it = lst.begin(); it != lst.end(); ++it) {
         if (already) {
             res += sep;
         }
@@ -155,7 +155,7 @@ static QString join(const KLDAP::LdapAttrValue &lst, const QString &sep)
     return res;
 }
 
-void TestLDAPClient::slotLDAPResult(const KLDAP::LdapClient &, const KLDAP::LdapObject &obj)
+void TestLDAPClient::slotLDAPResult(const KLDAPWidgets::LdapClient &, const KLDAPCore::LdapObject &obj)
 {
     QString cn = join(obj.attributes()[QStringLiteral("cn")], QStringLiteral(", "));
     qDebug() << " cn:" << cn;

@@ -1,5 +1,12 @@
 # SPDX-FileCopyrightText: none
 # SPDX-License-Identifier: BSD-3-Clause
+
+ecm_setup_version(PROJECT VARIABLE_PREFIX KLDAPWIDGETS
+                        VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kldap_widgets_version.h"
+			PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapWidgetsConfigVersion.cmake"
+                        SOVERSION 6
+)
+
 add_library(KPim6LdapWidgets)
 add_library(KPim6::LdapWidgets ALIAS KPim6LdapWidgets)
 
@@ -86,7 +93,7 @@ ecm_generate_headers(KLdapWidgets_CamelCase_HEADERS
   LdapClientSearchConfigWriteConfigJob
   LdapClientSearchConfigReadConfigJob
   LdapSearchClientReadConfigServerJob
-  PREFIX KLDAP
+  PREFIX KLDAPWidgets
   REQUIRED_HEADERS KLdapWidgets_HEADERS
 )
 
@@ -103,6 +110,13 @@ install(FILES
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPWidgets/KLDAPWidgets/
     COMPONENT Devel
 )
+
+install(FILES
+   ${CMAKE_CURRENT_BINARY_DIR}/kldap_widgets_version.h
+   DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPWidgets
+   COMPONENT Devel
+)
+
 
 if (BUILD_QCH)
     ecm_add_qch(
@@ -130,6 +144,23 @@ if (BUILD_QCH)
     )
 endif()
 
-ecm_generate_pri_file(BASE_NAME Ldap LIB_NAME KPim6LdapWidgets FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPWidgets/)
+ecm_generate_pri_file(BASE_NAME LdapWidgets LIB_NAME KPim6LdapWidgets FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPWidgets/)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
+
+if(BUILD_TESTING)
+    add_subdirectory(tests)
+endif()
+
+configure_package_config_file(
+	"${CMAKE_CURRENT_SOURCE_DIR}/KPimLdapWidgetsConfig.cmake.in"
+	"${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapWidgetsConfig.cmake"
+  INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
+)
+
+install(FILES
+	"${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapWidgetsConfig.cmake"
+	"${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapWidgetsConfigVersion.cmake"
+  DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+  COMPONENT Devel
+)
 

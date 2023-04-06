@@ -4,7 +4,7 @@ include(CheckFunctionExists)
 include(CheckIncludeFiles)
 include(CheckSymbolExists)
 
-ecm_setup_version(PROJECT VARIABLE_PREFIX KLDAP
+ecm_setup_version(PROJECT VARIABLE_PREFIX KLDAPCORE
                         VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kldap_core_version.h"
                         PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapCoreConfigVersion.cmake"
                         SOVERSION 6
@@ -115,7 +115,7 @@ ecm_generate_headers(KLdapCore_CamelCase_HEADERS
   LdapDefs
   LdapUrl
   Ldif
-  PREFIX KLDAP
+  PREFIX KLDAPCore
   REQUIRED_HEADERS KLdapCore_HEADERS
 )
 
@@ -128,7 +128,7 @@ install(FILES
 
 install(FILES
     ${KLdapCore_CamelCase_HEADERS}
-    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPCore/KLDAPCORE/
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPCore/KLDAPCore/
     COMPONENT Devel
 )
 
@@ -178,4 +178,8 @@ install(FILES
 
 ecm_generate_pri_file(BASE_NAME LdapCore LIB_NAME KPim6LdapCore FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPCore/)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
+
+if(BUILD_TESTING)
+    add_subdirectory(autotests)
+endif()
 
