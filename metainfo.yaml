@@ -8,9 +8,11 @@ portingAid: false
 deprecated: false
 release: false
 libraries:
- - qmake: Ldap 
-   cmake: "KPim6::Ldap"
-cmakename: KPim6Ldap
+ - qmake: LdapCore
+   cmake: "KPim6::LdapCore"
+ - qmake: LdapWidgets
+   cmake: "KPim6::LdapWidgets"
+cmakename: KPim6LdapCore
 
 public_lib: true
 group: kdepim
