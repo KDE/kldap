@@ -10,12 +10,12 @@
 #include <QByteArray>
 #include <QString>
 
-#include "kldap_export.h"
+#include "kldap_core_export.h"
 #include "ldapdn.h"
 
 // clazy:excludeall=copyable-polymorphic
 
-namespace KLDAP
+namespace KLDAPCore
 {
 /**
  * Ldif
@@ -25,7 +25,7 @@ namespace KLDAP
  * of changes which are to be applied to a directory.
  */
 
-class KLDAP_EXPORT Ldif
+class KLDAP_CORE_EXPORT Ldif
 {
 public:
     using ParseValue = enum { None, NewEntry, EndEntry, Item, Control, Err, MoreData };

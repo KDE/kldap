@@ -35,14 +35,14 @@ public:
 
 private:
     QByteArray mProtocol;
-    KLDAP::LdapConnection mConn;
-    KLDAP::LdapOperation mOp;
-    KLDAP::LdapServer mServer;
+    KLDAPCore::LdapConnection mConn;
+    KLDAPCore::LdapOperation mOp;
+    KLDAPCore::LdapServer mServer;
     bool mConnected = false;
 
-    void controlsFromMetaData(KLDAP::LdapControls &serverctrls, KLDAP::LdapControls &clientctrls);
-    void LDAPEntry2UDSEntry(const KLDAP::LdapDN &dn, KIO::UDSEntry &entry, const KLDAP::LdapUrl &usrc, bool dir = false);
+    void controlsFromMetaData(KLDAPCore::LdapControls &serverctrls, KLDAPCore::LdapControls &clientctrls);
+    void LDAPEntry2UDSEntry(const KLDAPCore::LdapDN &dn, KIO::UDSEntry &entry, const KLDAPCore::LdapUrl &usrc, bool dir = false);
 
     KIO::WorkerResult LDAPErr(int err = KLDAP_SUCCESS);
-    KIO::WorkerResult changeCheck(const KLDAP::LdapUrl &url);
+    KIO::WorkerResult changeCheck(const KLDAPCore::LdapUrl &url);
 };

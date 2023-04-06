@@ -7,15 +7,19 @@
 
 #pragma once
 
-#include "kldap_export.h"
+#include "kldapwidgets_export.h"
 #include <QObject>
 #include <QStringList>
 #include <memory>
 
-namespace KLDAP
+namespace KLDAPCore
 {
 class LdapObject;
 class LdapServer;
+}
+
+namespace KLDAPWidgets
+{
 
 /**
  * @short An object that represents a configured LDAP server.
@@ -26,7 +30,7 @@ class LdapServer;
  *
  * @since 4.5
  */
-class KLDAP_EXPORT LdapClient : public QObject
+class KLDAPWIDGETS_EXPORT LdapClient : public QObject
 {
     Q_OBJECT
 
@@ -72,13 +76,13 @@ public:
      * Sets the LDAP @p server information that shall be
      * used by this client.
      */
-    void setServer(const KLDAP::LdapServer &server);
+    void setServer(const KLDAPCore::LdapServer &server);
 
     /**
      * Returns the ldap server information that are used
      * by this client.
      */
-    const KLDAP::LdapServer server() const;
+    const KLDAPCore::LdapServer server() const;
 
     /**
      * Sets the LDAP @p attributes that should be returned
@@ -128,7 +132,7 @@ Q_SIGNALS:
      * This signal is emitted once for each object that is
      * returned from the query
      */
-    void result(const KLDAP::LdapClient &client, const KLDAP::LdapObject &);
+    void result(const KLDAPWidgets::LdapClient &client, const KLDAPCore::LdapObject &);
 
 private:
     //@cond PRIVATE

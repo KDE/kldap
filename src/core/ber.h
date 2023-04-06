@@ -9,17 +9,17 @@
 
 #include <QByteArray>
 
-#include "kldap_export.h"
+#include "kldap_core_export.h"
 #include <memory>
 // clazy:excludeall=copyable-polymorphic
 
-namespace KLDAP
+namespace KLDAPCore
 {
 /**
  * This class allows encoding and decoding Qt structures using Basic
  * Encoding Rules.
  */
-class KLDAP_EXPORT Ber
+class KLDAP_CORE_EXPORT Ber
 {
 public:
     /**

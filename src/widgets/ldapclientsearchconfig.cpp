@@ -10,7 +10,7 @@
 #include <KConfig>
 #include <qt6keychain/keychain.h>
 using namespace QKeychain;
-using namespace KLDAP;
+using namespace KLDAPWidgets;
 
 class Q_DECL_HIDDEN LdapClientSearchConfig::LdapClientSearchConfigPrivate
 {

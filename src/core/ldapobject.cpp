@@ -10,7 +10,7 @@
 
 #include <QSharedData>
 
-using namespace KLDAP;
+using namespace KLDAPCore;
 
 class LdapObjectPrivate : public QSharedData
 {

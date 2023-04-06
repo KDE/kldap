@@ -13,7 +13,7 @@
 #include <qt6keychain/keychain.h>
 using namespace QKeychain;
 
-using namespace KLDAP;
+using namespace KLDAPWidgets;
 LdapClientSearchConfigReadConfigJob::LdapClientSearchConfigReadConfigJob(QObject *parent)
     : QObject(parent)
 {
@@ -89,7 +89,7 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
 
     const QString base = mConfig.readEntry(prefix + QStringLiteral("Base%1").arg(mServerIndex), QString()).trimmed();
     if (!base.isEmpty()) {
-        mServer.setBaseDn(KLDAP::LdapDN(base));
+        mServer.setBaseDn(KLDAPCore::LdapDN(base));
     }
 
     const QString user = mConfig.readEntry(prefix + QStringLiteral("User%1").arg(mServerIndex), QString()).trimmed();
@@ -148,19 +148,19 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
     mServer.setVersion(mConfig.readEntry(prefix + QStringLiteral("Version%1").arg(mServerIndex), 3));
 
     QString tmp = mConfig.readEntry(prefix + QStringLiteral("Security%1").arg(mServerIndex), QStringLiteral("None"));
-    mServer.setSecurity(KLDAP::LdapServer::None);
+    mServer.setSecurity(KLDAPCore::LdapServer::None);
     if (tmp == QLatin1String("SSL")) {
-        mServer.setSecurity(KLDAP::LdapServer::SSL);
+        mServer.setSecurity(KLDAPCore::LdapServer::SSL);
     } else if (tmp == QLatin1String("TLS")) {
-        mServer.setSecurity(KLDAP::LdapServer::TLS);
+        mServer.setSecurity(KLDAPCore::LdapServer::TLS);
     }
 
     tmp = mConfig.readEntry(prefix + QStringLiteral("Auth%1").arg(mServerIndex), QStringLiteral("Anonymous"));
-    mServer.setAuth(KLDAP::LdapServer::Anonymous);
+    mServer.setAuth(KLDAPCore::LdapServer::Anonymous);
     if (tmp == QLatin1String("Simple")) {
-        mServer.setAuth(KLDAP::LdapServer::Simple);
+        mServer.setAuth(KLDAPCore::LdapServer::Simple);
     } else if (tmp == QLatin1String("SASL")) {
-        mServer.setAuth(KLDAP::LdapServer::SASL);
+        mServer.setAuth(KLDAPCore::LdapServer::SASL);
     }
 
     mServer.setMech(mConfig.readEntry(prefix + QStringLiteral("Mech%1").arg(mServerIndex), QString()));

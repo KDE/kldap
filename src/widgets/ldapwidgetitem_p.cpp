@@ -5,7 +5,7 @@
  */
 
 #include "ldapwidgetitem_p.h"
-using namespace KLDAP;
+using namespace KLDAPWidgets;
 
 LdapWidgetItem::LdapWidgetItem(QListWidget *parent, bool isActive)
     : QListWidgetItem(parent, QListWidgetItem::UserType)
@@ -15,13 +15,13 @@ LdapWidgetItem::LdapWidgetItem(QListWidget *parent, bool isActive)
     setCheckState(isActive ? Qt::Checked : Qt::Unchecked);
 }
 
-void LdapWidgetItem::setServer(const KLDAP::LdapServer &server)
+void LdapWidgetItem::setServer(const KLDAPCore::LdapServer &server)
 {
     mServer = server;
     setText(mServer.host());
 }
 
-const KLDAP::LdapServer &LdapWidgetItem::server() const
+const KLDAPCore::LdapServer &LdapWidgetItem::server() const
 {
     return mServer;
 }

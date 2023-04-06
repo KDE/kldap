@@ -23,7 +23,7 @@
 #include <sys/stat.h>
 
 using namespace KIO;
-using namespace KLDAP;
+using namespace KLDAPCore;
 
 // Pseudo plugin class to embed meta data
 class KIOPluginForMetaData : public QObject

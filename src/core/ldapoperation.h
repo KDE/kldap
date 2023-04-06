@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "kldap_export.h"
+#include "kldap_core_export.h"
 #include "ldapconnection.h"
 #include "ldapcontrol.h"
 #include "ldapdn.h"
@@ -21,14 +21,14 @@
 
 #include <memory>
 
-namespace KLDAP
+namespace KLDAPCore
 {
 /**
  * @brief
  * This class allows sending an ldap operation
  * (search, rename, modify, delete, compare, exop) to an LDAP server.
  */
-class KLDAP_EXPORT LdapOperation
+class KLDAP_CORE_EXPORT LdapOperation
 {
 public:
     using ModType = enum { Mod_None, Mod_Add, Mod_Replace, Mod_Del };

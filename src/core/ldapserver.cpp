@@ -7,9 +7,9 @@
 
 #include "ldapserver.h"
 
-#include "ldap_debug.h"
+#include "ldap_core_debug.h"
 
-using namespace KLDAP;
+using namespace KLDAPCore;
 
 class Q_DECL_HIDDEN LdapServer::LdapServerPrivate
 {
@@ -415,7 +415,7 @@ int LdapServer::completionWeight() const
     return d->mCompletionWeight;
 }
 
-QDebug operator<<(QDebug d, const KLDAP::LdapServer &t)
+QDebug operator<<(QDebug d, const KLDAPCore::LdapServer &t)
 {
     d << "completionWeight " << t.completionWeight();
     d << "timeout " << t.timeout();

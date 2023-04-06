@@ -8,10 +8,13 @@
 
 #include <KConfigGroup>
 #include <QObject>
-namespace KLDAP
+namespace KLDAPCore
+{
+class LdapServer;
+}
+namespace KLDAPWidgets
 {
 class LdapWidgetItem;
-class LdapServer;
 class LdapWidgetItemReadConfigServerJob : public QObject
 {
     Q_OBJECT
@@ -34,7 +37,7 @@ public:
     void setConfig(const KConfigGroup &config);
 
 private:
-    void slotConfigLoaded(const KLDAP::LdapServer &server);
+    void slotConfigLoaded(const KLDAPCore::LdapServer &server);
     LdapWidgetItem *mLdapWidgetItem = nullptr;
     KConfigGroup mConfig;
     int mCurrentIndex = -1;

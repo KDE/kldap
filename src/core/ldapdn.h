@@ -7,12 +7,12 @@
 
 #pragma once
 
-#include "kldap_export.h"
+#include "kldap_core_export.h"
 #include <QString>
 #include <memory>
-namespace KLDAP
+namespace KLDAPCore
 {
-class KLDAP_EXPORT LdapDN
+class KLDAP_CORE_EXPORT LdapDN
 {
 public:
     explicit LdapDN();

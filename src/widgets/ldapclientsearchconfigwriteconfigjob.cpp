@@ -12,7 +12,7 @@
 #include <qt6keychain/keychain.h>
 using namespace QKeychain;
 
-using namespace KLDAP;
+using namespace KLDAPWidgets;
 LdapClientSearchConfigWriteConfigJob::LdapClientSearchConfigWriteConfigJob(QObject *parent)
     : QObject(parent)
 {
@@ -104,10 +104,10 @@ void LdapClientSearchConfigWriteConfigJob::writeConfig()
     mConfig.writeEntry(prefix + QStringLiteral("Version%1").arg(mServerIndex), mServer.version());
     QString tmp;
     switch (mServer.security()) {
-    case KLDAP::LdapServer::TLS:
+    case KLDAPCore::LdapServer::TLS:
         tmp = QStringLiteral("TLS");
         break;
-    case KLDAP::LdapServer::SSL:
+    case KLDAPCore::LdapServer::SSL:
         tmp = QStringLiteral("SSL");
         break;
     default:
@@ -115,10 +115,10 @@ void LdapClientSearchConfigWriteConfigJob::writeConfig()
     }
     mConfig.writeEntry(prefix + QStringLiteral("Security%1").arg(mServerIndex), tmp);
     switch (mServer.auth()) {
-    case KLDAP::LdapServer::Simple:
+    case KLDAPCore::LdapServer::Simple:
         tmp = QStringLiteral("Simple");
         break;
-    case KLDAP::LdapServer::SASL:
+    case KLDAPCore::LdapServer::SASL:
         tmp = QStringLiteral("SASL");
         break;
     default:
@@ -132,12 +132,12 @@ void LdapClientSearchConfigWriteConfigJob::writeConfig()
     }
 }
 
-KLDAP::LdapServer LdapClientSearchConfigWriteConfigJob::server() const
+KLDAPCore::LdapServer LdapClientSearchConfigWriteConfigJob::server() const
 {
     return mServer;
 }
 
-void LdapClientSearchConfigWriteConfigJob::setServer(const KLDAP::LdapServer &server)
+void LdapClientSearchConfigWriteConfigJob::setServer(const KLDAPCore::LdapServer &server)
 {
     mServer = server;
 }

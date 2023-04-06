@@ -11,7 +11,7 @@
 #include <QString>
 class LdapSearchPrivate;
 
-#include "kldap_export.h"
+#include "kldap_core_export.h"
 
 #include "ldapconnection.h"
 #include "ldapcontrol.h"
@@ -22,14 +22,14 @@ class LdapSearchPrivate;
 
 // clazy:excludeall=ctor-missing-parent-argument
 
-namespace KLDAP
+namespace KLDAPCore
 {
 /**
  * @brief
  * This class starts a search operation on a LDAP server and returns the
  * search values via a Qt signal.
  */
-class KLDAP_EXPORT LdapSearch : public QObject
+class KLDAP_CORE_EXPORT LdapSearch : public QObject
 {
     Q_OBJECT
 
@@ -118,12 +118,12 @@ Q_SIGNALS:
     /**
      * Emitted for each result object.
      */
-    void data(KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj);
+    void data(KLDAPCore::LdapSearch *search, const KLDAPCore::LdapObject &obj);
 
     /**
      * Emitted when the searching finished.
      */
-    void result(KLDAP::LdapSearch *search);
+    void result(KLDAPCore::LdapSearch *search);
 
 private:
     std::unique_ptr<LdapSearchPrivate> const d;

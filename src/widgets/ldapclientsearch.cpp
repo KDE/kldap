@@ -30,7 +30,7 @@
 #include <QStandardPaths>
 #include <QTimer>
 
-using namespace KLDAP;
+using namespace KLDAPWidgets;
 
 class Q_DECL_HIDDEN LdapClientSearch::LdapClientSearchPrivate
 {
@@ -47,7 +47,7 @@ public:
     void finish();
     void makeSearchData(QStringList &ret, LdapResult::List &resList);
 
-    void slotLDAPResult(const KLDAP::LdapClient &client, const KLDAP::LdapObject &);
+    void slotLDAPResult(const KLDAPWidgets::LdapClient &client, const KLDAPCore::LdapObject &);
     void slotLDAPError(const QString &);
     void slotLDAPDone();
     void slotDataTimer();
@@ -112,7 +112,7 @@ void LdapClientSearch::LdapClientSearchPrivate::readWeighForClient(LdapClient *c
 
 void LdapClientSearch::updateCompletionWeights()
 {
-    KConfigGroup config(KLDAP::LdapClientSearchConfig::config(), "LDAP");
+    KConfigGroup config(KLDAPWidgets::LdapClientSearchConfig::config(), "LDAP");
     for (int i = 0, total = d->mClients.size(); i < total; ++i) {
         d->readWeighForClient(d->mClients[i], config, i);
     }
@@ -159,7 +159,7 @@ void LdapClientSearch::LdapClientSearchPrivate::readConfig()
     mClients.clear();
 
     // stolen from KAddressBook
-    KConfigGroup config(KLDAP::LdapClientSearchConfig::config(), "LDAP");
+    KConfigGroup config(KLDAPWidgets::LdapClientSearchConfig::config(), "LDAP");
     const int numHosts = config.readEntry("NumSelectedHosts", 0);
     if (!numHosts) {
         mNoLDAPLookup = true;
@@ -178,7 +178,7 @@ void LdapClientSearch::LdapClientSearchPrivate::readConfig()
 
             ldapClient->setAttributes(mAttributes);
 
-            q->connect(ldapClient, &LdapClient::result, q, [this](const LdapClient &client, const KLDAP::LdapObject &obj) {
+            q->connect(ldapClient, &LdapClient::result, q, [this](const LdapClient &client, const KLDAPCore::LdapObject &obj) {
                 slotLDAPResult(client, obj);
             });
             q->connect(ldapClient, &LdapClient::done, q, [this]() {
@@ -251,7 +251,7 @@ void LdapClientSearch::cancelSearch()
     d->mResults.clear();
 }
 
-void LdapClientSearch::LdapClientSearchPrivate::slotLDAPResult(const LdapClient &client, const KLDAP::LdapObject &obj)
+void LdapClientSearch::LdapClientSearchPrivate::slotLDAPResult(const LdapClient &client, const KLDAPCore::LdapObject &obj)
 {
     LdapResultObject result;
     result.client = &client;
@@ -302,7 +302,7 @@ void LdapClientSearch::LdapClientSearchPrivate::finish()
     Q_EMIT q->searchDone();
 }
 
-void LdapClientSearch::LdapClientSearchPrivate::makeSearchData(QStringList &ret, LdapResult::List &resList)
+void LdapClientSearch::LdapClientSearchPrivate::makeSearchData(QStringList &ret, KLDAPWidgets::LdapResult::List &resList)
 {
     LdapResultObject::List::ConstIterator it1(mResults.constBegin());
     const LdapResultObject::List::ConstIterator end1(mResults.constEnd());
@@ -318,7 +318,7 @@ void LdapClientSearch::LdapClientSearchPrivate::makeSearchData(QStringList &ret,
 
         // qCDebug(LDAPCLIENT_LOG) <<"\n\nLdapClientSearch::makeSearchData()";
 
-        KLDAP::LdapAttrMap::ConstIterator it2;
+        KLDAPCore::LdapAttrMap::ConstIterator it2;
         for (it2 = (*it1).object.attributes().constBegin(); it2 != (*it1).object.attributes().constEnd(); ++it2) {
             QByteArray val = (*it2).first();
             int len = val.size();
@@ -354,7 +354,7 @@ void LdapClientSearch::LdapClientSearchPrivate::makeSearchData(QStringList &ret,
                 wasDC = true;
             } else if (it2.key() == QLatin1String("mail")) {
                 mail = tmp;
-                KLDAP::LdapAttrValue::ConstIterator it3 = it2.value().constBegin();
+                KLDAPCore::LdapAttrValue::ConstIterator it3 = it2.value().constBegin();
                 for (; it3 != it2.value().constEnd(); ++it3) {
                     mails.append(QString::fromUtf8((*it3).data(), (*it3).size()));
                 }

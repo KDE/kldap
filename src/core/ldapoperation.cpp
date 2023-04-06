@@ -8,7 +8,7 @@
 #include "ldapoperation.h"
 #include "kldap_config.h"
 
-#include "ldap_debug.h"
+#include "ldap_core_debug.h"
 
 #include <QElapsedTimer>
 
@@ -34,7 +34,7 @@
 
 #include "ldapdefs.h"
 
-using namespace KLDAP;
+using namespace KLDAPCore;
 
 #if LDAP_FOUND
 static void extractControls(LdapControls &ctrls, LDAPControl **pctrls);

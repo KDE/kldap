@@ -6,20 +6,20 @@
 
 #pragma once
 
-#include "kldap_export.h"
+#include "kldapwidgets_export.h"
 
 #include <QObject>
 #include <memory>
 class KConfig;
 
-namespace KLDAP
+namespace KLDAPWidgets
 {
 class LdapClient;
 /**
  * @brief The LdapClientSearchConfig class
  * @author Laurent Montel <montel@kde.org>
  */
-class KLDAP_EXPORT LdapClientSearchConfig : public QObject
+class KLDAPWIDGETS_EXPORT LdapClientSearchConfig : public QObject
 {
     Q_OBJECT
 public:

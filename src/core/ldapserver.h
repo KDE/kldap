@@ -9,13 +9,13 @@
 
 #include <QString>
 
-#include "kldap_export.h"
+#include "kldap_core_export.h"
 #include "ldapdn.h"
 #include "ldapurl.h"
 
 // clazy:excludeall=copyable-polymorphic
 
-namespace KLDAP
+namespace KLDAPCore
 {
 /**
  * @short A class that contains LDAP server connection settings.
@@ -23,7 +23,7 @@ namespace KLDAP
  * This class holds various parameters that are needed to connect
  * to an LDAP server.
  */
-class KLDAP_EXPORT LdapServer
+class KLDAP_CORE_EXPORT LdapServer
 {
 public:
     /**
@@ -312,4 +312,4 @@ private:
     std::unique_ptr<LdapServerPrivate> const d;
 };
 }
-KLDAP_EXPORT QDebug operator<<(QDebug d, const KLDAP::LdapServer &t);
+KLDAP_CORE_EXPORT QDebug operator<<(QDebug d, const KLDAPCore::LdapServer &t);

@@ -11,12 +11,12 @@
 
 #include <QUrl>
 
-#include "kldap_export.h"
+#include "kldap_core_export.h"
 #include "ldapdn.h"
 
 // clazy:excludeall=copyable-polymorphic
 
-namespace KLDAP
+namespace KLDAPCore
 {
 /**
  * @short A special url class for LDAP.
@@ -26,7 +26,7 @@ namespace KLDAP
  * ldap[s]://[user[:password]@]hostname[:port]["/" [dn ["?" [attributes]
  * ["?" [scope] ["?" [filter] ["?" extensions]]]]]]
  */
-class KLDAP_EXPORT LdapUrl : public QUrl
+class KLDAP_CORE_EXPORT LdapUrl : public QUrl
 {
 public:
     /**

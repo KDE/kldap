@@ -8,7 +8,7 @@
 #include "ber.h"
 #include "kldap_config.h"
 
-#include "ldap_debug.h"
+#include "ldap_core_debug.h"
 
 #include <QList>
 #include <QVarLengthArray>
@@ -42,7 +42,7 @@
 
 #endif
 
-using namespace KLDAP;
+using namespace KLDAPCore;
 
 class Q_DECL_HIDDEN Ber::BerPrivate
 {

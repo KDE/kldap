@@ -21,12 +21,12 @@
 #include <kldap/ldapconfigwidget.h>
 #include <kldap/ldapserver.h>
 
-using namespace KLDAP;
+using namespace KLDAPWidgets;
 namespace
 {
 static const char myAddHostDialogPrivateGroupName[] = "AddHostDialog";
 }
-class KLDAP::AddHostDialogPrivate
+class KLDAPWidgets::AddHostDialogPrivate
 {
 public:
     explicit AddHostDialogPrivate(AddHostDialog *qq)
@@ -38,8 +38,8 @@ public:
     {
     }
 
-    KLDAP::LdapConfigWidget *mCfg = nullptr;
-    KLDAP::LdapServer *mServer = nullptr;
+    KLDAPWidgets::LdapConfigWidget *mCfg = nullptr;
+    KLDAPCore::LdapServer *mServer = nullptr;
     QPushButton *mOkButton = nullptr;
     AddHostDialog *const q;
 };
@@ -60,9 +60,9 @@ void AddHostDialog::writeConfig()
     group.sync();
 }
 
-AddHostDialog::AddHostDialog(KLDAP::LdapServer *server, QWidget *parent)
+AddHostDialog::AddHostDialog(KLDAPCore::LdapServer *server, QWidget *parent)
     : QDialog(parent)
-    , d(new KLDAP::AddHostDialogPrivate(this))
+    , d(new KLDAPWidgets::AddHostDialogPrivate(this))
 {
     setWindowTitle(i18nc("@title:window", "Add Host"));
     auto mainLayout = new QVBoxLayout(this);
@@ -82,12 +82,13 @@ AddHostDialog::AddHostDialog(KLDAP::LdapServer *server, QWidget *parent)
     auto layout = new QHBoxLayout(page);
     layout->setContentsMargins(0, 0, 0, 0);
 
-    d->mCfg = new KLDAP::LdapConfigWidget(KLDAP::LdapConfigWidget::W_USER | KLDAP::LdapConfigWidget::W_PASS | KLDAP::LdapConfigWidget::W_BINDDN
-                                              | KLDAP::LdapConfigWidget::W_REALM | KLDAP::LdapConfigWidget::W_HOST | KLDAP::LdapConfigWidget::W_PORT
-                                              | KLDAP::LdapConfigWidget::W_VER | KLDAP::LdapConfigWidget::W_TIMELIMIT | KLDAP::LdapConfigWidget::W_SIZELIMIT
-                                              | KLDAP::LdapConfigWidget::W_PAGESIZE | KLDAP::LdapConfigWidget::W_DN | KLDAP::LdapConfigWidget::W_FILTER
-                                              | KLDAP::LdapConfigWidget::W_SECBOX | KLDAP::LdapConfigWidget::W_AUTHBOX,
-                                          page);
+    d->mCfg = new KLDAPWidgets::LdapConfigWidget(
+        KLDAPWidgets::LdapConfigWidget::W_USER | KLDAPWidgets::LdapConfigWidget::W_PASS | KLDAPWidgets::LdapConfigWidget::W_BINDDN
+            | KLDAPWidgets::LdapConfigWidget::W_REALM | KLDAPWidgets::LdapConfigWidget::W_HOST | KLDAPWidgets::LdapConfigWidget::W_PORT
+            | KLDAPWidgets::LdapConfigWidget::W_VER | KLDAPWidgets::LdapConfigWidget::W_TIMELIMIT | KLDAPWidgets::LdapConfigWidget::W_SIZELIMIT
+            | KLDAPWidgets::LdapConfigWidget::W_PAGESIZE | KLDAPWidgets::LdapConfigWidget::W_DN | KLDAPWidgets::LdapConfigWidget::W_FILTER
+            | KLDAPWidgets::LdapConfigWidget::W_SECBOX | KLDAPWidgets::LdapConfigWidget::W_AUTHBOX,
+        page);
 
     layout->addWidget(d->mCfg);
     d->mCfg->setHost(d->mServer->host());
@@ -102,30 +103,30 @@ AddHostDialog::AddHostDialog(KLDAP::LdapServer *server, QWidget *parent)
     d->mCfg->setVersion(d->mServer->version());
     d->mCfg->setFilter(d->mServer->filter());
     switch (d->mServer->security()) {
-    case KLDAP::LdapServer::TLS:
-        d->mCfg->setSecurity(KLDAP::LdapConfigWidget::TLS);
+    case KLDAPCore::LdapServer::TLS:
+        d->mCfg->setSecurity(KLDAPWidgets::LdapConfigWidget::TLS);
         break;
-    case KLDAP::LdapServer::SSL:
-        d->mCfg->setSecurity(KLDAP::LdapConfigWidget::SSL);
+    case KLDAPCore::LdapServer::SSL:
+        d->mCfg->setSecurity(KLDAPWidgets::LdapConfigWidget::SSL);
         break;
     default:
-        d->mCfg->setSecurity(KLDAP::LdapConfigWidget::None);
+        d->mCfg->setSecurity(KLDAPWidgets::LdapConfigWidget::None);
     }
 
     switch (d->mServer->auth()) {
-    case KLDAP::LdapServer::Simple:
-        d->mCfg->setAuth(KLDAP::LdapConfigWidget::Simple);
+    case KLDAPCore::LdapServer::Simple:
+        d->mCfg->setAuth(KLDAPWidgets::LdapConfigWidget::Simple);
         break;
-    case KLDAP::LdapServer::SASL:
-        d->mCfg->setAuth(KLDAP::LdapConfigWidget::SASL);
+    case KLDAPCore::LdapServer::SASL:
+        d->mCfg->setAuth(KLDAPWidgets::LdapConfigWidget::SASL);
         break;
     default:
-        d->mCfg->setAuth(KLDAP::LdapConfigWidget::Anonymous);
+        d->mCfg->setAuth(KLDAPWidgets::LdapConfigWidget::Anonymous);
     }
     d->mCfg->setMech(d->mServer->mech());
 
     KAcceleratorManager::manage(this);
-    connect(d->mCfg, &KLDAP::LdapConfigWidget::hostNameChanged, this, &AddHostDialog::slotHostEditChanged);
+    connect(d->mCfg, &KLDAPWidgets::LdapConfigWidget::hostNameChanged, this, &AddHostDialog::slotHostEditChanged);
     connect(d->mOkButton, &QPushButton::clicked, this, &AddHostDialog::slotOk);
     d->mOkButton->setEnabled(!d->mServer->host().isEmpty());
     readConfig();
@@ -155,24 +156,24 @@ void AddHostDialog::slotOk()
     d->mServer->setVersion(d->mCfg->version());
     d->mServer->setFilter(d->mCfg->filter());
     switch (d->mCfg->security()) {
-    case KLDAP::LdapConfigWidget::TLS:
-        d->mServer->setSecurity(KLDAP::LdapServer::TLS);
+    case KLDAPWidgets::LdapConfigWidget::TLS:
+        d->mServer->setSecurity(KLDAPCore::LdapServer::TLS);
         break;
-    case KLDAP::LdapConfigWidget::SSL:
-        d->mServer->setSecurity(KLDAP::LdapServer::SSL);
+    case KLDAPWidgets::LdapConfigWidget::SSL:
+        d->mServer->setSecurity(KLDAPCore::LdapServer::SSL);
         break;
     default:
-        d->mServer->setSecurity(KLDAP::LdapServer::None);
+        d->mServer->setSecurity(KLDAPCore::LdapServer::None);
     }
     switch (d->mCfg->auth()) {
-    case KLDAP::LdapConfigWidget::Simple:
-        d->mServer->setAuth(KLDAP::LdapServer::Simple);
+    case KLDAPWidgets::LdapConfigWidget::Simple:
+        d->mServer->setAuth(KLDAPCore::LdapServer::Simple);
         break;
-    case KLDAP::LdapConfigWidget::SASL:
-        d->mServer->setAuth(KLDAP::LdapServer::SASL);
+    case KLDAPWidgets::LdapConfigWidget::SASL:
+        d->mServer->setAuth(KLDAPCore::LdapServer::SASL);
         break;
     default:
-        d->mServer->setAuth(KLDAP::LdapServer::Anonymous);
+        d->mServer->setAuth(KLDAPCore::LdapServer::Anonymous);
     }
     d->mServer->setMech(d->mCfg->mech());
     QDialog::accept();

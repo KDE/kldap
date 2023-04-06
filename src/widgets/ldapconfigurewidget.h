@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include "kldap_export.h"
+#include "kldapwidgets_export.h"
 
 #include <QWidget>
 
@@ -15,14 +15,14 @@ class QPushButton;
 class QToolButton;
 class QListWidgetItem;
 
-namespace KLDAP
+namespace KLDAPWidgets
 {
 class LdapClientSearchConfig;
 /**
  * @brief The LdapConfigureWidget class
  * @author Laurent Montel <montel@kde.org>
  */
-class KLDAP_EXPORT LdapConfigureWidget : public QWidget
+class KLDAPWIDGETS_EXPORT LdapConfigureWidget : public QWidget
 {
     Q_OBJECT
 public:
@@ -45,7 +45,7 @@ Q_SIGNALS:
     void changed(bool);
 
 private:
-    KLDAP_NO_EXPORT void initGUI();
+    KLDAPWIDGETS_NO_EXPORT void initGUI();
 
     QListWidget *mHostListView = nullptr;
 
@@ -55,6 +55,6 @@ private:
 
     QToolButton *mUpButton = nullptr;
     QToolButton *mDownButton = nullptr;
-    KLDAP::LdapClientSearchConfig *const mClientSearchConfig;
+    KLDAPWidgets::LdapClientSearchConfig *const mClientSearchConfig;
 };
 }

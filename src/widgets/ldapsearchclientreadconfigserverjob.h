@@ -6,14 +6,17 @@
 
 #pragma once
 
-#include "kldap_export.h"
+#include "kldapwidgets_export.h"
 #include <KConfigGroup>
 #include <QObject>
-namespace KLDAP
+namespace KLDAPCore
+{
+class LdapServer;
+}
+namespace KLDAPWidgets
 {
 class LdapClient;
-class LdapServer;
-class KLDAP_EXPORT LdapSearchClientReadConfigServerJob : public QObject
+class KLDAPWIDGETS_EXPORT LdapSearchClientReadConfigServerJob : public QObject
 {
     Q_OBJECT
 public:
@@ -36,7 +39,7 @@ public:
     void setLdapClient(LdapClient *ldapClient);
 
 private:
-    KLDAP_NO_EXPORT void slotConfigLoaded(const KLDAP::LdapServer &server);
+    KLDAPWIDGETS_NO_EXPORT void slotConfigLoaded(const KLDAPCore::LdapServer &server);
     LdapClient *mLdapClient = nullptr;
     KConfigGroup mConfig;
     int mCurrentIndex = -1;

@@ -8,23 +8,23 @@
 
 #include <QListWidget>
 #include <kldap/ldapserver.h>
-namespace KLDAP
+namespace KLDAPWidgets
 {
 class LdapWidgetItem : public QListWidgetItem
 {
 public:
     explicit LdapWidgetItem(QListWidget *parent, bool isActive = false);
 
-    void setServer(const KLDAP::LdapServer &server);
+    void setServer(const KLDAPCore::LdapServer &server);
 
-    const KLDAP::LdapServer &server() const;
+    const KLDAPCore::LdapServer &server() const;
 
     void setIsActive(bool isActive);
 
     Q_REQUIRED_RESULT bool isActive() const;
 
 private:
-    KLDAP::LdapServer mServer;
+    KLDAPCore::LdapServer mServer;
     bool mIsActive = false;
 };
 }

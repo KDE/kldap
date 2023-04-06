@@ -8,7 +8,8 @@
 #include "ldapclient.h"
 #include "ldapclient_debug.h"
 #include "ldapclientsearchconfigreadconfigjob.h"
-using namespace KLDAP;
+using namespace KLDAPCore;
+using namespace KLDAPWidgets;
 LdapSearchClientReadConfigServerJob::LdapSearchClientReadConfigServerJob(QObject *parent)
     : QObject(parent)
 {
@@ -36,7 +37,7 @@ bool LdapSearchClientReadConfigServerJob::canStart() const
     return mCurrentIndex != -1 && mConfig.isValid();
 }
 
-void LdapSearchClientReadConfigServerJob::slotConfigLoaded(const KLDAP::LdapServer &server)
+void LdapSearchClientReadConfigServerJob::slotConfigLoaded(const KLDAPCore::LdapServer &server)
 {
     mLdapClient->setServer(server);
     deleteLater();

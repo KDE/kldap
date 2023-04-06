@@ -9,7 +9,7 @@
 #include "kldap_config.h" // LDAP_FOUND
 #include "ldapdefs.h"
 
-#include "ldap_debug.h"
+#include "ldap_core_debug.h"
 #include <KLocalizedString>
 #include <cstdlib>
 
@@ -39,7 +39,7 @@ static bool ldapoperation_sasl_initialized = false;
 
 #endif
 
-using namespace KLDAP;
+using namespace KLDAPCore;
 
 class Q_DECL_HIDDEN LdapConnection::LdapConnectionPrivate
 {

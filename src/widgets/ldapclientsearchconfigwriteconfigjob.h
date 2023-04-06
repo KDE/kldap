@@ -5,7 +5,7 @@
  */
 
 #pragma once
-#include "kldap_export.h"
+#include "kldapwidgets_export.h"
 #include <KConfigGroup>
 #include <KLDAP/LdapServer>
 #include <QObject>
@@ -13,9 +13,9 @@ namespace QKeychain
 {
 class Job;
 }
-namespace KLDAP
+namespace KLDAPWidgets
 {
-class KLDAP_EXPORT LdapClientSearchConfigWriteConfigJob : public QObject
+class KLDAPWIDGETS_EXPORT LdapClientSearchConfigWriteConfigJob : public QObject
 {
     Q_OBJECT
 public:
@@ -34,19 +34,19 @@ public:
     Q_REQUIRED_RESULT KConfigGroup config() const;
     void setConfig(const KConfigGroup &newConfig);
 
-    Q_REQUIRED_RESULT KLDAP::LdapServer server() const;
-    void setServer(const KLDAP::LdapServer &server);
+    Q_REQUIRED_RESULT KLDAPCore::LdapServer server() const;
+    void setServer(const KLDAPCore::LdapServer &server);
 
 Q_SIGNALS:
     void configSaved();
 
 private:
-    KLDAP_NO_EXPORT void writeLdapClientConfigFinished();
-    KLDAP_NO_EXPORT void writeConfig();
+    KLDAPWIDGETS_NO_EXPORT void writeLdapClientConfigFinished();
+    KLDAPWIDGETS_NO_EXPORT void writeConfig();
     int mServerIndex = -1;
     KConfigGroup mConfig;
     bool mActive = false;
-    KLDAP::LdapServer mServer;
+    KLDAPCore::LdapServer mServer;
 };
 
 }

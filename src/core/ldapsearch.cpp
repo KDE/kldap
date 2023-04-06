@@ -11,9 +11,9 @@
 
 #include <QTimer>
 
-#include "ldap_debug.h"
+#include "ldap_core_debug.h"
 #include <KLocalizedString>
-using namespace KLDAP;
+using namespace KLDAPCore;
 
 // blocking the GUI for xxx milliseconds
 #define LDAPSEARCH_BLOCKING_TIMEOUT 10

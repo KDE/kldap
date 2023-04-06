@@ -10,17 +10,17 @@
 #include <QString>
 #include <memory>
 
-#include "kldap_export.h"
+#include "kldap_core_export.h"
 #include "ldapserver.h"
 #include "ldapurl.h"
 
-namespace KLDAP
+namespace KLDAPCore
 {
 /**
  * @brief
  * This class represents a connection to an LDAP server.
  */
-class KLDAP_EXPORT LdapConnection
+class KLDAP_CORE_EXPORT LdapConnection
 {
 public:
     enum SASL_Fields { SASL_Authname = 0x1, SASL_Authzid = 0x2, SASL_Realm = 0x4, SASL_Password = 0x8 };

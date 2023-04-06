@@ -10,7 +10,7 @@
 #include <ldapobject.h>
 #include <ldapsearch.h>
 
-using namespace KLDAP;
+using namespace KLDAPCore;
 
 class KLdapTest : public QObject
 {
@@ -33,8 +33,8 @@ private Q_SLOTS:
     void testLdapModel();
 
 private:
-    void searchResult(KLDAP::LdapSearch *search);
-    void searchData(KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj);
+    void searchResult(KLDAPCore::LdapSearch *search);
+    void searchData(KLDAPCore::LdapSearch *search, const KLDAPCore::LdapObject &obj);
     QString m_url;
     LdapSearch *m_search = nullptr;
     LdapObjects m_objects;

@@ -10,13 +10,13 @@
 #include <QString>
 #include <QWidget>
 
-#include "kldap_export.h"
+#include "kldapwidgets_export.h"
 #include "ldapdn.h"
 #include "ldapobject.h"
 #include "ldapserver.h"
 #include "ldapurl.h"
 
-namespace KLDAP
+namespace KLDAPWidgets
 {
 /**
   @brief LDAP Configuration widget
@@ -25,7 +25,7 @@ namespace KLDAP
   It's KConfigXT compatible, using widget names starting with kcfg_
 */
 
-class KLDAP_EXPORT LdapConfigWidget : public QWidget
+class KLDAPWIDGETS_EXPORT LdapConfigWidget : public QWidget
 {
     Q_OBJECT
     Q_FLAGS(WinFlags)
@@ -37,7 +37,7 @@ class KLDAP_EXPORT LdapConfigWidget : public QWidget
     Q_PROPERTY(QString host READ host WRITE setHost)
     Q_PROPERTY(int port READ port WRITE setPort)
     Q_PROPERTY(int version READ version WRITE setVersion)
-    Q_PROPERTY(LdapDN dn READ dn WRITE setDn)
+    Q_PROPERTY(KLDAPCore::LdapDN dn READ dn WRITE setDn)
     Q_PROPERTY(QString filter READ filter WRITE setFilter)
     Q_PROPERTY(QString mech READ mech WRITE setMech)
     Q_PROPERTY(Security security READ security WRITE setSecurity)
@@ -137,9 +137,9 @@ public:
     /** Sets the LDAP Base DN. Kconfig widget name: kcfg_ldapdn
      *  @param dn the LDAP Base DN to set
      */
-    void setDn(const LdapDN &dn);
+    void setDn(const KLDAPCore::LdapDN &dn);
     /** Gets the LDAP Base DN. Kconfig widget name: kcfg_ldapdn */
-    Q_REQUIRED_RESULT LdapDN dn() const;
+    Q_REQUIRED_RESULT KLDAPCore::LdapDN dn() const;
 
     /** Sets the LDAP Filter. Kconfig widget name: kcfg_ldapfilter
      *  @param filter the LDAP Filter to set
@@ -224,22 +224,22 @@ public:
      * Returns a LDAP Url constructed from the settings given.
      * Extensions are filled for use in the LDAP KIO worker.
      */
-    Q_REQUIRED_RESULT LdapUrl url() const;
+    Q_REQUIRED_RESULT KLDAPCore::LdapUrl url() const;
     /**
      * Set up the widget via an LDAP Url.
      * @param url the LDAP Url to set
      */
-    void setUrl(const LdapUrl &url);
+    void setUrl(const KLDAPCore::LdapUrl &url);
 
     /**
      * Returns an LdapServer object constructed from the settings given.
      */
-    Q_REQUIRED_RESULT LdapServer server() const;
+    Q_REQUIRED_RESULT KLDAPCore::LdapServer server() const;
     /**
      * Set up the widget via an LdapServer object.
      * @param server the LdapServer object to set
      */
-    void setServer(const LdapServer &server);
+    void setServer(const KLDAPCore::LdapServer &server);
 
 Q_SIGNALS:
     /**
@@ -252,5 +252,5 @@ private:
     std::unique_ptr<LdapConfigWidgetPrivate> const d;
 };
 
-Q_DECLARE_OPERATORS_FOR_FLAGS(LdapConfigWidget::WinFlags)
+Q_DECLARE_OPERATORS_FOR_FLAGS(KLDAPWidgets::LdapConfigWidget::WinFlags)
 }

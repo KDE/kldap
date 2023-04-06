@@ -7,13 +7,13 @@
 
 #pragma once
 
-#include "kldap_export.h"
+#include "kldapwidgets_export.h"
 
 #include <QObject>
 #include <QStringList>
 #include <kldap/ldapobject.h>
 
-namespace KLDAP
+namespace KLDAPWidgets
 {
 class LdapClient;
 
@@ -25,7 +25,7 @@ class LdapClient;
 struct LdapResultObject {
     using List = QList<LdapResultObject>;
     const LdapClient *client = nullptr;
-    KLDAP::LdapObject object;
+    KLDAPCore::LdapObject object;
 };
 
 /**
@@ -39,7 +39,7 @@ struct LdapResult {
      */
     using List = QList<LdapResult>;
 
-    LdapDN dn;
+    KLDAPCore::LdapDN dn;
     QString name; ///< The full name of the contact.
     QStringList email; ///< The list of emails of the contact.
     int clientNumber; ///< The client the contact comes from (used for sorting in a ldap-only lookup).
@@ -49,7 +49,7 @@ struct LdapResult {
 /**
  * @since 4.5
  */
-class KLDAP_EXPORT LdapClientSearch : public QObject
+class KLDAPWIDGETS_EXPORT LdapClientSearch : public QObject
 {
     Q_OBJECT
 
@@ -148,7 +148,7 @@ Q_SIGNALS:
      *
      * @param results The list of found contacts.
      */
-    void searchData(const KLDAP::LdapResult::List &results);
+    void searchData(const KLDAPWidgets::LdapResult::List &results);
 
     /**
      * This signal is emitted whenever new contacts have been found
@@ -156,7 +156,7 @@ Q_SIGNALS:
      *
      * @param results The list of found contacts.
      */
-    void searchData(const KLDAP::LdapResultObject::List &results);
+    void searchData(const KLDAPWidgets::LdapResultObject::List &results);
 
     /**
      * This signal is emitted whenever the lookup is complete or the
@@ -171,5 +171,5 @@ private:
     //@endcond
 };
 }
-Q_DECLARE_TYPEINFO(KLDAP::LdapResult, Q_MOVABLE_TYPE);
-Q_DECLARE_TYPEINFO(KLDAP::LdapResultObject, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(KLDAPWidgets::LdapResult, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(KLDAPWidgets::LdapResultObject, Q_MOVABLE_TYPE);

@@ -7,7 +7,7 @@
 #include "ldapwidgetitemreadconfigserverjob.h"
 #include "ldapclientsearchconfigreadconfigjob.h"
 #include "ldapwidgetitem_p.h"
-using namespace KLDAP;
+using namespace KLDAPWidgets;
 LdapWidgetItemReadConfigServerJob::LdapWidgetItemReadConfigServerJob(QObject *parent)
     : QObject(parent)
 {
@@ -25,7 +25,7 @@ void LdapWidgetItemReadConfigServerJob::start()
     job->start();
 }
 
-void LdapWidgetItemReadConfigServerJob::slotConfigLoaded(const KLDAP::LdapServer &server)
+void LdapWidgetItemReadConfigServerJob::slotConfigLoaded(const KLDAPCore::LdapServer &server)
 {
     mLdapWidgetItem->setServer(server);
     deleteLater();

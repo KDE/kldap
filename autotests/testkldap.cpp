@@ -225,7 +225,7 @@ void KLdapTest::testLdapSearch()
     qDebug() << "Search found" << m_objects.size() << "matching entries";
 }
 
-void KLdapTest::searchResult(KLDAP::LdapSearch *search)
+void KLdapTest::searchResult(KLDAPCore::LdapSearch *search)
 {
     qDebug();
     const int err = search->error();
@@ -235,7 +235,7 @@ void KLdapTest::searchResult(KLDAP::LdapSearch *search)
     QCOMPARE(err, 0);
 }
 
-void KLdapTest::searchData(KLDAP::LdapSearch *search, const KLDAP::LdapObject &obj)
+void KLdapTest::searchData(KLDAPCore::LdapSearch *search, const KLDAPCore::LdapObject &obj)
 {
     Q_UNUSED(search)
     // qDebug();

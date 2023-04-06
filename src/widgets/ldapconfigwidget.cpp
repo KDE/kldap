@@ -8,7 +8,7 @@
 #include "ldapconfigwidget.h"
 #include "ldapsearch.h"
 
-#include "ldap_debug.h"
+#include "ldap_widgets_debug.h"
 #include <KAuthorized>
 #include <KLocalizedString>
 #include <KMessageBox>
@@ -23,7 +23,7 @@
 #include <QRadioButton>
 #include <QSpinBox>
 
-using namespace KLDAP;
+using namespace KLDAPWidgets;
 
 class Q_DECL_HIDDEN LdapConfigWidget::LdapConfigWidgetPrivate
 {
@@ -42,8 +42,8 @@ public:
     void setSASL(bool on);
     void queryDNClicked();
     void queryMechClicked();
-    void loadData(LdapSearch *search, const LdapObject &object);
-    void loadResult(LdapSearch *search);
+    void loadData(KLDAPCore::LdapSearch *search, const KLDAPCore::LdapObject &object);
+    void loadResult(KLDAPCore::LdapSearch *search);
     void sendQuery();
     void initWidget();
 
@@ -274,28 +274,28 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
 
 void LdapConfigWidget::LdapConfigWidgetPrivate::sendQuery()
 {
-    LdapServer _server(mParent->server());
+    KLDAPCore::LdapServer _server(mParent->server());
 
     mQResult.clear();
     mCancelled = true;
 
     if (mAttr == QLatin1String("supportedsaslmechanisms")) {
-        _server.setAuth(LdapServer::Anonymous);
+        _server.setAuth(KLDAPCore::LdapServer::Anonymous);
     }
 
-    LdapUrl _url(_server.url());
+    KLDAPCore::LdapUrl _url(_server.url());
 
-    _url.setDn(LdapDN(QLatin1String("")));
+    _url.setDn(KLDAPCore::LdapDN(QLatin1String("")));
     _url.setAttributes(QStringList(mAttr));
-    _url.setScope(LdapUrl::Base);
+    _url.setScope(KLDAPCore::LdapUrl::Base);
 
     qCDebug(LDAP_LOG) << "sendQuery url:" << _url.toDisplayString();
 
-    LdapSearch search;
-    connect(&search, &LdapSearch::data, mParent, [this](KLDAP::LdapSearch *s, const KLDAP::LdapObject &obj) {
+    KLDAPCore::LdapSearch search;
+    connect(&search, &KLDAPCore::LdapSearch::data, mParent, [this](KLDAPCore::LdapSearch *s, const KLDAPCore::LdapObject &obj) {
         loadData(s, obj);
     });
-    connect(&search, &LdapSearch::result, mParent, [this](KLDAP::LdapSearch *s) {
+    connect(&search, &KLDAPCore::LdapSearch::result, mParent, [this](KLDAPCore::LdapSearch *s) {
         loadResult(s);
     });
 
@@ -348,20 +348,20 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::queryDNClicked()
     }
 }
 
-void LdapConfigWidget::LdapConfigWidgetPrivate::loadData(LdapSearch *, const LdapObject &object)
+void LdapConfigWidget::LdapConfigWidgetPrivate::loadData(KLDAPCore::LdapSearch *, const KLDAPCore::LdapObject &object)
 {
     qCDebug(LDAP_LOG) << "object:" << object.toString();
     mProg->setValue(mProg->value() + 1);
-    LdapAttrMap::ConstIterator end(object.attributes().constEnd());
-    for (LdapAttrMap::ConstIterator it = object.attributes().constBegin(); it != end; ++it) {
-        LdapAttrValue::ConstIterator end2((*it).constEnd());
-        for (LdapAttrValue::ConstIterator it2 = (*it).constBegin(); it2 != end2; ++it2) {
+    KLDAPCore::LdapAttrMap::ConstIterator end(object.attributes().constEnd());
+    for (KLDAPCore::LdapAttrMap::ConstIterator it = object.attributes().constBegin(); it != end; ++it) {
+        KLDAPCore::LdapAttrValue::ConstIterator end2((*it).constEnd());
+        for (KLDAPCore::LdapAttrValue::ConstIterator it2 = (*it).constBegin(); it2 != end2; ++it2) {
             mQResult.push_back(QString::fromUtf8(*it2));
         }
     }
 }
 
-void LdapConfigWidget::LdapConfigWidgetPrivate::loadResult(LdapSearch *search)
+void LdapConfigWidget::LdapConfigWidgetPrivate::loadResult(KLDAPCore::LdapSearch *search)
 {
     Q_UNUSED(search)
     mCancelled = false;
@@ -474,27 +474,27 @@ LdapConfigWidget::LdapConfigWidget(LdapConfigWidget::WinFlags flags, QWidget *pa
 
 LdapConfigWidget::~LdapConfigWidget() = default;
 
-LdapUrl LdapConfigWidget::url() const
+KLDAPCore::LdapUrl LdapConfigWidget::url() const
 {
     return server().url();
 }
 
-void LdapConfigWidget::setUrl(const LdapUrl &url)
+void LdapConfigWidget::setUrl(const KLDAPCore::LdapUrl &url)
 {
-    LdapServer _server;
+    KLDAPCore::LdapServer _server;
     _server.setUrl(url);
     setServer(_server);
 }
 
-LdapServer LdapConfigWidget::server() const
+KLDAPCore::LdapServer LdapConfigWidget::server() const
 {
-    LdapServer _server;
+    KLDAPCore::LdapServer _server;
     if (d->mSecSSL && d->mSecSSL->isChecked()) {
-        _server.setSecurity(LdapServer::SSL);
+        _server.setSecurity(KLDAPCore::LdapServer::SSL);
     } else if (d->mSecTLS && d->mSecTLS->isChecked()) {
-        _server.setSecurity(LdapServer::TLS);
+        _server.setSecurity(KLDAPCore::LdapServer::TLS);
     } else {
-        _server.setSecurity(LdapServer::None);
+        _server.setSecurity(KLDAPCore::LdapServer::None);
     }
 
     if (d->mUser) {
@@ -516,7 +516,7 @@ LdapServer LdapConfigWidget::server() const
         _server.setPort(d->mPort->value());
     }
     if (d->mDn) {
-        _server.setBaseDn(LdapDN(d->mDn->text()));
+        _server.setBaseDn(KLDAPCore::LdapDN(d->mDn->text()));
     }
     if (d->mFilter) {
         _server.setFilter(d->mFilter->text());
@@ -534,30 +534,30 @@ LdapServer LdapConfigWidget::server() const
         _server.setPageSize(d->mPageSize->value());
     }
     if (d->mAnonymous && d->mAnonymous->isChecked()) {
-        _server.setAuth(LdapServer::Anonymous);
+        _server.setAuth(KLDAPCore::LdapServer::Anonymous);
     } else if (d->mSimple && d->mSimple->isChecked()) {
-        _server.setAuth(LdapServer::Simple);
+        _server.setAuth(KLDAPCore::LdapServer::Simple);
     } else if (d->mSASL && d->mSASL->isChecked()) {
-        _server.setAuth(LdapServer::SASL);
+        _server.setAuth(KLDAPCore::LdapServer::SASL);
         _server.setMech(d->mMech->currentText());
     }
     return _server;
 }
 
-void LdapConfigWidget::setServer(const LdapServer &server)
+void LdapConfigWidget::setServer(const KLDAPCore::LdapServer &server)
 {
     switch (server.security()) {
-    case LdapServer::SSL:
+    case KLDAPCore::LdapServer::SSL:
         if (d->mSecSSL) {
             d->mSecSSL->setChecked(true);
         }
         break;
-    case LdapServer::TLS:
+    case KLDAPCore::LdapServer::TLS:
         if (d->mSecTLS) {
             d->mSecTLS->setChecked(true);
         }
         break;
-    case LdapServer::None:
+    case KLDAPCore::LdapServer::None:
         if (d->mSecNo) {
             d->mSecNo->setChecked(true);
         }
@@ -565,17 +565,17 @@ void LdapConfigWidget::setServer(const LdapServer &server)
     }
 
     switch (server.auth()) {
-    case LdapServer::Anonymous:
+    case KLDAPCore::LdapServer::Anonymous:
         if (d->mAnonymous) {
             d->mAnonymous->setChecked(true);
         }
         break;
-    case LdapServer::Simple:
+    case KLDAPCore::LdapServer::Simple:
         if (d->mSimple) {
             d->mSimple->setChecked(true);
         }
         break;
-    case LdapServer::SASL:
+    case KLDAPCore::LdapServer::SASL:
         if (d->mSASL) {
             d->mSASL->setChecked(true);
         }
@@ -681,16 +681,16 @@ int LdapConfigWidget::version() const
     return d->mVersion ? d->mVersion->value() : 3;
 }
 
-void LdapConfigWidget::setDn(const LdapDN &dn)
+void LdapConfigWidget::setDn(const KLDAPCore::LdapDN &dn)
 {
     if (d->mDn) {
         d->mDn->setText(dn.toString());
     }
 }
 
-LdapDN LdapConfigWidget::dn() const
+KLDAPCore::LdapDN LdapConfigWidget::dn() const
 {
-    return d->mDn ? LdapDN(d->mDn->text()) : LdapDN();
+    return d->mDn ? KLDAPCore::LdapDN(d->mDn->text()) : KLDAPCore::LdapDN();
 }
 
 void LdapConfigWidget::setFilter(const QString &filter)

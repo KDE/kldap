@@ -28,11 +28,11 @@
 
 #include "addhostdialog.h"
 
-using namespace KLDAP;
+using namespace KLDAPWidgets;
 
 LdapConfigureWidget::LdapConfigureWidget(QWidget *parent)
     : QWidget(parent)
-    , mClientSearchConfig(new KLDAP::LdapClientSearchConfig)
+    , mClientSearchConfig(new KLDAPWidgets::LdapClientSearchConfig)
 {
     initGUI();
 
@@ -73,8 +73,8 @@ void LdapConfigureWidget::slotItemClicked(QListWidgetItem *item)
 
 void LdapConfigureWidget::slotAddHost()
 {
-    KLDAP::LdapServer server;
-    KLDAP::AddHostDialog dlg(&server, this);
+    KLDAPCore::LdapServer server;
+    KLDAPWidgets::AddHostDialog dlg(&server, this);
 
     if (dlg.exec() && !server.host().trimmed().isEmpty()) { // krazy:exclude=crashy
         auto item = new LdapWidgetItem(mHostListView);
@@ -91,8 +91,8 @@ void LdapConfigureWidget::slotEditHost()
         return;
     }
 
-    KLDAP::LdapServer server = item->server();
-    KLDAP::AddHostDialog dlg(&server, this);
+    KLDAPCore::LdapServer server = item->server();
+    KLDAPWidgets::AddHostDialog dlg(&server, this);
     dlg.setWindowTitle(i18nc("@title:window", "Edit Host"));
 
     if (dlg.exec() && !server.host().isEmpty()) { // krazy:exclude=crashy
@@ -127,7 +127,7 @@ void LdapConfigureWidget::slotRemoveHost()
 
 static void swapItems(LdapWidgetItem *item, LdapWidgetItem *other)
 {
-    KLDAP::LdapServer server = item->server();
+    KLDAPCore::LdapServer server = item->server();
     bool isActive = item->isActive();
     item->setServer(other->server());
     item->setIsActive(other->isActive());
@@ -190,7 +190,7 @@ void LdapConfigureWidget::slotMoveDown()
 void LdapConfigureWidget::load()
 {
     mHostListView->clear();
-    KConfig *config = KLDAP::LdapClientSearchConfig::config();
+    KConfig *config = KLDAPWidgets::LdapClientSearchConfig::config();
     KConfigGroup group(config, "LDAP");
 
     int count = group.readEntry("NumSelectedHosts", 0);
@@ -222,7 +222,7 @@ void LdapConfigureWidget::load()
 void LdapConfigureWidget::save()
 {
     // mClientSearchConfig->clearWalletPassword();
-    KConfig *config = KLDAP::LdapClientSearchConfig::config();
+    KConfig *config = KLDAPWidgets::LdapClientSearchConfig::config();
     config->deleteGroup("LDAP");
 
     KConfigGroup group(config, "LDAP");
@@ -235,7 +235,7 @@ void LdapConfigureWidget::save()
             continue;
         }
 
-        KLDAP::LdapServer server = item->server();
+        KLDAPCore::LdapServer server = item->server();
         if (item->checkState() == Qt::Checked) {
             auto job = new LdapClientSearchConfigWriteConfigJob;
             job->setActive(true);

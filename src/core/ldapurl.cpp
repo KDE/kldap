@@ -7,9 +7,9 @@
 
 #include "ldapurl.h"
 
-#include "ldap_debug.h"
+#include "ldap_core_debug.h"
 
-using namespace KLDAP;
+using namespace KLDAPCore;
 
 class Q_DECL_HIDDEN LdapUrl::LdapUrlPrivate
 {
