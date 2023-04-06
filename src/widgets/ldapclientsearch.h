@@ -9,9 +9,9 @@
 
 #include "kldapwidgets_export.h"
 
+#include <KLDAPCore/LdapObject>
 #include <QObject>
 #include <QStringList>
-#include <kldap/ldapobject.h>
 
 namespace KLDAPWidgets
 {

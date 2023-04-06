@@ -74,9 +74,9 @@ target_include_directories(KPim6LdapWidgets INTERFACE "$<INSTALL_INTERFACE:${KDE
 target_include_directories(KPim6LdapWidgets PUBLIC "$<BUILD_INTERFACE:${KLdap_SOURCE_DIR}/src/widgets;${KLdap_BINARY_DIR}/src>")
 
 set_target_properties(KPim6LdapWidgets PROPERTIES
-    VERSION ${KLDAP_VERSION}
-    SOVERSION ${KLDAP_SOVERSION}
-    EXPORT_NAME Ldap
+	VERSION ${KLDAPWIDGETS_VERSION}
+	SOVERSION ${KLDAPWIDGETS_SOVERSION}
+	EXPORT_NAME LdapWidgets
 )
 
 install(TARGETS KPim6LdapWidgets EXPORT KPim6LdapWidgetsTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
@@ -152,6 +152,10 @@ if(BUILD_TESTING)
     add_subdirectory(tests)
     add_subdirectory(autotests)
 endif()
+
+set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim6LdapWidgets")
+
+install(EXPORT KPim6LdapWidgetsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KPim6LdapWidgetsTargets.cmake NAMESPACE KPim6::)
 
 configure_package_config_file(
 	"${CMAKE_CURRENT_SOURCE_DIR}/KPimLdapWidgetsConfig.cmake.in"

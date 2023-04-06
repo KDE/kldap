@@ -79,12 +79,6 @@ endif()
 add_definitions(-DTRANSLATION_DOMAIN=\"libkldap5\")
 
 
-########### CMake Config Files ###########
-set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim6Ldap")
-
-install(EXPORT KPim6LdapCoreTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KPim6LdapCoreTargets.cmake NAMESPACE KPim6::)
-
-
 ########### Targets ###########
 add_subdirectory(src)
 add_subdirectory(kioworker)
@@ -99,15 +93,5 @@ kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 ki18n_install(po)
 if(KF6DocTools_FOUND)
 	kdoctools_install(po)
-endif()
-
-if (BUILD_QCH)
-    ecm_install_qch_export(
-        TARGETS KPim6Ldap_QCH
-        FILE KPim6LdapQchTargets.cmake
-        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-        COMPONENT Devel
-    )
-    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6LdapQchTargets.cmake\")")
 endif()
 feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
