@@ -8,7 +8,7 @@
 #include "ldapclient_debug.h"
 
 #include <KConfig>
-#include <kldap/ldapdn.h>
+#include <kldapcore/ldapdn.h>
 #include <qt6keychain/keychain.h>
 using namespace QKeychain;
 

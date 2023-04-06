@@ -19,12 +19,11 @@
 #include <QDialogButtonBox>
 #include <QHBoxLayout>
 
-#include "ldapclientsearch.h"
 #include "ldapclientsearchconfig.h"
 #include "ldapclientsearchconfigwriteconfigjob.h"
 #include "ldapwidgetitem_p.h"
 #include "ldapwidgetitemreadconfigserverjob.h"
-#include <kldap/ldapserver.h>
+#include <kldapcore/ldapserver.h>
 
 #include "addhostdialog.h"
 

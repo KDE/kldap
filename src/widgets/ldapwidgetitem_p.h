@@ -7,7 +7,7 @@
 #pragma once
 
 #include <QListWidget>
-#include <kldap/ldapserver.h>
+#include <kldapcore/ldapserver.h>
 namespace KLDAPWidgets
 {
 class LdapWidgetItem : public QListWidgetItem

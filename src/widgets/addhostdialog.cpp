@@ -18,8 +18,8 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QWindow>
-#include <kldap/ldapconfigwidget.h>
-#include <kldap/ldapserver.h>
+#include <kldapcore/ldapserver.h>
+#include <kldapwidgets/ldapconfigwidget.h>
 
 using namespace KLDAPWidgets;
 namespace

@@ -9,12 +9,12 @@
 #include <KIO/AuthInfo>
 #include <KIO/WorkerBase>
 
-#include <kldap/ldapconnection.h>
-#include <kldap/ldapcontrol.h>
-#include <kldap/ldapdefs.h>
-#include <kldap/ldapdn.h>
-#include <kldap/ldapoperation.h>
-#include <kldap/ldapurl.h>
+#include <kldapcore/ldapconnection.h>
+#include <kldapcore/ldapcontrol.h>
+#include <kldapcore/ldapdefs.h>
+#include <kldapcore/ldapdn.h>
+#include <kldapcore/ldapoperation.h>
+#include <kldapcore/ldapurl.h>
 
 class LDAPProtocol : public KIO::WorkerBase
 {

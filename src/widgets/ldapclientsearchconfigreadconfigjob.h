@@ -7,7 +7,7 @@
 #pragma once
 #include "kldapwidgets_export.h"
 #include <KConfigGroup>
-#include <KLDAP/LdapServer>
+#include <KLDAPCore/LdapServer>
 #include <QObject>
 namespace QKeychain
 {
