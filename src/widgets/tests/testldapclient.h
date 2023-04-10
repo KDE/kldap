@@ -35,12 +35,10 @@ public:
 Q_SIGNALS:
     void leaveModality();
 
-private Q_SLOTS:
+private:
     void slotLDAPResult(const KLDAPWidgets::LdapClient &, const KLDAPCore::LdapObject &);
     void slotLDAPError(const QString &);
     void slotLDAPDone();
-
-private:
     bool check(const QString &, QString, QString);
 
     KLDAPWidgets::LdapClient *mClient = nullptr;
