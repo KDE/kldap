@@ -60,7 +60,7 @@ endif()
 ########### Find packages ###########
 find_package(KF6WidgetsAddons ${KF_MIN_VERSION} CONFIG REQUIRED)
 
-ecm_set_disabled_deprecation_versions(QT 6.4  KF 5.105.0)
+ecm_set_disabled_deprecation_versions(QT 6.4  KF 5.240.0)
 
 
 find_package(Ldap)
