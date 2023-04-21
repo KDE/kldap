@@ -34,21 +34,21 @@
 <para
 ><acronym
 >ldap</acronym
-> (Lightweight Directory Access Protocol), X.500 dizinlerine, ya da kendi başına çalışan <acronym
+> (Lightweight Directory Access Protocol), X.500 dizinlerine veya kendi başına çalışan <acronym
 >LDAP</acronym
 > sunucularına erişim sağlar.</para>
 
 <para
->Ldap kioslave'i şöyle kullanabilirsiniz:</para>
+>ldap KIO işçisini şöyle kullanabilirsiniz:</para>
 
 <para
->Alt dizin taraması için, <userinput
->ldap://host:port/ou=People,o=where,c=de??sub</userinput
-> </para>
+>Alt dizin sorgusu için <userinput
+>ldap://makine:kapı/ou=People,o=where,c=de??sub</userinput
+>;</para>
 
 <para
->ya da tüm dizinler üzerinde tarama yapmak için, <userinput
->ldap://host:port/cn=MM,ou=People,o=where,c=de??base</userinput
+>tam bir dal için <userinput
+>ldap://makine:kapı/cn=MM,ou=People,o=where,c=de??base</userinput
 ></para>
 
 </article>
