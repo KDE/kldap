@@ -106,7 +106,6 @@ install(FILES
 )
 
 install(FILES
-    ${KLdapCore_CamelCase_HEADERS}
     ${KLdapWidgets_CamelCase_HEADERS}
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPWidgets/KLDAPWidgets/
     COMPONENT Devel
