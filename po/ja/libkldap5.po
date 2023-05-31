@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
@@ -38,7 +38,6 @@ msgstr "プロトコルのバージョンを %1 に設定できません。"
 msgid "Cannot set timeout to %1 second."
 msgid_plural "Cannot set timeout to %1 seconds."
 msgstr[0] "タイムアウトを %1 秒に設定できません。"
-msgstr[1] "タイムアウトを %1 秒に設定できません。"
 
 #: core/ldapconnection.cpp:269
 #, kde-format
