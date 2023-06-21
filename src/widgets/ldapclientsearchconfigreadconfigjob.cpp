@@ -186,3 +186,5 @@ void LdapClientSearchConfigReadConfigJob::readLdapPasswordFinished(QKeychain::Jo
     }
     readLdapClientConfigFinished();
 }
+
+#include "moc_ldapclientsearchconfigreadconfigjob.cpp"

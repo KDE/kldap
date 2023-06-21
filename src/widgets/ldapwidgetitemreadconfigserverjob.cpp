@@ -70,3 +70,5 @@ void LdapWidgetItemReadConfigServerJob::setConfig(const KConfigGroup &config)
 {
     mConfig = config;
 }
+
+#include "moc_ldapwidgetitemreadconfigserverjob.cpp"

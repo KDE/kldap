@@ -176,3 +176,5 @@ void TestLDAPClient::slotLDAPDone()
     qDebug();
     Q_EMIT leaveModality();
 }
+
+#include "moc_testldapclient.cpp"

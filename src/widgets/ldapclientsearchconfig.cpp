@@ -52,3 +52,5 @@ void LdapClientSearchConfig::clearWalletPassword()
     }
 }
 #endif
+
+#include "moc_ldapclientsearchconfig.cpp"

@@ -20,3 +20,5 @@ void LdapClientSearchConfigReadConfigJobTest::shouldHaveDefaultValues()
     QCOMPARE(job.serverIndex(), -1);
     QVERIFY(!job.canStart());
 }
+
+#include "moc_ldapclientsearchconfigreadconfigjobtest.cpp"

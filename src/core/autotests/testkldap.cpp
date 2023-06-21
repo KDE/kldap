@@ -427,3 +427,5 @@ qDebug() << "next tag:" << a << "size:" << bl;
 /*
   }
 */
+
+#include "moc_testkldap.cpp"

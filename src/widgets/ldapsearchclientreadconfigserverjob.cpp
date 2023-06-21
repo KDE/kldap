@@ -82,3 +82,5 @@ void LdapSearchClientReadConfigServerJob::setConfig(const KConfigGroup &config)
 {
     mConfig = config;
 }
+
+#include "moc_ldapsearchclientreadconfigserverjob.cpp"

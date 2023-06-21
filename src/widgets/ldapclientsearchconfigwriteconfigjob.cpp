@@ -140,3 +140,5 @@ void LdapClientSearchConfigWriteConfigJob::setServer(const KLDAPCore::LdapServer
 {
     mServer = server;
 }
+
+#include "moc_ldapclientsearchconfigwriteconfigjob.cpp"

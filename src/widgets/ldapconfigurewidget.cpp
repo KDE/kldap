@@ -313,3 +313,5 @@ void LdapConfigureWidget::initGUI()
 
     mainLayout->addWidget(buttons);
 }
+
+#include "moc_ldapconfigurewidget.cpp"
