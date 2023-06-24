@@ -34,14 +34,14 @@ msgstr "Produciuse un erro durante a fase de inicialización da conexión."
 #: core/ldapconnection.cpp:246
 #, kde-format
 msgid "Cannot set protocol version to %1."
-msgstr "Non se pode estabelecer a versión do protocolo como %1."
+msgstr "Non se pode definir a versión do protocolo como %1."
 
 #: core/ldapconnection.cpp:257
 #, kde-format
 msgid "Cannot set timeout to %1 second."
 msgid_plural "Cannot set timeout to %1 seconds."
-msgstr[0] "Non se pode estabelecer o límite de tempo en %1 segundo."
-msgstr[1] "Non se pode estabelecer o límite de tempo en %1 segundos."
+msgstr[0] "Non se pode definir o límite de tempo en %1 segundo."
+msgstr[1] "Non se pode definir o límite de tempo en %1 segundos."
 
 #: core/ldapconnection.cpp:269
 #, kde-format
@@ -58,7 +58,7 @@ msgstr "Modo de requisito de certificado TLS incorrecto."
 #: core/ldapconnection.cpp:299
 #, kde-format
 msgid "Could not set TLS require certificate mode."
-msgstr "Non se puido estabelecer o modo de requisito de certificado TLS."
+msgstr "Non se puido definir o modo de requisito de certificado TLS."
 
 #: core/ldapconnection.cpp:308
 #, kde-format
@@ -73,12 +73,12 @@ msgstr "As bibliotecas LDAP do cliente non teñen compatibilidade con TLS."
 #: core/ldapconnection.cpp:335
 #, kde-format
 msgid "Cannot set size limit."
-msgstr "Non se pode estabelecer o límite de tamaño."
+msgstr "Non se pode definir o límite de tamaño."
 
 #: core/ldapconnection.cpp:345
 #, kde-format
 msgid "Cannot set time limit."
-msgstr "Non se pode estabelecer o límite de tempo."
+msgstr "Non se pode definir o límite de tempo."
 
 #: core/ldapconnection.cpp:353
 #, kde-format
@@ -138,7 +138,7 @@ msgstr "Retirar o servidor"
 #: widgets/ldapconfigurewidget.cpp:272
 #, kde-format
 msgid "Check all servers that should be used:"
-msgstr "Comprobar todos os servidores que se queiran empregar:"
+msgstr "Comprobar todos os servidores que se queiran usar:"
 
 #: widgets/ldapconfigurewidget.cpp:306
 #, kde-format
