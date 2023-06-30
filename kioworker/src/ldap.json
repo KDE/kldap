@@ -2,7 +2,7 @@
     "KDE-KIO-Protocols": {
         "ldap": {
             "Icon": "office-address-book",
-            "X-DocPath": "kioslave5/ldap/index.html",
+            "X-DocPath": "kioworker6/ldap/index.html",
             "deleting": true,
             "determineMimetypeFromExtension": false,
             "input": "none",
@@ -17,7 +17,7 @@
         },
         "ldaps": {
             "Icon": "office-address-book",
-            "X-DocPath": "kioslave5/ldap/index.html",
+            "X-DocPath": "kioworker6/ldap/index.html",
             "deleting": true,
             "determineMimetypeFromExtension": false,
             "input": "none",
