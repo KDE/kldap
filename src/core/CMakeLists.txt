@@ -135,7 +135,7 @@ install(FILES
 if (BUILD_QCH)
     ecm_add_qch(
         KPim6LdapCore_QCH
-        NAME KLdap
+	NAME KLdapCore
         BASE_NAME KPim6LdapCore
         VERSION ${PIM_VERSION}
         ORG_DOMAIN org.kde

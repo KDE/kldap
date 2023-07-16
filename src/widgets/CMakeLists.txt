@@ -121,7 +121,7 @@ install(FILES
 if (BUILD_QCH)
     ecm_add_qch(
 	    KPim6LdapWidgets_QCH
-        NAME KLdap
+	    NAME KLdapWidgets
 	BASE_NAME KPim6LdapWidgets
         VERSION ${PIM_VERSION}
         ORG_DOMAIN org.kde
