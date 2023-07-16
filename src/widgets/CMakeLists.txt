@@ -144,6 +144,8 @@ if (BUILD_QCH)
     )
 endif()
 
+
+
 ecm_generate_pri_file(BASE_NAME LdapWidgets LIB_NAME KPim6LdapWidgets FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPWidgets/)
 install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
 
@@ -155,6 +157,18 @@ endif()
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim6LdapWidgets")
 
 install(EXPORT KPim6LdapWidgetsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KPim6LdapWidgetsTargets.cmake NAMESPACE KPim6::)
+
+
+if (BUILD_QCH)
+    ecm_install_qch_export(
+	    TARGETS KPim6LdapWidgets_QCH
+	    FILE KPim6LdapWidgetsQchTargets.cmake
+        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+        COMPONENT Devel
+    )
+    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6LdapWidgetsQchTargets.cmake\")")
+endif()
+
 
 configure_package_config_file(
 	"${CMAKE_CURRENT_SOURCE_DIR}/KPimLdapWidgetsConfig.cmake.in"
