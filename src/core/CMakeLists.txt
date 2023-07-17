@@ -156,6 +156,18 @@ if (BUILD_QCH)
     )
 endif()
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim6LdapCore")
+
+
+if (BUILD_QCH)
+    ecm_install_qch_export(
+	    TARGETS KPim6LdapCore_QCH
+	    FILE KPim6LdapCoreQchTargets.cmake
+        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+        COMPONENT Devel
+    )
+    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6LdapCoreQchTargets.cmake\")")
+endif()
+
 install(EXPORT KPim6LdapCoreTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KPim6LdapCoreTargets.cmake NAMESPACE KPim6::)
 
 
@@ -171,16 +183,6 @@ install(FILES
   DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
   COMPONENT Devel
 )
-
-if (BUILD_QCH)
-    ecm_install_qch_export(
-	    TARGETS KPim6LdapCore_QCH
-	    FILE KPim6LdapCoreQchTargets.cmake
-        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-        COMPONENT Devel
-    )
-    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6LdapCoreQchTargets.cmake\")")
-endif()
 
 install(FILES
    ${CMAKE_CURRENT_BINARY_DIR}/kldap_core_version.h
