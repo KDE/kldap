@@ -310,6 +310,3 @@ msgstr "Consulta LDAP"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "Error desconegut en connectar %1"
-
-#~ msgid "LDAP Servers"
-#~ msgstr "Servidors LDAP"
