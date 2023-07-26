@@ -171,5 +171,5 @@ private:
     //@endcond
 };
 }
-Q_DECLARE_TYPEINFO(KLDAPWidgets::LdapResult, Q_MOVABLE_TYPE);
-Q_DECLARE_TYPEINFO(KLDAPWidgets::LdapResultObject, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(KLDAPWidgets::LdapResult, Q_RELOCATABLE_TYPE);
+Q_DECLARE_TYPEINFO(KLDAPWidgets::LdapResultObject, Q_RELOCATABLE_TYPE);
