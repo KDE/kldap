@@ -101,47 +101,6 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
     if (!bindDN.isEmpty()) {
         mServer.setBindDn(bindDN);
     }
-#if 0 // Port
-    const QString pwdBindBNEntry = prefix + QStringLiteral("PwdBind%1").arg(mServerIndex);
-    QString pwdBindDN = mConfig.readEntry(pwdBindBNEntry, QString());
-    if (!pwdBindDN.isEmpty()) {
-        if (d->askWallet && KMessageBox::Yes == KMessageBox::questionYesNo(nullptr, i18n("LDAP password is stored as clear text, do you want to store it in kwallet?"),
-                                                                           i18n("Store clear text password in Wallet"),
-                                                                           KStandardGuiItem::yes(),
-                                                                           KStandardGuiItem::no(),
-                                                                           QStringLiteral("DoAskToStoreToWallet"))) {
-            d->wallet = KWallet::Wallet::openWallet(KWallet::Wallet::LocalWallet(), 0);
-            if (d->wallet) {
-                connect(d->wallet, &KWallet::Wallet::walletClosed, this, &LdapClientSearchConfig::slotWalletClosed);
-                d->useWallet = true;
-                if (!d->wallet->hasFolder(QStringLiteral("ldapclient"))) {
-                    d->wallet->createFolder(QStringLiteral("ldapclient"));
-                }
-                d->wallet->setFolder(QStringLiteral("ldapclient"));
-                d->wallet->writePassword(pwdBindBNEntry, pwdBindDN);
-                mConfig.deleteEntry(pwdBindBNEntry);
-                mConfig.sync();
-            }
-        }
-        mServer.setPassword(pwdBindDN);
-    } else if (d->askWallet) { //Look at in Wallet
-        //Move as async here.
-        d->wallet = KWallet::Wallet::openWallet(KWallet::Wallet::LocalWallet(), 0);
-        if (d->wallet) {
-            d->useWallet = true;
-            if (!d->wallet->setFolder(QStringLiteral("ldapclient"))) {
-                d->wallet->createFolder(QStringLiteral("ldapclient"));
-                d->wallet->setFolder(QStringLiteral("ldapclient"));
-            }
-            d->wallet->readPassword(pwdBindBNEntry, pwdBindDN);
-            if (!pwdBindDN.isEmpty()) {
-                mServer.setPassword(pwdBindDN);
-            }
-        } else {
-            d->useWallet = false;
-        }
-    }
-#endif
     mServer.setTimeLimit(mConfig.readEntry(prefix + QStringLiteral("TimeLimit%1").arg(mServerIndex), 0));
     mServer.setSizeLimit(mConfig.readEntry(prefix + QStringLiteral("SizeLimit%1").arg(mServerIndex), 0));
     mServer.setPageSize(mConfig.readEntry(prefix + QStringLiteral("PageSize%1").arg(mServerIndex), 0));
@@ -170,21 +129,18 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
     const QString pwdBindBNEntry = prefix + QStringLiteral("PwdBind%1").arg(mServerIndex);
 
     auto readJob = new ReadPasswordJob(QStringLiteral("ldapclient"), this);
-    connect(readJob, &Job::finished, this, &LdapClientSearchConfigReadConfigJob::readLdapPasswordFinished);
+    connect(readJob, &Job::finished, this, [this, pwdBindBNEntry](QKeychain::Job *baseJob) {
+        auto job = qobject_cast<ReadPasswordJob *>(baseJob);
+        Q_ASSERT(job);
+        if (!job->error()) {
+            mServer.setPassword(job->textData());
+        } else {
+            qCWarning(LDAPCLIENT_LOG) << "We have an error during reading password " << job->errorString() << " password key " << pwdBindBNEntry;
+        }
+        readLdapClientConfigFinished();
+    });
     readJob->setKey(pwdBindBNEntry);
     readJob->start();
-}
-
-void LdapClientSearchConfigReadConfigJob::readLdapPasswordFinished(QKeychain::Job *baseJob)
-{
-    auto job = qobject_cast<ReadPasswordJob *>(baseJob);
-    Q_ASSERT(job);
-    if (!job->error()) {
-        mServer.setPassword(job->textData());
-    } else {
-        qCWarning(LDAPCLIENT_LOG) << "We have an error during reading password " << job->errorString();
-    }
-    readLdapClientConfigFinished();
 }
 
 #include "moc_ldapclientsearchconfigreadconfigjob.cpp"

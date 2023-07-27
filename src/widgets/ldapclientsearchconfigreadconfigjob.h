@@ -38,7 +38,6 @@ Q_SIGNALS:
     void configLoaded(const KLDAPCore::LdapServer &server);
 
 private:
-    KLDAPWIDGETS_NO_EXPORT void readLdapPasswordFinished(QKeychain::Job *baseJob);
     KLDAPWIDGETS_NO_EXPORT void readLdapClientConfigFinished();
     KLDAPWIDGETS_NO_EXPORT void readConfig();
     int mServerIndex = -1;
