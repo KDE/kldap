@@ -39,7 +39,7 @@
 >-server.</para>
 
 <para
->Du kan använda I/O-slaven ldap som följer:</para>
+>Du kan använda I/O-arbetaren ldap som följer:</para>
 
 <para
 ><userinput
