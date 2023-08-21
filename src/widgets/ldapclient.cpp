@@ -42,7 +42,7 @@ public:
     void finishCurrentObject();
 
     void slotData(KIO::Job *, const QByteArray &data);
-    void slotInfoMessage(KJob *, const QString &info, const QString &);
+    void slotInfoMessage(KJob *, const QString &info);
     void slotDone();
 
     LdapClient *const q;
@@ -125,8 +125,8 @@ void LdapClient::startQuery(const QString &filter)
     connect(transfertJob, &KIO::TransferJob::data, this, [this](KIO::Job *job, const QByteArray &data) {
         d->slotData(job, data);
     });
-    connect(d->mJob.data(), &KIO::TransferJob::infoMessage, this, [this](KJob *job, const QString &str, const QString &val) {
-        d->slotInfoMessage(job, str, val);
+    connect(d->mJob.data(), &KIO::TransferJob::infoMessage, this, [this](KJob *job, const QString &message) {
+        d->slotInfoMessage(job, message);
     });
     connect(d->mJob.data(), &KIO::TransferJob::result, this, [this]() {
         d->slotDone();
@@ -153,7 +153,7 @@ void LdapClient::LdapClientPrivate::slotData(KIO::Job *, const QByteArray &data)
     parseLDIF(data);
 }
 
-void LdapClient::LdapClientPrivate::slotInfoMessage(KJob *, const QString &info, const QString &)
+void LdapClient::LdapClientPrivate::slotInfoMessage(KJob *, const QString &info)
 {
     qCDebug(LDAPCLIENT_LOG) << "Job said :" << info;
 }
