@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-03 00:47+0000\n"
+"POT-Creation-Date: 2023-09-21 00:45+0000\n"
 "PO-Revision-Date: 2021-08-02 11:23+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -108,51 +108,38 @@ msgctxt "@title:window"
 msgid "Add Host"
 msgstr "Dodaj gostitelja"
 
-#: widgets/ldapclientsearchconfigreadconfigjob.cpp:112
-#, kde-format
-msgid ""
-"LDAP password is stored as clear text, do you want to store it in kwallet?"
-msgstr ""
-"Geslo LDAP je shranjeno kot odprto besedilo, ali ga želite shraniti v "
-"kwallet?"
-
-#: widgets/ldapclientsearchconfigreadconfigjob.cpp:113
-#, kde-format
-msgid "Store clear text password in Wallet"
-msgstr "Shrani odprto besedilo gesla v listnico"
-
-#: widgets/ldapconfigurewidget.cpp:96
+#: widgets/ldapconfigurewidget.cpp:95
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "Uredi gostitelja"
 
-#: widgets/ldapconfigurewidget.cpp:113
+#: widgets/ldapconfigurewidget.cpp:112
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Ali želite odstraniti nastavitev za gostitelja \"%1\"?"
 
-#: widgets/ldapconfigurewidget.cpp:114
+#: widgets/ldapconfigurewidget.cpp:113
 #, kde-format
 msgid "Remove Host"
 msgstr "Odstrani gostitelja"
 
-#: widgets/ldapconfigurewidget.cpp:272
+#: widgets/ldapconfigurewidget.cpp:271
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Preverite vse strežnike, ki bi jih bilo treba uporabiti:"
 
-#: widgets/ldapconfigurewidget.cpp:306
+#: widgets/ldapconfigurewidget.cpp:305
 #, kde-format
 msgid "&Add Host..."
 msgstr "Dodaj gostitelja..."
 
-#: widgets/ldapconfigurewidget.cpp:308
+#: widgets/ldapconfigurewidget.cpp:307
 #, kde-format
 msgid "&Edit Host..."
 msgstr "uredi gostitelja..."
 
-#: widgets/ldapconfigurewidget.cpp:311
+#: widgets/ldapconfigurewidget.cpp:310
 #, kde-format
 msgid "&Remove Host"
 msgstr "Odstrani gostitelja"
@@ -312,6 +299,15 @@ msgstr "Poizvedba LDAP"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "Neznana napaka med povezovanjem s %1"
+
+#~ msgid ""
+#~ "LDAP password is stored as clear text, do you want to store it in kwallet?"
+#~ msgstr ""
+#~ "Geslo LDAP je shranjeno kot odprto besedilo, ali ga želite shraniti v "
+#~ "kwallet?"
+
+#~ msgid "Store clear text password in Wallet"
+#~ msgstr "Shrani odprto besedilo gesla v listnico"
 
 #~ msgid "LDAP Servers"
 #~ msgstr "Strežniki LDAP"

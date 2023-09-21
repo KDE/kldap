@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-03 00:47+0000\n"
+"POT-Creation-Date: 2023-09-21 00:45+0000\n"
 "PO-Revision-Date: 2022-10-02 14:59+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -114,51 +114,38 @@ msgctxt "@title:window"
 msgid "Add Host"
 msgstr "Добавление сервера"
 
-#: widgets/ldapclientsearchconfigreadconfigjob.cpp:112
-#, kde-format
-msgid ""
-"LDAP password is stored as clear text, do you want to store it in kwallet?"
-msgstr ""
-"Пароль LDAP сохраняется в открытом виде, хотите хранить его в безопасном "
-"бумажнике KWallet?"
-
-#: widgets/ldapclientsearchconfigreadconfigjob.cpp:113
-#, kde-format
-msgid "Store clear text password in Wallet"
-msgstr "Сохранение открытого пароля в бумажнике KDE"
-
-#: widgets/ldapconfigurewidget.cpp:96
+#: widgets/ldapconfigurewidget.cpp:95
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "Изменение конфигурации сервера"
 
-#: widgets/ldapconfigurewidget.cpp:113
+#: widgets/ldapconfigurewidget.cpp:112
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Удалить конфигурацию для сервера «%1»?"
 
-#: widgets/ldapconfigurewidget.cpp:114
+#: widgets/ldapconfigurewidget.cpp:113
 #, kde-format
 msgid "Remove Host"
 msgstr "Удаление сервера"
 
-#: widgets/ldapconfigurewidget.cpp:272
+#: widgets/ldapconfigurewidget.cpp:271
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Выберите все серверы, которые должны быть использованы:"
 
-#: widgets/ldapconfigurewidget.cpp:306
+#: widgets/ldapconfigurewidget.cpp:305
 #, kde-format
 msgid "&Add Host..."
 msgstr "&Добавить сервер..."
 
-#: widgets/ldapconfigurewidget.cpp:308
+#: widgets/ldapconfigurewidget.cpp:307
 #, kde-format
 msgid "&Edit Host..."
 msgstr "&Изменить сервер..."
 
-#: widgets/ldapconfigurewidget.cpp:311
+#: widgets/ldapconfigurewidget.cpp:310
 #, kde-format
 msgid "&Remove Host"
 msgstr "&Удалить сервер"
@@ -318,6 +305,15 @@ msgstr "Запрос LDAP"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "Неизвестная ошибка при подключении к %1"
+
+#~ msgid ""
+#~ "LDAP password is stored as clear text, do you want to store it in kwallet?"
+#~ msgstr ""
+#~ "Пароль LDAP сохраняется в открытом виде, хотите хранить его в безопасном "
+#~ "бумажнике KWallet?"
+
+#~ msgid "Store clear text password in Wallet"
+#~ msgstr "Сохранение открытого пароля в бумажнике KDE"
 
 #~ msgid "LDAP Servers"
 #~ msgstr "Серверы LDAP"

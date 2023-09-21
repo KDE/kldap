@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-03 00:47+0000\n"
+"POT-Creation-Date: 2023-09-21 00:45+0000\n"
 "PO-Revision-Date: 2021-08-08 09:01+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -102,51 +102,38 @@ msgctxt "@title:window"
 msgid "Add Host"
 msgstr "Dodaj gospodarza"
 
-#: widgets/ldapclientsearchconfigreadconfigjob.cpp:112
-#, kde-format
-msgid ""
-"LDAP password is stored as clear text, do you want to store it in kwallet?"
-msgstr ""
-"Hasło LDAP jest przechowywane jako zwykły tekst, czy zapisać je zamiast tego "
-"w portfelu?"
-
-#: widgets/ldapclientsearchconfigreadconfigjob.cpp:113
-#, kde-format
-msgid "Store clear text password in Wallet"
-msgstr "Przechowuj hasło jako zwykły tekst w Portfelu"
-
-#: widgets/ldapconfigurewidget.cpp:96
+#: widgets/ldapconfigurewidget.cpp:95
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "Zmień gospodarza"
 
-#: widgets/ldapconfigurewidget.cpp:113
+#: widgets/ldapconfigurewidget.cpp:112
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Czy usunąć ustawienia dla gospodarza \"%1\"?"
 
-#: widgets/ldapconfigurewidget.cpp:114
+#: widgets/ldapconfigurewidget.cpp:113
 #, kde-format
 msgid "Remove Host"
 msgstr "Usuń gospodarza"
 
-#: widgets/ldapconfigurewidget.cpp:272
+#: widgets/ldapconfigurewidget.cpp:271
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Sprawdź wszystkie serwery, które powinny być użyte:"
 
-#: widgets/ldapconfigurewidget.cpp:306
+#: widgets/ldapconfigurewidget.cpp:305
 #, kde-format
 msgid "&Add Host..."
 msgstr "Dod&aj gospodarza..."
 
-#: widgets/ldapconfigurewidget.cpp:308
+#: widgets/ldapconfigurewidget.cpp:307
 #, kde-format
 msgid "&Edit Host..."
 msgstr "Zmi&eń gospodarza..."
 
-#: widgets/ldapconfigurewidget.cpp:311
+#: widgets/ldapconfigurewidget.cpp:310
 #, kde-format
 msgid "&Remove Host"
 msgstr "Usuń gospoda&rza"
@@ -306,6 +293,15 @@ msgstr "Zapytanie LDAP"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "Nieznany błąd przy łączeniu do %1"
+
+#~ msgid ""
+#~ "LDAP password is stored as clear text, do you want to store it in kwallet?"
+#~ msgstr ""
+#~ "Hasło LDAP jest przechowywane jako zwykły tekst, czy zapisać je zamiast "
+#~ "tego w portfelu?"
+
+#~ msgid "Store clear text password in Wallet"
+#~ msgstr "Przechowuj hasło jako zwykły tekst w Portfelu"
 
 #~ msgid "LDAP Servers"
 #~ msgstr "Serwery LDAP"

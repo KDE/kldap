@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-03 00:47+0000\n"
+"POT-Creation-Date: 2023-09-21 00:45+0000\n"
 "PO-Revision-Date: 2020-06-13 19:41+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -101,52 +101,38 @@ msgctxt "@title:window"
 msgid "Add Host"
 msgstr "Masina lisamine"
 
-#: widgets/ldapclientsearchconfigreadconfigjob.cpp:112
-#, kde-format
-msgid ""
-"LDAP password is stored as clear text, do you want to store it in kwallet?"
-msgstr ""
-"LDAP-i parool on salvestatud lihttekstina, kas soovid salvestada selle KDE "
-"turvalaekasse?"
-
-#: widgets/ldapclientsearchconfigreadconfigjob.cpp:113
-#, fuzzy, kde-format
-#| msgid "Store clear text password in KWallet"
-msgid "Store clear text password in Wallet"
-msgstr "Lihttekstis parooli salvestamine KDE turvalaekasse"
-
-#: widgets/ldapconfigurewidget.cpp:96
+#: widgets/ldapconfigurewidget.cpp:95
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "Masina muutmine"
 
-#: widgets/ldapconfigurewidget.cpp:113
+#: widgets/ldapconfigurewidget.cpp:112
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Kas eemaldada masina \"%1\" seadistus?"
 
-#: widgets/ldapconfigurewidget.cpp:114
+#: widgets/ldapconfigurewidget.cpp:113
 #, kde-format
 msgid "Remove Host"
 msgstr "Masina eemaldamine"
 
-#: widgets/ldapconfigurewidget.cpp:272
+#: widgets/ldapconfigurewidget.cpp:271
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Kõigi kasutatavate serverite kontroll:"
 
-#: widgets/ldapconfigurewidget.cpp:306
+#: widgets/ldapconfigurewidget.cpp:305
 #, kde-format
 msgid "&Add Host..."
 msgstr "&Lisa masin ..."
 
-#: widgets/ldapconfigurewidget.cpp:308
+#: widgets/ldapconfigurewidget.cpp:307
 #, kde-format
 msgid "&Edit Host..."
 msgstr "&Muuda masinat ..."
 
-#: widgets/ldapconfigurewidget.cpp:311
+#: widgets/ldapconfigurewidget.cpp:310
 #, kde-format
 msgid "&Remove Host"
 msgstr "&Eemalda masin"
@@ -308,6 +294,17 @@ msgstr "LDAP-i päring"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "Tundmatu tõrge ühendumisel serveriga %1"
+
+#~ msgid ""
+#~ "LDAP password is stored as clear text, do you want to store it in kwallet?"
+#~ msgstr ""
+#~ "LDAP-i parool on salvestatud lihttekstina, kas soovid salvestada selle "
+#~ "KDE turvalaekasse?"
+
+#, fuzzy
+#~| msgid "Store clear text password in KWallet"
+#~ msgid "Store clear text password in Wallet"
+#~ msgstr "Lihttekstis parooli salvestamine KDE turvalaekasse"
 
 #~ msgid "LDAP Servers"
 #~ msgstr "LDAP-serverid"

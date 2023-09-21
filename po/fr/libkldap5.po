@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-03 00:47+0000\n"
+"POT-Creation-Date: 2023-09-21 00:45+0000\n"
 "PO-Revision-Date: 2023-01-06 11:29+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -113,51 +113,38 @@ msgctxt "@title:window"
 msgid "Add Host"
 msgstr "Ajouter un hôte"
 
-#: widgets/ldapclientsearchconfigreadconfigjob.cpp:112
-#, kde-format
-msgid ""
-"LDAP password is stored as clear text, do you want to store it in kwallet?"
-msgstr ""
-"Le mot de passe « LDAP » est enregistré comme texte en clair. Voulez-vous "
-"l'enregistrer dans KWallet ?"
-
-#: widgets/ldapclientsearchconfigreadconfigjob.cpp:113
-#, kde-format
-msgid "Store clear text password in Wallet"
-msgstr "Enregistrer le mot de passe comme texte en clair dans le portefeuille"
-
-#: widgets/ldapconfigurewidget.cpp:96
+#: widgets/ldapconfigurewidget.cpp:95
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "Modifier un hôte"
 
-#: widgets/ldapconfigurewidget.cpp:113
+#: widgets/ldapconfigurewidget.cpp:112
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Voulez-vous vraiment supprimer les paramètres pour l'hôte « %1 » ?"
 
-#: widgets/ldapconfigurewidget.cpp:114
+#: widgets/ldapconfigurewidget.cpp:113
 #, kde-format
 msgid "Remove Host"
 msgstr "Supprimer un hôte"
 
-#: widgets/ldapconfigurewidget.cpp:272
+#: widgets/ldapconfigurewidget.cpp:271
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Vérifier tous les serveurs devant être utilisés :"
 
-#: widgets/ldapconfigurewidget.cpp:306
+#: widgets/ldapconfigurewidget.cpp:305
 #, kde-format
 msgid "&Add Host..."
 msgstr "&Ajouter un hôte..."
 
-#: widgets/ldapconfigurewidget.cpp:308
+#: widgets/ldapconfigurewidget.cpp:307
 #, kde-format
 msgid "&Edit Host..."
 msgstr "Modifi&er un hôte..."
 
-#: widgets/ldapconfigurewidget.cpp:311
+#: widgets/ldapconfigurewidget.cpp:310
 #, kde-format
 msgid "&Remove Host"
 msgstr "Supp&rimer un hôte"
@@ -317,6 +304,16 @@ msgstr "Requête LDAP"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "Erreur inconnue lors de la connexion %1"
+
+#~ msgid ""
+#~ "LDAP password is stored as clear text, do you want to store it in kwallet?"
+#~ msgstr ""
+#~ "Le mot de passe « LDAP » est enregistré comme texte en clair. Voulez-vous "
+#~ "l'enregistrer dans KWallet ?"
+
+#~ msgid "Store clear text password in Wallet"
+#~ msgstr ""
+#~ "Enregistrer le mot de passe comme texte en clair dans le portefeuille"
 
 #~ msgid "LDAP Servers"
 #~ msgstr "Serveurs LDAP"
