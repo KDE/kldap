@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-03 00:47+0000\n"
+"POT-Creation-Date: 2023-09-21 00:45+0000\n"
 "PO-Revision-Date: 2022-06-19 14:02+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -103,49 +103,38 @@ msgctxt "@title:window"
 msgid "Add Host"
 msgstr "Legg til vert"
 
-#: widgets/ldapclientsearchconfigreadconfigjob.cpp:112
-#, kde-format
-msgid ""
-"LDAP password is stored as clear text, do you want to store it in kwallet?"
-msgstr "LDAP-passordet vert lagra som reintekst. Vil du lagra det i KWallet?"
-
-#: widgets/ldapclientsearchconfigreadconfigjob.cpp:113
-#, kde-format
-msgid "Store clear text password in Wallet"
-msgstr "Lagra reintekst-passord i lommebok"
-
-#: widgets/ldapconfigurewidget.cpp:96
+#: widgets/ldapconfigurewidget.cpp:95
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "Rediger vert"
 
-#: widgets/ldapconfigurewidget.cpp:113
+#: widgets/ldapconfigurewidget.cpp:112
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Ønskjer du å fjerna innstillingane for verten «%1»?"
 
-#: widgets/ldapconfigurewidget.cpp:114
+#: widgets/ldapconfigurewidget.cpp:113
 #, kde-format
 msgid "Remove Host"
 msgstr "Fjern vert"
 
-#: widgets/ldapconfigurewidget.cpp:272
+#: widgets/ldapconfigurewidget.cpp:271
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Kryss av for alle tenarane som skal brukast:"
 
-#: widgets/ldapconfigurewidget.cpp:306
+#: widgets/ldapconfigurewidget.cpp:305
 #, kde-format
 msgid "&Add Host..."
 msgstr "&Legg til vert …"
 
-#: widgets/ldapconfigurewidget.cpp:308
+#: widgets/ldapconfigurewidget.cpp:307
 #, kde-format
 msgid "&Edit Host..."
 msgstr "&Rediger vert …"
 
-#: widgets/ldapconfigurewidget.cpp:311
+#: widgets/ldapconfigurewidget.cpp:310
 #, kde-format
 msgid "&Remove Host"
 msgstr "&Fjern vert"
@@ -305,3 +294,11 @@ msgstr "LDAP-spørjing"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "Ukjend feil ved kopling til %1"
+
+#~ msgid ""
+#~ "LDAP password is stored as clear text, do you want to store it in kwallet?"
+#~ msgstr ""
+#~ "LDAP-passordet vert lagra som reintekst. Vil du lagra det i KWallet?"
+
+#~ msgid "Store clear text password in Wallet"
+#~ msgstr "Lagra reintekst-passord i lommebok"
