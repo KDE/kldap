@@ -20,7 +20,7 @@
 <para
 ><acronym
 >ldap</acronym
-> és un lleuger protocol per accedir als directoris. Proporciona accés a un directori X.500 o a un servidor <acronym
+> és un protocol lleuger per a accedir als directoris. Proporciona accés a un directori X.500 o a un servidor <acronym
 >LDAP</acronym
 > autònom.</para>
 
@@ -35,6 +35,6 @@
 <para
 >o <userinput
 >ldap://màquina:port/cn=MM,ou=Gent,o=on,c=de??base</userinput
-> per obtenir una branca completa.</para>
+> per a obtenir una branca completa.</para>
 
 </article>
