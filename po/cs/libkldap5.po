@@ -294,10 +294,3 @@ msgstr "LDAP dotaz"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "Neznámá chyba při připojování k %1"
-
-#~ msgid ""
-#~ "LDAP password is stored as clear text, do you want to store it in kwallet?"
-#~ msgstr "Heslo LDAP je uloženo v čistém textu. Chcete jej uložit v KWallet?"
-
-#~ msgid "Store clear text password in Wallet"
-#~ msgstr "Uložit heslo v čistém textu ve Wallet"
