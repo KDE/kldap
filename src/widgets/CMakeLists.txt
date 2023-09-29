@@ -144,11 +144,6 @@ if (BUILD_QCH)
     )
 endif()
 
-
-
-ecm_generate_pri_file(BASE_NAME LdapWidgets LIB_NAME KPim6LdapWidgets FILENAME_VAR PRI_FILENAME INCLUDE_INSTALL_DIR ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPWidgets/)
-install(FILES ${PRI_FILENAME} DESTINATION ${ECM_MKSPECS_INSTALL_DIR})
-
 if(BUILD_TESTING)
     add_subdirectory(tests)
     add_subdirectory(autotests)
