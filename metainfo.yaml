@@ -11,10 +11,8 @@ portingAid: false
 deprecated: false
 release: false
 libraries:
- - qmake: LdapCore
-   cmake: "KPim6::LdapCore"
- - qmake: LdapWidgets
-   cmake: "KPim6::LdapWidgets"
+ - cmake: "KPim6::LdapCore"
+ - cmake: "KPim6::LdapWidgets"
 cmakename: KPim6LdapCore
 
 public_lib: true
