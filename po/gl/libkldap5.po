@@ -34,20 +34,20 @@ msgstr "Produciuse un erro durante a fase de inicialización da conexión."
 #: core/ldapconnection.cpp:246
 #, kde-format
 msgid "Cannot set protocol version to %1."
-msgstr "Non se pode definir a versión do protocolo como %1."
+msgstr "Non é posíbel definir a versión do protocolo como %1."
 
 #: core/ldapconnection.cpp:257
 #, kde-format
 msgid "Cannot set timeout to %1 second."
 msgid_plural "Cannot set timeout to %1 seconds."
-msgstr[0] "Non se pode definir o límite de tempo en %1 segundo."
-msgstr[1] "Non se pode definir o límite de tempo en %1 segundos."
+msgstr[0] "Non é posíbel definir o límite de tempo en %1 segundo."
+msgstr[1] "Non é posíbel definir o límite de tempo en %1 segundos."
 
 #: core/ldapconnection.cpp:269
 #, kde-format
 msgid "Could not set CA certificate file."
 msgstr ""
-"Non se puido definir o ficheiro de certificado de autoridade de "
+"Non foi posíbel definir o ficheiro de certificado de autoridade de "
 "certificación."
 
 #: core/ldapconnection.cpp:294
@@ -58,12 +58,12 @@ msgstr "Modo de requisito de certificado TLS incorrecto."
 #: core/ldapconnection.cpp:299
 #, kde-format
 msgid "Could not set TLS require certificate mode."
-msgstr "Non se puido definir o modo de requisito de certificado TLS."
+msgstr "Non foi posíbel definir o modo de requisito de certificado TLS."
 
 #: core/ldapconnection.cpp:308
 #, kde-format
 msgid "Could not initialize new TLS context."
-msgstr "Non se puido inicializar o novo contexto de TLS."
+msgstr "Non foi posíbel inicializar o novo contexto de TLS."
 
 #: core/ldapconnection.cpp:325
 #, kde-format
@@ -73,17 +73,17 @@ msgstr "As bibliotecas LDAP do cliente non teñen compatibilidade con TLS."
 #: core/ldapconnection.cpp:335
 #, kde-format
 msgid "Cannot set size limit."
-msgstr "Non se pode definir o límite de tamaño."
+msgstr "Non é posíbel definir o límite de tamaño."
 
 #: core/ldapconnection.cpp:345
 #, kde-format
 msgid "Cannot set time limit."
-msgstr "Non se pode definir o límite de tempo."
+msgstr "Non é posíbel definir o límite de tempo."
 
 #: core/ldapconnection.cpp:353
 #, kde-format
 msgid "Cannot initialize the SASL client."
-msgstr "Non se pode inicializar o cliente de SASL."
+msgstr "Non é posíbel inicializar o cliente de SASL."
 
 #: core/ldapconnection.cpp:430
 #, kde-format
@@ -98,7 +98,7 @@ msgstr ""
 #: core/ldapsearch.cpp:222
 #, kde-format
 msgid "Cannot access to server. Please reconfigure it."
-msgstr "Non se pode acceder ao servidor. Por favor, configúreo de novo."
+msgstr "Non é posíbel acceder ao servidor. Por favor, configúreo de novo."
 
 #: widgets/addhostdialog.cpp:67
 #, kde-format
