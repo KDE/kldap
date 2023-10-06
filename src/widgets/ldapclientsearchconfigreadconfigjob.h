@@ -22,16 +22,16 @@ public:
     explicit LdapClientSearchConfigReadConfigJob(QObject *parent = nullptr);
     ~LdapClientSearchConfigReadConfigJob() override;
 
-    Q_REQUIRED_RESULT bool canStart() const;
+    [[nodiscard]] bool canStart() const;
     void start();
 
-    Q_REQUIRED_RESULT bool active() const;
+    [[nodiscard]] bool active() const;
     void setActive(bool newActive);
 
-    Q_REQUIRED_RESULT int serverIndex() const;
+    [[nodiscard]] int serverIndex() const;
     void setServerIndex(int newServerIndex);
 
-    Q_REQUIRED_RESULT KConfigGroup config() const;
+    [[nodiscard]] KConfigGroup config() const;
     void setConfig(const KConfigGroup &newConfig);
 
 Q_SIGNALS:

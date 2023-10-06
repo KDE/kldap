@@ -62,7 +62,7 @@ public:
     /**
      * Returns a translated error string if connect() failed.
      */
-    Q_REQUIRED_RESULT QString connectionError() const;
+    [[nodiscard]] QString connectionError() const;
     /**
      *  Closes the LDAP connection.
      */
@@ -71,16 +71,16 @@ public:
     /** Sets the size limit for the connection.
      *  @param sizelimit the connection size limit to set
      */
-    Q_REQUIRED_RESULT bool setSizeLimit(int sizelimit);
+    [[nodiscard]] bool setSizeLimit(int sizelimit);
     /** Returns the current size limit. */
-    Q_REQUIRED_RESULT int sizeLimit() const;
+    [[nodiscard]] int sizeLimit() const;
 
     /** Sets the time limit for the connection.
      *  @param timelimit the connection time limit to set
      */
-    Q_REQUIRED_RESULT bool setTimeLimit(int timelimit);
+    [[nodiscard]] bool setTimeLimit(int timelimit);
     /** Returns the current time limit. */
-    Q_REQUIRED_RESULT int timeLimit() const;
+    [[nodiscard]] int timeLimit() const;
 
     /** Gets an option from the connection. The option value can be client
      * library specific, so avoid this function if possible
@@ -93,14 +93,14 @@ public:
     int setOption(int option, void *value);
 
     /** Returns the LDAP error code from the last operation */
-    Q_REQUIRED_RESULT int ldapErrorCode() const;
+    [[nodiscard]] int ldapErrorCode() const;
     /** Returns the LDAP error string from the last operation */
-    Q_REQUIRED_RESULT QString ldapErrorString() const;
+    [[nodiscard]] QString ldapErrorString() const;
     /** Returns a translated error message from the specified LDAP error code */
-    Q_REQUIRED_RESULT static QString errorString(int code);
+    [[nodiscard]] static QString errorString(int code);
 
     /** Returns the SASL error string from the last SASL operation */
-    Q_REQUIRED_RESULT QString saslErrorString() const;
+    [[nodiscard]] QString saslErrorString() const;
 
     /**
      * Returns the opaqe client-library specific LDAP object.

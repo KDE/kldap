@@ -41,7 +41,7 @@ public:
     /**
      * Returns the Ber object as a flat QByteArray.
      */
-    Q_REQUIRED_RESULT QByteArray flatten() const;
+    [[nodiscard]] QByteArray flatten() const;
 
     /**
      * Appends the data with the specified format to the Ber object.

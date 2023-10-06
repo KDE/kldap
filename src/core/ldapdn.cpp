@@ -19,8 +19,8 @@ public:
 
     ~LdapDNPrivate() = default;
 
-    Q_REQUIRED_RESULT bool isValidRDNString(const QString &rdn) const;
-    Q_REQUIRED_RESULT QStringList splitOnNonEscapedChar(const QString &rdn, QChar ch) const;
+    [[nodiscard]] bool isValidRDNString(const QString &rdn) const;
+    [[nodiscard]] QStringList splitOnNonEscapedChar(const QString &rdn, QChar ch) const;
 
     QString m_dn;
 };

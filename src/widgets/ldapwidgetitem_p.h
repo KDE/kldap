@@ -21,7 +21,7 @@ public:
 
     void setIsActive(bool isActive);
 
-    Q_REQUIRED_RESULT bool isActive() const;
+    [[nodiscard]] bool isActive() const;
 
 private:
     KLDAPCore::LdapServer mServer;

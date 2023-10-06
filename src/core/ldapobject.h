@@ -40,7 +40,7 @@ public:
     /**
      * Returns the text presentation (LDIF format) of the object.
      */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
     /**
      * Clears the name and attributes of the object.
@@ -75,7 +75,7 @@ public:
     /**
      * Return the Distinguished Name of the object.
      */
-    Q_REQUIRED_RESULT LdapDN dn() const;
+    [[nodiscard]] LdapDN dn() const;
     /**
      * Returns the attributes and their values.
      */
@@ -83,16 +83,16 @@ public:
     /**
      * Returns all values of the attribute with the given name.
      */
-    Q_REQUIRED_RESULT LdapAttrValue values(const QString &attributeName) const;
+    [[nodiscard]] LdapAttrValue values(const QString &attributeName) const;
     /**
      * Returns the first value of the attribute with the given name
      * or an empty byte array if the attribute does not exists.
      */
-    Q_REQUIRED_RESULT QByteArray value(const QString &attributeName) const;
+    [[nodiscard]] QByteArray value(const QString &attributeName) const;
     /**
      * Returns true if the given attributethe exists, false otherwise.
      */
-    Q_REQUIRED_RESULT bool hasAttribute(const QString &attributeName) const;
+    [[nodiscard]] bool hasAttribute(const QString &attributeName) const;
 
 private:
     QSharedDataPointer<LdapObjectPrivate> d;

@@ -98,49 +98,49 @@ public:
     /**
      * Returns the client controls (which set by setClientControls()).
      */
-    Q_REQUIRED_RESULT LdapControls clientControls() const;
+    [[nodiscard]] LdapControls clientControls() const;
     /**
      * Returns the server controls (which set by setServerControls()).
      */
-    Q_REQUIRED_RESULT LdapControls serverControls() const;
+    [[nodiscard]] LdapControls serverControls() const;
 
     /**
      * Binds to the server which specified in the connection object.
      * Can do simple or SASL bind. Returns a message id if successful, negative value if not.
      */
-    Q_REQUIRED_RESULT int bind(const QByteArray &creds = QByteArray(), SASL_Callback_Proc *saslproc = nullptr, void *data = nullptr);
+    [[nodiscard]] int bind(const QByteArray &creds = QByteArray(), SASL_Callback_Proc *saslproc = nullptr, void *data = nullptr);
 
     /**
      * Binds to the server which specified in the connection object.
      * Can do simple or SASL bind. This is the synchronous version.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
      */
-    Q_REQUIRED_RESULT int bind_s(SASL_Callback_Proc *saslproc = nullptr, void *data = nullptr);
+    [[nodiscard]] int bind_s(SASL_Callback_Proc *saslproc = nullptr, void *data = nullptr);
 
     /**
      * Starts a search operation with the given base DN, scope, filter and
      * result attributes. Returns a message id if successful, -1 if not.
      */
-    Q_REQUIRED_RESULT int search(const LdapDN &base, LdapUrl::Scope scope, const QString &filter, const QStringList &attrs);
+    [[nodiscard]] int search(const LdapDN &base, LdapUrl::Scope scope, const QString &filter, const QStringList &attrs);
     /**
      * Starts an addition operation.
      * Returns a message id if successful, -1 if not.
      * @param object the additional operation to start
      */
-    Q_REQUIRED_RESULT int add(const LdapObject &object);
+    [[nodiscard]] int add(const LdapObject &object);
     /**
      * Adds the specified object to the LDAP database.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
      * @param object the object to add to LDAP database
      */
-    Q_REQUIRED_RESULT int add_s(const LdapObject &object);
+    [[nodiscard]] int add_s(const LdapObject &object);
     /**
      * Starts an addition operation. This version accepts ModOps not LdapObject.
      * Returns a message id if successful, -1 if not.
      * @param dn the LdapDN operation to start
      * @param ops the ModOps operation to start
      */
-    Q_REQUIRED_RESULT int add(const LdapDN &dn, const ModOps &ops);
+    [[nodiscard]] int add(const LdapDN &dn, const ModOps &ops);
     /**
      * Adds the specified object to the LDAP database. This version accepts ModOps not LdapObject.
      * This is the synchronous version.
@@ -148,50 +148,50 @@ public:
      * @param dn the LdapDN object to add
      * @param ops the ModOps object to add
      */
-    Q_REQUIRED_RESULT int add_s(const LdapDN &dn, const ModOps &ops);
+    [[nodiscard]] int add_s(const LdapDN &dn, const ModOps &ops);
     /**
      * Starts a modrdn operation on given DN, changing its RDN to newRdn,
      * changing its parent to newSuperior (if it's not empty), and deletes
      * the old dn if deleteold is true.
      * Returns a message id if successful, -1 if not.
      */
-    Q_REQUIRED_RESULT int rename(const LdapDN &dn, const QString &newRdn, const QString &newSuperior, bool deleteold = true);
+    [[nodiscard]] int rename(const LdapDN &dn, const QString &newRdn, const QString &newSuperior, bool deleteold = true);
     /**
      * Performs a modrdn operation on given DN, changing its RDN to newRdn,
      * changing its parent to newSuperior (if it's not empty), and deletes
      * the old dn if deleteold is true. This is the synchronous version.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
      */
-    Q_REQUIRED_RESULT int rename_s(const LdapDN &dn, const QString &newRdn, const QString &newSuperior, bool deleteold = true);
+    [[nodiscard]] int rename_s(const LdapDN &dn, const QString &newRdn, const QString &newSuperior, bool deleteold = true);
     /**
      * Starts a delete operation on the given DN.
      * Returns a message id if successful, -1 if not.
      */
-    Q_REQUIRED_RESULT int del(const LdapDN &dn);
+    [[nodiscard]] int del(const LdapDN &dn);
     /**
      * Deletes the given DN. This is the synchronous version.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
      * @param dn the dn to delete
      */
-    Q_REQUIRED_RESULT int del_s(const LdapDN &dn);
+    [[nodiscard]] int del_s(const LdapDN &dn);
     /**
      * Starts a modify operation on the given DN.
      * Returns a message id if successful, -1 if not.
      * @param dn the DN to start modify operation on
      */
-    Q_REQUIRED_RESULT int modify(const LdapDN &dn, const ModOps &ops);
+    [[nodiscard]] int modify(const LdapDN &dn, const ModOps &ops);
     /**
      * Performs a modify operation on the given DN.
      * This is the synchronous version.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
      */
-    Q_REQUIRED_RESULT int modify_s(const LdapDN &dn, const ModOps &ops);
+    [[nodiscard]] int modify_s(const LdapDN &dn, const ModOps &ops);
     /**
      * Starts a compare operation on the given DN, compares the specified
      * attribute with the given value.
      * Returns a message id if successful, -1 if not.
      */
-    Q_REQUIRED_RESULT int compare(const LdapDN &dn, const QString &attr, const QByteArray &value);
+    [[nodiscard]] int compare(const LdapDN &dn, const QString &attr, const QByteArray &value);
     /**
      * Performs a compare operation on the given DN, compares the specified
      * attribute with the given value. This is the synchronous version.
@@ -199,22 +199,22 @@ public:
      * and KLDAP_COMPARE_FALSE if it does not. Otherwise, some error code
      * is returned.
      */
-    Q_REQUIRED_RESULT int compare_s(const LdapDN &dn, const QString &attr, const QByteArray &value);
+    [[nodiscard]] int compare_s(const LdapDN &dn, const QString &attr, const QByteArray &value);
     /**
      * Starts an extended operation specified with oid and data.
      * Returns a message id if successful, -1 if not.
      */
-    Q_REQUIRED_RESULT int exop(const QString &oid, const QByteArray &data);
+    [[nodiscard]] int exop(const QString &oid, const QByteArray &data);
     /**
      * Performs an extended operation specified with oid and data.
      * This is the synchronous version.
      * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
      */
-    Q_REQUIRED_RESULT int exop_s(const QString &oid, const QByteArray &data);
+    [[nodiscard]] int exop_s(const QString &oid, const QByteArray &data);
     /**
      * Abandons a long-running operation. Requires the message id.
      */
-    Q_REQUIRED_RESULT int abandon(int id);
+    [[nodiscard]] int abandon(int id);
     /**
      * Waits for up to \p msecs milliseconds for a result message from the LDAP
      * server. If \p msecs is -1, then this function will block indefinitely.
@@ -227,42 +227,42 @@ public:
      * not the LDAP operation error. Call connection().ldapErrorCode() to
      * determine if the operation succeeded.
      */
-    Q_REQUIRED_RESULT int waitForResult(int id, int msecs = -1);
+    [[nodiscard]] int waitForResult(int id, int msecs = -1);
     /**
      * Returns the result object if result() returned RES_SEARCH_ENTRY.
      */
-    Q_REQUIRED_RESULT LdapObject object() const;
+    [[nodiscard]] LdapObject object() const;
     /**
      * Returns the server controls from the returned ldap message (grabbed
      * by result()).
      */
-    Q_REQUIRED_RESULT LdapControls controls() const;
+    [[nodiscard]] LdapControls controls() const;
     /**
      * Returns the OID of the extended operation response (result
      * returned RES_EXTENDED).
      */
-    Q_REQUIRED_RESULT QByteArray extendedOid() const;
+    [[nodiscard]] QByteArray extendedOid() const;
     /**
      * Returns the data from the extended operation response (result
      * returned RES_EXTENDED).
      */
-    Q_REQUIRED_RESULT QByteArray extendedData() const;
+    [[nodiscard]] QByteArray extendedData() const;
     /**
      * The server might supply a matched DN string in the message indicating
      * how much of a name in a request was recognized. This can be grabbed by
      * matchedDn().
      */
-    Q_REQUIRED_RESULT QString matchedDn() const;
+    [[nodiscard]] QString matchedDn() const;
     /**
      * This function returns the referral strings from the parsed message
      * (if any).
      */
-    Q_REQUIRED_RESULT QList<QByteArray> referrals() const;
+    [[nodiscard]] QList<QByteArray> referrals() const;
     /**
      * Returns the server response for a bind request (result
      * returned RES_BIND).
      */
-    Q_REQUIRED_RESULT QByteArray serverCred() const;
+    [[nodiscard]] QByteArray serverCred() const;
 
 private:
     class LdapOperationPrivate;

@@ -27,13 +27,13 @@ public:
     LdapWidgetItem *ldapWidgetItem() const;
     void setLdapWidgetItem(LdapWidgetItem *ldapWidgetItem);
 
-    Q_REQUIRED_RESULT int currentIndex() const;
+    [[nodiscard]] int currentIndex() const;
     void setCurrentIndex(int currentIndex);
 
-    Q_REQUIRED_RESULT bool active() const;
+    [[nodiscard]] bool active() const;
     void setActive(bool active);
 
-    Q_REQUIRED_RESULT KConfigGroup config() const;
+    [[nodiscard]] KConfigGroup config() const;
     void setConfig(const KConfigGroup &config);
 
 private:

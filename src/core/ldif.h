@@ -49,18 +49,18 @@ public:
      * @param linelen Maximum length of the lines in the result.
      * @param url If true, encode value as url ( use :< ).
      */
-    Q_REQUIRED_RESULT static QByteArray assembleLine(const QString &fieldname, const QByteArray &value, uint linelen = 0, bool url = false);
+    [[nodiscard]] static QByteArray assembleLine(const QString &fieldname, const QByteArray &value, uint linelen = 0, bool url = false);
     /**
      * This is the same as the above function, the only difference that
      * this accepts QString as the value.
      */
-    Q_REQUIRED_RESULT static QByteArray assembleLine(const QString &fieldname, const QString &value, uint linelen = 0, bool url = false);
+    [[nodiscard]] static QByteArray assembleLine(const QString &fieldname, const QString &value, uint linelen = 0, bool url = false);
 
     /**
      * Splits one line from an Ldif file to attribute and value components.
      * @return true if value is an URL, false otherwise
      */
-    Q_REQUIRED_RESULT static bool splitLine(const QByteArray &line, QString &fieldname, QByteArray &value);
+    [[nodiscard]] static bool splitLine(const QByteArray &line, QString &fieldname, QByteArray &value);
 
     /**
      * Splits a control specification (without the "control:" directive)
@@ -69,7 +69,7 @@ public:
      * @param critical will contain the criticality of control
      * @param value is the control value
      */
-    Q_REQUIRED_RESULT static bool splitControl(const QByteArray &line, QString &oid, bool &critical, QByteArray &value);
+    [[nodiscard]] static bool splitControl(const QByteArray &line, QString &oid, bool &critical, QByteArray &value);
 
     /**
      * Starts the parsing of a new Ldif
@@ -79,7 +79,7 @@ public:
     /**
      * Process one Ldif line
      */
-    Q_REQUIRED_RESULT ParseValue processLine();
+    [[nodiscard]] ParseValue processLine();
 
     /**
      * Process the Ldif until a complete item can be returned
@@ -91,7 +91,7 @@ public:
      * If you want to finish the parsing after receiving MoreData, then call
      * endLdif(), so the parser can safely flush the current entry.
      */
-    Q_REQUIRED_RESULT ParseValue nextItem();
+    [[nodiscard]] ParseValue nextItem();
 
     /**
      * Sets a chunk of Ldif. Call before startParsing(), or if nextItem()
@@ -109,23 +109,23 @@ public:
     /**
      * Returns the requested LDAP operation extracted from the current entry.
      */
-    Q_REQUIRED_RESULT EntryType entryType() const;
+    [[nodiscard]] EntryType entryType() const;
 
     /**
      * Returns the LDAP modify request type if entryType() returned Entry_Mod.
      */
-    Q_REQUIRED_RESULT int modType() const;
+    [[nodiscard]] int modType() const;
 
     /**
      * Returns the Distinguished Name of the current entry.
      */
-    Q_REQUIRED_RESULT LdapDN dn() const;
+    [[nodiscard]] LdapDN dn() const;
 
     /**
      * Returns the new Relative Distinguished Name if modType() returned
      * Entry_Modrdn.
      */
-    Q_REQUIRED_RESULT QString newRdn() const;
+    [[nodiscard]] QString newRdn() const;
 
     /**
      * Returns the new parent of the entry if modType() returned Entry_Modrdn.
@@ -135,37 +135,37 @@ public:
     /**
      * Returns if the delete of the old RDN is required.
      */
-    Q_REQUIRED_RESULT bool delOldRdn() const;
+    [[nodiscard]] bool delOldRdn() const;
 
     /**
      * Returns the attribute name.
      */
-    Q_REQUIRED_RESULT QString attr() const;
+    [[nodiscard]] QString attr() const;
 
     /**
      * Returns the attribute value.
      */
-    Q_REQUIRED_RESULT QByteArray value() const;
+    [[nodiscard]] QByteArray value() const;
 
     /**
      * Returns if val() is an url
      */
-    Q_REQUIRED_RESULT bool isUrl() const;
+    [[nodiscard]] bool isUrl() const;
 
     /**
      * Returns the criticality level when modType() returned Control.
      */
-    Q_REQUIRED_RESULT bool isCritical() const;
+    [[nodiscard]] bool isCritical() const;
 
     /**
      * Returns the OID when modType() returned Control.
      */
-    Q_REQUIRED_RESULT QString oid() const;
+    [[nodiscard]] QString oid() const;
 
     /**
      * Returns the line number which the parser processes.
      */
-    Q_REQUIRED_RESULT uint lineNumber() const;
+    [[nodiscard]] uint lineNumber() const;
 
 private:
     class LdifPrivate;

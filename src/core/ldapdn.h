@@ -30,38 +30,38 @@ public:
     /**
      * \returns A QString representing the DN.
      */
-    Q_REQUIRED_RESULT QString toString() const;
+    [[nodiscard]] QString toString() const;
 
     /**
      * \param depth The depth of the DN to return using a zero-based index.
      * \returns A QString representing the DN levels deep in the directory.
      */
-    Q_REQUIRED_RESULT QString toString(int depth) const;
+    [[nodiscard]] QString toString(int depth) const;
 
     /**
      * \returns A QString representing the RDN of this DN.
      */
-    Q_REQUIRED_RESULT QString rdnString() const;
+    [[nodiscard]] QString rdnString() const;
 
     /**
      * \param depth The depth of the RDN to return using a zero-based index.
      * \returns A QString representing the RDN levels deep in the directory.
      */
-    Q_REQUIRED_RESULT QString rdnString(int depth) const;
+    [[nodiscard]] QString rdnString(int depth) const;
 
     /**
      * \returns True if this is a valid DN, false otherwise.
      */
-    Q_REQUIRED_RESULT bool isValid() const;
+    [[nodiscard]] bool isValid() const;
 
     /**
      * \returns The depth of this DN in the directory.
      */
-    Q_REQUIRED_RESULT int depth() const;
+    [[nodiscard]] int depth() const;
 
-    Q_REQUIRED_RESULT bool operator==(const LdapDN &rhs) const;
+    [[nodiscard]] bool operator==(const LdapDN &rhs) const;
 
-    Q_REQUIRED_RESULT bool operator!=(const LdapDN &rhs) const;
+    [[nodiscard]] bool operator!=(const LdapDN &rhs) const;
 
 private:
     class LdapDNPrivate;

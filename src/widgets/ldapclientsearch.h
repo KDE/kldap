@@ -131,7 +131,7 @@ public:
      */
     void setAttributes(const QStringList &);
 
-    Q_REQUIRED_RESULT static QStringList defaultAttributes();
+    [[nodiscard]] static QStringList defaultAttributes();
 
 Q_SIGNALS:
     /**

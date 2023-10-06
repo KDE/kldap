@@ -73,23 +73,23 @@ public:
      * will be emitted when the number of entries is reached, but with
      * isFinished() set to false.
      */
-    Q_REQUIRED_RESULT bool search(const LdapServer &server, const QStringList &attributes = QStringList(), int count = 0);
+    [[nodiscard]] bool search(const LdapServer &server, const QStringList &attributes = QStringList(), int count = 0);
 
     /**
      * Starts a search operation on the given LDAP URL.
      */
-    Q_REQUIRED_RESULT bool search(const LdapUrl &url, int count = 0);
+    [[nodiscard]] bool search(const LdapUrl &url, int count = 0);
 
     /**
      * Starts a search operation if the LdapConnection object already set
      * in the constructor.
      */
-    Q_REQUIRED_RESULT bool search(const LdapDN &base,
-                                  LdapUrl::Scope scope = LdapUrl::Sub,
-                                  const QString &filter = QString(),
-                                  const QStringList &attributes = QStringList(),
-                                  int pagesize = 0,
-                                  int count = 0);
+    [[nodiscard]] bool search(const LdapDN &base,
+                              LdapUrl::Scope scope = LdapUrl::Sub,
+                              const QString &filter = QString(),
+                              const QStringList &attributes = QStringList(),
+                              int pagesize = 0,
+                              int count = 0);
 
     /**
      * Continues the search (if you set count to non-zero in search(), and isFinished() is false)
@@ -98,7 +98,7 @@ public:
     /**
      * Returns true if the search is finished else returns false.
      */
-    Q_REQUIRED_RESULT bool isFinished();
+    [[nodiscard]] bool isFinished();
     /**
      * Tries to abandon the search.
      */
@@ -107,12 +107,12 @@ public:
     /**
      * Returns the error code of the search operation (0 if no error).
      */
-    Q_REQUIRED_RESULT int error() const;
+    [[nodiscard]] int error() const;
 
     /**
      * Returns the error description of the search operation.
      */
-    Q_REQUIRED_RESULT QString errorString() const;
+    [[nodiscard]] QString errorString() const;
 
 Q_SIGNALS:
     /**

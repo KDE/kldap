@@ -24,15 +24,15 @@ public:
     ~LdapSearchClientReadConfigServerJob() override;
 
     void start();
-    Q_REQUIRED_RESULT bool canStart() const;
+    [[nodiscard]] bool canStart() const;
 
-    Q_REQUIRED_RESULT int currentIndex() const;
+    [[nodiscard]] int currentIndex() const;
     void setCurrentIndex(int currentIndex);
 
-    Q_REQUIRED_RESULT bool active() const;
+    [[nodiscard]] bool active() const;
     void setActive(bool active);
 
-    Q_REQUIRED_RESULT KConfigGroup config() const;
+    [[nodiscard]] KConfigGroup config() const;
     void setConfig(const KConfigGroup &config);
 
     LdapClient *ldapClient() const;
