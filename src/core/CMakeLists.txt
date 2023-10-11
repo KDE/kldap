@@ -32,7 +32,7 @@ endif()
 
 set(kldap_EXTRA_LIBS ${kldap_EXTRA_LIBS} Sasl2::Sasl2)
 
-configure_file(kldap_config.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/kldap_config.h)
+configure_file(kldap_config.h.in ${CMAKE_CURRENT_BINARY_DIR}/kldap_config.h)
 
 ########### next target ###############
 
