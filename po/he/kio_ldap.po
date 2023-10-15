@@ -20,15 +20,15 @@ msgstr ""
 "Project-Id-Version: kio_ldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-13 00:50+0000\n"
-"PO-Revision-Date: 2017-05-16 07:05-0400\n"
+"PO-Revision-Date: 2023-10-14 21:49+0300\n"
 "Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
 "Language-Team: Hebrew <kde-l10n-he@kde.org>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Zanata 3.9.6\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: kio_ldap.cpp:86
 #, kde-format
@@ -51,7 +51,7 @@ msgstr ""
 #: kio_ldap.cpp:292
 #, kde-format
 msgid "LDAP Login"
-msgstr "כניסת LDAP"
+msgstr "כניסה עם LDAP"
 
 #: kio_ldap.cpp:294
 #, kde-format
@@ -61,7 +61,7 @@ msgstr "אתר:"
 #: kio_ldap.cpp:319
 #, kde-format
 msgid "Invalid authorization information."
-msgstr "מידע זיהוי לא תקף."
+msgstr "פרטי זיהוי שגויים."
 
 #: kio_ldap.cpp:327
 #, kde-format
@@ -71,9 +71,9 @@ msgstr "החיבור ל־LDAP בוטל."
 #: kio_ldap.cpp:584 kio_ldap.cpp:650
 #, kde-format
 msgid "The Ldif parser failed."
-msgstr "מפרק ה־Ldif נכשל."
+msgstr "מפענח ה־Ldif נכשל."
 
 #: kio_ldap.cpp:661
 #, kde-format
 msgid "Invalid Ldif file in line %1."
-msgstr "‏Ldif לא תקף בשורה %1."
+msgstr "Ldif שגוי בשורה %1."
