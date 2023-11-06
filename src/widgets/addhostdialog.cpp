@@ -48,14 +48,14 @@ void AddHostDialog::readConfig()
 {
     create(); // ensure a window is created
     windowHandle()->resize(QSize(600, 400));
-    KConfigGroup group(KSharedConfig::openStateConfig(), myAddHostDialogPrivateGroupName);
+    KConfigGroup group(KSharedConfig::openStateConfig(), QLatin1String(myAddHostDialogPrivateGroupName));
     KWindowConfig::restoreWindowSize(windowHandle(), group);
     resize(windowHandle()->size()); // workaround for QTBUG-40584
 }
 
 void AddHostDialog::writeConfig()
 {
-    KConfigGroup group(KSharedConfig::openStateConfig(), myAddHostDialogPrivateGroupName);
+    KConfigGroup group(KSharedConfig::openStateConfig(), QLatin1String(myAddHostDialogPrivateGroupName));
     KWindowConfig::saveWindowSize(windowHandle(), group);
     group.sync();
 }

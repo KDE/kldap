@@ -190,7 +190,7 @@ void LdapConfigureWidget::load()
 {
     mHostListView->clear();
     KConfig *config = KLDAPWidgets::LdapClientSearchConfig::config();
-    KConfigGroup group(config, "LDAP");
+    KConfigGroup group(config, QLatin1String("LDAP"));
 
     int count = group.readEntry("NumSelectedHosts", 0);
     for (int i = 0; i < count; ++i) {
@@ -222,9 +222,9 @@ void LdapConfigureWidget::save()
 {
     // mClientSearchConfig->clearWalletPassword();
     KConfig *config = KLDAPWidgets::LdapClientSearchConfig::config();
-    config->deleteGroup("LDAP");
+    config->deleteGroup(QLatin1String("LDAP"));
 
-    KConfigGroup group(config, "LDAP");
+    KConfigGroup group(config, QLatin1String("LDAP"));
 
     int selected = 0;
     int unselected = 0;

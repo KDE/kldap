@@ -112,7 +112,7 @@ void LdapClientSearch::LdapClientSearchPrivate::readWeighForClient(LdapClient *c
 
 void LdapClientSearch::updateCompletionWeights()
 {
-    KConfigGroup config(KLDAPWidgets::LdapClientSearchConfig::config(), "LDAP");
+    KConfigGroup config(KLDAPWidgets::LdapClientSearchConfig::config(), QLatin1String("LDAP"));
     for (int i = 0, total = d->mClients.size(); i < total; ++i) {
         d->readWeighForClient(d->mClients[i], config, i);
     }
@@ -159,7 +159,7 @@ void LdapClientSearch::LdapClientSearchPrivate::readConfig()
     mClients.clear();
 
     // stolen from KAddressBook
-    KConfigGroup config(KLDAPWidgets::LdapClientSearchConfig::config(), "LDAP");
+    KConfigGroup config(KLDAPWidgets::LdapClientSearchConfig::config(), QLatin1String("LDAP"));
     const int numHosts = config.readEntry("NumSelectedHosts", 0);
     if (!numHosts) {
         mNoLDAPLookup = true;
