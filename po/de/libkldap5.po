@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-21 00:45+0000\n"
+"POT-Creation-Date: 2023-11-15 01:39+0000\n"
 "PO-Revision-Date: 2021-08-25 15:54+0200\n"
 "Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -120,22 +120,22 @@ msgstr "Möchten Sie die Einstellungen für den Rechner „%1“ entfernen?"
 msgid "Remove Host"
 msgstr "Rechner entfernen"
 
-#: widgets/ldapconfigurewidget.cpp:271
+#: widgets/ldapconfigurewidget.cpp:270
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Alle Rechner auswählen, die verwendet werden sollen:"
 
-#: widgets/ldapconfigurewidget.cpp:305
+#: widgets/ldapconfigurewidget.cpp:304
 #, kde-format
 msgid "&Add Host..."
 msgstr "Rechner &hinzufügen ..."
 
-#: widgets/ldapconfigurewidget.cpp:307
+#: widgets/ldapconfigurewidget.cpp:306
 #, kde-format
 msgid "&Edit Host..."
 msgstr "&Rechner bearbeiten ..."
 
-#: widgets/ldapconfigurewidget.cpp:310
+#: widgets/ldapconfigurewidget.cpp:309
 #, kde-format
 msgid "&Remove Host"
 msgstr "Rechner &entfernen"

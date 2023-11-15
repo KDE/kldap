@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-21 00:45+0000\n"
+"POT-Creation-Date: 2023-11-15 01:39+0000\n"
 "PO-Revision-Date: 2023-01-06 11:29+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -129,22 +129,22 @@ msgstr "Voulez-vous vraiment supprimer les paramètres pour l'hôte « %1 » 
 msgid "Remove Host"
 msgstr "Supprimer un hôte"
 
-#: widgets/ldapconfigurewidget.cpp:271
+#: widgets/ldapconfigurewidget.cpp:270
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Vérifier tous les serveurs devant être utilisés :"
 
-#: widgets/ldapconfigurewidget.cpp:305
+#: widgets/ldapconfigurewidget.cpp:304
 #, kde-format
 msgid "&Add Host..."
 msgstr "&Ajouter un hôte..."
 
-#: widgets/ldapconfigurewidget.cpp:307
+#: widgets/ldapconfigurewidget.cpp:306
 #, kde-format
 msgid "&Edit Host..."
 msgstr "Modifi&er un hôte..."
 
-#: widgets/ldapconfigurewidget.cpp:310
+#: widgets/ldapconfigurewidget.cpp:309
 #, kde-format
 msgid "&Remove Host"
 msgstr "Supp&rimer un hôte"

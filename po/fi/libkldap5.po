@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-21 00:45+0000\n"
+"POT-Creation-Date: 2023-11-15 01:39+0000\n"
 "PO-Revision-Date: 2021-08-22 21:01+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -119,22 +119,22 @@ msgstr "Haluatko poistaa asetuksen palvelimelta ”%1”?"
 msgid "Remove Host"
 msgstr "Poista palvelin"
 
-#: widgets/ldapconfigurewidget.cpp:271
+#: widgets/ldapconfigurewidget.cpp:270
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Valitse kaikki palvelimet, joita tulisi käyttää:"
 
-#: widgets/ldapconfigurewidget.cpp:305
+#: widgets/ldapconfigurewidget.cpp:304
 #, kde-format
 msgid "&Add Host..."
 msgstr "L&isää palvelin…"
 
-#: widgets/ldapconfigurewidget.cpp:307
+#: widgets/ldapconfigurewidget.cpp:306
 #, kde-format
 msgid "&Edit Host..."
 msgstr "&Muokkaa palvelinta…"
 
-#: widgets/ldapconfigurewidget.cpp:310
+#: widgets/ldapconfigurewidget.cpp:309
 #, kde-format
 msgid "&Remove Host"
 msgstr "P&oista palvelin"

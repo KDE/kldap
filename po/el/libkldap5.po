@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-21 00:45+0000\n"
+"POT-Creation-Date: 2023-11-15 01:39+0000\n"
 "PO-Revision-Date: 2021-07-29 08:41+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -120,22 +120,22 @@ msgstr "Θέλετε να διαγράψετε τη ρύθμιση για τον
 msgid "Remove Host"
 msgstr "Διαγραφή υπολογιστή"
 
-#: widgets/ldapconfigurewidget.cpp:271
+#: widgets/ldapconfigurewidget.cpp:270
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Να επιλεγούν όλοι οι εξυπηρετητές που θα χρησιμοποιηθούν:"
 
-#: widgets/ldapconfigurewidget.cpp:305
+#: widgets/ldapconfigurewidget.cpp:304
 #, kde-format
 msgid "&Add Host..."
 msgstr "&Προσθήκη υπολογιστή..."
 
-#: widgets/ldapconfigurewidget.cpp:307
+#: widgets/ldapconfigurewidget.cpp:306
 #, kde-format
 msgid "&Edit Host..."
 msgstr "&Επεξεργασία υπολογιατή..."
 
-#: widgets/ldapconfigurewidget.cpp:310
+#: widgets/ldapconfigurewidget.cpp:309
 #, kde-format
 msgid "&Remove Host"
 msgstr "Διαγ&ραφή υπολογιστή"
