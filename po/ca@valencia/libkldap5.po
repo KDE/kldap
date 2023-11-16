@@ -99,13 +99,13 @@ msgstr ""
 #: core/ldapsearch.cpp:222
 #, kde-format
 msgid "Cannot access to server. Please reconfigure it."
-msgstr "No s'ha pogut accedir al servidor. Torneu a configurar-lo."
+msgstr "No s'ha pogut accedir a l'amfitrió. Torneu a configurar-lo."
 
 #: widgets/addhostdialog.cpp:67
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Host"
-msgstr "Afig una màquina"
+msgstr "Afegiu un amfitrió"
 
 #: widgets/ldapconfigurewidget.cpp:95
 #, kde-format
@@ -116,7 +116,7 @@ msgstr "Edita la màquina"
 #: widgets/ldapconfigurewidget.cpp:112
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
-msgstr "Voleu eliminar la configuració per a la màquina «%1»?"
+msgstr "Voleu eliminar la configuració per a l'amfitrió «%1»?"
 
 #: widgets/ldapconfigurewidget.cpp:113
 #, kde-format
@@ -298,11 +298,3 @@ msgstr "Consulta LDAP"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "S'ha produït un error desconegut en connectar %1"
-
-#~ msgid ""
-#~ "LDAP password is stored as clear text, do you want to store it in kwallet?"
-#~ msgstr ""
-#~ "La contrasenya LDAP s'emmagatzema com a text, voleu guardar-la en KWallet?"
-
-#~ msgid "Store clear text password in Wallet"
-#~ msgstr "Guarda la contrasenya de text en la Cartera"
