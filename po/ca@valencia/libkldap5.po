@@ -99,13 +99,13 @@ msgstr ""
 #: core/ldapsearch.cpp:222
 #, kde-format
 msgid "Cannot access to server. Please reconfigure it."
-msgstr "No s'ha pogut accedir al servidor. Torneu a configurar-lo."
+msgstr "No s'ha pogut accedir a l'amfitrió. Torneu a configurar-lo."
 
 #: widgets/addhostdialog.cpp:67
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Host"
-msgstr "Afig una màquina"
+msgstr "Afegiu un amfitrió"
 
 #: widgets/ldapclientsearchconfigreadconfigjob.cpp:112
 #, kde-format
@@ -123,17 +123,17 @@ msgstr "Guarda la contrasenya de text en la Cartera"
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
-msgstr "Edita la màquina"
+msgstr "Editeu l'amfitrió"
 
 #: widgets/ldapconfigurewidget.cpp:113
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
-msgstr "Voleu eliminar la configuració per a la màquina «%1»?"
+msgstr "Voleu eliminar la configuració per a l'amfitrió «%1»?"
 
 #: widgets/ldapconfigurewidget.cpp:114
 #, kde-format
 msgid "Remove Host"
-msgstr "Elimina la màquina"
+msgstr "Elimineu l'amfitrió"
 
 #: widgets/ldapconfigurewidget.cpp:272
 #, kde-format
@@ -143,12 +143,12 @@ msgstr "Marqueu tots els servidors que s'haurien d'utilitzar:"
 #: widgets/ldapconfigurewidget.cpp:306
 #, kde-format
 msgid "&Add Host..."
-msgstr "Afi&g una màquina..."
+msgstr "&Afegiu un amfitrió..."
 
 #: widgets/ldapconfigurewidget.cpp:308
 #, kde-format
 msgid "&Edit Host..."
-msgstr "&Edita la màquina..."
+msgstr "&Edita l'amfitrió..."
 
 #: widgets/ldapconfigurewidget.cpp:311
 #, kde-format
@@ -178,7 +178,7 @@ msgstr "Contrasenya:"
 #: widgets/ldapconfigwidget.cpp:119
 #, kde-format
 msgid "Host:"
-msgstr "Màquina:"
+msgstr "Amfitrió:"
 
 #: widgets/ldapconfigwidget.cpp:128
 #, kde-format
