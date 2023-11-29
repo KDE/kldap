@@ -1,83 +1,85 @@
 # Translation of libkldap5.pot into esperanto.
 # Copyright (C) 2009 Free Software Foundation, Inc.
+# This file is distributed under the same license as the kldap package.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-03 00:47+0000\n"
-"PO-Revision-Date: 2023-03-21 22:43+0100\n"
+"PO-Revision-Date: 2023-10-01 05:27+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: pology\n"
 
 #: core/ldapconnection.cpp:124
 #, kde-format
 msgid "No LDAP Support..."
-msgstr ""
+msgstr "Neniu LDAP-subteno..."
 
 #: core/ldapconnection.cpp:239
 #, kde-format
 msgid "An error occurred during the connection initialization phase."
-msgstr ""
+msgstr "Okazis eraro dum la fazo de komencado de konekto."
 
 #: core/ldapconnection.cpp:246
 #, kde-format
 msgid "Cannot set protocol version to %1."
-msgstr ""
+msgstr "Ne povas agordi protokolversion al %1."
 
 #: core/ldapconnection.cpp:257
 #, kde-format
 msgid "Cannot set timeout to %1 second."
 msgid_plural "Cannot set timeout to %1 seconds."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Ne eblas meti eltempiĝon al %1 sekundo."
+msgstr[1] "Ne eblas meti eltempiĝon al %1 sekundoj."
 
 #: core/ldapconnection.cpp:269
 #, kde-format
 msgid "Could not set CA certificate file."
-msgstr ""
+msgstr "Ne eblis agordi CA-atestdosieron."
 
 #: core/ldapconnection.cpp:294
 #, kde-format
 msgid "Invalid TLS require certificate mode."
-msgstr ""
+msgstr "Nevalida TLS postulas atestreĝimon."
 
 #: core/ldapconnection.cpp:299
 #, kde-format
 msgid "Could not set TLS require certificate mode."
-msgstr ""
+msgstr "Ne eblis agordi TLS postulas atestreĝimon."
 
 #: core/ldapconnection.cpp:308
 #, kde-format
 msgid "Could not initialize new TLS context."
-msgstr ""
+msgstr "Ne eblis pravalorigi novan TLS-kuntekston."
 
 #: core/ldapconnection.cpp:325
 #, kde-format
 msgid "TLS support not available in the LDAP client libraries."
-msgstr ""
+msgstr "TLS-subteno ne havebla en la LDAP-klientbibliotekoj."
 
 #: core/ldapconnection.cpp:335
 #, kde-format
 msgid "Cannot set size limit."
-msgstr ""
+msgstr "Ne povas agordi limon de grandeco."
 
 #: core/ldapconnection.cpp:345
 #, kde-format
 msgid "Cannot set time limit."
-msgstr ""
+msgstr "Ne povas agordi tempolimon."
 
 #: core/ldapconnection.cpp:353
 #, kde-format
 msgid "Cannot initialize the SASL client."
-msgstr ""
+msgstr "Ne povas pravalorigi la SASL-klienton."
 
 #: core/ldapconnection.cpp:430
 #, kde-format
@@ -85,17 +87,19 @@ msgid ""
 "LDAP support not compiled in. Please recompile libkldap with the OpenLDAP "
 "(or compatible) client libraries, or complain to your distribution packagers."
 msgstr ""
+"LDAP-subteno ne kompilita. Bonvolu rekompili libkldap kun la OpenLDAP (aŭ "
+"kongruaj) klientbibliotekoj, aŭ plendi al viaj distribuaj pakistoj."
 
 #: core/ldapsearch.cpp:222
 #, kde-format
 msgid "Cannot access to server. Please reconfigure it."
-msgstr ""
+msgstr "Ne povas aliri al servilo. Bonvolu reagordi ĝin."
 
 #: widgets/addhostdialog.cpp:67
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Host"
-msgstr ""
+msgstr "Aldoni Gastiganton"
 
 #: widgets/ldapclientsearchconfigreadconfigjob.cpp:112
 #, kde-format
@@ -112,37 +116,37 @@ msgstr ""
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
-msgstr ""
+msgstr "Redakti Gastiganton"
 
 #: widgets/ldapconfigurewidget.cpp:113
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
-msgstr ""
+msgstr "Ĉu vi volas forigi agordon por gastiganto \"%1\"?"
 
 #: widgets/ldapconfigurewidget.cpp:114
 #, kde-format
 msgid "Remove Host"
-msgstr ""
+msgstr "Forigi Gastiganton"
 
 #: widgets/ldapconfigurewidget.cpp:272
 #, kde-format
 msgid "Check all servers that should be used:"
-msgstr ""
+msgstr "Kontroli ĉiujn servilojn, kiuj devus esti uzataj:"
 
 #: widgets/ldapconfigurewidget.cpp:306
 #, kde-format
 msgid "&Add Host..."
-msgstr ""
+msgstr "&Aldonu Gastiganton..."
 
 #: widgets/ldapconfigurewidget.cpp:308
 #, kde-format
 msgid "&Edit Host..."
-msgstr ""
+msgstr "R&edakti Gastiganton..."
 
 #: widgets/ldapconfigurewidget.cpp:311
 #, kde-format
 msgid "&Remove Host"
-msgstr ""
+msgstr "Fo&rigi Gastiganton"
 
 #: widgets/ldapconfigwidget.cpp:90
 #, kde-format
@@ -152,12 +156,12 @@ msgstr "Uzanto:"
 #: widgets/ldapconfigwidget.cpp:97
 #, kde-format
 msgid "Bind DN:"
-msgstr ""
+msgstr "Ligi DN:"
 
 #: widgets/ldapconfigwidget.cpp:104
 #, kde-format
 msgid "Realm:"
-msgstr ""
+msgstr "Sfero:"
 
 #: widgets/ldapconfigwidget.cpp:112
 #, kde-format
@@ -177,18 +181,18 @@ msgstr "Pordo:"
 #: widgets/ldapconfigwidget.cpp:136
 #, kde-format
 msgid "LDAP version:"
-msgstr ""
+msgstr "LDAP-versio:"
 
 #: widgets/ldapconfigwidget.cpp:144
 #, kde-format
 msgctxt "default ldap size limit"
 msgid "Default"
-msgstr ""
+msgstr "Defaŭlte"
 
 #: widgets/ldapconfigwidget.cpp:145
 #, kde-format
 msgid "Size limit:"
-msgstr ""
+msgstr "Grandeca limo:"
 
 #: widgets/ldapconfigwidget.cpp:153
 #, kde-format
@@ -199,7 +203,7 @@ msgstr " s"
 #, kde-format
 msgctxt "default ldap time limit"
 msgid "Default"
-msgstr ""
+msgstr "Defaŭlte"
 
 #: widgets/ldapconfigwidget.cpp:155
 #, kde-format
@@ -209,7 +213,7 @@ msgstr "Tempolimo:"
 #: widgets/ldapconfigwidget.cpp:163
 #, kde-format
 msgid "No paging"
-msgstr ""
+msgstr "Neniu paĝigo"
 
 #: widgets/ldapconfigwidget.cpp:164
 #, kde-format
@@ -219,13 +223,13 @@ msgstr "Paĝgrando"
 #: widgets/ldapconfigwidget.cpp:175 widgets/ldapconfigwidget.cpp:253
 #, kde-format
 msgid "Query Server"
-msgstr ""
+msgstr "Demandservilo"
 
 #: widgets/ldapconfigwidget.cpp:185
 #, kde-format
 msgctxt "Distinguished Name"
 msgid "DN:"
-msgstr ""
+msgstr "DN:"
 
 #: widgets/ldapconfigwidget.cpp:192
 #, kde-format
@@ -236,7 +240,7 @@ msgstr "Filtrilo:"
 #, kde-format
 msgctxt "@option:radio set no security"
 msgid "No"
-msgstr ""
+msgstr "Ne"
 
 #: widgets/ldapconfigwidget.cpp:204
 #, kde-format
@@ -259,13 +263,13 @@ msgstr "Sekureco:"
 #, kde-format
 msgctxt "@option:radio anonymous authentication"
 msgid "Anonymous"
-msgstr ""
+msgstr "Anonima"
 
 #: widgets/ldapconfigwidget.cpp:235
 #, kde-format
 msgctxt "@option:radio simple authentication"
 msgid "Simple"
-msgstr ""
+msgstr "Simpla"
 
 #: widgets/ldapconfigwidget.cpp:238
 #, kde-format
@@ -281,12 +285,12 @@ msgstr "Aŭtentigo:"
 #: widgets/ldapconfigwidget.cpp:259
 #, kde-format
 msgid "SASL mechanism:"
-msgstr ""
+msgstr "SASL-mekanismo:"
 
 #: widgets/ldapconfigwidget.cpp:303
 #, kde-format
 msgid "Check server"
-msgstr ""
+msgstr "Kontroli servilon"
 
 #: widgets/ldapconfigwidget.cpp:309
 #, kde-format
@@ -298,4 +302,4 @@ msgstr "LDAP Query"
 #, kde-format
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
-msgstr ""
+msgstr "Nekonata eraro konektante %1"
