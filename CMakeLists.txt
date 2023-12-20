@@ -80,7 +80,7 @@ if (Ldap_FOUND)
    set(LDAP_FOUND 1)
 endif()
 
-add_definitions(-DTRANSLATION_DOMAIN=\"libkldap5\")
+add_definitions(-DTRANSLATION_DOMAIN=\"libkldap6\")
 
 
 ########### Targets ###########
