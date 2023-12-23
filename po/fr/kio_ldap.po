@@ -4,7 +4,7 @@
 # Matthieu Robin <kde@macolu.org>, 2004.
 # Nicolas Ternisien <nicolas.ternisien@gmail.com>, 2005.
 # Sébastien Renard <Sebastien.Renard@digitalfox.org>, 2007.
-# xavier <xavier.besnard@neuf.fr>, 2013.
+# Xavier Besnard <xavier.besnard@kde.org>, 2013.
 msgid ""
 msgstr ""
 "Project-Id-Version: kio_ldap\n"
