@@ -1,100 +1,98 @@
+# translation of libkldap.po to Francais
+# Copyright (C) YEAR This_file_is_part_of_KDE
+# This file is distributed under the same license as the PACKAGE package.
+# Johann Schaeffer <johann.schaeffer@gmail.com>, 2007, 2008.
+# Sébastien Renard <Sebastien.Renard@digitalfox.org>, 2008.
+# Mickael Sibelle <kimael@gmail.com>, 2008.
+# Xavier Besnard <xavier.besnard@kde.org>, 2012, 2013, 2020, 2021.
+# Vincent Pinon <vpinon@kde.org>, 2017, 2018.
+# Simon Depiets <sdepiets@gmail.com>, 2018, 2019.
+# Xavier Besnard <xavier.besnard@kde.org>, 2023.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: kldap\n"
+"Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-03 00:47+0000\n"
-"PO-Revision-Date: 2023-12-22 05:31+0100\n"
-"Last-Translator: KDE Francophone <kde-francophone@kde.org>\n"
-"Language-Team: KDE Francophone <kde-francophone@kde.org>\n"
+"PO-Revision-Date: 2023-01-06 11:29+0100\n"
+"Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
+"Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 22.12.0\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
 
 #: core/ldapconnection.cpp:124
-#, fuzzy, kde-format
-#| msgid "No LDAP Support..."
+#, kde-format
 msgid "No LDAP Support..."
 msgstr "Aucune prise en charge du « LDAP »..."
 
 #: core/ldapconnection.cpp:239
-#, fuzzy, kde-format
-#| msgid "An error occurred during the connection initialization phase."
+#, kde-format
 msgid "An error occurred during the connection initialization phase."
 msgstr ""
 "Une erreur s'est produite pendant la phase d'initialisation de connexion."
 
 #: core/ldapconnection.cpp:246
-#, fuzzy, kde-format
-#| msgid "Cannot set protocol version to %1."
+#, kde-format
 msgid "Cannot set protocol version to %1."
 msgstr "Impossible de définir la version du protocole à %1."
 
 #: core/ldapconnection.cpp:257
-#, fuzzy, kde-format
-#| msgid "Cannot set timeout to %1 second."
-#| msgid_plural "Cannot set timeout to %1 seconds."
+#, kde-format
 msgid "Cannot set timeout to %1 second."
 msgid_plural "Cannot set timeout to %1 seconds."
 msgstr[0] "Impossible de régler le temps d'attente limite à %1 seconde."
 msgstr[1] "Impossible de régler le temps d'attente limite à %1 secondes."
 
 #: core/ldapconnection.cpp:269
-#, fuzzy, kde-format
-#| msgid "Could not set CA certificate file."
+#, kde-format
 msgid "Could not set CA certificate file."
 msgstr "Impossible de définir le fichier de certificat CA."
 
 #: core/ldapconnection.cpp:294
-#, fuzzy, kde-format
-#| msgid "Invalid TLS require certificate mode."
+#, kde-format
 msgid "Invalid TLS require certificate mode."
 msgstr "Mode de certificat exigé par TLS non valable."
 
 #: core/ldapconnection.cpp:299
-#, fuzzy, kde-format
-#| msgid "Could not set TLS require certificate mode."
+#, kde-format
 msgid "Could not set TLS require certificate mode."
 msgstr "Impossible de définir le mode de certificat exigé par « TLS »."
 
 #: core/ldapconnection.cpp:308
-#, fuzzy, kde-format
-#| msgid "Could not initialize new TLS context."
+#, kde-format
 msgid "Could not initialize new TLS context."
 msgstr "Impossible d'initialiser un nouveau contexte TLS."
 
 #: core/ldapconnection.cpp:325
-#, fuzzy, kde-format
-#| msgid "TLS support not available in the LDAP client libraries."
+#, kde-format
 msgid "TLS support not available in the LDAP client libraries."
 msgstr ""
 "L'option « TLS » n'est pas disponible dans les bibliothèques du client LDAP."
 
 #: core/ldapconnection.cpp:335
-#, fuzzy, kde-format
-#| msgid "Cannot set size limit."
+#, kde-format
 msgid "Cannot set size limit."
 msgstr "Impossible de régler la taille limite."
 
 #: core/ldapconnection.cpp:345
-#, fuzzy, kde-format
-#| msgid "Cannot set time limit."
+#, kde-format
 msgid "Cannot set time limit."
 msgstr "Impossible de régler le temps limite."
 
 #: core/ldapconnection.cpp:353
-#, fuzzy, kde-format
-#| msgid "Cannot initialize the SASL client."
+#, kde-format
 msgid "Cannot initialize the SASL client."
 msgstr "Impossible d'initialiser le client « SASL »."
 
 #: core/ldapconnection.cpp:430
-#, fuzzy, kde-format
-#| msgid ""
-#| "LDAP support not compiled in. Please recompile libkldap with the OpenLDAP "
-#| "(or compatible) client libraries, or complain to your distribution "
-#| "packagers."
+#, kde-format
 msgid ""
 "LDAP support not compiled in. Please recompile libkldap with the OpenLDAP "
 "(or compatible) client libraries, or complain to your distribution packagers."
@@ -105,23 +103,18 @@ msgstr ""
 "distribution.kcm_bluetooth.po"
 
 #: core/ldapsearch.cpp:222
-#, fuzzy, kde-format
-#| msgid "Cannot access to server. Please reconfigure it."
+#, kde-format
 msgid "Cannot access to server. Please reconfigure it."
 msgstr "Impossible d'accéder au serveur. Veuillez le reconfigurer."
 
 #: widgets/addhostdialog.cpp:67
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Add Host"
+#, kde-format
 msgctxt "@title:window"
 msgid "Add Host"
 msgstr "Ajouter un hôte"
 
 #: widgets/ldapclientsearchconfigreadconfigjob.cpp:112
-#, fuzzy, kde-format
-#| msgid ""
-#| "LDAP password is stored as clear text, do you want to store it in kwallet?"
+#, kde-format
 msgid ""
 "LDAP password is stored as clear text, do you want to store it in kwallet?"
 msgstr ""
@@ -129,247 +122,198 @@ msgstr ""
 "l'enregistrer dans KWallet ?"
 
 #: widgets/ldapclientsearchconfigreadconfigjob.cpp:113
-#, fuzzy, kde-format
-#| msgid "Store clear text password in Wallet"
+#, kde-format
 msgid "Store clear text password in Wallet"
 msgstr "Enregistrer le mot de passe comme texte en clair dans le portefeuille"
 
 #: widgets/ldapconfigurewidget.cpp:96
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Edit Host"
+#, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "Modifier un hôte"
 
 #: widgets/ldapconfigurewidget.cpp:113
-#, fuzzy, kde-format
-#| msgid "Do you want to remove setting for host \"%1\"?"
+#, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Voulez-vous vraiment supprimer les paramètres pour l'hôte « %1 » ?"
 
 #: widgets/ldapconfigurewidget.cpp:114
-#, fuzzy, kde-format
-#| msgid "Remove Host"
+#, kde-format
 msgid "Remove Host"
 msgstr "Supprimer un hôte"
 
 #: widgets/ldapconfigurewidget.cpp:272
-#, fuzzy, kde-format
-#| msgid "Check all servers that should be used:"
+#, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Vérifier tous les serveurs devant être utilisés :"
 
 #: widgets/ldapconfigurewidget.cpp:306
-#, fuzzy, kde-format
-#| msgid "&Add Host..."
+#, kde-format
 msgid "&Add Host..."
 msgstr "&Ajouter un hôte..."
 
 #: widgets/ldapconfigurewidget.cpp:308
-#, fuzzy, kde-format
-#| msgid "&Edit Host..."
+#, kde-format
 msgid "&Edit Host..."
 msgstr "Modifi&er un hôte..."
 
 #: widgets/ldapconfigurewidget.cpp:311
-#, fuzzy, kde-format
-#| msgid "&Remove Host"
+#, kde-format
 msgid "&Remove Host"
 msgstr "Supp&rimer un hôte"
 
 #: widgets/ldapconfigwidget.cpp:90
-#, fuzzy, kde-format
-#| msgid "User:"
+#, kde-format
 msgid "User:"
 msgstr "Utilisateur :"
 
 #: widgets/ldapconfigwidget.cpp:97
-#, fuzzy, kde-format
-#| msgid "Bind DN:"
+#, kde-format
 msgid "Bind DN:"
 msgstr "Nom de domaine de connexion :"
 
 #: widgets/ldapconfigwidget.cpp:104
-#, fuzzy, kde-format
-#| msgid "Realm:"
+#, kde-format
 msgid "Realm:"
 msgstr "Domaine :"
 
 #: widgets/ldapconfigwidget.cpp:112
-#, fuzzy, kde-format
-#| msgid "Password:"
+#, kde-format
 msgid "Password:"
 msgstr "Mot de passe :"
 
 #: widgets/ldapconfigwidget.cpp:119
-#, fuzzy, kde-format
-#| msgid "Host:"
+#, kde-format
 msgid "Host:"
 msgstr "Hôte :"
 
 #: widgets/ldapconfigwidget.cpp:128
-#, fuzzy, kde-format
-#| msgid "Port:"
+#, kde-format
 msgid "Port:"
 msgstr " Port :"
 
 #: widgets/ldapconfigwidget.cpp:136
-#, fuzzy, kde-format
-#| msgid "LDAP version:"
+#, kde-format
 msgid "LDAP version:"
 msgstr "Version LDAP :"
 
 #: widgets/ldapconfigwidget.cpp:144
-#, fuzzy, kde-format
-#| msgctxt "default ldap size limit"
-#| msgid "Default"
+#, kde-format
 msgctxt "default ldap size limit"
 msgid "Default"
 msgstr "Par défaut"
 
 #: widgets/ldapconfigwidget.cpp:145
-#, fuzzy, kde-format
-#| msgid "Size limit:"
+#, kde-format
 msgid "Size limit:"
 msgstr "Taille limite :"
 
 #: widgets/ldapconfigwidget.cpp:153
-#, fuzzy, kde-format
-#| msgid " sec"
+#, kde-format
 msgid " sec"
 msgstr " seconde"
 
 #: widgets/ldapconfigwidget.cpp:154
-#, fuzzy, kde-format
-#| msgctxt "default ldap time limit"
-#| msgid "Default"
+#, kde-format
 msgctxt "default ldap time limit"
 msgid "Default"
 msgstr "Par défaut"
 
 #: widgets/ldapconfigwidget.cpp:155
-#, fuzzy, kde-format
-#| msgid "Time limit:"
+#, kde-format
 msgid "Time limit:"
 msgstr "Temps limite :"
 
 #: widgets/ldapconfigwidget.cpp:163
-#, fuzzy, kde-format
-#| msgid "No paging"
+#, kde-format
 msgid "No paging"
 msgstr "Aucune pagination"
 
 #: widgets/ldapconfigwidget.cpp:164
-#, fuzzy, kde-format
-#| msgid "Page size:"
+#, kde-format
 msgid "Page size:"
 msgstr "Taille de la page :"
 
 #: widgets/ldapconfigwidget.cpp:175 widgets/ldapconfigwidget.cpp:253
-#, fuzzy, kde-format
-#| msgid "Query Server"
+#, kde-format
 msgid "Query Server"
 msgstr "Interroger un serveur"
 
 #: widgets/ldapconfigwidget.cpp:185
-#, fuzzy, kde-format
-#| msgctxt "Distinguished Name"
-#| msgid "DN:"
+#, kde-format
 msgctxt "Distinguished Name"
 msgid "DN:"
 msgstr "Nom de domaine :"
 
 #: widgets/ldapconfigwidget.cpp:192
-#, fuzzy, kde-format
-#| msgid "Filter:"
+#, kde-format
 msgid "Filter:"
 msgstr "Filtre :"
 
 #: widgets/ldapconfigwidget.cpp:201
-#, fuzzy, kde-format
-#| msgctxt "@option:radio set no security"
-#| msgid "No"
+#, kde-format
 msgctxt "@option:radio set no security"
 msgid "No"
 msgstr "Non"
 
 #: widgets/ldapconfigwidget.cpp:204
-#, fuzzy, kde-format
-#| msgctxt "@option:radio use TLS security"
-#| msgid "TLS"
+#, kde-format
 msgctxt "@option:radio use TLS security"
 msgid "TLS"
 msgstr "Chiffrement « TLS »"
 
 #: widgets/ldapconfigwidget.cpp:207
-#, fuzzy, kde-format
-#| msgctxt "@option:radio use SSL security"
-#| msgid "SSL"
+#, kde-format
 msgctxt "@option:radio use SSL security"
 msgid "SSL"
 msgstr "SSL"
 
 #: widgets/ldapconfigwidget.cpp:222
-#, fuzzy, kde-format
-#| msgid "Security:"
+#, kde-format
 msgid "Security:"
 msgstr "Sécurité :"
 
 #: widgets/ldapconfigwidget.cpp:232
-#, fuzzy, kde-format
-#| msgctxt "@option:radio anonymous authentication"
-#| msgid "Anonymous"
+#, kde-format
 msgctxt "@option:radio anonymous authentication"
 msgid "Anonymous"
 msgstr "Anonyme"
 
 #: widgets/ldapconfigwidget.cpp:235
-#, fuzzy, kde-format
-#| msgctxt "@option:radio simple authentication"
-#| msgid "Simple"
+#, kde-format
 msgctxt "@option:radio simple authentication"
 msgid "Simple"
 msgstr "Simple"
 
 #: widgets/ldapconfigwidget.cpp:238
-#, fuzzy, kde-format
-#| msgctxt "@option:radio SASL authentication"
-#| msgid "SASL"
+#, kde-format
 msgctxt "@option:radio SASL authentication"
 msgid "SASL"
 msgstr "SASL"
 
 #: widgets/ldapconfigwidget.cpp:241
-#, fuzzy, kde-format
-#| msgid "Authentication:"
+#, kde-format
 msgid "Authentication:"
 msgstr "Authentification :"
 
 #: widgets/ldapconfigwidget.cpp:259
-#, fuzzy, kde-format
-#| msgid "SASL mechanism:"
+#, kde-format
 msgid "SASL mechanism:"
 msgstr "Mécanisme « SASL » :"
 
 #: widgets/ldapconfigwidget.cpp:303
-#, fuzzy, kde-format
-#| msgid "Check server"
+#, kde-format
 msgid "Check server"
 msgstr "Vérifier le serveur"
 
 #: widgets/ldapconfigwidget.cpp:309
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "LDAP Query"
+#, kde-format
 msgctxt "@title:window"
 msgid "LDAP Query"
 msgstr "Requête LDAP"
 
 #: widgets/ldapconfigwidget.cpp:323
-#, fuzzy, kde-format
-#| msgctxt "%1 is a url to ldap server"
-#| msgid "Unknown error connecting %1"
+#, kde-format
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "Erreur inconnue lors de la connexion %1"
