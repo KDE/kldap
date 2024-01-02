@@ -15,7 +15,7 @@
 #include <kldapcore/ldapurl.h>
 #include <kldapcore/ldif.h>
 
-#include <KIO/Job>
+#include <KIO/TransferJob>
 
 #include <QPointer>
 
