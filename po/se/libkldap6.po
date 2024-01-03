@@ -1,4 +1,4 @@
-# Translation of libkldap5 to Northern Sami
+# Translation of libkldap6 to Northern Sami
 #
 msgid ""
 msgstr ""
