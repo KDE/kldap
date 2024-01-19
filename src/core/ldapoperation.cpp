@@ -227,7 +227,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds, SASL_Call
     int ret;
 
     if (server.auth() == LdapServer::SASL) {
-#if !defined(HAVE_WINLDAP_H)
+#if !HAVE_WINLDAP_H
         auto saslconn = (sasl_conn_t *)mConnection->saslHandle();
         sasl_interact_t *client_interact = nullptr;
         const char *out = nullptr;
