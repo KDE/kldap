@@ -27,6 +27,7 @@ kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 
 include(ECMQtDeclareLoggingCategory)
 include(ECMDeprecationSettings)
+include(ECMFeatureSummary)
 include(ECMAddQch)
 
 set(KLDAP_LIB_VERSION ${PIM_VERSION})
@@ -98,4 +99,4 @@ ki18n_install(po)
 if(KF6DocTools_FOUND)
 	kdoctools_install(po)
 endif()
-feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
+ecm_feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
