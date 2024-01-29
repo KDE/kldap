@@ -279,13 +279,13 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::sendQuery()
     mQResult.clear();
     mCancelled = true;
 
-    if (mAttr == QLatin1String("supportedsaslmechanisms")) {
+    if (mAttr == QLatin1StringView("supportedsaslmechanisms")) {
         _server.setAuth(KLDAPCore::LdapServer::Anonymous);
     }
 
     KLDAPCore::LdapUrl _url(_server.url());
 
-    _url.setDn(KLDAPCore::LdapDN(QLatin1String("")));
+    _url.setDn(KLDAPCore::LdapDN(QLatin1StringView("")));
     _url.setAttributes(QStringList(mAttr));
     _url.setScope(KLDAPCore::LdapUrl::Base);
 

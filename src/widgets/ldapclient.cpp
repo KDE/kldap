@@ -107,12 +107,12 @@ void LdapClient::startQuery(const QString &filter)
     KLDAPCore::LdapUrl url{d->mServer.url()};
 
     url.setAttributes(d->mAttrs);
-    url.setScope(d->mScope == QLatin1String("one") ? KLDAPCore::LdapUrl::One : KLDAPCore::LdapUrl::Sub);
+    url.setScope(d->mScope == QLatin1StringView("one") ? KLDAPCore::LdapUrl::One : KLDAPCore::LdapUrl::Sub);
     const QString userFilter = url.filter();
     QString finalFilter = filter;
     // combine the filter set by the user in the config dialog (url.filter()) and the filter from this query
     if (!userFilter.isEmpty()) {
-        finalFilter = QLatin1String("&(") + finalFilter + QLatin1String(")(") + userFilter + QLatin1Char(')');
+        finalFilter = QLatin1StringView("&(") + finalFilter + QLatin1String(")(") + userFilter + QLatin1Char(')');
     }
     url.setFilter(QLatin1Char('(') + finalFilter + QLatin1Char(')'));
 
@@ -188,7 +188,7 @@ void LdapClient::LdapClientPrivate::finishCurrentObject()
     KLDAPCore::LdapAttrValue objectclasses;
     const KLDAPCore::LdapAttrMap::ConstIterator end = mCurrentObject.attributes().constEnd();
     for (KLDAPCore::LdapAttrMap::ConstIterator it = mCurrentObject.attributes().constBegin(); it != end; ++it) {
-        if (it.key().toLower() == QLatin1String("objectclass")) {
+        if (it.key().toLower() == QLatin1StringView("objectclass")) {
             objectclasses = it.value();
             break;
         }
@@ -212,7 +212,7 @@ void LdapClient::LdapClientPrivate::finishCurrentObject()
             const QStringList lMail = mCurrentObject.dn().toString().split(QStringLiteral(",dc="), Qt::SkipEmptyParts);
             const int n = lMail.count();
             if (n) {
-                if (lMail.first().startsWith(QLatin1String("cn="), Qt::CaseInsensitive)) {
+                if (lMail.first().startsWith(QLatin1StringView("cn="), Qt::CaseInsensitive)) {
                     sMail = lMail.first().simplified().mid(3);
                     if (1 < n) {
                         sMail.append(QLatin1Char('@'));

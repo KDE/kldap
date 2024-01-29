@@ -220,7 +220,7 @@ int LdapConnection::connect()
     int timeout = d->mServer.timeout();
 
     url = d->mServer.security() == LdapServer::SSL ? QStringLiteral("ldaps") : QStringLiteral("ldap");
-    url += QLatin1String("://");
+    url += QLatin1StringView("://");
     url += d->mServer.host();
     url += QLatin1Char(':');
     url += QString::number(d->mServer.port());

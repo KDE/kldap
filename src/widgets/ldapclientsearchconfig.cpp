@@ -20,7 +20,7 @@ public:
     ~LdapClientSearchConfigPrivate() = default;
 };
 
-Q_GLOBAL_STATIC_WITH_ARGS(KConfig, s_config, (QLatin1String("kabldaprc"), KConfig::NoGlobals))
+Q_GLOBAL_STATIC_WITH_ARGS(KConfig, s_config, (QLatin1StringView("kabldaprc"), KConfig::NoGlobals))
 
 KConfig *LdapClientSearchConfig::config()
 {

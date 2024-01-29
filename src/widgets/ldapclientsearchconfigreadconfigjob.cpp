@@ -108,17 +108,17 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
 
     QString tmp = mConfig.readEntry(prefix + QStringLiteral("Security%1").arg(mServerIndex), QStringLiteral("None"));
     mServer.setSecurity(KLDAPCore::LdapServer::None);
-    if (tmp == QLatin1String("SSL")) {
+    if (tmp == QLatin1StringView("SSL")) {
         mServer.setSecurity(KLDAPCore::LdapServer::SSL);
-    } else if (tmp == QLatin1String("TLS")) {
+    } else if (tmp == QLatin1StringView("TLS")) {
         mServer.setSecurity(KLDAPCore::LdapServer::TLS);
     }
 
     tmp = mConfig.readEntry(prefix + QStringLiteral("Auth%1").arg(mServerIndex), QStringLiteral("Anonymous"));
     mServer.setAuth(KLDAPCore::LdapServer::Anonymous);
-    if (tmp == QLatin1String("Simple")) {
+    if (tmp == QLatin1StringView("Simple")) {
         mServer.setAuth(KLDAPCore::LdapServer::Simple);
-    } else if (tmp == QLatin1String("SASL")) {
+    } else if (tmp == QLatin1StringView("SASL")) {
         mServer.setAuth(KLDAPCore::LdapServer::SASL);
     }
 

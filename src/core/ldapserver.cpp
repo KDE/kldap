@@ -294,7 +294,7 @@ void LdapServer::setUrl(const LdapUrl &url)
     d->mFilter = url.filter();
 
     d->mSecurity = None;
-    if (url.scheme() == QLatin1String("ldaps")) {
+    if (url.scheme() == QLatin1StringView("ldaps")) {
         d->mSecurity = SSL;
     } else if (url.hasExtension(QStringLiteral("x-tls"))) {
         d->mSecurity = TLS;

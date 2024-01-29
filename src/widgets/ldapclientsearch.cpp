@@ -327,7 +327,7 @@ void LdapClientSearch::LdapClientSearchPrivate::makeSearchData(QStringList &ret,
             }
             const QString tmp = QString::fromUtf8(val.constData(), len);
             // qCDebug(LDAPCLIENT_LOG) <<"      key: \"" << it2.key() <<"\" value: \"" << tmp <<"\"";
-            if (it2.key() == QLatin1String("cn")) {
+            if (it2.key() == QLatin1StringView("cn")) {
                 name = tmp;
                 if (mail.isEmpty()) {
                     mail = tmp;
@@ -340,7 +340,7 @@ void LdapClientSearch::LdapClientSearchPrivate::makeSearchData(QStringList &ret,
                     mail.prepend(tmp);
                 }
                 wasCN = true;
-            } else if (it2.key() == QLatin1String("dc")) {
+            } else if (it2.key() == QLatin1StringView("dc")) {
                 if (mail.isEmpty()) {
                     mail = tmp;
                 } else {
@@ -352,17 +352,17 @@ void LdapClientSearch::LdapClientSearchPrivate::makeSearchData(QStringList &ret,
                     mail.append(tmp);
                 }
                 wasDC = true;
-            } else if (it2.key() == QLatin1String("mail")) {
+            } else if (it2.key() == QLatin1StringView("mail")) {
                 mail = tmp;
                 KLDAPCore::LdapAttrValue::ConstIterator it3 = it2.value().constBegin();
                 for (; it3 != it2.value().constEnd(); ++it3) {
                     mails.append(QString::fromUtf8((*it3).data(), (*it3).size()));
                 }
-            } else if (it2.key() == QLatin1String("givenName")) {
+            } else if (it2.key() == QLatin1StringView("givenName")) {
                 givenname = tmp;
-            } else if (it2.key() == QLatin1String("sn")) {
+            } else if (it2.key() == QLatin1StringView("sn")) {
                 sn = tmp;
-            } else if (it2.key() == QLatin1String("objectClass") && (tmp == QLatin1String("groupOfNames") || tmp == QLatin1String("kolabGroupOfNames"))) {
+            } else if (it2.key() == QLatin1StringView("objectClass") && (tmp == QLatin1String("groupOfNames") || tmp == QLatin1String("kolabGroupOfNames"))) {
                 isDistributionList = true;
             }
         }

@@ -62,7 +62,7 @@ QByteArray Ldif::assembleLine(const QString &fieldname, const QByteArray &value,
         result = fieldname.toUtf8() + ":< " + value;
     } else {
         bool safe = false;
-        bool isDn = fieldname.toLower() == QLatin1String("dn");
+        bool isDn = fieldname.toLower() == QLatin1StringView("dn");
         // SAFE-INIT-CHAR
         if (!value.isEmpty() && value[0] > 0 && value[0] != '\n' && value[0] != '\r' && value[0] != ':' && value[0] != '<') {
             safe = true;
@@ -115,7 +115,7 @@ bool Ldif::splitLine(const QByteArray &line, QString &fieldname, QByteArray &val
     position = line.indexOf(":");
     if (position == -1) {
         // strange: we did not find a fieldname
-        fieldname = QLatin1String("");
+        fieldname = QLatin1StringView("");
         value = line.trimmed();
         //    qCDebug(LDAP_LOG) << "value :" << value[0];
         return false;
@@ -163,10 +163,10 @@ bool Ldif::splitControl(const QByteArray &line, QString &oid, bool &critical, QB
         tmp = QString::fromUtf8(value);
         value.resize(0);
     }
-    if (tmp.endsWith(QLatin1String("true"))) {
+    if (tmp.endsWith(QLatin1StringView("true"))) {
         critical = true;
         tmp.chop(5);
-    } else if (tmp.endsWith(QLatin1String("false"))) {
+    } else if (tmp.endsWith(QLatin1StringView("false"))) {
         critical = false;
         tmp.chop(6);
     }
@@ -191,37 +191,37 @@ Ldif::ParseValue Ldif::processLine()
 
     switch (d->mEntryType) {
     case Entry_None:
-        if (attrLower == QLatin1String("version")) {
+        if (attrLower == QLatin1StringView("version")) {
             if (!d->mDn.isEmpty()) {
                 retval = Err;
             }
-        } else if (attrLower == QLatin1String("dn")) {
+        } else if (attrLower == QLatin1StringView("dn")) {
             qCDebug(LDAP_LOG) << "ldapentry dn:" << QString::fromUtf8(d->mValue);
             d->mDn = LdapDN(QString::fromUtf8(d->mValue));
             d->mModType = Mod_None;
             retval = NewEntry;
-        } else if (attrLower == QLatin1String("changetype")) {
+        } else if (attrLower == QLatin1StringView("changetype")) {
             if (d->mDn.isEmpty()) {
                 retval = Err;
             } else {
                 QString tmpval = QString::fromUtf8(d->mValue);
                 qCDebug(LDAP_LOG) << "changetype:" << tmpval;
-                if (tmpval == QLatin1String("add")) {
+                if (tmpval == QLatin1StringView("add")) {
                     d->mEntryType = Entry_Add;
-                } else if (tmpval == QLatin1String("delete")) {
+                } else if (tmpval == QLatin1StringView("delete")) {
                     d->mEntryType = Entry_Del;
-                } else if (tmpval == QLatin1String("modrdn") || tmpval == QLatin1String("moddn")) {
+                } else if (tmpval == QLatin1StringView("modrdn") || tmpval == QLatin1String("moddn")) {
                     d->mNewRdn.clear();
                     d->mNewSuperior.clear();
                     d->mDelOldRdn = true;
                     d->mEntryType = Entry_Modrdn;
-                } else if (tmpval == QLatin1String("modify")) {
+                } else if (tmpval == QLatin1StringView("modify")) {
                     d->mEntryType = Entry_Mod;
                 } else {
                     retval = Err;
                 }
             }
-        } else if (attrLower == QLatin1String("control")) {
+        } else if (attrLower == QLatin1StringView("control")) {
             d->mUrl = splitControl(d->mValue, d->mOid, d->mCritical, d->mValue);
             retval = Control;
         } else if (!d->mAttr.isEmpty() && !d->mValue.isEmpty()) {
@@ -248,14 +248,14 @@ Ldif::ParseValue Ldif::processLine()
             qCDebug(LDAP_LOG) << "new modtype" << d->mAttr;
             if (d->mAttr.isEmpty() && d->mValue.isEmpty()) {
                 retval = EndEntry;
-            } else if (attrLower == QLatin1String("add")) {
+            } else if (attrLower == QLatin1StringView("add")) {
                 d->mModType = Mod_Add;
-            } else if (attrLower == QLatin1String("replace")) {
+            } else if (attrLower == QLatin1StringView("replace")) {
                 d->mModType = Mod_Replace;
                 d->mAttr = QString::fromUtf8(d->mValue);
                 d->mValue = QByteArray();
                 retval = Item;
-            } else if (attrLower == QLatin1String("delete")) {
+            } else if (attrLower == QLatin1StringView("delete")) {
                 d->mModType = Mod_Del;
                 d->mAttr = QString::fromUtf8(d->mValue);
                 d->mValue = QByteArray();
@@ -265,7 +265,7 @@ Ldif::ParseValue Ldif::processLine()
             }
         } else {
             if (d->mAttr.isEmpty()) {
-                if (QString::fromUtf8(d->mValue) == QLatin1String("-")) {
+                if (QString::fromUtf8(d->mValue) == QLatin1StringView("-")) {
                     d->mModType = Mod_None;
                 } else if (d->mValue.isEmpty()) {
                     retval = EndEntry;
@@ -280,11 +280,11 @@ Ldif::ParseValue Ldif::processLine()
     case Entry_Modrdn:
         if (d->mAttr.isEmpty() && d->mValue.isEmpty()) {
             retval = EndEntry;
-        } else if (attrLower == QLatin1String("newrdn")) {
+        } else if (attrLower == QLatin1StringView("newrdn")) {
             d->mNewRdn = QString::fromUtf8(d->mValue);
-        } else if (attrLower == QLatin1String("newsuperior")) {
+        } else if (attrLower == QLatin1StringView("newsuperior")) {
             d->mNewSuperior = QString::fromUtf8(d->mValue);
-        } else if (attrLower == QLatin1String("deleteoldrdn")) {
+        } else if (attrLower == QLatin1StringView("deleteoldrdn")) {
             if (d->mValue.size() > 0 && d->mValue[0] == '0') {
                 d->mDelOldRdn = false;
             } else if (d->mValue.size() > 0 && d->mValue[0] == '1') {
