@@ -16,9 +16,9 @@
 
 #include "ldapclient.h"
 
-#include <kldapcore/ldapserver.h>
-#include <kldapcore/ldapurl.h>
-#include <kldapcore/ldif.h>
+#include "kldapcore/ldapserver.h"
+#include "kldapcore/ldapurl.h"
+#include "kldapcore/ldif.h"
 
 #include <KConfig>
 #include <KConfigGroup>

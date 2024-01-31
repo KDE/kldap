@@ -10,10 +10,10 @@
 #include "ldapclient.h"
 #include "ldapclient_debug.h"
 
-#include <kldapcore/ldapobject.h>
-#include <kldapcore/ldapserver.h>
-#include <kldapcore/ldapurl.h>
-#include <kldapcore/ldif.h>
+#include "kldapcore/ldapobject.h"
+#include "kldapcore/ldapserver.h"
+#include "kldapcore/ldapurl.h"
+#include "kldapcore/ldif.h"
 
 #include <KIO/TransferJob>
 

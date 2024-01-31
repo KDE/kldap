@@ -5,7 +5,7 @@
  */
 
 #include "ldapclientsearchconfig.h"
-#include <kldapcore/ldapserver.h>
+#include "kldapcore/ldapserver.h"
 
 #include <KConfig>
 #include <qt6keychain/keychain.h>

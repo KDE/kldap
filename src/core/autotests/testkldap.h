@@ -6,9 +6,9 @@
 
 #pragma once
 
+#include "ldapobject.h"
+#include "ldapsearch.h"
 #include <QObject>
-#include <ldapobject.h>
-#include <ldapsearch.h>
 
 using namespace KLDAPCore;
 

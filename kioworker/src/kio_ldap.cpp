@@ -8,7 +8,7 @@
 #include "kio_ldap.h"
 #include "kldap_debug.h"
 
-#include <kldapcore/ldif.h>
+#include "kldapcore/ldif.h"
 
 #include <KLocalizedString>
 #include <QCoreApplication>

@@ -30,7 +30,7 @@ static bool ldapoperation_sasl_initialized = false;
 #include <lber.h>
 #include <ldap.h>
 #else
-#include <w32-ldap-help.h>
+#include "w32-ldap-help.h"
 #endif // HAVE_WINLDAP_H
 
 #ifndef LDAP_OPT_SUCCESS

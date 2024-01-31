@@ -25,7 +25,7 @@
 #include <lber.h>
 #include <ldap.h>
 #else
-#include <w32-ldap-help.h>
+#include "w32-ldap-help.h"
 #endif
 
 #ifndef LBER_USE_DER

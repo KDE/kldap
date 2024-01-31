@@ -7,9 +7,9 @@
 #include "ldapclientsearchconfigreadconfigjob.h"
 #include "ldapclient_debug.h"
 
+#include "kldapcore/ldapdn.h"
 #include <KConfig>
 #include <KLocalizedString>
-#include <kldapcore/ldapdn.h>
 #include <qt6keychain/keychain.h>
 using namespace QKeychain;
 

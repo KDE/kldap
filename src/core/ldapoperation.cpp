@@ -28,7 +28,7 @@
 #include <lber.h>
 #include <ldap.h>
 #else
-#include <w32-ldap-help.h>
+#include "w32-ldap-help.h"
 #endif // HAVE_WINLDAP_H
 #endif // LDAP_FOUND
 

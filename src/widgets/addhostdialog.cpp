@@ -8,6 +8,8 @@
 
 #include "addhostdialog.h"
 
+#include "kldapcore/ldapserver.h"
+#include "kldapwidgets/ldapconfigwidget.h"
 #include <KAcceleratorManager>
 #include <KConfigGroup>
 #include <KLocalizedString>
@@ -18,8 +20,6 @@
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QWindow>
-#include <kldapcore/ldapserver.h>
-#include <kldapwidgets/ldapconfigwidget.h>
 
 using namespace KLDAPWidgets;
 namespace
