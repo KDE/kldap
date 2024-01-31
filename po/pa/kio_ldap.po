@@ -2,20 +2,20 @@
 # Amanpreet Singh Alam <aalam@redhat.com>, 2004, 2005.
 # Amanpreet Singh Brar <aalam@redhat.com>, 2005.
 # AP S Alam <aalam@users.sf.net>, 2007.
-# A S Alam <aalam@users.sf.net>, 2007.
+# SPDX-FileCopyrightText: 2007, 2024 A S Alam <aalam@users.sf.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kio_ldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-13 00:50+0000\n"
-"PO-Revision-Date: 2007-08-06 21:07+0530\n"
-"Last-Translator: A S Alam <aalam@users.sf.net>\n"
-"Language-Team: Punjabi <punjabi-l10n@users.sf.net>\n"
+"PO-Revision-Date: 2024-01-30 09:58-0600\n"
+"Last-Translator: A S Alam <aalam@punlinux.org>\n"
+"Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
 "\n"
@@ -51,12 +51,12 @@ msgstr "ਸਾਇਟ:"
 #: kio_ldap.cpp:319
 #, kde-format
 msgid "Invalid authorization information."
-msgstr "ਗਲਤ ਪਰਮਾਣਕਤਾ ਜਾਣਕਾਰੀ ਹੈ।"
+msgstr "ਗਲਤ ਪਰਮਾਣੀਕਰਨ ਜਾਣਕਾਰੀ ਹੈ।"
 
 #: kio_ldap.cpp:327
 #, kde-format
 msgid "LDAP connection canceled."
-msgstr "LDAP ਕੁਨੈਕਸ਼ਨ ਰੱਦ ਕੀਤਾ ਗਿਆ।"
+msgstr "LDAP ਕਨੈਕਸ਼ਨ ਰੱਦ ਕੀਤਾ ਗਿਆ।"
 
 #: kio_ldap.cpp:584 kio_ldap.cpp:650
 #, kde-format
