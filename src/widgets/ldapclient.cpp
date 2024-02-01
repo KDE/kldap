@@ -112,7 +112,7 @@ void LdapClient::startQuery(const QString &filter)
     QString finalFilter = filter;
     // combine the filter set by the user in the config dialog (url.filter()) and the filter from this query
     if (!userFilter.isEmpty()) {
-        finalFilter = QLatin1StringView("&(") + finalFilter + QLatin1String(")(") + userFilter + QLatin1Char(')');
+        finalFilter = QLatin1StringView("&(") + finalFilter + QLatin1StringView(")(") + userFilter + QLatin1Char(')');
     }
     url.setFilter(QLatin1Char('(') + finalFilter + QLatin1Char(')'));
 

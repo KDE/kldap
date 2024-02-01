@@ -362,7 +362,8 @@ void LdapClientSearch::LdapClientSearchPrivate::makeSearchData(QStringList &ret,
                 givenname = tmp;
             } else if (it2.key() == QLatin1StringView("sn")) {
                 sn = tmp;
-            } else if (it2.key() == QLatin1StringView("objectClass") && (tmp == QLatin1String("groupOfNames") || tmp == QLatin1String("kolabGroupOfNames"))) {
+            } else if (it2.key() == QLatin1StringView("objectClass")
+                       && (tmp == QLatin1StringView("groupOfNames") || tmp == QLatin1StringView("kolabGroupOfNames"))) {
                 isDistributionList = true;
             }
         }

@@ -210,7 +210,7 @@ Ldif::ParseValue Ldif::processLine()
                     d->mEntryType = Entry_Add;
                 } else if (tmpval == QLatin1StringView("delete")) {
                     d->mEntryType = Entry_Del;
-                } else if (tmpval == QLatin1StringView("modrdn") || tmpval == QLatin1String("moddn")) {
+                } else if (tmpval == QLatin1StringView("modrdn") || tmpval == QLatin1StringView("moddn")) {
                     d->mNewRdn.clear();
                     d->mNewSuperior.clear();
                     d->mDelOldRdn = true;
