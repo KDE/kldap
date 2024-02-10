@@ -5,13 +5,13 @@
 # Serdar Soytetir <tulliana@gmail.com>, 2008, 2009.
 # Volkan Gezer <volkangezer@gmail.com>, 2013, 2014.
 # Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-15 01:39+0000\n"
-"PO-Revision-Date: 2023-01-21 15:27+0300\n"
+"PO-Revision-Date: 2024-02-09 19:26+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 24.01.95\n"
 
 #: core/ldapconnection.cpp:124
 #, kde-format
@@ -294,7 +294,7 @@ msgstr "LDAP Sorgusu"
 #, kde-format
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
-msgstr "%1'e bağlanırken bilinmeyen hata"
+msgstr "%1 konumuna bağlanırken bilinmeyen hata"
 
 #~ msgid ""
 #~ "LDAP password is stored as clear text, do you want to store it in kwallet?"
