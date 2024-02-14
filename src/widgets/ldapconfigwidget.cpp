@@ -108,7 +108,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
     if (mFeatures & W_PASS) {
         mPassword = new KPasswordLineEdit(mParent);
         mPassword->setObjectName(QLatin1StringView("kcfg_ldappassword"));
-#if KWIDGETSADDONS_VERSION < QT_VERSION_CHECK(5, 249, 0)
+#if KWIDGETSADDONS_VERSION <= QT_VERSION_CHECK(5, 249, 0)
         mPassword->setRevealPasswordAvailable(KAuthorized::authorize(QStringLiteral("lineedit_reveal_password")));
 #else
         mPassword->setRevealPasswordMode(KAuthorized::authorize(QStringLiteral("lineedit_reveal_password")) ? KPassword::RevealMode::OnlyNew
