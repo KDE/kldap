@@ -8,6 +8,7 @@ project(KLdap VERSION ${PIM_VERSION})
 # ECM setup
 set(KF_MIN_VERSION "5.248.0")
 set(QT_REQUIRED_VERSION "6.6.0")
+set(QT6KEYCHAIN_LIB_VERSION "0.14.2")
 find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${KLdap_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
 
@@ -36,7 +37,7 @@ find_package(KF6KIO ${KF_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF6I18n ${KF_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF6DocTools ${KF_MIN_VERSION} CONFIG)
 
-find_package(Qt6Keychain CONFIG)
+find_package(Qt6Keychain ${QT6KEYCHAIN_LIB_VERSION} CONFIG)
 set_package_properties(Qt6Keychain PROPERTIES
                                    DESCRIPTION "Provides support for secure credentials storage"
                                    URL "https://github.com/frankosterfeld/qtkeychain"
