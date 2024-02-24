@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-13 00:38+0000\n"
-"PO-Revision-Date: 2024-02-12 14:13+0400\n"
+"PO-Revision-Date: 2024-02-23 20:45+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -20,59 +20,55 @@ msgstr ""
 "X-Generator: Lokalize 23.08.1\n"
 
 #: core/ldapconnection.cpp:124
-#, fuzzy, kde-format
+#, kde-format
 msgid "No LDAP Support..."
-msgstr "لا LDAP دعم."
+msgstr "لا يوجد دعم LDAP..."
 
 #: core/ldapconnection.cpp:239
-#, fuzzy, kde-format
+#, kde-format
 msgid "An error occurred during the connection initialization phase."
-msgstr "أداة تعريف خطأ اتصال."
+msgstr "حدث خطأ أثناء مرحلة تهيئة الاتصال."
 
 #: core/ldapconnection.cpp:246
-#, fuzzy, kde-format
+#, kde-format
 msgid "Cannot set protocol version to %1."
-msgstr ""
-"لا يستطيع set مراسم\n"
-"ميفاق النسخة إلى."
+msgstr "لا يمكن تعيين إصدار الميفاق إلى %1."
 
 #: core/ldapconnection.cpp:257
-#, fuzzy, kde-format
+#, kde-format
 msgid "Cannot set timeout to %1 second."
 msgid_plural "Cannot set timeout to %1 seconds."
-msgstr[0] "غير قادر على تعيين حدّ للوقت."
-msgstr[1] "غير قادر على تعيين حدّ للوقت."
-msgstr[2] "غير قادر على تعيين حدّ للوقت."
-msgstr[3] "غير قادر على تعيين حدّ للوقت."
-msgstr[4] "غير قادر على تعيين حدّ للوقت."
-msgstr[5] "غير قادر على تعيين حدّ للوقت."
+msgstr[0] "لا يمكن تعيين المهلة إلى %1 ثانية."
+msgstr[1] "لا يمكن تعيين المهلة إلى ثانية واحدة."
+msgstr[2] "لا يمكن تعيين المهلة إلى ثانيتين."
+msgstr[3] "لا يمكن تعيين المهلة إلى %1 ثواني."
+msgstr[4] "لا يمكن تعيين المهلة إلى %1 ثانية."
+msgstr[5] "لا يمكن تعيين المهلة إلى %1 ثانية."
 
 #: core/ldapconnection.cpp:269
 #, kde-format
 msgid "Could not set CA certificate file."
-msgstr ""
+msgstr "تعذر تعيين ملف شهادة CA."
 
 #: core/ldapconnection.cpp:294
 #, kde-format
 msgid "Invalid TLS require certificate mode."
-msgstr ""
+msgstr "يطلب TLS غير صالح وضع الشهادة."
 
 #: core/ldapconnection.cpp:299
 #, kde-format
 msgid "Could not set TLS require certificate mode."
-msgstr ""
+msgstr "تعذر تعيين TLS يتطلب وضع الشهادة."
 
 #: core/ldapconnection.cpp:308
-#, fuzzy, kde-format
+#, kde-format
 msgid "Could not initialize new TLS context."
-msgstr ""
-"لا يستطيع يهيئ\n"
-"يُبدِء التشغيلئ SASL عميل."
+msgstr "تعذر تهيئة سياق TLS الجديد."
 
 #: core/ldapconnection.cpp:325
-#, fuzzy, kde-format
+#, kde-format
 msgid "TLS support not available in the LDAP client libraries."
-msgstr "TLS دعم ليس متوفّر بوصة LDAP عميل."
+msgstr "دعم TLS غير متوفر في مكتبات عملاء LDAP."
 
 #: core/ldapconnection.cpp:335
 #, kde-format
@@ -85,23 +81,23 @@ msgid "Cannot set time limit."
 msgstr "غير قادر على تعيين حدّ للوقت."
 
 #: core/ldapconnection.cpp:353
-#, fuzzy, kde-format
+#, kde-format
 msgid "Cannot initialize the SASL client."
-msgstr ""
-"لا يستطيع يهيئ\n"
-"يُبدِء التشغيلئ SASL عميل."
+msgstr "لا يستطيع يهيئ عميل SASL."
 
 #: core/ldapconnection.cpp:430
-#, fuzzy, kde-format
+#, kde-format
 msgid ""
 "LDAP support not compiled in. Please recompile libkldap with the OpenLDAP "
 "(or compatible) client libraries, or complain to your distribution packagers."
-msgstr "LDAP دعم ليس بوصة رجاء مع أو متوافق عميل أو إلى التوزيعة."
+msgstr ""
+"لم إضافة دعم LDAP. يرجى إعادة ترجمة libkldap باستخدام مكتبات عملاء OpenLDAP "
+"(أو المتوافقة)، أو تقديم شكوى إلى حزم التوزيع لديك."
 
 #: core/ldapsearch.cpp:222
 #, kde-format
 msgid "Cannot access to server. Please reconfigure it."
-msgstr ""
+msgstr "لا يمكن الوصول إلى الخادم. يرجى إعادة تكوينه."
 
 #: widgets/addhostdialog.cpp:67
 #, kde-format
@@ -118,17 +114,17 @@ msgstr "حرر مضيف"
 #: widgets/ldapconfigurewidget.cpp:112
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
-msgstr ""
+msgstr "هل تريد إزالة الإعداد للمضيف \"%1\"؟"
 
 #: widgets/ldapconfigurewidget.cpp:113
 #, kde-format
 msgid "Remove Host"
-msgstr ""
+msgstr "أزل المضيف"
 
 #: widgets/ldapconfigurewidget.cpp:270
 #, kde-format
 msgid "Check all servers that should be used:"
-msgstr ""
+msgstr "تحقق من جميع الخوادم التي يجب استخدامها:"
 
 #: widgets/ldapconfigurewidget.cpp:304
 #, kde-format
@@ -138,12 +134,12 @@ msgstr "اضف &مضيف..."
 #: widgets/ldapconfigurewidget.cpp:306
 #, kde-format
 msgid "&Edit Host..."
-msgstr ""
+msgstr "&حرر مضيف..."
 
 #: widgets/ldapconfigurewidget.cpp:309
 #, kde-format
 msgid "&Remove Host"
-msgstr ""
+msgstr "أ&زل المضيف"
 
 #: widgets/ldapconfigwidget.cpp:91
 #, kde-format
@@ -151,17 +147,14 @@ msgid "User:"
 msgstr "المستخدم:"
 
 #: widgets/ldapconfigwidget.cpp:98
-#, fuzzy, kde-format
+#, kde-format
 msgid "Bind DN:"
-msgstr ""
-"يربط :: يوثق :: يقيّد :: يعوق عن الحركة :: يُلزِم :: يحْزم :: يعْصب :: يضمّد :: "
-"يجعله متماسكاً :: يَعقِل :: يُجلّد :: يقي :: يُمتّن :: يتماسك :: يصبح صلباً :: "
-"رِباط :: رَبْط :: ارتباط :: مأزق DN:"
+msgstr "ربط الاسم المميز:"
 
 #: widgets/ldapconfigwidget.cpp:105
-#, fuzzy, kde-format
+#, kde-format
 msgid "Realm:"
-msgstr "المملكة:"
+msgstr "المجال:"
 
 #: widgets/ldapconfigwidget.cpp:118
 #, kde-format
@@ -229,7 +222,7 @@ msgstr "خادم الاستعلام"
 #, kde-format
 msgctxt "Distinguished Name"
 msgid "DN:"
-msgstr "DN:"
+msgstr "الاسم المميز:"
 
 #: widgets/ldapconfigwidget.cpp:198
 #, kde-format
@@ -302,7 +295,7 @@ msgstr "استعلام LDAP "
 #, kde-format
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
-msgstr ""
+msgstr "خطأ في  الاتّصال ب%1"
 
 #, fuzzy
 #~ msgid "LDAP Servers"
