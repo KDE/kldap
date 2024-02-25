@@ -51,13 +51,13 @@ public:
     /**
      * Returns the number of this client.
      */
-    int clientNumber() const;
+    [[nodiscard]] int clientNumber() const;
 
     /**
      * Returns whether this client is currently running
      * a search query.
      */
-    bool isActive() const;
+    [[nodiscard]] bool isActive() const;
 
     /**
      * Sets the completion @p weight of this client.
@@ -70,7 +70,7 @@ public:
     /**
      * Returns the completion weight of this client.
      */
-    int completionWeight() const;
+    [[nodiscard]] int completionWeight() const;
 
     /**
      * Sets the LDAP @p server information that shall be
@@ -96,7 +96,7 @@ public:
      * Returns the LDAP attributes that should be returned
      * in the query result.
      */
-    QStringList attributes() const;
+    [[nodiscard]] QStringList attributes() const;
 
     /**
      * Sets the @p scope of the LDAP query.

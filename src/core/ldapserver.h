@@ -162,7 +162,7 @@ public:
     /**
      * Returns the password of the LDAP connection.
      */
-    QString password() const;
+    [[nodiscard]] QString password() const;
 
     /**
      * Sets the protocol @p version of the LDAP connection.

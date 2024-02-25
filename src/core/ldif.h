@@ -130,7 +130,7 @@ public:
     /**
      * Returns the new parent of the entry if modType() returned Entry_Modrdn.
      */
-    QString newSuperior() const;
+    [[nodiscard]] QString newSuperior() const;
 
     /**
      * Returns if the delete of the old RDN is required.

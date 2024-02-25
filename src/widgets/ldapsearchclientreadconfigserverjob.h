@@ -35,7 +35,7 @@ public:
     [[nodiscard]] KConfigGroup config() const;
     void setConfig(const KConfigGroup &config);
 
-    LdapClient *ldapClient() const;
+    [[nodiscard]] LdapClient *ldapClient() const;
     void setLdapClient(LdapClient *ldapClient);
 
 private:

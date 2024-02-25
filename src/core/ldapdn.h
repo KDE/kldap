@@ -25,7 +25,7 @@ public:
 
     void clear();
 
-    bool isEmpty() const;
+    [[nodiscard]] bool isEmpty() const;
 
     /**
      * \returns A QString representing the DN.

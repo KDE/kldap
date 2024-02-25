@@ -90,7 +90,7 @@ public:
      * @note This method can return @c false if either no LDAP is configured
      *       or the system does not support the KIO LDAP protocol.
      */
-    bool isAvailable() const;
+    [[nodiscard]] bool isAvailable() const;
 
     /**
      * Updates the completion weights for the configured LDAP clients from
@@ -101,14 +101,14 @@ public:
     /**
      * Returns the list of configured LDAP clients.
      */
-    QList<LdapClient *> clients() const;
+    [[nodiscard]] QList<LdapClient *> clients() const;
 
     /**
      * Returns the filter for the Query
      *
      * @since 4.14
      */
-    QString filter() const;
+    [[nodiscard]] QString filter() const;
 
     /**
      * Sets the filter for the Query
@@ -122,7 +122,7 @@ public:
      *
      * @since 4.14
      */
-    QStringList attributes() const;
+    [[nodiscard]] QStringList attributes() const;
 
     /**
      * Sets the attributes, that are queried the LDAP Server.

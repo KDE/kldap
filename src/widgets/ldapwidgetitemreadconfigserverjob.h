@@ -24,7 +24,7 @@ public:
 
     void start();
 
-    LdapWidgetItem *ldapWidgetItem() const;
+    [[nodiscard]] LdapWidgetItem *ldapWidgetItem() const;
     void setLdapWidgetItem(LdapWidgetItem *ldapWidgetItem);
 
     [[nodiscard]] int currentIndex() const;

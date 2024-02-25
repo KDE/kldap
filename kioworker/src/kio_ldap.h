@@ -43,6 +43,6 @@ private:
     void controlsFromMetaData(KLDAPCore::LdapControls &serverctrls, KLDAPCore::LdapControls &clientctrls);
     void LDAPEntry2UDSEntry(const KLDAPCore::LdapDN &dn, KIO::UDSEntry &entry, const KLDAPCore::LdapUrl &usrc, bool dir = false);
 
-    KIO::WorkerResult LDAPErr(int err = KLDAP_SUCCESS);
-    KIO::WorkerResult changeCheck(const KLDAPCore::LdapUrl &url);
+    [[nodiscard]] KIO::WorkerResult LDAPErr(int err = KLDAP_SUCCESS);
+    [[nodiscard]] KIO::WorkerResult changeCheck(const KLDAPCore::LdapUrl &url);
 };

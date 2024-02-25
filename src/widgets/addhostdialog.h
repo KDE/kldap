@@ -33,11 +33,9 @@ public:
 Q_SIGNALS:
     void changed(bool);
 
-private Q_SLOTS:
+private:
     KLDAPWIDGETS_NO_EXPORT void slotHostEditChanged(const QString &);
     KLDAPWIDGETS_NO_EXPORT void slotOk();
-
-private:
     KLDAPWIDGETS_NO_EXPORT void readConfig();
     KLDAPWIDGETS_NO_EXPORT void writeConfig();
     std::unique_ptr<AddHostDialogPrivate> const d;
