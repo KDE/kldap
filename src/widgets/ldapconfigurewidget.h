@@ -32,19 +32,17 @@ public:
     void load();
     void save();
 
-private Q_SLOTS:
-    void slotAddHost();
-    void slotEditHost();
-    void slotRemoveHost();
-    void slotSelectionChanged(QListWidgetItem *);
-    void slotItemClicked(QListWidgetItem *);
-    void slotMoveUp();
-    void slotMoveDown();
-
 Q_SIGNALS:
     void changed(bool);
 
 private:
+    KLDAPWIDGETS_NO_EXPORT void slotAddHost();
+    KLDAPWIDGETS_NO_EXPORT void slotEditHost();
+    KLDAPWIDGETS_NO_EXPORT void slotRemoveHost();
+    KLDAPWIDGETS_NO_EXPORT void slotSelectionChanged(QListWidgetItem *);
+    KLDAPWIDGETS_NO_EXPORT void slotItemClicked(QListWidgetItem *);
+    KLDAPWIDGETS_NO_EXPORT void slotMoveUp();
+    KLDAPWIDGETS_NO_EXPORT void slotMoveDown();
     KLDAPWIDGETS_NO_EXPORT void initGUI();
 
     QListWidget *mHostListView = nullptr;
