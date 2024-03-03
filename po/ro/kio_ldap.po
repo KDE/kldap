@@ -1,14 +1,14 @@
 # Traducerea kio_ldap.po în Română
+# translation of kio_ldap.po to Romanian
 # Claudiu Costin <claudiuc@kde.org>, 2004.
 # Sergiu Bivol <sergiu@cip.md>, 2008.
-# translation of kio_ldap.po to Romanian
 msgid ""
 msgstr ""
 "Project-Id-Version: kio_ldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-13 00:50+0000\n"
 "PO-Revision-Date: 2008-03-14 16:09+0200\n"
-"Last-Translator: Sergiu Bivol <sergiu-bivol@mail.md>\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Română <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
