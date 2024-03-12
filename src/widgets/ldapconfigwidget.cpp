@@ -15,7 +15,6 @@
 #include <KPasswordLineEdit>
 #include <QComboBox>
 #include <QProgressDialog>
-#include <kwidgetsaddons_version.h>
 
 #include <QCheckBox>
 #include <QFormLayout>
@@ -108,12 +107,8 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
     if (mFeatures & W_PASS) {
         mPassword = new KPasswordLineEdit(mParent);
         mPassword->setObjectName(QLatin1StringView("kcfg_ldappassword"));
-#if KWIDGETSADDONS_VERSION <= QT_VERSION_CHECK(5, 249, 0)
-        mPassword->setRevealPasswordAvailable(KAuthorized::authorize(QStringLiteral("lineedit_reveal_password")));
-#else
         mPassword->setRevealPasswordMode(KAuthorized::authorize(QStringLiteral("lineedit_reveal_password")) ? KPassword::RevealMode::OnlyNew
                                                                                                             : KPassword::RevealMode::Never);
-#endif
 
         mainLayout->addRow(i18n("Password:"), mPassword);
     }
