@@ -10,6 +10,7 @@
 
 #include "ldap_widgets_debug.h"
 #include <KAuthorized>
+#include <KLineEditEventHandler>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <KPasswordLineEdit>
@@ -85,6 +86,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
 {
     if (mFeatures & W_USER) {
         mUser = new QLineEdit(mParent);
+        KLineEditEventHandler::catchReturnKey(mUser);
         mUser->setObjectName(QLatin1StringView("kcfg_ldapuser"));
 
         mainLayout->addRow(i18n("User:"), mUser);
@@ -92,6 +94,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
 
     if (mFeatures & W_BINDDN) {
         mBindDn = new QLineEdit(mParent);
+        KLineEditEventHandler::catchReturnKey(mBindDn);
         mBindDn->setObjectName(QLatin1StringView("kcfg_ldapbinddn"));
 
         mainLayout->addRow(i18n("Bind DN:"), mBindDn);
@@ -99,6 +102,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
 
     if (mFeatures & W_REALM) {
         mRealm = new QLineEdit(mParent);
+        KLineEditEventHandler::catchReturnKey(mRealm);
         mRealm->setObjectName(QLatin1StringView("kcfg_ldaprealm"));
 
         mainLayout->addRow(i18n("Realm:"), mRealm);
@@ -106,6 +110,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
 
     if (mFeatures & W_PASS) {
         mPassword = new KPasswordLineEdit(mParent);
+        KLineEditEventHandler::catchReturnKey(mPassword);
         mPassword->setObjectName(QLatin1StringView("kcfg_ldappassword"));
         mPassword->setRevealPasswordMode(KAuthorized::authorize(QStringLiteral("lineedit_reveal_password")) ? KPassword::RevealMode::OnlyNew
                                                                                                             : KPassword::RevealMode::Never);
@@ -115,6 +120,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
 
     if (mFeatures & W_HOST) {
         mHost = new QLineEdit(mParent);
+        KLineEditEventHandler::catchReturnKey(mHost);
         mHost->setObjectName(QLatin1StringView("kcfg_ldaphost"));
         mParent->connect(mHost, &QLineEdit::textChanged, mParent, &LdapConfigWidget::hostNameChanged);
         mainLayout->addRow(i18n("Host:"), mHost);
@@ -168,6 +174,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
     if (mFeatures & W_DN) {
         auto horizontalLayout = new QHBoxLayout;
         mDn = new QLineEdit(mParent);
+        KLineEditEventHandler::catchReturnKey(mDn);
         mDn->setObjectName(QLatin1StringView("kcfg_ldapdn"));
         horizontalLayout->addWidget(mDn);
 
@@ -188,6 +195,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
 
     if (mFeatures & W_FILTER) {
         mFilter = new QLineEdit(mParent);
+        KLineEditEventHandler::catchReturnKey(mFilter);
         mFilter->setObjectName(QLatin1StringView("kcfg_ldapfilter"));
 
         mainLayout->addRow(i18n("Filter:"), mFilter);
