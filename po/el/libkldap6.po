@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-13 00:38+0000\n"
+"POT-Creation-Date: 2024-03-29 00:38+0000\n"
 "PO-Revision-Date: 2021-07-29 08:41+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -140,157 +140,157 @@ msgstr "&Επεξεργασία υπολογιατή..."
 msgid "&Remove Host"
 msgstr "Διαγ&ραφή υπολογιστή"
 
-#: widgets/ldapconfigwidget.cpp:90
+#: widgets/ldapconfigwidget.cpp:92
 #, kde-format
 msgid "User:"
 msgstr "Χρήστης:"
 
-#: widgets/ldapconfigwidget.cpp:97
+#: widgets/ldapconfigwidget.cpp:100
 #, kde-format
 msgid "Bind DN:"
 msgstr "Σύνδεση DN:"
 
-#: widgets/ldapconfigwidget.cpp:104
+#: widgets/ldapconfigwidget.cpp:108
 #, kde-format
 msgid "Realm:"
 msgstr "Περιοχή:"
 
-#: widgets/ldapconfigwidget.cpp:113
+#: widgets/ldapconfigwidget.cpp:118
 #, kde-format
 msgid "Password:"
 msgstr "Κωδικός πρόσβασης:"
 
-#: widgets/ldapconfigwidget.cpp:120
+#: widgets/ldapconfigwidget.cpp:126
 #, kde-format
 msgid "Host:"
 msgstr "Υπολογιστής:"
 
-#: widgets/ldapconfigwidget.cpp:129
+#: widgets/ldapconfigwidget.cpp:135
 #, kde-format
 msgid "Port:"
 msgstr "Θύρα:"
 
-#: widgets/ldapconfigwidget.cpp:137
+#: widgets/ldapconfigwidget.cpp:143
 #, kde-format
 msgid "LDAP version:"
 msgstr "Έκδοση LDAP:"
 
-#: widgets/ldapconfigwidget.cpp:145
+#: widgets/ldapconfigwidget.cpp:151
 #, kde-format
 msgctxt "default ldap size limit"
 msgid "Default"
 msgstr "Προκαθορισμένο"
 
-#: widgets/ldapconfigwidget.cpp:146
+#: widgets/ldapconfigwidget.cpp:152
 #, kde-format
 msgid "Size limit:"
 msgstr "Όριο μεγέθους:"
 
-#: widgets/ldapconfigwidget.cpp:154
+#: widgets/ldapconfigwidget.cpp:160
 #, kde-format
 msgid " sec"
 msgstr " δευτ"
 
-#: widgets/ldapconfigwidget.cpp:155
+#: widgets/ldapconfigwidget.cpp:161
 #, kde-format
 msgctxt "default ldap time limit"
 msgid "Default"
 msgstr "Προκαθορισμένο"
 
-#: widgets/ldapconfigwidget.cpp:156
+#: widgets/ldapconfigwidget.cpp:162
 #, kde-format
 msgid "Time limit:"
 msgstr "Χρονικό όριο:"
 
-#: widgets/ldapconfigwidget.cpp:164
+#: widgets/ldapconfigwidget.cpp:170
 #, kde-format
 msgid "No paging"
 msgstr "Χωρίς σελιδοποίηση"
 
-#: widgets/ldapconfigwidget.cpp:165
+#: widgets/ldapconfigwidget.cpp:171
 #, kde-format
 msgid "Page size:"
 msgstr "Μέγεθος σελίδας:"
 
-#: widgets/ldapconfigwidget.cpp:176 widgets/ldapconfigwidget.cpp:254
+#: widgets/ldapconfigwidget.cpp:183 widgets/ldapconfigwidget.cpp:262
 #, kde-format
 msgid "Query Server"
 msgstr "Αίτηση Εξυπηρετητή"
 
-#: widgets/ldapconfigwidget.cpp:186
+#: widgets/ldapconfigwidget.cpp:193
 #, kde-format
 msgctxt "Distinguished Name"
 msgid "DN:"
 msgstr "DN:"
 
-#: widgets/ldapconfigwidget.cpp:193
+#: widgets/ldapconfigwidget.cpp:201
 #, kde-format
 msgid "Filter:"
 msgstr "Φίλτρο:"
 
-#: widgets/ldapconfigwidget.cpp:202
+#: widgets/ldapconfigwidget.cpp:210
 #, kde-format
 msgctxt "@option:radio set no security"
 msgid "No"
 msgstr "Όχι"
 
-#: widgets/ldapconfigwidget.cpp:205
+#: widgets/ldapconfigwidget.cpp:213
 #, kde-format
 msgctxt "@option:radio use TLS security"
 msgid "TLS"
 msgstr "TLS"
 
-#: widgets/ldapconfigwidget.cpp:208
+#: widgets/ldapconfigwidget.cpp:216
 #, kde-format
 msgctxt "@option:radio use SSL security"
 msgid "SSL"
 msgstr "SSL"
 
-#: widgets/ldapconfigwidget.cpp:223
+#: widgets/ldapconfigwidget.cpp:231
 #, kde-format
 msgid "Security:"
 msgstr "Ασφάλεια:"
 
-#: widgets/ldapconfigwidget.cpp:233
+#: widgets/ldapconfigwidget.cpp:241
 #, kde-format
 msgctxt "@option:radio anonymous authentication"
 msgid "Anonymous"
 msgstr "Ανώνυμη"
 
-#: widgets/ldapconfigwidget.cpp:236
+#: widgets/ldapconfigwidget.cpp:244
 #, kde-format
 msgctxt "@option:radio simple authentication"
 msgid "Simple"
 msgstr "Απλή"
 
-#: widgets/ldapconfigwidget.cpp:239
+#: widgets/ldapconfigwidget.cpp:247
 #, kde-format
 msgctxt "@option:radio SASL authentication"
 msgid "SASL"
 msgstr "SASL"
 
-#: widgets/ldapconfigwidget.cpp:242
+#: widgets/ldapconfigwidget.cpp:250
 #, kde-format
 msgid "Authentication:"
 msgstr "Ταυτοποίηση:"
 
-#: widgets/ldapconfigwidget.cpp:260
+#: widgets/ldapconfigwidget.cpp:268
 #, kde-format
 msgid "SASL mechanism:"
 msgstr "Μηχανισμός SASL:"
 
-#: widgets/ldapconfigwidget.cpp:304
+#: widgets/ldapconfigwidget.cpp:312
 #, kde-format
 msgid "Check server"
 msgstr "Επιλογή εξυπηρετητή"
 
-#: widgets/ldapconfigwidget.cpp:310
+#: widgets/ldapconfigwidget.cpp:318
 #, kde-format
 msgctxt "@title:window"
 msgid "LDAP Query"
 msgstr "Ερώτημα LDAP"
 
-#: widgets/ldapconfigwidget.cpp:324
+#: widgets/ldapconfigwidget.cpp:332
 #, kde-format
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
