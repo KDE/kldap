@@ -6,6 +6,8 @@
 */
 
 #include "ldapconfigwidget.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "ldapsearch.h"
 
 #include "ldap_widgets_debug.h"
@@ -87,7 +89,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
     if (mFeatures & W_USER) {
         mUser = new QLineEdit(mParent);
         KLineEditEventHandler::catchReturnKey(mUser);
-        mUser->setObjectName(QLatin1StringView("kcfg_ldapuser"));
+        mUser->setObjectName("kcfg_ldapuser"_L1);
 
         mainLayout->addRow(i18n("User:"), mUser);
     }
@@ -95,7 +97,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
     if (mFeatures & W_BINDDN) {
         mBindDn = new QLineEdit(mParent);
         KLineEditEventHandler::catchReturnKey(mBindDn);
-        mBindDn->setObjectName(QLatin1StringView("kcfg_ldapbinddn"));
+        mBindDn->setObjectName("kcfg_ldapbinddn"_L1);
 
         mainLayout->addRow(i18n("Bind DN:"), mBindDn);
     }
@@ -103,7 +105,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
     if (mFeatures & W_REALM) {
         mRealm = new QLineEdit(mParent);
         KLineEditEventHandler::catchReturnKey(mRealm);
-        mRealm->setObjectName(QLatin1StringView("kcfg_ldaprealm"));
+        mRealm->setObjectName("kcfg_ldaprealm"_L1);
 
         mainLayout->addRow(i18n("Realm:"), mRealm);
     }
@@ -111,7 +113,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
     if (mFeatures & W_PASS) {
         mPassword = new KPasswordLineEdit(mParent);
         KLineEditEventHandler::catchReturnKey(mPassword);
-        mPassword->setObjectName(QLatin1StringView("kcfg_ldappassword"));
+        mPassword->setObjectName("kcfg_ldappassword"_L1);
         mPassword->setRevealPasswordMode(KAuthorized::authorize(QStringLiteral("lineedit_reveal_password")) ? KPassword::RevealMode::OnlyNew
                                                                                                             : KPassword::RevealMode::Never);
 
@@ -121,7 +123,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
     if (mFeatures & W_HOST) {
         mHost = new QLineEdit(mParent);
         KLineEditEventHandler::catchReturnKey(mHost);
-        mHost->setObjectName(QLatin1StringView("kcfg_ldaphost"));
+        mHost->setObjectName("kcfg_ldaphost"_L1);
         mParent->connect(mHost, &QLineEdit::textChanged, mParent, &LdapConfigWidget::hostNameChanged);
         mainLayout->addRow(i18n("Host:"), mHost);
     }
@@ -129,7 +131,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
     if (mFeatures & W_PORT) {
         mPort = new QSpinBox(mParent);
         mPort->setRange(0, 65535);
-        mPort->setObjectName(QLatin1StringView("kcfg_ldapport"));
+        mPort->setObjectName("kcfg_ldapport"_L1);
         mPort->setValue(389);
 
         mainLayout->addRow(i18n("Port:"), mPort);
@@ -138,7 +140,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
     if (mFeatures & W_VER) {
         mVersion = new QSpinBox(mParent);
         mVersion->setRange(2, 3);
-        mVersion->setObjectName(QLatin1StringView("kcfg_ldapver"));
+        mVersion->setObjectName("kcfg_ldapver"_L1);
         mVersion->setValue(3);
         mainLayout->addRow(i18n("LDAP version:"), mVersion);
     }
@@ -146,7 +148,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
     if (mFeatures & W_SIZELIMIT) {
         mSizeLimit = new QSpinBox(mParent);
         mSizeLimit->setRange(0, 9999999);
-        mSizeLimit->setObjectName(QLatin1StringView("kcfg_ldapsizelimit"));
+        mSizeLimit->setObjectName("kcfg_ldapsizelimit"_L1);
         mSizeLimit->setValue(0);
         mSizeLimit->setSpecialValueText(i18nc("default ldap size limit", "Default"));
         mainLayout->addRow(i18n("Size limit:"), mSizeLimit);
@@ -155,7 +157,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
     if (mFeatures & W_TIMELIMIT) {
         mTimeLimit = new QSpinBox(mParent);
         mTimeLimit->setRange(0, 9999999);
-        mTimeLimit->setObjectName(QLatin1StringView("kcfg_ldaptimelimit"));
+        mTimeLimit->setObjectName("kcfg_ldaptimelimit"_L1);
         mTimeLimit->setValue(0);
         mTimeLimit->setSuffix(i18n(" sec"));
         mTimeLimit->setSpecialValueText(i18nc("default ldap time limit", "Default"));
@@ -165,7 +167,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
     if (mFeatures & W_PAGESIZE) {
         mPageSize = new QSpinBox(mParent);
         mPageSize->setRange(0, 9999999);
-        mPageSize->setObjectName(QLatin1StringView("kcfg_ldappagesize"));
+        mPageSize->setObjectName("kcfg_ldappagesize"_L1);
         mPageSize->setValue(0);
         mPageSize->setSpecialValueText(i18n("No paging"));
         mainLayout->addRow(i18n("Page size:"), mPageSize);
@@ -175,7 +177,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
         auto horizontalLayout = new QHBoxLayout;
         mDn = new QLineEdit(mParent);
         KLineEditEventHandler::catchReturnKey(mDn);
-        mDn->setObjectName(QLatin1StringView("kcfg_ldapdn"));
+        mDn->setObjectName("kcfg_ldapdn"_L1);
         horizontalLayout->addWidget(mDn);
 
         // without host query doesn't make sense
@@ -196,7 +198,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
     if (mFeatures & W_FILTER) {
         mFilter = new QLineEdit(mParent);
         KLineEditEventHandler::catchReturnKey(mFilter);
-        mFilter->setObjectName(QLatin1StringView("kcfg_ldapfilter"));
+        mFilter->setObjectName("kcfg_ldapfilter"_L1);
 
         mainLayout->addRow(i18n("Filter:"), mFilter);
     }
@@ -208,13 +210,13 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
         auto hbox = new QHBoxLayout(btgroup);
 
         mSecNo = new QRadioButton(i18nc("@option:radio set no security", "No"), btgroup);
-        mSecNo->setObjectName(QLatin1StringView("kcfg_ldapnosec"));
+        mSecNo->setObjectName("kcfg_ldapnosec"_L1);
         hbox->addWidget(mSecNo);
         mSecTLS = new QRadioButton(i18nc("@option:radio use TLS security", "TLS"), btgroup);
-        mSecTLS->setObjectName(QLatin1StringView("kcfg_ldaptls"));
+        mSecTLS->setObjectName("kcfg_ldaptls"_L1);
         hbox->addWidget(mSecTLS);
         mSecSSL = new QRadioButton(i18nc("@option:radio use SSL security", "SSL"), btgroup);
-        mSecSSL->setObjectName(QLatin1StringView("kcfg_ldapssl"));
+        mSecSSL->setObjectName("kcfg_ldapssl"_L1);
         hbox->addWidget(mSecSSL);
 
         connect(mSecNo, &QRadioButton::clicked, mParent, [this]() {
@@ -239,19 +241,19 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
         auto hbox = new QHBoxLayout(authbox);
 
         mAnonymous = new QRadioButton(i18nc("@option:radio anonymous authentication", "Anonymous"), authbox);
-        mAnonymous->setObjectName(QLatin1StringView("kcfg_ldapanon"));
+        mAnonymous->setObjectName("kcfg_ldapanon"_L1);
         hbox->addWidget(mAnonymous);
         mSimple = new QRadioButton(i18nc("@option:radio simple authentication", "Simple"), authbox);
-        mSimple->setObjectName(QLatin1StringView("kcfg_ldapsimple"));
+        mSimple->setObjectName("kcfg_ldapsimple"_L1);
         hbox->addWidget(mSimple);
         mSASL = new QRadioButton(i18nc("@option:radio SASL authentication", "SASL"), authbox);
-        mSASL->setObjectName(QLatin1StringView("kcfg_ldapsasl"));
+        mSASL->setObjectName("kcfg_ldapsasl"_L1);
         hbox->addWidget(mSASL);
         mainLayout->addRow(i18n("Authentication:"), authbox);
 
         hbox = new QHBoxLayout;
         mMech = new QComboBox(mParent);
-        mMech->setObjectName(QLatin1StringView("kcfg_ldapsaslmech"));
+        mMech->setObjectName("kcfg_ldapsaslmech"_L1);
         mMech->addItem(QStringLiteral("DIGEST-MD5"));
         mMech->addItem(QStringLiteral("GSSAPI"));
         mMech->addItem(QStringLiteral("PLAIN"));
@@ -288,13 +290,13 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::sendQuery()
     mQResult.clear();
     mCancelled = true;
 
-    if (mAttr == QLatin1StringView("supportedsaslmechanisms")) {
+    if (mAttr == "supportedsaslmechanisms"_L1) {
         _server.setAuth(KLDAPCore::LdapServer::Anonymous);
     }
 
     KLDAPCore::LdapUrl _url(_server.url());
 
-    _url.setDn(KLDAPCore::LdapDN(QLatin1StringView("")));
+    _url.setDn(KLDAPCore::LdapDN(""_L1));
     _url.setAttributes(QStringList(mAttr));
     _url.setScope(KLDAPCore::LdapUrl::Base);
 

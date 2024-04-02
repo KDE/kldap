@@ -6,6 +6,7 @@
 */
 
 #include "ldapserver.h"
+using namespace Qt::Literals::StringLiterals;
 
 #include "ldap_core_debug.h"
 
@@ -294,7 +295,7 @@ void LdapServer::setUrl(const LdapUrl &url)
     d->mFilter = url.filter();
 
     d->mSecurity = None;
-    if (url.scheme() == QLatin1StringView("ldaps")) {
+    if (url.scheme() == "ldaps"_L1) {
         d->mSecurity = SSL;
     } else if (url.hasExtension(QStringLiteral("x-tls"))) {
         d->mSecurity = TLS;

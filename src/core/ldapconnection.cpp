@@ -6,6 +6,8 @@
 */
 
 #include "ldapconnection.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "kldap_config.h" // LDAP_FOUND
 #include "ldapdefs.h"
 
@@ -220,7 +222,7 @@ int LdapConnection::connect()
     int timeout = d->mServer.timeout();
 
     url = d->mServer.security() == LdapServer::SSL ? QStringLiteral("ldaps") : QStringLiteral("ldap");
-    url += QLatin1StringView("://");
+    url += "://"_L1;
     url += d->mServer.host();
     url += QLatin1Char(':');
     url += QString::number(d->mServer.port());

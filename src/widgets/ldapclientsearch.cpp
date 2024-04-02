@@ -31,6 +31,7 @@
 #include <QTimer>
 
 using namespace KLDAPWidgets;
+using namespace Qt::Literals::StringLiterals;
 
 class Q_DECL_HIDDEN LdapClientSearch::LdapClientSearchPrivate
 {
@@ -327,7 +328,7 @@ void LdapClientSearch::LdapClientSearchPrivate::makeSearchData(QStringList &ret,
             }
             const QString tmp = QString::fromUtf8(val.constData(), len);
             // qCDebug(LDAPCLIENT_LOG) <<"      key: \"" << it2.key() <<"\" value: \"" << tmp <<"\"";
-            if (it2.key() == QLatin1StringView("cn")) {
+            if (it2.key() == "cn"_L1) {
                 name = tmp;
                 if (mail.isEmpty()) {
                     mail = tmp;
@@ -340,7 +341,7 @@ void LdapClientSearch::LdapClientSearchPrivate::makeSearchData(QStringList &ret,
                     mail.prepend(tmp);
                 }
                 wasCN = true;
-            } else if (it2.key() == QLatin1StringView("dc")) {
+            } else if (it2.key() == "dc"_L1) {
                 if (mail.isEmpty()) {
                     mail = tmp;
                 } else {
@@ -352,18 +353,17 @@ void LdapClientSearch::LdapClientSearchPrivate::makeSearchData(QStringList &ret,
                     mail.append(tmp);
                 }
                 wasDC = true;
-            } else if (it2.key() == QLatin1StringView("mail")) {
+            } else if (it2.key() == "mail"_L1) {
                 mail = tmp;
                 KLDAPCore::LdapAttrValue::ConstIterator it3 = it2.value().constBegin();
                 for (; it3 != it2.value().constEnd(); ++it3) {
                     mails.append(QString::fromUtf8((*it3).data(), (*it3).size()));
                 }
-            } else if (it2.key() == QLatin1StringView("givenName")) {
+            } else if (it2.key() == "givenName"_L1) {
                 givenname = tmp;
-            } else if (it2.key() == QLatin1StringView("sn")) {
+            } else if (it2.key() == "sn"_L1) {
                 sn = tmp;
-            } else if (it2.key() == QLatin1StringView("objectClass")
-                       && (tmp == QLatin1StringView("groupOfNames") || tmp == QLatin1StringView("kolabGroupOfNames"))) {
+            } else if (it2.key() == "objectClass"_L1 && (tmp == "groupOfNames"_L1 || tmp == "kolabGroupOfNames"_L1)) {
                 isDistributionList = true;
             }
         }

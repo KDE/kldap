@@ -5,6 +5,8 @@
  */
 
 #include "ldapclientsearchconfigreadconfigjob.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "ldapclient_debug.h"
 
 #include "kldapcore/ldapdn.h"
@@ -108,17 +110,17 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
 
     QString tmp = mConfig.readEntry(prefix + QStringLiteral("Security%1").arg(mServerIndex), QStringLiteral("None"));
     mServer.setSecurity(KLDAPCore::LdapServer::None);
-    if (tmp == QLatin1StringView("SSL")) {
+    if (tmp == "SSL"_L1) {
         mServer.setSecurity(KLDAPCore::LdapServer::SSL);
-    } else if (tmp == QLatin1StringView("TLS")) {
+    } else if (tmp == "TLS"_L1) {
         mServer.setSecurity(KLDAPCore::LdapServer::TLS);
     }
 
     tmp = mConfig.readEntry(prefix + QStringLiteral("Auth%1").arg(mServerIndex), QStringLiteral("Anonymous"));
     mServer.setAuth(KLDAPCore::LdapServer::Anonymous);
-    if (tmp == QLatin1StringView("Simple")) {
+    if (tmp == "Simple"_L1) {
         mServer.setAuth(KLDAPCore::LdapServer::Simple);
-    } else if (tmp == QLatin1StringView("SASL")) {
+    } else if (tmp == "SASL"_L1) {
         mServer.setAuth(KLDAPCore::LdapServer::SASL);
     }
 

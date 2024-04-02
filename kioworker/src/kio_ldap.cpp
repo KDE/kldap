@@ -6,6 +6,8 @@
 */
 
 #include "kio_ldap.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "kldap_debug.h"
 
 #include "kldapcore/ldif.h"
@@ -200,9 +202,9 @@ void LDAPProtocol::LDAPEntry2UDSEntry(const LdapDN &dn, UDSEntry &entry, const L
     if ((pos = name.indexOf(QLatin1Char('='))) > 0) {
         name.remove(0, pos + 1);
     }
-    name.replace(QLatin1Char(' '), QLatin1StringView("_"));
+    name.replace(QLatin1Char(' '), "_"_L1);
     if (!dir) {
-        name += QLatin1StringView(".ldif");
+        name += ".ldif"_L1;
     }
     entry.fastInsert(KIO::UDSEntry::UDS_NAME, name);
 
@@ -290,7 +292,7 @@ KIO::WorkerResult LDAPProtocol::openConnection()
     info.url.setPort(mServer.port());
     info.url.setUserName(mServer.user());
     info.caption = i18n("LDAP Login");
-    info.comment = QString::fromLatin1(mProtocol) + QLatin1StringView("://") + mServer.host() + QLatin1Char(':') + QString::number(mServer.port());
+    info.comment = QString::fromLatin1(mProtocol) + "://"_L1 + mServer.host() + QLatin1Char(':') + QString::number(mServer.port());
     info.commentLabel = i18n("site:");
     info.username = mServer.auth() == LdapServer::SASL ? mServer.user() : mServer.bindDn();
     info.password = mServer.password();
@@ -486,7 +488,7 @@ KIO::WorkerResult LDAPProtocol::stat(const QUrl &_url)
 
     UDSEntry uds;
     bool critical;
-    LDAPEntry2UDSEntry(usrc.dn(), uds, usrc, usrc.extension(QStringLiteral("x-dir"), critical) != QLatin1StringView("base"));
+    LDAPEntry2UDSEntry(usrc.dn(), uds, usrc, usrc.extension(QStringLiteral("x-dir"), critical) != "base"_L1);
 
     statEntry(uds);
     // we are done
@@ -685,7 +687,7 @@ KIO::WorkerResult LDAPProtocol::listDir(const QUrl &_url)
 
     const QStringList saveatt = usrc.attributes();
     bool critical = true;
-    bool isSub = (usrc.extension(QStringLiteral("x-dir"), critical) == QLatin1StringView("sub"));
+    bool isSub = (usrc.extension(QStringLiteral("x-dir"), critical) == "sub"_L1);
     // look up the entries
     if (isSub) {
         att.append(QStringLiteral("dn"));
@@ -700,7 +702,7 @@ KIO::WorkerResult LDAPProtocol::listDir(const QUrl &_url)
         return LDAPErr();
     }
 
-    usrc.setAttributes(QStringList() << QLatin1StringView(""));
+    usrc.setAttributes(QStringList() << ""_L1);
     usrc.setExtension(QStringLiteral("x-dir"), QStringLiteral("base"));
     // publish the results
     UDSEntry uds;

@@ -5,6 +5,8 @@
  */
 
 #include "ldapconfigurewidget.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include <QLabel>
 #include <QListWidget>
 #include <QListWidgetItem>
@@ -264,7 +266,7 @@ void LdapConfigureWidget::save()
 void LdapConfigureWidget::initGUI()
 {
     auto mainLayout = new QVBoxLayout(this);
-    mainLayout->setObjectName(QLatin1StringView("layout"));
+    mainLayout->setObjectName("layout"_L1);
 
     // Contents of the QVGroupBox: label and hbox
     auto label = new QLabel(i18n("Check all servers that should be used:"));

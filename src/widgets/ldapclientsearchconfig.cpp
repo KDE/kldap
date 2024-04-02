@@ -5,6 +5,8 @@
  */
 
 #include "ldapclientsearchconfig.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "kldapcore/ldapserver.h"
 
 #include <KConfig>
@@ -20,7 +22,7 @@ public:
     ~LdapClientSearchConfigPrivate() = default;
 };
 
-Q_GLOBAL_STATIC_WITH_ARGS(KConfig, s_config, (QLatin1StringView("kabldaprc"), KConfig::NoGlobals))
+Q_GLOBAL_STATIC_WITH_ARGS(KConfig, s_config, ("kabldaprc"_L1, KConfig::NoGlobals))
 
 KConfig *LdapClientSearchConfig::config()
 {

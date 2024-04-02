@@ -6,6 +6,8 @@
 */
 
 #include "ldapcontrol.h"
+using namespace Qt::Literals::StringLiterals;
+
 #include "ber.h"
 
 #include <QSharedData>
@@ -94,7 +96,7 @@ void LdapControl::setCritical(bool critical)
 
 int LdapControl::parsePageControl(QByteArray &cookie) const
 {
-    if (d->mOid != QLatin1StringView("1.2.840.113556.1.4.319")) {
+    if (d->mOid != "1.2.840.113556.1.4.319"_L1) {
         return -1;
     }
 

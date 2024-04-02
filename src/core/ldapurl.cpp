@@ -10,6 +10,7 @@
 #include "ldap_core_debug.h"
 
 using namespace KLDAPCore;
+using namespace Qt::Literals::StringLiterals;
 
 class Q_DECL_HIDDEN LdapUrl::LdapUrlPrivate
 {
@@ -125,7 +126,7 @@ LdapUrl::Extension LdapUrl::extension(const QString &key) const
         return *it;
     } else {
         Extension ext;
-        ext.value = QLatin1StringView("");
+        ext.value = ""_L1;
         ext.critical = false;
         return ext;
     }
@@ -192,7 +193,7 @@ void LdapUrl::updateQuery()
 
     // set the filter
     q += QLatin1Char('?');
-    if (d->m_filter != QLatin1StringView("(objectClass=*)") && !d->m_filter.isEmpty()) {
+    if (d->m_filter != "(objectClass=*)"_L1 && !d->m_filter.isEmpty()) {
         q += QLatin1StringView(toPercentEncoding(d->m_filter));
     }
 
@@ -242,9 +243,9 @@ void LdapUrl::parseQuery()
             d->m_attributes = (*it).split(QLatin1Char(','), Qt::SkipEmptyParts);
             break;
         case 1:
-            if ((*it) == QLatin1StringView("sub")) {
+            if ((*it) == "sub"_L1) {
                 d->m_scope = Sub;
-            } else if ((*it) == QLatin1StringView("one")) {
+            } else if ((*it) == "one"_L1) {
                 d->m_scope = One;
             }
             break;
@@ -269,7 +270,7 @@ void LdapUrl::parseQuery()
             name.remove(0, 1);
         }
         qCDebug(LDAP_LOG) << "LdapUrl extensions name=" << name << "value:" << value;
-        ext.value = value.replace(QLatin1StringView("%2"), QLatin1StringView(","));
+        ext.value = value.replace("%2"_L1, ","_L1);
         setExtension(name, ext);
     }
 }
