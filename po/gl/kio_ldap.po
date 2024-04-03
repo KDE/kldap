@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kio_ldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 00:50+0000\n"
+"POT-Creation-Date: 2024-04-03 00:38+0000\n"
 "PO-Revision-Date: 2018-04-28 20:43+0100\n"
 "Last-Translator: Adrian Chaves <adrian@chaves.io>\n"
 "Language-Team: Galician <kde-i18n-doc@kde.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: kio_ldap.cpp:86
+#: kio_ldap.cpp:88
 #, kde-format
 msgid ""
 "\n"
@@ -27,7 +27,7 @@ msgstr ""
 "\n"
 "Información adicional: "
 
-#: kio_ldap.cpp:161
+#: kio_ldap.cpp:163
 #, kde-format
 msgid ""
 "LDAP server returned the error: %1 %2\n"
@@ -36,32 +36,32 @@ msgstr ""
 "O servidor LDAP devolveu o seguinte erro: %1 %2\n"
 "O URL de LDAP era: %3"
 
-#: kio_ldap.cpp:292
+#: kio_ldap.cpp:294
 #, kde-format
 msgid "LDAP Login"
 msgstr "Acceso con LDAP"
 
-#: kio_ldap.cpp:294
+#: kio_ldap.cpp:296
 #, kde-format
 msgid "site:"
 msgstr "sitio:"
 
-#: kio_ldap.cpp:319
+#: kio_ldap.cpp:321
 #, kde-format
 msgid "Invalid authorization information."
 msgstr "Información de autorización incorrecta."
 
-#: kio_ldap.cpp:327
+#: kio_ldap.cpp:329
 #, kde-format
 msgid "LDAP connection canceled."
 msgstr "Cancelouse a conexión LDAP."
 
-#: kio_ldap.cpp:584 kio_ldap.cpp:650
+#: kio_ldap.cpp:586 kio_ldap.cpp:652
 #, kde-format
 msgid "The Ldif parser failed."
 msgstr "O procesador de LDIF fallou."
 
-#: kio_ldap.cpp:661
+#: kio_ldap.cpp:663
 #, kde-format
 msgid "Invalid Ldif file in line %1."
 msgstr "Ficheiro LDIF incorrecto na liña %1."

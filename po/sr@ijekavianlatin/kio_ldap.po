@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kio_ldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-13 00:50+0000\n"
+"POT-Creation-Date: 2024-04-03 00:38+0000\n"
 "PO-Revision-Date: 2009-12-14 00:24+0100\n"
 "Last-Translator: Dalibor Djuric <dalibor.djuric@mozilla-srbija.org>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: kio_ldap.cpp:86
+#: kio_ldap.cpp:88
 #, kde-format
 msgid ""
 "\n"
@@ -28,7 +28,7 @@ msgstr ""
 "\n"
 "Dodatni podaci: "
 
-#: kio_ldap.cpp:161
+#: kio_ldap.cpp:163
 #, kde-format
 msgid ""
 "LDAP server returned the error: %1 %2\n"
@@ -37,33 +37,33 @@ msgstr ""
 "LDAP server javlja grešku: %1 %2\n"
 "URL LDAP‑a: %3"
 
-#: kio_ldap.cpp:292
+#: kio_ldap.cpp:294
 #, kde-format
 msgid "LDAP Login"
 msgstr "LDAP prijava"
 
-#: kio_ldap.cpp:294
+#: kio_ldap.cpp:296
 #, kde-format
 msgid "site:"
 msgstr "sajt:"
 
 # >! authorization -> authentication
-#: kio_ldap.cpp:319
+#: kio_ldap.cpp:321
 #, kde-format
 msgid "Invalid authorization information."
 msgstr "Neispravni podaci za autentifikaciju."
 
-#: kio_ldap.cpp:327
+#: kio_ldap.cpp:329
 #, kde-format
 msgid "LDAP connection canceled."
 msgstr "LDAP veza otkazana."
 
-#: kio_ldap.cpp:584 kio_ldap.cpp:650
+#: kio_ldap.cpp:586 kio_ldap.cpp:652
 #, kde-format
 msgid "The Ldif parser failed."
 msgstr "Neuspjelo raščlanjivanje LDIF‑a."
 
-#: kio_ldap.cpp:661
+#: kio_ldap.cpp:663
 #, kde-format
 msgid "Invalid Ldif file in line %1."
 msgstr "Neispravan LDIF u redu %1."
