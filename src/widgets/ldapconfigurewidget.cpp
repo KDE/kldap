@@ -109,7 +109,7 @@ void LdapConfigureWidget::slotRemoveHost()
     if (!item) {
         return;
     }
-    auto ldapItem = dynamic_cast<LdapWidgetItem *>(item);
+    auto ldapItem = static_cast<LdapWidgetItem *>(item);
     const int answer = KMessageBox::questionTwoActions(this,
                                                        i18n("Do you want to remove setting for host \"%1\"?", ldapItem->server().host()),
                                                        i18n("Remove Host"),
