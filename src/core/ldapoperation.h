@@ -31,7 +31,12 @@ namespace KLDAPCore
 class KLDAP_CORE_EXPORT LdapOperation
 {
 public:
-    using ModType = enum { Mod_None, Mod_Add, Mod_Replace, Mod_Del };
+    using ModType = enum {
+        Mod_None,
+        Mod_Add,
+        Mod_Replace,
+        Mod_Del,
+    };
 
     using ResultType = enum {
         RES_BIND = 0x61,
@@ -44,7 +49,7 @@ public:
         RES_MODDN = 0x6d,
         RES_COMPARE = 0x6f,
         RES_EXTENDED = 0x78,
-        RES_EXTENDED_PARTIAL = 0x79
+        RES_EXTENDED_PARTIAL = 0x79,
     };
 
     using ModOp = struct {
@@ -55,7 +60,12 @@ public:
 
     using ModOps = QList<ModOp>;
 
-    enum SASL_Fields { SASL_Authname = 0x1, SASL_Authzid = 0x2, SASL_Realm = 0x4, SASL_Password = 0x8 };
+    enum SASL_Fields {
+        SASL_Authname = 0x1,
+        SASL_Authzid = 0x2,
+        SASL_Realm = 0x4,
+        SASL_Password = 0x8,
+    };
 
     struct SASL_Credentials {
         int fields;

@@ -23,7 +23,12 @@ namespace KLDAPCore
 class KLDAP_CORE_EXPORT LdapConnection
 {
 public:
-    enum SASL_Fields { SASL_Authname = 0x1, SASL_Authzid = 0x2, SASL_Realm = 0x4, SASL_Password = 0x8 };
+    enum SASL_Fields {
+        SASL_Authname = 0x1,
+        SASL_Authzid = 0x2,
+        SASL_Realm = 0x4,
+        SASL_Password = 0x8,
+    };
 
     /** Constructs an LdapConnection object */
     LdapConnection();
