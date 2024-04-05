@@ -8,7 +8,7 @@ project(KLdap VERSION ${PIM_VERSION})
 # ECM setup
 set(KF_MIN_VERSION "6.0.0")
 set(QT_REQUIRED_VERSION "6.6.0")
-set(QT6KEYCHAIN_LIB_VERSION "0.14.1")
+set(QT6KEYCHAIN_LIB_VERSION "0.14.2")
 find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${KLdap_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
 
@@ -42,10 +42,6 @@ set_package_properties(Qt6Keychain PROPERTIES
                                    DESCRIPTION "Provides support for secure credentials storage"
                                    URL "https://github.com/frankosterfeld/qtkeychain"
 				   TYPE REQUIRED)
-
-if (Qt6Keychain_VERSION VERSION_LESS 0.14.2)
-     MESSAGE(STATUS "Qt6KeyChain version is less 0.14.2. It will not support KWallet 6... It will not able to load password. Please update it.")
-endif()
 
 # tell what is missing without doctools
 set_package_properties(KF6DocTools PROPERTIES DESCRIPTION "Provides tools to generate documentation in various format from DocBook files"
