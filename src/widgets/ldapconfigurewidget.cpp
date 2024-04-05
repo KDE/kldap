@@ -276,7 +276,7 @@ void LdapConfigureWidget::initGUI()
     mainLayout->addWidget(hBox);
 
     auto hBoxHBoxLayout = new QHBoxLayout(hBox);
-    hBoxHBoxLayout->setContentsMargins(0, 0, 0, 0);
+    hBoxHBoxLayout->setContentsMargins({});
     hBoxHBoxLayout->setSpacing(6);
     // Contents of the hbox: listview and up/down buttons on the right (vbox)
     mHostListView = new QListWidget(hBox);
@@ -285,7 +285,7 @@ void LdapConfigureWidget::initGUI()
 
     auto upDownBox = new QWidget(hBox);
     auto upDownBoxVBoxLayout = new QVBoxLayout(upDownBox);
-    upDownBoxVBoxLayout->setContentsMargins(0, 0, 0, 0);
+    upDownBoxVBoxLayout->setContentsMargins({});
     hBoxHBoxLayout->addWidget(upDownBox);
     upDownBoxVBoxLayout->setSpacing(6);
     mUpButton = new QToolButton(upDownBox);
