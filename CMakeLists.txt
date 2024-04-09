@@ -8,7 +8,11 @@ project(KLdap VERSION ${PIM_VERSION})
 # ECM setup
 set(KF_MIN_VERSION "6.0.0")
 set(QT_REQUIRED_VERSION "6.6.0")
-set(QT6KEYCHAIN_LIB_VERSION "0.14.2")
+if (WIN32)
+    set(QT6KEYCHAIN_LIB_VERSION "0.14.1") # delete once craft cache is updated
+else()
+    set(QT6KEYCHAIN_LIB_VERSION "0.14.2")
+endif()
 find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH ${KLdap_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
 
