@@ -41,7 +41,7 @@ find_package(Qt6Keychain ${QT6KEYCHAIN_LIB_VERSION} CONFIG)
 set_package_properties(Qt6Keychain PROPERTIES
                                    DESCRIPTION "Provides support for secure credentials storage"
                                    URL "https://github.com/frankosterfeld/qtkeychain"
-				   TYPE REQUIRED)
+                                   TYPE REQUIRED)
 
 # tell what is missing without doctools
 set_package_properties(KF6DocTools PROPERTIES DESCRIPTION "Provides tools to generate documentation in various format from DocBook files"
