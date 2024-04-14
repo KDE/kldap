@@ -92,7 +92,7 @@ public:
      * @param option the connection option to return
      * @param value the value of option to get
      */
-    int getOption(int option, void *value) const;
+    [[nodiscard]] int getOption(int option, void *value) const;
     /** Sets an option in the connection. The option value can be client
      * library specific, so avoid this function if possible */
     int setOption(int option, void *value);

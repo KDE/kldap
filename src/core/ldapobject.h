@@ -79,7 +79,7 @@ public:
     /**
      * Returns the attributes and their values.
      */
-    const LdapAttrMap &attributes() const;
+    [[nodiscard]] const LdapAttrMap &attributes() const;
     /**
      * Returns all values of the attribute with the given name.
      */
