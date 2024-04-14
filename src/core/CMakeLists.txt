@@ -62,6 +62,9 @@ target_sources(KPim6LdapCore PRIVATE
   ldapoperation.h
   ldapserver.h
   ldapobject.h
+
+  ldapmodel.h
+  ldapmodel.cpp
    )
  
 ecm_qt_declare_logging_category(KPim6LdapCore HEADER ldap_core_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME org.kde.pim.ldap.core
