@@ -5,14 +5,25 @@
  */
 
 #pragma once
-
+#include "kldap_core_export.h"
 #include <QAbstractListModel>
 namespace KLDAPCore
 {
-class LdapModel : public QAbstractListModel
+class KLDAP_CORE_EXPORT LdapModel : public QAbstractListModel
 {
+    Q_OBJECT
 public:
     explicit LdapModel(QObject *parent = nullptr);
     ~LdapModel() override;
+
+    enum LdapRoles {
+        Name,
+        Enabled,
+    };
+
+    [[nodiscard]] QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    [[nodiscard]] int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    [[nodiscard]] int columnCount(const QModelIndex &parent) const override;
+    [[nodiscard]] QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 };
 }

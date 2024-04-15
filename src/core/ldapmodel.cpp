@@ -12,3 +12,28 @@ LdapModel::LdapModel(QObject *parent)
 }
 
 LdapModel::~LdapModel() = default;
+
+QVariant LdapModel::data(const QModelIndex &index, int role) const
+{
+    return {};
+}
+
+int LdapModel::rowCount(const QModelIndex &parent) const
+{
+    // TODO
+    return {};
+}
+
+int LdapModel::columnCount(const QModelIndex &parent) const
+{
+    // TODO
+    return {};
+}
+
+QVariant LdapModel::headerData(int section, Qt::Orientation orientation, int role) const
+{
+    // TODO
+    return {};
+}
+
+#include "moc_ldapmodel.cpp"
