@@ -65,10 +65,18 @@ public:
     };
     Q_DECLARE_FLAGS(WinFlags, WinFlag)
 
-    enum Security { None, SSL, TLS };
+    enum Security {
+        None,
+        SSL,
+        TLS,
+    };
     Q_ENUM(Security)
 
-    enum Auth { Anonymous, Simple, SASL };
+    enum Auth {
+        Anonymous,
+        Simple,
+        SASL,
+    };
     Q_ENUM(Auth)
 
     /** Constructs an empty configuration widget.
