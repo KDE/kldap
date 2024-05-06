@@ -120,6 +120,8 @@ ecm_generate_headers(KLdapCore_CamelCase_HEADERS
     LdapDefs
     LdapUrl
     Ldif
+    LdapActivitiesAbstract
+    LdapModel
     PREFIX KLDAPCore
     REQUIRED_HEADERS KLdapCore_HEADERS
 )
