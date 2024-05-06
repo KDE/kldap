@@ -9,6 +9,7 @@
 #include <QAbstractListModel>
 namespace KLDAPCore
 {
+class LdapServer;
 class KLDAP_CORE_EXPORT LdapModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -27,5 +28,8 @@ public:
     [[nodiscard]] int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     [[nodiscard]] int columnCount(const QModelIndex &parent) const override;
     [[nodiscard]] QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
+
+private:
+    QList<KLDAPCore::LdapServer> mLdapServer;
 };
 }

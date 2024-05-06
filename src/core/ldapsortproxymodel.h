@@ -20,7 +20,7 @@ public:
     void setLdapActivitiesAbstract(LdapActivitiesAbstract *newldapActivitiesAbstract);
 
 protected:
-    bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
+    [[nodiscard]] bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
 
 private:
     LdapActivitiesAbstract *mLdapActivitiesAbstract = nullptr;
