@@ -10,9 +10,15 @@ using namespace KLDAPCore;
 LdapModel::LdapModel(QObject *parent)
     : QAbstractListModel{parent}
 {
+    init();
 }
 
 LdapModel::~LdapModel() = default;
+
+void LdapModel::init()
+{
+    // TODO
+}
 
 QVariant LdapModel::data(const QModelIndex &index, int role) const
 {

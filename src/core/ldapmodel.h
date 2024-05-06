@@ -30,6 +30,7 @@ public:
     [[nodiscard]] QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
 private:
+    KLDAP_CORE_NO_EXPORT void init();
     QList<KLDAPCore::LdapServer> mLdapServer;
 };
 }
