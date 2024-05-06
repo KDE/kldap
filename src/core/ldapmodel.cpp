@@ -16,6 +16,10 @@ LdapModel::~LdapModel() = default;
 
 QVariant LdapModel::data(const QModelIndex &index, int role) const
 {
+    if (!index.isValid()) {
+        return {};
+    }
+    // TODO
     return {};
 }
 
