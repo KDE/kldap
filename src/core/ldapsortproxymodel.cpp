@@ -34,3 +34,5 @@ void LdapSortProxyModel::setLdapActivitiesAbstract(LdapActivitiesAbstract *newId
         invalidateFilter();
     }
 }
+
+#include "moc_ldapsortproxymodel.cpp"

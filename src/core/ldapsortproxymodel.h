@@ -11,6 +11,7 @@ namespace KLDAPCore
 class LdapActivitiesAbstract;
 class KLDAP_CORE_EXPORT LdapSortProxyModel : public QSortFilterProxyModel
 {
+    Q_OBJECT
 public:
     explicit LdapSortProxyModel(QObject *parent);
     ~LdapSortProxyModel() override;
