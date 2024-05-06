@@ -3,7 +3,7 @@
 
 #include "ldapactivitiesabstract.h"
 
-using namespace KIdentityManagementCore;
+using namespace KLDAPCore;
 LdapActivitiesAbstract::LdapActivitiesAbstract(QObject *parent)
     : QObject{parent}
 {

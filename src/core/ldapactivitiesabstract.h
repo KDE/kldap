@@ -6,8 +6,12 @@
 #include "kldap_core_export.h"
 #include <QObject>
 
-namespace KIdentityManagementCore
+namespace KLDAPCore
 {
+/**
+ * @brief The LdapActivitiesAbstract class
+ * @author Laurent Montel <montel@kde.org>
+ */
 class KLDAP_CORE_EXPORT LdapActivitiesAbstract : public QObject
 {
     Q_OBJECT
