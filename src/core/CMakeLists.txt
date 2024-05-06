@@ -65,6 +65,9 @@ target_sources(KPim6LdapCore PRIVATE
 
     ldapmodel.h
     ldapmodel.cpp
+    ldapsortproxymodel.cpp
+    ldapsortproxymodel.h
+
     ldapactivitiesabstract.h
     ldapactivitiesabstract.cpp 
 )

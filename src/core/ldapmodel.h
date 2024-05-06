@@ -19,6 +19,7 @@ public:
     enum LdapRoles {
         Name,
         Enabled,
+        Activities,
     };
 
     [[nodiscard]] QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
