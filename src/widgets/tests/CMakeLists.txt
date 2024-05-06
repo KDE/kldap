@@ -3,5 +3,9 @@
 ########## next target ###############
 add_executable(testldapclient testldapclient.cpp testldapclient.h)
 
-target_link_libraries(testldapclient KF6::I18n KF6::Completion KPim6::LdapWidgets KPim6::LdapCore KF6::CoreAddons)
+target_link_libraries(testldapclient KPim6::LdapWidgets Qt::Widgets)
 
+#####
+add_executable(ldapconfigurewidget_gui ldapconfigurewidget_gui.cpp)
+
+target_link_libraries(ldapconfigurewidget_gui KPim6::LdapWidgets Qt::Widgets)
