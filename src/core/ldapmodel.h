@@ -20,6 +20,7 @@ public:
         Name,
         Enabled,
         Activities,
+        LastColumn = Activities,
     };
 
     [[nodiscard]] QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
