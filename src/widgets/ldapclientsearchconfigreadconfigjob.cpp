@@ -5,7 +5,6 @@
  */
 
 #include "ldapclientsearchconfigreadconfigjob.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "ldapclient_debug.h"
 
@@ -14,6 +13,7 @@ using namespace Qt::Literals::StringLiterals;
 #include <KLocalizedString>
 #include <qt6keychain/keychain.h>
 using namespace QKeychain;
+using namespace Qt::Literals::StringLiterals;
 
 using namespace KLDAPWidgets;
 LdapClientSearchConfigReadConfigJob::LdapClientSearchConfigReadConfigJob(QObject *parent)

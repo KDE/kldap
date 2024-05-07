@@ -37,22 +37,4 @@ LdapClientSearchConfig::LdapClientSearchConfig(QObject *parent)
 
 LdapClientSearchConfig::~LdapClientSearchConfig() = default;
 
-#if 0 // Port it
-void LdapClientSearchConfig::clearWalletPassword()
-{
-    if (!d->wallet) {
-        d->wallet = KWallet::Wallet::openWallet(KWallet::Wallet::LocalWallet(), 0);
-    }
-    if (d->wallet) {
-        d->useWallet = true;
-        if (d->wallet->hasFolder(QStringLiteral("ldapclient"))) {
-            //Recreate it.
-            d->wallet->removeFolder(QStringLiteral("ldapclient"));
-            d->wallet->createFolder(QStringLiteral("ldapclient"));
-            d->wallet->setFolder(QStringLiteral("ldapclient"));
-        }
-    }
-}
-#endif
-
 #include "moc_ldapclientsearchconfig.cpp"

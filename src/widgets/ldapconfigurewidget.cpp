@@ -222,7 +222,6 @@ void LdapConfigureWidget::load()
 
 void LdapConfigureWidget::save()
 {
-    // mClientSearchConfig->clearWalletPassword();
     KConfig *config = KLDAPWidgets::LdapClientSearchConfig::config();
     config->deleteGroup(QStringLiteral("LDAP"));
 
