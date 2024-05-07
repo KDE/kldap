@@ -39,3 +39,5 @@ private:
     QList<ServerInfo> mLdapServerInfo;
 };
 }
+Q_DECLARE_METATYPE(KLDAPCore::LdapModel::ServerInfo)
+Q_DECLARE_TYPEINFO(KLDAPCore::LdapModel::ServerInfo, Q_RELOCATABLE_TYPE);
