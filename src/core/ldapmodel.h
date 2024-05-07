@@ -34,6 +34,9 @@ public:
     [[nodiscard]] int columnCount(const QModelIndex &parent) const override;
     [[nodiscard]] QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
 
+    [[nodiscard]] QList<ServerInfo> ldapServerInfo() const;
+    void setLdapServerInfo(const QList<ServerInfo> &newLdapServerInfo);
+
 private:
     KLDAP_CORE_NO_EXPORT void init();
     QList<ServerInfo> mLdapServerInfo;

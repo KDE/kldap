@@ -20,6 +20,16 @@ void LdapModel::init()
     // TODO
 }
 
+QList<LdapModel::ServerInfo> LdapModel::ldapServerInfo() const
+{
+    return mLdapServerInfo;
+}
+
+void LdapModel::setLdapServerInfo(const QList<ServerInfo> &newLdapServerInfo)
+{
+    mLdapServerInfo = newLdapServerInfo;
+}
+
 QVariant LdapModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid()) {
