@@ -43,12 +43,12 @@ public:
 
     ~LdapClientSearchPrivate() = default;
 
-    void readWeighForClient(LdapClient *client, const KConfigGroup &config, int clientNumber);
+    void readWeighForClient(KLDAPCore::LdapClient *client, const KConfigGroup &config, int clientNumber);
     void readConfig();
     void finish();
     void makeSearchData(QStringList &ret, LdapResult::List &resList);
 
-    void slotLDAPResult(const KLDAPWidgets::LdapClient &client, const KLDAPCore::LdapObject &);
+    void slotLDAPResult(const KLDAPCore::LdapClient &client, const KLDAPCore::LdapObject &);
     void slotLDAPError(const QString &);
     void slotLDAPDone();
     void slotDataTimer();
@@ -56,7 +56,7 @@ public:
     void init(const QStringList &attributes);
 
     LdapClientSearch *const q;
-    QList<LdapClient *> mClients;
+    QList<KLDAPCore::LdapClient *> mClients;
     QStringList mAttributes;
     QString mSearchText;
     QString mFilter;
@@ -103,7 +103,7 @@ void LdapClientSearch::LdapClientSearchPrivate::init(const QStringList &attribut
     });
 }
 
-void LdapClientSearch::LdapClientSearchPrivate::readWeighForClient(LdapClient *client, const KConfigGroup &config, int clientNumber)
+void LdapClientSearch::LdapClientSearchPrivate::readWeighForClient(KLDAPCore::LdapClient *client, const KConfigGroup &config, int clientNumber)
 {
     const int completionWeight = config.readEntry(QStringLiteral("SelectedCompletionWeight%1").arg(clientNumber), -1);
     if (completionWeight != -1) {
@@ -119,7 +119,7 @@ void LdapClientSearch::updateCompletionWeights()
     }
 }
 
-QList<LdapClient *> LdapClientSearch::clients() const
+QList<KLDAPCore::LdapClient *> LdapClientSearch::clients() const
 {
     return d->mClients;
 }
@@ -166,8 +166,8 @@ void LdapClientSearch::LdapClientSearchPrivate::readConfig()
         mNoLDAPLookup = true;
     } else {
         for (int j = 0; j < numHosts; ++j) {
-            auto ldapClient = new LdapClient(j, q);
-            auto job = new LdapSearchClientReadConfigServerJob;
+            auto ldapClient = new KLDAPCore::LdapClient(j, q);
+            auto job = new KLDAPCore::LdapSearchClientReadConfigServerJob;
             job->setCurrentIndex(j);
             job->setActive(true);
             job->setConfig(config);
@@ -179,13 +179,13 @@ void LdapClientSearch::LdapClientSearchPrivate::readConfig()
 
             ldapClient->setAttributes(mAttributes);
 
-            q->connect(ldapClient, &LdapClient::result, q, [this](const LdapClient &client, const KLDAPCore::LdapObject &obj) {
+            q->connect(ldapClient, &KLDAPCore::LdapClient::result, q, [this](const KLDAPCore::LdapClient &client, const KLDAPCore::LdapObject &obj) {
                 slotLDAPResult(client, obj);
             });
-            q->connect(ldapClient, &LdapClient::done, q, [this]() {
+            q->connect(ldapClient, &KLDAPCore::LdapClient::done, q, [this]() {
                 slotLDAPDone();
             });
-            q->connect(ldapClient, qOverload<const QString &>(&LdapClient::error), q, [this](const QString &str) {
+            q->connect(ldapClient, qOverload<const QString &>(&KLDAPCore::LdapClient::error), q, [this](const QString &str) {
                 slotLDAPError(str);
             });
 
@@ -231,8 +231,8 @@ void LdapClientSearch::startSearch(const QString &txt)
 
     const QString filter = d->mFilter.arg(d->mSearchText);
 
-    QList<LdapClient *>::Iterator it(d->mClients.begin());
-    const QList<LdapClient *>::Iterator end(d->mClients.end());
+    QList<KLDAPCore::LdapClient *>::Iterator it(d->mClients.begin());
+    const QList<KLDAPCore::LdapClient *>::Iterator end(d->mClients.end());
     for (; it != end; ++it) {
         (*it)->startQuery(filter);
         qCDebug(LDAPCLIENT_LOG) << "LdapClientSearch::startSearch()" << filter;
@@ -242,8 +242,8 @@ void LdapClientSearch::startSearch(const QString &txt)
 
 void LdapClientSearch::cancelSearch()
 {
-    QList<LdapClient *>::Iterator it(d->mClients.begin());
-    const QList<LdapClient *>::Iterator end(d->mClients.end());
+    QList<KLDAPCore::LdapClient *>::Iterator it(d->mClients.begin());
+    const QList<KLDAPCore::LdapClient *>::Iterator end(d->mClients.end());
     for (; it != end; ++it) {
         (*it)->cancelQuery();
     }
@@ -252,7 +252,7 @@ void LdapClientSearch::cancelSearch()
     d->mResults.clear();
 }
 
-void LdapClientSearch::LdapClientSearchPrivate::slotLDAPResult(const LdapClient &client, const KLDAPCore::LdapObject &obj)
+void LdapClientSearch::LdapClientSearchPrivate::slotLDAPResult(const KLDAPCore::LdapClient &client, const KLDAPCore::LdapObject &obj)
 {
     LdapResultObject result;
     result.client = &client;

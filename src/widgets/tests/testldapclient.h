@@ -13,12 +13,8 @@
 namespace KLDAPCore
 {
 class LdapObject;
-}
-namespace KLDAPWidgets
-{
 class LdapClient;
 }
-
 class TestLDAPClient : public QObject
 {
     Q_OBJECT
@@ -36,10 +32,10 @@ Q_SIGNALS:
     void leaveModality();
 
 private:
-    void slotLDAPResult(const KLDAPWidgets::LdapClient &, const KLDAPCore::LdapObject &);
+    void slotLDAPResult(const KLDAPCore::LdapClient &, const KLDAPCore::LdapObject &);
     void slotLDAPError(const QString &);
     void slotLDAPDone();
     bool check(const QString &, QString, QString);
 
-    KLDAPWidgets::LdapClient *mClient = nullptr;
+    KLDAPCore::LdapClient *mClient = nullptr;
 };

@@ -8,7 +8,7 @@
  */
 
 #include "ldapclient.h"
-#include "ldapclient_debug.h"
+#include "ldapclient_core_debug.h"
 
 #include "kldapcore/ldapobject.h"
 #include "kldapcore/ldapserver.h"
@@ -20,7 +20,6 @@
 #include <QPointer>
 
 using namespace KLDAPCore;
-using namespace KLDAPWidgets;
 class Q_DECL_HIDDEN LdapClient::LdapClientPrivate
 {
 public:
@@ -116,7 +115,7 @@ void LdapClient::startQuery(const QString &filter)
     }
     url.setFilter(QLatin1Char('(') + finalFilter + QLatin1Char(')'));
 
-    qCDebug(LDAPCLIENT_LOG) << "LdapClient: Doing query:" << url.toDisplayString();
+    qCDebug(LDAPCLIENT_CORE_LOG) << "LdapClient: Doing query:" << url.toDisplayString();
 
     d->startParseLDIF();
     d->mActive = true;
@@ -155,7 +154,7 @@ void LdapClient::LdapClientPrivate::slotData(KIO::Job *, const QByteArray &data)
 
 void LdapClient::LdapClientPrivate::slotInfoMessage(KJob *, const QString &info)
 {
-    qCDebug(LDAPCLIENT_LOG) << "Job said :" << info;
+    qCDebug(LDAPCLIENT_CORE_LOG) << "Job said :" << info;
 }
 
 void LdapClient::LdapClientPrivate::slotDone()

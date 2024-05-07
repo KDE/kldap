@@ -76,7 +76,7 @@ void TestLDAPClient::cleanup()
 void TestLDAPClient::testIntevation()
 {
     qDebug();
-    mClient = new KLDAPWidgets::LdapClient(0, this);
+    mClient = new KLDAPCore::LdapClient(0, this);
 
 #if 0
     mClient->setHost("ca.intevation.de");
@@ -109,9 +109,9 @@ void TestLDAPClient::testIntevation()
         "&(|(objectclass=person)(objectclass=groupofnames)(mail=*))"
         "(|(cn=*Ägypten MDK*)(sn=*Ägypten MDK*))");
 
-    connect(mClient, &KLDAPWidgets::LdapClient::result, this, &TestLDAPClient::slotLDAPResult);
-    connect(mClient, &KLDAPWidgets::LdapClient::done, this, &TestLDAPClient::slotLDAPDone);
-    connect(mClient, &KLDAPWidgets::LdapClient::error, this, &TestLDAPClient::slotLDAPError);
+    connect(mClient, &KLDAPCore::LdapClient::result, this, &TestLDAPClient::slotLDAPResult);
+    connect(mClient, &KLDAPCore::LdapClient::done, this, &TestLDAPClient::slotLDAPDone);
+    connect(mClient, &KLDAPCore::LdapClient::error, this, &TestLDAPClient::slotLDAPError);
     mClient->startQuery(filter);
 
     QEventLoop eventLoop;
@@ -155,7 +155,7 @@ static QString join(const KLDAPCore::LdapAttrValue &lst, const QString &sep)
     return res;
 }
 
-void TestLDAPClient::slotLDAPResult(const KLDAPWidgets::LdapClient &, const KLDAPCore::LdapObject &obj)
+void TestLDAPClient::slotLDAPResult(const KLDAPCore::LdapClient &, const KLDAPCore::LdapObject &obj)
 {
     QString cn = join(obj.attributes()[QStringLiteral("cn")], QStringLiteral(", "));
     qDebug() << " cn:" << cn;

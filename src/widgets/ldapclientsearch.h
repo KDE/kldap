@@ -13,9 +13,12 @@
 #include <QObject>
 #include <QStringList>
 
-namespace KLDAPWidgets
+namespace KLDAPCore
 {
 class LdapClient;
+}
+namespace KLDAPWidgets
+{
 
 /**
  * Describes the result returned by an LdapClientSearch query.
@@ -24,7 +27,7 @@ class LdapClient;
  */
 struct LdapResultObject {
     using List = QList<LdapResultObject>;
-    const LdapClient *client = nullptr;
+    const KLDAPCore::LdapClient *client = nullptr;
     KLDAPCore::LdapObject object;
 };
 
@@ -101,7 +104,7 @@ public:
     /**
      * Returns the list of configured LDAP clients.
      */
-    [[nodiscard]] QList<LdapClient *> clients() const;
+    [[nodiscard]] QList<KLDAPCore::LdapClient *> clients() const;
 
     /**
      * Returns the filter for the Query

@@ -75,12 +75,21 @@ target_sources(KPim6LdapCore PRIVATE
     ldapclientsearchconfigreadconfigjob.h
     ldapclientsearchconfigwriteconfigjob.cpp
     ldapclientsearchconfigwriteconfigjob.h
+    ldapsearchclientreadconfigserverjob.cpp
+    ldapsearchclientreadconfigserverjob.h
 
+    ldapclient.cpp
+    ldapclient.h
 )
 
 ecm_qt_declare_logging_category(KPim6LdapCore HEADER ldap_core_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME org.kde.pim.ldap.core
     DESCRIPTION "kpim6ldapcore (kldap)"
     OLD_CATEGORY_NAMES log_ldap_core
+    EXPORT KLDAP
+)
+
+ecm_qt_declare_logging_category(KPim6LdapCore HEADER ldapclient_core_debug.h IDENTIFIER LDAPCLIENT_CORE_LOG CATEGORY_NAME org.kde.pim.ldapclientcore
+    DESCRIPTION "ldapclient core (kldap)"
     EXPORT KLDAP
 )
 
@@ -97,7 +106,6 @@ target_link_libraries(KPim6LdapCore
     KF6::ConfigCore
     KF6::CoreAddons
     KF6::KIOCore
-    KF6::ConfigGui
     ${kldap_EXTRA_LIBS}
 )
 
@@ -133,6 +141,8 @@ ecm_generate_headers(KLdapCore_CamelCase_HEADERS
     LdapModel
     LdapClientSearchConfigWriteConfigJob
     LdapClientSearchConfigReadConfigJob
+    LdapSearchClientReadConfigServerJob
+    LdapClient
     PREFIX KLDAPCore
     REQUIRED_HEADERS KLdapCore_HEADERS
 )

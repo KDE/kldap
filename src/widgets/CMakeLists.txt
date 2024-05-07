@@ -13,23 +13,19 @@ add_library(KPim6::LdapWidgets ALIAS KPim6LdapWidgets)
 target_sources(KPim6LdapWidgets PRIVATE
     ldapconfigwidget.cpp
     addhostdialog.cpp
-    ldapclient.cpp
     ldapclientsearch.cpp
     ldapclientsearchconfig.cpp
     ldapconfigurewidget.cpp
     ldapwidgetitem_p.cpp
     ldapwidgetitemreadconfigserverjob.cpp
-    ldapsearchclientreadconfigserverjob.cpp
 
     ldapclientsearchconfig.h
-    ldapclient.h
     addhostdialog.h
     ldapwidgetitem_p.h
     ldapconfigwidget.h
     ldapclientsearch.h
     ldapconfigurewidget.h
     ldapwidgetitemreadconfigserverjob.h
-    ldapsearchclientreadconfigserverjob.cpp
 )
 
 ecm_qt_declare_logging_category(KPim6LdapWidgets HEADER ldap_widgets_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME org.kde.pim.ldap.widgets
@@ -85,9 +81,7 @@ ecm_generate_headers(KLdapWidgets_CamelCase_HEADERS
     LdapClientSearchConfig
     LdapClientSearch
     AddHostDialog
-    LdapClient
     LdapConfigureWidget
-    LdapSearchClientReadConfigServerJob
     PREFIX KLDAPWidgets
     REQUIRED_HEADERS KLdapWidgets_HEADERS
 )

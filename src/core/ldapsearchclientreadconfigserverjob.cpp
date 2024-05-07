@@ -6,10 +6,9 @@
 
 #include "ldapsearchclientreadconfigserverjob.h"
 #include "ldapclient.h"
-#include "ldapclient_debug.h"
+#include "ldapclient_core_debug.h"
 #include "ldapclientsearchconfigreadconfigjob.h"
 using namespace KLDAPCore;
-using namespace KLDAPWidgets;
 LdapSearchClientReadConfigServerJob::LdapSearchClientReadConfigServerJob(QObject *parent)
     : QObject(parent)
 {
@@ -20,7 +19,7 @@ LdapSearchClientReadConfigServerJob::~LdapSearchClientReadConfigServerJob() = de
 void LdapSearchClientReadConfigServerJob::start()
 {
     if (!canStart()) {
-        qCWarning(LDAPCLIENT_LOG) << " Impossible to start LdapSearchClientReadConfigServerJob";
+        qCWarning(LDAPCLIENT_CORE_LOG) << " Impossible to start LdapSearchClientReadConfigServerJob";
         deleteLater();
         return;
     }
