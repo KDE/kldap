@@ -6,10 +6,10 @@
 
 #pragma once
 #include "kldap_core_export.h"
+#include <KLDAPCore/LdapServer>
 #include <QAbstractListModel>
 namespace KLDAPCore
 {
-class LdapServer;
 class KLDAP_CORE_EXPORT LdapModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -24,6 +24,11 @@ public:
         LastColumn = Activities,
     };
 
+    struct ServerInfo {
+        bool enabled = false;
+        KLDAPCore::LdapServer mServer;
+    };
+
     [[nodiscard]] QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     [[nodiscard]] int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     [[nodiscard]] int columnCount(const QModelIndex &parent) const override;
@@ -31,6 +36,6 @@ public:
 
 private:
     KLDAP_CORE_NO_EXPORT void init();
-    QList<KLDAPCore::LdapServer> mLdapServer;
+    QList<ServerInfo> mLdapServerInfo;
 };
 }
