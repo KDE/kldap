@@ -5,13 +5,13 @@
  */
 
 #include "ldapclientsearchconfigwriteconfigjob.h"
-#include "ldapclient_debug.h"
+#include "ldap_core_debug.h"
 
 #include "kldapcore/ldapdn.h"
 #include <qt6keychain/keychain.h>
 using namespace QKeychain;
 
-using namespace KLDAPWidgets;
+using namespace KLDAPCore;
 LdapClientSearchConfigWriteConfigJob::LdapClientSearchConfigWriteConfigJob(QObject *parent)
     : QObject(parent)
 {
@@ -89,7 +89,7 @@ void LdapClientSearchConfigWriteConfigJob::writeConfig()
         auto writeJob = new WritePasswordJob(QStringLiteral("ldapclient"), this);
         connect(writeJob, &Job::finished, this, [](QKeychain::Job *baseJob) {
             if (baseJob->error()) {
-                qCWarning(LDAPCLIENT_LOG) << "Error writing password using QKeychain:" << baseJob->errorString();
+                qCWarning(LDAP_LOG) << "Error writing password using QKeychain:" << baseJob->errorString();
             }
         });
         writeJob->setKey(passwordEntry);

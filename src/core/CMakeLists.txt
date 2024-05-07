@@ -69,7 +69,13 @@ target_sources(KPim6LdapCore PRIVATE
     ldapsortproxymodel.h
 
     ldapactivitiesabstract.h
-    ldapactivitiesabstract.cpp 
+    ldapactivitiesabstract.cpp
+
+    ldapclientsearchconfigreadconfigjob.cpp
+    ldapclientsearchconfigreadconfigjob.h
+    ldapclientsearchconfigwriteconfigjob.cpp
+    ldapclientsearchconfigwriteconfigjob.h
+
 )
 
 ecm_qt_declare_logging_category(KPim6LdapCore HEADER ldap_core_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME org.kde.pim.ldap.core
@@ -125,6 +131,8 @@ ecm_generate_headers(KLdapCore_CamelCase_HEADERS
     Ldif
     LdapActivitiesAbstract
     LdapModel
+    LdapClientSearchConfigWriteConfigJob
+    LdapClientSearchConfigReadConfigJob
     PREFIX KLDAPCore
     REQUIRED_HEADERS KLdapCore_HEADERS
 )

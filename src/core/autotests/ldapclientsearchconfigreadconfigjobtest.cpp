@@ -15,7 +15,7 @@ LdapClientSearchConfigReadConfigJobTest::LdapClientSearchConfigReadConfigJobTest
 
 void LdapClientSearchConfigReadConfigJobTest::shouldHaveDefaultValues()
 {
-    KLDAPWidgets::LdapClientSearchConfigReadConfigJob job;
+    KLDAPCore::LdapClientSearchConfigReadConfigJob job;
     QVERIFY(!job.active());
     QCOMPARE(job.serverIndex(), -1);
     QVERIFY(!job.canStart());

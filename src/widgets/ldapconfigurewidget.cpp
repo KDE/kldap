@@ -237,7 +237,7 @@ void LdapConfigureWidget::save()
 
         KLDAPCore::LdapServer server = item->server();
         if (item->checkState() == Qt::Checked) {
-            auto job = new LdapClientSearchConfigWriteConfigJob;
+            auto job = new KLDAPCore::LdapClientSearchConfigWriteConfigJob;
             job->setActive(true);
             job->setConfig(group);
             job->setServerIndex(selected);
@@ -245,7 +245,7 @@ void LdapConfigureWidget::save()
             job->start();
             selected++;
         } else {
-            auto job = new LdapClientSearchConfigWriteConfigJob;
+            auto job = new KLDAPCore::LdapClientSearchConfigWriteConfigJob;
             job->setActive(false);
             job->setConfig(group);
             job->setServerIndex(unselected);

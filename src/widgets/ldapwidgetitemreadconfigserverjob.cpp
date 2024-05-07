@@ -17,8 +17,8 @@ LdapWidgetItemReadConfigServerJob::~LdapWidgetItemReadConfigServerJob() = defaul
 
 void LdapWidgetItemReadConfigServerJob::start()
 {
-    auto job = new LdapClientSearchConfigReadConfigJob(this);
-    connect(job, &LdapClientSearchConfigReadConfigJob::configLoaded, this, &LdapWidgetItemReadConfigServerJob::slotConfigLoaded);
+    auto job = new KLDAPCore::LdapClientSearchConfigReadConfigJob(this);
+    connect(job, &KLDAPCore::LdapClientSearchConfigReadConfigJob::configLoaded, this, &LdapWidgetItemReadConfigServerJob::slotConfigLoaded);
     job->setActive(mActive);
     job->setConfig(mConfig);
     job->setServerIndex(mCurrentIndex);

@@ -6,7 +6,7 @@
 
 #include "ldapclientsearchconfigreadconfigjob.h"
 
-#include "ldapclient_debug.h"
+#include "ldap_core_debug.h"
 
 #include "kldapcore/ldapdn.h"
 #include <KConfig>
@@ -15,7 +15,7 @@
 using namespace QKeychain;
 using namespace Qt::Literals::StringLiterals;
 
-using namespace KLDAPWidgets;
+using namespace KLDAPCore;
 LdapClientSearchConfigReadConfigJob::LdapClientSearchConfigReadConfigJob(QObject *parent)
     : QObject(parent)
 {
@@ -137,7 +137,7 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
         if (!job->error()) {
             mServer.setPassword(job->textData());
         } else {
-            qCWarning(LDAPCLIENT_LOG) << "We have an error during reading password " << job->errorString() << " password key " << pwdBindBNEntry;
+            qCWarning(LDAP_LOG) << "We have an error during reading password " << job->errorString() << " password key " << pwdBindBNEntry;
         }
         readLdapClientConfigFinished();
     });
