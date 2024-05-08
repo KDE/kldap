@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-03 00:38+0000\n"
+"POT-Creation-Date: 2024-05-08 00:39+0000\n"
 "PO-Revision-Date: 2021-07-28 10:12+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -124,22 +124,26 @@ msgstr "Хочете вилучити запис для вузла «%1»?"
 msgid "Remove Host"
 msgstr "Вилучення вузла"
 
-#: widgets/ldapconfigurewidget.cpp:272
+#: widgets/ldapconfigurewidget.cpp:271
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Позначте всі сервери, які слід використовувати:"
 
-#: widgets/ldapconfigurewidget.cpp:306
-#, kde-format
-msgid "&Add Host..."
-msgstr "&Додати вузол…"
+#: widgets/ldapconfigurewidget.cpp:305
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Add Host"
+msgid "&Add Host…"
+msgstr "Додавання вузла"
 
-#: widgets/ldapconfigurewidget.cpp:308
-#, kde-format
-msgid "&Edit Host..."
-msgstr "&Змінити вузол…"
+#: widgets/ldapconfigurewidget.cpp:307
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Edit Host"
+msgid "&Edit Host…"
+msgstr "Зміна вузла"
 
-#: widgets/ldapconfigurewidget.cpp:311
+#: widgets/ldapconfigurewidget.cpp:310
 #, kde-format
 msgid "&Remove Host"
 msgstr "&Вилучити вузол"
@@ -299,6 +303,12 @@ msgstr "Опитування LDAP"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "Невідома помилка під час спроби встановлення зв’язку із %1"
+
+#~ msgid "&Add Host..."
+#~ msgstr "&Додати вузол…"
+
+#~ msgid "&Edit Host..."
+#~ msgstr "&Змінити вузол…"
 
 #~ msgid ""
 #~ "LDAP password is stored as clear text, do you want to store it in kwallet?"

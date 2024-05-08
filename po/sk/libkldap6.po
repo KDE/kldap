@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-03 00:38+0000\n"
+"POT-Creation-Date: 2024-05-08 00:39+0000\n"
 "PO-Revision-Date: 2022-04-18 17:37+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -117,22 +117,26 @@ msgstr "Chcete odstrániť nastavenie pre hostiteľa \"%1\"?"
 msgid "Remove Host"
 msgstr "Odstrániť hostiteľa"
 
-#: widgets/ldapconfigurewidget.cpp:272
+#: widgets/ldapconfigurewidget.cpp:271
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Skontrolovať všetky servery, ktoré sa majú použiť:"
 
-#: widgets/ldapconfigurewidget.cpp:306
-#, kde-format
-msgid "&Add Host..."
-msgstr "Pridať hostiteľa..."
+#: widgets/ldapconfigurewidget.cpp:305
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Add Host"
+msgid "&Add Host…"
+msgstr "Pridať hostiteľa"
 
-#: widgets/ldapconfigurewidget.cpp:308
-#, kde-format
-msgid "&Edit Host..."
-msgstr "Upraviť hostiteľa..."
+#: widgets/ldapconfigurewidget.cpp:307
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Edit Host"
+msgid "&Edit Host…"
+msgstr "Upraviť hostiteľa"
 
-#: widgets/ldapconfigurewidget.cpp:311
+#: widgets/ldapconfigurewidget.cpp:310
 #, kde-format
 msgid "&Remove Host"
 msgstr "Odstrániť hostiteľa"
@@ -292,6 +296,12 @@ msgstr "LDAP dopyt"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "Neznáma chyba pripojenia %1"
+
+#~ msgid "&Add Host..."
+#~ msgstr "Pridať hostiteľa..."
+
+#~ msgid "&Edit Host..."
+#~ msgstr "Upraviť hostiteľa..."
 
 #~ msgid ""
 #~ "LDAP password is stored as clear text, do you want to store it in kwallet?"

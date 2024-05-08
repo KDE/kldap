@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-03 00:38+0000\n"
+"POT-Creation-Date: 2024-05-08 00:39+0000\n"
 "PO-Revision-Date: 2021-08-25 15:54+0200\n"
 "Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -120,22 +120,26 @@ msgstr "Möchten Sie die Einstellungen für den Rechner „%1“ entfernen?"
 msgid "Remove Host"
 msgstr "Rechner entfernen"
 
-#: widgets/ldapconfigurewidget.cpp:272
+#: widgets/ldapconfigurewidget.cpp:271
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Alle Rechner auswählen, die verwendet werden sollen:"
 
-#: widgets/ldapconfigurewidget.cpp:306
-#, kde-format
-msgid "&Add Host..."
-msgstr "Rechner &hinzufügen ..."
+#: widgets/ldapconfigurewidget.cpp:305
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Add Host"
+msgid "&Add Host…"
+msgstr "Rechner hinzufügen"
 
-#: widgets/ldapconfigurewidget.cpp:308
-#, kde-format
-msgid "&Edit Host..."
-msgstr "&Rechner bearbeiten ..."
+#: widgets/ldapconfigurewidget.cpp:307
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Edit Host"
+msgid "&Edit Host…"
+msgstr "Rechner bearbeiten"
 
-#: widgets/ldapconfigurewidget.cpp:311
+#: widgets/ldapconfigurewidget.cpp:310
 #, kde-format
 msgid "&Remove Host"
 msgstr "Rechner &entfernen"
@@ -295,6 +299,12 @@ msgstr "LDAP-Abfrage"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "Unbekannter Fehler beim Verbinden mit %1"
+
+#~ msgid "&Add Host..."
+#~ msgstr "Rechner &hinzufügen ..."
+
+#~ msgid "&Edit Host..."
+#~ msgstr "&Rechner bearbeiten ..."
 
 #~ msgid ""
 #~ "LDAP password is stored as clear text, do you want to store it in kwallet?"

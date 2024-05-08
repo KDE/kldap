@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-03 00:38+0000\n"
+"POT-Creation-Date: 2024-05-08 00:39+0000\n"
 "PO-Revision-Date: 2023-01-06 11:29+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -129,22 +129,26 @@ msgstr "Voulez-vous vraiment supprimer les paramètres pour l'hôte « %1 » 
 msgid "Remove Host"
 msgstr "Supprimer un hôte"
 
-#: widgets/ldapconfigurewidget.cpp:272
+#: widgets/ldapconfigurewidget.cpp:271
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Vérifier tous les serveurs devant être utilisés :"
 
-#: widgets/ldapconfigurewidget.cpp:306
-#, kde-format
-msgid "&Add Host..."
-msgstr "&Ajouter un hôte..."
+#: widgets/ldapconfigurewidget.cpp:305
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Add Host"
+msgid "&Add Host…"
+msgstr "Ajouter un hôte"
 
-#: widgets/ldapconfigurewidget.cpp:308
-#, kde-format
-msgid "&Edit Host..."
-msgstr "Modifi&er un hôte..."
+#: widgets/ldapconfigurewidget.cpp:307
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Edit Host"
+msgid "&Edit Host…"
+msgstr "Modifier un hôte"
 
-#: widgets/ldapconfigurewidget.cpp:311
+#: widgets/ldapconfigurewidget.cpp:310
 #, kde-format
 msgid "&Remove Host"
 msgstr "Supp&rimer un hôte"
@@ -304,6 +308,12 @@ msgstr "Requête LDAP"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "Erreur inconnue lors de la connexion %1"
+
+#~ msgid "&Add Host..."
+#~ msgstr "&Ajouter un hôte..."
+
+#~ msgid "&Edit Host..."
+#~ msgstr "Modifi&er un hôte..."
 
 #~ msgid ""
 #~ "LDAP password is stored as clear text, do you want to store it in kwallet?"

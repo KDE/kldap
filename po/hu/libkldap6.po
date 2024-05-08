@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-03 00:38+0000\n"
+"POT-Creation-Date: 2024-05-08 00:39+0000\n"
 "PO-Revision-Date: 2024-02-12 11:48+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -119,22 +119,26 @@ msgstr "Szeretné eltávolítani a(z) „%1” gép beállításait?"
 msgid "Remove Host"
 msgstr "Gépnév eltávolítása"
 
-#: widgets/ldapconfigurewidget.cpp:272
+#: widgets/ldapconfigurewidget.cpp:271
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Az összes használni kívánt kiszolgáló ellenőrzése:"
 
-#: widgets/ldapconfigurewidget.cpp:306
-#, kde-format
-msgid "&Add Host..."
-msgstr "Gépnév hozzá&adása…"
+#: widgets/ldapconfigurewidget.cpp:305
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Add Host"
+msgid "&Add Host…"
+msgstr "Gépnév hozzáadása"
 
-#: widgets/ldapconfigurewidget.cpp:308
-#, kde-format
-msgid "&Edit Host..."
-msgstr "Gépnév sz&erkesztése…"
+#: widgets/ldapconfigurewidget.cpp:307
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Edit Host"
+msgid "&Edit Host…"
+msgstr "Gépnév szerkesztése"
 
-#: widgets/ldapconfigurewidget.cpp:311
+#: widgets/ldapconfigurewidget.cpp:310
 #, kde-format
 msgid "&Remove Host"
 msgstr "Gépnév eltá&volítása"
@@ -294,6 +298,12 @@ msgstr "LDAP lekérdezés"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "Ismeretlen hiba csatlakozáskor: %1"
+
+#~ msgid "&Add Host..."
+#~ msgstr "Gépnév hozzá&adása…"
+
+#~ msgid "&Edit Host..."
+#~ msgstr "Gépnév sz&erkesztése…"
 
 #, fuzzy
 #~| msgid "LDAP version:"

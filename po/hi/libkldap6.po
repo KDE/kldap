@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-03 00:38+0000\n"
+"POT-Creation-Date: 2024-05-08 00:39+0000\n"
 "PO-Revision-Date: 2008-01-28 12:57+0530\n"
 "Last-Translator: Ravishankar Shrivastava <aviratlami@aol.in>\n"
 "Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net>\n"
@@ -118,23 +118,24 @@ msgstr ""
 msgid "Remove Host"
 msgstr ""
 
-#: widgets/ldapconfigurewidget.cpp:272
+#: widgets/ldapconfigurewidget.cpp:271
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr ""
 
-#: widgets/ldapconfigurewidget.cpp:306
+#: widgets/ldapconfigurewidget.cpp:305
 #, fuzzy, kde-format
 #| msgid "Host:"
-msgid "&Add Host..."
+msgid "&Add Host…"
 msgstr "होस्टः"
 
-#: widgets/ldapconfigurewidget.cpp:308
-#, kde-format
-msgid "&Edit Host..."
-msgstr ""
+#: widgets/ldapconfigurewidget.cpp:307
+#, fuzzy, kde-format
+#| msgid "Host:"
+msgid "&Edit Host…"
+msgstr "होस्टः"
 
-#: widgets/ldapconfigurewidget.cpp:311
+#: widgets/ldapconfigurewidget.cpp:310
 #, kde-format
 msgid "&Remove Host"
 msgstr ""
@@ -306,6 +307,11 @@ msgstr "एलडीएपी क्वेरी"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr ""
+
+#, fuzzy
+#~| msgid "Host:"
+#~ msgid "&Add Host..."
+#~ msgstr "होस्टः"
 
 #, fuzzy
 #~| msgid "LDAP version:"
