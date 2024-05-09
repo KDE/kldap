@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "kldapwidgets_export.h"
+#include "kldap_core_export.h"
 
 #include <KLDAPCore/LdapObject>
 #include <QObject>
@@ -16,10 +16,6 @@
 namespace KLDAPCore
 {
 class LdapClient;
-}
-namespace KLDAPWidgets
-{
-
 /**
  * Describes the result returned by an LdapClientSearch query.
  *
@@ -52,7 +48,7 @@ struct LdapResult {
 /**
  * @since 4.5
  */
-class KLDAPWIDGETS_EXPORT LdapClientSearch : public QObject
+class KLDAP_CORE_EXPORT LdapClientSearch : public QObject
 {
     Q_OBJECT
 
@@ -151,7 +147,7 @@ Q_SIGNALS:
      *
      * @param results The list of found contacts.
      */
-    void searchData(const KLDAPWidgets::LdapResult::List &results);
+    void searchData(const KLDAPCore::LdapResult::List &results);
 
     /**
      * This signal is emitted whenever new contacts have been found
@@ -159,7 +155,7 @@ Q_SIGNALS:
      *
      * @param results The list of found contacts.
      */
-    void searchData(const KLDAPWidgets::LdapResultObject::List &results);
+    void searchData(const KLDAPCore::LdapResultObject::List &results);
 
     /**
      * This signal is emitted whenever the lookup is complete or the
@@ -174,5 +170,5 @@ private:
     //@endcond
 };
 }
-Q_DECLARE_TYPEINFO(KLDAPWidgets::LdapResult, Q_RELOCATABLE_TYPE);
-Q_DECLARE_TYPEINFO(KLDAPWidgets::LdapResultObject, Q_RELOCATABLE_TYPE);
+Q_DECLARE_TYPEINFO(KLDAPCore::LdapResult, Q_RELOCATABLE_TYPE);
+Q_DECLARE_TYPEINFO(KLDAPCore::LdapResultObject, Q_RELOCATABLE_TYPE);

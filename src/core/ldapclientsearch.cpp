@@ -11,7 +11,7 @@
 
 #include "ldapclientsearch.h"
 #include "kldapcore/ldapclientsearchconfig.h"
-#include "ldapclient_debug.h"
+#include "ldapclient_core_debug.h"
 #include "ldapsearchclientreadconfigserverjob.h"
 
 #include "ldapclient.h"
@@ -30,7 +30,7 @@
 #include <QStandardPaths>
 #include <QTimer>
 
-using namespace KLDAPWidgets;
+using namespace KLDAPCore;
 using namespace Qt::Literals::StringLiterals;
 
 class Q_DECL_HIDDEN LdapClientSearch::LdapClientSearchPrivate
@@ -235,7 +235,7 @@ void LdapClientSearch::startSearch(const QString &txt)
     const QList<KLDAPCore::LdapClient *>::Iterator end(d->mClients.end());
     for (; it != end; ++it) {
         (*it)->startQuery(filter);
-        qCDebug(LDAPCLIENT_LOG) << "LdapClientSearch::startSearch()" << filter;
+        qCDebug(LDAPCLIENT_CORE_LOG) << "LdapClientSearch::startSearch()" << filter;
         ++d->mActiveClients;
     }
 }
@@ -303,7 +303,7 @@ void LdapClientSearch::LdapClientSearchPrivate::finish()
     Q_EMIT q->searchDone();
 }
 
-void LdapClientSearch::LdapClientSearchPrivate::makeSearchData(QStringList &ret, KLDAPWidgets::LdapResult::List &resList)
+void LdapClientSearch::LdapClientSearchPrivate::makeSearchData(QStringList &ret, KLDAPCore::LdapResult::List &resList)
 {
     LdapResultObject::List::ConstIterator it1(mResults.constBegin());
     const LdapResultObject::List::ConstIterator end1(mResults.constEnd());
