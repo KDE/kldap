@@ -21,8 +21,8 @@ using namespace Qt::Literals::StringLiterals;
 #include <QDialogButtonBox>
 #include <QHBoxLayout>
 
+#include "kldapcore/ldapclientsearchconfig.h"
 #include "kldapcore/ldapserver.h"
-#include "ldapclientsearchconfig.h"
 #include "ldapclientsearchconfigwriteconfigjob.h"
 #include "ldapwidgetitem_p.h"
 #include "ldapwidgetitemreadconfigserverjob.h"
@@ -33,7 +33,7 @@ using namespace KLDAPWidgets;
 
 LdapConfigureWidget::LdapConfigureWidget(QWidget *parent)
     : QWidget(parent)
-    , mClientSearchConfig(new KLDAPWidgets::LdapClientSearchConfig)
+    , mClientSearchConfig(new KLDAPCore::LdapClientSearchConfig)
 {
     initGUI();
 
@@ -191,7 +191,7 @@ void LdapConfigureWidget::slotMoveDown()
 void LdapConfigureWidget::load()
 {
     mHostListView->clear();
-    KConfig *config = KLDAPWidgets::LdapClientSearchConfig::config();
+    KConfig *config = KLDAPCore::LdapClientSearchConfig::config();
     KConfigGroup group(config, QStringLiteral("LDAP"));
 
     int count = group.readEntry("NumSelectedHosts", 0);
@@ -222,7 +222,7 @@ void LdapConfigureWidget::load()
 
 void LdapConfigureWidget::save()
 {
-    KConfig *config = KLDAPWidgets::LdapClientSearchConfig::config();
+    KConfig *config = KLDAPCore::LdapClientSearchConfig::config();
     config->deleteGroup(QStringLiteral("LDAP"));
 
     KConfigGroup group(config, QStringLiteral("LDAP"));

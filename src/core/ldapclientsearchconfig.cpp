@@ -12,7 +12,7 @@ using namespace Qt::Literals::StringLiterals;
 #include <KConfig>
 #include <qt6keychain/keychain.h>
 using namespace QKeychain;
-using namespace KLDAPWidgets;
+using namespace KLDAPCore;
 
 class Q_DECL_HIDDEN LdapClientSearchConfig::LdapClientSearchConfigPrivate
 {

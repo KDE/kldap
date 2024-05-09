@@ -15,9 +15,13 @@ class QPushButton;
 class QToolButton;
 class QListWidgetItem;
 
-namespace KLDAPWidgets
+namespace KLDAPCore
 {
 class LdapClientSearchConfig;
+}
+
+namespace KLDAPWidgets
+{
 /**
  * @brief The LdapConfigureWidget class
  * @author Laurent Montel <montel@kde.org>
@@ -53,6 +57,6 @@ private:
 
     QToolButton *mUpButton = nullptr;
     QToolButton *mDownButton = nullptr;
-    KLDAPWidgets::LdapClientSearchConfig *const mClientSearchConfig;
+    KLDAPCore::LdapClientSearchConfig *const mClientSearchConfig;
 };
 }

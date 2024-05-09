@@ -10,8 +10,8 @@
  */
 
 #include "ldapclientsearch.h"
+#include "kldapcore/ldapclientsearchconfig.h"
 #include "ldapclient_debug.h"
-#include "ldapclientsearchconfig.h"
 #include "ldapsearchclientreadconfigserverjob.h"
 
 #include "ldapclient.h"
@@ -113,7 +113,7 @@ void LdapClientSearch::LdapClientSearchPrivate::readWeighForClient(KLDAPCore::Ld
 
 void LdapClientSearch::updateCompletionWeights()
 {
-    KConfigGroup config(KLDAPWidgets::LdapClientSearchConfig::config(), QStringLiteral("LDAP"));
+    KConfigGroup config(KLDAPCore::LdapClientSearchConfig::config(), QStringLiteral("LDAP"));
     for (int i = 0, total = d->mClients.size(); i < total; ++i) {
         d->readWeighForClient(d->mClients[i], config, i);
     }
@@ -160,7 +160,7 @@ void LdapClientSearch::LdapClientSearchPrivate::readConfig()
     mClients.clear();
 
     // stolen from KAddressBook
-    KConfigGroup config(KLDAPWidgets::LdapClientSearchConfig::config(), QStringLiteral("LDAP"));
+    KConfigGroup config(KLDAPCore::LdapClientSearchConfig::config(), QStringLiteral("LDAP"));
     const int numHosts = config.readEntry("NumSelectedHosts", 0);
     if (!numHosts) {
         mNoLDAPLookup = true;

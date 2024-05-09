@@ -14,12 +14,10 @@ target_sources(KPim6LdapWidgets PRIVATE
     ldapconfigwidget.cpp
     addhostdialog.cpp
     ldapclientsearch.cpp
-    ldapclientsearchconfig.cpp
     ldapconfigurewidget.cpp
     ldapwidgetitem_p.cpp
     ldapwidgetitemreadconfigserverjob.cpp
 
-    ldapclientsearchconfig.h
     addhostdialog.h
     ldapwidgetitem_p.h
     ldapconfigwidget.h
@@ -78,7 +76,6 @@ install(TARGETS KPim6LdapWidgets EXPORT KPim6LdapWidgetsTargets ${KDE_INSTALL_TA
 ecm_generate_headers(KLdapWidgets_CamelCase_HEADERS
     HEADER_NAMES
     LdapConfigWidget
-    LdapClientSearchConfig
     LdapClientSearch
     AddHostDialog
     LdapConfigureWidget
