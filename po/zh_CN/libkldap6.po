@@ -120,18 +120,14 @@ msgid "Check all servers that should be used:"
 msgstr "勾选要使用的所有服务器："
 
 #: widgets/ldapconfigurewidget.cpp:305
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Add Host"
+#, kde-format
 msgid "&Add Host…"
-msgstr "添加主机"
+msgstr ""
 
 #: widgets/ldapconfigurewidget.cpp:307
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Edit Host"
+#, kde-format
 msgid "&Edit Host…"
-msgstr "编辑主机"
+msgstr ""
 
 #: widgets/ldapconfigurewidget.cpp:310
 #, kde-format
@@ -293,9 +289,3 @@ msgstr "LDAP 查询"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "连接 %1 时发生未知错误"
-
-#~ msgid "&Add Host..."
-#~ msgstr "添加主机(&A)..."
-
-#~ msgid "&Edit Host..."
-#~ msgstr "编辑主机(&E)..."

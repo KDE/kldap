@@ -2,14 +2,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Federico Zenith <federico.zenith@member.fsf.org>, 2007.
-# Luigi Toscano <luigi.toscano@tiscali.it>, 2014, 2017, 2018, 2019, 2020, 2021.
+# Luigi Toscano <luigi.toscano@tiscali.it>, 2014, 2017, 2018, 2019, 2020, 2021, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-08 00:39+0000\n"
-"PO-Revision-Date: 2021-07-30 23:47+0200\n"
+"PO-Revision-Date: 2024-05-08 21:17+0200\n"
 "Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: core/ldapconnection.cpp:126
 #, kde-format
@@ -127,18 +127,14 @@ msgid "Check all servers that should be used:"
 msgstr "Controlla tutti i server che devono essere usati:"
 
 #: widgets/ldapconfigurewidget.cpp:305
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Add Host"
+#, kde-format
 msgid "&Add Host…"
-msgstr "Aggiungi host"
+msgstr "&Aggiungi host…"
 
 #: widgets/ldapconfigurewidget.cpp:307
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Edit Host"
+#, kde-format
 msgid "&Edit Host…"
-msgstr "Modifica host"
+msgstr "&Modifica host…"
 
 #: widgets/ldapconfigurewidget.cpp:310
 #, kde-format
