@@ -22,9 +22,6 @@
 
 #include "kldapcore/ldapclientsearchconfig.h"
 #include "kldapcore/ldapserver.h"
-#include "ldapclientsearchconfigwriteconfigjob.h"
-#include "ldapwidgetitem_p.h"
-#include "ldapwidgetitemreadconfigserverjob.h"
 #include <KLDAPCore/LdapModel>
 
 #include "addhostdialog.h"
@@ -35,6 +32,7 @@ using namespace Qt::Literals::StringLiterals;
 LdapConfigureWidgetNg::LdapConfigureWidgetNg(QWidget *parent)
     : QWidget(parent)
     , mClientSearchConfig(new KLDAPCore::LdapClientSearchConfig)
+    , mLdapModel(new KLDAPCore::LdapModel(this))
 {
     initGUI();
 #if 0
@@ -51,6 +49,22 @@ LdapConfigureWidgetNg::~LdapConfigureWidgetNg()
 {
     delete mClientSearchConfig;
 }
+
+void LdapConfigureWidgetNg::slotAddHost()
+{
+    KLDAPCore::LdapServer server;
+    KLDAPWidgets::AddHostDialog dlg(&server, this);
+
+    if (dlg.exec() && !server.host().trimmed().isEmpty()) { // krazy:exclude=crashy
+#if 0
+        auto item = new LdapWidgetItem(mHostListView);
+        item->setServer(server);
+
+        Q_EMIT changed(true);
+#endif
+    }
+}
+
 #if 0
 void LdapConfigureWidgetNg::slotSelectionChanged(QListWidgetItem *item)
 {
@@ -74,18 +88,6 @@ void LdapConfigureWidgetNg::slotItemClicked(QListWidgetItem *item)
     }
 }
 
-void LdapConfigureWidgetNg::slotAddHost()
-{
-    KLDAPCore::LdapServer server;
-    KLDAPWidgets::AddHostDialog dlg(&server, this);
-
-    if (dlg.exec() && !server.host().trimmed().isEmpty()) { // krazy:exclude=crashy
-        auto item = new LdapWidgetItem(mHostListView);
-        item->setServer(server);
-
-        Q_EMIT changed(true);
-    }
-}
 
 void LdapConfigureWidgetNg::slotEditHost()
 {
@@ -293,8 +295,7 @@ void LdapConfigureWidgetNg::initGUI()
 
     hBoxHBoxLayout->addWidget(mHostListView);
 
-    auto model = new KLDAPCore::LdapModel(this);
-    mHostListView->setModel(model);
+    mHostListView->setModel(mLdapModel);
 
     auto upDownBox = new QWidget(hBox);
     auto upDownBoxVBoxLayout = new QVBoxLayout(upDownBox);
@@ -317,7 +318,7 @@ void LdapConfigureWidgetNg::initGUI()
 
     auto buttons = new QDialogButtonBox(this);
     QPushButton *add = buttons->addButton(i18n("&Add Host…"), QDialogButtonBox::ActionRole);
-    // TODO connect(add, &QPushButton::clicked, this, &LdapConfigureWidgetNg::slotAddHost);
+    connect(add, &QPushButton::clicked, this, &LdapConfigureWidgetNg::slotAddHost);
     mEditButton = buttons->addButton(i18n("&Edit Host…"), QDialogButtonBox::ActionRole);
     // TODO connect(mEditButton, &QPushButton::clicked, this, &LdapConfigureWidgetNg::slotEditHost);
     mEditButton->setEnabled(false);

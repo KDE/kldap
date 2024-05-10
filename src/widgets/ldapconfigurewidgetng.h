@@ -17,6 +17,7 @@ class QToolButton;
 namespace KLDAPCore
 {
 class LdapClientSearchConfig;
+class LdapModel;
 }
 
 namespace KLDAPWidgets
@@ -39,8 +40,8 @@ Q_SIGNALS:
     void changed(bool);
 
 private:
-#if 0
     KLDAPWIDGETS_NO_EXPORT void slotAddHost();
+#if 0
     KLDAPWIDGETS_NO_EXPORT void slotEditHost();
     KLDAPWIDGETS_NO_EXPORT void slotRemoveHost();
     KLDAPWIDGETS_NO_EXPORT void slotSelectionChanged(QListWidgetItem *);
@@ -58,5 +59,6 @@ private:
     QToolButton *mUpButton = nullptr;
     QToolButton *mDownButton = nullptr;
     KLDAPCore::LdapClientSearchConfig *const mClientSearchConfig;
+    KLDAPCore::LdapModel *const mLdapModel;
 };
 }
