@@ -110,14 +110,14 @@ bool Ldif::splitLine(const QByteArray &line, QString &fieldname, QByteArray &val
     int position;
     int linelen;
 
-    //  qCDebug(LDAP_LOG) << "line:" << QString::fromUtf8(line);
+    //  qCDebug(LDAP_CORE_LOG) << "line:" << QString::fromUtf8(line);
 
     position = line.indexOf(":");
     if (position == -1) {
         // strange: we did not find a fieldname
         fieldname = ""_L1;
         value = line.trimmed();
-        //    qCDebug(LDAP_LOG) << "value :" << value[0];
+        //    qCDebug(LDAP_CORE_LOG) << "value :" << value[0];
         return false;
     }
 
@@ -158,7 +158,7 @@ bool Ldif::splitControl(const QByteArray &line, QString &oid, bool &critical, QB
     critical = false;
     bool url = splitLine(line, tmp, value);
 
-    qCDebug(LDAP_LOG) << "value:" << QString::fromUtf8(value);
+    qCDebug(LDAP_CORE_LOG) << "value:" << QString::fromUtf8(value);
     if (tmp.isEmpty()) {
         tmp = QString::fromUtf8(value);
         value.resize(0);
@@ -196,7 +196,7 @@ Ldif::ParseValue Ldif::processLine()
                 retval = Err;
             }
         } else if (attrLower == "dn"_L1) {
-            qCDebug(LDAP_LOG) << "ldapentry dn:" << QString::fromUtf8(d->mValue);
+            qCDebug(LDAP_CORE_LOG) << "ldapentry dn:" << QString::fromUtf8(d->mValue);
             d->mDn = LdapDN(QString::fromUtf8(d->mValue));
             d->mModType = Mod_None;
             retval = NewEntry;
@@ -205,7 +205,7 @@ Ldif::ParseValue Ldif::processLine()
                 retval = Err;
             } else {
                 QString tmpval = QString::fromUtf8(d->mValue);
-                qCDebug(LDAP_LOG) << "changetype:" << tmpval;
+                qCDebug(LDAP_CORE_LOG) << "changetype:" << tmpval;
                 if (tmpval == "add"_L1) {
                     d->mEntryType = Entry_Add;
                 } else if (tmpval == "delete"_L1) {
@@ -245,7 +245,7 @@ Ldif::ParseValue Ldif::processLine()
         break;
     case Entry_Mod:
         if (d->mModType == Mod_None) {
-            qCDebug(LDAP_LOG) << "new modtype" << d->mAttr;
+            qCDebug(LDAP_CORE_LOG) << "new modtype" << d->mAttr;
             if (d->mAttr.isEmpty() && d->mValue.isEmpty()) {
                 retval = EndEntry;
             } else if (attrLower == "add"_L1) {

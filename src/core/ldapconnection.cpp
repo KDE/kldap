@@ -173,7 +173,7 @@ QString LdapConnection::ldapErrorString() const
 bool LdapConnection::setSizeLimit(int sizelimit)
 {
     Q_ASSERT(d->mLDAP);
-    qCDebug(LDAP_LOG) << "sizelimit:" << sizelimit;
+    qCDebug(LDAP_CORE_LOG) << "sizelimit:" << sizelimit;
     if (setOption(LDAP_OPT_SIZELIMIT, &sizelimit) != LDAP_OPT_SUCCESS) {
         return false;
     }
@@ -193,7 +193,7 @@ int LdapConnection::sizeLimit() const
 bool LdapConnection::setTimeLimit(int timelimit)
 {
     Q_ASSERT(d->mLDAP);
-    qCDebug(LDAP_LOG) << "timelimit:" << timelimit;
+    qCDebug(LDAP_CORE_LOG) << "timelimit:" << timelimit;
     if (setOption(LDAP_OPT_TIMELIMIT, &timelimit) != LDAP_OPT_SUCCESS) {
         return false;
     }
@@ -226,7 +226,7 @@ int LdapConnection::connect()
     url += d->mServer.host();
     url += QLatin1Char(':');
     url += QString::number(d->mServer.port());
-    qCDebug(LDAP_LOG) << "ldap url:" << url;
+    qCDebug(LDAP_CORE_LOG) << "ldap url:" << url;
 #if HAVE_LDAP_INITIALIZE
     ret = ldap_initialize(&d->mLDAP, url.toLatin1().constData());
 #else
@@ -242,7 +242,7 @@ int LdapConnection::connect()
         return ret;
     }
 
-    qCDebug(LDAP_LOG) << "setting version to:" << version;
+    qCDebug(LDAP_CORE_LOG) << "setting version to:" << version;
     if (setOption(LDAP_OPT_PROTOCOL_VERSION, &version) != LDAP_OPT_SUCCESS) {
         ret = ldapErrorCode();
         d->mConnectionError = i18n("Cannot set protocol version to %1.", version);
@@ -251,7 +251,7 @@ int LdapConnection::connect()
     }
 
 #if defined(LDAP_OPT_TIMEOUT)
-    qCDebug(LDAP_LOG) << "setting timeout to:" << timeout;
+    qCDebug(LDAP_CORE_LOG) << "setting timeout to:" << timeout;
 
     if (timeout) {
         if (setOption(LDAP_OPT_TIMEOUT, &timeout) != LDAP_OPT_SUCCESS) {
@@ -263,7 +263,7 @@ int LdapConnection::connect()
     }
 #endif
 
-    qCDebug(LDAP_LOG) << "setting security to:" << d->mServer.security();
+    qCDebug(LDAP_CORE_LOG) << "setting security to:" << d->mServer.security();
     if (d->mServer.security() != LdapServer::None) {
         bool initContext = false;
         if (d->mServer.tlsCACertFile().isEmpty() == false) {
@@ -314,7 +314,7 @@ int LdapConnection::connect()
     }
 
     if (d->mServer.security() == LdapServer::TLS) {
-        qCDebug(LDAP_LOG) << "start TLS";
+        qCDebug(LDAP_CORE_LOG) << "start TLS";
 
 #if HAVE_LDAP_START_TLS_S
         if ((ret = ldap_start_tls_s(d->mLDAP, nullptr, nullptr)) != LDAP_SUCCESS) {
@@ -329,7 +329,7 @@ int LdapConnection::connect()
 #endif
     }
 
-    qCDebug(LDAP_LOG) << "setting sizelimit to:" << d->mServer.sizeLimit();
+    qCDebug(LDAP_CORE_LOG) << "setting sizelimit to:" << d->mServer.sizeLimit();
     if (d->mServer.sizeLimit()) {
         if (!setSizeLimit(d->mServer.sizeLimit())) {
             ret = ldapErrorCode();
@@ -339,7 +339,7 @@ int LdapConnection::connect()
         }
     }
 
-    qCDebug(LDAP_LOG) << "setting timelimit to:" << d->mServer.timeLimit();
+    qCDebug(LDAP_CORE_LOG) << "setting timelimit to:" << d->mServer.timeLimit();
     if (d->mServer.timeLimit()) {
         if (!setTimeLimit(d->mServer.timeLimit())) {
             ret = ldapErrorCode();
@@ -349,7 +349,7 @@ int LdapConnection::connect()
         }
     }
 
-    qCDebug(LDAP_LOG) << "initializing SASL client";
+    qCDebug(LDAP_CORE_LOG) << "initializing SASL client";
     const int saslresult = sasl_client_new("ldap", d->mServer.host().toLatin1().constData(), nullptr, nullptr, callbacks, 0, &d->mSASLconn);
     if (saslresult != SASL_OK) {
         d->mConnectionError = i18n("Cannot initialize the SASL client.");
@@ -373,7 +373,7 @@ void LdapConnection::close()
         sasl_dispose(&d->mSASLconn);
         d->mSASLconn = nullptr;
     }
-    qCDebug(LDAP_LOG) << "connection closed!";
+    qCDebug(LDAP_CORE_LOG) << "connection closed!";
 }
 
 #else // LDAP_FOUND

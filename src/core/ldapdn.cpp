@@ -27,7 +27,7 @@ public:
 
 bool LdapDN::LdapDNPrivate::isValidRDNString(const QString &rdn) const
 {
-    qCDebug(LDAP_LOG) << "Testing rdn:" << rdn;
+    qCDebug(LDAP_CORE_LOG) << "Testing rdn:" << rdn;
 
     // If it is a muli-valued rdn, split it into its constituent parts
     const QStringList rdnParts = splitOnNonEscapedChar(rdn, QLatin1Char('+'));
@@ -60,9 +60,9 @@ QStringList LdapDN::LdapDNPrivate::splitOnNonEscapedChar(const QString &str, QCh
         const QChar prev = str[std::max(0, index - 1)];
         if (prev != QLatin1Char('\\')) {
             // Found a component of a multi-valued RDN
-            // qCDebug(LDAP_LOG) << "Found" << ch << "at index" << index;
+            // qCDebug(LDAP_CORE_LOG) << "Found" << ch << "at index" << index;
             QString tmp = str.mid(strPartStartIndex, index - strPartStartIndex);
-            // qCDebug(LDAP_LOG) << "Adding part:" << tmp;
+            // qCDebug(LDAP_CORE_LOG) << "Adding part:" << tmp;
             strParts.append(tmp);
             strPartStartIndex = index + 1;
         }
@@ -72,7 +72,7 @@ QStringList LdapDN::LdapDNPrivate::splitOnNonEscapedChar(const QString &str, QCh
 
     // Add on the part after the last found delimiter
     QString tmp = str.mid(strPartStartIndex);
-    // qCDebug(LDAP_LOG) << "Adding part:" << tmp;
+    // qCDebug(LDAP_CORE_LOG) << "Adding part:" << tmp;
     strParts.append(tmp);
 
     return strParts;
@@ -133,7 +133,7 @@ QString LdapDN::toString(int depth) const
     QString dn;
     for (int i = depth; i >= 0; i--) {
         dn += rdns.at(rdns.size() - 1 - i) + QLatin1Char(',');
-        qCDebug(LDAP_LOG) << "dn =" << dn;
+        qCDebug(LDAP_CORE_LOG) << "dn =" << dn;
     }
     dn.chop(1); // Strip off the extraneous comma
 
@@ -158,7 +158,7 @@ QString LdapDN::rdnString(int depth) const
 
 bool LdapDN::isValid() const
 {
-    qCDebug(LDAP_LOG) << "Testing dn:" << d->m_dn;
+    qCDebug(LDAP_CORE_LOG) << "Testing dn:" << d->m_dn;
 
     // Break the string into rdn's
     const QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, QLatin1Char(','));

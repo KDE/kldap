@@ -300,7 +300,7 @@ void LdapServer::setUrl(const LdapUrl &url)
     } else if (url.hasExtension(QStringLiteral("x-tls"))) {
         d->mSecurity = TLS;
     }
-    qCDebug(LDAP_LOG) << "security:" << d->mSecurity;
+    qCDebug(LDAP_CORE_LOG) << "security:" << d->mSecurity;
 
     d->mMech.clear();
     d->mUser.clear();

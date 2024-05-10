@@ -89,7 +89,7 @@ void LdapClientSearchConfigWriteConfigJob::writeConfig()
         auto writeJob = new WritePasswordJob(QStringLiteral("ldapclient"), this);
         connect(writeJob, &Job::finished, this, [](QKeychain::Job *baseJob) {
             if (baseJob->error()) {
-                qCWarning(LDAP_LOG) << "Error writing password using QKeychain:" << baseJob->errorString();
+                qCWarning(LDAP_CORE_LOG) << "Error writing password using QKeychain:" << baseJob->errorString();
             }
         });
         writeJob->setKey(passwordEntry);

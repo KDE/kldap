@@ -86,7 +86,7 @@ target_sources(KPim6LdapCore PRIVATE
     ldapclientsearch.h
 )
 
-ecm_qt_declare_logging_category(KPim6LdapCore HEADER ldap_core_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME org.kde.pim.ldap.core
+ecm_qt_declare_logging_category(KPim6LdapCore HEADER ldap_core_debug.h IDENTIFIER LDAP_CORE_LOG CATEGORY_NAME org.kde.pim.ldap.core
     DESCRIPTION "kpim6ldapcore (kldap)"
     OLD_CATEGORY_NAMES log_ldap_core
     EXPORT KLDAP

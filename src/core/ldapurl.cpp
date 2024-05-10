@@ -214,7 +214,7 @@ void LdapUrl::updateQuery()
     }
 
     setQuery(q);
-    qCDebug(LDAP_LOG) << "LDAP URL updateQuery():" << toDisplayString();
+    qCDebug(LDAP_CORE_LOG) << "LDAP URL updateQuery():" << toDisplayString();
 }
 
 void LdapUrl::parseQuery()
@@ -269,7 +269,7 @@ void LdapUrl::parseQuery()
             ext.critical = true;
             name.remove(0, 1);
         }
-        qCDebug(LDAP_LOG) << "LdapUrl extensions name=" << name << "value:" << value;
+        qCDebug(LDAP_CORE_LOG) << "LdapUrl extensions name=" << name << "value:" << value;
         ext.value = value.replace("%2"_L1, ","_L1);
         setExtension(name, ext);
     }

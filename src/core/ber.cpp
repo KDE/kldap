@@ -194,10 +194,10 @@ int Ber::printf(QString format, ...)
             ret = ber_printf(d->mBer, fmt);
             break;
         default:
-            qCWarning(LDAP_LOG) << "Invalid BER format parameter: '" << fmt << "'";
+            qCWarning(LDAP_CORE_LOG) << "Invalid BER format parameter: '" << fmt << "'";
             ret = -1;
         }
-        qCDebug(LDAP_LOG) << "ber_printf format:" << fmt << "ret:" << ret;
+        qCDebug(LDAP_CORE_LOG) << "ber_printf format:" << fmt << "ret:" << ret;
         if (ret == -1) {
             break;
         }
@@ -335,11 +335,11 @@ int Ber::scanf(QString format, ...)
             ret = ber_scanf(d->mBer, fmt);
             break;
         default:
-            qCWarning(LDAP_LOG) << "Invalid BER format parameter: '" << fmt << "'";
+            qCWarning(LDAP_CORE_LOG) << "Invalid BER format parameter: '" << fmt << "'";
             ret = -1;
         }
 
-        qCDebug(LDAP_LOG) << "ber_scanf format:" << fmt << "ret:" << ret;
+        qCDebug(LDAP_CORE_LOG) << "ber_scanf format:" << fmt << "ret:" << ret;
         if (ret == -1) {
             break;
         }

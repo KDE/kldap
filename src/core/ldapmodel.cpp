@@ -126,7 +126,7 @@ QVariant LdapModel::data(const QModelIndex &index, int role) const
 bool LdapModel::setData(const QModelIndex &modelIndex, const QVariant &value, int role)
 {
     if (!modelIndex.isValid()) {
-        qCWarning(LDAP_LOG) << "ERROR: invalid index";
+        qCWarning(LDAP_CORE_LOG) << "ERROR: invalid index";
         return false;
     }
     if (role == Qt::CheckStateRole) {

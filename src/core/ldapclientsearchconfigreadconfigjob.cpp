@@ -137,7 +137,7 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
         if (!job->error()) {
             mServer.setPassword(job->textData());
         } else {
-            qCWarning(LDAP_LOG) << "We have an error during reading password " << job->errorString() << " password key " << pwdBindBNEntry;
+            qCWarning(LDAP_CORE_LOG) << "We have an error during reading password " << job->errorString() << " password key " << pwdBindBNEntry;
         }
         readLdapClientConfigFinished();
     });
