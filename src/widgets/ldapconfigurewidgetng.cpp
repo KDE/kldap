@@ -292,7 +292,6 @@ void LdapConfigureWidgetNg::initGUI()
     mHostListView->setColumnHidden(KLDAPCore::LdapModel::Activities, true);
 
     hBoxHBoxLayout->addWidget(mHostListView);
-    // mHostListView->setSortingEnabled(false);
 
     auto model = new KLDAPCore::LdapModel(this);
     mHostListView->setModel(model);

@@ -89,7 +89,6 @@ QVariant LdapModel::data(const QModelIndex &index, int role) const
 int LdapModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
-    qDebug() << " mLdapServerInfo.count()" << mLdapServerInfo.count();
     return mLdapServerInfo.count();
 }
 
