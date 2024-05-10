@@ -7,8 +7,7 @@
 #include "ldapconfigurewidgetng.h"
 
 #include <QLabel>
-#include <QListWidget>
-#include <QListWidgetItem>
+#include <QListView>
 #include <QPushButton>
 #include <QToolButton>
 #include <QVBoxLayout>
@@ -25,6 +24,7 @@
 #include "ldapclientsearchconfigwriteconfigjob.h"
 #include "ldapwidgetitem_p.h"
 #include "ldapwidgetitemreadconfigserverjob.h"
+#include <KLDAPCore/LdapModel>
 
 #include "addhostdialog.h"
 
@@ -279,9 +279,12 @@ void LdapConfigureWidgetNg::initGUI()
     hBoxHBoxLayout->setContentsMargins({});
     hBoxHBoxLayout->setSpacing(6);
     // Contents of the hbox: listview and up/down buttons on the right (vbox)
-    mHostListView = new QListWidget(hBox);
+    mHostListView = new QListView(hBox);
     hBoxHBoxLayout->addWidget(mHostListView);
-    mHostListView->setSortingEnabled(false);
+    // mHostListView->setSortingEnabled(false);
+
+    auto model = new KLDAPCore::LdapModel(this);
+    mHostListView->setModel(model);
 
     auto upDownBox = new QWidget(hBox);
     auto upDownBoxVBoxLayout = new QVBoxLayout(upDownBox);

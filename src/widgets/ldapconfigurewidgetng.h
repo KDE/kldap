@@ -10,7 +10,7 @@
 
 #include <QWidget>
 
-class QListWidget;
+class QListView;
 class QPushButton;
 class QToolButton;
 class QListWidgetItem;
@@ -50,7 +50,7 @@ private:
     KLDAPWIDGETS_NO_EXPORT void slotMoveDown();
 #endif
     KLDAPWIDGETS_NO_EXPORT void initGUI();
-    QListWidget *mHostListView = nullptr;
+    QListView *mHostListView = nullptr;
 
     QPushButton *mAddButton = nullptr;
     QPushButton *mEditButton = nullptr;
