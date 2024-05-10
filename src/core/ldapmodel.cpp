@@ -6,6 +6,10 @@
 
 #include "ldapmodel.h"
 #include "ldapserver.h"
+#include <KConfig>
+#include <KConfigGroup>
+#include <KLDAPCore/LdapClientSearchConfig>
+#include <KLDAPCore/LdapClientSearchConfigReadConfigJob>
 using namespace KLDAPCore;
 LdapModel::LdapModel(QObject *parent)
     : QAbstractListModel{parent}
@@ -17,7 +21,32 @@ LdapModel::~LdapModel() = default;
 
 void LdapModel::init()
 {
-    // TODO
+    KConfig *config = KLDAPCore::LdapClientSearchConfig::config();
+    KConfigGroup group(config, QStringLiteral("LDAP"));
+
+    int count = group.readEntry("NumSelectedHosts", 0);
+    for (int i = 0; i < count; ++i) {
+        auto job = new KLDAPCore::LdapClientSearchConfigReadConfigJob(this);
+        connect(job, &KLDAPCore::LdapClientSearchConfigReadConfigJob::configLoaded, this, [this](const KLDAPCore::LdapServer &server) {
+            mLdapServerInfo.append({true, server});
+        });
+        job->setActive(true);
+        job->setConfig(group);
+        job->setServerIndex(i);
+        job->start();
+    }
+
+    count = group.readEntry("NumHosts", 0);
+    for (int i = 0; i < count; ++i) {
+        auto job = new KLDAPCore::LdapClientSearchConfigReadConfigJob(this);
+        connect(job, &KLDAPCore::LdapClientSearchConfigReadConfigJob::configLoaded, this, [this](const KLDAPCore::LdapServer &server) {
+            mLdapServerInfo.append({false, server});
+        });
+        job->setActive(false);
+        job->setConfig(group);
+        job->setServerIndex(i);
+        job->start();
+    }
 }
 
 QList<LdapModel::ServerInfo> LdapModel::ldapServerInfo() const
