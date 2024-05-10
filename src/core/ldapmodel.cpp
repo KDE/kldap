@@ -5,11 +5,13 @@
  */
 
 #include "ldapmodel.h"
+#include "ldap_core_debug.h"
 #include "ldapserver.h"
 #include <KConfig>
 #include <KConfigGroup>
 #include <KLDAPCore/LdapClientSearchConfig>
 #include <KLDAPCore/LdapClientSearchConfigReadConfigJob>
+#include <KLDAPCore/LdapClientSearchConfigWriteConfigJob>
 using namespace KLDAPCore;
 LdapModel::LdapModel(QObject *parent)
     : QAbstractListModel{parent}
@@ -55,6 +57,40 @@ void LdapModel::init()
     }
 }
 
+void LdapModel::save()
+{
+    KConfig *config = KLDAPCore::LdapClientSearchConfig::config();
+    config->deleteGroup(QStringLiteral("LDAP"));
+
+    KConfigGroup group(config, QStringLiteral("LDAP"));
+
+    int selected = 0;
+    int unselected = 0;
+    for (const auto &serverInfo : std::as_const(mLdapServerInfo)) {
+        if (serverInfo.enabled) {
+            auto job = new KLDAPCore::LdapClientSearchConfigWriteConfigJob;
+            job->setActive(true);
+            job->setConfig(group);
+            job->setServerIndex(selected);
+            job->setServer(serverInfo.mServer);
+            job->start();
+            selected++;
+        } else {
+            auto job = new KLDAPCore::LdapClientSearchConfigWriteConfigJob;
+            job->setActive(false);
+            job->setConfig(group);
+            job->setServerIndex(unselected);
+            job->setServer(serverInfo.mServer);
+            job->start();
+            unselected++;
+        }
+    }
+
+    group.writeEntry("NumSelectedHosts", selected);
+    group.writeEntry("NumHosts", unselected);
+    config->sync();
+}
+
 QList<LdapModel::ServerInfo> LdapModel::ldapServerInfo() const
 {
     return mLdapServerInfo;
@@ -70,20 +106,45 @@ QVariant LdapModel::data(const QModelIndex &index, int role) const
     if (!index.isValid()) {
         return {};
     }
+    const auto serverInfo = mLdapServerInfo[index.row()];
+    if (role == Qt::CheckStateRole && static_cast<LdapRoles>(index.column()) == Enabled) {
+        return serverInfo.enabled ? Qt::CheckState::Checked : Qt::CheckState::Unchecked;
+    }
     if (role != Qt::DisplayRole) {
         return {};
     }
-    const auto serverInfo = mLdapServerInfo[index.row()];
     switch (static_cast<LdapRoles>(index.column())) {
     case Name:
         return serverInfo.mServer.host();
     case Enabled:
-        return serverInfo.enabled;
     case Activities:
         // TODO
         return {};
     }
     return {};
+}
+
+bool LdapModel::setData(const QModelIndex &modelIndex, const QVariant &value, int role)
+{
+    if (!modelIndex.isValid()) {
+        qCWarning(LDAP_LOG) << "ERROR: invalid index";
+        return false;
+    }
+    if (role == Qt::CheckStateRole) {
+        const int idx = modelIndex.row();
+        auto &serverInfo = mLdapServerInfo[idx];
+        switch (static_cast<LdapRoles>(modelIndex.column())) {
+        case Enabled: {
+            const QModelIndex newIndex = index(modelIndex.row(), Enabled);
+            Q_EMIT dataChanged(newIndex, newIndex);
+            serverInfo.enabled = value.toBool();
+            return true;
+        }
+        default:
+            break;
+        }
+    }
+    return false;
 }
 
 int LdapModel::rowCount(const QModelIndex &parent) const
@@ -103,7 +164,6 @@ QVariant LdapModel::headerData(int section, Qt::Orientation orientation, int rol
 {
     if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
         switch (static_cast<LdapRoles>(section)) {
-        // TODO
         case Name:
         case Enabled:
         case Activities:
