@@ -6,10 +6,11 @@
 
 #include "ldapconfigurewidgetng.h"
 
+#include <QHeaderView>
 #include <QLabel>
-#include <QListView>
 #include <QPushButton>
 #include <QToolButton>
+#include <QTreeView>
 #include <QVBoxLayout>
 
 #include <KConfig>
@@ -279,7 +280,16 @@ void LdapConfigureWidgetNg::initGUI()
     hBoxHBoxLayout->setContentsMargins({});
     hBoxHBoxLayout->setSpacing(6);
     // Contents of the hbox: listview and up/down buttons on the right (vbox)
-    mHostListView = new QListView(hBox);
+    mHostListView = new QTreeView(hBox);
+    mHostListView->setAlternatingRowColors(true);
+    // mHostListView->setSelectionMode(SingleSelection);
+    mHostListView->setContextMenuPolicy(Qt::CustomContextMenu);
+    mHostListView->setSelectionBehavior(QAbstractItemView::SelectRows);
+    mHostListView->setRootIsDecorated(false);
+    mHostListView->setSortingEnabled(false);
+    mHostListView->header()->setSectionsMovable(false);
+    mHostListView->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+
     hBoxHBoxLayout->addWidget(mHostListView);
     // mHostListView->setSortingEnabled(false);
 

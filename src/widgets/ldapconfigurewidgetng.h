@@ -10,10 +10,9 @@
 
 #include <QWidget>
 
-class QListView;
+class QTreeView;
 class QPushButton;
 class QToolButton;
-class QListWidgetItem;
 
 namespace KLDAPCore
 {
@@ -50,7 +49,7 @@ private:
     KLDAPWIDGETS_NO_EXPORT void slotMoveDown();
 #endif
     KLDAPWIDGETS_NO_EXPORT void initGUI();
-    QListView *mHostListView = nullptr;
+    QTreeView *mHostListView = nullptr;
 
     QPushButton *mAddButton = nullptr;
     QPushButton *mEditButton = nullptr;

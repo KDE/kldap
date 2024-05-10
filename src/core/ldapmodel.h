@@ -18,8 +18,8 @@ public:
     ~LdapModel() override;
 
     enum LdapRoles {
-        Name,
         Enabled,
+        Name,
         Activities,
         LastColumn = Activities,
     };
@@ -36,6 +36,8 @@ public:
 
     [[nodiscard]] QList<ServerInfo> ldapServerInfo() const;
     void setLdapServerInfo(const QList<ServerInfo> &newLdapServerInfo);
+
+    [[nodiscard]] Qt::ItemFlags flags(const QModelIndex &index) const override;
 
 private:
     KLDAP_CORE_NO_EXPORT void init();

@@ -70,6 +70,9 @@ QVariant LdapModel::data(const QModelIndex &index, int role) const
     if (!index.isValid()) {
         return {};
     }
+    if (role != Qt::DisplayRole) {
+        return {};
+    }
     const auto serverInfo = mLdapServerInfo[index.row()];
     switch (static_cast<LdapRoles>(index.column())) {
     case Name:
@@ -109,6 +112,17 @@ QVariant LdapModel::headerData(int section, Qt::Orientation orientation, int rol
         }
     }
     return {};
+}
+
+Qt::ItemFlags LdapModel::flags(const QModelIndex &index) const
+{
+    if (!index.isValid())
+        return Qt::NoItemFlags;
+
+    if (static_cast<LdapRoles>(index.column()) == Enabled) {
+        return Qt::ItemIsUserCheckable | QAbstractItemModel::flags(index);
+    }
+    return QAbstractItemModel::flags(index);
 }
 
 #include "moc_ldapmodel.cpp"
