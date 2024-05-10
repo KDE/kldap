@@ -1,11 +1,10 @@
 /*
- * SPDX-FileCopyrightText: 2019-2024 Laurent Montel <montel@kde.org>
+ * SPDX-FileCopyrightText: 2024 Laurent Montel <montel@kde.org>
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
 #include "ldapconfigurewidgetng.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include <QLabel>
 #include <QListWidget>
@@ -30,26 +29,28 @@ using namespace Qt::Literals::StringLiterals;
 #include "addhostdialog.h"
 
 using namespace KLDAPWidgets;
+using namespace Qt::Literals::StringLiterals;
 
 LdapConfigureWidgetNg::LdapConfigureWidgetNg(QWidget *parent)
     : QWidget(parent)
     , mClientSearchConfig(new KLDAPCore::LdapClientSearchConfig)
 {
     initGUI();
-
+#if 0
     connect(mHostListView, &QListWidget::currentItemChanged, this, &LdapConfigureWidgetNg::slotSelectionChanged);
     connect(mHostListView, &QListWidget::itemDoubleClicked, this, &LdapConfigureWidgetNg::slotEditHost);
     connect(mHostListView, &QListWidget::itemClicked, this, &LdapConfigureWidgetNg::slotItemClicked);
 
     connect(mUpButton, &QToolButton::clicked, this, &LdapConfigureWidgetNg::slotMoveUp);
     connect(mDownButton, &QToolButton::clicked, this, &LdapConfigureWidgetNg::slotMoveDown);
+#endif
 }
 
 LdapConfigureWidgetNg::~LdapConfigureWidgetNg()
 {
     delete mClientSearchConfig;
 }
-
+#if 0
 void LdapConfigureWidgetNg::slotSelectionChanged(QListWidgetItem *item)
 {
     bool state = (item != nullptr);
@@ -261,7 +262,7 @@ void LdapConfigureWidgetNg::save()
 
     Q_EMIT changed(false);
 }
-
+#endif
 void LdapConfigureWidgetNg::initGUI()
 {
     auto mainLayout = new QVBoxLayout(this);
@@ -303,12 +304,12 @@ void LdapConfigureWidgetNg::initGUI()
 
     auto buttons = new QDialogButtonBox(this);
     QPushButton *add = buttons->addButton(i18n("&Add Host…"), QDialogButtonBox::ActionRole);
-    connect(add, &QPushButton::clicked, this, &LdapConfigureWidgetNg::slotAddHost);
+    // TODO connect(add, &QPushButton::clicked, this, &LdapConfigureWidgetNg::slotAddHost);
     mEditButton = buttons->addButton(i18n("&Edit Host…"), QDialogButtonBox::ActionRole);
-    connect(mEditButton, &QPushButton::clicked, this, &LdapConfigureWidgetNg::slotEditHost);
+    // TODO connect(mEditButton, &QPushButton::clicked, this, &LdapConfigureWidgetNg::slotEditHost);
     mEditButton->setEnabled(false);
     mRemoveButton = buttons->addButton(i18n("&Remove Host"), QDialogButtonBox::ActionRole);
-    connect(mRemoveButton, &QPushButton::clicked, this, &LdapConfigureWidgetNg::slotRemoveHost);
+    // TODO connect(mRemoveButton, &QPushButton::clicked, this, &LdapConfigureWidgetNg::slotRemoveHost);
     mRemoveButton->setEnabled(false);
 
     mainLayout->addWidget(buttons);

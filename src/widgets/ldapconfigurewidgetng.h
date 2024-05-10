@@ -1,5 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2019-2024 Laurent Montel <montel@kde.org>
+ * SPDX-FileCopyrightText: 2024 Laurent Montel <montel@kde.org>
  *
  * SPDX-License-Identifier: LGPL-2.0-or-later
  */
@@ -33,13 +33,14 @@ public:
     explicit LdapConfigureWidgetNg(QWidget *parent = nullptr);
     ~LdapConfigureWidgetNg() override;
 
-    void load();
-    void save();
+    // void load();
+    // void save();
 
 Q_SIGNALS:
     void changed(bool);
 
 private:
+#if 0
     KLDAPWIDGETS_NO_EXPORT void slotAddHost();
     KLDAPWIDGETS_NO_EXPORT void slotEditHost();
     KLDAPWIDGETS_NO_EXPORT void slotRemoveHost();
@@ -47,8 +48,8 @@ private:
     KLDAPWIDGETS_NO_EXPORT void slotItemClicked(QListWidgetItem *);
     KLDAPWIDGETS_NO_EXPORT void slotMoveUp();
     KLDAPWIDGETS_NO_EXPORT void slotMoveDown();
+#endif
     KLDAPWIDGETS_NO_EXPORT void initGUI();
-
     QListWidget *mHostListView = nullptr;
 
     QPushButton *mAddButton = nullptr;
