@@ -64,7 +64,16 @@ QVariant LdapModel::data(const QModelIndex &index, int role) const
     if (!index.isValid()) {
         return {};
     }
-    // TODO
+    const auto serverInfo = mLdapServerInfo[index.row()];
+    switch (static_cast<LdapRoles>(index.column())) {
+    case Name:
+        return serverInfo.mServer.host();
+    case Enabled:
+        return serverInfo.enabled;
+    case Activities:
+        // TODO
+        return {};
+    }
     return {};
 }
 
@@ -83,7 +92,15 @@ int LdapModel::columnCount(const QModelIndex &parent) const
 
 QVariant LdapModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
-    // TODO
+    if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
+        switch (static_cast<LdapRoles>(section)) {
+        // TODO
+        case Name:
+        case Enabled:
+        case Activities:
+            return {};
+        }
+    }
     return {};
 }
 
