@@ -18,7 +18,6 @@ public:
     ~LdapModel() override;
 
     enum LdapRoles {
-        Enabled,
         Name,
         Activities,
         LastColumn = Activities,

@@ -107,7 +107,7 @@ QVariant LdapModel::data(const QModelIndex &index, int role) const
         return {};
     }
     const auto serverInfo = mLdapServerInfo[index.row()];
-    if (role == Qt::CheckStateRole && static_cast<LdapRoles>(index.column()) == Enabled) {
+    if (role == Qt::CheckStateRole && static_cast<LdapRoles>(index.column()) == Name) {
         return serverInfo.enabled ? Qt::CheckState::Checked : Qt::CheckState::Unchecked;
     }
     if (role != Qt::DisplayRole) {
@@ -116,7 +116,6 @@ QVariant LdapModel::data(const QModelIndex &index, int role) const
     switch (static_cast<LdapRoles>(index.column())) {
     case Name:
         return serverInfo.mServer.host();
-    case Enabled:
     case Activities:
         // TODO
         return {};
@@ -134,8 +133,8 @@ bool LdapModel::setData(const QModelIndex &modelIndex, const QVariant &value, in
         const int idx = modelIndex.row();
         auto &serverInfo = mLdapServerInfo[idx];
         switch (static_cast<LdapRoles>(modelIndex.column())) {
-        case Enabled: {
-            const QModelIndex newIndex = index(modelIndex.row(), Enabled);
+        case Name: {
+            const QModelIndex newIndex = index(modelIndex.row(), Name);
             Q_EMIT dataChanged(newIndex, newIndex);
             serverInfo.enabled = value.toBool();
             return true;
@@ -165,7 +164,6 @@ QVariant LdapModel::headerData(int section, Qt::Orientation orientation, int rol
     if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
         switch (static_cast<LdapRoles>(section)) {
         case Name:
-        case Enabled:
         case Activities:
             return {};
         }
@@ -178,7 +176,7 @@ Qt::ItemFlags LdapModel::flags(const QModelIndex &index) const
     if (!index.isValid())
         return Qt::NoItemFlags;
 
-    if (static_cast<LdapRoles>(index.column()) == Enabled) {
+    if (static_cast<LdapRoles>(index.column()) == Name) {
         return Qt::ItemIsUserCheckable | QAbstractItemModel::flags(index);
     }
     return QAbstractItemModel::flags(index);
