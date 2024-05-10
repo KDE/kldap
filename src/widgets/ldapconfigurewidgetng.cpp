@@ -289,6 +289,7 @@ void LdapConfigureWidgetNg::initGUI()
     mHostListView->setSortingEnabled(false);
     mHostListView->header()->setSectionsMovable(false);
     mHostListView->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    mHostListView->setColumnHidden(KLDAPCore::LdapModel::Activities, true);
 
     hBoxHBoxLayout->addWidget(mHostListView);
     // mHostListView->setSortingEnabled(false);
