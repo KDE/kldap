@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-08 00:39+0000\n"
-"PO-Revision-Date: 2024-02-23 20:45+0400\n"
+"PO-Revision-Date: 2024-05-09 09:57+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -127,18 +127,14 @@ msgid "Check all servers that should be used:"
 msgstr "تحقق من جميع الخوادم التي يجب استخدامها:"
 
 #: widgets/ldapconfigurewidget.cpp:305
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Add Host"
+#, kde-format
 msgid "&Add Host…"
-msgstr "اضف مضيف"
+msgstr "اضف &مضيف…"
 
 #: widgets/ldapconfigurewidget.cpp:307
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Edit Host"
+#, kde-format
 msgid "&Edit Host…"
-msgstr "حرر مضيف"
+msgstr "&حرر مضيف…"
 
 #: widgets/ldapconfigurewidget.cpp:310
 #, kde-format

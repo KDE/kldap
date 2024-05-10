@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# g.sora <g.sora@tiscali.it>, 2011, 2012, 2020, 2021.
+# g.sora <g.sora@tiscali.it>, 2011, 2012, 2020, 2021, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-08 00:39+0000\n"
-"PO-Revision-Date: 2021-07-29 22:39+0200\n"
+"PO-Revision-Date: 2024-05-09 10:57+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.04.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: core/ldapconnection.cpp:126
 #, kde-format
@@ -122,18 +122,14 @@ msgid "Check all servers that should be used:"
 msgstr "Marca tote servitores que on deberea usar:"
 
 #: widgets/ldapconfigurewidget.cpp:305
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Add Host"
+#, kde-format
 msgid "&Add Host…"
-msgstr "Adde hospite"
+msgstr "&Adde hospite…"
 
 #: widgets/ldapconfigurewidget.cpp:307
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Edit Host"
+#, kde-format
 msgid "&Edit Host…"
-msgstr "Modifica hospite"
+msgstr "&Modifica hospite…"
 
 #: widgets/ldapconfigurewidget.cpp:310
 #, kde-format

@@ -122,12 +122,12 @@ msgstr "勾选要使用的所有服务器："
 #: widgets/ldapconfigurewidget.cpp:305
 #, kde-format
 msgid "&Add Host…"
-msgstr ""
+msgstr "添加主机(&A)…"
 
 #: widgets/ldapconfigurewidget.cpp:307
 #, kde-format
 msgid "&Edit Host…"
-msgstr ""
+msgstr "编辑主机(&E)…"
 
 #: widgets/ldapconfigurewidget.cpp:310
 #, kde-format

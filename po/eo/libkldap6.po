@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-08 00:39+0000\n"
-"PO-Revision-Date: 2023-10-01 05:27+0100\n"
+"PO-Revision-Date: 2024-05-09 22:01+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -123,18 +123,14 @@ msgid "Check all servers that should be used:"
 msgstr "Kontroli ĉiujn servilojn, kiuj devus esti uzataj:"
 
 #: widgets/ldapconfigurewidget.cpp:305
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Add Host"
+#, kde-format
 msgid "&Add Host…"
-msgstr "Aldoni Gastiganton"
+msgstr "&Aldoni Gastiganton…"
 
 #: widgets/ldapconfigurewidget.cpp:307
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Edit Host"
+#, kde-format
 msgid "&Edit Host…"
-msgstr "Redakti Gastiganton"
+msgstr "R&edakti Gastiganton…"
 
 #: widgets/ldapconfigurewidget.cpp:310
 #, kde-format
@@ -296,9 +292,3 @@ msgstr "LDAP Query"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "Nekonata eraro konektante %1"
-
-#~ msgid "&Add Host..."
-#~ msgstr "&Aldonu Gastiganton..."
-
-#~ msgid "&Edit Host..."
-#~ msgstr "R&edakti Gastiganton..."

@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-08 00:39+0000\n"
-"PO-Revision-Date: 2024-03-08 16:26+0300\n"
+"PO-Revision-Date: 2024-05-09 18:52+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -19,12 +19,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.02.0\n"
+"X-Generator: Lokalize 24.07.70\n"
 
 #: core/ldapconnection.cpp:126
 #, kde-format
 msgid "No LDAP Support..."
-msgstr "LDAP Desteği Yok..."
+msgstr "LDAP Desteği Yok…"
 
 #: core/ldapconnection.cpp:241
 #, kde-format
@@ -113,7 +113,7 @@ msgstr "Makineyi Düzenle"
 #: widgets/ldapconfigurewidget.cpp:114
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
-msgstr "\"%1\" makinesi için ayarı kaldırmak istiyor musunuz?"
+msgstr "“%1” makinesi için ayarı kaldırmak istiyor musunuz?"
 
 #: widgets/ldapconfigurewidget.cpp:115
 #, kde-format
@@ -126,18 +126,14 @@ msgid "Check all servers that should be used:"
 msgstr "Kullanılması gereken tüm sunucuları denetle:"
 
 #: widgets/ldapconfigurewidget.cpp:305
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Add Host"
+#, kde-format
 msgid "&Add Host…"
-msgstr "Makine Ekle"
+msgstr "Makine &Ekle…"
 
 #: widgets/ldapconfigurewidget.cpp:307
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Edit Host"
+#, kde-format
 msgid "&Edit Host…"
-msgstr "Makineyi Düzenle"
+msgstr "Makineyi &Düzenle…"
 
 #: widgets/ldapconfigurewidget.cpp:310
 #, kde-format
