@@ -14,6 +14,7 @@ target_sources(KPim6LdapWidgets PRIVATE
     ldapconfigwidget.cpp
     addhostdialog.cpp
     ldapconfigurewidget.cpp
+    ldapconfigurewidgetng.cpp
     ldapwidgetitem_p.cpp
     ldapwidgetitemreadconfigserverjob.cpp
 
@@ -21,7 +22,11 @@ target_sources(KPim6LdapWidgets PRIVATE
     ldapwidgetitem_p.h
     ldapconfigwidget.h
     ldapconfigurewidget.h
+    ldapconfigurewidgetng.h
     ldapwidgetitemreadconfigserverjob.h
+
+    ldapconfigurewidgetng.cpp
+    ldapconfigurewidgetng.h
 )
 
 ecm_qt_declare_logging_category(KPim6LdapWidgets HEADER ldap_widgets_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME org.kde.pim.ldap.widgets
@@ -76,6 +81,7 @@ ecm_generate_headers(KLdapWidgets_CamelCase_HEADERS
     LdapConfigWidget
     AddHostDialog
     LdapConfigureWidget
+    LdapConfigureWidgetNg
     PREFIX KLDAPWidgets
     REQUIRED_HEADERS KLdapWidgets_HEADERS
 )
