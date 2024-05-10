@@ -29,6 +29,9 @@ void LdapModel::init()
         auto job = new KLDAPCore::LdapClientSearchConfigReadConfigJob(this);
         connect(job, &KLDAPCore::LdapClientSearchConfigReadConfigJob::configLoaded, this, [this](const KLDAPCore::LdapServer &server) {
             mLdapServerInfo.append({true, server});
+            // TODO improve it
+            beginResetModel();
+            endResetModel();
         });
         job->setActive(true);
         job->setConfig(group);
@@ -41,6 +44,9 @@ void LdapModel::init()
         auto job = new KLDAPCore::LdapClientSearchConfigReadConfigJob(this);
         connect(job, &KLDAPCore::LdapClientSearchConfigReadConfigJob::configLoaded, this, [this](const KLDAPCore::LdapServer &server) {
             mLdapServerInfo.append({false, server});
+            // TODO improve it
+            beginResetModel();
+            endResetModel();
         });
         job->setActive(false);
         job->setConfig(group);
@@ -80,6 +86,7 @@ QVariant LdapModel::data(const QModelIndex &index, int role) const
 int LdapModel::rowCount(const QModelIndex &parent) const
 {
     Q_UNUSED(parent)
+    qDebug() << " mLdapServerInfo.count()" << mLdapServerInfo.count();
     return mLdapServerInfo.count();
 }
 
