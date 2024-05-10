@@ -182,4 +182,21 @@ Qt::ItemFlags LdapModel::flags(const QModelIndex &index) const
     return QAbstractItemModel::flags(index);
 }
 
+void LdapModel::modifyServer(int index, const KLDAPCore::LdapServer &server)
+{
+    // TODO
+}
+
+void LdapModel::removeServer(int index)
+{
+    // TODO
+}
+
+void LdapModel::insertServer(const KLDAPCore::LdapServer &server)
+{
+    beginInsertRows(QModelIndex(), 0, mLdapServerInfo.count() - 1);
+    mLdapServerInfo.append({true, server});
+    endInsertRows();
+}
+
 #include "moc_ldapmodel.cpp"

@@ -41,6 +41,12 @@ public:
 
     void save();
 
+    void insertServer(const KLDAPCore::LdapServer &server);
+
+    void removeServer(int index);
+
+    void modifyServer(int index, const KLDAPCore::LdapServer &server);
+
 private:
     KLDAP_CORE_NO_EXPORT void init();
     QList<ServerInfo> mLdapServerInfo;
