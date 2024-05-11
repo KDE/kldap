@@ -29,7 +29,7 @@ public:
     void result();
     bool connect();
     void closeConnection();
-    bool startSearch(const LdapDN &base, LdapUrl::Scope scope, const QString &filter, const QStringList &attributes, int pagesize, int count);
+    [[nodiscard]] bool startSearch(const LdapDN &base, LdapUrl::Scope scope, const QString &filter, const QStringList &attributes, int pagesize, int count);
 
     LdapSearch *const mParent;
     LdapConnection *mConn = nullptr;
