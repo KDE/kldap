@@ -149,6 +149,7 @@ ecm_generate_headers(KLdapCore_CamelCase_HEADERS
     LdapClientSearchConfig
     LdapClient
     LdapClientSearch
+    LdapSortProxyModel
     PREFIX KLDAPCore
     REQUIRED_HEADERS KLdapCore_HEADERS
 )
