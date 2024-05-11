@@ -46,9 +46,9 @@ private:
     KLDAPWIDGETS_NO_EXPORT void slotRemoveHost();
     KLDAPWIDGETS_NO_EXPORT void slotSelectionChanged(QListWidgetItem *);
     KLDAPWIDGETS_NO_EXPORT void slotItemClicked(QListWidgetItem *);
+#endif
     KLDAPWIDGETS_NO_EXPORT void slotMoveUp();
     KLDAPWIDGETS_NO_EXPORT void slotMoveDown();
-#endif
     KLDAPWIDGETS_NO_EXPORT void initGUI();
     QTreeView *mHostListView = nullptr;
 

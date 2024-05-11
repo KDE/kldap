@@ -40,9 +40,9 @@ LdapConfigureWidgetNg::LdapConfigureWidgetNg(QWidget *parent)
     connect(mHostListView, &QListWidget::itemDoubleClicked, this, &LdapConfigureWidgetNg::slotEditHost);
     connect(mHostListView, &QListWidget::itemClicked, this, &LdapConfigureWidgetNg::slotItemClicked);
 
+#endif
     connect(mUpButton, &QToolButton::clicked, this, &LdapConfigureWidgetNg::slotMoveUp);
     connect(mDownButton, &QToolButton::clicked, this, &LdapConfigureWidgetNg::slotMoveDown);
-#endif
 }
 
 LdapConfigureWidgetNg::~LdapConfigureWidgetNg()
@@ -141,9 +141,10 @@ static void swapItems(LdapWidgetItem *item, LdapWidgetItem *other)
     other->setIsActive(isActive);
     other->setCheckState(isActive ? Qt::Checked : Qt::Unchecked);
 }
-
+#endif
 void LdapConfigureWidgetNg::slotMoveUp()
 {
+#if 0
     const QList<QListWidgetItem *> selectedItems = mHostListView->selectedItems();
     if (selectedItems.isEmpty()) {
         return;
@@ -165,10 +166,12 @@ void LdapConfigureWidgetNg::slotMoveUp()
     above->setSelected(true);
 
     Q_EMIT changed(true);
+#endif
 }
 
 void LdapConfigureWidgetNg::slotMoveDown()
 {
+#if 0
     const QList<QListWidgetItem *> selectedItems = mHostListView->selectedItems();
     if (selectedItems.isEmpty()) {
         return;
@@ -190,8 +193,9 @@ void LdapConfigureWidgetNg::slotMoveDown()
     below->setSelected(true);
 
     Q_EMIT changed(true);
+#endif
 }
-
+#if 0
 void LdapConfigureWidgetNg::load()
 {
     mHostListView->clear();
