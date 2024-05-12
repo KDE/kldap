@@ -189,7 +189,9 @@ void LdapModel::modifyServer(int index, const KLDAPCore::LdapServer &server)
 
 void LdapModel::removeServer(int index)
 {
-    // TODO
+    beginRemoveRows(QModelIndex(), index, index);
+    mLdapServerInfo.remove(index);
+    endRemoveRows();
 }
 
 void LdapModel::insertServer(const KLDAPCore::LdapServer &server)
