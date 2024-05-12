@@ -25,6 +25,7 @@ public:
 
     struct ServerInfo {
         bool enabled = false;
+        int index = 0;
         KLDAPCore::LdapServer mServer;
     };
 

@@ -21,6 +21,12 @@ bool LdapSortProxyModel::filterAcceptsRow(int source_row, const QModelIndex &sou
     return QSortFilterProxyModel::filterAcceptsRow(source_row, source_parent);
 }
 
+bool LdapSortProxyModel::lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const
+{
+    // TODO
+    return true;
+}
+
 LdapActivitiesAbstract *LdapSortProxyModel::ldapActivitiesAbstract() const
 {
     return mLdapActivitiesAbstract;

@@ -29,8 +29,8 @@ void LdapModel::init()
     int count = group.readEntry("NumSelectedHosts", 0);
     for (int i = 0; i < count; ++i) {
         auto job = new KLDAPCore::LdapClientSearchConfigReadConfigJob(this);
-        connect(job, &KLDAPCore::LdapClientSearchConfigReadConfigJob::configLoaded, this, [this](const KLDAPCore::LdapServer &server) {
-            mLdapServerInfo.append({true, server});
+        connect(job, &KLDAPCore::LdapClientSearchConfigReadConfigJob::configLoaded, this, [this, i](const KLDAPCore::LdapServer &server) {
+            mLdapServerInfo.append({true, i, server});
             // TODO improve it
             beginResetModel();
             endResetModel();
@@ -44,8 +44,8 @@ void LdapModel::init()
     count = group.readEntry("NumHosts", 0);
     for (int i = 0; i < count; ++i) {
         auto job = new KLDAPCore::LdapClientSearchConfigReadConfigJob(this);
-        connect(job, &KLDAPCore::LdapClientSearchConfigReadConfigJob::configLoaded, this, [this](const KLDAPCore::LdapServer &server) {
-            mLdapServerInfo.append({false, server});
+        connect(job, &KLDAPCore::LdapClientSearchConfigReadConfigJob::configLoaded, this, [this, i](const KLDAPCore::LdapServer &server) {
+            mLdapServerInfo.append({false, i, server});
             // TODO improve it
             beginResetModel();
             endResetModel();
@@ -195,7 +195,8 @@ void LdapModel::removeServer(int index)
 void LdapModel::insertServer(const KLDAPCore::LdapServer &server)
 {
     beginInsertRows(QModelIndex(), 0, mLdapServerInfo.count() - 1);
-    mLdapServerInfo.append({true, server});
+    // TODO verify it
+    mLdapServerInfo.append({true, 0, server});
     endInsertRows();
 }
 
