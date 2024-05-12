@@ -60,8 +60,8 @@ void LdapConfigureWidgetNg::slotAddHost()
         auto item = new LdapWidgetItem(mHostListView);
         item->setServer(server);
 
-        Q_EMIT changed(true);
 #endif
+        Q_EMIT changed(true);
     }
 }
 
@@ -87,10 +87,11 @@ void LdapConfigureWidgetNg::slotItemClicked(QListWidgetItem *item)
         ldapItem->setIsActive(ldapItem->checkState() == Qt::Checked);
     }
 }
-
+#endif
 
 void LdapConfigureWidgetNg::slotEditHost()
 {
+#if 0
     auto item = dynamic_cast<LdapWidgetItem *>(mHostListView->currentItem());
     if (!item) {
         return;
@@ -105,10 +106,11 @@ void LdapConfigureWidgetNg::slotEditHost()
 
         Q_EMIT changed(true);
     }
+#endif
 }
-
 void LdapConfigureWidgetNg::slotRemoveHost()
 {
+#if 0
     QListWidgetItem *item = mHostListView->currentItem();
     if (!item) {
         return;
@@ -126,10 +128,11 @@ void LdapConfigureWidgetNg::slotRemoveHost()
     delete mHostListView->takeItem(mHostListView->currentRow());
 
     slotSelectionChanged(mHostListView->currentItem());
-
+#endif
     Q_EMIT changed(true);
 }
 
+#if 0
 static void swapItems(LdapWidgetItem *item, LdapWidgetItem *other)
 {
     KLDAPCore::LdapServer server = item->server();
@@ -165,8 +168,8 @@ void LdapConfigureWidgetNg::slotMoveUp()
     mHostListView->setCurrentItem(above);
     above->setSelected(true);
 
-    Q_EMIT changed(true);
 #endif
+    Q_EMIT changed(true);
 }
 
 void LdapConfigureWidgetNg::slotMoveDown()
@@ -192,8 +195,8 @@ void LdapConfigureWidgetNg::slotMoveDown()
     mHostListView->setCurrentItem(below);
     below->setSelected(true);
 
-    Q_EMIT changed(true);
 #endif
+    Q_EMIT changed(true);
 }
 
 void LdapConfigureWidgetNg::initGUI()
@@ -250,10 +253,10 @@ void LdapConfigureWidgetNg::initGUI()
     QPushButton *add = buttons->addButton(i18n("&Add Host…"), QDialogButtonBox::ActionRole);
     connect(add, &QPushButton::clicked, this, &LdapConfigureWidgetNg::slotAddHost);
     mEditButton = buttons->addButton(i18n("&Edit Host…"), QDialogButtonBox::ActionRole);
-    // TODO connect(mEditButton, &QPushButton::clicked, this, &LdapConfigureWidgetNg::slotEditHost);
+    connect(mEditButton, &QPushButton::clicked, this, &LdapConfigureWidgetNg::slotEditHost);
     mEditButton->setEnabled(false);
     mRemoveButton = buttons->addButton(i18n("&Remove Host"), QDialogButtonBox::ActionRole);
-    // TODO connect(mRemoveButton, &QPushButton::clicked, this, &LdapConfigureWidgetNg::slotRemoveHost);
+    connect(mRemoveButton, &QPushButton::clicked, this, &LdapConfigureWidgetNg::slotRemoveHost);
     mRemoveButton->setEnabled(false);
 
     mainLayout->addWidget(buttons);

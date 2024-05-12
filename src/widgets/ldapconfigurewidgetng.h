@@ -38,9 +38,9 @@ Q_SIGNALS:
 
 private:
     KLDAPWIDGETS_NO_EXPORT void slotAddHost();
-#if 0
     KLDAPWIDGETS_NO_EXPORT void slotEditHost();
     KLDAPWIDGETS_NO_EXPORT void slotRemoveHost();
+#if 0
     KLDAPWIDGETS_NO_EXPORT void slotSelectionChanged(QListWidgetItem *);
     KLDAPWIDGETS_NO_EXPORT void slotItemClicked(QListWidgetItem *);
 #endif
