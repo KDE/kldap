@@ -224,12 +224,11 @@ void LdapConfigureWidgetNg::initGUI()
     mHostListView->setSortingEnabled(false);
     mHostListView->header()->setSectionsMovable(false);
     mHostListView->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
+    mHostListView->setModel(mLdapSortProxyModel);
     mHostListView->setColumnHidden(KLDAPCore::LdapModel::Activities, true);
     mHostListView->setColumnHidden(KLDAPCore::LdapModel::Index, true);
 
     hBoxHBoxLayout->addWidget(mHostListView);
-
-    mHostListView->setModel(mLdapModel);
 
     auto upDownBox = new QWidget(hBox);
     auto upDownBoxVBoxLayout = new QVBoxLayout(upDownBox);
