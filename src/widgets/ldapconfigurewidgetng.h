@@ -18,6 +18,7 @@ namespace KLDAPCore
 {
 class LdapClientSearchConfig;
 class LdapModel;
+class LdapSortProxyModel;
 }
 
 namespace KLDAPWidgets
@@ -57,5 +58,6 @@ private:
     QToolButton *mDownButton = nullptr;
     KLDAPCore::LdapClientSearchConfig *const mClientSearchConfig;
     KLDAPCore::LdapModel *const mLdapModel;
+    KLDAPCore::LdapSortProxyModel *const mLdapSortProxyModel;
 };
 }

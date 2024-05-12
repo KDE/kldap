@@ -23,6 +23,7 @@
 #include "kldapcore/ldapclientsearchconfig.h"
 #include "kldapcore/ldapserver.h"
 #include <KLDAPCore/LdapModel>
+#include <KLDAPCore/LdapSortProxyModel>
 
 #include "addhostdialog.h"
 
@@ -33,7 +34,9 @@ LdapConfigureWidgetNg::LdapConfigureWidgetNg(QWidget *parent)
     : QWidget(parent)
     , mClientSearchConfig(new KLDAPCore::LdapClientSearchConfig)
     , mLdapModel(new KLDAPCore::LdapModel(this))
+    , mLdapSortProxyModel(new KLDAPCore::LdapSortProxyModel(this))
 {
+    mLdapSortProxyModel->setSourceModel(mLdapModel);
     initGUI();
 #if 0
     connect(mHostListView, &QListWidget::currentItemChanged, this, &LdapConfigureWidgetNg::slotSelectionChanged);
@@ -56,11 +59,7 @@ void LdapConfigureWidgetNg::slotAddHost()
     KLDAPWidgets::AddHostDialog dlg(&server, this);
 
     if (dlg.exec() && !server.host().trimmed().isEmpty()) { // krazy:exclude=crashy
-#if 0
-        auto item = new LdapWidgetItem(mHostListView);
-        item->setServer(server);
-
-#endif
+        mLdapModel->insertServer(server);
         Q_EMIT changed(true);
     }
 }
@@ -129,6 +128,7 @@ void LdapConfigureWidgetNg::slotRemoveHost()
 
     slotSelectionChanged(mHostListView->currentItem());
 #endif
+    // TODO mLdapModel->removeServer();
     Q_EMIT changed(true);
 }
 
