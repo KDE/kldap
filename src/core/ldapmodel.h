@@ -19,6 +19,7 @@ public:
 
     enum LdapRoles {
         Name,
+        Index,
         Activities,
         LastColumn = Activities,
     };

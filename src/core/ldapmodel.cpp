@@ -116,6 +116,8 @@ QVariant LdapModel::data(const QModelIndex &index, int role) const
     switch (static_cast<LdapRoles>(index.column())) {
     case Name:
         return serverInfo.mServer.host();
+    case Index:
+        return serverInfo.index;
     case Activities:
         // TODO
         return {};
@@ -164,6 +166,7 @@ QVariant LdapModel::headerData(int section, Qt::Orientation orientation, int rol
     if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
         switch (static_cast<LdapRoles>(section)) {
         case Name:
+        case Index:
         case Activities:
             return {};
         }
