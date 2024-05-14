@@ -40,9 +40,6 @@ LdapConfigureWidgetNg::LdapConfigureWidgetNg(QWidget *parent)
     initGUI();
     connect(mHostListView->selectionModel(), &QItemSelectionModel::selectionChanged, this, &LdapConfigureWidgetNg::slotSelectionChanged);
     connect(mHostListView, &QTreeView::doubleClicked, this, &LdapConfigureWidgetNg::slotEditHost);
-#if 0
-    connect(mHostListView, &QListWidget::itemClicked, this, &LdapConfigureWidgetNg::slotItemClicked);
-#endif
     connect(mUpButton, &QToolButton::clicked, this, &LdapConfigureWidgetNg::slotMoveUp);
     connect(mDownButton, &QToolButton::clicked, this, &LdapConfigureWidgetNg::slotMoveDown);
 }
@@ -74,20 +71,6 @@ void LdapConfigureWidgetNg::slotSelectionChanged()
     mUpButton->setEnabled(item && (mHostListView->row(item) != 0));
 #endif
 }
-#if 0
-void LdapConfigureWidgetNg::slotItemClicked(QListWidgetItem *item)
-{
-    auto ldapItem = dynamic_cast<LdapWidgetItem *>(item);
-    if (!ldapItem) {
-        return;
-    }
-
-    if ((ldapItem->checkState() == Qt::Checked) != ldapItem->isActive()) {
-        Q_EMIT changed(true);
-        ldapItem->setIsActive(ldapItem->checkState() == Qt::Checked);
-    }
-}
-#endif
 
 void LdapConfigureWidgetNg::slotEditHost()
 {
