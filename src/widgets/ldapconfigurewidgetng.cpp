@@ -39,8 +39,8 @@ LdapConfigureWidgetNg::LdapConfigureWidgetNg(QWidget *parent)
     mLdapSortProxyModel->setSourceModel(mLdapModel);
     initGUI();
     connect(mHostListView->selectionModel(), &QItemSelectionModel::selectionChanged, this, &LdapConfigureWidgetNg::slotSelectionChanged);
+    connect(mHostListView, &QTreeView::doubleClicked, this, &LdapConfigureWidgetNg::slotEditHost);
 #if 0
-    connect(mHostListView, &QListWidget::itemDoubleClicked, this, &LdapConfigureWidgetNg::slotEditHost);
     connect(mHostListView, &QListWidget::itemClicked, this, &LdapConfigureWidgetNg::slotItemClicked);
 #endif
     connect(mUpButton, &QToolButton::clicked, this, &LdapConfigureWidgetNg::slotMoveUp);
@@ -127,8 +127,6 @@ void LdapConfigureWidgetNg::slotRemoveHost()
         return;
     }
 #if 0
-    delete mHostListView->takeItem(mHostListView->currentRow());
-
     slotSelectionChanged(mHostListView->currentItem());
 #endif
     // TODO mLdapModel->removeServer();
