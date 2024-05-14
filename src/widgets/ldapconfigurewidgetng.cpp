@@ -38,11 +38,10 @@ LdapConfigureWidgetNg::LdapConfigureWidgetNg(QWidget *parent)
 {
     mLdapSortProxyModel->setSourceModel(mLdapModel);
     initGUI();
+    connect(mHostListView->selectionModel(), &QItemSelectionModel::selectionChanged, this, &LdapConfigureWidgetNg::slotSelectionChanged);
 #if 0
-    connect(mHostListView, &QListWidget::currentItemChanged, this, &LdapConfigureWidgetNg::slotSelectionChanged);
     connect(mHostListView, &QListWidget::itemDoubleClicked, this, &LdapConfigureWidgetNg::slotEditHost);
     connect(mHostListView, &QListWidget::itemClicked, this, &LdapConfigureWidgetNg::slotItemClicked);
-
 #endif
     connect(mUpButton, &QToolButton::clicked, this, &LdapConfigureWidgetNg::slotMoveUp);
     connect(mDownButton, &QToolButton::clicked, this, &LdapConfigureWidgetNg::slotMoveDown);
@@ -64,16 +63,18 @@ void LdapConfigureWidgetNg::slotAddHost()
     }
 }
 
-#if 0
-void LdapConfigureWidgetNg::slotSelectionChanged(QListWidgetItem *item)
+void LdapConfigureWidgetNg::slotSelectionChanged()
 {
+    const auto nbItems{mHostListView->selectionModel()->selectedRows().count()};
+#if 0
     bool state = (item != nullptr);
     mEditButton->setEnabled(state);
     mRemoveButton->setEnabled(state);
     mDownButton->setEnabled(item && (mHostListView->row(item) != (mHostListView->count() - 1)));
     mUpButton->setEnabled(item && (mHostListView->row(item) != 0));
+#endif
 }
-
+#if 0
 void LdapConfigureWidgetNg::slotItemClicked(QListWidgetItem *item)
 {
     auto ldapItem = dynamic_cast<LdapWidgetItem *>(item);
@@ -90,12 +91,10 @@ void LdapConfigureWidgetNg::slotItemClicked(QListWidgetItem *item)
 
 void LdapConfigureWidgetNg::slotEditHost()
 {
-#if 0
-    auto item = dynamic_cast<LdapWidgetItem *>(mHostListView->currentItem());
-    if (!item) {
+    if (!mHostListView->selectionModel()->hasSelection()) {
         return;
     }
-
+#if 0
     KLDAPCore::LdapServer server = item->server();
     KLDAPWidgets::AddHostDialog dlg(&server, this);
     dlg.setWindowTitle(i18nc("@title:window", "Edit Host"));
@@ -109,12 +108,10 @@ void LdapConfigureWidgetNg::slotEditHost()
 }
 void LdapConfigureWidgetNg::slotRemoveHost()
 {
-#if 0
-    QListWidgetItem *item = mHostListView->currentItem();
-    if (!item) {
+    if (!mHostListView->selectionModel()->hasSelection()) {
         return;
     }
-    auto ldapItem = static_cast<LdapWidgetItem *>(item);
+#if 0
     const int answer = KMessageBox::questionTwoActions(this,
                                                        i18n("Do you want to remove setting for host \"%1\"?", ldapItem->server().host()),
                                                        i18n("Remove Host"),

@@ -41,8 +41,8 @@ private:
     KLDAPWIDGETS_NO_EXPORT void slotAddHost();
     KLDAPWIDGETS_NO_EXPORT void slotEditHost();
     KLDAPWIDGETS_NO_EXPORT void slotRemoveHost();
+    KLDAPWIDGETS_NO_EXPORT void slotSelectionChanged();
 #if 0
-    KLDAPWIDGETS_NO_EXPORT void slotSelectionChanged(QListWidgetItem *);
     KLDAPWIDGETS_NO_EXPORT void slotItemClicked(QListWidgetItem *);
 #endif
     KLDAPWIDGETS_NO_EXPORT void slotMoveUp();
