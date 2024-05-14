@@ -147,6 +147,21 @@ bool LdapModel::setData(const QModelIndex &modelIndex, const QVariant &value, in
             break;
         }
     }
+    if (role != Qt::EditRole) {
+        return {};
+    }
+    const int idx = modelIndex.row();
+    auto &serverInfo = mLdapServerInfo[idx];
+    switch (static_cast<LdapRoles>(modelIndex.column())) {
+    case Server: {
+        const QModelIndex newIndex = index(modelIndex.row(), Server);
+        Q_EMIT dataChanged(newIndex, newIndex);
+        serverInfo.mServer = value.value<KLDAPCore::LdapServer>();
+        return true;
+    }
+    default:
+        break;
+    }
     return false;
 }
 
@@ -186,11 +201,6 @@ Qt::ItemFlags LdapModel::flags(const QModelIndex &index) const
         return Qt::ItemIsUserCheckable | QAbstractItemModel::flags(index);
     }
     return QAbstractItemModel::flags(index);
-}
-
-void LdapModel::modifyServer(int index, const KLDAPCore::LdapServer &server)
-{
-    // TODO
 }
 
 void LdapModel::removeServer(int index)

@@ -87,9 +87,7 @@ void LdapConfigureWidgetNg::slotEditHost()
     dlg.setWindowTitle(i18nc("@title:window", "Edit Host"));
 
     if (dlg.exec() && !server.host().isEmpty()) { // krazy:exclude=crashy
-#if 0
-        item->setServer(server);
-#endif
+        mHostListView->model()->setData(modelIndex, QVariant::fromValue(server));
         Q_EMIT changed(true);
     }
 }
