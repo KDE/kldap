@@ -20,9 +20,9 @@
 #include <QDialogButtonBox>
 #include <QHBoxLayout>
 
-#include "kldapcore/ldapclientsearchconfig.h"
-#include "kldapcore/ldapserver.h"
+#include <KLDAPCore/LdapClientSearchConfig>
 #include <KLDAPCore/LdapModel>
+#include <KLDAPCore/LdapServer>
 #include <KLDAPCore/LdapSortProxyModel>
 
 #include "addhostdialog.h"
@@ -47,6 +47,11 @@ LdapConfigureWidgetNg::LdapConfigureWidgetNg(QWidget *parent)
 LdapConfigureWidgetNg::~LdapConfigureWidgetNg()
 {
     delete mClientSearchConfig;
+}
+
+void LdapConfigureWidgetNg::save()
+{
+    mLdapModel->save();
 }
 
 void LdapConfigureWidgetNg::slotAddHost()
@@ -129,6 +134,9 @@ static void swapItems(LdapWidgetItem *item, LdapWidgetItem *other)
 #endif
 void LdapConfigureWidgetNg::slotMoveUp()
 {
+    if (!mHostListView->selectionModel()->hasSelection()) {
+        return;
+    }
 #if 0
     const QList<QListWidgetItem *> selectedItems = mHostListView->selectedItems();
     if (selectedItems.isEmpty()) {
@@ -156,6 +164,9 @@ void LdapConfigureWidgetNg::slotMoveUp()
 
 void LdapConfigureWidgetNg::slotMoveDown()
 {
+    if (!mHostListView->selectionModel()->hasSelection()) {
+        return;
+    }
 #if 0
     const QList<QListWidgetItem *> selectedItems = mHostListView->selectedItems();
     if (selectedItems.isEmpty()) {

@@ -34,6 +34,8 @@ public:
     explicit LdapConfigureWidgetNg(QWidget *parent = nullptr);
     ~LdapConfigureWidgetNg() override;
 
+    void save();
+
 Q_SIGNALS:
     void changed(bool);
 
