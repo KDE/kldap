@@ -221,6 +221,7 @@ void LdapConfigureWidgetNg::initGUI()
     mHostListView->setColumnHidden(KLDAPCore::LdapModel::Activities, true);
     mHostListView->setColumnHidden(KLDAPCore::LdapModel::Index, true);
     mHostListView->setColumnHidden(KLDAPCore::LdapModel::Server, true);
+    mHostListView->header()->hide();
 
     hBoxHBoxLayout->addWidget(mHostListView);
 
