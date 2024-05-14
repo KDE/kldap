@@ -23,7 +23,16 @@ bool LdapSortProxyModel::filterAcceptsRow(int source_row, const QModelIndex &sou
 
 bool LdapSortProxyModel::lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const
 {
-    // TODO
+    if (!sourceModel()) {
+        return false;
+    }
+    if (source_left.isValid() && source_right.isValid()) {
+        const int left = sourceModel()->data(source_left, LdapModel::Index).toInt();
+        const int right = sourceModel()->data(source_right, LdapModel::Index).toInt();
+        return left < right;
+    } else {
+        return false;
+    }
     return true;
 }
 
