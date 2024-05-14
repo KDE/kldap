@@ -26,8 +26,8 @@ void LdapModel::init()
     KConfig *config = KLDAPCore::LdapClientSearchConfig::config();
     KConfigGroup group(config, QStringLiteral("LDAP"));
 
-    int count = group.readEntry("NumSelectedHosts", 0);
-    for (int i = 0; i < count; ++i) {
+    const int countSelectedHost = group.readEntry("NumSelectedHosts", 0);
+    for (int i = 0; i < countSelectedHost; ++i) {
         auto job = new KLDAPCore::LdapClientSearchConfigReadConfigJob(this);
         connect(job, &KLDAPCore::LdapClientSearchConfigReadConfigJob::configLoaded, this, [this, i](const KLDAPCore::LdapServer &server) {
             mLdapServerInfo.append({true, i, server});
@@ -41,11 +41,11 @@ void LdapModel::init()
         job->start();
     }
 
-    count = group.readEntry("NumHosts", 0);
-    for (int i = 0; i < count; ++i) {
+    const int countUnselectedHost = group.readEntry("NumHosts", 0);
+    for (int i = 0; i < countUnselectedHost; ++i) {
         auto job = new KLDAPCore::LdapClientSearchConfigReadConfigJob(this);
-        connect(job, &KLDAPCore::LdapClientSearchConfigReadConfigJob::configLoaded, this, [this, i](const KLDAPCore::LdapServer &server) {
-            mLdapServerInfo.append({false, i, server});
+        connect(job, &KLDAPCore::LdapClientSearchConfigReadConfigJob::configLoaded, this, [this, i, countSelectedHost](const KLDAPCore::LdapServer &server) {
+            mLdapServerInfo.append({false, i + countSelectedHost, server});
             // TODO improve it
             beginResetModel();
             endResetModel();
