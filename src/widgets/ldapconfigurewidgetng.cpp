@@ -66,10 +66,10 @@ void LdapConfigureWidgetNg::slotAddHost()
 void LdapConfigureWidgetNg::slotSelectionChanged()
 {
     const auto nbItems{mHostListView->selectionModel()->selectedRows().count()};
-#if 0
-    bool state = (item != nullptr);
+    bool state = (nbItems >= 1);
     mEditButton->setEnabled(state);
     mRemoveButton->setEnabled(state);
+#if 0
     mDownButton->setEnabled(item && (mHostListView->row(item) != (mHostListView->count() - 1)));
     mUpButton->setEnabled(item && (mHostListView->row(item) != 0));
 #endif
@@ -111,16 +111,18 @@ void LdapConfigureWidgetNg::slotRemoveHost()
     if (!mHostListView->selectionModel()->hasSelection()) {
         return;
     }
-#if 0
+    const QModelIndex index = mHostListView->selectionModel()->selectedRows().constFirst();
+    const QModelIndex modelIndex = mHostListView->model()->index(index.row(), KLDAPCore::LdapModel::Server);
+    KLDAPCore::LdapServer server = modelIndex.data().value<KLDAPCore::LdapServer>();
     const int answer = KMessageBox::questionTwoActions(this,
-                                                       i18n("Do you want to remove setting for host \"%1\"?", ldapItem->server().host()),
+                                                       i18n("Do you want to remove setting for host \"%1\"?", server.host()),
                                                        i18n("Remove Host"),
                                                        KStandardGuiItem::remove(),
                                                        KStandardGuiItem::cancel());
     if (answer == KMessageBox::SecondaryAction) {
         return;
     }
-
+#if 0
     delete mHostListView->takeItem(mHostListView->currentRow());
 
     slotSelectionChanged(mHostListView->currentItem());
@@ -224,6 +226,7 @@ void LdapConfigureWidgetNg::initGUI()
     mHostListView->setModel(mLdapSortProxyModel);
     mHostListView->setColumnHidden(KLDAPCore::LdapModel::Activities, true);
     mHostListView->setColumnHidden(KLDAPCore::LdapModel::Index, true);
+    mHostListView->setColumnHidden(KLDAPCore::LdapModel::Server, true);
 
     hBoxHBoxLayout->addWidget(mHostListView);
 

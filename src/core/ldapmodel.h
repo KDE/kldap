@@ -21,7 +21,8 @@ public:
         Name,
         Index,
         Activities,
-        LastColumn = Activities,
+        Server,
+        LastColumn = Server,
     };
 
     struct ServerInfo {
