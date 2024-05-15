@@ -121,8 +121,7 @@ QVariant LdapModel::data(const QModelIndex &index, int role) const
     case Server:
         return QVariant::fromValue(serverInfo.mServer);
     case Activities:
-        // TODO
-        return {};
+        return serverInfo.mServer.activities();
     }
     return {};
 }
