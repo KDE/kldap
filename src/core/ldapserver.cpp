@@ -35,6 +35,7 @@ public:
     TLSRequireCertificate mTLSRequireCertificate;
     LdapUrl::Scope mScope;
     int mCompletionWeight = -1;
+    QStringList mActivities;
 };
 
 LdapServer::LdapServer()
@@ -86,6 +87,7 @@ void LdapServer::clear()
     d->mTimeout = 0;
     d->mSizeLimit = d->mTimeLimit = d->mPageSize = 0;
     d->mCompletionWeight = -1;
+    d->mActivities.clear();
 }
 
 QString LdapServer::host() const
@@ -414,6 +416,16 @@ void LdapServer::setCompletionWeight(int value)
 int LdapServer::completionWeight() const
 {
     return d->mCompletionWeight;
+}
+
+void LdapServer::setActivities(const QStringList &lst)
+{
+    d->mActivities = lst;
+}
+
+QStringList LdapServer::activities() const
+{
+    return d->mActivities;
 }
 
 QDebug operator<<(QDebug d, const KLDAPCore::LdapServer &t)

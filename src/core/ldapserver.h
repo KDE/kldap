@@ -307,6 +307,9 @@ public:
     void setCompletionWeight(int value);
     [[nodiscard]] int completionWeight() const;
 
+    void setActivities(const QStringList &lst);
+    [[nodiscard]] QStringList activities() const;
+
 private:
     class LdapServerPrivate;
     std::unique_ptr<LdapServerPrivate> const d;
