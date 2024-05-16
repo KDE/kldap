@@ -112,37 +112,16 @@ void LdapConfigureWidgetNg::slotRemoveHost()
     if (answer == KMessageBox::SecondaryAction) {
         return;
     }
-#if 0
-    slotSelectionChanged(mHostListView->currentItem());
-#endif
     mLdapModel->removeServer(index.row());
     Q_EMIT changed(true);
 }
 
-#if 0
-static void swapItems(LdapWidgetItem *item, LdapWidgetItem *other)
-{
-    KLDAPCore::LdapServer server = item->server();
-    bool isActive = item->isActive();
-    item->setServer(other->server());
-    item->setIsActive(other->isActive());
-    item->setCheckState(other->isActive() ? Qt::Checked : Qt::Unchecked);
-    other->setServer(server);
-    other->setIsActive(isActive);
-    other->setCheckState(isActive ? Qt::Checked : Qt::Unchecked);
-}
-#endif
 void LdapConfigureWidgetNg::slotMoveUp()
 {
     if (!mHostListView->selectionModel()->hasSelection()) {
         return;
     }
 #if 0
-    const QList<QListWidgetItem *> selectedItems = mHostListView->selectedItems();
-    if (selectedItems.isEmpty()) {
-        return;
-    }
-
     LdapWidgetItem *item = static_cast<LdapWidgetItem *>(mHostListView->selectedItems().first());
     if (!item) {
         return;
@@ -168,11 +147,6 @@ void LdapConfigureWidgetNg::slotMoveDown()
         return;
     }
 #if 0
-    const QList<QListWidgetItem *> selectedItems = mHostListView->selectedItems();
-    if (selectedItems.isEmpty()) {
-        return;
-    }
-
     LdapWidgetItem *item = static_cast<LdapWidgetItem *>(mHostListView->selectedItems().first());
     if (!item) {
         return;
