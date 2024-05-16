@@ -125,18 +125,14 @@ msgid "Check all servers that should be used:"
 msgstr "Zvolte všechny servery, které se mají použít:"
 
 #: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:248
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Add Host"
+#, kde-format
 msgid "&Add Host…"
-msgstr "Přidat hostitele"
+msgstr ""
 
 #: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:250
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Edit Host"
+#, kde-format
 msgid "&Edit Host…"
-msgstr "Upravit hostitele"
+msgstr ""
 
 #: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:253
 #, kde-format
@@ -298,9 +294,3 @@ msgstr "LDAP dotaz"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "Neznámá chyba při připojování k %1"
-
-#~ msgid "&Add Host..."
-#~ msgstr "Přid&at hostitele..."
-
-#~ msgid "&Edit Host..."
-#~ msgstr "Upravit hostit&ele..."
