@@ -78,10 +78,7 @@ void LdapConfigureWidgetNg::slotSelectionChanged()
     const QModelIndex index = mHostListView->selectionModel()->selectedRows().constFirst();
     const int initialRow = index.row();
     mUpButton->setEnabled(initialRow != 0);
-
-#if 0
-    mDownButton->setEnabled(item && (mHostListView->row(item) != (mHostListView->count() - 1)));
-#endif
+    mDownButton->setEnabled(initialRow != (mHostListView->model()->rowCount() - 1));
 }
 
 void LdapConfigureWidgetNg::slotEditHost()
