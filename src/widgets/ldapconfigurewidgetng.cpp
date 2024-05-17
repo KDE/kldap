@@ -71,9 +71,16 @@ void LdapConfigureWidgetNg::slotSelectionChanged()
     bool state = (nbItems >= 1);
     mEditButton->setEnabled(state);
     mRemoveButton->setEnabled(state);
+
+    if (!mHostListView->selectionModel()->hasSelection()) {
+        return;
+    }
+    const QModelIndex index = mHostListView->selectionModel()->selectedRows().constFirst();
+    const int initialRow = index.row();
+    mUpButton->setEnabled(initialRow != 0);
+
 #if 0
     mDownButton->setEnabled(item && (mHostListView->row(item) != (mHostListView->count() - 1)));
-    mUpButton->setEnabled(item && (mHostListView->row(item) != 0));
 #endif
 }
 
