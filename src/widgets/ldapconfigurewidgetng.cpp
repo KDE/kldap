@@ -121,11 +121,13 @@ void LdapConfigureWidgetNg::slotMoveUp()
     if (!mHostListView->selectionModel()->hasSelection()) {
         return;
     }
-#if 0
-    LdapWidgetItem *item = static_cast<LdapWidgetItem *>(mHostListView->selectedItems().first());
-    if (!item) {
+    const QModelIndex index = mHostListView->selectionModel()->selectedRows().constFirst();
+    const int initialRow = index.row();
+
+    if (initialRow == 0) {
         return;
     }
+#if 0
 
     auto above = static_cast<LdapWidgetItem *>(mHostListView->item(mHostListView->row(item) - 1));
     if (!above) {
@@ -146,6 +148,9 @@ void LdapConfigureWidgetNg::slotMoveDown()
     if (!mHostListView->selectionModel()->hasSelection()) {
         return;
     }
+    const QModelIndex index = mHostListView->selectionModel()->selectedRows().constFirst();
+    const int initialRow = index.row();
+
 #if 0
     LdapWidgetItem *item = static_cast<LdapWidgetItem *>(mHostListView->selectedItems().first());
     if (!item) {
