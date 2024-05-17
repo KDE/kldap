@@ -131,6 +131,11 @@ void LdapConfigureWidgetNg::slotMoveUp()
     if (initialRow == 0) {
         return;
     }
+    // TODO mLdapModel->setData(index, initialRow - 1, KLDAPCore::LdapModel::Index);
+    // TODO next item
+    // const QModelIndex previewIndex = mHostListView->selectionModel()->selectedRows().constFirst();
+    // TODO mLdapModel->setData(previewIndex, initialRow, KLDAPCore::LdapModel::Index);
+
 #if 0
 
     auto above = static_cast<LdapWidgetItem *>(mHostListView->item(mHostListView->row(item) - 1));
@@ -157,7 +162,10 @@ void LdapConfigureWidgetNg::slotMoveDown()
     if (initialRow != (mHostListView->model()->rowCount() - 1)) {
         return;
     }
-
+    // TODO mLdapModel->setData(index, initialRow + 1, KLDAPCore::LdapModel::Index);
+    // TODO next item
+    // const QModelIndex nextIndex = mHostListView->selectionModel()->selectedRows().constFirst();
+    // TODO mLdapModel->setData(nextIndex, initialRow, KLDAPCore::LdapModel::Index);
 #if 0
     LdapWidgetItem *item = static_cast<LdapWidgetItem *>(mHostListView->selectedItems().first());
     if (!item) {
