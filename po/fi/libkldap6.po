@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-15 00:39+0000\n"
+"POT-Creation-Date: 2024-05-17 00:39+0000\n"
 "PO-Revision-Date: 2021-08-22 21:01+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -119,26 +119,26 @@ msgstr "Haluatko poistaa asetuksen palvelimelta ”%1”?"
 msgid "Remove Host"
 msgstr "Poista palvelin"
 
-#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:201
+#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:175
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Valitse kaikki palvelimet, joita tulisi käyttää:"
 
-#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:248
+#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:222
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Add Host"
 msgid "&Add Host…"
 msgstr "Lisää palvelin"
 
-#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:250
+#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:224
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Edit Host"
 msgid "&Edit Host…"
 msgstr "Muokkaa palvelinta"
 
-#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:253
+#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:227
 #, kde-format
 msgid "&Remove Host"
 msgstr "P&oista palvelin"

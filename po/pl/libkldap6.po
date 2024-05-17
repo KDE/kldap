@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-15 00:39+0000\n"
+"POT-Creation-Date: 2024-05-17 00:39+0000\n"
 "PO-Revision-Date: 2021-08-08 09:01+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -118,26 +118,26 @@ msgstr "Czy usunąć ustawienia dla gospodarza \"%1\"?"
 msgid "Remove Host"
 msgstr "Usuń gospodarza"
 
-#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:201
+#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:175
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Sprawdź wszystkie serwery, które powinny być użyte:"
 
-#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:248
+#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:222
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Add Host"
 msgid "&Add Host…"
 msgstr "Dodaj gospodarza"
 
-#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:250
+#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:224
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Edit Host"
 msgid "&Edit Host…"
 msgstr "Zmień gospodarza"
 
-#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:253
+#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:227
 #, kde-format
 msgid "&Remove Host"
 msgstr "Usuń gospoda&rza"

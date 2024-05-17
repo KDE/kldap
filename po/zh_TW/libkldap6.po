@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-15 00:39+0000\n"
+"POT-Creation-Date: 2024-05-17 00:39+0000\n"
 "PO-Revision-Date: 2024-05-09 07:13+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -118,22 +118,22 @@ msgstr "您確定要刪除主機 \"%1\" 的設定嗎？"
 msgid "Remove Host"
 msgstr "移除主機"
 
-#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:201
+#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:175
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "勾選所有要使用的伺服器："
 
-#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:248
+#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:222
 #, kde-format
 msgid "&Add Host…"
 msgstr "新增主機(&A)…"
 
-#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:250
+#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:224
 #, kde-format
 msgid "&Edit Host…"
 msgstr "編輯主機(&E)…"
 
-#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:253
+#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:227
 #, kde-format
 msgid "&Remove Host"
 msgstr "移除主機(&R)"
