@@ -28,14 +28,14 @@ public:
     struct ServerInfo {
         bool enabled = false;
         int index = 0;
-        KLDAPCore::LdapServer mServer;
+        KLDAPCore::LdapServer server;
     };
 
     [[nodiscard]] QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
     [[nodiscard]] int rowCount(const QModelIndex &parent = QModelIndex()) const override;
     [[nodiscard]] int columnCount(const QModelIndex &parent) const override;
     [[nodiscard]] QVariant headerData(int section, Qt::Orientation orientation, int role) const override;
-    [[nodiscard]] bool setData(const QModelIndex &modelIndex, const QVariant &value, int role) override;
+    bool setData(const QModelIndex &modelIndex, const QVariant &value, int role) override;
 
     [[nodiscard]] QList<ServerInfo> ldapServerInfo() const;
     void setLdapServerInfo(const QList<ServerInfo> &newLdapServerInfo);

@@ -72,7 +72,7 @@ void LdapModel::save()
             job->setActive(true);
             job->setConfig(group);
             job->setServerIndex(selected);
-            job->setServer(serverInfo.mServer);
+            job->setServer(serverInfo.server);
             job->start();
             selected++;
         } else {
@@ -80,7 +80,7 @@ void LdapModel::save()
             job->setActive(false);
             job->setConfig(group);
             job->setServerIndex(unselected);
-            job->setServer(serverInfo.mServer);
+            job->setServer(serverInfo.server);
             job->start();
             unselected++;
         }
@@ -115,13 +115,13 @@ QVariant LdapModel::data(const QModelIndex &index, int role) const
     }
     switch (static_cast<LdapRoles>(index.column())) {
     case Name:
-        return serverInfo.mServer.host();
+        return serverInfo.server.host();
     case Index:
         return serverInfo.index;
     case Server:
-        return QVariant::fromValue(serverInfo.mServer);
+        return QVariant::fromValue(serverInfo.server);
     case Activities:
-        return serverInfo.mServer.activities();
+        return serverInfo.server.activities();
     }
     return {};
 }
@@ -155,7 +155,13 @@ bool LdapModel::setData(const QModelIndex &modelIndex, const QVariant &value, in
     case Server: {
         const QModelIndex newIndex = index(modelIndex.row(), Server);
         Q_EMIT dataChanged(newIndex, newIndex);
-        serverInfo.mServer = value.value<KLDAPCore::LdapServer>();
+        serverInfo.server = value.value<KLDAPCore::LdapServer>();
+        return true;
+    }
+    case Index: {
+        const QModelIndex newIndex = index(modelIndex.row(), Index);
+        Q_EMIT dataChanged(newIndex, newIndex);
+        serverInfo.index = value.toInt();
         return true;
     }
     default:
