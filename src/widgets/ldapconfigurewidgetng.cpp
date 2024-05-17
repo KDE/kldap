@@ -154,6 +154,9 @@ void LdapConfigureWidgetNg::slotMoveDown()
     }
     const QModelIndex index = mHostListView->selectionModel()->selectedRows().constFirst();
     const int initialRow = index.row();
+    if (initialRow != (mHostListView->model()->rowCount() - 1)) {
+        return;
+    }
 
 #if 0
     LdapWidgetItem *item = static_cast<LdapWidgetItem *>(mHostListView->selectedItems().first());
