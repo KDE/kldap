@@ -86,9 +86,6 @@ void LdapConfigureWidgetNg::slotEditHost()
     if (!mHostListView->selectionModel()->hasSelection()) {
         return;
     }
-    if (!mHostListView->selectionModel()->hasSelection()) {
-        return;
-    }
     const QModelIndex index = mHostListView->selectionModel()->selectedRows().constFirst();
     const QModelIndex modelIndex = mHostListView->model()->index(index.row(), KLDAPCore::LdapModel::Server);
     KLDAPCore::LdapServer server = modelIndex.data().value<KLDAPCore::LdapServer>();
