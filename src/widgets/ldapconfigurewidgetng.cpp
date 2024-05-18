@@ -236,12 +236,12 @@ void LdapConfigureWidgetNg::initGUI()
     upDownBoxVBoxLayout->setStretchFactor(spacer, 100);
 
     auto buttons = new QDialogButtonBox(this);
-    QPushButton *add = buttons->addButton(i18n("&Add Host…"), QDialogButtonBox::ActionRole);
+    QPushButton *add = buttons->addButton(i18nc("@action:button", "&Add Host…"), QDialogButtonBox::ActionRole);
     connect(add, &QPushButton::clicked, this, &LdapConfigureWidgetNg::slotAddHost);
-    mEditButton = buttons->addButton(i18n("&Edit Host…"), QDialogButtonBox::ActionRole);
+    mEditButton = buttons->addButton(i18nc("@action:button", "&Edit Host…"), QDialogButtonBox::ActionRole);
     connect(mEditButton, &QPushButton::clicked, this, &LdapConfigureWidgetNg::slotEditHost);
     mEditButton->setEnabled(false);
-    mRemoveButton = buttons->addButton(i18n("&Remove Host"), QDialogButtonBox::ActionRole);
+    mRemoveButton = buttons->addButton(i18nc("@action:button", "&Remove Host"), QDialogButtonBox::ActionRole);
     connect(mRemoveButton, &QPushButton::clicked, this, &LdapConfigureWidgetNg::slotRemoveHost);
     mRemoveButton->setEnabled(false);
 
