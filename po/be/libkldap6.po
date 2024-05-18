@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 86ff119b1606fcaa910d6b44fc14b611\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-17 00:39+0000\n"
+"POT-Creation-Date: 2024-05-18 00:39+0000\n"
 "PO-Revision-Date: 2023-01-19 13:17\n"
 "Last-Translator: Darafei Praliaskouski <komzpa@licei2.com>\n"
 "Language-Team: Belarusian\n"
@@ -106,42 +106,42 @@ msgctxt "@title:window"
 msgid "Add Host"
 msgstr "Дадаць хост"
 
-#: widgets/ldapconfigurewidget.cpp:97 widgets/ldapconfigurewidgetng.cpp:92
+#: widgets/ldapconfigurewidget.cpp:97 widgets/ldapconfigurewidgetng.cpp:96
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "Рэдагаваць хост"
 
-#: widgets/ldapconfigurewidget.cpp:114 widgets/ldapconfigurewidgetng.cpp:108
+#: widgets/ldapconfigurewidget.cpp:114 widgets/ldapconfigurewidgetng.cpp:112
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Хочаце выдаліць налады для хоста \"%1\"?"
 
-#: widgets/ldapconfigurewidget.cpp:115 widgets/ldapconfigurewidgetng.cpp:109
+#: widgets/ldapconfigurewidget.cpp:115 widgets/ldapconfigurewidgetng.cpp:113
 #, kde-format
 msgid "Remove Host"
 msgstr "Выдаліць хост"
 
-#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:175
+#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:195
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Адзначце серверы, якія павінны выкарыстоўвацца:"
 
-#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:222
+#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:242
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Add Host"
 msgid "&Add Host…"
 msgstr "Дадаць хост"
 
-#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:224
+#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:244
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Edit Host"
 msgid "&Edit Host…"
 msgstr "Рэдагаваць хост"
 
-#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:227
+#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:247
 #, kde-format
 msgid "&Remove Host"
 msgstr "&Выдаліць хост"
