@@ -120,25 +120,22 @@ msgid "Check all servers that should be used:"
 msgstr "勾选要使用的所有服务器："
 
 #: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:239
-#, fuzzy, kde-format
-#| msgid "&Add Host…"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
-msgstr "添加主机(&A)…"
+msgstr ""
 
 #: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:241
-#, fuzzy, kde-format
-#| msgid "&Edit Host…"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
-msgstr "编辑主机(&E)…"
+msgstr ""
 
 #: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:244
-#, fuzzy, kde-format
-#| msgid "&Remove Host"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
-msgstr "删除主机(&R)"
+msgstr ""
 
 #: widgets/ldapconfigwidget.cpp:94
 #, kde-format

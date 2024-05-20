@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-19 00:39+0000\n"
-"PO-Revision-Date: 2024-05-08 12:40+0200\n"
+"PO-Revision-Date: 2024-05-19 16:36+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -129,22 +129,19 @@ msgid "Check all servers that should be used:"
 msgstr "Marque todos los servidores que se van a usar:"
 
 #: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:239
-#, fuzzy, kde-format
-#| msgid "&Add Host…"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
 msgstr "&Añadir servidor..."
 
 #: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:241
-#, fuzzy, kde-format
-#| msgid "&Edit Host…"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
 msgstr "&Editar servidor..."
 
 #: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:244
-#, fuzzy, kde-format
-#| msgid "&Remove Host"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
 msgstr "E&liminar servidor"

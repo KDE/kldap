@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: libkldap5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-19 00:39+0000\n"
-"PO-Revision-Date: 2024-05-08 09:21+0300\n"
+"PO-Revision-Date: 2024-05-19 09:33+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian\n"
 "Language: uk\n"
@@ -130,22 +130,19 @@ msgid "Check all servers that should be used:"
 msgstr "Позначте всі сервери, які слід використовувати:"
 
 #: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:239
-#, fuzzy, kde-format
-#| msgid "&Add Host…"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
 msgstr "&Додати вузол…"
 
 #: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:241
-#, fuzzy, kde-format
-#| msgid "&Edit Host…"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
 msgstr "&Змінити вузол…"
 
 #: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:244
-#, fuzzy, kde-format
-#| msgid "&Remove Host"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
 msgstr "&Вилучити вузол"
