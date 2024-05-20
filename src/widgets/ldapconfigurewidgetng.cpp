@@ -130,9 +130,9 @@ void LdapConfigureWidgetNg::slotMoveUp()
     }
 
     const QModelIndex modelIndex = mHostListView->model()->index(index.row(), KLDAPCore::LdapModel::Index);
-    mHostListView->model()->setData(modelIndex, initialRow - 1);
 
-    const QModelIndex previewIndex = mHostListView->model()->index(index.row() + 1, KLDAPCore::LdapModel::Index);
+    const QModelIndex previewIndex = mHostListView->model()->index(index.row() - 1, KLDAPCore::LdapModel::Index);
+    mHostListView->model()->setData(modelIndex, initialRow - 1);
     mHostListView->model()->setData(previewIndex, initialRow);
 #if 0
 
