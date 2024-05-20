@@ -128,11 +128,12 @@ void LdapConfigureWidgetNg::slotMoveUp()
     if (initialRow == 0) {
         return;
     }
-    // TODO mLdapModel->setData(index, initialRow - 1, KLDAPCore::LdapModel::Index);
-    // TODO next item
-    // const QModelIndex previewIndex = mHostListView->selectionModel()->selectedRows().constFirst();
-    // TODO mLdapModel->setData(previewIndex, initialRow, KLDAPCore::LdapModel::Index);
 
+    const QModelIndex modelIndex = mHostListView->model()->index(index.row(), KLDAPCore::LdapModel::Index);
+    mHostListView->model()->setData(modelIndex, initialRow - 1);
+
+    const QModelIndex previewIndex = mHostListView->model()->index(index.row() + 1, KLDAPCore::LdapModel::Index);
+    mHostListView->model()->setData(previewIndex, initialRow);
 #if 0
 
     auto above = static_cast<LdapWidgetItem *>(mHostListView->item(mHostListView->row(item) - 1));
