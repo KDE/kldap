@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-19 00:39+0000\n"
-"PO-Revision-Date: 2024-05-09 22:01+0100\n"
+"POT-Creation-Date: 2024-05-21 00:39+0000\n"
+"PO-Revision-Date: 2024-05-20 13:35+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -117,28 +117,25 @@ msgstr "Ĉu vi volas forigi agordon por gastiganto \"%1\"?"
 msgid "Remove Host"
 msgstr "Forigi Gastiganton"
 
-#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:192
+#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:193
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Kontroli ĉiujn servilojn, kiuj devus esti uzataj:"
 
-#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:239
-#, fuzzy, kde-format
-#| msgid "&Add Host…"
+#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:240
+#, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
 msgstr "&Aldoni Gastiganton…"
 
-#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:241
-#, fuzzy, kde-format
-#| msgid "&Edit Host…"
+#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:242
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
 msgstr "R&edakti Gastiganton…"
 
-#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:244
-#, fuzzy, kde-format
-#| msgid "&Remove Host"
+#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:245
+#, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
 msgstr "Fo&rigi Gastiganton"

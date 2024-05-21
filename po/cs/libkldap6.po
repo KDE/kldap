@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-19 00:39+0000\n"
+"POT-Creation-Date: 2024-05-21 00:39+0000\n"
 "PO-Revision-Date: 2021-07-23 18:11+0200\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -119,33 +119,28 @@ msgstr "Chcete odstranit nastavení pro hostitele \"%1\"?"
 msgid "Remove Host"
 msgstr "Odstranit hostitele"
 
-#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:192
+#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:193
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Zvolte všechny servery, které se mají použít:"
 
-#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:239
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Add Host"
+#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:240
+#, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
-msgstr "Přidat hostitele"
+msgstr ""
 
-#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:241
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Edit Host"
+#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:242
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
-msgstr "Upravit hostitele"
+msgstr ""
 
-#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:244
-#, fuzzy, kde-format
-#| msgid "&Remove Host"
+#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:245
+#, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
-msgstr "Odst&ranit hostitele"
+msgstr ""
 
 #: widgets/ldapconfigwidget.cpp:94
 #, kde-format

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-19 00:39+0000\n"
+"POT-Creation-Date: 2024-05-21 00:39+0000\n"
 "PO-Revision-Date: 2024-05-19 13:32+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -121,24 +121,24 @@ msgstr "Wilt u de instellingen voor host \"%1\" verwijderen?"
 msgid "Remove Host"
 msgstr "Host verwijderen"
 
-#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:192
+#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:193
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Selecteer alle servers die zouden moeten worden gebruikt:"
 
-#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:239
+#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:240
 #, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
 msgstr "Host &toevoegen…"
 
-#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:241
+#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:242
 #, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
 msgstr "Host b&ewerken…"
 
-#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:244
+#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:245
 #, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"

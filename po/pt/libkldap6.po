@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-19 00:39+0000\n"
+"POT-Creation-Date: 2024-05-21 00:39+0000\n"
 "PO-Revision-Date: 2021-07-24 20:14+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-doc@kde.org>\n"
@@ -118,12 +118,12 @@ msgstr "Deseja remover a definição da máquina \"%1\"?"
 msgid "Remove Host"
 msgstr "Remover a Máquina"
 
-#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:192
+#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:193
 #, kde-format
 msgid "Check all servers that should be used:"
 msgstr "Assinale todos os servidores que deverá usar:"
 
-#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:239
+#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:240
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Add Host"
@@ -131,7 +131,7 @@ msgctxt "@action:button"
 msgid "&Add Host…"
 msgstr "Adicionar uma Máquina"
 
-#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:241
+#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:242
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Edit Host"
@@ -139,7 +139,7 @@ msgctxt "@action:button"
 msgid "&Edit Host…"
 msgstr "Editar a Máquina"
 
-#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:244
+#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:245
 #, fuzzy, kde-format
 #| msgid "&Remove Host"
 msgctxt "@action:button"
