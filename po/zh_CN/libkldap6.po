@@ -132,7 +132,7 @@ msgstr "编辑主机(&E)..."
 #: widgets/ldapconfigurewidget.cpp:311
 #, kde-format
 msgid "&Remove Host"
-msgstr ""
+msgstr "移除主机(&R)"
 
 #: widgets/ldapconfigwidget.cpp:94
 #, kde-format
