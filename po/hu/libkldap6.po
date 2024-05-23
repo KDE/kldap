@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-21 00:39+0000\n"
-"PO-Revision-Date: 2024-02-12 11:48+0100\n"
+"PO-Revision-Date: 2024-05-22 10:42+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.01.95\n"
+"X-Generator: Lokalize 24.07.70\n"
 
 #: core/ldapconnection.cpp:126
 #, kde-format
@@ -125,27 +125,22 @@ msgid "Check all servers that should be used:"
 msgstr "Az összes használni kívánt kiszolgáló ellenőrzése:"
 
 #: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:240
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Add Host"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
-msgstr "Gépnév hozzáadása"
+msgstr "Gépnév hozzá&adása…"
 
 #: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:242
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Edit Host"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
-msgstr "Gépnév szerkesztése"
+msgstr "Gépnév sz &erkesztése…"
 
 #: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:245
-#, fuzzy, kde-format
-#| msgid "&Remove Host"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
-msgstr "Gépnév eltá&volítása"
+msgstr "Gépnév eltá&volítása…"
 
 #: widgets/ldapconfigwidget.cpp:94
 #, kde-format
