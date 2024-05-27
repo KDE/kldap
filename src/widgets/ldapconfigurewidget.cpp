@@ -268,7 +268,7 @@ void LdapConfigureWidget::initGUI()
     mainLayout->setObjectName("layout"_L1);
 
     // Contents of the QVGroupBox: label and hbox
-    auto label = new QLabel(i18n("Check all servers that should be used:"), this);
+    auto label = new QLabel(i18nc("@label:textbox", "Check all servers that should be used:"), this);
     mainLayout->addWidget(label);
 
     auto hBox = new QWidget(this);
