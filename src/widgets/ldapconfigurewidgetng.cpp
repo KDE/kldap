@@ -135,17 +135,8 @@ void LdapConfigureWidgetNg::slotMoveUp()
     mHostListView->model()->setData(modelIndex, initialRow - 1);
     mHostListView->model()->setData(previewIndex, initialRow);
 #if 0
-
-    auto above = static_cast<LdapWidgetItem *>(mHostListView->item(mHostListView->row(item) - 1));
-    if (!above) {
-        return;
-    }
-
-    swapItems(item, above);
-
     mHostListView->setCurrentItem(above);
     above->setSelected(true);
-
 #endif
     Q_EMIT changed(true);
 }
@@ -165,17 +156,6 @@ void LdapConfigureWidgetNg::slotMoveDown()
     // const QModelIndex nextIndex = mHostListView->selectionModel()->selectedRows().constFirst();
     // TODO mLdapModel->setData(nextIndex, initialRow, KLDAPCore::LdapModel::Index);
 #if 0
-    LdapWidgetItem *item = static_cast<LdapWidgetItem *>(mHostListView->selectedItems().first());
-    if (!item) {
-        return;
-    }
-
-    auto below = static_cast<LdapWidgetItem *>(mHostListView->item(mHostListView->row(item) + 1));
-    if (!below) {
-        return;
-    }
-
-    swapItems(item, below);
 
     mHostListView->setCurrentItem(below);
     below->setSelected(true);
