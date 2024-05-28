@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-21 00:39+0000\n"
+"POT-Creation-Date: 2024-05-28 00:38+0000\n"
 "PO-Revision-Date: 2024-05-20 12:37+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -116,24 +116,26 @@ msgstr "Tu vole remover preferntias pro hospite \"%1\"?"
 msgid "Remove Host"
 msgstr "Remove hospite"
 
-#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:193
-#, kde-format
+#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:173
+#, fuzzy, kde-format
+#| msgid "Check all servers that should be used:"
+msgctxt "@label:textbox"
 msgid "Check all servers that should be used:"
 msgstr "Marca tote servitores que on deberea usar:"
 
-#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:240
+#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:220
 #, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
 msgstr "&Adde hospite…"
 
-#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:242
+#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:222
 #, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
 msgstr "&Modifica hospite…"
 
-#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:245
+#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:225
 #, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"

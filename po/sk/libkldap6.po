@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-21 00:39+0000\n"
+"POT-Creation-Date: 2024-05-28 00:38+0000\n"
 "PO-Revision-Date: 2022-04-18 17:37+0200\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -117,12 +117,14 @@ msgstr "Chcete odstrániť nastavenie pre hostiteľa \"%1\"?"
 msgid "Remove Host"
 msgstr "Odstrániť hostiteľa"
 
-#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:193
-#, kde-format
+#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:173
+#, fuzzy, kde-format
+#| msgid "Check all servers that should be used:"
+msgctxt "@label:textbox"
 msgid "Check all servers that should be used:"
 msgstr "Skontrolovať všetky servery, ktoré sa majú použiť:"
 
-#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:240
+#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:220
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Add Host"
@@ -130,7 +132,7 @@ msgctxt "@action:button"
 msgid "&Add Host…"
 msgstr "Pridať hostiteľa"
 
-#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:242
+#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:222
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Edit Host"
@@ -138,7 +140,7 @@ msgctxt "@action:button"
 msgid "&Edit Host…"
 msgstr "Upraviť hostiteľa"
 
-#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:245
+#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:225
 #, fuzzy, kde-format
 #| msgid "&Remove Host"
 msgctxt "@action:button"
