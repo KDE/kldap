@@ -117,7 +117,7 @@ msgstr "删除主机"
 #: widgets/ldapconfigurewidget.cpp:272
 #, kde-format
 msgid "Check all servers that should be used:"
-msgstr "勾选要使用的所有服务器："
+msgstr ""
 
 #: widgets/ldapconfigurewidget.cpp:306
 #, kde-format
