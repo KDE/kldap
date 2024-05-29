@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-28 00:38+0000\n"
-"PO-Revision-Date: 2024-05-19 16:36+0200\n"
+"PO-Revision-Date: 2024-05-28 16:43+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -92,14 +92,14 @@ msgid ""
 "LDAP support not compiled in. Please recompile libkldap with the OpenLDAP "
 "(or compatible) client libraries, or complain to your distribution packagers."
 msgstr ""
-"No se compiló el reconocimiento de LDAP. Por favor, vuelva a compilar "
-"libkldap con las bibliotecas cliente de OpenLDAP (o compatible), o consulte "
-"a los empaquetadores de su distribución."
+"No se compiló el reconocimiento de LDAP. Vuelva a compilar libkldap con las "
+"bibliotecas cliente de OpenLDAP (o compatible), o consulte a los "
+"empaquetadores de su distribución."
 
 #: core/ldapsearch.cpp:222
 #, kde-format
 msgid "Cannot access to server. Please reconfigure it."
-msgstr "No se puede acceder al servidor. Por favor, reconfigúrelo."
+msgstr "No se puede acceder al servidor. Vuelva a configurarlo."
 
 #: widgets/addhostdialog.cpp:67
 #, kde-format
@@ -124,8 +124,7 @@ msgid "Remove Host"
 msgstr "Eliminar servidor"
 
 #: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:173
-#, fuzzy, kde-format
-#| msgid "Check all servers that should be used:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Check all servers that should be used:"
 msgstr "Marque todos los servidores que se van a usar:"
