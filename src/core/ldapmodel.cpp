@@ -160,8 +160,8 @@ bool LdapModel::setData(const QModelIndex &modelIndex, const QVariant &value, in
     }
     case Index: {
         const QModelIndex newIndex = index(modelIndex.row(), Index);
-        Q_EMIT dataChanged(newIndex, newIndex);
         serverInfo.index = value.toInt();
+        Q_EMIT dataChanged(newIndex, newIndex);
         return true;
     }
     default:
@@ -217,8 +217,7 @@ void LdapModel::removeServer(int index)
 
 void LdapModel::insertServer(const KLDAPCore::LdapServer &server)
 {
-    beginInsertRows(QModelIndex(), 0, mLdapServerInfo.count() - 1);
-    // TODO verify it
+    beginInsertRows(QModelIndex(), mLdapServerInfo.count() - 1, mLdapServerInfo.count() - 1);
     mLdapServerInfo.append({true, 0, server});
     endInsertRows();
 }
