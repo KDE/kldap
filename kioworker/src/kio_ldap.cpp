@@ -46,7 +46,7 @@ int kdemain(int argc, char **argv)
     QCoreApplication app(argc, argv); // needed for QSocketNotifier
     app.setApplicationName(QStringLiteral("kio_ldap"));
 
-    qCDebug(KLDAP_LOG) << "Starting kio_ldap instance";
+    qCDebug(KLDAP_KIO_WORKERS_LOG) << "Starting kio_ldap instance";
 
     if (argc != 4) {
         qCritical() << "Usage kio_ldap protocol pool app";
@@ -57,7 +57,7 @@ int kdemain(int argc, char **argv)
     LDAPProtocol worker(argv[1], argv[2], argv[3]);
     worker.dispatchLoop();
 
-    qCDebug(KLDAP_LOG) << "Done";
+    qCDebug(KLDAP_KIO_WORKERS_LOG) << "Done";
     return 0;
 }
 
@@ -69,7 +69,7 @@ LDAPProtocol::LDAPProtocol(const QByteArray &protocol, const QByteArray &pool, c
     , mProtocol(protocol)
 {
     mOp.setConnection(mConn);
-    qCDebug(KLDAP_LOG) << "LDAPProtocol::LDAPProtocol (" << protocol << ")";
+    qCDebug(KLDAP_KIO_WORKERS_LOG) << "LDAPProtocol::LDAPProtocol (" << protocol << ")";
 }
 
 LDAPProtocol::~LDAPProtocol()
@@ -92,7 +92,7 @@ KIO::WorkerResult LDAPProtocol::LDAPErr(int err)
         return KIO::WorkerResult::pass();
     }
 
-    qCDebug(KLDAP_LOG) << "error code: " << err << " msg: " << LdapConnection::errorString(err) << extramsg << "'";
+    qCDebug(KLDAP_KIO_WORKERS_LOG) << "error code: " << err << " msg: " << LdapConnection::errorString(err) << extramsg << "'";
     QString msg;
     msg = mServer.url().toDisplayString();
     if (!extramsg.isEmpty()) {
@@ -173,8 +173,8 @@ void LDAPProtocol::controlsFromMetaData(LdapControls &serverctrls, LdapControls 
     while (hasMetaData(QStringLiteral("SERVER_CTRL%1").arg(i))) {
         const QByteArray val = metaData(QStringLiteral("SERVER_CTRL%1").arg(i)).toUtf8();
         Ldif::splitControl(val, oid, critical, value);
-        qCDebug(KLDAP_LOG) << "server ctrl #" << i << " value: " << val << " oid: " << oid << " critical: " << critical
-                           << " value: " << QString::fromUtf8(value.constData(), value.size());
+        qCDebug(KLDAP_KIO_WORKERS_LOG) << "server ctrl #" << i << " value: " << val << " oid: " << oid << " critical: " << critical
+                                       << " value: " << QString::fromUtf8(value.constData(), value.size());
         LdapControl ctrl(oid, val, critical);
         serverctrls.append(ctrl);
         i++;
@@ -183,8 +183,8 @@ void LDAPProtocol::controlsFromMetaData(LdapControls &serverctrls, LdapControls 
     while (hasMetaData(QStringLiteral("CLIENT_CTRL%1").arg(i))) {
         const QByteArray val = metaData(QStringLiteral("CLIENT_CTRL%1").arg(i)).toUtf8();
         Ldif::splitControl(val, oid, critical, value);
-        qCDebug(KLDAP_LOG) << "client ctrl #" << i << " value: " << val << " oid: " << oid << " critical: " << critical
-                           << " value: " << QString::fromUtf8(value.constData(), value.size());
+        qCDebug(KLDAP_KIO_WORKERS_LOG) << "client ctrl #" << i << " value: " << val << " oid: " << oid << " critical: " << critical
+                                       << " value: " << QString::fromUtf8(value.constData(), value.size());
         LdapControl ctrl(oid, val, critical);
         clientctrls.append(ctrl);
         i++;
@@ -270,7 +270,7 @@ void LDAPProtocol::setHost(const QString &host, quint16 port, const QString &use
     mServer.setUser(user);
     mServer.setPassword(password);
 
-    qCDebug(KLDAP_LOG) << "setHost: " << host << " port: " << port << " user: " << user << " pass: [protected]";
+    qCDebug(KLDAP_KIO_WORKERS_LOG) << "setHost: " << host << " port: " << port << " user: " << user << " pass: [protected]";
 }
 
 KIO::WorkerResult LDAPProtocol::openConnection()
@@ -347,7 +347,7 @@ KIO::WorkerResult LDAPProtocol::openConnection()
         }
     }
 
-    qCDebug(KLDAP_LOG) << "connected!";
+    qCDebug(KLDAP_KIO_WORKERS_LOG) << "connected!";
     return KIO::WorkerResult::pass();
 }
 
@@ -358,7 +358,7 @@ void LDAPProtocol::closeConnection()
     }
     mConnected = false;
 
-    qCDebug(KLDAP_LOG) << "connection closed!";
+    qCDebug(KLDAP_KIO_WORKERS_LOG) << "connection closed!";
 }
 
 /**
@@ -366,7 +366,7 @@ void LDAPProtocol::closeConnection()
  */
 KIO::WorkerResult LDAPProtocol::get(const QUrl &_url)
 {
-    qCDebug(KLDAP_LOG) << "get(" << _url << ")";
+    qCDebug(KLDAP_KIO_WORKERS_LOG) << "get(" << _url << ")";
 
     LdapUrl usrc(_url);
 
@@ -381,7 +381,7 @@ KIO::WorkerResult LDAPProtocol::get(const QUrl &_url)
     if (mServer.pageSize()) {
         LdapControls ctrls = serverctrls;
         ctrls.append(LdapControl::createPageControl(mServer.pageSize()));
-        qCDebug(KLDAP_LOG) << "page size: " << mServer.pageSize();
+        qCDebug(KLDAP_KIO_WORKERS_LOG) << "page size: " << mServer.pageSize();
         mOp.setServerControls(ctrls);
     } else {
         mOp.setServerControls(serverctrls);
@@ -404,22 +404,22 @@ KIO::WorkerResult LDAPProtocol::get(const QUrl &_url)
         if (ret == -1 || mConn.ldapErrorCode() != KLDAP_SUCCESS) {
             return LDAPErr();
         }
-        qCDebug(KLDAP_LOG) << " ldap_result: " << ret;
+        qCDebug(KLDAP_KIO_WORKERS_LOG) << " ldap_result: " << ret;
         if (ret == LdapOperation::RES_SEARCH_RESULT) {
             if (mServer.pageSize()) {
                 QByteArray cookie;
                 int estsize = -1;
                 for (int i = 0; i < mOp.controls().count(); ++i) {
-                    qCDebug(KLDAP_LOG) << " control oid: " << mOp.controls().at(i).oid();
+                    qCDebug(KLDAP_KIO_WORKERS_LOG) << " control oid: " << mOp.controls().at(i).oid();
                     estsize = mOp.controls().at(i).parsePageControl(cookie);
                     if (estsize != -1) {
                         break;
                     }
                 }
-                qCDebug(KLDAP_LOG) << " estimated size: " << estsize;
+                qCDebug(KLDAP_KIO_WORKERS_LOG) << " estimated size: " << estsize;
                 if (estsize != -1 && !cookie.isEmpty()) {
                     LdapControls ctrls{serverctrls}; // clazy:exclude=container-inside-loop
-                    qCDebug(KLDAP_LOG) << "page size: " << mServer.pageSize() << " estimated size: " << estsize;
+                    qCDebug(KLDAP_KIO_WORKERS_LOG) << "page size: " << mServer.pageSize() << " estimated size: " << estsize;
                     ctrls.append(LdapControl::createPageControl(mServer.pageSize(), cookie));
                     mOp.setServerControls(ctrls);
                     if ((id = mOp.search(usrc.dn(), usrc.scope(), usrc.filter(), usrc.attributes())) == -1) {
@@ -452,7 +452,7 @@ KIO::WorkerResult LDAPProtocol::get(const QUrl &_url)
  */
 KIO::WorkerResult LDAPProtocol::stat(const QUrl &_url)
 {
-    qCDebug(KLDAP_LOG) << "stat(" << _url << ")";
+    qCDebug(KLDAP_KIO_WORKERS_LOG) << "stat(" << _url << ")";
 
     LdapUrl usrc(_url);
 
@@ -471,7 +471,7 @@ KIO::WorkerResult LDAPProtocol::stat(const QUrl &_url)
         return LDAPErr();
     }
 
-    qCDebug(KLDAP_LOG) << "stat() getting result";
+    qCDebug(KLDAP_KIO_WORKERS_LOG) << "stat() getting result";
     do {
         ret = mOp.waitForResult(id, -1);
         if (ret == -1 || mConn.ldapErrorCode() != KLDAP_SUCCESS) {
@@ -500,7 +500,7 @@ KIO::WorkerResult LDAPProtocol::stat(const QUrl &_url)
  */
 KIO::WorkerResult LDAPProtocol::del(const QUrl &_url, bool)
 {
-    qCDebug(KLDAP_LOG) << "del(" << _url << ")";
+    qCDebug(KLDAP_KIO_WORKERS_LOG) << "del(" << _url << ")";
 
     LdapUrl usrc(_url);
 
@@ -515,7 +515,7 @@ KIO::WorkerResult LDAPProtocol::del(const QUrl &_url, bool)
     mOp.setServerControls(serverctrls);
     mOp.setClientControls(clientctrls);
 
-    qCDebug(KLDAP_LOG) << " del: " << usrc.dn().toString().toUtf8();
+    qCDebug(KLDAP_KIO_WORKERS_LOG) << " del: " << usrc.dn().toString().toUtf8();
     int id;
     int ret;
 
@@ -532,7 +532,7 @@ KIO::WorkerResult LDAPProtocol::del(const QUrl &_url, bool)
 
 KIO::WorkerResult LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
 {
-    qCDebug(KLDAP_LOG) << "put(" << _url << ")";
+    qCDebug(KLDAP_KIO_WORKERS_LOG) << "put(" << _url << ")";
 
     LdapUrl usrc(_url);
 
@@ -567,12 +567,12 @@ KIO::WorkerResult LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
             return KIO::WorkerResult::fail();
         }
         if (result == 0) {
-            qCDebug(KLDAP_LOG) << "EOF!";
+            qCDebug(KLDAP_KIO_WORKERS_LOG) << "EOF!";
             ldif.endLdif();
         }
         do {
             ret = ldif.nextItem();
-            qCDebug(KLDAP_LOG) << "nextitem: " << ret;
+            qCDebug(KLDAP_KIO_WORKERS_LOG) << "nextitem: " << ret;
 
             switch (ret) {
             case Ldif::None:
@@ -585,25 +585,25 @@ KIO::WorkerResult LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
                 case Ldif::Entry_None:
                     return KIO::WorkerResult::fail(ERR_INTERNAL, i18n("The Ldif parser failed."));
                 case Ldif::Entry_Del:
-                    qCDebug(KLDAP_LOG) << "kio_ldap_del";
+                    qCDebug(KLDAP_KIO_WORKERS_LOG) << "kio_ldap_del";
                     ldaperr = mOp.del_s(ldif.dn());
                     break;
                 case Ldif::Entry_Modrdn:
-                    qCDebug(KLDAP_LOG) << "kio_ldap_modrdn olddn:" << ldif.dn().toString() << " newRdn: " << ldif.newRdn()
-                                       << " newSuperior: " << ldif.newSuperior() << " deloldrdn: " << ldif.delOldRdn();
+                    qCDebug(KLDAP_KIO_WORKERS_LOG) << "kio_ldap_modrdn olddn:" << ldif.dn().toString() << " newRdn: " << ldif.newRdn()
+                                                   << " newSuperior: " << ldif.newSuperior() << " deloldrdn: " << ldif.delOldRdn();
                     ldaperr = mOp.rename_s(ldif.dn(), ldif.newRdn(), ldif.newSuperior(), ldif.delOldRdn());
                     break;
                 case Ldif::Entry_Mod:
-                    qCDebug(KLDAP_LOG) << "kio_ldap_mod";
+                    qCDebug(KLDAP_KIO_WORKERS_LOG) << "kio_ldap_mod";
                     ldaperr = mOp.modify_s(ldif.dn(), modops);
                     modops.clear();
                     break;
                 case Ldif::Entry_Add:
-                    qCDebug(KLDAP_LOG) << "kio_ldap_add " << ldif.dn().toString();
+                    qCDebug(KLDAP_KIO_WORKERS_LOG) << "kio_ldap_add " << ldif.dn().toString();
                     addObject.setDn(ldif.dn());
                     ldaperr = mOp.add_s(addObject);
                     if (ldaperr == KLDAP_ALREADY_EXISTS && (flags & KIO::Overwrite)) {
-                        qCDebug(KLDAP_LOG) << ldif.dn().toString() << " already exists, delete first";
+                        qCDebug(KLDAP_KIO_WORKERS_LOG) << ldif.dn().toString() << " already exists, delete first";
                         ldaperr = mOp.del_s(ldif.dn());
                         if (ldaperr == KLDAP_SUCCESS) {
                             ldaperr = mOp.add_s(addObject);
@@ -613,7 +613,7 @@ KIO::WorkerResult LDAPProtocol::put(const QUrl &_url, int, KIO::JobFlags flags)
                     break;
                 }
                 if (ldaperr != KLDAP_SUCCESS) {
-                    qCDebug(KLDAP_LOG) << "put ldap error: " << ldaperr;
+                    qCDebug(KLDAP_KIO_WORKERS_LOG) << "put ldap error: " << ldaperr;
                     return LDAPErr(ldaperr);
                 }
                 break;
@@ -676,7 +676,7 @@ KIO::WorkerResult LDAPProtocol::listDir(const QUrl &_url)
     QStringList att;
     LdapUrl usrc(_url);
 
-    qCDebug(KLDAP_LOG) << "listDir(" << _url << ")";
+    qCDebug(KLDAP_KIO_WORKERS_LOG) << "listDir(" << _url << ")";
 
     const KIO::WorkerResult checkResult = changeCheck(usrc);
     if (!checkResult.success()) {
@@ -723,7 +723,7 @@ KIO::WorkerResult LDAPProtocol::listDir(const QUrl &_url)
         if (ret != LdapOperation::RES_SEARCH_ENTRY) {
             continue;
         }
-        qCDebug(KLDAP_LOG) << " ldap_result: " << ret;
+        qCDebug(KLDAP_KIO_WORKERS_LOG) << " ldap_result: " << ret;
 
         total++;
         uds.clear();
@@ -731,7 +731,7 @@ KIO::WorkerResult LDAPProtocol::listDir(const QUrl &_url)
         LDAPEntry2UDSEntry(mOp.object().dn(), uds, usrc);
         listEntry(uds);
         //      processedSize( total );
-        qCDebug(KLDAP_LOG) << " total: " << total << " " << usrc.toDisplayString();
+        qCDebug(KLDAP_KIO_WORKERS_LOG) << " total: " << total << " " << usrc.toDisplayString();
 
         // publish the sub-directories (if dirmode==sub)
         if (isSub) {
@@ -740,10 +740,10 @@ KIO::WorkerResult LDAPProtocol::listDir(const QUrl &_url)
             usrc2.setScope(LdapUrl::One);
             usrc2.setAttributes(saveatt);
             usrc2.setFilter(usrc.filter());
-            qCDebug(KLDAP_LOG) << "search2 " << dn.toString();
+            qCDebug(KLDAP_KIO_WORKERS_LOG) << "search2 " << dn.toString();
             if ((id2 = mOp.search(dn, LdapUrl::One, QString(), att)) != -1) {
                 while (true) {
-                    qCDebug(KLDAP_LOG) << " next result ";
+                    qCDebug(KLDAP_KIO_WORKERS_LOG) << " next result ";
                     ret2 = mOp.waitForResult(id2, -1);
                     if (ret2 == -1 || ret2 == LdapOperation::RES_SEARCH_RESULT) {
                         break;
