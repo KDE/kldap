@@ -69,7 +69,7 @@ public:
      * @param critical will contain the criticality of control
      * @param value is the control value
      */
-    [[nodiscard]] static bool splitControl(const QByteArray &line, QString &oid, bool &critical, QByteArray &value);
+    static bool splitControl(const QByteArray &line, QString &oid, bool &critical, QByteArray &value);
 
     /**
      * Starts the parsing of a new Ldif
