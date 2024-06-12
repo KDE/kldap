@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: fc57ad16a28d02dea100ceb1c60de14e\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-28 00:38+0000\n"
-"PO-Revision-Date: 2024-05-30 05:04\n"
+"PO-Revision-Date: 2024-06-10 20:10\n"
 "Last-Translator: Darafei Praliaskouski <komzpa@licei2.com>\n"
 "Language-Team: Belarusian\n"
 "Language: be\n"
@@ -132,13 +132,13 @@ msgstr "Адзначце серверы, якія павінны выкарыс�
 #, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
-msgstr ""
+msgstr "&Дадаць хост…"
 
 #: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:222
 #, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
-msgstr ""
+msgstr "&Рэдагаваць хост…"
 
 #: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:225
 #, kde-format
