@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-28 00:38+0000\n"
+"POT-Creation-Date: 2024-06-18 00:40+0000\n"
 "PO-Revision-Date: 2010-12-13 09:23+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -217,7 +217,9 @@ msgid "Page size:"
 msgstr "ទំហំ​ទំព័រ ៖"
 
 #: widgets/ldapconfigwidget.cpp:185 widgets/ldapconfigwidget.cpp:264
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Query Server"
+msgctxt "@action:button"
 msgid "Query Server"
 msgstr "ម៉ាស៊ីន​បម្រើ​សំណួរ"
 
