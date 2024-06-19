@@ -211,11 +211,10 @@ msgid "Page size:"
 msgstr "页面大小："
 
 #: widgets/ldapconfigwidget.cpp:185 widgets/ldapconfigwidget.cpp:264
-#, fuzzy, kde-format
-#| msgid "Query Server"
+#, kde-format
 msgctxt "@action:button"
 msgid "Query Server"
-msgstr "查询服务器"
+msgstr ""
 
 #: widgets/ldapconfigwidget.cpp:195
 #, kde-format

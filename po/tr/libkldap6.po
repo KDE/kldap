@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-18 00:40+0000\n"
-"PO-Revision-Date: 2024-05-29 12:45+0300\n"
+"PO-Revision-Date: 2024-06-18 12:54+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -217,11 +217,10 @@ msgid "Page size:"
 msgstr "Sayfa boyutu:"
 
 #: widgets/ldapconfigwidget.cpp:185 widgets/ldapconfigwidget.cpp:264
-#, fuzzy, kde-format
-#| msgid "Query Server"
+#, kde-format
 msgctxt "@action:button"
 msgid "Query Server"
-msgstr "Sorgu Sunucusu"
+msgstr "Sunucuyu Sorgula"
 
 #: widgets/ldapconfigwidget.cpp:195
 #, kde-format
