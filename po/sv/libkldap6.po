@@ -2,20 +2,20 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Stefan Asserhäll <stefan.asserhall@gmail.com>, 2007, 2008, 2009, 2010, 2014, 2017, 2018, 2019, 2020, 2021.
+# SPDX-FileCopyrightText: 2007, 2008, 2009, 2010, 2014, 2017, 2018, 2019, 2020, 2021, 2024 Stefan Asserhäll <stefan.asserhall@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-18 00:40+0000\n"
-"PO-Revision-Date: 2021-07-28 20:15+0200\n"
+"PO-Revision-Date: 2024-06-19 02:44+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: core/ldapconnection.cpp:126
@@ -118,31 +118,25 @@ msgid "Remove Host"
 msgstr "Ta bort värddator"
 
 #: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:173
-#, fuzzy, kde-format
-#| msgid "Check all servers that should be used:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Check all servers that should be used:"
 msgstr "Markera alla servrar som ska användas:"
 
 #: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:220
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Add Host"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
-msgstr "Lägg till värddator"
+msgstr "&Lägg till värddator…"
 
 #: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:222
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Edit Host"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
-msgstr "Redigera värddator"
+msgstr "R&edigera värddator…"
 
 #: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:225
-#, fuzzy, kde-format
-#| msgid "&Remove Host"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
 msgstr "Ta bo&rt värddator"
@@ -220,8 +214,7 @@ msgid "Page size:"
 msgstr "Sidstorlek:"
 
 #: widgets/ldapconfigwidget.cpp:185 widgets/ldapconfigwidget.cpp:264
-#, fuzzy, kde-format
-#| msgid "Query Server"
+#, kde-format
 msgctxt "@action:button"
 msgid "Query Server"
 msgstr "Fråga server"
