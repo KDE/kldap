@@ -41,7 +41,7 @@ ecm_qt_declare_logging_category(KPim6LdapWidgets HEADER ldapclient_debug.h IDENT
     EXPORT KLDAP
 )
 
-if (COMPILE_WITH_UNITY_CMAKE_SUPPORT)
+if(COMPILE_WITH_UNITY_CMAKE_SUPPORT)
     set_target_properties(KPim6LdapWidgets PROPERTIES UNITY_BUILD ON)
 endif()
 generate_export_header(KPim6LdapWidgets BASE_NAME kldapwidgets)
@@ -106,7 +106,7 @@ install(FILES
 )
 
 
-if (BUILD_QCH)
+if(BUILD_QCH)
     ecm_add_qch(
         KPim6LdapWidgets_QCH
         NAME KLdapWidgets
@@ -129,7 +129,7 @@ if (BUILD_QCH)
         TAGFILE_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
         QCH_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
         COMPONENT Devel
-    )
+)
 endif()
 
 if(BUILD_TESTING)
@@ -142,13 +142,13 @@ set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim6LdapWidgets")
 install(EXPORT KPim6LdapWidgetsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KPim6LdapWidgetsTargets.cmake NAMESPACE KPim6::)
 
 
-if (BUILD_QCH)
+if(BUILD_QCH)
     ecm_install_qch_export(
         TARGETS KPim6LdapWidgets_QCH
         FILE KPim6LdapWidgetsQchTargets.cmake
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
-    )
+)
 set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6LdapWidgetsQchTargets.cmake\")")
 endif()
 

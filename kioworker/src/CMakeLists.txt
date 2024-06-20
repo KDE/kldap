@@ -9,11 +9,11 @@ ecm_qt_declare_logging_category(kio_ldap
         DESCRIPTION "ldap KIO worker"
         OLD_CATEGORY_NAMES log_kldap org.kde.pim.kldap
         EXPORT KLDAP
-    )
+)
 
 
 target_link_libraries(kio_ldap Qt::Network KF6::KIOCore KF6::I18n KPim6::LdapCore)
-if (WIN32)
+if(WIN32)
     target_link_libraries(kio_ldap ws2_32)
 endif()
 set_target_properties(kio_ldap PROPERTIES OUTPUT_NAME "ldap")

@@ -54,7 +54,7 @@ add_feature_info(QCH ${BUILD_QCH} "API documentation in QCH format (for e.g. Qt 
 
 option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)
 set(COMPILE_WITH_UNITY_CMAKE_SUPPORT OFF)
-if (USE_UNITY_CMAKE_SUPPORT)
+if(USE_UNITY_CMAKE_SUPPORT)
     set(COMPILE_WITH_UNITY_CMAKE_SUPPORT ON)
 endif()
 
@@ -74,7 +74,7 @@ set_package_properties(Ldap PROPERTIES
 find_package(Sasl2)
 set_package_properties(Sasl2 PROPERTIES TYPE REQUIRED)
 
-if (Ldap_FOUND)
+if(Ldap_FOUND)
    set(LDAP_FOUND 1)
 endif()
 
@@ -89,11 +89,11 @@ ecm_qt_install_logging_categories(
         EXPORT KLDAP
         FILE kldap.categories
         DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
-        )
+       )
 
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 ki18n_install(po)
 if(KF6DocTools_FOUND)
-	kdoctools_install(po)
+   kdoctools_install(po)
 endif()
 ecm_feature_summary(WHAT ALL FATAL_ON_MISSING_REQUIRED_PACKAGES)
