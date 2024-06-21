@@ -160,6 +160,7 @@ bool LdapModel::setData(const QModelIndex &modelIndex, const QVariant &value, in
     }
     case Index: {
         const QModelIndex newIndex = index(modelIndex.row(), Index);
+        // qDebug() << " serverInfo.server" << serverInfo.server << " value.toInt()" << value.toInt();
         serverInfo.index = value.toInt();
         Q_EMIT dataChanged(newIndex, newIndex);
         return true;

@@ -134,6 +134,7 @@ void LdapConfigureWidgetNg::slotMoveUp()
     const QModelIndex previewIndex = mHostListView->model()->index(index.row() - 1, KLDAPCore::LdapModel::Index);
     mHostListView->model()->setData(modelIndex, initialRow - 1);
     mHostListView->model()->setData(previewIndex, initialRow);
+    mLdapSortProxyModel->invalidate();
 #if 0
     mHostListView->setCurrentItem(above);
     above->setSelected(true);
@@ -155,6 +156,8 @@ void LdapConfigureWidgetNg::slotMoveDown()
     // TODO next item
     // const QModelIndex nextIndex = mHostListView->selectionModel()->selectedRows().constFirst();
     // TODO mLdapModel->setData(nextIndex, initialRow, KLDAPCore::LdapModel::Index);
+
+    mLdapSortProxyModel->invalidate();
 #if 0
 
     mHostListView->setCurrentItem(below);
