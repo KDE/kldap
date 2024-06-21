@@ -12,7 +12,6 @@
 #include "ldapcontrol.h"
 #include "ldapdn.h"
 #include "ldapobject.h"
-#include "ldapserver.h"
 #include "ldapurl.h"
 
 #include <QByteArray>
