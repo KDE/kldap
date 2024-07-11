@@ -313,7 +313,7 @@ void LdapSearch::continueSearch()
     });
 }
 
-bool LdapSearch::isFinished()
+bool LdapSearch::isFinished() const
 {
     return d->mFinished;
 }

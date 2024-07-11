@@ -98,7 +98,7 @@ public:
     /**
      * Returns true if the search is finished else returns false.
      */
-    [[nodiscard]] bool isFinished();
+    [[nodiscard]] bool isFinished() const;
     /**
      * Tries to abandon the search.
      */
