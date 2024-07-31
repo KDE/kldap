@@ -107,7 +107,7 @@ void LdapConfigureWidgetNg::slotRemoveHost()
     const KLDAPCore::LdapServer server = modelIndex.data().value<KLDAPCore::LdapServer>();
     const int answer = KMessageBox::questionTwoActions(this,
                                                        i18n("Do you want to remove setting for host \"%1\"?", server.host()),
-                                                       i18n("Remove Host"),
+                                                       i18nc("@title:window", "Remove Host"),
                                                        KStandardGuiItem::remove(),
                                                        KStandardGuiItem::cancel());
     if (answer == KMessageBox::SecondaryAction) {

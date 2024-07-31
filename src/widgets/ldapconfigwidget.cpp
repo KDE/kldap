@@ -311,7 +311,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::sendQuery()
     });
 
     if (!search.search(_url)) {
-        KMessageBox::error(mParent, search.errorString(), i18n("Check server"));
+        KMessageBox::error(mParent, search.errorString(), i18nc("@title:window", "Check server"));
         return;
     }
 
