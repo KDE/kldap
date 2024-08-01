@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-22 00:39+0000\n"
+"POT-Creation-Date: 2024-08-01 00:41+0000\n"
 "PO-Revision-Date: 2024-06-18 08:36+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian\n"
@@ -120,7 +120,9 @@ msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Хочете вилучити запис для вузла «%1»?"
 
 #: widgets/ldapconfigurewidget.cpp:115 widgets/ldapconfigurewidgetng.cpp:110
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Remove Host"
+msgctxt "@title:window"
 msgid "Remove Host"
 msgstr "Вилучення вузла"
 
@@ -289,7 +291,9 @@ msgid "SASL mechanism:"
 msgstr "Механізм SASL:"
 
 #: widgets/ldapconfigwidget.cpp:314
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Check server"
+msgctxt "@title:window"
 msgid "Check server"
 msgstr "Перевірити сервер"
 

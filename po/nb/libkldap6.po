@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-22 00:39+0000\n"
+"POT-Creation-Date: 2024-08-01 00:41+0000\n"
 "PO-Revision-Date: 2014-09-23 22:05+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -115,6 +115,7 @@ msgstr ""
 
 #: widgets/ldapconfigurewidget.cpp:115 widgets/ldapconfigurewidgetng.cpp:110
 #, kde-format
+msgctxt "@title:window"
 msgid "Remove Host"
 msgstr ""
 
@@ -285,6 +286,7 @@ msgstr "SASL-mekanisme:"
 
 #: widgets/ldapconfigwidget.cpp:314
 #, kde-format
+msgctxt "@title:window"
 msgid "Check server"
 msgstr ""
 

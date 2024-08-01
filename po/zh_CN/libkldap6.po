@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-22 00:39+0000\n"
+"POT-Creation-Date: 2024-08-01 00:41+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -110,7 +110,9 @@ msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "您要删除主机“%1”的设置吗？"
 
 #: widgets/ldapconfigurewidget.cpp:115 widgets/ldapconfigurewidgetng.cpp:110
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Remove Host"
+msgctxt "@title:window"
 msgid "Remove Host"
 msgstr "删除主机"
 
@@ -279,7 +281,9 @@ msgid "SASL mechanism:"
 msgstr "SASL 算法："
 
 #: widgets/ldapconfigwidget.cpp:314
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Check server"
+msgctxt "@title:window"
 msgid "Check server"
 msgstr "检查服务器"
 

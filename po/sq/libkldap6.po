@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdepimlibs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-22 00:39+0000\n"
+"POT-Creation-Date: 2024-08-01 00:41+0000\n"
 "PO-Revision-Date: 2010-05-30 13:28+0000\n"
 "Last-Translator: Launchpad Translations Administrators <rosetta@launchpad."
 "net>\n"
@@ -114,6 +114,7 @@ msgstr ""
 
 #: widgets/ldapconfigurewidget.cpp:115 widgets/ldapconfigurewidgetng.cpp:110
 #, kde-format
+msgctxt "@title:window"
 msgid "Remove Host"
 msgstr ""
 
@@ -288,6 +289,7 @@ msgstr "Mekanizmi SASL:"
 
 #: widgets/ldapconfigwidget.cpp:314
 #, kde-format
+msgctxt "@title:window"
 msgid "Check server"
 msgstr ""
 

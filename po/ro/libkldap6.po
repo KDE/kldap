@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-22 00:39+0000\n"
+"POT-Creation-Date: 2024-08-01 00:41+0000\n"
 "PO-Revision-Date: 2009-01-05 10:56+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@lists.kde.org>\n"
@@ -118,6 +118,7 @@ msgstr ""
 
 #: widgets/ldapconfigurewidget.cpp:115 widgets/ldapconfigurewidgetng.cpp:110
 #, kde-format
+msgctxt "@title:window"
 msgid "Remove Host"
 msgstr ""
 
@@ -292,6 +293,7 @@ msgstr "Mecanism SASL:"
 
 #: widgets/ldapconfigwidget.cpp:314
 #, kde-format
+msgctxt "@title:window"
 msgid "Check server"
 msgstr ""
 

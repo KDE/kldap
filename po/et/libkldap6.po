@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-22 00:39+0000\n"
+"POT-Creation-Date: 2024-08-01 00:41+0000\n"
 "PO-Revision-Date: 2020-06-13 19:41+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -113,7 +113,9 @@ msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Kas eemaldada masina \"%1\" seadistus?"
 
 #: widgets/ldapconfigurewidget.cpp:115 widgets/ldapconfigurewidgetng.cpp:110
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Remove Host"
+msgctxt "@title:window"
 msgid "Remove Host"
 msgstr "Masina eemaldamine"
 
@@ -291,7 +293,9 @@ msgid "SASL mechanism:"
 msgstr "SASL mehhanism:"
 
 #: widgets/ldapconfigwidget.cpp:314
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Check server"
+msgctxt "@title:window"
 msgid "Check server"
 msgstr "Serveri kontroll"
 
