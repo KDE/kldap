@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-01 00:41+0000\n"
-"PO-Revision-Date: 2024-06-18 05:57+0200\n"
+"PO-Revision-Date: 2024-08-01 05:58+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -112,8 +112,7 @@ msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "გნებავთ ჰოსტის (%1) პარამეტრების წაშლა?"
 
 #: widgets/ldapconfigurewidget.cpp:115 widgets/ldapconfigurewidgetng.cpp:110
-#, fuzzy, kde-format
-#| msgid "Remove Host"
+#, kde-format
 msgctxt "@title:window"
 msgid "Remove Host"
 msgstr "ჰოსტის წაშლა"
@@ -283,8 +282,7 @@ msgid "SASL mechanism:"
 msgstr "SASL-ის მექანიზმი:"
 
 #: widgets/ldapconfigwidget.cpp:314
-#, fuzzy, kde-format
-#| msgid "Check server"
+#, kde-format
 msgctxt "@title:window"
 msgid "Check server"
 msgstr "სერვერის შემოწმება"
