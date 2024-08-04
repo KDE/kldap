@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-01 00:41+0000\n"
-"PO-Revision-Date: 2024-06-18 19:52+0200\n"
+"PO-Revision-Date: 2024-08-03 12:19+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.0\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: core/ldapconnection.cpp:126
 #, kde-format
@@ -118,8 +118,7 @@ msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Quere retirar a configuración do servidor «%1»?"
 
 #: widgets/ldapconfigurewidget.cpp:115 widgets/ldapconfigurewidgetng.cpp:110
-#, fuzzy, kde-format
-#| msgid "Remove Host"
+#, kde-format
 msgctxt "@title:window"
 msgid "Remove Host"
 msgstr "Retirar o servidor"
@@ -289,8 +288,7 @@ msgid "SASL mechanism:"
 msgstr "Mecanismo de SASL:"
 
 #: widgets/ldapconfigwidget.cpp:314
-#, fuzzy, kde-format
-#| msgid "Check server"
+#, kde-format
 msgctxt "@title:window"
 msgid "Check server"
 msgstr "Comprobar o servidor"

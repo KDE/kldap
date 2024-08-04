@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-01 00:41+0000\n"
-"PO-Revision-Date: 2024-07-14 13:39+0200\n"
+"PO-Revision-Date: 2024-08-03 11:23+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -114,8 +114,7 @@ msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Czy usunąć ustawienia dla gospodarza \"%1\"?"
 
 #: widgets/ldapconfigurewidget.cpp:115 widgets/ldapconfigurewidgetng.cpp:110
-#, fuzzy, kde-format
-#| msgid "Remove Host"
+#, kde-format
 msgctxt "@title:window"
 msgid "Remove Host"
 msgstr "Usuń gospodarza"
@@ -285,8 +284,7 @@ msgid "SASL mechanism:"
 msgstr "Mechanizm SASL:"
 
 #: widgets/ldapconfigwidget.cpp:314
-#, fuzzy, kde-format
-#| msgid "Check server"
+#, kde-format
 msgctxt "@title:window"
 msgid "Check server"
 msgstr "Sprawdź serwer"
