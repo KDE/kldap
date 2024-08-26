@@ -217,7 +217,6 @@ msgstr "Sidestørrelse:"
 
 #: widgets/ldapconfigwidget.cpp:185 widgets/ldapconfigwidget.cpp:264
 #, fuzzy, kde-format
-#| msgid "Query Server"
 msgctxt "@action:button"
 msgid "Query Server"
 msgstr "Spør tjener"
