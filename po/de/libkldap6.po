@@ -4,7 +4,7 @@
 # Frederik Schwarzer <schwarzer@kde.org>, 2010, 2014.
 msgid ""
 msgstr ""
-"Project-Id-Version: libkldap\n"
+"Project-Id-Version: libkldap6\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-22 00:39+0000\n"
 "PO-Revision-Date: 2021-08-25 15:54+0200\n"
