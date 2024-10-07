@@ -36,6 +36,9 @@ public:
 
     void save();
 
+    [[nodiscard]] bool enablePlasmaActivities() const;
+    void setEnablePlasmaActivities(bool newEnablePlasmaActivities);
+
 Q_SIGNALS:
     void changed(bool);
 

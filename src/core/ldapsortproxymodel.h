@@ -19,11 +19,15 @@ public:
     [[nodiscard]] LdapActivitiesAbstract *ldapActivitiesAbstract() const;
     void setLdapActivitiesAbstract(LdapActivitiesAbstract *newldapActivitiesAbstract);
 
+    [[nodiscard]] bool enablePlasmaActivities() const;
+    void setEnablePlasmaActivities(bool newEnablePlasmaActivities);
+
 protected:
     [[nodiscard]] bool filterAcceptsRow(int source_row, const QModelIndex &source_parent) const override;
     [[nodiscard]] bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override;
 
 private:
     LdapActivitiesAbstract *mLdapActivitiesAbstract = nullptr;
+    bool mEnablePlasmaActivities = false;
 };
 }

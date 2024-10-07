@@ -54,6 +54,16 @@ void LdapConfigureWidgetNg::save()
     mLdapModel->save();
 }
 
+bool LdapConfigureWidgetNg::enablePlasmaActivities() const
+{
+    return mLdapSortProxyModel->enablePlasmaActivities();
+}
+
+void LdapConfigureWidgetNg::setEnablePlasmaActivities(bool newEnablePlasmaActivities)
+{
+    mLdapSortProxyModel->setEnablePlasmaActivities(newEnablePlasmaActivities);
+}
+
 void LdapConfigureWidgetNg::slotAddHost()
 {
     KLDAPCore::LdapServer server;

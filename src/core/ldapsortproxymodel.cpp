@@ -14,7 +14,8 @@ LdapSortProxyModel::~LdapSortProxyModel() = default;
 
 bool LdapSortProxyModel::filterAcceptsRow(int source_row, const QModelIndex &source_parent) const
 {
-    if (mLdapActivitiesAbstract) {
+    if (mLdapActivitiesAbstract && mEnablePlasmaActivities) {
+        // TODO add ActivitiesEnabled
         const auto activities = sourceModel()->index(source_row, 0).data(LdapModel::Activities).toStringList();
         return mLdapActivitiesAbstract->filterAcceptsRow(activities);
     }
@@ -48,6 +49,17 @@ void LdapSortProxyModel::setLdapActivitiesAbstract(LdapActivitiesAbstract *newId
         connect(mLdapActivitiesAbstract, &LdapActivitiesAbstract::activitiesChanged, this, &LdapSortProxyModel::invalidateFilter);
         invalidateFilter();
     }
+}
+
+bool LdapSortProxyModel::enablePlasmaActivities() const
+{
+    return mEnablePlasmaActivities;
+}
+
+void LdapSortProxyModel::setEnablePlasmaActivities(bool newEnablePlasmaActivities)
+{
+    mEnablePlasmaActivities = newEnablePlasmaActivities;
+    invalidateFilter();
 }
 
 #include "moc_ldapsortproxymodel.cpp"

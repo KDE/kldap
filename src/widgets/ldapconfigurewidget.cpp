@@ -5,7 +5,6 @@
  */
 
 #include "ldapconfigurewidget.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include <QLabel>
 #include <QListWidget>
@@ -30,6 +29,7 @@ using namespace Qt::Literals::StringLiterals;
 #include "addhostdialog.h"
 
 using namespace KLDAPWidgets;
+using namespace Qt::Literals::StringLiterals;
 
 LdapConfigureWidget::LdapConfigureWidget(QWidget *parent)
     : QWidget(parent)
