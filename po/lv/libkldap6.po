@@ -4,19 +4,20 @@
 #
 # Viesturs Zarins <viesturs.zarins@mii.lu.lv>, 2007, 2008.
 # Viesturs Zariņš <viesturs.zarins@mii.lu.lv>, 2009.
+# SPDX-FileCopyrightText: 2024 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-08 00:40+0000\n"
-"PO-Revision-Date: 2009-06-01 20:03+0300\n"
-"Last-Translator: Viesturs Zariņš <viesturs.zarins@mii.lu.lv>\n"
-"Language-Team: Latvian <locale@laka.lv>\n"
+"PO-Revision-Date: 2024-10-02 21:19+0300\n"
+"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
+"Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 24.08.0\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
 
@@ -33,7 +34,7 @@ msgstr "Gadījās kļūda savienojuma inicializācijas fāzē."
 #: core/ldapconnection.cpp:248
 #, kde-format
 msgid "Cannot set protocol version to %1."
-msgstr "Nizdevās uzstādīt protokola versiju uz %1."
+msgstr "Neizdevās iestatīt protokola versiju uz %1."
 
 #: core/ldapconnection.cpp:259
 #, kde-format
@@ -46,28 +47,27 @@ msgstr[2] "Neizdevās iestatīt noildzi uz %1 sekundēm."
 #: core/ldapconnection.cpp:271
 #, kde-format
 msgid "Could not set CA certificate file."
-msgstr ""
+msgstr "Neizdevās iestatīt CA sertifikācijas datni."
 
 #: core/ldapconnection.cpp:296
 #, kde-format
 msgid "Invalid TLS require certificate mode."
-msgstr ""
+msgstr "Nederīgs, TLS pieprasa sertifikācijas režīmu."
 
 #: core/ldapconnection.cpp:301
 #, kde-format
 msgid "Could not set TLS require certificate mode."
-msgstr ""
+msgstr "Neizdevās iestatīt, TLS pieprasa sertifikācijas režīmu."
 
 #: core/ldapconnection.cpp:310
-#, fuzzy, kde-format
-#| msgid "Cannot initialize the SASL client."
+#, kde-format
 msgid "Could not initialize new TLS context."
-msgstr "Neizdodas inicializēt SASL klientu."
+msgstr "neizdevās inicializēt jaunu TLS kontekstu."
 
 #: core/ldapconnection.cpp:327
 #, kde-format
 msgid "TLS support not available in the LDAP client libraries."
-msgstr "Nav pieejams TLS atbalsts LDAP klienta bibliotēkās."
+msgstr "LDAP klienta bibliotēkās nav pieejams TLS atbalsts."
 
 #: core/ldapconnection.cpp:337
 #, kde-format
@@ -90,64 +90,61 @@ msgid ""
 "LDAP support not compiled in. Please recompile libkldap with the OpenLDAP "
 "(or compatible) client libraries, or complain to your distribution packagers."
 msgstr ""
-"LDAP atbalsts nav iekompilēts. Lūdzu pāromilējiet libkldap ar OpenLDAP (vai "
+"LDAP atbalsts nav iekompilēts. Pārkompilējiet „libkldap“ ar „OpenLDAP“ (vai "
 "savietojamu) klienta bibliotēku, vai sūdzieties jūsu distribūcijas "
 "pakotājiem."
 
 #: core/ldapsearch.cpp:222
 #, kde-format
 msgid "Cannot access to server. Please reconfigure it."
-msgstr "Neizdevās piekļūt serverim. Lūdzu konfigurējiet to."
+msgstr "Neizdevās piekļūt serverim. Lūdzu, to konfigurējiet."
 
 #: widgets/addhostdialog.cpp:67
-#, fuzzy, kde-format
-#| msgid "Host:"
+#, kde-format
 msgctxt "@title:window"
 msgid "Add Host"
-msgstr "Serveris:"
+msgstr "Pievienot resursdatoru:"
 
 #: widgets/ldapconfigurewidget.cpp:97 widgets/ldapconfigurewidgetng.cpp:103
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
-msgstr ""
+msgstr "Rediģēt resursdatoru"
 
 #: widgets/ldapconfigurewidget.cpp:114 widgets/ldapconfigurewidgetng.cpp:119
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
-msgstr ""
+msgstr "Vai vēlaties noņemt iestatījumu resursdatoram „%1“?"
 
 #: widgets/ldapconfigurewidget.cpp:115 widgets/ldapconfigurewidgetng.cpp:120
 #, kde-format
 msgctxt "@title:window"
 msgid "Remove Host"
-msgstr ""
+msgstr "Noņemt resursdatoru"
 
 #: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:186
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Check all servers that should be used:"
-msgstr ""
+msgstr "Atzīmējiet visus izmantojamos serverus:"
 
 #: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:233
-#, fuzzy, kde-format
-#| msgid "Host:"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
-msgstr "Serveris:"
+msgstr "&Pievienot resursdatoru…"
 
 #: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:235
-#, fuzzy, kde-format
-#| msgid "Host:"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
-msgstr "Serveris:"
+msgstr "&Pievienot resursdatoru…"
 
 #: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:238
 #, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
-msgstr ""
+msgstr "&Noņemt resursdatoru"
 
 #: widgets/ldapconfigwidget.cpp:94
 #, kde-format
@@ -162,7 +159,7 @@ msgstr "Piesaistīt DN:"
 #: widgets/ldapconfigwidget.cpp:110
 #, kde-format
 msgid "Realm:"
-msgstr "Realms:"
+msgstr "Nogabals:"
 
 #: widgets/ldapconfigwidget.cpp:120
 #, kde-format
@@ -172,7 +169,7 @@ msgstr "Parole:"
 #: widgets/ldapconfigwidget.cpp:128
 #, kde-format
 msgid "Host:"
-msgstr "Serveris:"
+msgstr "Resursdators:"
 
 #: widgets/ldapconfigwidget.cpp:137
 #, kde-format
@@ -198,7 +195,7 @@ msgstr "Izmēra ierobežojums:"
 #: widgets/ldapconfigwidget.cpp:162
 #, kde-format
 msgid " sec"
-msgstr " sek"
+msgstr " sek."
 
 #: widgets/ldapconfigwidget.cpp:163
 #, kde-format
@@ -222,11 +219,10 @@ msgid "Page size:"
 msgstr "Lapas izmērs:"
 
 #: widgets/ldapconfigwidget.cpp:185 widgets/ldapconfigwidget.cpp:264
-#, fuzzy, kde-format
-#| msgid "Query Server"
+#, kde-format
 msgctxt "@action:button"
 msgid "Query Server"
-msgstr "Apjautāt serveri"
+msgstr "Vaicāt serverim"
 
 #: widgets/ldapconfigwidget.cpp:195
 #, kde-format
@@ -258,10 +254,9 @@ msgid "SSL"
 msgstr "SSL"
 
 #: widgets/ldapconfigwidget.cpp:233
-#, fuzzy, kde-format
-#| msgid "Security"
+#, kde-format
 msgid "Security:"
-msgstr "Drošība"
+msgstr "Drošība:"
 
 #: widgets/ldapconfigwidget.cpp:243
 #, kde-format
@@ -282,10 +277,9 @@ msgid "SASL"
 msgstr "SASL"
 
 #: widgets/ldapconfigwidget.cpp:252
-#, fuzzy, kde-format
-#| msgid "Authentication"
+#, kde-format
 msgid "Authentication:"
-msgstr "Autentificēšana"
+msgstr "Autentifikācija:"
 
 #: widgets/ldapconfigwidget.cpp:270
 #, kde-format
@@ -296,20 +290,19 @@ msgstr "SASL mehānisms:"
 #, kde-format
 msgctxt "@title:window"
 msgid "Check server"
-msgstr ""
+msgstr "Atzīmējiet serveri"
 
 #: widgets/ldapconfigwidget.cpp:320
-#, fuzzy, kde-format
-#| msgid "LDAP Query"
+#, kde-format
 msgctxt "@title:window"
 msgid "LDAP Query"
-msgstr "LDAP pieprasījums"
+msgstr "LDAP vaicājums"
 
 #: widgets/ldapconfigwidget.cpp:334
 #, kde-format
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
-msgstr ""
+msgstr "Nezināma kļūda, savienojoties ar „%1“"
 
 #, fuzzy
 #~| msgid "LDAP version:"
