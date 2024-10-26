@@ -28,11 +28,30 @@ namespace KLDAPCore
 class KLDAP_CORE_EXPORT Ldif
 {
 public:
-    using ParseValue = enum { None, NewEntry, EndEntry, Item, Control, Err, MoreData };
+    using ParseValue = enum {
+        None,
+        NewEntry,
+        EndEntry,
+        Item,
+        Control,
+        Err,
+        MoreData
+    };
 
-    using EntryType = enum { Entry_None, Entry_Add, Entry_Del, Entry_Mod, Entry_Modrdn };
+    using EntryType = enum {
+        Entry_None,
+        Entry_Add,
+        Entry_Del,
+        Entry_Mod,
+        Entry_Modrdn
+    };
 
-    using ModType = enum { Mod_None, Mod_Add, Mod_Replace, Mod_Del };
+    using ModType = enum {
+        Mod_None,
+        Mod_Add,
+        Mod_Replace,
+        Mod_Del
+    };
 
     Ldif();
 
