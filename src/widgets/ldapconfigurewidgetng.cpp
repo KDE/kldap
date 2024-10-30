@@ -6,6 +6,7 @@
 
 #include "ldapconfigurewidgetng.h"
 
+#include <QCheckBox>
 #include <QHeaderView>
 #include <QLabel>
 #include <QPushButton>
@@ -69,7 +70,7 @@ void LdapConfigureWidgetNg::slotAddHost()
     KLDAPCore::LdapServer server;
     KLDAPWidgets::AddHostDialog dlg(&server, this);
 
-    if (dlg.exec() && !server.host().trimmed().isEmpty()) { // krazy:exclude=crashy
+    if (dlg.exec() && !server.host().trimmed().isEmpty()) {
         mLdapModel->insertServer(server);
         Q_EMIT changed(true);
     }
@@ -102,7 +103,7 @@ void LdapConfigureWidgetNg::slotEditHost()
     KLDAPWidgets::AddHostDialog dlg(&server, this);
     dlg.setWindowTitle(i18nc("@title:window", "Edit Host"));
 
-    if (dlg.exec() && !server.host().isEmpty()) { // krazy:exclude=crashy
+    if (dlg.exec() && !server.host().isEmpty()) {
         mHostListView->model()->setData(modelIndex, QVariant::fromValue(server));
         Q_EMIT changed(true);
     }
@@ -181,6 +182,14 @@ void LdapConfigureWidgetNg::initGUI()
 {
     auto mainLayout = new QVBoxLayout(this);
     mainLayout->setObjectName("layout"_L1);
+
+    mLdapOnCurrentActivity = new QCheckBox(i18n("Show only ldap server on current activity"), this);
+    mainLayout->addWidget(mLdapOnCurrentActivity);
+
+    connect(mLdapOnCurrentActivity, &QCheckBox::checkStateChanged, this, [this](Qt::CheckState state) {
+        mLdapSortProxyModel->setEnablePlasmaActivities(state == Qt::Checked);
+    });
+    mLdapOnCurrentActivity->setVisible(false);
 
     // Contents of the QVGroupBox: label and hbox
     auto label = new QLabel(i18nc("@label:textbox", "Check all servers that should be used:"), this);

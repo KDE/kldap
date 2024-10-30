@@ -13,6 +13,7 @@
 class QTreeView;
 class QPushButton;
 class QToolButton;
+class QCheckBox;
 
 namespace KLDAPCore
 {
@@ -61,5 +62,6 @@ private:
     KLDAPCore::LdapClientSearchConfig *const mClientSearchConfig;
     KLDAPCore::LdapModel *const mLdapModel;
     KLDAPCore::LdapSortProxyModel *const mLdapSortProxyModel;
+    QCheckBox *mLdapOnCurrentActivity = nullptr;
 };
 }
