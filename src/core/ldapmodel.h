@@ -21,6 +21,7 @@ public:
         Name,
         Index,
         Activities,
+        EnabledActivitiesRole,
         Server,
         LastColumn = Server,
     };

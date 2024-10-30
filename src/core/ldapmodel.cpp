@@ -122,6 +122,8 @@ QVariant LdapModel::data(const QModelIndex &index, int role) const
         return QVariant::fromValue(serverInfo.server);
     case Activities:
         return serverInfo.server.activities();
+    case EnabledActivitiesRole:
+        return serverInfo.server.enablePlasmaActivities();
     }
     return {};
 }
@@ -186,12 +188,14 @@ int LdapModel::columnCount(const QModelIndex &parent) const
 
 QVariant LdapModel::headerData(int section, Qt::Orientation orientation, int role) const
 {
+    // Necessary ???
     if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
         switch (static_cast<LdapRoles>(section)) {
         case Name:
         case Index:
         case Server:
         case Activities:
+        case EnabledActivitiesRole:
             return {};
         }
     }
