@@ -127,6 +127,8 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
     mServer.setMech(mConfig.readEntry(prefix + QStringLiteral("Mech%1").arg(mServerIndex), QString()));
     mServer.setFilter(mConfig.readEntry(prefix + QStringLiteral("UserFilter%1").arg(mServerIndex), QString()));
     mServer.setCompletionWeight(mConfig.readEntry(prefix + QStringLiteral("CompletionWeight%1").arg(mServerIndex), -1));
+    mServer.setActivities(mConfig.readEntry(prefix + QStringLiteral("Activities%1").arg(mServerIndex), QStringList()));
+    mServer.setEnablePlasmaActivities(mConfig.readEntry(prefix + QStringLiteral("EnabledActivities%1").arg(mServerIndex), false));
 
     const QString pwdBindBNEntry = prefix + QStringLiteral("PwdBind%1").arg(mServerIndex);
 

@@ -101,6 +101,9 @@ void LdapClientSearchConfigWriteConfigJob::writeConfig()
     mConfig.writeEntry(prefix + QStringLiteral("SizeLimit%1").arg(mServerIndex), mServer.sizeLimit());
     mConfig.writeEntry(prefix + QStringLiteral("PageSize%1").arg(mServerIndex), mServer.pageSize());
     mConfig.writeEntry(prefix + QStringLiteral("Version%1").arg(mServerIndex), mServer.version());
+    mConfig.readEntry(prefix + QStringLiteral("Activities%1").arg(mServerIndex), mServer.activities());
+    mConfig.readEntry(prefix + QStringLiteral("EnabledActivities%1").arg(mServerIndex), mServer.enablePlasmaActivities());
+
     QString tmp;
     switch (mServer.security()) {
     case KLDAPCore::LdapServer::TLS:

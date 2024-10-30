@@ -446,6 +446,7 @@ QDebug operator<<(QDebug d, const KLDAPCore::LdapServer &t)
     d << "timeout " << t.timeout();
     d << "timeLimit " << t.timeLimit();
     d << "sizeLimit " << t.sizeLimit();
-    // TODO
+    d << "activities " << t.activities();
+    d << "enablePlasmaActivities " << t.enablePlasmaActivities();
     return d;
 }
