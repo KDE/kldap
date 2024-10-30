@@ -310,6 +310,9 @@ public:
     void setActivities(const QStringList &lst);
     [[nodiscard]] QStringList activities() const;
 
+    void setEnablePlasmaActivities(bool enabled);
+    [[nodiscard]] bool enablePlasmaActivities() const;
+
 private:
     class LdapServerPrivate;
     std::unique_ptr<LdapServerPrivate> const d;

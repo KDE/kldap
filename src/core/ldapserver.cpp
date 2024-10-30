@@ -36,6 +36,7 @@ public:
     LdapUrl::Scope mScope;
     int mCompletionWeight = -1;
     QStringList mActivities;
+    bool mEnablePlasmaActivities = false;
 };
 
 LdapServer::LdapServer()
@@ -88,6 +89,7 @@ void LdapServer::clear()
     d->mSizeLimit = d->mTimeLimit = d->mPageSize = 0;
     d->mCompletionWeight = -1;
     d->mActivities.clear();
+    d->mEnablePlasmaActivities = false;
 }
 
 QString LdapServer::host() const
@@ -426,6 +428,16 @@ void LdapServer::setActivities(const QStringList &lst)
 QStringList LdapServer::activities() const
 {
     return d->mActivities;
+}
+
+void LdapServer::setEnablePlasmaActivities(bool enabled)
+{
+    d->mEnablePlasmaActivities = enabled;
+}
+
+bool LdapServer::enablePlasmaActivities() const
+{
+    return d->mEnablePlasmaActivities;
 }
 
 QDebug operator<<(QDebug d, const KLDAPCore::LdapServer &t)
