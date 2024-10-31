@@ -63,6 +63,7 @@ bool LdapConfigureWidgetNg::enablePlasmaActivities() const
 void LdapConfigureWidgetNg::setEnablePlasmaActivities(bool newEnablePlasmaActivities)
 {
     mLdapSortProxyModel->setEnablePlasmaActivities(newEnablePlasmaActivities);
+    mLdapOnCurrentActivity->setVisible(newEnablePlasmaActivities);
 }
 
 void LdapConfigureWidgetNg::slotAddHost()
