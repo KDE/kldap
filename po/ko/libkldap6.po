@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-31 00:41+0000\n"
+"POT-Creation-Date: 2024-11-01 00:40+0000\n"
 "PO-Revision-Date: 2024-08-19 23:21+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -98,48 +98,48 @@ msgctxt "@title:window"
 msgid "Add Host"
 msgstr "호스트 추가"
 
-#: widgets/ldapconfigurewidget.cpp:97 widgets/ldapconfigurewidgetng.cpp:104
+#: widgets/ldapconfigurewidget.cpp:97 widgets/ldapconfigurewidgetng.cpp:105
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "호스트 편집"
 
-#: widgets/ldapconfigurewidget.cpp:114 widgets/ldapconfigurewidgetng.cpp:120
+#: widgets/ldapconfigurewidget.cpp:114 widgets/ldapconfigurewidgetng.cpp:121
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "호스트 \"%1\"의 설정을 삭제하시겠습니까?"
 
-#: widgets/ldapconfigurewidget.cpp:115 widgets/ldapconfigurewidgetng.cpp:121
+#: widgets/ldapconfigurewidget.cpp:115 widgets/ldapconfigurewidgetng.cpp:122
 #, kde-format
 msgctxt "@title:window"
 msgid "Remove Host"
 msgstr "호스트 삭제"
 
-#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:195
+#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:196
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Check all servers that should be used:"
 msgstr "사용될 모든 서버 확인:"
 
-#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:242
+#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:243
 #, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
 msgstr "호스트 추가(&A)…"
 
-#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:244
+#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:245
 #, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
 msgstr "호스트 편집(&E)…"
 
-#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:247
+#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:248
 #, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
 msgstr "호스트 삭제(&R)"
 
-#: widgets/ldapconfigurewidgetng.cpp:186
+#: widgets/ldapconfigurewidgetng.cpp:187
 #, kde-format
 msgid "Show only ldap server on current activity"
 msgstr ""

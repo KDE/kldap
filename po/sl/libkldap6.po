@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-31 00:41+0000\n"
-"PO-Revision-Date: 2024-08-01 06:33+0200\n"
+"POT-Creation-Date: 2024-11-01 00:40+0000\n"
+"PO-Revision-Date: 2024-10-31 09:13+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.4.4\n"
+"X-Generator: Poedit 3.5\n"
 
 #: core/ldapconnection.cpp:126
 #, kde-format
@@ -108,51 +108,51 @@ msgctxt "@title:window"
 msgid "Add Host"
 msgstr "Dodaj gostitelja"
 
-#: widgets/ldapconfigurewidget.cpp:97 widgets/ldapconfigurewidgetng.cpp:104
+#: widgets/ldapconfigurewidget.cpp:97 widgets/ldapconfigurewidgetng.cpp:105
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "Uredi gostitelja"
 
-#: widgets/ldapconfigurewidget.cpp:114 widgets/ldapconfigurewidgetng.cpp:120
+#: widgets/ldapconfigurewidget.cpp:114 widgets/ldapconfigurewidgetng.cpp:121
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Ali želite odstraniti nastavitev za gostitelja \"%1\"?"
 
-#: widgets/ldapconfigurewidget.cpp:115 widgets/ldapconfigurewidgetng.cpp:121
+#: widgets/ldapconfigurewidget.cpp:115 widgets/ldapconfigurewidgetng.cpp:122
 #, kde-format
 msgctxt "@title:window"
 msgid "Remove Host"
 msgstr "Odstrani gostitelja"
 
-#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:195
+#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:196
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Check all servers that should be used:"
 msgstr "Preverite vse strežnike, ki naj bi bili uporabljeni:"
 
-#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:242
+#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:243
 #, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
 msgstr "Dod&aj gostitelja…"
 
-#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:244
+#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:245
 #, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
-msgstr "Ur&edi gostitelja..."
+msgstr "Ur&edi gostitelja…"
 
-#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:247
+#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:248
 #, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
 msgstr "Odst&rani gostitelja"
 
-#: widgets/ldapconfigurewidgetng.cpp:186
+#: widgets/ldapconfigurewidgetng.cpp:187
 #, kde-format
 msgid "Show only ldap server on current activity"
-msgstr ""
+msgstr "Prikaži samo strežnik ldap pri trenutni dejavnosti"
 
 #: widgets/ldapconfigwidget.cpp:94
 #, kde-format
