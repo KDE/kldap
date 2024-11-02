@@ -148,7 +148,7 @@ msgstr "Maki&neyi Kaldır"
 #: widgets/ldapconfigurewidgetng.cpp:187
 #, kde-format
 msgid "Show only ldap server on current activity"
-msgstr ""
+msgstr "Yalnızca geçerli etkinlikteki ldap sunucusunu göster"
 
 #: widgets/ldapconfigwidget.cpp:94
 #, kde-format
@@ -199,7 +199,7 @@ msgstr "Boyut sınırı:"
 #: widgets/ldapconfigwidget.cpp:162
 #, kde-format
 msgid " sec"
-msgstr "sn"
+msgstr " sn"
 
 #: widgets/ldapconfigwidget.cpp:163
 #, kde-format
@@ -272,7 +272,7 @@ msgstr "Anonim"
 #, kde-format
 msgctxt "@option:radio simple authentication"
 msgid "Simple"
-msgstr "Basit"
+msgstr "Temel"
 
 #: widgets/ldapconfigwidget.cpp:249
 #, kde-format
@@ -307,54 +307,3 @@ msgstr "LDAP Sorgusu"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "%1 konumuna bağlanırken bilinmeyen hata"
-
-#~ msgid "&Add Host..."
-#~ msgstr "Makine &Ekle..."
-
-#~ msgid "&Edit Host..."
-#~ msgstr "Makineyi Dü&zenle..."
-
-#~ msgid ""
-#~ "LDAP password is stored as clear text, do you want to store it in kwallet?"
-#~ msgstr ""
-#~ "LDAP parolası düz metin olarak depolanıyor, bunun yerine K Cüzdan'da "
-#~ "depolamak ister misiniz?"
-
-#~ msgid "Store clear text password in Wallet"
-#~ msgstr "Düz metin parolayı KWallet'ta depola"
-
-#, fuzzy
-#~| msgid "LDAP version:"
-#~ msgid "LDAP Servers"
-#~ msgstr "LDAP sürümü:"
-
-#~ msgid "Attribute"
-#~ msgstr "Özellik"
-
-#~ msgid "Value"
-#~ msgstr "Değer"
-
-#~ msgid "Distinguished Name"
-#~ msgstr "Eşsiz İsim"
-
-#~ msgid ""
-#~ "SASL support is not available. Please recompile libkldap with the Cyrus-"
-#~ "SASL (or compatible) client libraries, or complain to your distribution "
-#~ "packagers."
-#~ msgstr ""
-#~ "SASL desteği kullanılabilir değil. Lütfen libkldap uygulamasını Cyrus-"
-#~ "SASL (ya da uyumlu bir uygulama) istemci kitaplıkları ile yeniden "
-#~ "derleyin ya da kullandığınız dağıtımın paketçilerine başvurun."
-
-#~ msgid "LDAP Operations error"
-#~ msgstr "LDAP İşlem hatası"
-
-#, fuzzy
-#~| msgid "LDAP version:"
-#~ msgid "LDAP Server Settings"
-#~ msgstr "LDAP sürümü:"
-
-#, fuzzy
-#~| msgid "User:"
-#~ msgid "User ID"
-#~ msgstr "Kullanıcı:"

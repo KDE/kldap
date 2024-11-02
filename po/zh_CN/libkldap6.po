@@ -142,7 +142,7 @@ msgstr "移除主机(&R)"
 #: widgets/ldapconfigurewidgetng.cpp:187
 #, kde-format
 msgid "Show only ldap server on current activity"
-msgstr ""
+msgstr "仅显示当前活动中的 LDAP 服务器"
 
 #: widgets/ldapconfigwidget.cpp:94
 #, kde-format
