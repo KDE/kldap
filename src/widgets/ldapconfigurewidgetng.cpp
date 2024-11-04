@@ -74,6 +74,7 @@ void LdapConfigureWidgetNg::slotAddHost()
 
     if (dlg.exec() && !server.host().trimmed().isEmpty()) {
         mLdapModel->insertServer(server);
+        slotSelectionChanged();
         Q_EMIT changed(true);
     }
 }
@@ -127,6 +128,7 @@ void LdapConfigureWidgetNg::slotRemoveHost()
         return;
     }
     mLdapModel->removeServer(index.row());
+    slotSelectionChanged();
     Q_EMIT changed(true);
 }
 
