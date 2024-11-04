@@ -186,22 +186,6 @@ int LdapModel::columnCount(const QModelIndex &parent) const
     return nbCol;
 }
 
-QVariant LdapModel::headerData(int section, Qt::Orientation orientation, int role) const
-{
-    // Necessary ???
-    if (role == Qt::DisplayRole && orientation == Qt::Horizontal) {
-        switch (static_cast<LdapRoles>(section)) {
-        case Name:
-        case Index:
-        case Server:
-        case Activities:
-        case EnabledActivitiesRole:
-            return {};
-        }
-    }
-    return {};
-}
-
 Qt::ItemFlags LdapModel::flags(const QModelIndex &index) const
 {
     if (!index.isValid())
