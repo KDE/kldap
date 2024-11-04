@@ -8,6 +8,7 @@ using namespace KLDAPCore;
 LdapSortProxyModel::LdapSortProxyModel(QObject *parent)
     : QSortFilterProxyModel(parent)
 {
+    setFilterKeyColumn(LdapModel::Index);
 }
 
 LdapSortProxyModel::~LdapSortProxyModel() = default;
