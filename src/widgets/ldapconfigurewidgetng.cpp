@@ -165,10 +165,13 @@ void LdapConfigureWidgetNg::slotMoveDown()
     if (initialRow != (mHostListView->model()->rowCount() - 1)) {
         return;
     }
-    // TODO mLdapModel->setData(index, initialRow + 1, KLDAPCore::LdapModel::Index);
-    // TODO next item
-    // const QModelIndex nextIndex = mHostListView->selectionModel()->selectedRows().constFirst();
-    // TODO mLdapModel->setData(nextIndex, initialRow, KLDAPCore::LdapModel::Index);
+
+    const QModelIndex modelIndex = mHostListView->model()->index(index.row(), KLDAPCore::LdapModel::Index);
+
+    const QModelIndex newIndex = mHostListView->model()->index(index.row() + 1, KLDAPCore::LdapModel::Index);
+    mHostListView->model()->setData(modelIndex, initialRow);
+    mHostListView->model()->setData(newIndex, initialRow - 1);
+    mLdapSortProxyModel->invalidate();
 
     mLdapSortProxyModel->invalidate();
 #if 0
