@@ -62,6 +62,6 @@ private:
     KLDAPCore::LdapClientSearchConfig *const mClientSearchConfig;
     KLDAPCore::LdapModel *const mLdapModel;
     KLDAPCore::LdapSortProxyModel *const mLdapSortProxyModel;
-    QCheckBox *mLdapOnCurrentActivity = nullptr;
+    QCheckBox *const mLdapOnCurrentActivity;
 };
 }

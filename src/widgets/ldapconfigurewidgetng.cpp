@@ -36,6 +36,7 @@ LdapConfigureWidgetNg::LdapConfigureWidgetNg(QWidget *parent)
     , mClientSearchConfig(new KLDAPCore::LdapClientSearchConfig)
     , mLdapModel(new KLDAPCore::LdapModel(this))
     , mLdapSortProxyModel(new KLDAPCore::LdapSortProxyModel(this))
+    , mLdapOnCurrentActivity(new QCheckBox(i18n("Show only ldap server on current activity"), this))
 {
     mLdapSortProxyModel->setSourceModel(mLdapModel);
     initGUI();
@@ -184,7 +185,6 @@ void LdapConfigureWidgetNg::initGUI()
     auto mainLayout = new QVBoxLayout(this);
     mainLayout->setObjectName("layout"_L1);
 
-    mLdapOnCurrentActivity = new QCheckBox(i18n("Show only ldap server on current activity"), this);
     mainLayout->addWidget(mLdapOnCurrentActivity);
 
     connect(mLdapOnCurrentActivity, &QCheckBox::checkStateChanged, this, [this](Qt::CheckState state) {
