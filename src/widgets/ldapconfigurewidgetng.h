@@ -20,6 +20,7 @@ namespace KLDAPCore
 class LdapClientSearchConfig;
 class LdapModel;
 class LdapSortProxyModel;
+class LdapActivitiesAbstract;
 }
 
 namespace KLDAPWidgets
@@ -36,9 +37,13 @@ public:
     ~LdapConfigureWidgetNg() override;
 
     void save();
+    void load();
 
     [[nodiscard]] bool enablePlasmaActivities() const;
     void setEnablePlasmaActivities(bool newEnablePlasmaActivities);
+
+    [[nodiscard]] KLDAPCore::LdapActivitiesAbstract *ldapActivitiesAbstract() const;
+    void setLdapActivitiesAbstract(KLDAPCore::LdapActivitiesAbstract *newldapActivitiesAbstract);
 
 Q_SIGNALS:
     void changed(bool);
@@ -47,7 +52,7 @@ private:
     KLDAPWIDGETS_NO_EXPORT void slotAddHost();
     KLDAPWIDGETS_NO_EXPORT void slotEditHost();
     KLDAPWIDGETS_NO_EXPORT void slotRemoveHost();
-    KLDAPWIDGETS_NO_EXPORT void slotSelectionChanged();
+    KLDAPWIDGETS_NO_EXPORT void updateButtons();
     KLDAPWIDGETS_NO_EXPORT void slotMoveUp();
     KLDAPWIDGETS_NO_EXPORT void slotMoveDown();
     KLDAPWIDGETS_NO_EXPORT void initGUI();

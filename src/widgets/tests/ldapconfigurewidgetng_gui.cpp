@@ -12,7 +12,7 @@ int main(int argc, char **argv)
     QApplication app(argc, argv);
     app.setApplicationName(QStringLiteral("ldapconfigurewidgetng_gui"));
     auto t = new KLDAPWidgets::LdapConfigureWidgetNg();
-    // t->load();
+    t->load();
     t->show();
     app.exec();
     delete t;

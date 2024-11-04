@@ -40,7 +40,7 @@ LdapConfigureWidgetNg::LdapConfigureWidgetNg(QWidget *parent)
 {
     mLdapSortProxyModel->setSourceModel(mLdapModel);
     initGUI();
-    connect(mHostListView->selectionModel(), &QItemSelectionModel::selectionChanged, this, &LdapConfigureWidgetNg::slotSelectionChanged);
+    connect(mHostListView->selectionModel(), &QItemSelectionModel::selectionChanged, this, &LdapConfigureWidgetNg::updateButtons);
     connect(mHostListView, &QTreeView::doubleClicked, this, &LdapConfigureWidgetNg::slotEditHost);
     connect(mUpButton, &QToolButton::clicked, this, &LdapConfigureWidgetNg::slotMoveUp);
     connect(mDownButton, &QToolButton::clicked, this, &LdapConfigureWidgetNg::slotMoveDown);
@@ -56,6 +56,11 @@ void LdapConfigureWidgetNg::save()
     mLdapModel->save();
 }
 
+void LdapConfigureWidgetNg::load()
+{
+    mLdapModel->load();
+}
+
 bool LdapConfigureWidgetNg::enablePlasmaActivities() const
 {
     return mLdapSortProxyModel->enablePlasmaActivities();
@@ -67,6 +72,16 @@ void LdapConfigureWidgetNg::setEnablePlasmaActivities(bool newEnablePlasmaActivi
     mLdapOnCurrentActivity->setVisible(newEnablePlasmaActivities);
 }
 
+KLDAPCore::LdapActivitiesAbstract *LdapConfigureWidgetNg::ldapActivitiesAbstract() const
+{
+    return mLdapSortProxyModel->ldapActivitiesAbstract();
+}
+
+void LdapConfigureWidgetNg::setLdapActivitiesAbstract(KLDAPCore::LdapActivitiesAbstract *newldapActivitiesAbstract)
+{
+    mLdapSortProxyModel->setLdapActivitiesAbstract(newldapActivitiesAbstract);
+}
+
 void LdapConfigureWidgetNg::slotAddHost()
 {
     KLDAPCore::LdapServer server;
@@ -74,12 +89,12 @@ void LdapConfigureWidgetNg::slotAddHost()
 
     if (dlg.exec() && !server.host().trimmed().isEmpty()) {
         mLdapModel->insertServer(server);
-        slotSelectionChanged();
+        updateButtons();
         Q_EMIT changed(true);
     }
 }
 
-void LdapConfigureWidgetNg::slotSelectionChanged()
+void LdapConfigureWidgetNg::updateButtons()
 {
     const auto nbItems{mHostListView->selectionModel()->selectedRows().count()};
     bool state = (nbItems >= 1);
@@ -128,7 +143,7 @@ void LdapConfigureWidgetNg::slotRemoveHost()
         return;
     }
     mLdapModel->removeServer(index.row());
-    slotSelectionChanged();
+    updateButtons();
     Q_EMIT changed(true);
 }
 
@@ -150,11 +165,10 @@ void LdapConfigureWidgetNg::slotMoveUp()
     const int previousValue = mLdapSortProxyModel->mapToSource(mLdapSortProxyModel->index(previewIndex.row(), KLDAPCore::LdapModel::Index)).data().toInt();
     const int currentValue = mLdapSortProxyModel->mapToSource(mLdapSortProxyModel->index(modelIndex.row(), KLDAPCore::LdapModel::Index)).data().toInt();
 
-    qDebug() << " currentValue " << currentValue << " previousValue " << previousValue;
-
     mHostListView->model()->setData(modelIndex, previousValue);
     mHostListView->model()->setData(previewIndex, currentValue);
-    mLdapSortProxyModel->invalidate();
+    mHostListView->sortByColumn(KLDAPCore::LdapModel::Index, Qt::AscendingOrder);
+    updateButtons();
     Q_EMIT changed(true);
 }
 
@@ -177,8 +191,8 @@ void LdapConfigureWidgetNg::slotMoveDown()
 
     mHostListView->model()->setData(modelIndex, nextValue);
     mHostListView->model()->setData(nextIndex, currentValue);
-    mLdapSortProxyModel->invalidate();
-
+    mHostListView->sortByColumn(KLDAPCore::LdapModel::Index, Qt::AscendingOrder);
+    updateButtons();
     Q_EMIT changed(true);
 }
 
@@ -216,7 +230,7 @@ void LdapConfigureWidgetNg::initGUI()
     mHostListView->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
     mHostListView->setModel(mLdapSortProxyModel);
     mHostListView->setColumnHidden(KLDAPCore::LdapModel::Activities, true);
-    // mHostListView->setColumnHidden(KLDAPCore::LdapModel::Index, true);
+    mHostListView->setColumnHidden(KLDAPCore::LdapModel::Index, true);
     mHostListView->setColumnHidden(KLDAPCore::LdapModel::Server, true);
     mHostListView->setColumnHidden(KLDAPCore::LdapModel::EnabledActivitiesRole, true);
     mHostListView->header()->hide();

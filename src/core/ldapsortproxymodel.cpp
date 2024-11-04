@@ -8,7 +8,6 @@ using namespace KLDAPCore;
 LdapSortProxyModel::LdapSortProxyModel(QObject *parent)
     : QSortFilterProxyModel(parent)
 {
-    setFilterKeyColumn(LdapModel::Index);
 }
 
 LdapSortProxyModel::~LdapSortProxyModel() = default;
@@ -31,8 +30,8 @@ bool LdapSortProxyModel::lessThan(const QModelIndex &source_left, const QModelIn
         return false;
     }
     if (source_left.isValid() && source_right.isValid()) {
-        const int left = sourceModel()->data(source_left, LdapModel::Index).toInt();
-        const int right = sourceModel()->data(source_right, LdapModel::Index).toInt();
+        const int left = sourceModel()->index(source_left.row(), LdapModel::Index).data().toInt();
+        const int right = sourceModel()->index(source_right.row(), LdapModel::Index).data().toInt();
         return left < right;
     } else {
         return false;

@@ -43,6 +43,7 @@ public:
     [[nodiscard]] Qt::ItemFlags flags(const QModelIndex &index) const override;
 
     void save();
+    void load();
 
     void insertServer(const KLDAPCore::LdapServer &server);
 

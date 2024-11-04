@@ -16,7 +16,6 @@ using namespace KLDAPCore;
 LdapModel::LdapModel(QObject *parent)
     : QAbstractListModel{parent}
 {
-    init();
 }
 
 LdapModel::~LdapModel() = default;
@@ -55,6 +54,12 @@ void LdapModel::init()
         job->setServerIndex(i);
         job->start();
     }
+}
+
+void LdapModel::load()
+{
+    mLdapServerInfo.clear();
+    init();
 }
 
 void LdapModel::save()
@@ -110,20 +115,19 @@ QVariant LdapModel::data(const QModelIndex &index, int role) const
     if (role == Qt::CheckStateRole && static_cast<LdapRoles>(index.column()) == Name) {
         return serverInfo.enabled ? Qt::CheckState::Checked : Qt::CheckState::Unchecked;
     }
-    if (role != Qt::DisplayRole) {
-        return {};
-    }
-    switch (static_cast<LdapRoles>(index.column())) {
-    case Name:
-        return serverInfo.server.host();
-    case Index:
-        return serverInfo.index;
-    case Server:
-        return QVariant::fromValue(serverInfo.server);
-    case Activities:
-        return serverInfo.server.activities();
-    case EnabledActivitiesRole:
-        return serverInfo.server.enablePlasmaActivities();
+    if (role == Qt::DisplayRole) {
+        switch (static_cast<LdapRoles>(index.column())) {
+        case Name:
+            return serverInfo.server.host();
+        case Index:
+            return serverInfo.index;
+        case Server:
+            return QVariant::fromValue(serverInfo.server);
+        case Activities:
+            return serverInfo.server.activities();
+        case EnabledActivitiesRole:
+            return serverInfo.server.enablePlasmaActivities();
+        }
     }
     return {};
 }
