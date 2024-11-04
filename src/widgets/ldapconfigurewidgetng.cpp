@@ -145,15 +145,16 @@ void LdapConfigureWidgetNg::slotMoveUp()
     }
 
     const QModelIndex modelIndex = mHostListView->model()->index(index.row(), KLDAPCore::LdapModel::Index);
-
     const QModelIndex previewIndex = mHostListView->model()->index(index.row() - 1, KLDAPCore::LdapModel::Index);
-    mHostListView->model()->setData(modelIndex, initialRow - 1);
-    mHostListView->model()->setData(previewIndex, initialRow);
+
+    const int previousValue = mLdapSortProxyModel->mapToSource(mLdapSortProxyModel->index(previewIndex.row(), KLDAPCore::LdapModel::Index)).data().toInt();
+    const int currentValue = mLdapSortProxyModel->mapToSource(mLdapSortProxyModel->index(modelIndex.row(), KLDAPCore::LdapModel::Index)).data().toInt();
+
+    qDebug() << " currentValue " << currentValue << " previousValue " << previousValue;
+
+    mHostListView->model()->setData(modelIndex, previousValue);
+    mHostListView->model()->setData(previewIndex, currentValue);
     mLdapSortProxyModel->invalidate();
-#if 0
-    mHostListView->setCurrentItem(above);
-    above->setSelected(true);
-#endif
     Q_EMIT changed(true);
 }
 
@@ -169,19 +170,15 @@ void LdapConfigureWidgetNg::slotMoveDown()
     }
 
     const QModelIndex modelIndex = mHostListView->model()->index(index.row(), KLDAPCore::LdapModel::Index);
+    const QModelIndex nextIndex = mHostListView->model()->index(index.row() + 1, KLDAPCore::LdapModel::Index);
 
-    const QModelIndex newIndex = mHostListView->model()->index(index.row() + 1, KLDAPCore::LdapModel::Index);
-    mHostListView->model()->setData(modelIndex, initialRow);
-    mHostListView->model()->setData(newIndex, initialRow - 1);
+    const int nextValue = mLdapSortProxyModel->mapToSource(mLdapSortProxyModel->index(nextIndex.row(), KLDAPCore::LdapModel::Index)).data().toInt();
+    const int currentValue = mLdapSortProxyModel->mapToSource(mLdapSortProxyModel->index(modelIndex.row(), KLDAPCore::LdapModel::Index)).data().toInt();
+
+    mHostListView->model()->setData(modelIndex, nextValue);
+    mHostListView->model()->setData(nextIndex, currentValue);
     mLdapSortProxyModel->invalidate();
 
-    mLdapSortProxyModel->invalidate();
-#if 0
-
-    mHostListView->setCurrentItem(below);
-    below->setSelected(true);
-
-#endif
     Q_EMIT changed(true);
 }
 
@@ -219,7 +216,7 @@ void LdapConfigureWidgetNg::initGUI()
     mHostListView->header()->setSectionResizeMode(QHeaderView::ResizeToContents);
     mHostListView->setModel(mLdapSortProxyModel);
     mHostListView->setColumnHidden(KLDAPCore::LdapModel::Activities, true);
-    mHostListView->setColumnHidden(KLDAPCore::LdapModel::Index, true);
+    // mHostListView->setColumnHidden(KLDAPCore::LdapModel::Index, true);
     mHostListView->setColumnHidden(KLDAPCore::LdapModel::Server, true);
     mHostListView->setColumnHidden(KLDAPCore::LdapModel::EnabledActivitiesRole, true);
     mHostListView->header()->hide();
