@@ -442,6 +442,16 @@ bool LdapServer::enablePlasmaActivities() const
 
 QDebug operator<<(QDebug d, const KLDAPCore::LdapServer &t)
 {
+    d << "port " << t.port();
+    d << "host " << t.host();
+    d << "user " << t.user();
+    d << "bindDn " << t.bindDn();
+    d << "mech " << t.mech();
+    d << "security " << t.security();
+    d << "auth " << t.auth();
+    d << "tlsRequireCertificate " << t.tlsRequireCertificate();
+    d << "tlsCACertFile " << t.tlsCACertFile();
+    d << "version " << t.version();
     d << "completionWeight " << t.completionWeight();
     d << "timeout " << t.timeout();
     d << "timeLimit " << t.timeLimit();
