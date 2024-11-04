@@ -60,8 +60,10 @@ bool LdapSortProxyModel::enablePlasmaActivities() const
 
 void LdapSortProxyModel::setEnablePlasmaActivities(bool newEnablePlasmaActivities)
 {
-    mEnablePlasmaActivities = newEnablePlasmaActivities;
-    invalidateFilter();
+    if (mEnablePlasmaActivities != newEnablePlasmaActivities) {
+        mEnablePlasmaActivities = newEnablePlasmaActivities;
+        invalidateFilter();
+    }
 }
 
 #include "moc_ldapsortproxymodel.cpp"
