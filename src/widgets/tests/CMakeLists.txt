@@ -6,11 +6,6 @@ add_executable(testldapclient testldapclient.cpp testldapclient.h)
 target_link_libraries(testldapclient KPim6::LdapWidgets Qt::Widgets)
 
 #####
-add_executable(ldapconfigurewidget_gui ldapconfigurewidget_gui.cpp)
-
-target_link_libraries(ldapconfigurewidget_gui KPim6::LdapWidgets Qt::Widgets)
-
-#####
 add_executable(ldapconfigurewidgetng_gui ldapconfigurewidgetng_gui.cpp)
 
 target_link_libraries(ldapconfigurewidgetng_gui KPim6::LdapWidgets Qt::Widgets)

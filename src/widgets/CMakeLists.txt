@@ -13,7 +13,6 @@ add_library(KPim6::LdapWidgets ALIAS KPim6LdapWidgets)
 target_sources(KPim6LdapWidgets PRIVATE
     ldapconfigwidget.cpp
     addhostdialog.cpp
-    ldapconfigurewidget.cpp
     ldapconfigurewidgetng.cpp
     ldapwidgetitem_p.cpp
     ldapwidgetitemreadconfigserverjob.cpp
@@ -21,7 +20,6 @@ target_sources(KPim6LdapWidgets PRIVATE
     addhostdialog.h
     ldapwidgetitem_p.h
     ldapconfigwidget.h
-    ldapconfigurewidget.h
     ldapconfigurewidgetng.h
     ldapwidgetitemreadconfigserverjob.h
 
@@ -80,7 +78,6 @@ ecm_generate_headers(KLdapWidgets_CamelCase_HEADERS
     HEADER_NAMES
     LdapConfigWidget
     AddHostDialog
-    LdapConfigureWidget
     LdapConfigureWidgetNg
     PREFIX KLDAPWidgets
     REQUIRED_HEADERS KLdapWidgets_HEADERS
