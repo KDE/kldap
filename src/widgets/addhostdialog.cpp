@@ -9,15 +9,19 @@
 #include "addhostdialog.h"
 
 #include "kldapcore/ldapserver.h"
+#include "kldapwidgets/ldapactivitiesabstractplugin.h"
 #include "kldapwidgets/ldapconfigwidget.h"
 #include <KAcceleratorManager>
 #include <KConfigGroup>
 #include <KLocalizedString>
+#include <KPluginFactory>
+#include <KPluginMetaData>
 #include <KSharedConfig>
 #include <KWindowConfig>
 #include <QDialogButtonBox>
 #include <QHBoxLayout>
 #include <QPushButton>
+#include <QTabWidget>
 #include <QVBoxLayout>
 #include <QWindow>
 
@@ -42,6 +46,8 @@ public:
     KLDAPCore::LdapServer *mServer = nullptr;
     QPushButton *mOkButton = nullptr;
     AddHostDialog *const q;
+    QTabWidget *mTabWidget = nullptr;
+    KLDAPWidgets::LdapActivitiesAbstractPlugin *mActivitiesPlugin = nullptr;
 };
 
 void AddHostDialog::readConfig()
@@ -75,6 +81,25 @@ AddHostDialog::AddHostDialog(KLDAPCore::LdapServer *server, QWidget *parent)
     setModal(true);
 
     d->mServer = server;
+#if 0
+    d->mTabWidget = new QTabWidget(this);
+
+
+    const KPluginMetaData editWidgetPlugin(QStringLiteral("pim6/ldapactivities/kldapactivitiesplugin"));
+
+    const auto result = KPluginFactory::instantiatePlugin<KLDAPWidgets::LdapActivitiesAbstractPlugin>(editWidgetPlugin);
+    if (result) {
+        d->mActivitiesPlugin = result.plugin;
+    }
+    if (d->mActivitiesPlugin) {
+        d->ui.tabWidget->addTab(d->mActivitiesPlugin, i18n("Activities"));
+        KLDAPWidgets::LdapActivitiesAbstractPlugin::ActivitySettings settings{
+            mServer->activities(),
+            mServer->activitiesEnabled(),
+        };
+        d->mActivitiesPlugin->setActivitiesSettings(settings);
+    }
+#endif
 
     auto page = new QWidget(this);
     mainLayout->addWidget(page);
