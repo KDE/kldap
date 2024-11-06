@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-05 00:41+0000\n"
-"PO-Revision-Date: 2024-08-01 21:57+0200\n"
+"POT-Creation-Date: 2024-11-06 00:40+0000\n"
+"PO-Revision-Date: 2024-11-04 23:10+0100\n"
 "Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -105,51 +105,51 @@ msgctxt "@title:window"
 msgid "Add Host"
 msgstr "Aggiungi host"
 
-#: widgets/ldapconfigurewidget.cpp:97 widgets/ldapconfigurewidgetng.cpp:122
+#: widgets/ldapconfigurewidgetng.cpp:39
+#, kde-format
+msgid "Show only ldap server on current activity"
+msgstr "Mostra solo il server LDAP nell'attività corrente"
+
+#: widgets/ldapconfigurewidgetng.cpp:122
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "Modifica host"
 
-#: widgets/ldapconfigurewidget.cpp:114 widgets/ldapconfigurewidgetng.cpp:138
+#: widgets/ldapconfigurewidgetng.cpp:138
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Vuoi rimuovere le impostazioni per l'host «%1»?"
 
-#: widgets/ldapconfigurewidget.cpp:115 widgets/ldapconfigurewidgetng.cpp:139
+#: widgets/ldapconfigurewidgetng.cpp:139
 #, kde-format
 msgctxt "@title:window"
 msgid "Remove Host"
 msgstr "Rimuovi host"
 
-#: widgets/ldapconfigurewidget.cpp:271 widgets/ldapconfigurewidgetng.cpp:212
+#: widgets/ldapconfigurewidgetng.cpp:212
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Check all servers that should be used:"
 msgstr "Controlla tutti i server che devono essere usati:"
 
-#: widgets/ldapconfigurewidget.cpp:305 widgets/ldapconfigurewidgetng.cpp:260
+#: widgets/ldapconfigurewidgetng.cpp:260
 #, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
 msgstr "&Aggiungi host…"
 
-#: widgets/ldapconfigurewidget.cpp:307 widgets/ldapconfigurewidgetng.cpp:262
+#: widgets/ldapconfigurewidgetng.cpp:262
 #, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
 msgstr "&Modifica host…"
 
-#: widgets/ldapconfigurewidget.cpp:310 widgets/ldapconfigurewidgetng.cpp:265
+#: widgets/ldapconfigurewidgetng.cpp:265
 #, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
 msgstr "&Rimuovi host"
-
-#: widgets/ldapconfigurewidgetng.cpp:39
-#, kde-format
-msgid "Show only ldap server on current activity"
-msgstr ""
 
 #: widgets/ldapconfigwidget.cpp:94
 #, kde-format
