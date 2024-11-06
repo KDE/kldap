@@ -81,9 +81,13 @@ AddHostDialog::AddHostDialog(KLDAPCore::LdapServer *server, QWidget *parent)
     setModal(true);
 
     d->mServer = server;
-#if 0
-    d->mTabWidget = new QTabWidget(this);
 
+    d->mTabWidget = new QTabWidget(this);
+    d->mTabWidget->setTabBarAutoHide(true);
+    mainLayout->addWidget(d->mTabWidget);
+
+    auto page = new QWidget(this);
+    d->mTabWidget->addTab(page, i18n("Configure"));
 
     const KPluginMetaData editWidgetPlugin(QStringLiteral("pim6/ldapactivities/kldapactivitiesplugin"));
 
@@ -92,17 +96,14 @@ AddHostDialog::AddHostDialog(KLDAPCore::LdapServer *server, QWidget *parent)
         d->mActivitiesPlugin = result.plugin;
     }
     if (d->mActivitiesPlugin) {
-        d->ui.tabWidget->addTab(d->mActivitiesPlugin, i18n("Activities"));
+        d->mTabWidget->addTab(d->mActivitiesPlugin, i18n("Activities"));
         KLDAPWidgets::LdapActivitiesAbstractPlugin::ActivitySettings settings{
-            mServer->activities(),
-            mServer->activitiesEnabled(),
+            d->mServer->activities(),
+            d->mServer->enablePlasmaActivities(),
         };
         d->mActivitiesPlugin->setActivitiesSettings(settings);
     }
-#endif
 
-    auto page = new QWidget(this);
-    mainLayout->addWidget(page);
     mainLayout->addWidget(buttonBox);
     auto layout = new QHBoxLayout(page);
     layout->setContentsMargins(0, 0, 0, 0);
