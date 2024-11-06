@@ -14,14 +14,10 @@ target_sources(KPim6LdapWidgets PRIVATE
     ldapconfigwidget.cpp
     addhostdialog.cpp
     ldapconfigurewidgetng.cpp
-    ldapwidgetitem_p.cpp
-    ldapwidgetitemreadconfigserverjob.cpp
 
     addhostdialog.h
-    ldapwidgetitem_p.h
     ldapconfigwidget.h
     ldapconfigurewidgetng.h
-    ldapwidgetitemreadconfigserverjob.h
 
     ldapconfigurewidgetng.cpp
     ldapconfigurewidgetng.h
