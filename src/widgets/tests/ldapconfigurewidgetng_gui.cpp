@@ -15,5 +15,6 @@ int main(int argc, char **argv)
     t->load();
     t->show();
     app.exec();
+    t->save();
     delete t;
 }
