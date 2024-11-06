@@ -202,6 +202,11 @@ void AddHostDialog::slotOk()
         d->mServer->setAuth(KLDAPCore::LdapServer::Anonymous);
     }
     d->mServer->setMech(d->mCfg->mech());
+    if (d->mActivitiesPlugin) {
+        const KLDAPWidgets::LdapActivitiesAbstractPlugin::ActivitySettings settings = d->mActivitiesPlugin->activitiesSettings();
+        d->mServer->setActivities(settings.activities);
+        d->mServer->setEnablePlasmaActivities(settings.enabled);
+    }
     QDialog::accept();
 }
 
