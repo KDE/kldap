@@ -17,7 +17,7 @@ bool LdapSortProxyModel::filterAcceptsRow(int source_row, const QModelIndex &sou
     if (mLdapActivitiesAbstract && mEnablePlasmaActivities) {
         const bool enableActivities = sourceModel()->index(source_row, LdapModel::EnabledActivitiesRole).data().toBool();
         if (enableActivities) {
-            const auto activities = sourceModel()->index(source_row, 0).data(LdapModel::Activities).toStringList();
+            const auto activities = sourceModel()->index(source_row, LdapModel::Activities).data().toStringList();
             return mLdapActivitiesAbstract->filterAcceptsRow(activities);
         }
     }
