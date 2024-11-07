@@ -90,6 +90,7 @@ void LdapConfigureWidgetNg::slotAddHost()
     if (dlg.exec() && !server.host().trimmed().isEmpty()) {
         mLdapModel->insertServer(server);
         updateButtons();
+        mLdapSortProxyModel->invalidate();
         Q_EMIT changed(true);
     }
 }
@@ -123,6 +124,7 @@ void LdapConfigureWidgetNg::slotEditHost()
 
     if (dlg.exec() && !server.host().isEmpty()) {
         mHostListView->model()->setData(modelIndex, QVariant::fromValue(server));
+        mLdapSortProxyModel->invalidate();
         Q_EMIT changed(true);
     }
 }
