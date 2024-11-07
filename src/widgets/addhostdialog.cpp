@@ -21,6 +21,7 @@
 #include <QDialogButtonBox>
 #include <QHBoxLayout>
 #include <QPushButton>
+#include <QTabBar>
 #include <QTabWidget>
 #include <QVBoxLayout>
 #include <QWindow>
@@ -83,8 +84,10 @@ AddHostDialog::AddHostDialog(KLDAPCore::LdapServer *server, QWidget *parent)
     d->mServer = server;
 
     d->mTabWidget = new QTabWidget(this);
-    d->mTabWidget->setTabBarAutoHide(true);
     mainLayout->addWidget(d->mTabWidget);
+    d->mTabWidget->tabBar()->setExpanding(true);
+    d->mTabWidget->setDocumentMode(true);
+    d->mTabWidget->setTabBarAutoHide(true);
 
     auto page = new QWidget(this);
     d->mTabWidget->addTab(page, i18n("Configure"));
@@ -106,7 +109,7 @@ AddHostDialog::AddHostDialog(KLDAPCore::LdapServer *server, QWidget *parent)
 
     mainLayout->addWidget(buttonBox);
     auto layout = new QHBoxLayout(page);
-    layout->setContentsMargins(0, 0, 0, 0);
+    layout->setContentsMargins({});
 
     d->mCfg = new KLDAPWidgets::LdapConfigWidget(
         KLDAPWidgets::LdapConfigWidget::W_USER | KLDAPWidgets::LdapConfigWidget::W_PASS | KLDAPWidgets::LdapConfigWidget::W_BINDDN

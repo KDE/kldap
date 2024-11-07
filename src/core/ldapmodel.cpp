@@ -124,6 +124,7 @@ QVariant LdapModel::data(const QModelIndex &index, int role) const
         case Server:
             return QVariant::fromValue(serverInfo.server);
         case Activities:
+            qDebug() << " serverInfo.server.activities()" << serverInfo.server.activities();
             return serverInfo.server.activities();
         case EnabledActivitiesRole:
             return serverInfo.server.enablePlasmaActivities();
