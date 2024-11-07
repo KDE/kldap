@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-06 00:40+0000\n"
+"POT-Creation-Date: 2024-11-07 00:40+0000\n"
 "PO-Revision-Date: 2024-08-03 12:19+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -100,11 +100,21 @@ msgstr ""
 msgid "Cannot access to server. Please reconfigure it."
 msgstr "Non é posíbel acceder ao servidor. Por favor, configúreo de novo."
 
-#: widgets/addhostdialog.cpp:67
+#: widgets/addhostdialog.cpp:73
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Host"
 msgstr "Engadir un servidor"
+
+#: widgets/addhostdialog.cpp:90
+#, kde-format
+msgid "Configure"
+msgstr ""
+
+#: widgets/addhostdialog.cpp:99
+#, kde-format
+msgid "Activities"
+msgstr ""
 
 #: widgets/ldapconfigurewidgetng.cpp:39
 #, kde-format

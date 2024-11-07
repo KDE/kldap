@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-06 00:40+0000\n"
+"POT-Creation-Date: 2024-11-07 00:40+0000\n"
 "PO-Revision-Date: 2021-07-29 08:41+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -98,11 +98,21 @@ msgid "Cannot access to server. Please reconfigure it."
 msgstr ""
 "Αδυναμία πρόσβασης στον εξυπηρετητή. Παρακαλώ επαναλάβετε τη ρύθμισή του."
 
-#: widgets/addhostdialog.cpp:67
+#: widgets/addhostdialog.cpp:73
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Host"
 msgstr "Προσθήκη υπολογιστή"
+
+#: widgets/addhostdialog.cpp:90
+#, kde-format
+msgid "Configure"
+msgstr ""
+
+#: widgets/addhostdialog.cpp:99
+#, kde-format
+msgid "Activities"
+msgstr ""
 
 #: widgets/ldapconfigurewidgetng.cpp:39
 #, kde-format

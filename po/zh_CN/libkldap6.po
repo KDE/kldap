@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-06 00:40+0000\n"
+"POT-Creation-Date: 2024-11-07 00:40+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -92,11 +92,21 @@ msgstr ""
 msgid "Cannot access to server. Please reconfigure it."
 msgstr "无法访问服务器，请重新配置。"
 
-#: widgets/addhostdialog.cpp:67
+#: widgets/addhostdialog.cpp:73
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Host"
 msgstr "添加主机"
+
+#: widgets/addhostdialog.cpp:90
+#, kde-format
+msgid "Configure"
+msgstr ""
+
+#: widgets/addhostdialog.cpp:99
+#, kde-format
+msgid "Activities"
+msgstr ""
 
 #: widgets/ldapconfigurewidgetng.cpp:39
 #, kde-format

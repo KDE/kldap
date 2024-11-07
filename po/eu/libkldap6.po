@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-06 00:40+0000\n"
-"PO-Revision-Date: 2024-08-03 11:15+0200\n"
+"POT-Creation-Date: 2024-11-07 00:40+0000\n"
+"PO-Revision-Date: 2024-11-06 18:38+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: core/ldapconnection.cpp:126
 #, kde-format
@@ -97,16 +97,26 @@ msgstr ""
 msgid "Cannot access to server. Please reconfigure it."
 msgstr "Ezin du zerbitzaria atzitu. Mesedez, birkonfigura ezazu."
 
-#: widgets/addhostdialog.cpp:67
+#: widgets/addhostdialog.cpp:73
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Host"
 msgstr "Gehitu ostalaria"
 
+#: widgets/addhostdialog.cpp:90
+#, kde-format
+msgid "Configure"
+msgstr ""
+
+#: widgets/addhostdialog.cpp:99
+#, kde-format
+msgid "Activities"
+msgstr ""
+
 #: widgets/ldapconfigurewidgetng.cpp:39
 #, kde-format
 msgid "Show only ldap server on current activity"
-msgstr ""
+msgstr "Erakutsi LDAP zerbitzaria uneko jardueran bakarrik"
 
 #: widgets/ldapconfigurewidgetng.cpp:122
 #, kde-format
