@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-07 00:40+0000\n"
+"POT-Creation-Date: 2024-11-08 00:41+0000\n"
 "PO-Revision-Date: 2021-07-29 08:41+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -98,18 +98,18 @@ msgid "Cannot access to server. Please reconfigure it."
 msgstr ""
 "Αδυναμία πρόσβασης στον εξυπηρετητή. Παρακαλώ επαναλάβετε τη ρύθμισή του."
 
-#: widgets/addhostdialog.cpp:73
+#: widgets/addhostdialog.cpp:74
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Host"
 msgstr "Προσθήκη υπολογιστή"
 
-#: widgets/addhostdialog.cpp:90
+#: widgets/addhostdialog.cpp:93
 #, kde-format
 msgid "Configure"
 msgstr ""
 
-#: widgets/addhostdialog.cpp:99
+#: widgets/addhostdialog.cpp:102
 #, kde-format
 msgid "Activities"
 msgstr ""
@@ -119,42 +119,42 @@ msgstr ""
 msgid "Show only ldap server on current activity"
 msgstr ""
 
-#: widgets/ldapconfigurewidgetng.cpp:122
+#: widgets/ldapconfigurewidgetng.cpp:123
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "Επεξεργασία υπολογιστή"
 
-#: widgets/ldapconfigurewidgetng.cpp:138
+#: widgets/ldapconfigurewidgetng.cpp:140
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Θέλετε να διαγράψετε τη ρύθμιση για τον υπολογιστή «%1»;"
 
-#: widgets/ldapconfigurewidgetng.cpp:139
+#: widgets/ldapconfigurewidgetng.cpp:141
 #, kde-format
 msgctxt "@title:window"
 msgid "Remove Host"
 msgstr "Διαγραφή υπολογιστή"
 
-#: widgets/ldapconfigurewidgetng.cpp:212
+#: widgets/ldapconfigurewidgetng.cpp:214
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Check all servers that should be used:"
 msgstr "Να επιλεγούν όλοι οι εξυπηρετητές που θα χρησιμοποιηθούν:"
 
-#: widgets/ldapconfigurewidgetng.cpp:260
+#: widgets/ldapconfigurewidgetng.cpp:262
 #, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
 msgstr "Προσθήκ&η υπολογιστή…"
 
-#: widgets/ldapconfigurewidgetng.cpp:262
+#: widgets/ldapconfigurewidgetng.cpp:264
 #, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
 msgstr "Επεξεργασία υπολογισ&τή…"
 
-#: widgets/ldapconfigurewidgetng.cpp:265
+#: widgets/ldapconfigurewidgetng.cpp:267
 #, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
