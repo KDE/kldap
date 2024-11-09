@@ -20,7 +20,7 @@ msgstr ""
 #: core/ldapconnection.cpp:126
 #, kde-format
 msgid "No LDAP Support..."
-msgstr "无 LDAP 支持..."
+msgstr "没有 LDAP 支持..."
 
 #: core/ldapconnection.cpp:241
 #, kde-format
@@ -101,12 +101,12 @@ msgstr "添加主机"
 #: widgets/addhostdialog.cpp:93
 #, kde-format
 msgid "Configure"
-msgstr ""
+msgstr "配置"
 
 #: widgets/addhostdialog.cpp:102
 #, kde-format
 msgid "Activities"
-msgstr ""
+msgstr "活动"
 
 #: widgets/ldapconfigurewidgetng.cpp:39
 #, kde-format
