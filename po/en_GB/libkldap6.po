@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-08 00:41+0000\n"
-"PO-Revision-Date: 2024-11-01 14:08+0000\n"
+"PO-Revision-Date: 2024-11-08 14:59+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -102,12 +102,12 @@ msgstr "Add Host"
 #: widgets/addhostdialog.cpp:93
 #, kde-format
 msgid "Configure"
-msgstr ""
+msgstr "Configure"
 
 #: widgets/addhostdialog.cpp:102
 #, kde-format
 msgid "Activities"
-msgstr ""
+msgstr "Activities"
 
 #: widgets/ldapconfigurewidgetng.cpp:39
 #, kde-format

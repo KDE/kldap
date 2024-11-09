@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-08 00:41+0000\n"
-"PO-Revision-Date: 2024-08-01 13:07+0300\n"
+"PO-Revision-Date: 2024-11-08 19:34+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -107,12 +107,12 @@ msgstr "Makine Ekle"
 #: widgets/addhostdialog.cpp:93
 #, kde-format
 msgid "Configure"
-msgstr ""
+msgstr "Yapılandır"
 
 #: widgets/addhostdialog.cpp:102
 #, kde-format
 msgid "Activities"
-msgstr ""
+msgstr "Etkinlikler"
 
 #: widgets/ldapconfigurewidgetng.cpp:39
 #, kde-format
