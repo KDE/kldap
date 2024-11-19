@@ -11,19 +11,20 @@
 # Andrey Cherepanov <skull@kde.ru>, 2009.
 # Alexander Potashev <aspotashev@gmail.com>, 2011, 2014.
 # Alexander Yavorsky <kekcuha@gmail.com>, 2018, 2020, 2021, 2022.
+# SPDX-FileCopyrightText: 2024 Olesya Gerasimenko <translation-team@basealt.ru>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-08 00:41+0000\n"
-"PO-Revision-Date: 2022-10-02 14:59+0300\n"
-"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
-"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"PO-Revision-Date: 2024-11-18 15:44+0300\n"
+"Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
+"Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.08.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Environment: kde\n"
@@ -122,12 +123,12 @@ msgstr "Настройка"
 #: widgets/addhostdialog.cpp:102
 #, kde-format
 msgid "Activities"
-msgstr ""
+msgstr "Комнаты"
 
 #: widgets/ldapconfigurewidgetng.cpp:39
 #, kde-format
 msgid "Show only ldap server on current activity"
-msgstr ""
+msgstr "Показывать только сервер LDAP в текущей комнате Plasma"
 
 #: widgets/ldapconfigurewidgetng.cpp:123
 #, kde-format
@@ -141,38 +142,31 @@ msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Удалить конфигурацию для сервера «%1»?"
 
 #: widgets/ldapconfigurewidgetng.cpp:141
-#, fuzzy, kde-format
-#| msgid "Remove Host"
+#, kde-format
 msgctxt "@title:window"
 msgid "Remove Host"
 msgstr "Удаление сервера"
 
 #: widgets/ldapconfigurewidgetng.cpp:214
-#, fuzzy, kde-format
-#| msgid "Check all servers that should be used:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Check all servers that should be used:"
-msgstr "Выберите все серверы, которые должны быть использованы:"
+msgstr "Выберите все серверы, которые следует использовать:"
 
 #: widgets/ldapconfigurewidgetng.cpp:262
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Add Host"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
-msgstr "Добавление сервера"
+msgstr "&Добавить сервер…"
 
 #: widgets/ldapconfigurewidgetng.cpp:264
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Edit Host"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
-msgstr "Изменение конфигурации сервера"
+msgstr "&Изменить конфигурацию сервера…"
 
 #: widgets/ldapconfigurewidgetng.cpp:267
-#, fuzzy, kde-format
-#| msgid "&Remove Host"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
 msgstr "&Удалить сервер"
@@ -250,8 +244,7 @@ msgid "Page size:"
 msgstr "Размер страницы:"
 
 #: widgets/ldapconfigwidget.cpp:185 widgets/ldapconfigwidget.cpp:264
-#, fuzzy, kde-format
-#| msgid "Query Server"
+#, kde-format
 msgctxt "@action:button"
 msgid "Query Server"
 msgstr "Получить с сервера"
@@ -319,11 +312,10 @@ msgid "SASL mechanism:"
 msgstr "Механизм SASL:"
 
 #: widgets/ldapconfigwidget.cpp:314
-#, fuzzy, kde-format
-#| msgid "Check server"
+#, kde-format
 msgctxt "@title:window"
 msgid "Check server"
-msgstr "Проверьте сервер"
+msgstr "Проверка сервера"
 
 #: widgets/ldapconfigwidget.cpp:320
 #, kde-format
