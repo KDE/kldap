@@ -11,19 +11,20 @@
 # Andrey Cherepanov <skull@kde.ru>, 2009.
 # Alexander Potashev <aspotashev@gmail.com>, 2011, 2014.
 # Alexander Yavorsky <kekcuha@gmail.com>, 2018, 2020, 2021, 2022.
+# SPDX-FileCopyrightText: 2024 Olesya Gerasimenko <translation-team@basealt.ru>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-08 00:41+0000\n"
-"PO-Revision-Date: 2022-10-02 14:59+0300\n"
-"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
-"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"PO-Revision-Date: 2024-11-18 15:44+0300\n"
+"Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
+"Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.08.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Environment: kde\n"
@@ -122,12 +123,12 @@ msgstr "Настройка"
 #: widgets/addhostdialog.cpp:102
 #, kde-format
 msgid "Activities"
-msgstr ""
+msgstr "Комнаты"
 
 #: widgets/ldapconfigurewidgetng.cpp:39
 #, kde-format
 msgid "Show only ldap server on current activity"
-msgstr ""
+msgstr "Показывать только сервер LDAP в текущей комнате Plasma"
 
 #: widgets/ldapconfigurewidgetng.cpp:123
 #, kde-format
@@ -141,38 +142,31 @@ msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Удалить конфигурацию для сервера «%1»?"
 
 #: widgets/ldapconfigurewidgetng.cpp:141
-#, fuzzy, kde-format
-#| msgid "Remove Host"
+#, kde-format
 msgctxt "@title:window"
 msgid "Remove Host"
 msgstr "Удаление сервера"
 
 #: widgets/ldapconfigurewidgetng.cpp:214
-#, fuzzy, kde-format
-#| msgid "Check all servers that should be used:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Check all servers that should be used:"
-msgstr "Выберите все серверы, которые должны быть использованы:"
+msgstr "Выберите все серверы, которые следует использовать:"
 
 #: widgets/ldapconfigurewidgetng.cpp:262
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Add Host"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
-msgstr "Добавление сервера"
+msgstr "&Добавить сервер…"
 
 #: widgets/ldapconfigurewidgetng.cpp:264
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Edit Host"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
-msgstr "Изменение конфигурации сервера"
+msgstr "&Изменить конфигурацию сервера…"
 
 #: widgets/ldapconfigurewidgetng.cpp:267
-#, fuzzy, kde-format
-#| msgid "&Remove Host"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
 msgstr "&Удалить сервер"
@@ -250,8 +244,7 @@ msgid "Page size:"
 msgstr "Размер страницы:"
 
 #: widgets/ldapconfigwidget.cpp:185 widgets/ldapconfigwidget.cpp:264
-#, fuzzy, kde-format
-#| msgid "Query Server"
+#, kde-format
 msgctxt "@action:button"
 msgid "Query Server"
 msgstr "Получить с сервера"
@@ -319,11 +312,10 @@ msgid "SASL mechanism:"
 msgstr "Механизм SASL:"
 
 #: widgets/ldapconfigwidget.cpp:314
-#, fuzzy, kde-format
-#| msgid "Check server"
+#, kde-format
 msgctxt "@title:window"
 msgid "Check server"
-msgstr "Проверьте сервер"
+msgstr "Проверка сервера"
 
 #: widgets/ldapconfigwidget.cpp:320
 #, kde-format
@@ -377,49 +369,40 @@ msgstr "Неизвестная ошибка при подключении к %1"
 #~ msgstr "Ошибка операции с LDAP"
 
 #, fuzzy
-#~| msgid "&Save Settings"
 #~ msgid "LDAP Server Settings"
 #~ msgstr "&Сохранить параметры"
 
 #, fuzzy
-#~| msgid "(c) 2003 Tobias Koenig"
 #~ msgid "(c) 2009 - 2010 Tobias Koenig"
 #~ msgstr "(c) 2003 Tobias Koenig"
 
 #, fuzzy
-#~| msgid "(c) 2003 Tobias Koenig"
 #~ msgid "Tobias Koenig"
 #~ msgstr "(c) 2003 Tobias Koenig"
 
 #, fuzzy
-#~| msgid "Title:"
 #~ msgctxt "@item LDAP search key"
 #~ msgid "Title"
 #~ msgstr "Заголовок:"
 
 #, fuzzy
-#~| msgid "Family Name"
 #~ msgid "Full Name"
 #~ msgstr "Фамилия"
 
 #, fuzzy
-#~| msgid "Email"
 #~ msgctxt "@item LDAP search key"
 #~ msgid "Email"
 #~ msgstr "E-mail"
 
 #, fuzzy
-#~| msgid "Telephone Number"
 #~ msgid "Home Number"
 #~ msgstr "Номер телефона"
 
 #, fuzzy
-#~| msgid "of November"
 #~ msgid "Work Number"
 #~ msgstr "ноября"
 
 #, fuzzy
-#~| msgid "Middle Name"
 #~ msgid "Mobile Number"
 #~ msgstr "Отчество"
 
@@ -430,7 +413,6 @@ msgstr "Неизвестная ошибка при подключении к %1"
 #~ msgstr "Улица"
 
 #, fuzzy
-#~| msgid "State"
 #~ msgctxt "@item LDAP search key"
 #~ msgid "State"
 #~ msgstr "Состояние"
@@ -445,7 +427,6 @@ msgstr "Неизвестная ошибка при подключении к %1"
 #~ msgstr "Организация"
 
 #, fuzzy
-#~| msgid "Copy"
 #~ msgid "Company"
 #~ msgstr "Копировать"
 
@@ -453,87 +434,72 @@ msgstr "Неизвестная ошибка при подключении к %1"
 #~ msgstr "Отдел"
 
 #, fuzzy
-#~| msgid "Zipcode"
 #~ msgid "Zip Code"
 #~ msgstr "Индекс"
 
 #, fuzzy
-#~| msgid "Email Address"
 #~ msgid "Postal Address"
 #~ msgstr "Адрес электронной почты"
 
 #, fuzzy
-#~| msgid "Description:"
 #~ msgid "Description"
 #~ msgstr "Описание:"
 
 #, fuzzy
-#~| msgid "User:"
 #~ msgid "User ID"
 #~ msgstr "Пользователь:"
 
 #, fuzzy
-#~| msgid "Name"
 #~ msgctxt "Search attribute: Name of contact"
 #~ msgid "Name"
 #~ msgstr "Имя"
 
 #, fuzzy
-#~| msgid "Email"
 #~ msgctxt "Search attribute: Email of the contact"
 #~ msgid "Email"
 #~ msgstr "E-mail"
 
 #, fuzzy
-#~| msgid "Email"
 #~ msgctxt "@title:column Column containing email addresses"
 #~ msgid "Email"
 #~ msgstr "E-mail"
 
 #, fuzzy
-#~| msgid "State"
 #~ msgctxt ""
 #~ "@title:column Column containing the residential state of the address"
 #~ msgid "State"
 #~ msgstr "Состояние"
 
 #, fuzzy
-#~| msgid "Title:"
 #~ msgctxt "@title:column Column containing title of the person"
 #~ msgid "Title"
 #~ msgstr "Заголовок:"
 
 #, fuzzy
-#~| msgid "&Search:"
 #~ msgid "Search for:"
 #~ msgstr "&Поиск:"
 
 #, fuzzy
-#~| msgid "Win"
 #~ msgctxt "In LDAP attribute"
 #~ msgid "in"
 #~ msgstr "Win"
 
 #, fuzzy
-#~| msgid "Name"
 #~ msgctxt "@item:inlistbox Name of the contact"
 #~ msgid "Name"
 #~ msgstr "Имя"
 
 #, fuzzy
-#~| msgid "Email"
 #~ msgctxt "@item:inlistbox email address of the contact"
 #~ msgid "Email"
 #~ msgstr "E-mail"
 
 #, fuzzy
-#~| msgid "Telephone Number"
 #~ msgctxt "@item:inlistbox"
 #~ msgid "Home Number"
 #~ msgstr "Номер телефона"
 
 #, fuzzy
-#~| msgid "of November"
 #~ msgctxt "@item:inlistbox"
 #~ msgid "Work Number"
 #~ msgstr "ноября"
@@ -542,18 +508,15 @@ msgstr "Неизвестная ошибка при подключении к %1"
 #~ msgstr "Стоп"
 
 #, fuzzy
-#~| msgid "&Search"
 #~ msgctxt "@action:button Start searching"
 #~ msgid "&Search"
 #~ msgstr "&Поиск"
 
 #, fuzzy
-#~| msgid "Recursive search for domains"
 #~ msgid "Recursive search"
 #~ msgstr "Рекурсивный поиск доменов"
 
 #, fuzzy
-#~| msgid "Contents"
 #~ msgid "Contains"
 #~ msgstr "Содержание"
 
@@ -561,17 +524,14 @@ msgstr "Неизвестная ошибка при подключении к %1"
 #~ msgstr "Выделить все"
 
 #, fuzzy
-#~| msgid "Select All"
 #~ msgid "Unselect All"
 #~ msgstr "Выделить все"
 
 #, fuzzy
-#~| msgid "Selected"
 #~ msgid "Add Selected"
 #~ msgstr "Выделено"
 
 #, fuzzy
-#~| msgid "Configure S&hortcuts..."
 #~ msgid "Configure LDAP Servers..."
 #~ msgstr "&Комбинации клавиш..."
 
