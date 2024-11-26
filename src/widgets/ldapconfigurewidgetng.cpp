@@ -36,7 +36,7 @@ LdapConfigureWidgetNg::LdapConfigureWidgetNg(QWidget *parent)
     , mClientSearchConfig(new KLDAPCore::LdapClientSearchConfig)
     , mLdapModel(new KLDAPCore::LdapModel(this))
     , mLdapSortProxyModel(new KLDAPCore::LdapSortProxyModel(this))
-    , mLdapOnCurrentActivity(new QCheckBox(i18n("Show only ldap server on current activity"), this))
+    , mLdapOnCurrentActivity(new QCheckBox(i18n("Show only ldap servers on current activity"), this))
 {
     mLdapSortProxyModel->setSourceModel(mLdapModel);
     initGUI();
