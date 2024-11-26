@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-08 00:41+0000\n"
+"POT-Creation-Date: 2024-11-26 00:40+0000\n"
 "PO-Revision-Date: 2024-11-08 19:34+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -119,42 +119,42 @@ msgstr "Etkinlikler"
 msgid "Show only ldap server on current activity"
 msgstr "Yalnızca geçerli etkinlikteki ldap sunucusunu göster"
 
-#: widgets/ldapconfigurewidgetng.cpp:123
+#: widgets/ldapconfigurewidgetng.cpp:122
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "Makineyi Düzenle"
 
-#: widgets/ldapconfigurewidgetng.cpp:140
+#: widgets/ldapconfigurewidgetng.cpp:139
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "“%1” makinesi için ayarı kaldırmak istiyor musunuz?"
 
-#: widgets/ldapconfigurewidgetng.cpp:141
+#: widgets/ldapconfigurewidgetng.cpp:140
 #, kde-format
 msgctxt "@title:window"
 msgid "Remove Host"
 msgstr "Makineyi Kaldır"
 
-#: widgets/ldapconfigurewidgetng.cpp:214
+#: widgets/ldapconfigurewidgetng.cpp:213
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Check all servers that should be used:"
 msgstr "Kullanılması gereken tüm sunucuları denetle:"
 
-#: widgets/ldapconfigurewidgetng.cpp:262
+#: widgets/ldapconfigurewidgetng.cpp:261
 #, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
 msgstr "Makine &Ekle…"
 
-#: widgets/ldapconfigurewidgetng.cpp:264
+#: widgets/ldapconfigurewidgetng.cpp:263
 #, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
 msgstr "Makineyi &Düzenle…"
 
-#: widgets/ldapconfigurewidgetng.cpp:267
+#: widgets/ldapconfigurewidgetng.cpp:266
 #, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
