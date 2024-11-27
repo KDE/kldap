@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-26 00:40+0000\n"
+"POT-Creation-Date: 2024-11-27 00:41+0000\n"
 "PO-Revision-Date: 2024-11-15 20:23+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -114,8 +114,9 @@ msgid "Activities"
 msgstr "Aktivitások"
 
 #: widgets/ldapconfigurewidgetng.cpp:39
-#, kde-format
-msgid "Show only ldap server on current activity"
+#, fuzzy, kde-format
+#| msgid "Show only ldap server on current activity"
+msgid "Show only ldap servers on current activity"
 msgstr "Csak a jelenlegi aktivitás LDAP kiszolgálóinak megjelenítése"
 
 #: widgets/ldapconfigurewidgetng.cpp:122

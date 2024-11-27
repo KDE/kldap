@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-26 00:40+0000\n"
+"POT-Creation-Date: 2024-11-27 00:41+0000\n"
 "PO-Revision-Date: 2020-06-13 19:41+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -113,7 +113,7 @@ msgstr ""
 
 #: widgets/ldapconfigurewidgetng.cpp:39
 #, kde-format
-msgid "Show only ldap server on current activity"
+msgid "Show only ldap servers on current activity"
 msgstr ""
 
 #: widgets/ldapconfigurewidgetng.cpp:122

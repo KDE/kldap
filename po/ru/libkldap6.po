@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-26 00:40+0000\n"
+"POT-Creation-Date: 2024-11-27 00:41+0000\n"
 "PO-Revision-Date: 2024-11-18 15:44+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -126,8 +126,9 @@ msgid "Activities"
 msgstr "Комнаты"
 
 #: widgets/ldapconfigurewidgetng.cpp:39
-#, kde-format
-msgid "Show only ldap server on current activity"
+#, fuzzy, kde-format
+#| msgid "Show only ldap server on current activity"
+msgid "Show only ldap servers on current activity"
 msgstr "Показывать только сервер LDAP в текущей комнате Plasma"
 
 #: widgets/ldapconfigurewidgetng.cpp:122
