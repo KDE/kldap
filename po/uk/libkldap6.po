@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: libkldap5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-27 00:41+0000\n"
-"PO-Revision-Date: 2024-11-07 17:12+0200\n"
+"PO-Revision-Date: 2024-11-27 08:35+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -119,10 +119,9 @@ msgid "Activities"
 msgstr "Простори дій"
 
 #: widgets/ldapconfigurewidgetng.cpp:39
-#, fuzzy, kde-format
-#| msgid "Show only ldap server on current activity"
+#, kde-format
 msgid "Show only ldap servers on current activity"
-msgstr "Показувати лише сервер LDAP з поточного простору дій"
+msgstr "Показувати лише сервери LDAP з поточного простору дій"
 
 #: widgets/ldapconfigurewidgetng.cpp:122
 #, kde-format

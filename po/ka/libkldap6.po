@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-27 00:41+0000\n"
-"PO-Revision-Date: 2024-11-07 04:06+0100\n"
+"PO-Revision-Date: 2024-11-27 04:00+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -111,10 +111,9 @@ msgid "Activities"
 msgstr "აქტივობები"
 
 #: widgets/ldapconfigurewidgetng.cpp:39
-#, fuzzy, kde-format
-#| msgid "Show only ldap server on current activity"
+#, kde-format
 msgid "Show only ldap servers on current activity"
-msgstr "მიმდინარე აქტივობაზე, მხოლოდ, ldap სერვერის ჩვენება"
+msgstr "მიმდინარე აქტივობაზე, მხოლოდ, ldap სერვერების ჩვენება"
 
 #: widgets/ldapconfigurewidgetng.cpp:122
 #, kde-format

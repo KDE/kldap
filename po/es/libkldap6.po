@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-27 00:41+0000\n"
-"PO-Revision-Date: 2024-11-07 02:24+0100\n"
+"PO-Revision-Date: 2024-11-28 00:54+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 24.08.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: core/ldapconnection.cpp:126
@@ -118,10 +118,9 @@ msgid "Activities"
 msgstr "Actividades"
 
 #: widgets/ldapconfigurewidgetng.cpp:39
-#, fuzzy, kde-format
-#| msgid "Show only ldap server on current activity"
+#, kde-format
 msgid "Show only ldap servers on current activity"
-msgstr "Mostrar el servidor LDAP solo en la actividad actual"
+msgstr "Mostrar servidores LDAP solo en la actividad actual"
 
 #: widgets/ldapconfigurewidgetng.cpp:122
 #, kde-format

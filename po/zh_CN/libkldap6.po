@@ -109,10 +109,9 @@ msgid "Activities"
 msgstr "活动"
 
 #: widgets/ldapconfigurewidgetng.cpp:39
-#, fuzzy, kde-format
-#| msgid "Show only ldap server on current activity"
+#, kde-format
 msgid "Show only ldap servers on current activity"
-msgstr "仅显示当前活动中的 LDAP 服务器"
+msgstr ""
 
 #: widgets/ldapconfigurewidgetng.cpp:122
 #, kde-format
