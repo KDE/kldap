@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-27 00:41+0000\n"
-"PO-Revision-Date: 2024-08-15 11:52+0400\n"
+"PO-Revision-Date: 2024-11-28 12:23+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -109,17 +109,17 @@ msgstr "اضف مضيف"
 #: widgets/addhostdialog.cpp:93
 #, kde-format
 msgid "Configure"
-msgstr ""
+msgstr "اضبط"
 
 #: widgets/addhostdialog.cpp:102
 #, kde-format
 msgid "Activities"
-msgstr ""
+msgstr "الأنشطة"
 
 #: widgets/ldapconfigurewidgetng.cpp:39
 #, kde-format
 msgid "Show only ldap servers on current activity"
-msgstr ""
+msgstr "أظهر خوادم LDAP فقط في النشاط الحالي"
 
 #: widgets/ldapconfigurewidgetng.cpp:122
 #, kde-format
