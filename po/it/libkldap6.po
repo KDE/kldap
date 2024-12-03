@@ -2,14 +2,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Federico Zenith <federico.zenith@member.fsf.org>, 2007.
-# Luigi Toscano <luigi.toscano@tiscali.it>, 2014, 2017, 2018, 2019, 2020, 2021, 2024.
+# SPDX-FileCopyrightText: 2014, 2017, 2018, 2019, 2020, 2021, 2024 Luigi Toscano <luigi.toscano@tiscali.it>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-27 00:41+0000\n"
-"PO-Revision-Date: 2024-11-08 12:56+0100\n"
+"PO-Revision-Date: 2024-11-27 13:37+0100\n"
 "Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #: core/ldapconnection.cpp:126
 #, kde-format
@@ -116,10 +116,9 @@ msgid "Activities"
 msgstr "Attività"
 
 #: widgets/ldapconfigurewidgetng.cpp:39
-#, fuzzy, kde-format
-#| msgid "Show only ldap server on current activity"
+#, kde-format
 msgid "Show only ldap servers on current activity"
-msgstr "Mostra solo il server LDAP nell'attività corrente"
+msgstr "Mostra solo i server LDAP nell'attività corrente"
 
 #: widgets/ldapconfigurewidgetng.cpp:122
 #, kde-format
