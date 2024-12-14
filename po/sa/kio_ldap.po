@@ -1,0 +1,65 @@
+# Sanskrit translations for kldap package.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the kldap package.
+# Kali <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kldap\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-04-03 00:38+0000\n"
+"PO-Revision-Date: 2024-12-13 19:09+0530\n"
+"Last-Translator: Kali <EMAIL@ADDRESS>\n"
+"Language-Team: Sanskrit\n"
+"Language: sa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: kio_ldap.cpp:88
+#, kde-format
+msgid ""
+"\n"
+"Additional info: "
+msgstr ""
+"\n"
+"अतिरिक्तसूचनाः १. "
+
+#: kio_ldap.cpp:163
+#, kde-format
+msgid ""
+"LDAP server returned the error: %1 %2\n"
+"The LDAP URL was: %3"
+msgstr ""
+"LDAP सर्वरः त्रुटिं प्रत्यागच्छत्: %1 %2\n"
+"LDAP URL आसीत्: %3"
+
+#: kio_ldap.cpp:294
+#, kde-format
+msgid "LDAP Login"
+msgstr "LDAP प्रवेशः"
+
+#: kio_ldap.cpp:296
+#, kde-format
+msgid "site:"
+msgstr "क्षेत्र:"
+
+#: kio_ldap.cpp:321
+#, kde-format
+msgid "Invalid authorization information."
+msgstr "अमान्य प्राधिकरणसूचना।"
+
+#: kio_ldap.cpp:329
+#, kde-format
+msgid "LDAP connection canceled."
+msgstr "LDAP संयोजनं रद्दं कृतम्।"
+
+#: kio_ldap.cpp:586 kio_ldap.cpp:652
+#, kde-format
+msgid "The Ldif parser failed."
+msgstr "Ldif पार्सरः विफलः अभवत् ।"
+
+#: kio_ldap.cpp:663
+#, kde-format
+msgid "Invalid Ldif file in line %1."
+msgstr "%1 पङ्क्तौ अमान्यम् Ldif सञ्चिका ।"

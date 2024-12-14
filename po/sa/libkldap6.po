@@ -1,0 +1,314 @@
+# Sanskrit translations for kldap package.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the kldap package.
+# Kali <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kldap\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-11-27 00:41+0000\n"
+"PO-Revision-Date: 2024-12-13 19:09+0530\n"
+"Last-Translator: Kali <EMAIL@ADDRESS>\n"
+"Language-Team: Sanskrit\n"
+"Language: sa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n>2);\n"
+
+#: core/ldapconnection.cpp:126
+#, kde-format
+msgid "No LDAP Support..."
+msgstr "LDAP समर्थनं नास्ति..."
+
+#: core/ldapconnection.cpp:241
+#, kde-format
+msgid "An error occurred during the connection initialization phase."
+msgstr "संयोजनप्रारम्भचरणस्य समये त्रुटिः अभवत् ।"
+
+#: core/ldapconnection.cpp:248
+#, kde-format
+msgid "Cannot set protocol version to %1."
+msgstr "प्रोटोकॉलसंस्करणं %1 इति सेट् कर्तुं न शक्यते ।"
+
+#: core/ldapconnection.cpp:259
+#, kde-format
+msgid "Cannot set timeout to %1 second."
+msgid_plural "Cannot set timeout to %1 seconds."
+msgstr[0] ""
+msgstr[1] ""
+
+#: core/ldapconnection.cpp:271
+#, kde-format
+msgid "Could not set CA certificate file."
+msgstr "CA प्रमाणपत्रसञ्चिकां सेट् कर्तुं न शक्तवान् ।"
+
+#: core/ldapconnection.cpp:296
+#, kde-format
+msgid "Invalid TLS require certificate mode."
+msgstr "अमान्य TLS प्रमाणपत्रविधानस्य आवश्यकता भवति ।"
+
+#: core/ldapconnection.cpp:301
+#, kde-format
+msgid "Could not set TLS require certificate mode."
+msgstr "TLS इत्यस्य प्रमाणपत्रविधानस्य आवश्यकता सेट् कर्तुं न शक्तम् ।"
+
+#: core/ldapconnection.cpp:310
+#, kde-format
+msgid "Could not initialize new TLS context."
+msgstr "नूतनं TLS सन्दर्भं आरभुं न शक्तवान् ।"
+
+#: core/ldapconnection.cpp:327
+#, kde-format
+msgid "TLS support not available in the LDAP client libraries."
+msgstr "LDAP क्लायन्ट् पुस्तकालयेषु TLS समर्थनं उपलब्धं नास्ति ।"
+
+#: core/ldapconnection.cpp:337
+#, kde-format
+msgid "Cannot set size limit."
+msgstr "आकारसीमा निर्धारयितुं न शक्यते।"
+
+#: core/ldapconnection.cpp:347
+#, kde-format
+msgid "Cannot set time limit."
+msgstr "समयसीमा निर्धारयितुं न शक्यते।"
+
+#: core/ldapconnection.cpp:355
+#, kde-format
+msgid "Cannot initialize the SASL client."
+msgstr "SASL क्लायन्ट् प्रारम्भं कर्तुं न शक्यते ।"
+
+#: core/ldapconnection.cpp:432
+#, kde-format
+msgid ""
+"LDAP support not compiled in. Please recompile libkldap with the OpenLDAP "
+"(or compatible) client libraries, or complain to your distribution packagers."
+msgstr ""
+"LDAP समर्थनं संकलितं न कृतम् कृपया libkldap इत्येतत् OpenLDAP (अथवा संगत) क्लायन्ट् "
+"पुस्तकालयैः सह पुनः संकलितं कुर्वन्तु, अथवा स्वस्य वितरणसङ्कुलकानां कृते शिकायतुं शक्नुवन्ति ।"
+
+#: core/ldapsearch.cpp:222
+#, kde-format
+msgid "Cannot access to server. Please reconfigure it."
+msgstr "सर्वरं प्राप्तुं न शक्नोति। कृपया पुनः विन्यस्यताम् ।"
+
+#: widgets/addhostdialog.cpp:74
+#, kde-format
+msgctxt "@title:window"
+msgid "Add Host"
+msgstr ""
+
+#: widgets/addhostdialog.cpp:93
+#, kde-format
+msgid "Configure"
+msgstr "विन्यस्तं कुर्वन्तु"
+
+#: widgets/addhostdialog.cpp:102
+#, kde-format
+msgid "Activities"
+msgstr "गतिविधयः"
+
+#: widgets/ldapconfigurewidgetng.cpp:39
+#, kde-format
+msgid "Show only ldap servers on current activity"
+msgstr "वर्तमानक्रियाकलापस्य उपरि केवलं ldap सर्वरान् दर्शयतु"
+
+#: widgets/ldapconfigurewidgetng.cpp:122
+#, kde-format
+msgctxt "@title:window"
+msgid "Edit Host"
+msgstr ""
+
+#: widgets/ldapconfigurewidgetng.cpp:139
+#, kde-format
+msgid "Do you want to remove setting for host \"%1\"?"
+msgstr "किं भवान् \"%1\" होस्ट् कृते सेटिङ्ग् अपसारयितुम् इच्छति?"
+
+#: widgets/ldapconfigurewidgetng.cpp:140
+#, kde-format
+msgctxt "@title:window"
+msgid "Remove Host"
+msgstr ""
+
+#: widgets/ldapconfigurewidgetng.cpp:213
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Check all servers that should be used:"
+msgstr ""
+
+#: widgets/ldapconfigurewidgetng.cpp:261
+#, kde-format
+msgctxt "@action:button"
+msgid "&Add Host…"
+msgstr ""
+
+#: widgets/ldapconfigurewidgetng.cpp:263
+#, kde-format
+msgctxt "@action:button"
+msgid "&Edit Host…"
+msgstr ""
+
+#: widgets/ldapconfigurewidgetng.cpp:266
+#, kde-format
+msgctxt "@action:button"
+msgid "&Remove Host"
+msgstr ""
+
+#: widgets/ldapconfigwidget.cpp:94
+#, kde-format
+msgid "User:"
+msgstr "उपयोक्ता : १."
+
+#: widgets/ldapconfigwidget.cpp:102
+#, kde-format
+msgid "Bind DN:"
+msgstr "बाइंड डी एन : १."
+
+#: widgets/ldapconfigwidget.cpp:110
+#, kde-format
+msgid "Realm:"
+msgstr "क्षेत्रम् : १."
+
+#: widgets/ldapconfigwidget.cpp:120
+#, kde-format
+msgid "Password:"
+msgstr "समाभाष्:"
+
+#: widgets/ldapconfigwidget.cpp:128
+#, kde-format
+msgid "Host:"
+msgstr "निमन्त्रकः:"
+
+#: widgets/ldapconfigwidget.cpp:137
+#, kde-format
+msgid "Port:"
+msgstr "पोताश्रय:"
+
+#: widgets/ldapconfigwidget.cpp:145
+#, kde-format
+msgid "LDAP version:"
+msgstr "LDAP संस्करणम् : १."
+
+#: widgets/ldapconfigwidget.cpp:153
+#, kde-format
+msgctxt "default ldap size limit"
+msgid "Default"
+msgstr ""
+
+#: widgets/ldapconfigwidget.cpp:154
+#, kde-format
+msgid "Size limit:"
+msgstr "आकारसीमा : १."
+
+#: widgets/ldapconfigwidget.cpp:162
+#, kde-format
+msgid " sec"
+msgstr " सेक"
+
+#: widgets/ldapconfigwidget.cpp:163
+#, kde-format
+msgctxt "default ldap time limit"
+msgid "Default"
+msgstr ""
+
+#: widgets/ldapconfigwidget.cpp:164
+#, kde-format
+msgid "Time limit:"
+msgstr "समयसीमा : १."
+
+#: widgets/ldapconfigwidget.cpp:172
+#, kde-format
+msgid "No paging"
+msgstr "न पेजिंग्"
+
+#: widgets/ldapconfigwidget.cpp:173
+#, kde-format
+msgid "Page size:"
+msgstr "पृष्ठस्य आकारः : १."
+
+#: widgets/ldapconfigwidget.cpp:185 widgets/ldapconfigwidget.cpp:264
+#, kde-format
+msgctxt "@action:button"
+msgid "Query Server"
+msgstr ""
+
+#: widgets/ldapconfigwidget.cpp:195
+#, kde-format
+msgctxt "Distinguished Name"
+msgid "DN:"
+msgstr ""
+
+#: widgets/ldapconfigwidget.cpp:203
+#, kde-format
+msgid "Filter:"
+msgstr "फ़िल्टर : १."
+
+#: widgets/ldapconfigwidget.cpp:212
+#, kde-format
+msgctxt "@option:radio set no security"
+msgid "No"
+msgstr ""
+
+#: widgets/ldapconfigwidget.cpp:215
+#, kde-format
+msgctxt "@option:radio use TLS security"
+msgid "TLS"
+msgstr ""
+
+#: widgets/ldapconfigwidget.cpp:218
+#, kde-format
+msgctxt "@option:radio use SSL security"
+msgid "SSL"
+msgstr ""
+
+#: widgets/ldapconfigwidget.cpp:233
+#, kde-format
+msgid "Security:"
+msgstr "सुरक्षा:"
+
+#: widgets/ldapconfigwidget.cpp:243
+#, kde-format
+msgctxt "@option:radio anonymous authentication"
+msgid "Anonymous"
+msgstr ""
+
+#: widgets/ldapconfigwidget.cpp:246
+#, kde-format
+msgctxt "@option:radio simple authentication"
+msgid "Simple"
+msgstr ""
+
+#: widgets/ldapconfigwidget.cpp:249
+#, kde-format
+msgctxt "@option:radio SASL authentication"
+msgid "SASL"
+msgstr ""
+
+#: widgets/ldapconfigwidget.cpp:252
+#, kde-format
+msgid "Authentication:"
+msgstr "प्रमाणीकरणम् : १."
+
+#: widgets/ldapconfigwidget.cpp:270
+#, kde-format
+msgid "SASL mechanism:"
+msgstr "SASL तन्त्रम् : १."
+
+#: widgets/ldapconfigwidget.cpp:314
+#, kde-format
+msgctxt "@title:window"
+msgid "Check server"
+msgstr ""
+
+#: widgets/ldapconfigwidget.cpp:320
+#, kde-format
+msgctxt "@title:window"
+msgid "LDAP Query"
+msgstr ""
+
+#: widgets/ldapconfigwidget.cpp:334
+#, kde-format
+msgctxt "%1 is a url to ldap server"
+msgid "Unknown error connecting %1"
+msgstr ""
