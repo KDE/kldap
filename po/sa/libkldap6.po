@@ -3,19 +3,21 @@
 # This file is distributed under the same license as the kldap package.
 # Kali <EMAIL@ADDRESS>, 2024.
 #
+# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-27 00:41+0000\n"
-"PO-Revision-Date: 2024-12-13 19:09+0530\n"
-"Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
+"PO-Revision-Date: 2024-12-14 01:48+0530\n"
+"Last-Translator: kali <skkalwar999@gmail.com>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n>2);\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: core/ldapconnection.cpp:126
 #, kde-format
@@ -36,8 +38,8 @@ msgstr "प्रोटोकॉलसंस्करणं %1 इति से�
 #, kde-format
 msgid "Cannot set timeout to %1 second."
 msgid_plural "Cannot set timeout to %1 seconds."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "%1 सेकण्ड् इति समयसमाप्तिः सेट् कर्तुं न शक्यते ।"
+msgstr[1] "%1 सेकण्ड् इति समयसमाप्तिः सेट् कर्तुं न शक्यते ।"
 
 #: core/ldapconnection.cpp:271
 #, kde-format
@@ -97,7 +99,7 @@ msgstr "सर्वरं प्राप्तुं न शक्नोति
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Host"
-msgstr ""
+msgstr "Host योजयतु"
 
 #: widgets/addhostdialog.cpp:93
 #, kde-format
@@ -118,7 +120,7 @@ msgstr "वर्तमानक्रियाकलापस्य उपर�
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
-msgstr ""
+msgstr "होस्ट सम्पादयतु"
 
 #: widgets/ldapconfigurewidgetng.cpp:139
 #, kde-format
@@ -129,31 +131,31 @@ msgstr "किं भवान् \"%1\" होस्ट् कृते से�
 #, kde-format
 msgctxt "@title:window"
 msgid "Remove Host"
-msgstr ""
+msgstr "होस्ट् निष्कासयन्तु"
 
 #: widgets/ldapconfigurewidgetng.cpp:213
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Check all servers that should be used:"
-msgstr ""
+msgstr "येषां सर्वेषां सर्वराणां उपयोगः करणीयः, तेषां जाँचं कुर्वन्तु:"
 
 #: widgets/ldapconfigurewidgetng.cpp:261
 #, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
-msgstr ""
+msgstr "&Host योजयतु…"
 
 #: widgets/ldapconfigurewidgetng.cpp:263
 #, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
-msgstr ""
+msgstr "&सम्पादन मेजबान…"
 
 #: widgets/ldapconfigurewidgetng.cpp:266
 #, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
-msgstr ""
+msgstr "&होस्टं निष्कासयन्तु"
 
 #: widgets/ldapconfigwidget.cpp:94
 #, kde-format
@@ -194,7 +196,7 @@ msgstr "LDAP संस्करणम् : १."
 #, kde-format
 msgctxt "default ldap size limit"
 msgid "Default"
-msgstr ""
+msgstr "मूलभूतम्‌"
 
 #: widgets/ldapconfigwidget.cpp:154
 #, kde-format
@@ -210,7 +212,7 @@ msgstr " सेक"
 #, kde-format
 msgctxt "default ldap time limit"
 msgid "Default"
-msgstr ""
+msgstr "मूलभूतम्‌"
 
 #: widgets/ldapconfigwidget.cpp:164
 #, kde-format
@@ -231,13 +233,13 @@ msgstr "पृष्ठस्य आकारः : १."
 #, kde-format
 msgctxt "@action:button"
 msgid "Query Server"
-msgstr ""
+msgstr "क्वेरी सर्वर"
 
 #: widgets/ldapconfigwidget.cpp:195
 #, kde-format
 msgctxt "Distinguished Name"
 msgid "DN:"
-msgstr ""
+msgstr "डी.एन."
 
 #: widgets/ldapconfigwidget.cpp:203
 #, kde-format
@@ -248,19 +250,19 @@ msgstr "फ़िल्टर : १."
 #, kde-format
 msgctxt "@option:radio set no security"
 msgid "No"
-msgstr ""
+msgstr "नहि"
 
 #: widgets/ldapconfigwidget.cpp:215
 #, kde-format
 msgctxt "@option:radio use TLS security"
 msgid "TLS"
-msgstr ""
+msgstr "TLS"
 
 #: widgets/ldapconfigwidget.cpp:218
 #, kde-format
 msgctxt "@option:radio use SSL security"
 msgid "SSL"
-msgstr ""
+msgstr "SSL"
 
 #: widgets/ldapconfigwidget.cpp:233
 #, kde-format
@@ -271,19 +273,19 @@ msgstr "सुरक्षा:"
 #, kde-format
 msgctxt "@option:radio anonymous authentication"
 msgid "Anonymous"
-msgstr ""
+msgstr "अनामक"
 
 #: widgets/ldapconfigwidget.cpp:246
 #, kde-format
 msgctxt "@option:radio simple authentication"
 msgid "Simple"
-msgstr ""
+msgstr "सरलं"
 
 #: widgets/ldapconfigwidget.cpp:249
 #, kde-format
 msgctxt "@option:radio SASL authentication"
 msgid "SASL"
-msgstr ""
+msgstr "SASL"
 
 #: widgets/ldapconfigwidget.cpp:252
 #, kde-format
@@ -299,16 +301,16 @@ msgstr "SASL तन्त्रम् : १."
 #, kde-format
 msgctxt "@title:window"
 msgid "Check server"
-msgstr ""
+msgstr "सर्वरं पश्यन्तु"
 
 #: widgets/ldapconfigwidget.cpp:320
 #, kde-format
 msgctxt "@title:window"
 msgid "LDAP Query"
-msgstr ""
+msgstr "LDAP प्रश्नः"
 
 #: widgets/ldapconfigwidget.cpp:334
 #, kde-format
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
-msgstr ""
+msgstr "%1 संयोजयन् अज्ञातदोषः"
