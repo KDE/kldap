@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: libkldap6\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-08 00:41+0000\n"
-"PO-Revision-Date: 2024-09-07 00:18+0200\n"
+"PO-Revision-Date: 2024-12-23 17:07+0100\n"
 "Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.11.70\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #: core/ldapconnection.cpp:126
 #, kde-format
@@ -108,17 +108,17 @@ msgstr "Rechner hinzufügen"
 #: widgets/addhostdialog.cpp:93
 #, kde-format
 msgid "Configure"
-msgstr ""
+msgstr "Einrichten"
 
 #: widgets/addhostdialog.cpp:102
 #, kde-format
 msgid "Activities"
-msgstr ""
+msgstr "Aktivitäten"
 
 #: widgets/ldapconfigurewidgetng.cpp:39
 #, kde-format
 msgid "Show only ldap server on current activity"
-msgstr ""
+msgstr "Nur die LDAP-Server der aktuellen Identität anzeigen"
 
 #: widgets/ldapconfigurewidgetng.cpp:123
 #, kde-format
