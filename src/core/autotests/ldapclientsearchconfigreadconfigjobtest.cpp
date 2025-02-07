@@ -7,7 +7,7 @@
 #include "ldapclientsearchconfigreadconfigjobtest.h"
 #include "ldapclientsearchconfigreadconfigjob.h"
 #include <QTest>
-QTEST_MAIN(LdapClientSearchConfigReadConfigJobTest)
+QTEST_GUILESS_MAIN(LdapClientSearchConfigReadConfigJobTest)
 LdapClientSearchConfigReadConfigJobTest::LdapClientSearchConfigReadConfigJobTest(QObject *parent)
     : QObject(parent)
 {

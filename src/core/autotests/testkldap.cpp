@@ -19,7 +19,7 @@
 #include <QDebug>
 #include <QFile>
 #include <QTest>
-QTEST_MAIN(KLdapTest)
+QTEST_GUILESS_MAIN(KLdapTest)
 
 KLdapTest::KLdapTest(QObject *parent)
     : QObject(parent)
