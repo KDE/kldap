@@ -320,20 +320,3 @@ msgstr "Consulta LDAP"
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr "Error desconegut en connectar %1"
-
-#~ msgid "&Add Host..."
-#~ msgstr "&Afegeix una màquina..."
-
-#~ msgid "&Edit Host..."
-#~ msgstr "&Edita la màquina..."
-
-#~ msgid ""
-#~ "LDAP password is stored as clear text, do you want to store it in kwallet?"
-#~ msgstr ""
-#~ "La contrasenya LDAP s'emmagatzema com a text, voleu desar-la al KWallet?"
-
-#~ msgid "Store clear text password in Wallet"
-#~ msgstr "Desa la contrasenya de text a la Cartera"
-
-#~ msgid "LDAP Servers"
-#~ msgstr "Servidors LDAP"
