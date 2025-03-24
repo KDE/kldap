@@ -180,7 +180,8 @@ bool LdapModel::setData(const QModelIndex &modelIndex, const QVariant &value, in
 
 int LdapModel::rowCount(const QModelIndex &parent) const
 {
-    Q_UNUSED(parent)
+    if (parent.isValid()) // flat model
+        return 0;
     return mLdapServerInfo.count();
 }
 
