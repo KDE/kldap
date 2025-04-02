@@ -11,13 +11,13 @@
 # Andrey Cherepanov <skull@kde.ru>, 2009.
 # Alexander Potashev <aspotashev@gmail.com>, 2011, 2014.
 # Alexander Yavorsky <kekcuha@gmail.com>, 2018, 2020, 2021, 2022.
-# SPDX-FileCopyrightText: 2024 Olesya Gerasimenko <translation-team@basealt.ru>
+# SPDX-FileCopyrightText: 2024, 2025 Olesya Gerasimenko <translation-team@basealt.ru>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-27 00:41+0000\n"
-"PO-Revision-Date: 2024-11-18 15:44+0300\n"
+"PO-Revision-Date: 2025-04-01 14:42+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -126,10 +126,9 @@ msgid "Activities"
 msgstr "Комнаты"
 
 #: widgets/ldapconfigurewidgetng.cpp:39
-#, fuzzy, kde-format
-#| msgid "Show only ldap server on current activity"
+#, kde-format
 msgid "Show only ldap servers on current activity"
-msgstr "Показывать только сервер LDAP в текущей комнате Plasma"
+msgstr "Показывать только серверы LDAP в текущей комнате Plasma"
 
 #: widgets/ldapconfigurewidgetng.cpp:122
 #, kde-format
