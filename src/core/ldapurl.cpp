@@ -16,13 +16,12 @@ class Q_DECL_HIDDEN LdapUrl::LdapUrlPrivate
 {
 public:
     LdapUrlPrivate()
-        : m_scope(Base)
     {
     }
 
     QMap<QString, Extension> m_extensions;
     QStringList m_attributes;
-    Scope m_scope;
+    Scope m_scope{Base};
     QString m_filter;
 };
 
