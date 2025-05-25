@@ -99,7 +99,7 @@ msgstr ""
 #: core/ldapsearch.cpp:222
 #, kde-format
 msgid "Cannot access to server. Please reconfigure it."
-msgstr "No s'ha pogut accedir a l'amfitrió. Torneu a configurar-lo."
+msgstr "No s'ha pogut accedir al servidor. Torneu a configurar-lo."
 
 #: widgets/addhostdialog.cpp:74
 #, kde-format
@@ -137,7 +137,7 @@ msgstr "Voleu eliminar la configuració per a l'amfitrió «%1»?"
 #, kde-format
 msgctxt "@title:window"
 msgid "Remove Host"
-msgstr "Eliminació de màquina"
+msgstr "Elimineu un amfitrió"
 
 #: widgets/ldapconfigurewidgetng.cpp:213
 #, kde-format
