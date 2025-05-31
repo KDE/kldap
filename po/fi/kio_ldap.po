@@ -1,4 +1,5 @@
 # translation of kio_ldap.po to
+# SPDX-FileCopyrightText: 2025 Tommi Nieminen <translator@legisign.org>
 # Ilpo Kantonen <ilpo@iki.fi>, 2004, 2005.
 # Mikko Piippo <piippo@cc.helsinki.fi>, 2007.
 # KDE Finnish translation sprint participants:
@@ -7,14 +8,15 @@ msgstr ""
 "Project-Id-Version: kio_ldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-03 00:38+0000\n"
-"PO-Revision-Date: 2013-01-20 20:04:10+0000\n"
-"Last-Translator: Mikko Piippo <piippo@cc.helsinki.fi>\n"
-"Language-Team: Finnish <lokalisointi@lists.coss.fi>\n"
+"PO-Revision-Date: 2025-05-29 15:19+0300\n"
+"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
+"Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: kio_ldap.cpp:88
 #, kde-format
@@ -32,17 +34,17 @@ msgid ""
 "The LDAP URL was: %3"
 msgstr ""
 "LDAP-palvelin palautti virheen: %1 %2\n"
-"LDAP URL oli: %3"
+"LDAPin verkko-osoite oli: %3"
 
 #: kio_ldap.cpp:294
 #, kde-format
 msgid "LDAP Login"
-msgstr "LDAP Sisäänkirjautuminen"
+msgstr "LDAP-kirjautuminen"
 
 #: kio_ldap.cpp:296
 #, kde-format
 msgid "site:"
-msgstr "kohde:"
+msgstr "sivusto:"
 
 #: kio_ldap.cpp:321
 #, kde-format
@@ -57,7 +59,7 @@ msgstr "LDAP-yhteys peruttu."
 #: kio_ldap.cpp:586 kio_ldap.cpp:652
 #, kde-format
 msgid "The Ldif parser failed."
-msgstr "LDIF-jäsentäjä epäonnistui."
+msgstr "LDIF-jäsennys epäonnistui."
 
 #: kio_ldap.cpp:663
 #, kde-format
