@@ -301,7 +301,7 @@ void KLdapTest::testLdapModel()
   QCOMPARE( url.dn(), QStringLiteral("ou=People,dc=kde,dc=org") );
 
   LdapServer server;
-//  url.setUrl("ldaps://cn=manager,dc=kde,dc=org:passwor@localhost:3999/"
+//  url.setUrl("ldaps://cn=manager,dc=kde,dc=org:password@localhost:3999/"
                "dc=kde,dc=org????x-timelimt=5,x-sizelimit=6,x=pagesize=7,binddn=cn=apple,ou=berry");
 url.setUrl("ldaps://cn=manager,dc=kde,dc=org:password@localhost:3999/"
            "dc=kde,dc=org??base??x-timelimit=5");

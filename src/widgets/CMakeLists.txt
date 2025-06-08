@@ -10,19 +10,19 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KLDAPWIDGETS
 add_library(KPim6LdapWidgets)
 add_library(KPim6::LdapWidgets ALIAS KPim6LdapWidgets)
 
-target_sources(KPim6LdapWidgets PRIVATE
-    ldapconfigwidget.cpp
-    addhostdialog.cpp
-    ldapconfigurewidgetng.cpp
-
-    addhostdialog.h
-    ldapconfigwidget.h
-    ldapconfigurewidgetng.h
-
-    ldapconfigurewidgetng.cpp
-    ldapconfigurewidgetng.h
-    ldapactivitiesabstractplugin.h
-    ldapactivitiesabstractplugin.cpp
+target_sources(
+    KPim6LdapWidgets
+    PRIVATE
+        ldapconfigwidget.cpp
+        addhostdialog.cpp
+        ldapconfigurewidgetng.cpp
+        addhostdialog.h
+        ldapconfigwidget.h
+        ldapconfigurewidgetng.h
+        ldapconfigurewidgetng.cpp
+        ldapconfigurewidgetng.h
+        ldapactivitiesabstractplugin.h
+        ldapactivitiesabstractplugin.cpp
 )
 
 ecm_qt_declare_logging_category(KPim6LdapWidgets HEADER ldap_widgets_debug.h IDENTIFIER LDAP_LOG CATEGORY_NAME org.kde.pim.ldap.widgets
@@ -42,33 +42,45 @@ if(COMPILE_WITH_UNITY_CMAKE_SUPPORT)
 endif()
 generate_export_header(KPim6LdapWidgets BASE_NAME kldapwidgets)
 
-
-
-target_link_libraries(KPim6LdapWidgets
-    PUBLIC
-    KPim6::LdapCore
+target_link_libraries(
+    KPim6LdapWidgets
+    PUBLIC KPim6::LdapCore
     PRIVATE
-    Qt::Widgets
-    KF6::I18n
-    KF6::WidgetsAddons
-    KF6::ConfigCore
-    KF6::CoreAddons
-    KF6::KIOCore
-    KF6::ConfigGui
+        Qt::Widgets
+        KF6::I18n
+        KF6::WidgetsAddons
+        KF6::ConfigCore
+        KF6::CoreAddons
+        KF6::KIOCore
+        KF6::ConfigGui
 )
 
 target_link_libraries(KPim6LdapWidgets PRIVATE qt6keychain)
 
-target_include_directories(KPim6LdapWidgets INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPWidgets>")
-target_include_directories(KPim6LdapWidgets PUBLIC "$<BUILD_INTERFACE:${KLdap_SOURCE_DIR}/src/widgets;${KLdap_BINARY_DIR}/src>")
-
-set_target_properties(KPim6LdapWidgets PROPERTIES
-    VERSION ${KLDAPWIDGETS_VERSION}
-    SOVERSION ${KLDAPWIDGETS_SOVERSION}
-    EXPORT_NAME LdapWidgets
+target_include_directories(
+    KPim6LdapWidgets
+    INTERFACE
+        "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPWidgets>"
+)
+target_include_directories(
+    KPim6LdapWidgets
+    PUBLIC
+        "$<BUILD_INTERFACE:${KLdap_SOURCE_DIR}/src/widgets;${KLdap_BINARY_DIR}/src>"
 )
 
-install(TARGETS KPim6LdapWidgets EXPORT KPim6LdapWidgetsTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+set_target_properties(
+    KPim6LdapWidgets
+    PROPERTIES
+        VERSION ${KLDAPWIDGETS_VERSION}
+        SOVERSION ${KLDAPWIDGETS_SOVERSION}
+        EXPORT_NAME LdapWidgets
+)
+
+install(
+    TARGETS KPim6LdapWidgets
+    EXPORT KPim6LdapWidgetsTargets
+    ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
+)
 
 ########### install files ###############
 
@@ -82,25 +94,25 @@ ecm_generate_headers(KLdapWidgets_CamelCase_HEADERS
     REQUIRED_HEADERS KLdapWidgets_HEADERS
 )
 
-install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/kldapwidgets_export.h
-    ${KLdapWidgets_HEADERS}
+install(
+    FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/kldapwidgets_export.h
+        ${KLdapWidgets_HEADERS}
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPWidgets/kldapwidgets
     COMPONENT Devel
 )
 
-install(FILES
-    ${KLdapWidgets_CamelCase_HEADERS}
+install(
+    FILES ${KLdapWidgets_CamelCase_HEADERS}
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPWidgets/KLDAPWidgets/
     COMPONENT Devel
 )
 
-install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/kldap_widgets_version.h
+install(
+    FILES ${CMAKE_CURRENT_BINARY_DIR}/kldap_widgets_version.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPWidgets
     COMPONENT Devel
 )
-
 
 if(BUILD_QCH)
     ecm_add_qch(
@@ -125,7 +137,7 @@ if(BUILD_QCH)
         TAGFILE_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
         QCH_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
         COMPONENT Devel
-)
+    )
 endif()
 
 if(BUILD_TESTING)
@@ -135,8 +147,12 @@ endif()
 
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim6LdapWidgets")
 
-install(EXPORT KPim6LdapWidgetsTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KPim6LdapWidgetsTargets.cmake NAMESPACE KPim6::)
-
+install(
+    EXPORT KPim6LdapWidgetsTargets
+    DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+    FILE KPim6LdapWidgetsTargets.cmake
+    NAMESPACE KPim6::
+)
 
 if(BUILD_QCH)
     ecm_install_qch_export(
@@ -144,21 +160,22 @@ if(BUILD_QCH)
         FILE KPim6LdapWidgetsQchTargets.cmake
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
-)
-set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6LdapWidgetsQchTargets.cmake\")")
+    )
+    set(PACKAGE_INCLUDE_QCHTARGETS
+        "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6LdapWidgetsQchTargets.cmake\")"
+    )
 endif()
-
 
 configure_package_config_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/KPimLdapWidgetsConfig.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapWidgetsConfig.cmake"
-    INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
+    INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
 )
 
-install(FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapWidgetsConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapWidgetsConfigVersion.cmake"
+install(
+    FILES
+        "${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapWidgetsConfig.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapWidgetsConfigVersion.cmake"
     DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
     COMPONENT Devel
 )
-

@@ -3,6 +3,5 @@
 add_subdirectory(src)
 
 if(KF6DocTools_FOUND)
-        add_subdirectory(doc)
+    add_subdirectory(doc)
 endif()
-

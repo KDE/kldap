@@ -11,10 +11,15 @@ ecm_qt_declare_logging_category(kio_ldap
         EXPORT KLDAP
 )
 
-
-target_link_libraries(kio_ldap Qt::Network KF6::KIOCore KF6::I18n KPim6::LdapCore)
+target_link_libraries(
+    kio_ldap
+    Qt::Network
+    KF6::KIOCore
+    KF6::I18n
+    KPim6::LdapCore
+)
 if(WIN32)
     target_link_libraries(kio_ldap ws2_32)
 endif()
 set_target_properties(kio_ldap PROPERTIES OUTPUT_NAME "ldap")
-install(TARGETS kio_ldap  DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf6/kio)
+install(TARGETS kio_ldap DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf6/kio)

@@ -10,7 +10,6 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KLDAPCORE
     SOVERSION 6
 )
 
-
 check_include_files(sys/time.h HAVE_SYS_TIME_H)
 
 set(kldap_EXTRA_LIBS)
@@ -27,7 +26,10 @@ if(Ldap_FOUND)
     check_function_exists(ber_memfree HAVE_BER_MEMFREE)
     check_function_exists(ldap_unbind_ext HAVE_LDAP_UNBIND_EXT)
     check_function_exists(ldap_extended_operation HAVE_LDAP_EXTENDED_OPERATION)
-    check_function_exists(ldap_extended_operation_s HAVE_LDAP_EXTENDED_OPERATION_S)
+    check_function_exists(
+        ldap_extended_operation_s
+        HAVE_LDAP_EXTENDED_OPERATION_S
+    )
 endif()
 
 set(kldap_EXTRA_LIBS ${kldap_EXTRA_LIBS} Sasl2::Sasl2)
@@ -39,51 +41,49 @@ configure_file(kldap_config.h.in ${CMAKE_CURRENT_BINARY_DIR}/kldap_config.h)
 add_library(KPim6LdapCore)
 add_library(KPim6::LdapCore ALIAS KPim6LdapCore)
 
-target_sources(KPim6LdapCore PRIVATE
-    ber.cpp
-    ldif.cpp
-    ldapurl.cpp
-    ldapserver.cpp
-    ldapobject.cpp
-    ldapconnection.cpp
-    ldapoperation.cpp
-    ldapcontrol.cpp
-    ldapsearch.cpp
-    ldapdn.cpp
-    ldif.h
-    ldapsearch.h
-    w32-ldap-help.h
-    ldapurl.h
-    ldapcontrol.h
-    ber.h
-    ldapdefs.h
-    ldapconnection.h
-    ldapdn.h
-    ldapoperation.h
-    ldapserver.h
-    ldapobject.h
-
-    ldapmodel.h
-    ldapmodel.cpp
-    ldapsortproxymodel.cpp
-    ldapsortproxymodel.h
-
-    ldapactivitiesabstract.h
-    ldapactivitiesabstract.cpp
-
-    ldapclientsearchconfigreadconfigjob.cpp
-    ldapclientsearchconfigreadconfigjob.h
-    ldapclientsearchconfigwriteconfigjob.cpp
-    ldapclientsearchconfigwriteconfigjob.h
-    ldapsearchclientreadconfigserverjob.cpp
-    ldapsearchclientreadconfigserverjob.h
-
-    ldapclient.cpp
-    ldapclient.h
-    ldapclientsearchconfig.cpp
-    ldapclientsearchconfig.h
-    ldapclientsearch.cpp
-    ldapclientsearch.h
+target_sources(
+    KPim6LdapCore
+    PRIVATE
+        ber.cpp
+        ldif.cpp
+        ldapurl.cpp
+        ldapserver.cpp
+        ldapobject.cpp
+        ldapconnection.cpp
+        ldapoperation.cpp
+        ldapcontrol.cpp
+        ldapsearch.cpp
+        ldapdn.cpp
+        ldif.h
+        ldapsearch.h
+        w32-ldap-help.h
+        ldapurl.h
+        ldapcontrol.h
+        ber.h
+        ldapdefs.h
+        ldapconnection.h
+        ldapdn.h
+        ldapoperation.h
+        ldapserver.h
+        ldapobject.h
+        ldapmodel.h
+        ldapmodel.cpp
+        ldapsortproxymodel.cpp
+        ldapsortproxymodel.h
+        ldapactivitiesabstract.h
+        ldapactivitiesabstract.cpp
+        ldapclientsearchconfigreadconfigjob.cpp
+        ldapclientsearchconfigreadconfigjob.h
+        ldapclientsearchconfigwriteconfigjob.cpp
+        ldapclientsearchconfigwriteconfigjob.h
+        ldapsearchclientreadconfigserverjob.cpp
+        ldapsearchclientreadconfigserverjob.h
+        ldapclient.cpp
+        ldapclient.h
+        ldapclientsearchconfig.cpp
+        ldapclientsearchconfig.h
+        ldapclientsearch.cpp
+        ldapclientsearch.h
 )
 
 ecm_qt_declare_logging_category(KPim6LdapCore HEADER ldap_core_debug.h IDENTIFIER LDAP_CORE_LOG CATEGORY_NAME org.kde.pim.ldap.core
@@ -102,29 +102,41 @@ if(COMPILE_WITH_UNITY_CMAKE_SUPPORT)
 endif()
 generate_export_header(KPim6LdapCore BASE_NAME kldap_core)
 
-
-
-target_link_libraries(KPim6LdapCore
+target_link_libraries(
+    KPim6LdapCore
     PRIVATE
-    KF6::I18n
-    KF6::ConfigCore
-    KF6::CoreAddons
-    KF6::KIOCore
-    ${kldap_EXTRA_LIBS}
+        KF6::I18n
+        KF6::ConfigCore
+        KF6::CoreAddons
+        KF6::KIOCore
+        ${kldap_EXTRA_LIBS}
 )
 
 target_link_libraries(KPim6LdapCore PRIVATE qt6keychain)
 
-target_include_directories(KPim6LdapCore INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPCore>")
-target_include_directories(KPim6LdapCore PUBLIC "$<BUILD_INTERFACE:${KLdap_SOURCE_DIR}/src/core;${KLdap_BINARY_DIR}/src>")
-
-set_target_properties(KPim6LdapCore PROPERTIES
-    VERSION ${KLDAPCORE_VERSION}
-    SOVERSION ${KLDAPCORE_SOVERSION}
-    EXPORT_NAME LdapCore
+target_include_directories(
+    KPim6LdapCore
+    INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPCore>"
+)
+target_include_directories(
+    KPim6LdapCore
+    PUBLIC
+        "$<BUILD_INTERFACE:${KLdap_SOURCE_DIR}/src/core;${KLdap_BINARY_DIR}/src>"
 )
 
-install(TARGETS KPim6LdapCore EXPORT KPim6LdapCoreTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
+set_target_properties(
+    KPim6LdapCore
+    PROPERTIES
+        VERSION ${KLDAPCORE_VERSION}
+        SOVERSION ${KLDAPCORE_SOVERSION}
+        EXPORT_NAME LdapCore
+)
+
+install(
+    TARGETS KPim6LdapCore
+    EXPORT KPim6LdapCoreTargets
+    ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
+)
 
 ########### install files ###############
 
@@ -154,15 +166,14 @@ ecm_generate_headers(KLdapCore_CamelCase_HEADERS
     REQUIRED_HEADERS KLdapCore_HEADERS
 )
 
-install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/kldap_core_export.h
-    ${KLdapCore_HEADERS}
+install(
+    FILES ${CMAKE_CURRENT_BINARY_DIR}/kldap_core_export.h ${KLdapCore_HEADERS}
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPCore/kldapcore
     COMPONENT Devel
 )
 
-install(FILES
-    ${KLdapCore_CamelCase_HEADERS}
+install(
+    FILES ${KLdapCore_CamelCase_HEADERS}
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPCore/KLDAPCore/
     COMPONENT Devel
 )
@@ -188,10 +199,9 @@ if(BUILD_QCH)
         TAGFILE_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
         QCH_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
         COMPONENT Devel
-)
+    )
 endif()
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim6LdapCore")
-
 
 if(BUILD_QCH)
     ecm_install_qch_export(
@@ -199,28 +209,35 @@ if(BUILD_QCH)
         FILE KPim6LdapCoreQchTargets.cmake
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
-)
-set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6LdapCoreQchTargets.cmake\")")
+    )
+    set(PACKAGE_INCLUDE_QCHTARGETS
+        "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6LdapCoreQchTargets.cmake\")"
+    )
 endif()
 
-install(EXPORT KPim6LdapCoreTargets DESTINATION "${CMAKECONFIG_INSTALL_DIR}" FILE KPim6LdapCoreTargets.cmake NAMESPACE KPim6::)
-
+install(
+    EXPORT KPim6LdapCoreTargets
+    DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
+    FILE KPim6LdapCoreTargets.cmake
+    NAMESPACE KPim6::
+)
 
 configure_package_config_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/KPimLdapCoreConfig.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapCoreConfig.cmake"
-    INSTALL_DESTINATION  ${CMAKECONFIG_INSTALL_DIR}
+    INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
 )
 
-install(FILES
-    "${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapCoreConfig.cmake"
-    "${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapCoreConfigVersion.cmake"
+install(
+    FILES
+        "${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapCoreConfig.cmake"
+        "${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapCoreConfigVersion.cmake"
     DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
     COMPONENT Devel
 )
 
-install(FILES
-    ${CMAKE_CURRENT_BINARY_DIR}/kldap_core_version.h
+install(
+    FILES ${CMAKE_CURRENT_BINARY_DIR}/kldap_core_version.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPCore
     COMPONENT Devel
 )
@@ -228,4 +245,3 @@ install(FILES
 if(BUILD_TESTING)
     add_subdirectory(autotests)
 endif()
-

@@ -41,59 +41,102 @@
 find_path(Ldap_INCLUDE_DIRS NAMES ldap.h)
 
 if(APPLE)
-   find_library(Ldap_LIBRARIES NAMES LDAP
-      PATHS
-      /System/Library/Frameworks
-      /Library/Frameworks
-   )
+    find_library(
+        Ldap_LIBRARIES
+        NAMES LDAP
+        PATHS /System/Library/Frameworks /Library/Frameworks
+    )
 else()
-   find_library(Ldap_LIBRARY NAMES ldap)
-   find_library(Lber_LIBRARY NAMES lber)
+    find_library(Ldap_LIBRARY NAMES ldap)
+    find_library(Lber_LIBRARY NAMES lber)
 endif()
 
 if(Ldap_LIBRARY AND Lber_LIBRARY)
-  set(Ldap_LIBRARIES ${Ldap_LIBRARY} ${Lber_LIBRARY})
+    set(Ldap_LIBRARIES ${Ldap_LIBRARY} ${Lber_LIBRARY})
 endif()
 
 if(EXISTS ${Ldap_INCLUDE_DIRS}/ldap_features.h)
-  file(READ ${Ldap_INCLUDE_DIRS}/ldap_features.h LDAP_FEATURES_H_CONTENT)
-  string(REGEX MATCH "#define LDAP_VENDOR_VERSION_MAJOR[ ]+[0-9]+" _LDAP_VERSION_MAJOR_MATCH ${LDAP_FEATURES_H_CONTENT})
-  string(REGEX MATCH "#define LDAP_VENDOR_VERSION_MINOR[ ]+[0-9]+" _LDAP_VERSION_MINOR_MATCH ${LDAP_FEATURES_H_CONTENT})
-  string(REGEX MATCH "#define LDAP_VENDOR_VERSION_PATCH[ ]+[0-9]+" _LDAP_VERSION_PATCH_MATCH ${LDAP_FEATURES_H_CONTENT})
+    file(READ ${Ldap_INCLUDE_DIRS}/ldap_features.h LDAP_FEATURES_H_CONTENT)
+    string(
+        REGEX MATCH
+        "#define LDAP_VENDOR_VERSION_MAJOR[ ]+[0-9]+"
+        _LDAP_VERSION_MAJOR_MATCH
+        ${LDAP_FEATURES_H_CONTENT}
+    )
+    string(
+        REGEX MATCH
+        "#define LDAP_VENDOR_VERSION_MINOR[ ]+[0-9]+"
+        _LDAP_VERSION_MINOR_MATCH
+        ${LDAP_FEATURES_H_CONTENT}
+    )
+    string(
+        REGEX MATCH
+        "#define LDAP_VENDOR_VERSION_PATCH[ ]+[0-9]+"
+        _LDAP_VERSION_PATCH_MATCH
+        ${LDAP_FEATURES_H_CONTENT}
+    )
 
-  string(REGEX REPLACE ".*_MAJOR[ ]+(.*)" "\\1" LDAP_VERSION_MAJOR ${_LDAP_VERSION_MAJOR_MATCH})
-  string(REGEX REPLACE ".*_MINOR[ ]+(.*)" "\\1" LDAP_VERSION_MINOR ${_LDAP_VERSION_MINOR_MATCH})
-  string(REGEX REPLACE ".*_PATCH[ ]+(.*)" "\\1" LDAP_VERSION_PATCH ${_LDAP_VERSION_PATCH_MATCH})
+    string(
+        REGEX REPLACE
+        ".*_MAJOR[ ]+(.*)"
+        "\\1"
+        LDAP_VERSION_MAJOR
+        ${_LDAP_VERSION_MAJOR_MATCH}
+    )
+    string(
+        REGEX REPLACE
+        ".*_MINOR[ ]+(.*)"
+        "\\1"
+        LDAP_VERSION_MINOR
+        ${_LDAP_VERSION_MINOR_MATCH}
+    )
+    string(
+        REGEX REPLACE
+        ".*_PATCH[ ]+(.*)"
+        "\\1"
+        LDAP_VERSION_PATCH
+        ${_LDAP_VERSION_PATCH_MATCH}
+    )
 
-  set(Ldap_VERSION "${LDAP_VERSION_MAJOR}.${LDAP_VERSION_MINOR}.${LDAP_VERSION_PATCH}")
+    set(Ldap_VERSION
+        "${LDAP_VERSION_MAJOR}.${LDAP_VERSION_MINOR}.${LDAP_VERSION_PATCH}"
+    )
 endif()
 
 include(FindPackageHandleStandardArgs)
 
-find_package_handle_standard_args(Ldap
+find_package_handle_standard_args(
+    Ldap
     FOUND_VAR Ldap_FOUND
     REQUIRED_VARS Ldap_LIBRARIES Ldap_INCLUDE_DIRS
     VERSION_VAR Ldap_VERSION
 )
 
 if(Ldap_FOUND AND NOT TARGET Lber::Lber)
-  add_library(Lber::Lber UNKNOWN IMPORTED)
-  set_target_properties(Lber::Lber PROPERTIES
-  IMPORTED_LOCATION "${Lber_LIBRARY}")
+    add_library(Lber::Lber UNKNOWN IMPORTED)
+    set_target_properties(
+        Lber::Lber
+        PROPERTIES IMPORTED_LOCATION "${Lber_LIBRARY}"
+    )
 endif()
 
 if(Ldap_FOUND AND NOT TARGET Ldap::Ldap)
-  add_library(Ldap::Ldap UNKNOWN IMPORTED)
-  set_target_properties(Ldap::Ldap PROPERTIES
-  IMPORTED_LOCATION "${Ldap_LIBRARY}"
-  INTERFACE_INCLUDE_DIRECTORIES "${Ldap_INCLUDE_DIRS}"
-  INTERFACE_LINK_LIBRARIES Lber::Lber)
+    add_library(Ldap::Ldap UNKNOWN IMPORTED)
+    set_target_properties(
+        Ldap::Ldap
+        PROPERTIES
+            IMPORTED_LOCATION "${Ldap_LIBRARY}"
+            INTERFACE_INCLUDE_DIRECTORIES "${Ldap_INCLUDE_DIRS}"
+            INTERFACE_LINK_LIBRARIES Lber::Lber
+    )
 endif()
 
 mark_as_advanced(Ldap_INCLUDE_DIRS Ldap_LIBRARY Lber_LIBRARY Ldap_LIBRARIES)
 
 include(FeatureSummary)
-set_package_properties(Ldap PROPERTIES
-  URL "https://www.openldap.org/"
-  DESCRIPTION "LDAP (Lightweight Directory Access Protocol) libraries."
+set_package_properties(
+    Ldap
+    PROPERTIES
+        URL "https://www.openldap.org/"
+        DESCRIPTION "LDAP (Lightweight Directory Access Protocol) libraries."
 )

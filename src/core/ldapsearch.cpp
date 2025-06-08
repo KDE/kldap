@@ -205,7 +205,7 @@ bool LdapSearchPrivate::startSearch(const LdapDN &base, LdapUrl::Scope scope, co
     LdapControls savedctrls = mOp.serverControls();
     if (pagesize) {
         LdapControls ctrls = savedctrls;
-        mConn->setOption(0x0008, nullptr); // Disable referals or paging won't work
+        mConn->setOption(0x0008, nullptr); // Disable referrals or paging won't work
         LdapControl::insert(ctrls, LdapControl::createPageControl(pagesize));
         mOp.setServerControls(ctrls);
     }
