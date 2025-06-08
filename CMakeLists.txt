@@ -28,7 +28,6 @@ file(
     kioworker/*.cpp
     kioworker/*.h
 )
-kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 
 set(PRE_COMMIT_INSTALLED FALSE)
 if(${CMAKE_SOURCE_DIR} STREQUAL ${PROJECT_SOURCE_DIR})
