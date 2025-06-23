@@ -245,12 +245,12 @@ void LdapConfigureWidgetNg::initGUI()
     upDownBoxVBoxLayout->setSpacing(6);
     mUpButton = new QToolButton(upDownBox);
     upDownBoxVBoxLayout->addWidget(mUpButton);
-    mUpButton->setIcon(QIcon::fromTheme(QStringLiteral("go-up")));
+    mUpButton->setIcon(QIcon::fromTheme(u"go-up"_s));
     mUpButton->setEnabled(false); // b/c no item is selected yet
 
     mDownButton = new QToolButton(upDownBox);
     upDownBoxVBoxLayout->addWidget(mDownButton);
-    mDownButton->setIcon(QIcon::fromTheme(QStringLiteral("go-down")));
+    mDownButton->setIcon(QIcon::fromTheme(u"go-down"_s));
     mDownButton->setEnabled(false); // b/c no item is selected yet
 
     auto spacer = new QWidget(upDownBox);

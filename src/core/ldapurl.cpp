@@ -61,17 +61,17 @@ LdapUrl::~LdapUrl() = default;
 void LdapUrl::setDn(const LdapDN &dn)
 {
     const QString tmp = dn.toString();
-    if (tmp.startsWith(QLatin1Char('/'))) {
+    if (tmp.startsWith(u'/')) {
         setPath(tmp);
     } else {
-        setPath(QLatin1Char('/') + tmp);
+        setPath(u'/' + tmp);
     }
 }
 
 LdapDN LdapUrl::dn() const
 {
     QString tmp = path();
-    if (tmp.startsWith(QLatin1Char('/'))) {
+    if (tmp.startsWith(u'/')) {
         tmp = tmp.mid(1);
     }
     const LdapDN tmpDN(tmp);
@@ -169,46 +169,46 @@ void LdapUrl::removeExtension(const QString &key)
 void LdapUrl::updateQuery()
 {
     QMap<QString, Extension>::const_iterator it;
-    QString q(QLatin1Char('?'));
+    QString q(u'?');
 
     // set the attributes to query
     if (!d->m_attributes.isEmpty()) {
-        q += d->m_attributes.join(QLatin1Char(','));
+        q += d->m_attributes.join(u',');
     }
 
     // set the scope
-    q += QLatin1Char('?');
+    q += u'?';
     switch (d->m_scope) {
     case Sub:
-        q += QStringLiteral("sub");
+        q += u"sub"_s;
         break;
     case One:
-        q += QStringLiteral("one");
+        q += u"one"_s;
         break;
     case Base:
-        q += QStringLiteral("base");
+        q += u"base"_s;
         break;
     }
 
     // set the filter
-    q += QLatin1Char('?');
+    q += u'?';
     if (d->m_filter != "(objectClass=*)"_L1 && !d->m_filter.isEmpty()) {
         q += QLatin1StringView(toPercentEncoding(d->m_filter));
     }
 
     // set the extensions
-    q += QLatin1Char('?');
+    q += u'?';
     for (it = d->m_extensions.constBegin(); it != d->m_extensions.constEnd(); ++it) {
         if (it.value().critical) {
-            q += QLatin1Char('!');
+            q += u'!';
         }
         q += it.key();
         if (!it.value().value.isEmpty()) {
-            q += QLatin1Char('=') + QLatin1StringView(toPercentEncoding(it.value().value));
+            q += u'=' + QLatin1StringView(toPercentEncoding(it.value().value));
         }
-        q += QLatin1Char(',');
+        q += u',';
     }
-    while (q.endsWith(QLatin1Char('?')) || q.endsWith(QLatin1Char(','))) {
+    while (q.endsWith(u'?') || q.endsWith(u',')) {
         q.remove(q.length() - 1, 1);
     }
 
@@ -222,16 +222,16 @@ void LdapUrl::parseQuery()
     QStringList extensions;
     QString q = query(QUrl::FullyEncoded);
     // remove first ?
-    if (q.startsWith(QLatin1Char('?'))) {
+    if (q.startsWith(u'?')) {
         q.remove(0, 1);
     }
 
     // split into a list
-    const QStringList url_items = q.split(QLatin1Char('?'));
+    const QStringList url_items = q.split(u'?');
 
     d->m_attributes.clear();
     d->m_scope = Base;
-    d->m_filter = QStringLiteral("(objectClass=*)");
+    d->m_filter = u"(objectClass=*)"_s;
     d->m_extensions.clear();
 
     int i = 0;
@@ -239,7 +239,7 @@ void LdapUrl::parseQuery()
     for (QStringList::const_iterator it = url_items.constBegin(); it != end; ++it, i++) {
         switch (i) {
         case 0:
-            d->m_attributes = (*it).split(QLatin1Char(','), Qt::SkipEmptyParts);
+            d->m_attributes = (*it).split(u',', Qt::SkipEmptyParts);
             break;
         case 1:
             if ((*it) == "sub"_L1) {
@@ -252,7 +252,7 @@ void LdapUrl::parseQuery()
             d->m_filter = fromPercentEncoding((*it).toLatin1());
             break;
         case 3:
-            extensions = (*it).split(QLatin1Char(','), Qt::SkipEmptyParts);
+            extensions = (*it).split(u',', Qt::SkipEmptyParts);
             break;
         }
     }
@@ -262,9 +262,9 @@ void LdapUrl::parseQuery()
     QStringList::const_iterator end2(extensions.constEnd());
     for (QStringList::const_iterator it = extensions.constBegin(); it != end2; ++it) {
         ext.critical = false;
-        name = fromPercentEncoding((*it).section(QLatin1Char('='), 0, 0).toLatin1()).toLower();
-        value = fromPercentEncoding((*it).section(QLatin1Char('='), 1).toLatin1());
-        if (name.startsWith(QLatin1Char('!'))) {
+        name = fromPercentEncoding((*it).section(u'=', 0, 0).toLatin1()).toLower();
+        value = fromPercentEncoding((*it).section(u'=', 1).toLatin1());
+        if (name.startsWith(u'!')) {
             ext.critical = true;
             name.remove(0, 1);
         }

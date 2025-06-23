@@ -35,7 +35,7 @@
 #include "ldapdefs.h"
 
 using namespace KLDAPCore;
-
+using namespace Qt::Literals::StringLiterals;
 #if LDAP_FOUND
 static void extractControls(LdapControls &ctrls, LDAPControl **pctrls);
 #endif // LDAP_FOUND
@@ -240,7 +240,7 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds, SASL_Call
 
         QString mech = server.mech();
         if (mech.isEmpty()) {
-            mech = QStringLiteral("DIGEST-MD5");
+            mech = u"DIGEST-MD5"_s;
         }
 
         SASL_Data sasldata;

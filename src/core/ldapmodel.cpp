@@ -13,6 +13,7 @@
 #include <KLDAPCore/LdapClientSearchConfigReadConfigJob>
 #include <KLDAPCore/LdapClientSearchConfigWriteConfigJob>
 using namespace KLDAPCore;
+using namespace Qt::Literals::StringLiterals;
 LdapModel::LdapModel(QObject *parent)
     : QAbstractListModel{parent}
 {
@@ -23,7 +24,7 @@ LdapModel::~LdapModel() = default;
 void LdapModel::init()
 {
     KConfig *config = KLDAPCore::LdapClientSearchConfig::config();
-    KConfigGroup group(config, QStringLiteral("LDAP"));
+    KConfigGroup group(config, u"LDAP"_s);
 
     const int countSelectedHost = group.readEntry("NumSelectedHosts", 0);
     for (int i = 0; i < countSelectedHost; ++i) {
@@ -65,9 +66,9 @@ void LdapModel::load()
 void LdapModel::save()
 {
     KConfig *config = KLDAPCore::LdapClientSearchConfig::config();
-    config->deleteGroup(QStringLiteral("LDAP"));
+    config->deleteGroup(u"LDAP"_s);
 
-    KConfigGroup group(config, QStringLiteral("LDAP"));
+    KConfigGroup group(config, u"LDAP"_s);
 
     int selected = 0;
     int unselected = 0;

@@ -20,7 +20,7 @@
 #include <QFile>
 #include <QTest>
 QTEST_GUILESS_MAIN(KLdapTest)
-
+using namespace Qt::Literals::StringLiterals;
 KLdapTest::KLdapTest(QObject *parent)
     : QObject(parent)
 {
@@ -34,7 +34,7 @@ void KLdapTest::initTestCase()
       The specified server should not be a production server in case we break anything here.
       You have been warned!
     */
-    const QString filename(QStringLiteral("testurl.txt"));
+    const QString filename(u"testurl.txt"_s);
     QFile file(filename);
     if (file.open(QIODevice::ReadOnly | QIODevice::Text)) {
         QTextStream stream(&file);
@@ -83,37 +83,37 @@ void KLdapTest::testBer()
 
     ainteger = 23543;
 
-    ber1.printf(QStringLiteral("i"), ainteger);
-    ber2.printf(QStringLiteral("o"), &aoctetString1);
-    ber3.printf(QStringLiteral("O"), &aoctetString2);
-    ber4.printf(QStringLiteral("s"), &aoctetString3);
-    ber5.printf(QStringLiteral("{v}"), &alist1);
-    ber6.printf(QStringLiteral("{V}"), &alist2);
-    ber7.printf(QStringLiteral("oi{v}O"), &aoctetString1, ainteger, &alist2, &aoctetString2);
+    ber1.printf(u"i"_s, ainteger);
+    ber2.printf(u"o"_s, &aoctetString1);
+    ber3.printf(u"O"_s, &aoctetString2);
+    ber4.printf(u"s"_s, &aoctetString3);
+    ber5.printf(u"{v}"_s, &alist1);
+    ber6.printf(u"{V}"_s, &alist2);
+    ber7.printf(u"oi{v}O"_s, &aoctetString1, ainteger, &alist2, &aoctetString2);
 
     // test integer:
     bber = ber1;
-    bber.scanf(QStringLiteral("i"), &binteger);
+    bber.scanf(u"i"_s, &binteger);
     QCOMPARE(ainteger, binteger);
 
     // test octet strings:
     bber = ber2;
-    bber.scanf(QStringLiteral("o"), &boctetString1);
+    bber.scanf(u"o"_s, &boctetString1);
     QCOMPARE(aoctetString1, boctetString1);
     bber = ber3;
-    bber.scanf(QStringLiteral("o"), &boctetString2);
+    bber.scanf(u"o"_s, &boctetString2);
     QCOMPARE(aoctetString2, boctetString2);
     bber = ber4;
-    bber.scanf(QStringLiteral("o"), &boctetString3);
+    bber.scanf(u"o"_s, &boctetString3);
     QCOMPARE(aoctetString3, boctetString3);
 
     // test sequence of octet strings:
     bber = ber5;
-    bber.scanf(QStringLiteral("v"), &blist1);
+    bber.scanf(u"v"_s, &blist1);
     QCOMPARE(alist1, blist1);
 
     bber = ber6;
-    bber.scanf(QStringLiteral("v"), &blist2);
+    bber.scanf(u"v"_s, &blist2);
     QCOMPARE(alist2, blist2);
 
     // complex tests
@@ -123,7 +123,7 @@ void KLdapTest::testBer()
     blist2.clear();
 
     bber = ber7;
-    bber.scanf(QStringLiteral("oivO"), &boctetString1, &binteger, &blist2, &boctetString2);
+    bber.scanf(u"oivO"_s, &boctetString1, &binteger, &blist2, &boctetString2);
     QCOMPARE(aoctetString1, boctetString1);
     QCOMPARE(aoctetString2, boctetString2);
     QCOMPARE(alist2, blist2);
@@ -146,33 +146,33 @@ void KLdapTest::testLdapUrl()
                        "dc=kde,dc=org?cn,mail?sub?(objectClass=*)?x-dir=base"));
     url.parseQuery();
 
-    QCOMPARE(url.userName(), QStringLiteral("cn=manager,dc=kde,dc=org"));
-    QCOMPARE(url.password(), QStringLiteral("password"));
-    QCOMPARE(url.dn(), LdapDN(QStringLiteral("dc=kde,dc=org")));
+    QCOMPARE(url.userName(), u"cn=manager,dc=kde,dc=org"_s);
+    QCOMPARE(url.password(), u"password"_s);
+    QCOMPARE(url.dn(), LdapDN(u"dc=kde,dc=org"_s));
     QCOMPARE(url.scope(), LdapUrl::Sub);
-    QCOMPARE(url.attributes().at(0), QStringLiteral("cn"));
-    QCOMPARE(url.attributes().at(1), QStringLiteral("mail"));
-    QCOMPARE(url.filter(), QStringLiteral("(objectClass=*)"));
-    QCOMPARE(url.extension(QStringLiteral("x-dir"), critical), QStringLiteral("base"));
-    QCOMPARE(url.query(), QStringLiteral("?cn,mail?sub??x-dir=base"));
+    QCOMPARE(url.attributes().at(0), u"cn"_s);
+    QCOMPARE(url.attributes().at(1), u"mail"_s);
+    QCOMPARE(url.filter(), u"(objectClass=*)"_s);
+    QCOMPARE(url.extension(u"x-dir"_s, critical), u"base"_s);
+    QCOMPARE(url.query(), u"?cn,mail?sub??x-dir=base"_s);
     // For some reason the code removes the filter if it's (objectClass=*)...
     QCOMPARE(url.toString(),
              QStringLiteral("ldap://cn=manager,dc=kde,dc=org:password@localhost:3999/"
                             "dc=kde,dc=org??cn,mail?sub??x-dir=base"));
 
     // Now set a different filter
-    url.setFilter(QStringLiteral("(objectclass=person)"));
+    url.setFilter(u"(objectclass=person)"_s);
     QCOMPARE(url.toDisplayString(),
              QStringLiteral("ldap://cn=manager,dc=kde,dc=org@localhost:3999/"
                             "dc=kde,dc=org??cn,mail?sub?%28objectclass%3Dperson%29?x-dir=base"));
-    QCOMPARE(url.filter(), QStringLiteral("(objectclass=person)"));
+    QCOMPARE(url.filter(), u"(objectclass=person)"_s);
 
     // And now a filter with non-ascii letters
-    url.setFilter(QStringLiteral("(givenName=Valérie *)"));
+    url.setFilter(u"(givenName=Valérie *)"_s);
     QCOMPARE(url.toDisplayString(),
              QString::fromUtf8("ldap://cn=manager,dc=kde,dc=org@localhost:3999/"
                                "dc=kde,dc=org??cn,mail?sub?%28givenName%3DValérie %2A%29?x-dir=base"));
-    QCOMPARE(url.filter(), QStringLiteral("(givenName=Valérie *)"));
+    QCOMPARE(url.filter(), u"(givenName=Valérie *)"_s);
 
     // Test roundtrip via QUrl, as happens when sending it to kio_ldap
     const QUrl qurl(url);
@@ -181,7 +181,7 @@ void KLdapTest::testLdapUrl()
     const LdapUrl kiourl(qurl);
     QCOMPARE(kiourl.toString(), url.toString());
     QCOMPARE(kiourl.toDisplayString(), url.toDisplayString());
-    QCOMPARE(kiourl.filter(), QStringLiteral("(givenName=Valérie *)"));
+    QCOMPARE(kiourl.filter(), u"(givenName=Valérie *)"_s);
 }
 
 void KLdapTest::testLdapConnection()
@@ -245,10 +245,10 @@ void KLdapTest::searchData(KLDAPCore::LdapSearch *search, const KLDAPCore::LdapO
 
 void KLdapTest::testLdapDN()
 {
-    const QString strDN(QStringLiteral("uid=Test\\+Person+ou=accounts\\,outgoing,dc=kde,dc=org"));
+    const QString strDN(u"uid=Test\\+Person+ou=accounts\\,outgoing,dc=kde,dc=org"_s);
     const LdapDN dn(strDN);
     QCOMPARE(dn.isValid(), true);
-    QCOMPARE(dn.rdnString(), QStringLiteral("uid=Test\\+Person+ou=accounts\\,outgoing"));
+    QCOMPARE(dn.rdnString(), u"uid=Test\\+Person+ou=accounts\\,outgoing"_s);
 }
 
 void KLdapTest::testLdapModel()
@@ -286,19 +286,19 @@ void KLdapTest::testLdapModel()
              "/dc=kde,dc=org?cn,mail?sub?(objectClass=*)?x-dir=base");
   url.parseQuery();
 
-  QCOMPARE( url.user(), QStringLiteral("cn=manager,dc=kde,dc=org") );
-  QCOMPARE( url.password(), QStringLiteral("password") );
-  QCOMPARE( url.dn(), QStringLiteral("dc=kde,dc=org") );
+  QCOMPARE( url.user(), u"cn=manager,dc=kde,dc=org"_s );
+  QCOMPARE( url.password(), u"password"_s );
+  QCOMPARE( url.dn(), u"dc=kde,dc=org"_s );
   QCOMPARE( url.scope(), LdapUrl::Sub );
-  QCOMPARE( url.attributes().at(0), QStringLiteral("cn") );
-  QCOMPARE( url.attributes().at(1), QStringLiteral("mail") );
-  QCOMPARE( url.filter(), QStringLiteral("(objectClass=*)") );
-  QCOMPARE( url.extension(QStringLiteral("x-dir"), critical), QStringLiteral("base") );
+  QCOMPARE( url.attributes().at(0), u"cn"_s );
+  QCOMPARE( url.attributes().at(1), u"mail"_s );
+  QCOMPARE( url.filter(), u"(objectClass=*)"_s );
+  QCOMPARE( url.extension(u"x-dir"_s, critical), u"base"_s );
 
   url.setDn("ou=People,dc=kde,dc=org");
-  QCOMPARE( url.dn(), QStringLiteral("ou=People,dc=kde,dc=org") );
+  QCOMPARE( url.dn(), u"ou=People,dc=kde,dc=org"_s );
   url.setDn("/ou=People,dc=kde,dc=org");
-  QCOMPARE( url.dn(), QStringLiteral("ou=People,dc=kde,dc=org") );
+  QCOMPARE( url.dn(), u"ou=People,dc=kde,dc=org"_s );
 
   LdapServer server;
 //  url.setUrl("ldaps://cn=manager,dc=kde,dc=org:password@localhost:3999/"
@@ -307,20 +307,20 @@ url.setUrl("ldaps://cn=manager,dc=kde,dc=org:password@localhost:3999/"
            "dc=kde,dc=org??base??x-timelimit=5");
 url.parseQuery();
 server.setUrl( url );
-QCOMPARE( url.query(), QStringLiteral("??base??x-timelimit=5") );
+QCOMPARE( url.query(), u"??base??x-timelimit=5"_s );
 QCOMPARE( url.url(), server.url().url() );
 
 LdapControl c1;
-c1.setControl( QStringLiteral("1.2.3.4.5.6"), QByteArray("abcdefg"), true );
+c1.setControl( u"1.2.3.4.5.6"_s, QByteArray("abcdefg"), true );
 //test copy constructor
 LdapControl c2(c1);
-QCOMPARE( c2.oid(), QStringLiteral("1.2.3.4.5.6") );
+QCOMPARE( c2.oid(), u"1.2.3.4.5.6"_s );
 QCOMPARE( c2.value(), QByteArray("abcdefg") );
 QCOMPARE( c2.critical(), true );
 //test assignment operator
 LdapControl c3;
 c3 = c1;
-QCOMPARE( c3.oid(), QStringLiteral("1.2.3.4.5.6") );
+QCOMPARE( c3.oid(), u"1.2.3.4.5.6"_s );
 QCOMPARE( c3.value(), QByteArray("abcdefg") );
 QCOMPARE( c3.critical(), true );
 */

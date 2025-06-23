@@ -114,8 +114,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
         mPassword = new KPasswordLineEdit(mParent);
         KLineEditEventHandler::catchReturnKey(mPassword);
         mPassword->setObjectName("kcfg_ldappassword"_L1);
-        mPassword->setRevealPasswordMode(KAuthorized::authorize(QStringLiteral("lineedit_reveal_password")) ? KPassword::RevealMode::OnlyNew
-                                                                                                            : KPassword::RevealMode::Never);
+        mPassword->setRevealPasswordMode(KAuthorized::authorize(u"lineedit_reveal_password"_s) ? KPassword::RevealMode::OnlyNew : KPassword::RevealMode::Never);
 
         mainLayout->addRow(i18n("Password:"), mPassword);
     }
@@ -254,9 +253,9 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::initWidget()
         hbox = new QHBoxLayout;
         mMech = new QComboBox(mParent);
         mMech->setObjectName("kcfg_ldapsaslmech"_L1);
-        mMech->addItem(QStringLiteral("DIGEST-MD5"));
-        mMech->addItem(QStringLiteral("GSSAPI"));
-        mMech->addItem(QStringLiteral("PLAIN"));
+        mMech->addItem(u"DIGEST-MD5"_s);
+        mMech->addItem(u"GSSAPI"_s);
+        mMech->addItem(u"PLAIN"_s);
         hbox->addWidget(mMech);
 
         // without host query doesn't make sense
@@ -341,7 +340,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::sendQuery()
 
 void LdapConfigWidget::LdapConfigWidgetPrivate::queryMechClicked()
 {
-    mAttr = QStringLiteral("supportedsaslmechanisms");
+    mAttr = u"supportedsaslmechanisms"_s;
     sendQuery();
     if (!mQResult.isEmpty()) {
         mQResult.sort();
@@ -352,7 +351,7 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::queryMechClicked()
 
 void LdapConfigWidget::LdapConfigWidgetPrivate::queryDNClicked()
 {
-    mAttr = QStringLiteral("namingcontexts");
+    mAttr = u"namingcontexts"_s;
     sendQuery();
     if (!mQResult.isEmpty()) {
         mDn->setText(mQResult.constFirst());

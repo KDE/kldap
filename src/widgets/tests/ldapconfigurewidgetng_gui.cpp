@@ -6,11 +6,11 @@
 
 #include <KLDAPWidgets/LdapConfigureWidgetNg>
 #include <QApplication>
-
+using namespace Qt::Literals::StringLiterals;
 int main(int argc, char **argv)
 {
     QApplication app(argc, argv);
-    app.setApplicationName(QStringLiteral("ldapconfigurewidgetng_gui"));
+    app.setApplicationName(u"ldapconfigurewidgetng_gui"_s);
     auto t = new KLDAPWidgets::LdapConfigureWidgetNg();
     t->load();
     t->show();

@@ -18,7 +18,7 @@
 #include <KIO/TransferJob>
 
 #include <QPointer>
-
+using namespace Qt::Literals::StringLiterals;
 using namespace KLDAPCore;
 class Q_DECL_HIDDEN LdapClient::LdapClientPrivate
 {
@@ -87,7 +87,7 @@ const KLDAPCore::LdapServer LdapClient::server() const
 void LdapClient::setAttributes(const QStringList &attrs)
 {
     d->mAttrs = attrs;
-    d->mAttrs << QStringLiteral("objectClass"); // via objectClass we detect distribution lists
+    d->mAttrs << u"objectClass"_s; // via objectClass we detect distribution lists
 }
 
 QStringList LdapClient::attributes() const
@@ -111,9 +111,9 @@ void LdapClient::startQuery(const QString &filter)
     QString finalFilter = filter;
     // combine the filter set by the user in the config dialog (url.filter()) and the filter from this query
     if (!userFilter.isEmpty()) {
-        finalFilter = QLatin1StringView("&(") + finalFilter + QLatin1StringView(")(") + userFilter + QLatin1Char(')');
+        finalFilter = QLatin1StringView("&(") + finalFilter + QLatin1StringView(")(") + userFilter + u')';
     }
-    url.setFilter(QLatin1Char('(') + finalFilter + QLatin1Char(')'));
+    url.setFilter(u'(' + finalFilter + u')');
 
     qCDebug(LDAPCLIENT_CORE_LOG) << "LdapClient: Doing query:" << url.toDisplayString();
 
@@ -203,26 +203,26 @@ void LdapClient::LdapClientPrivate::finishCurrentObject()
     }
 
     if (groupofnames) {
-        KLDAPCore::LdapAttrMap::ConstIterator it = mCurrentObject.attributes().find(QStringLiteral("mail"));
+        KLDAPCore::LdapAttrMap::ConstIterator it = mCurrentObject.attributes().find(u"mail"_s);
         if (it == mCurrentObject.attributes().end()) {
             // No explicit mail address found so far?
             // Fine, then we use the address stored in the DN.
             QString sMail;
-            const QStringList lMail = mCurrentObject.dn().toString().split(QStringLiteral(",dc="), Qt::SkipEmptyParts);
+            const QStringList lMail = mCurrentObject.dn().toString().split(u",dc="_s, Qt::SkipEmptyParts);
             const int n = lMail.count();
             if (n) {
                 if (lMail.first().startsWith(QLatin1StringView("cn="), Qt::CaseInsensitive)) {
                     sMail = lMail.first().simplified().mid(3);
                     if (1 < n) {
-                        sMail.append(QLatin1Char('@'));
+                        sMail.append(u'@');
                     }
                     for (int i = 1; i < n; ++i) {
                         sMail.append(lMail.at(i));
                         if (i < n - 1) {
-                            sMail.append(QLatin1Char('.'));
+                            sMail.append(u'.');
                         }
                     }
-                    mCurrentObject.addValue(QStringLiteral("mail"), sMail.toUtf8());
+                    mCurrentObject.addValue(u"mail"_s, sMail.toUtf8());
                 }
             }
         }

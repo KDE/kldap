@@ -11,7 +11,7 @@
 #include <QSharedData>
 
 using namespace KLDAPCore;
-
+using namespace Qt::Literals::StringLiterals;
 class LdapObjectPrivate : public QSharedData
 {
 public:
@@ -81,13 +81,13 @@ const LdapAttrMap &LdapObject::attributes() const
 
 QString LdapObject::toString() const
 {
-    QString result = QStringLiteral("dn: %1\n").arg(d->mDn.toString());
+    QString result = u"dn: %1\n"_s.arg(d->mDn.toString());
     LdapAttrMap::ConstIterator end(d->mAttrs.constEnd());
     for (LdapAttrMap::ConstIterator it = d->mAttrs.constBegin(); it != end; ++it) {
         const QString attr = it.key();
         LdapAttrValue::ConstIterator end2((*it).constEnd());
         for (LdapAttrValue::ConstIterator it2 = (*it).constBegin(); it2 != end2; ++it2) {
-            result += QString::fromUtf8(Ldif::assembleLine(attr, *it2, 76)) + QLatin1Char('\n');
+            result += QString::fromUtf8(Ldif::assembleLine(attr, *it2, 76)) + u'\n';
         }
     }
     return result;

@@ -26,6 +26,7 @@
 #include <QVBoxLayout>
 #include <QWindow>
 
+using namespace Qt::Literals::StringLiterals;
 using namespace KLDAPWidgets;
 namespace
 {
@@ -92,7 +93,7 @@ AddHostDialog::AddHostDialog(KLDAPCore::LdapServer *server, QWidget *parent)
     auto page = new QWidget(this);
     d->mTabWidget->addTab(page, i18n("Configure"));
 
-    const KPluginMetaData editWidgetPlugin(QStringLiteral("pim6/ldapactivities/kldapactivitiesplugin"));
+    const KPluginMetaData editWidgetPlugin(u"pim6/ldapactivities/kldapactivitiesplugin"_s);
 
     const auto result = KPluginFactory::instantiatePlugin<KLDAPWidgets::LdapActivitiesAbstractPlugin>(editWidgetPlugin);
     if (result) {

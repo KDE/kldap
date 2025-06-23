@@ -14,7 +14,7 @@
 #include "ldap_core_debug.h"
 #include <KLocalizedString>
 using namespace KLDAPCore;
-
+using namespace Qt::Literals::StringLiterals;
 // blocking the GUI for xxx milliseconds
 #define LDAPSEARCH_BLOCKING_TIMEOUT 10
 
@@ -294,7 +294,7 @@ bool LdapSearch::search(const LdapUrl &url, int count)
         }
     }
     bool critical = true;
-    const int pagesize = url.extension(QStringLiteral("x-pagesize"), critical).toInt();
+    const int pagesize = url.extension(u"x-pagesize"_s, critical).toInt();
     return d->startSearch(url.dn(), url.scope(), url.filter(), url.attributes(), pagesize, count);
 }
 

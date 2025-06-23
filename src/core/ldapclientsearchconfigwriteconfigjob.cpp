@@ -10,7 +10,7 @@
 #include "kldapcore/ldapdn.h"
 #include <qt6keychain/keychain.h>
 using namespace QKeychain;
-
+using namespace Qt::Literals::StringLiterals;
 using namespace KLDAPCore;
 LdapClientSearchConfigWriteConfigJob::LdapClientSearchConfigWriteConfigJob(QObject *parent)
     : QObject(parent)
@@ -74,19 +74,19 @@ void LdapClientSearchConfigWriteConfigJob::writeConfig()
 {
     QString prefix;
     if (mActive) {
-        prefix = QStringLiteral("Selected");
+        prefix = u"Selected"_s;
     }
 
-    mConfig.writeEntry(prefix + QStringLiteral("Host%1").arg(mServerIndex), mServer.host());
-    mConfig.writeEntry(prefix + QStringLiteral("Port%1").arg(mServerIndex), mServer.port());
-    mConfig.writeEntry(prefix + QStringLiteral("Base%1").arg(mServerIndex), mServer.baseDn().toString());
-    mConfig.writeEntry(prefix + QStringLiteral("User%1").arg(mServerIndex), mServer.user());
-    mConfig.writeEntry(prefix + QStringLiteral("Bind%1").arg(mServerIndex), mServer.bindDn());
+    mConfig.writeEntry(prefix + u"Host%1"_s.arg(mServerIndex), mServer.host());
+    mConfig.writeEntry(prefix + u"Port%1"_s.arg(mServerIndex), mServer.port());
+    mConfig.writeEntry(prefix + u"Base%1"_s.arg(mServerIndex), mServer.baseDn().toString());
+    mConfig.writeEntry(prefix + u"User%1"_s.arg(mServerIndex), mServer.user());
+    mConfig.writeEntry(prefix + u"Bind%1"_s.arg(mServerIndex), mServer.bindDn());
 
-    const QString passwordEntry = prefix + QStringLiteral("PwdBind%1").arg(mServerIndex);
+    const QString passwordEntry = prefix + u"PwdBind%1"_s.arg(mServerIndex);
     const QString password = mServer.password();
     if (!password.isEmpty()) {
-        auto writeJob = new WritePasswordJob(QStringLiteral("ldapclient"), this);
+        auto writeJob = new WritePasswordJob(u"ldapclient"_s, this);
         connect(writeJob, &Job::finished, this, [](QKeychain::Job *baseJob) {
             if (baseJob->error()) {
                 qCWarning(LDAP_CORE_LOG) << "Error writing password using QKeychain:" << baseJob->errorString();
@@ -97,40 +97,40 @@ void LdapClientSearchConfigWriteConfigJob::writeConfig()
         writeJob->start();
     }
 
-    mConfig.writeEntry(prefix + QStringLiteral("TimeLimit%1").arg(mServerIndex), mServer.timeLimit());
-    mConfig.writeEntry(prefix + QStringLiteral("SizeLimit%1").arg(mServerIndex), mServer.sizeLimit());
-    mConfig.writeEntry(prefix + QStringLiteral("PageSize%1").arg(mServerIndex), mServer.pageSize());
-    mConfig.writeEntry(prefix + QStringLiteral("Version%1").arg(mServerIndex), mServer.version());
-    mConfig.writeEntry(prefix + QStringLiteral("Activities%1").arg(mServerIndex), mServer.activities());
-    mConfig.writeEntry(prefix + QStringLiteral("EnabledActivities%1").arg(mServerIndex), mServer.enablePlasmaActivities());
+    mConfig.writeEntry(prefix + u"TimeLimit%1"_s.arg(mServerIndex), mServer.timeLimit());
+    mConfig.writeEntry(prefix + u"SizeLimit%1"_s.arg(mServerIndex), mServer.sizeLimit());
+    mConfig.writeEntry(prefix + u"PageSize%1"_s.arg(mServerIndex), mServer.pageSize());
+    mConfig.writeEntry(prefix + u"Version%1"_s.arg(mServerIndex), mServer.version());
+    mConfig.writeEntry(prefix + u"Activities%1"_s.arg(mServerIndex), mServer.activities());
+    mConfig.writeEntry(prefix + u"EnabledActivities%1"_s.arg(mServerIndex), mServer.enablePlasmaActivities());
 
     QString tmp;
     switch (mServer.security()) {
     case KLDAPCore::LdapServer::TLS:
-        tmp = QStringLiteral("TLS");
+        tmp = u"TLS"_s;
         break;
     case KLDAPCore::LdapServer::SSL:
-        tmp = QStringLiteral("SSL");
+        tmp = u"SSL"_s;
         break;
     default:
-        tmp = QStringLiteral("None");
+        tmp = u"None"_s;
     }
-    mConfig.writeEntry(prefix + QStringLiteral("Security%1").arg(mServerIndex), tmp);
+    mConfig.writeEntry(prefix + u"Security%1"_s.arg(mServerIndex), tmp);
     switch (mServer.auth()) {
     case KLDAPCore::LdapServer::Simple:
-        tmp = QStringLiteral("Simple");
+        tmp = u"Simple"_s;
         break;
     case KLDAPCore::LdapServer::SASL:
-        tmp = QStringLiteral("SASL");
+        tmp = u"SASL"_s;
         break;
     default:
-        tmp = QStringLiteral("Anonymous");
+        tmp = u"Anonymous"_s;
     }
-    mConfig.writeEntry(prefix + QStringLiteral("Auth%1").arg(mServerIndex), tmp);
-    mConfig.writeEntry(prefix + QStringLiteral("Mech%1").arg(mServerIndex), mServer.mech());
-    mConfig.writeEntry(prefix + QStringLiteral("UserFilter%1").arg(mServerIndex), mServer.filter().trimmed());
+    mConfig.writeEntry(prefix + u"Auth%1"_s.arg(mServerIndex), tmp);
+    mConfig.writeEntry(prefix + u"Mech%1"_s.arg(mServerIndex), mServer.mech());
+    mConfig.writeEntry(prefix + u"UserFilter%1"_s.arg(mServerIndex), mServer.filter().trimmed());
     if (mServer.completionWeight() > -1) {
-        mConfig.writeEntry(prefix + QStringLiteral("CompletionWeight%1").arg(mServerIndex), mServer.completionWeight());
+        mConfig.writeEntry(prefix + u"CompletionWeight%1"_s.arg(mServerIndex), mServer.completionWeight());
     }
 }
 

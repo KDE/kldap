@@ -221,10 +221,10 @@ int LdapConnection::connect()
     int version = d->mServer.version();
     int timeout = d->mServer.timeout();
 
-    url = d->mServer.security() == LdapServer::SSL ? QStringLiteral("ldaps") : QStringLiteral("ldap");
+    url = d->mServer.security() == LdapServer::SSL ? u"ldaps"_s : u"ldap"_s;
     url += "://"_L1;
     url += d->mServer.host();
-    url += QLatin1Char(':');
+    url += u':';
     url += QString::number(d->mServer.port());
     qCDebug(LDAP_CORE_LOG) << "ldap url:" << url;
 #if HAVE_LDAP_INITIALIZE

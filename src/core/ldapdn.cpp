@@ -30,7 +30,7 @@ bool LdapDN::LdapDNPrivate::isValidRDNString(const QString &rdn) const
     qCDebug(LDAP_CORE_LOG) << "Testing rdn:" << rdn;
 
     // If it is a muli-valued rdn, split it into its constituent parts
-    const QStringList rdnParts = splitOnNonEscapedChar(rdn, QLatin1Char('+'));
+    const QStringList rdnParts = splitOnNonEscapedChar(rdn, u'+');
     const int rdnPartsSize(rdnParts.size());
     if (rdnPartsSize > 1) {
         for (int i = 0; i < rdnPartsSize; i++) {
@@ -41,7 +41,7 @@ bool LdapDN::LdapDNPrivate::isValidRDNString(const QString &rdn) const
         return true;
     }
     // Split the rdn into the attribute name and value parts
-    const auto components = QStringView(rdn).split(QLatin1Char('='));
+    const auto components = QStringView(rdn).split(u'=');
     // We should have exactly two parts
     if (components.size() != 2) {
         return false;
@@ -58,7 +58,7 @@ QStringList LdapDN::LdapDNPrivate::splitOnNonEscapedChar(const QString &str, QCh
     int strPartStartIndex = 0;
     while ((index = str.indexOf(ch, searchFrom)) != -1) {
         const QChar prev = str[std::max(0, index - 1)];
-        if (prev != QLatin1Char('\\')) {
+        if (prev != u'\\') {
             // Found a component of a multi-valued RDN
             // qCDebug(LDAP_CORE_LOG) << "Found" << ch << "at index" << index;
             QString tmp = str.mid(strPartStartIndex, index - strPartStartIndex);
@@ -124,7 +124,7 @@ QString LdapDN::toString() const
 
 QString LdapDN::toString(int depth) const
 {
-    const QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, QLatin1Char(','));
+    const QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, u',');
     if (depth >= rdns.size()) {
         return {};
     }
@@ -132,7 +132,7 @@ QString LdapDN::toString(int depth) const
     // Construct a DN down to the requested depth
     QString dn;
     for (int i = depth; i >= 0; i--) {
-        dn += rdns.at(rdns.size() - 1 - i) + QLatin1Char(',');
+        dn += rdns.at(rdns.size() - 1 - i) + u',';
         qCDebug(LDAP_CORE_LOG) << "dn =" << dn;
     }
     dn.chop(1); // Strip off the extraneous comma
@@ -143,13 +143,13 @@ QString LdapDN::toString(int depth) const
 QString LdapDN::rdnString() const
 {
     /** \TODO We should move this into the d pointer as we calculate rdns quite a lot */
-    const QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, QLatin1Char(','));
+    const QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, u',');
     return rdns.at(0);
 }
 
 QString LdapDN::rdnString(int depth) const
 {
-    const QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, QLatin1Char(','));
+    const QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, u',');
     if (depth >= rdns.size()) {
         return {};
     }
@@ -161,7 +161,7 @@ bool LdapDN::isValid() const
     qCDebug(LDAP_CORE_LOG) << "Testing dn:" << d->m_dn;
 
     // Break the string into rdn's
-    const QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, QLatin1Char(','));
+    const QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, u',');
 
     // Test to see if each rdn is valid
     const int rdnsSize(rdns.size());
@@ -176,7 +176,7 @@ bool LdapDN::isValid() const
 
 int LdapDN::depth() const
 {
-    const QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, QLatin1Char(','));
+    const QStringList rdns = d->splitOnNonEscapedChar(d->m_dn, u',');
     return rdns.size();
 }
 

@@ -301,7 +301,7 @@ void LdapServer::setUrl(const LdapUrl &url)
     d->mSecurity = None;
     if (url.scheme() == "ldaps"_L1) {
         d->mSecurity = SSL;
-    } else if (url.hasExtension(QStringLiteral("x-tls"))) {
+    } else if (url.hasExtension(u"x-tls"_s)) {
         d->mSecurity = TLS;
     }
     qCDebug(LDAP_CORE_LOG) << "security:" << d->mSecurity;
@@ -309,21 +309,21 @@ void LdapServer::setUrl(const LdapUrl &url)
     d->mMech.clear();
     d->mUser.clear();
     d->mBindDn.clear();
-    if (url.hasExtension(QStringLiteral("x-sasl"))) {
+    if (url.hasExtension(u"x-sasl"_s)) {
         d->mAuth = SASL;
-        if (url.hasExtension(QStringLiteral("x-mech"))) {
-            d->mMech = url.extension(QStringLiteral("x-mech"), critical);
+        if (url.hasExtension(u"x-mech"_s)) {
+            d->mMech = url.extension(u"x-mech"_s, critical);
         }
-        if (url.hasExtension(QStringLiteral("x-realm"))) {
-            d->mRealm = url.extension(QStringLiteral("x-realm"), critical);
+        if (url.hasExtension(u"x-realm"_s)) {
+            d->mRealm = url.extension(u"x-realm"_s, critical);
         }
-        if (url.hasExtension(QStringLiteral("bindname"))) {
-            d->mBindDn = url.extension(QStringLiteral("bindname"), critical);
+        if (url.hasExtension(u"bindname"_s)) {
+            d->mBindDn = url.extension(u"bindname"_s, critical);
         }
         d->mUser = url.userName();
-    } else if (url.hasExtension(QStringLiteral("bindname"))) {
+    } else if (url.hasExtension(u"bindname"_s)) {
         d->mAuth = Simple;
-        d->mBindDn = url.extension(QStringLiteral("bindname"), critical);
+        d->mBindDn = url.extension(u"bindname"_s, critical);
     } else {
         const QString user = url.userName();
         if (user.isEmpty()) {
@@ -334,32 +334,32 @@ void LdapServer::setUrl(const LdapUrl &url)
         }
     }
     d->mPassword = url.password();
-    if (url.hasExtension(QStringLiteral("x-version"))) {
-        d->mVersion = url.extension(QStringLiteral("x-version"), critical).toInt();
+    if (url.hasExtension(u"x-version"_s)) {
+        d->mVersion = url.extension(u"x-version"_s, critical).toInt();
     } else {
         d->mVersion = 3;
     }
 
-    if (url.hasExtension(QStringLiteral("x-timeout"))) {
-        d->mTimeout = url.extension(QStringLiteral("x-timeout"), critical).toInt();
+    if (url.hasExtension(u"x-timeout"_s)) {
+        d->mTimeout = url.extension(u"x-timeout"_s, critical).toInt();
     } else {
         d->mTimeout = 0;
     }
 
-    if (url.hasExtension(QStringLiteral("x-timelimit"))) {
-        d->mTimeLimit = url.extension(QStringLiteral("x-timelimit"), critical).toInt();
+    if (url.hasExtension(u"x-timelimit"_s)) {
+        d->mTimeLimit = url.extension(u"x-timelimit"_s, critical).toInt();
     } else {
         d->mTimeLimit = 0;
     }
 
-    if (url.hasExtension(QStringLiteral("x-sizelimit"))) {
-        d->mSizeLimit = url.extension(QStringLiteral("x-sizelimit"), critical).toInt();
+    if (url.hasExtension(u"x-sizelimit"_s)) {
+        d->mSizeLimit = url.extension(u"x-sizelimit"_s, critical).toInt();
     } else {
         d->mSizeLimit = 0;
     }
 
-    if (url.hasExtension(QStringLiteral("x-pagesize"))) {
-        d->mPageSize = url.extension(QStringLiteral("x-pagesize"), critical).toInt();
+    if (url.hasExtension(u"x-pagesize"_s)) {
+        d->mPageSize = url.extension(u"x-pagesize"_s, critical).toInt();
     } else {
         d->mPageSize = 0;
     }
@@ -368,7 +368,7 @@ void LdapServer::setUrl(const LdapUrl &url)
 LdapUrl LdapServer::url() const
 {
     LdapUrl url;
-    url.setScheme(d->mSecurity == SSL ? QStringLiteral("ldaps") : QStringLiteral("ldap"));
+    url.setScheme(d->mSecurity == SSL ? u"ldaps"_s : u"ldap"_s);
     url.setPort(d->mPort);
     url.setHost(d->mHost);
     url.setDn(d->mBaseDn);
@@ -377,35 +377,35 @@ LdapUrl LdapServer::url() const
     if (d->mAuth == SASL) {
         url.setUserName(d->mUser);
         url.setPassword(d->mPassword);
-        url.setExtension(QStringLiteral("bindname"), d->mBindDn, true);
-        url.setExtension(QStringLiteral("x-sasl"), QString());
+        url.setExtension(u"bindname"_s, d->mBindDn, true);
+        url.setExtension(u"x-sasl"_s, QString());
         if (!d->mMech.isEmpty()) {
-            url.setExtension(QStringLiteral("x-mech"), d->mMech);
+            url.setExtension(u"x-mech"_s, d->mMech);
         }
         if (!d->mRealm.isEmpty()) {
-            url.setExtension(QStringLiteral("x-realm"), d->mRealm);
+            url.setExtension(u"x-realm"_s, d->mRealm);
         }
     } else if (d->mAuth == Simple) {
         url.setUserName(d->mBindDn);
         url.setPassword(d->mPassword);
     }
     if (d->mVersion == 2) {
-        url.setExtension(QStringLiteral("x-version"), d->mVersion);
+        url.setExtension(u"x-version"_s, d->mVersion);
     }
     if (d->mTimeout) {
-        url.setExtension(QStringLiteral("x-timeout"), d->mTimeout);
+        url.setExtension(u"x-timeout"_s, d->mTimeout);
     }
     if (d->mTimeLimit != 0) {
-        url.setExtension(QStringLiteral("x-timelimit"), d->mTimeLimit);
+        url.setExtension(u"x-timelimit"_s, d->mTimeLimit);
     }
     if (d->mSizeLimit != 0) {
-        url.setExtension(QStringLiteral("x-sizelimit"), d->mSizeLimit);
+        url.setExtension(u"x-sizelimit"_s, d->mSizeLimit);
     }
     if (d->mPageSize != 0) {
-        url.setExtension(QStringLiteral("x-pagesize"), d->mPageSize);
+        url.setExtension(u"x-pagesize"_s, d->mPageSize);
     }
     if (d->mSecurity == TLS) {
-        url.setExtension(QStringLiteral("x-tls"), 1, true);
+        url.setExtension(u"x-tls"_s, 1, true);
     }
     return url;
 }

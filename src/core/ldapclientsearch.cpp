@@ -85,7 +85,7 @@ LdapClientSearch::~LdapClientSearch() = default;
 
 void LdapClientSearch::LdapClientSearchPrivate::init(const QStringList &attributes)
 {
-    if (!KProtocolInfo::isKnownProtocol(QUrl(QStringLiteral("ldap://localhost")))) {
+    if (!KProtocolInfo::isKnownProtocol(QUrl(u"ldap://localhost"_s))) {
         mNoLDAPLookup = true;
         return;
     }
@@ -105,7 +105,7 @@ void LdapClientSearch::LdapClientSearchPrivate::init(const QStringList &attribut
 
 void LdapClientSearch::LdapClientSearchPrivate::readWeighForClient(KLDAPCore::LdapClient *client, const KConfigGroup &config, int clientNumber)
 {
-    const int completionWeight = config.readEntry(QStringLiteral("SelectedCompletionWeight%1").arg(clientNumber), -1);
+    const int completionWeight = config.readEntry(u"SelectedCompletionWeight%1"_s.arg(clientNumber), -1);
     if (completionWeight != -1) {
         client->setCompletionWeight(completionWeight);
     }
@@ -113,7 +113,7 @@ void LdapClientSearch::LdapClientSearchPrivate::readWeighForClient(KLDAPCore::Ld
 
 void LdapClientSearch::updateCompletionWeights()
 {
-    KConfigGroup config(KLDAPCore::LdapClientSearchConfig::config(), QStringLiteral("LDAP"));
+    KConfigGroup config(KLDAPCore::LdapClientSearchConfig::config(), u"LDAP"_s);
     for (int i = 0, total = d->mClients.size(); i < total; ++i) {
         d->readWeighForClient(d->mClients[i], config, i);
     }
@@ -149,7 +149,7 @@ void LdapClientSearch::setAttributes(const QStringList &attrs)
 
 QStringList LdapClientSearch::defaultAttributes()
 {
-    const QStringList attr{QStringLiteral("cn"), QStringLiteral("mail"), QStringLiteral("givenname"), QStringLiteral("sn")};
+    const QStringList attr{u"cn"_s, u"mail"_s, QStringLiteral("givenname"), QStringLiteral("sn")};
     return attr;
 }
 
@@ -160,7 +160,7 @@ void LdapClientSearch::LdapClientSearchPrivate::readConfig()
     mClients.clear();
 
     // stolen from KAddressBook
-    KConfigGroup config(KLDAPCore::LdapClientSearchConfig::config(), QStringLiteral("LDAP"));
+    KConfigGroup config(KLDAPCore::LdapClientSearchConfig::config(), u"LDAP"_s);
     const int numHosts = config.readEntry("NumSelectedHosts", 0);
     if (!numHosts) {
         mNoLDAPLookup = true;
@@ -196,7 +196,7 @@ void LdapClientSearch::LdapClientSearchPrivate::readConfig()
             slotDataTimer();
         });
     }
-    mConfigFile = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + QStringLiteral("/kabldaprc");
+    mConfigFile = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + u"/kabldaprc"_s;
     KDirWatch::self()->addFile(mConfigFile);
 }
 
@@ -216,10 +216,10 @@ void LdapClientSearch::startSearch(const QString &txt)
 
     cancelSearch();
 
-    int pos = txt.indexOf(QLatin1Char('\"'));
+    int pos = txt.indexOf(u'\"');
     if (pos >= 0) {
         ++pos;
-        const int pos2 = txt.indexOf(QLatin1Char('\"'), pos);
+        const int pos2 = txt.indexOf(u'\"', pos);
         if (pos2 >= 0) {
             d->mSearchText = txt.mid(pos, pos2 - pos);
         } else {
@@ -334,9 +334,9 @@ void LdapClientSearch::LdapClientSearchPrivate::makeSearchData(QStringList &ret,
                     mail = tmp;
                 } else {
                     if (wasCN) {
-                        mail.prepend(QLatin1Char('.'));
+                        mail.prepend(u'.');
                     } else {
-                        mail.prepend(QLatin1Char('@'));
+                        mail.prepend(u'@');
                     }
                     mail.prepend(tmp);
                 }
@@ -346,9 +346,9 @@ void LdapClientSearch::LdapClientSearchPrivate::makeSearchData(QStringList &ret,
                     mail = tmp;
                 } else {
                     if (wasDC) {
-                        mail.append(QLatin1Char('.'));
+                        mail.append(u'.');
                     } else {
-                        mail.append(QLatin1Char('@'));
+                        mail.append(u'@');
                     }
                     mail.append(tmp);
                 }
@@ -395,7 +395,7 @@ void LdapClientSearch::LdapClientSearchPrivate::makeSearchData(QStringList &ret,
         } else if (name.isEmpty()) {
             ret.append(mail);
         } else {
-            ret.append(QStringLiteral("%1 <%2>").arg(name, mail));
+            ret.append(u"%1 <%2>"_s.arg(name, mail));
         }
 
         LdapResult sr;

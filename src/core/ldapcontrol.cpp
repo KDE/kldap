@@ -102,7 +102,7 @@ int LdapControl::parsePageControl(QByteArray &cookie) const
 
     Ber ber(d->mValue);
     int size;
-    if (ber.scanf(QStringLiteral("{iO}"), &size, &cookie) == -1) {
+    if (ber.scanf(u"{iO}"_s, &size, &cookie) == -1) {
         return -1;
     } else {
         return size;
@@ -114,8 +114,8 @@ LdapControl LdapControl::createPageControl(int pagesize, const QByteArray &cooki
     LdapControl control;
     Ber ber;
 
-    ber.printf(QStringLiteral("{iO}"), pagesize, &cookie);
-    control.setOid(QStringLiteral("1.2.840.113556.1.4.319"));
+    ber.printf(u"{iO}"_s, pagesize, &cookie);
+    control.setOid(u"1.2.840.113556.1.4.319"_s);
     control.setValue(ber.flatten());
     return control;
 }

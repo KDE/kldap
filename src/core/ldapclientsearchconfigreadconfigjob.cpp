@@ -78,37 +78,37 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
 {
     QString prefix;
     if (mActive) {
-        prefix = QStringLiteral("Selected");
+        prefix = u"Selected"_s;
     }
 
-    const QString host = mConfig.readEntry(prefix + QStringLiteral("Host%1").arg(mServerIndex), QString()).trimmed();
+    const QString host = mConfig.readEntry(prefix + u"Host%1"_s.arg(mServerIndex), QString()).trimmed();
     if (!host.isEmpty()) {
         mServer.setHost(host);
     }
 
-    const int port = mConfig.readEntry(prefix + QStringLiteral("Port%1").arg(mServerIndex), 389);
+    const int port = mConfig.readEntry(prefix + u"Port%1"_s.arg(mServerIndex), 389);
     mServer.setPort(port);
 
-    const QString base = mConfig.readEntry(prefix + QStringLiteral("Base%1").arg(mServerIndex), QString()).trimmed();
+    const QString base = mConfig.readEntry(prefix + u"Base%1"_s.arg(mServerIndex), QString()).trimmed();
     if (!base.isEmpty()) {
         mServer.setBaseDn(KLDAPCore::LdapDN(base));
     }
 
-    const QString user = mConfig.readEntry(prefix + QStringLiteral("User%1").arg(mServerIndex), QString()).trimmed();
+    const QString user = mConfig.readEntry(prefix + u"User%1"_s.arg(mServerIndex), QString()).trimmed();
     if (!user.isEmpty()) {
         mServer.setUser(user);
     }
 
-    const QString bindDN = mConfig.readEntry(prefix + QStringLiteral("Bind%1").arg(mServerIndex), QString()).trimmed();
+    const QString bindDN = mConfig.readEntry(prefix + u"Bind%1"_s.arg(mServerIndex), QString()).trimmed();
     if (!bindDN.isEmpty()) {
         mServer.setBindDn(bindDN);
     }
-    mServer.setTimeLimit(mConfig.readEntry(prefix + QStringLiteral("TimeLimit%1").arg(mServerIndex), 0));
-    mServer.setSizeLimit(mConfig.readEntry(prefix + QStringLiteral("SizeLimit%1").arg(mServerIndex), 0));
-    mServer.setPageSize(mConfig.readEntry(prefix + QStringLiteral("PageSize%1").arg(mServerIndex), 0));
-    mServer.setVersion(mConfig.readEntry(prefix + QStringLiteral("Version%1").arg(mServerIndex), 3));
+    mServer.setTimeLimit(mConfig.readEntry(prefix + u"TimeLimit%1"_s.arg(mServerIndex), 0));
+    mServer.setSizeLimit(mConfig.readEntry(prefix + u"SizeLimit%1"_s.arg(mServerIndex), 0));
+    mServer.setPageSize(mConfig.readEntry(prefix + u"PageSize%1"_s.arg(mServerIndex), 0));
+    mServer.setVersion(mConfig.readEntry(prefix + u"Version%1"_s.arg(mServerIndex), 3));
 
-    QString tmp = mConfig.readEntry(prefix + QStringLiteral("Security%1").arg(mServerIndex), QStringLiteral("None"));
+    QString tmp = mConfig.readEntry(prefix + u"Security%1"_s.arg(mServerIndex), u"None"_s);
     mServer.setSecurity(KLDAPCore::LdapServer::None);
     if (tmp == "SSL"_L1) {
         mServer.setSecurity(KLDAPCore::LdapServer::SSL);
@@ -116,7 +116,7 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
         mServer.setSecurity(KLDAPCore::LdapServer::TLS);
     }
 
-    tmp = mConfig.readEntry(prefix + QStringLiteral("Auth%1").arg(mServerIndex), QStringLiteral("Anonymous"));
+    tmp = mConfig.readEntry(prefix + u"Auth%1"_s.arg(mServerIndex), u"Anonymous"_s);
     mServer.setAuth(KLDAPCore::LdapServer::Anonymous);
     if (tmp == "Simple"_L1) {
         mServer.setAuth(KLDAPCore::LdapServer::Simple);
@@ -124,15 +124,15 @@ void LdapClientSearchConfigReadConfigJob::readConfig()
         mServer.setAuth(KLDAPCore::LdapServer::SASL);
     }
 
-    mServer.setMech(mConfig.readEntry(prefix + QStringLiteral("Mech%1").arg(mServerIndex), QString()));
-    mServer.setFilter(mConfig.readEntry(prefix + QStringLiteral("UserFilter%1").arg(mServerIndex), QString()));
-    mServer.setCompletionWeight(mConfig.readEntry(prefix + QStringLiteral("CompletionWeight%1").arg(mServerIndex), -1));
-    mServer.setActivities(mConfig.readEntry(prefix + QStringLiteral("Activities%1").arg(mServerIndex), QStringList()));
-    mServer.setEnablePlasmaActivities(mConfig.readEntry(prefix + QStringLiteral("EnabledActivities%1").arg(mServerIndex), false));
+    mServer.setMech(mConfig.readEntry(prefix + u"Mech%1"_s.arg(mServerIndex), QString()));
+    mServer.setFilter(mConfig.readEntry(prefix + u"UserFilter%1"_s.arg(mServerIndex), QString()));
+    mServer.setCompletionWeight(mConfig.readEntry(prefix + u"CompletionWeight%1"_s.arg(mServerIndex), -1));
+    mServer.setActivities(mConfig.readEntry(prefix + u"Activities%1"_s.arg(mServerIndex), QStringList()));
+    mServer.setEnablePlasmaActivities(mConfig.readEntry(prefix + u"EnabledActivities%1"_s.arg(mServerIndex), false));
 
-    const QString pwdBindBNEntry = prefix + QStringLiteral("PwdBind%1").arg(mServerIndex);
+    const QString pwdBindBNEntry = prefix + u"PwdBind%1"_s.arg(mServerIndex);
 
-    auto readJob = new ReadPasswordJob(QStringLiteral("ldapclient"), this);
+    auto readJob = new ReadPasswordJob(u"ldapclient"_s, this);
     connect(readJob, &Job::finished, this, [this, pwdBindBNEntry](QKeychain::Job *baseJob) {
         auto job = qobject_cast<ReadPasswordJob *>(baseJob);
         Q_ASSERT(job);
