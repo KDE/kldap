@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-27 00:41+0000\n"
+"POT-Creation-Date: 2025-06-24 00:43+0000\n"
 "PO-Revision-Date: 2025-02-03 21:15+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -97,18 +97,18 @@ msgid "Cannot access to server. Please reconfigure it."
 msgstr ""
 "Nem sikerült elérni a kiszolgálót. Ha szükséges, módosítson a beállításokon."
 
-#: widgets/addhostdialog.cpp:74
+#: widgets/addhostdialog.cpp:75
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Host"
 msgstr "Gépnév hozzáadása"
 
-#: widgets/addhostdialog.cpp:93
+#: widgets/addhostdialog.cpp:94
 #, kde-format
 msgid "Configure"
 msgstr "Beállítás"
 
-#: widgets/addhostdialog.cpp:102
+#: widgets/addhostdialog.cpp:103
 #, kde-format
 msgid "Activities"
 msgstr "Aktivitások"
@@ -174,144 +174,144 @@ msgstr "Csatlakozási DN:"
 msgid "Realm:"
 msgstr "Tartomány:"
 
-#: widgets/ldapconfigwidget.cpp:120
+#: widgets/ldapconfigwidget.cpp:119
 #, kde-format
 msgid "Password:"
 msgstr "Jelszó:"
 
-#: widgets/ldapconfigwidget.cpp:128
+#: widgets/ldapconfigwidget.cpp:127
 #, kde-format
 msgid "Host:"
 msgstr "Gépnév:"
 
-#: widgets/ldapconfigwidget.cpp:137
+#: widgets/ldapconfigwidget.cpp:136
 #, kde-format
 msgid "Port:"
 msgstr "Port:"
 
-#: widgets/ldapconfigwidget.cpp:145
+#: widgets/ldapconfigwidget.cpp:144
 #, kde-format
 msgid "LDAP version:"
 msgstr "LDAP verzió:"
 
-#: widgets/ldapconfigwidget.cpp:153
+#: widgets/ldapconfigwidget.cpp:152
 #, kde-format
 msgctxt "default ldap size limit"
 msgid "Default"
 msgstr "Alapértelmezés"
 
-#: widgets/ldapconfigwidget.cpp:154
+#: widgets/ldapconfigwidget.cpp:153
 #, kde-format
 msgid "Size limit:"
 msgstr "Méretkorlát:"
 
-#: widgets/ldapconfigwidget.cpp:162
+#: widgets/ldapconfigwidget.cpp:161
 #, kde-format
 msgid " sec"
 msgstr " s"
 
-#: widgets/ldapconfigwidget.cpp:163
+#: widgets/ldapconfigwidget.cpp:162
 #, kde-format
 msgctxt "default ldap time limit"
 msgid "Default"
 msgstr "Alapértelmezés"
 
-#: widgets/ldapconfigwidget.cpp:164
+#: widgets/ldapconfigwidget.cpp:163
 #, kde-format
 msgid "Time limit:"
 msgstr "Időkorlát:"
 
-#: widgets/ldapconfigwidget.cpp:172
+#: widgets/ldapconfigwidget.cpp:171
 #, kde-format
 msgid "No paging"
 msgstr "Nincs lapozás"
 
-#: widgets/ldapconfigwidget.cpp:173
+#: widgets/ldapconfigwidget.cpp:172
 #, kde-format
 msgid "Page size:"
 msgstr "Lapméret:"
 
-#: widgets/ldapconfigwidget.cpp:185 widgets/ldapconfigwidget.cpp:264
+#: widgets/ldapconfigwidget.cpp:184 widgets/ldapconfigwidget.cpp:263
 #, kde-format
 msgctxt "@action:button"
 msgid "Query Server"
 msgstr "Lekérdezés"
 
-#: widgets/ldapconfigwidget.cpp:195
+#: widgets/ldapconfigwidget.cpp:194
 #, kde-format
 msgctxt "Distinguished Name"
 msgid "DN:"
 msgstr "DN:"
 
-#: widgets/ldapconfigwidget.cpp:203
+#: widgets/ldapconfigwidget.cpp:202
 #, kde-format
 msgid "Filter:"
 msgstr "Szűrő:"
 
-#: widgets/ldapconfigwidget.cpp:212
+#: widgets/ldapconfigwidget.cpp:211
 #, kde-format
 msgctxt "@option:radio set no security"
 msgid "No"
 msgstr "Nincs"
 
-#: widgets/ldapconfigwidget.cpp:215
+#: widgets/ldapconfigwidget.cpp:214
 #, kde-format
 msgctxt "@option:radio use TLS security"
 msgid "TLS"
 msgstr "TLS"
 
-#: widgets/ldapconfigwidget.cpp:218
+#: widgets/ldapconfigwidget.cpp:217
 #, kde-format
 msgctxt "@option:radio use SSL security"
 msgid "SSL"
 msgstr "SSL"
 
-#: widgets/ldapconfigwidget.cpp:233
+#: widgets/ldapconfigwidget.cpp:232
 #, kde-format
 msgid "Security:"
 msgstr "Biztonság:"
 
-#: widgets/ldapconfigwidget.cpp:243
+#: widgets/ldapconfigwidget.cpp:242
 #, kde-format
 msgctxt "@option:radio anonymous authentication"
 msgid "Anonymous"
 msgstr "Anonymous"
 
-#: widgets/ldapconfigwidget.cpp:246
+#: widgets/ldapconfigwidget.cpp:245
 #, kde-format
 msgctxt "@option:radio simple authentication"
 msgid "Simple"
 msgstr "Egyszerű"
 
-#: widgets/ldapconfigwidget.cpp:249
+#: widgets/ldapconfigwidget.cpp:248
 #, kde-format
 msgctxt "@option:radio SASL authentication"
 msgid "SASL"
 msgstr "SASL"
 
-#: widgets/ldapconfigwidget.cpp:252
+#: widgets/ldapconfigwidget.cpp:251
 #, kde-format
 msgid "Authentication:"
 msgstr "Hitelesítés:"
 
-#: widgets/ldapconfigwidget.cpp:270
+#: widgets/ldapconfigwidget.cpp:269
 #, kde-format
 msgid "SASL mechanism:"
 msgstr "SASL-mechanizmus:"
 
-#: widgets/ldapconfigwidget.cpp:314
+#: widgets/ldapconfigwidget.cpp:313
 #, kde-format
 msgctxt "@title:window"
 msgid "Check server"
 msgstr "Kiszolgáló ellenőrzése"
 
-#: widgets/ldapconfigwidget.cpp:320
+#: widgets/ldapconfigwidget.cpp:319
 #, kde-format
 msgctxt "@title:window"
 msgid "LDAP Query"
 msgstr "LDAP lekérdezés"
 
-#: widgets/ldapconfigwidget.cpp:334
+#: widgets/ldapconfigwidget.cpp:333
 #, kde-format
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"

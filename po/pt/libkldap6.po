@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-27 00:41+0000\n"
+"POT-Creation-Date: 2025-06-24 00:43+0000\n"
 "PO-Revision-Date: 2021-07-24 20:14+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-doc@kde.org>\n"
@@ -96,18 +96,18 @@ msgstr ""
 msgid "Cannot access to server. Please reconfigure it."
 msgstr "Não é possível aceder ao servidor. Reconfigure-o, por favor."
 
-#: widgets/addhostdialog.cpp:74
+#: widgets/addhostdialog.cpp:75
 #, kde-format
 msgctxt "@title:window"
 msgid "Add Host"
 msgstr "Adicionar uma Máquina"
 
-#: widgets/addhostdialog.cpp:93
+#: widgets/addhostdialog.cpp:94
 #, kde-format
 msgid "Configure"
 msgstr ""
 
-#: widgets/addhostdialog.cpp:102
+#: widgets/addhostdialog.cpp:103
 #, kde-format
 msgid "Activities"
 msgstr ""
@@ -180,146 +180,146 @@ msgstr "DN de ligação:"
 msgid "Realm:"
 msgstr "Reino:"
 
-#: widgets/ldapconfigwidget.cpp:120
+#: widgets/ldapconfigwidget.cpp:119
 #, kde-format
 msgid "Password:"
 msgstr "Senha:"
 
-#: widgets/ldapconfigwidget.cpp:128
+#: widgets/ldapconfigwidget.cpp:127
 #, kde-format
 msgid "Host:"
 msgstr "Máquina:"
 
-#: widgets/ldapconfigwidget.cpp:137
+#: widgets/ldapconfigwidget.cpp:136
 #, kde-format
 msgid "Port:"
 msgstr "Porto:"
 
-#: widgets/ldapconfigwidget.cpp:145
+#: widgets/ldapconfigwidget.cpp:144
 #, kde-format
 msgid "LDAP version:"
 msgstr "Versão LDAP:"
 
-#: widgets/ldapconfigwidget.cpp:153
+#: widgets/ldapconfigwidget.cpp:152
 #, kde-format
 msgctxt "default ldap size limit"
 msgid "Default"
 msgstr "Predefinição"
 
-#: widgets/ldapconfigwidget.cpp:154
+#: widgets/ldapconfigwidget.cpp:153
 #, kde-format
 msgid "Size limit:"
 msgstr "Limite de tamanho:"
 
-#: widgets/ldapconfigwidget.cpp:162
+#: widgets/ldapconfigwidget.cpp:161
 #, kde-format
 msgid " sec"
 msgstr " s"
 
-#: widgets/ldapconfigwidget.cpp:163
+#: widgets/ldapconfigwidget.cpp:162
 #, kde-format
 msgctxt "default ldap time limit"
 msgid "Default"
 msgstr "Predefinição"
 
-#: widgets/ldapconfigwidget.cpp:164
+#: widgets/ldapconfigwidget.cpp:163
 #, kde-format
 msgid "Time limit:"
 msgstr "Limite de tempo:"
 
-#: widgets/ldapconfigwidget.cpp:172
+#: widgets/ldapconfigwidget.cpp:171
 #, kde-format
 msgid "No paging"
 msgstr "Sem paginação"
 
-#: widgets/ldapconfigwidget.cpp:173
+#: widgets/ldapconfigwidget.cpp:172
 #, kde-format
 msgid "Page size:"
 msgstr "Tamanho da página:"
 
-#: widgets/ldapconfigwidget.cpp:185 widgets/ldapconfigwidget.cpp:264
+#: widgets/ldapconfigwidget.cpp:184 widgets/ldapconfigwidget.cpp:263
 #, fuzzy, kde-format
 #| msgid "Query Server"
 msgctxt "@action:button"
 msgid "Query Server"
 msgstr "Procurar no Servidor"
 
-#: widgets/ldapconfigwidget.cpp:195
+#: widgets/ldapconfigwidget.cpp:194
 #, kde-format
 msgctxt "Distinguished Name"
 msgid "DN:"
 msgstr "DN:"
 
-#: widgets/ldapconfigwidget.cpp:203
+#: widgets/ldapconfigwidget.cpp:202
 #, kde-format
 msgid "Filter:"
 msgstr "Filtro:"
 
-#: widgets/ldapconfigwidget.cpp:212
+#: widgets/ldapconfigwidget.cpp:211
 #, kde-format
 msgctxt "@option:radio set no security"
 msgid "No"
 msgstr "Não"
 
-#: widgets/ldapconfigwidget.cpp:215
+#: widgets/ldapconfigwidget.cpp:214
 #, kde-format
 msgctxt "@option:radio use TLS security"
 msgid "TLS"
 msgstr "TLS"
 
-#: widgets/ldapconfigwidget.cpp:218
+#: widgets/ldapconfigwidget.cpp:217
 #, kde-format
 msgctxt "@option:radio use SSL security"
 msgid "SSL"
 msgstr "SSL"
 
-#: widgets/ldapconfigwidget.cpp:233
+#: widgets/ldapconfigwidget.cpp:232
 #, kde-format
 msgid "Security:"
 msgstr "Segurança:"
 
-#: widgets/ldapconfigwidget.cpp:243
+#: widgets/ldapconfigwidget.cpp:242
 #, kde-format
 msgctxt "@option:radio anonymous authentication"
 msgid "Anonymous"
 msgstr "Anónimo"
 
-#: widgets/ldapconfigwidget.cpp:246
+#: widgets/ldapconfigwidget.cpp:245
 #, kde-format
 msgctxt "@option:radio simple authentication"
 msgid "Simple"
 msgstr "Simples"
 
-#: widgets/ldapconfigwidget.cpp:249
+#: widgets/ldapconfigwidget.cpp:248
 #, kde-format
 msgctxt "@option:radio SASL authentication"
 msgid "SASL"
 msgstr "SASL"
 
-#: widgets/ldapconfigwidget.cpp:252
+#: widgets/ldapconfigwidget.cpp:251
 #, kde-format
 msgid "Authentication:"
 msgstr "Autenticação:"
 
-#: widgets/ldapconfigwidget.cpp:270
+#: widgets/ldapconfigwidget.cpp:269
 #, kde-format
 msgid "SASL mechanism:"
 msgstr "Mecanismo SASL:"
 
-#: widgets/ldapconfigwidget.cpp:314
+#: widgets/ldapconfigwidget.cpp:313
 #, fuzzy, kde-format
 #| msgid "Check server"
 msgctxt "@title:window"
 msgid "Check server"
 msgstr "Verificar o servidor"
 
-#: widgets/ldapconfigwidget.cpp:320
+#: widgets/ldapconfigwidget.cpp:319
 #, kde-format
 msgctxt "@title:window"
 msgid "LDAP Query"
 msgstr "Pesquisa LDAP"
 
-#: widgets/ldapconfigwidget.cpp:334
+#: widgets/ldapconfigwidget.cpp:333
 #, kde-format
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
