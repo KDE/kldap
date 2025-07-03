@@ -1,7 +1,12 @@
 # SPDX-FileCopyrightText: none
 # SPDX-License-Identifier: BSD-3-Clause
 add_library(kio_ldap MODULE)
-target_sources(kio_ldap PRIVATE kio_ldap.cpp kio_ldap.h)
+target_sources(
+    kio_ldap
+    PRIVATE
+        kio_ldap.cpp
+        kio_ldap.h
+)
 ecm_qt_declare_logging_category(kio_ldap
         HEADER kldap_debug.h
         IDENTIFIER KLDAP_KIO_WORKERS_LOG
@@ -21,5 +26,10 @@ target_link_libraries(
 if(WIN32)
     target_link_libraries(kio_ldap ws2_32)
 endif()
-set_target_properties(kio_ldap PROPERTIES OUTPUT_NAME "ldap")
+set_target_properties(
+    kio_ldap
+    PROPERTIES
+        OUTPUT_NAME
+            "ldap"
+)
 install(TARGETS kio_ldap DESTINATION ${KDE_INSTALL_PLUGINDIR}/kf6/kio)

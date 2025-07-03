@@ -10,29 +10,56 @@ ecm_setup_version(PROJECT VARIABLE_PREFIX KLDAPCORE
     SOVERSION 6
 )
 
-check_include_files(sys/time.h HAVE_SYS_TIME_H)
+check_include_files(
+    sys/time.h
+    HAVE_SYS_TIME_H
+)
 
 set(kldap_EXTRA_LIBS)
 
 if(Ldap_FOUND)
     set(kldap_EXTRA_LIBS Ldap::Ldap)
     if(WIN32)
-        set(kldap_EXTRA_LIBS ${kldap_EXTRA_LIBS} ws2_32)
+        set(kldap_EXTRA_LIBS
+            ${kldap_EXTRA_LIBS}
+            ws2_32
+        )
     endif()
-    set(CMAKE_REQUIRED_INCLUDES lber.h ldap.h)
+    set(CMAKE_REQUIRED_INCLUDES
+        lber.h
+        ldap.h
+    )
     set(CMAKE_REQUIRED_LIBRARIES Ldap::Ldap)
-    check_function_exists(ldap_start_tls_s HAVE_LDAP_START_TLS_S)
-    check_function_exists(ldap_initialize HAVE_LDAP_INITIALIZE)
-    check_function_exists(ber_memfree HAVE_BER_MEMFREE)
-    check_function_exists(ldap_unbind_ext HAVE_LDAP_UNBIND_EXT)
-    check_function_exists(ldap_extended_operation HAVE_LDAP_EXTENDED_OPERATION)
+    check_function_exists(
+        ldap_start_tls_s
+        HAVE_LDAP_START_TLS_S
+    )
+    check_function_exists(
+        ldap_initialize
+        HAVE_LDAP_INITIALIZE
+    )
+    check_function_exists(
+        ber_memfree
+        HAVE_BER_MEMFREE
+    )
+    check_function_exists(
+        ldap_unbind_ext
+        HAVE_LDAP_UNBIND_EXT
+    )
+    check_function_exists(
+        ldap_extended_operation
+        HAVE_LDAP_EXTENDED_OPERATION
+    )
     check_function_exists(
         ldap_extended_operation_s
         HAVE_LDAP_EXTENDED_OPERATION_S
     )
 endif()
 
-set(kldap_EXTRA_LIBS ${kldap_EXTRA_LIBS} Sasl2::Sasl2)
+set(kldap_EXTRA_LIBS
+    ${kldap_EXTRA_LIBS}
+    Sasl2::Sasl2
+)
 
 configure_file(kldap_config.h.in ${CMAKE_CURRENT_BINARY_DIR}/kldap_config.h)
 
@@ -98,7 +125,12 @@ ecm_qt_declare_logging_category(KPim6LdapCore HEADER ldapclient_core_debug.h IDE
 )
 
 if(COMPILE_WITH_UNITY_CMAKE_SUPPORT)
-    set_target_properties(KPim6LdapCore PROPERTIES UNITY_BUILD ON)
+    set_target_properties(
+        KPim6LdapCore
+        PROPERTIES
+            UNITY_BUILD
+                ON
+    )
 endif()
 generate_export_header(KPim6LdapCore BASE_NAME kldap_core)
 
@@ -114,10 +146,7 @@ target_link_libraries(
 
 target_link_libraries(KPim6LdapCore PRIVATE qt6keychain)
 
-target_include_directories(
-    KPim6LdapCore
-    INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPCore>"
-)
+target_include_directories(KPim6LdapCore INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPCore>")
 target_include_directories(
     KPim6LdapCore
     PUBLIC
@@ -127,16 +156,15 @@ target_include_directories(
 set_target_properties(
     KPim6LdapCore
     PROPERTIES
-        VERSION ${KLDAPCORE_VERSION}
-        SOVERSION ${KLDAPCORE_SOVERSION}
-        EXPORT_NAME LdapCore
+        VERSION
+            ${KLDAPCORE_VERSION}
+        SOVERSION
+            ${KLDAPCORE_SOVERSION}
+        EXPORT_NAME
+            LdapCore
 )
 
-install(
-    TARGETS KPim6LdapCore
-    EXPORT KPim6LdapCoreTargets
-    ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
-)
+install(TARGETS KPim6LdapCore EXPORT KPim6LdapCoreTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 
@@ -167,13 +195,16 @@ ecm_generate_headers(KLdapCore_CamelCase_HEADERS
 )
 
 install(
-    FILES ${CMAKE_CURRENT_BINARY_DIR}/kldap_core_export.h ${KLdapCore_HEADERS}
+    FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/kldap_core_export.h
+        ${KLdapCore_HEADERS}
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPCore/kldapcore
     COMPONENT Devel
 )
 
 install(
-    FILES ${KLdapCore_CamelCase_HEADERS}
+    FILES
+        ${KLdapCore_CamelCase_HEADERS}
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPCore/KLDAPCore/
     COMPONENT Devel
 )
@@ -210,9 +241,7 @@ if(BUILD_QCH)
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
     )
-    set(PACKAGE_INCLUDE_QCHTARGETS
-        "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6LdapCoreQchTargets.cmake\")"
-    )
+    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6LdapCoreQchTargets.cmake\")")
 endif()
 
 install(
@@ -237,7 +266,8 @@ install(
 )
 
 install(
-    FILES ${CMAKE_CURRENT_BINARY_DIR}/kldap_core_version.h
+    FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/kldap_core_version.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPCore
     COMPONENT Devel
 )

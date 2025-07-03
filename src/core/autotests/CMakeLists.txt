@@ -14,10 +14,7 @@ add_executable(
     ldapclientsearchconfigreadconfigjobtest.cpp
     ldapclientsearchconfigreadconfigjobtest.h
 )
-add_test(
-    NAME ldapclientsearchconfigreadconfigjobtest
-    COMMAND ldapclientsearchconfigreadconfigjobtest
-)
+add_test(NAME ldapclientsearchconfigreadconfigjobtest COMMAND ldapclientsearchconfigreadconfigjobtest)
 ecm_mark_as_test(ldapclientsearchconfigreadconfigjobtest)
 target_link_libraries(
     ldapclientsearchconfigreadconfigjobtest

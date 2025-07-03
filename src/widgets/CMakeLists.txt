@@ -38,13 +38,19 @@ ecm_qt_declare_logging_category(KPim6LdapWidgets HEADER ldapclient_debug.h IDENT
 )
 
 if(COMPILE_WITH_UNITY_CMAKE_SUPPORT)
-    set_target_properties(KPim6LdapWidgets PROPERTIES UNITY_BUILD ON)
+    set_target_properties(
+        KPim6LdapWidgets
+        PROPERTIES
+            UNITY_BUILD
+                ON
+    )
 endif()
 generate_export_header(KPim6LdapWidgets BASE_NAME kldapwidgets)
 
 target_link_libraries(
     KPim6LdapWidgets
-    PUBLIC KPim6::LdapCore
+    PUBLIC
+        KPim6::LdapCore
     PRIVATE
         Qt::Widgets
         KF6::I18n
@@ -71,16 +77,15 @@ target_include_directories(
 set_target_properties(
     KPim6LdapWidgets
     PROPERTIES
-        VERSION ${KLDAPWIDGETS_VERSION}
-        SOVERSION ${KLDAPWIDGETS_SOVERSION}
-        EXPORT_NAME LdapWidgets
+        VERSION
+            ${KLDAPWIDGETS_VERSION}
+        SOVERSION
+            ${KLDAPWIDGETS_SOVERSION}
+        EXPORT_NAME
+            LdapWidgets
 )
 
-install(
-    TARGETS KPim6LdapWidgets
-    EXPORT KPim6LdapWidgetsTargets
-    ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
-)
+install(TARGETS KPim6LdapWidgets EXPORT KPim6LdapWidgetsTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 
 ########### install files ###############
 
@@ -103,13 +108,15 @@ install(
 )
 
 install(
-    FILES ${KLdapWidgets_CamelCase_HEADERS}
+    FILES
+        ${KLdapWidgets_CamelCase_HEADERS}
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPWidgets/KLDAPWidgets/
     COMPONENT Devel
 )
 
 install(
-    FILES ${CMAKE_CURRENT_BINARY_DIR}/kldap_widgets_version.h
+    FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/kldap_widgets_version.h
     DESTINATION ${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPWidgets
     COMPONENT Devel
 )
@@ -161,9 +168,7 @@ if(BUILD_QCH)
         DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
         COMPONENT Devel
     )
-    set(PACKAGE_INCLUDE_QCHTARGETS
-        "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6LdapWidgetsQchTargets.cmake\")"
-    )
+    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6LdapWidgetsQchTargets.cmake\")")
 endif()
 
 configure_package_config_file(

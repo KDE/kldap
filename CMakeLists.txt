@@ -11,7 +11,10 @@ set(QT_REQUIRED_VERSION "6.8.0")
 set(QT6KEYCHAIN_LIB_VERSION "0.14.2")
 set(CMAKE_CXX_STANDARD 20)
 find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
-set(CMAKE_MODULE_PATH ${KLdap_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
+set(CMAKE_MODULE_PATH
+    ${KLdap_SOURCE_DIR}/cmake
+    ${ECM_MODULE_PATH}
+)
 
 include(KDEInstallDirs)
 include(KDECMakeSettings)
@@ -60,9 +63,12 @@ find_package(Qt6Keychain ${QT6KEYCHAIN_LIB_VERSION} CONFIG)
 set_package_properties(
     Qt6Keychain
     PROPERTIES
-        DESCRIPTION "Provides support for secure credentials storage"
-        URL "https://github.com/frankosterfeld/qtkeychain"
-        TYPE REQUIRED
+        DESCRIPTION
+            "Provides support for secure credentials storage"
+        URL
+            "https://github.com/frankosterfeld/qtkeychain"
+        TYPE
+            REQUIRED
 )
 
 # tell what is missing without doctools
@@ -71,26 +77,20 @@ set_package_properties(
     PROPERTIES
         DESCRIPTION
             "Provides tools to generate documentation in various format from DocBook files"
-        TYPE OPTIONAL
-        PURPOSE "Required to build documentation"
+        TYPE
+            OPTIONAL
+        PURPOSE
+            "Required to build documentation"
 )
 
-option(
-    BUILD_QCH
-    "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)"
-    OFF
-)
+option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
 add_feature_info(
     QCH
     ${BUILD_QCH}
     "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)"
 )
 
-option(
-    USE_UNITY_CMAKE_SUPPORT
-    "Use UNITY cmake support (speedup compile time)"
-    OFF
-)
+option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)
 set(COMPILE_WITH_UNITY_CMAKE_SUPPORT OFF)
 if(USE_UNITY_CMAKE_SUPPORT)
     set(COMPILE_WITH_UNITY_CMAKE_SUPPORT ON)
@@ -106,12 +106,19 @@ find_package(Ldap)
 set_package_properties(
     Ldap
     PROPERTIES
-        TYPE RECOMMENDED
-        PURPOSE "Needed to provide LDAP functionality in KDE"
+        TYPE
+            RECOMMENDED
+        PURPOSE
+            "Needed to provide LDAP functionality in KDE"
 )
 
 find_package(Sasl2)
-set_package_properties(Sasl2 PROPERTIES TYPE REQUIRED)
+set_package_properties(
+    Sasl2
+    PROPERTIES
+        TYPE
+            REQUIRED
+)
 
 if(Ldap_FOUND)
     set(LDAP_FOUND 1)
