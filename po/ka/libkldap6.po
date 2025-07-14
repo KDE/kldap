@@ -195,7 +195,7 @@ msgstr "LDAP-ის ვერსია:"
 #, kde-format
 msgctxt "default ldap size limit"
 msgid "Default"
-msgstr "ნაგულისხმები"
+msgstr "ნაგულისხმევი"
 
 #: widgets/ldapconfigwidget.cpp:153
 #, kde-format
@@ -211,7 +211,7 @@ msgstr " წმ"
 #, kde-format
 msgctxt "default ldap time limit"
 msgid "Default"
-msgstr "ნაგულისხმები"
+msgstr "ნაგულისხმევი"
 
 #: widgets/ldapconfigwidget.cpp:163
 #, kde-format
