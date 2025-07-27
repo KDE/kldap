@@ -5,20 +5,21 @@
 # Diniz Bortolotto <diniz.bortolotto@gmail.com>, 2007.
 # André Marcelo Alvarenga <alvarenga@kde.org>, 2008, 2009, 2010, 2014, 2018.
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2010, 2019, 2020, 2021.
+# SPDX-FileCopyrightText: 2025 Marcus Gama <marcus.gama@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: libkldap5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-24 00:43+0000\n"
-"PO-Revision-Date: 2021-08-04 10:44-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
+"PO-Revision-Date: 2025-07-26 14:23-0300\n"
+"Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 21.04.3\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #: core/ldapconnection.cpp:126
 #, kde-format
@@ -106,17 +107,17 @@ msgstr "Adicionar máquina"
 #: widgets/addhostdialog.cpp:94
 #, kde-format
 msgid "Configure"
-msgstr ""
+msgstr "Configurar"
 
 #: widgets/addhostdialog.cpp:103
 #, kde-format
 msgid "Activities"
-msgstr ""
+msgstr "Atividades"
 
 #: widgets/ldapconfigurewidgetng.cpp:39
 #, kde-format
 msgid "Show only ldap servers on current activity"
-msgstr ""
+msgstr "Mostrar somente servidores ldap da atividade atual"
 
 #: widgets/ldapconfigurewidgetng.cpp:122
 #, kde-format
@@ -130,38 +131,31 @@ msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Deseja remover a configuração da máquina \"%1\"?"
 
 #: widgets/ldapconfigurewidgetng.cpp:140
-#, fuzzy, kde-format
-#| msgid "Remove Host"
+#, kde-format
 msgctxt "@title:window"
 msgid "Remove Host"
 msgstr "Remover máquina"
 
 #: widgets/ldapconfigurewidgetng.cpp:213
-#, fuzzy, kde-format
-#| msgid "Check all servers that should be used:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Check all servers that should be used:"
 msgstr "Selecione todos os servidores que devem ser usados:"
 
 #: widgets/ldapconfigurewidgetng.cpp:261
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Add Host"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
-msgstr "Adicionar máquina"
+msgstr "&Adicionar máquina..."
 
 #: widgets/ldapconfigurewidgetng.cpp:263
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Edit Host"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
-msgstr "Editar máquina"
+msgstr "&Editar máquina..."
 
 #: widgets/ldapconfigurewidgetng.cpp:266
-#, fuzzy, kde-format
-#| msgid "&Remove Host"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
 msgstr "&Remover máquina"
@@ -239,11 +233,10 @@ msgid "Page size:"
 msgstr "Tamanho da página:"
 
 #: widgets/ldapconfigwidget.cpp:184 widgets/ldapconfigwidget.cpp:263
-#, fuzzy, kde-format
-#| msgid "Query Server"
+#, kde-format
 msgctxt "@action:button"
 msgid "Query Server"
-msgstr "Procurar no servidor"
+msgstr "Pesquisar no servidor"
 
 #: widgets/ldapconfigwidget.cpp:194
 #, kde-format
@@ -308,8 +301,7 @@ msgid "SASL mechanism:"
 msgstr "Mecanismo SASL:"
 
 #: widgets/ldapconfigwidget.cpp:313
-#, fuzzy, kde-format
-#| msgid "Check server"
+#, kde-format
 msgctxt "@title:window"
 msgid "Check server"
 msgstr "Verificar servidor"
