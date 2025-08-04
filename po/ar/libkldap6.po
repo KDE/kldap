@@ -180,7 +180,7 @@ msgstr "المجال:"
 #: widgets/ldapconfigwidget.cpp:119
 #, kde-format
 msgid "Password:"
-msgstr "كلمة المرور:"
+msgstr "كلمة السر:"
 
 #: widgets/ldapconfigwidget.cpp:127
 #, kde-format
