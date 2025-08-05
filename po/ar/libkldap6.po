@@ -300,7 +300,7 @@ msgstr "الاستيثاق:"
 #: widgets/ldapconfigwidget.cpp:269
 #, kde-format
 msgid "SASL mechanism:"
-msgstr "آلية SASL:"
+msgstr "آليّة SASL:"
 
 #: widgets/ldapconfigwidget.cpp:313
 #, kde-format
