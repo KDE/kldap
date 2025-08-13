@@ -207,12 +207,11 @@ void LdapClient::LdapClientPrivate::finishCurrentObject()
         if (it == mCurrentObject.attributes().end()) {
             // No explicit mail address found so far?
             // Fine, then we use the address stored in the DN.
-            QString sMail;
             const QStringList lMail = mCurrentObject.dn().toString().split(u",dc="_s, Qt::SkipEmptyParts);
             const int n = lMail.count();
             if (n) {
                 if (lMail.first().startsWith(QLatin1StringView("cn="), Qt::CaseInsensitive)) {
-                    sMail = lMail.first().simplified().mid(3);
+                    QString sMail = lMail.first().simplified().mid(3);
                     if (1 < n) {
                         sMail.append(u'@');
                     }

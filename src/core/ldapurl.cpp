@@ -257,12 +257,11 @@ void LdapUrl::parseQuery()
         }
     }
 
-    QString name;
     QString value;
     QStringList::const_iterator end2(extensions.constEnd());
     for (QStringList::const_iterator it = extensions.constBegin(); it != end2; ++it) {
         ext.critical = false;
-        name = fromPercentEncoding((*it).section(u'=', 0, 0).toLatin1()).toLower();
+        QString name = fromPercentEncoding((*it).section(u'=', 0, 0).toLatin1()).toLower();
         value = fromPercentEncoding((*it).section(u'=', 1).toLatin1());
         if (name.startsWith(u'!')) {
             ext.critical = true;

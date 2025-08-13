@@ -142,10 +142,10 @@ bool LdapModel::setData(const QModelIndex &modelIndex, const QVariant &value, in
     }
     if (role == Qt::CheckStateRole) {
         const int idx = modelIndex.row();
-        auto &serverInfo = mLdapServerInfo[idx];
         switch (static_cast<LdapRoles>(modelIndex.column())) {
         case Name: {
             const QModelIndex newIndex = index(modelIndex.row(), Name);
+            auto &serverInfo = mLdapServerInfo[idx];
             Q_EMIT dataChanged(newIndex, newIndex);
             serverInfo.enabled = value.toBool();
             return true;
