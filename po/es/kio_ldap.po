@@ -1,19 +1,19 @@
-# translation of kio_ldap.po to Spanish
-# Translation of kio_ldap to Spanish
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
+# Spanish translations for kio_ldap.po package.
+# Copyright (C) 2007-2025 This file is copyright:
+# This file is distributed under the same license as the kldap package.
 #
-# Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2007.
-# Jaime Robles <jaime@kde.org>, 2007.
-# Javier Vinal <fjvinal@gmail.com>, 2011, 2016.
+# SPDX-FileCopyrightText: 2007 Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>
+# SPDX-FileCopyrightText: 2007 Jaime Robles <jaime@kde.org>
+# SPDX-FileCopyrightText: 2011, 2016 Javier Vinal <fjvinal@gmail.com>
+# SPDX-FileCopyrightText: 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kio_ldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-03 00:38+0000\n"
-"PO-Revision-Date: 2016-01-07 13:29+0100\n"
-"Last-Translator: Javier Vinal <fjvinal@gmail.com>\n"
-"Language-Team: Spanish <l10n-kde-es@kde.org>\n"
+"PO-Revision-Date: 2025-08-16 01:49+0100\n"
+"Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
+"Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
