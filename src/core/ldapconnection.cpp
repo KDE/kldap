@@ -219,7 +219,9 @@ int LdapConnection::connect()
     }
 
     int version = d->mServer.version();
+#if defined(LDAP_OPT_TIMEOUT)
     int timeout = d->mServer.timeout();
+#endif
 
     url = d->mServer.security() == LdapServer::SSL ? u"ldaps"_s : u"ldap"_s;
     url += "://"_L1;
