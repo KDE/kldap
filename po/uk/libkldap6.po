@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-24 00:43+0000\n"
+"POT-Creation-Date: 2025-08-18 00:43+0000\n"
 "PO-Revision-Date: 2024-11-27 08:35+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -26,17 +26,17 @@ msgstr ""
 msgid "No LDAP Support..."
 msgstr "Немає підтримки LDAP..."
 
-#: core/ldapconnection.cpp:241
+#: core/ldapconnection.cpp:243
 #, kde-format
 msgid "An error occurred during the connection initialization phase."
 msgstr "Під час фази ініціалізації з’єднання сталася помилка."
 
-#: core/ldapconnection.cpp:248
+#: core/ldapconnection.cpp:250
 #, kde-format
 msgid "Cannot set protocol version to %1."
 msgstr "Неможливо встановити версію протоколу до %1."
 
-#: core/ldapconnection.cpp:259
+#: core/ldapconnection.cpp:261
 #, kde-format
 msgid "Cannot set timeout to %1 second."
 msgid_plural "Cannot set timeout to %1 seconds."
@@ -45,47 +45,47 @@ msgstr[1] "Не вдається встановити тайм-аут у %1 се
 msgstr[2] "Не вдається встановити тайм-аут у %1 секунд."
 msgstr[3] "Не вдається встановити тайм-аут у %1 секунду."
 
-#: core/ldapconnection.cpp:271
+#: core/ldapconnection.cpp:273
 #, kde-format
 msgid "Could not set CA certificate file."
 msgstr "Не вдалося встановити файл сертифіката CA."
 
-#: core/ldapconnection.cpp:296
+#: core/ldapconnection.cpp:298
 #, kde-format
 msgid "Invalid TLS require certificate mode."
 msgstr "Некоректна вимога TLS щодо режиму сертифікації."
 
-#: core/ldapconnection.cpp:301
+#: core/ldapconnection.cpp:303
 #, kde-format
 msgid "Could not set TLS require certificate mode."
 msgstr "Не вдалося встановити запитаний TLS режим сертифікації."
 
-#: core/ldapconnection.cpp:310
+#: core/ldapconnection.cpp:312
 #, kde-format
 msgid "Could not initialize new TLS context."
 msgstr "Не вдалося ініціалізувати новий контекст TLS."
 
-#: core/ldapconnection.cpp:327
+#: core/ldapconnection.cpp:329
 #, kde-format
 msgid "TLS support not available in the LDAP client libraries."
 msgstr "Немає підтримки TLS в бібліотеках клієнта LDAP."
 
-#: core/ldapconnection.cpp:337
+#: core/ldapconnection.cpp:339
 #, kde-format
 msgid "Cannot set size limit."
 msgstr "Не вдається встановити обмеження на розмір."
 
-#: core/ldapconnection.cpp:347
+#: core/ldapconnection.cpp:349
 #, kde-format
 msgid "Cannot set time limit."
 msgstr "Не вдається встановити обмеження на час."
 
-#: core/ldapconnection.cpp:355
+#: core/ldapconnection.cpp:357
 #, kde-format
 msgid "Cannot initialize the SASL client."
 msgstr "Неможливо започаткувати клієнт SASL."
 
-#: core/ldapconnection.cpp:432
+#: core/ldapconnection.cpp:434
 #, kde-format
 msgid ""
 "LDAP support not compiled in. Please recompile libkldap with the OpenLDAP "

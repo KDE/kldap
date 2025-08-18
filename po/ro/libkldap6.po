@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-24 00:43+0000\n"
+"POT-Creation-Date: 2025-08-18 00:43+0000\n"
 "PO-Revision-Date: 2009-01-05 10:56+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@lists.kde.org>\n"
@@ -24,17 +24,17 @@ msgstr ""
 msgid "No LDAP Support..."
 msgstr "Niciun suport LDAP..."
 
-#: core/ldapconnection.cpp:241
+#: core/ldapconnection.cpp:243
 #, kde-format
 msgid "An error occurred during the connection initialization phase."
 msgstr ""
 
-#: core/ldapconnection.cpp:248
+#: core/ldapconnection.cpp:250
 #, kde-format
 msgid "Cannot set protocol version to %1."
 msgstr "Imposibil de stabilit versiunea protocolului la %1."
 
-#: core/ldapconnection.cpp:259
+#: core/ldapconnection.cpp:261
 #, fuzzy, kde-format
 #| msgid "Cannot set timeout to %1 seconds."
 msgid "Cannot set timeout to %1 second."
@@ -43,49 +43,49 @@ msgstr[0] "Imposibil de stabilit temporizarea la %1 secunde."
 msgstr[1] "Imposibil de stabilit temporizarea la %1 secunde."
 msgstr[2] "Imposibil de stabilit temporizarea la %1 secunde."
 
-#: core/ldapconnection.cpp:271
+#: core/ldapconnection.cpp:273
 #, kde-format
 msgid "Could not set CA certificate file."
 msgstr ""
 
-#: core/ldapconnection.cpp:296
+#: core/ldapconnection.cpp:298
 #, kde-format
 msgid "Invalid TLS require certificate mode."
 msgstr ""
 
-#: core/ldapconnection.cpp:301
+#: core/ldapconnection.cpp:303
 #, kde-format
 msgid "Could not set TLS require certificate mode."
 msgstr ""
 
-#: core/ldapconnection.cpp:310
+#: core/ldapconnection.cpp:312
 #, fuzzy, kde-format
 #| msgid "Cannot initialize the SASL client."
 msgid "Could not initialize new TLS context."
 msgstr "Imposibil de inițializat clientul SASL."
 
-#: core/ldapconnection.cpp:327
+#: core/ldapconnection.cpp:329
 #, kde-format
 msgid "TLS support not available in the LDAP client libraries."
 msgstr ""
 "Suportul pentru TLS nu este disponibil în bibliotecile clientului LDAP."
 
-#: core/ldapconnection.cpp:337
+#: core/ldapconnection.cpp:339
 #, kde-format
 msgid "Cannot set size limit."
 msgstr "Imposibil de stabilit limita de dimensiune."
 
-#: core/ldapconnection.cpp:347
+#: core/ldapconnection.cpp:349
 #, kde-format
 msgid "Cannot set time limit."
 msgstr "Imposibil de stabilit limita de timp."
 
-#: core/ldapconnection.cpp:355
+#: core/ldapconnection.cpp:357
 #, kde-format
 msgid "Cannot initialize the SASL client."
 msgstr "Imposibil de inițializat clientul SASL."
 
-#: core/ldapconnection.cpp:432
+#: core/ldapconnection.cpp:434
 #, kde-format
 msgid ""
 "LDAP support not compiled in. Please recompile libkldap with the OpenLDAP "
