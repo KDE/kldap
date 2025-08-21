@@ -306,7 +306,7 @@ msgstr "آليّة SASL:"
 #, kde-format
 msgctxt "@title:window"
 msgid "Check server"
-msgstr "فحص الخادوم"
+msgstr "فحص الخادم"
 
 #: widgets/ldapconfigwidget.cpp:319
 #, kde-format

@@ -32,7 +32,7 @@ msgid ""
 "LDAP server returned the error: %1 %2\n"
 "The LDAP URL was: %3"
 msgstr ""
-"لقد أرجع خادوم IDAP الخطأ: %1 ‏%2\n"
+"لقد أرجع خادم IDAP الخطأ: %1 ‏%2\n"
 "كان مسار LDAP هو: %3"
 
 #: kio_ldap.cpp:294
