@@ -371,9 +371,8 @@ void LdapConfigWidget::LdapConfigWidgetPrivate::loadData(KLDAPCore::LdapSearch *
     }
 }
 
-void LdapConfigWidget::LdapConfigWidgetPrivate::loadResult(KLDAPCore::LdapSearch *search)
+void LdapConfigWidget::LdapConfigWidgetPrivate::loadResult([[maybe_unused]] KLDAPCore::LdapSearch *search)
 {
-    Q_UNUSED(search)
     mCancelled = false;
     mProg->close();
 }

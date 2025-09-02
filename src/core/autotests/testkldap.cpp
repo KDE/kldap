@@ -234,9 +234,8 @@ void KLdapTest::searchResult(KLDAPCore::LdapSearch *search)
     QCOMPARE(err, 0);
 }
 
-void KLdapTest::searchData(KLDAPCore::LdapSearch *search, const KLDAPCore::LdapObject &obj)
+void KLdapTest::searchData([[maybe_unused]] KLDAPCore::LdapSearch *search, const KLDAPCore::LdapObject &obj)
 {
-    Q_UNUSED(search)
     // qDebug();
     // qDebug() << "Object:";
     // qDebug() << obj.toString();

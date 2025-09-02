@@ -405,9 +405,8 @@ QByteArray Ber::flatten() const
     return QByteArray();
 }
 
-int Ber::printf(QString format, ...)
+int Ber::printf([[maybe_unused]] QString format, ...)
 {
-    Q_UNUSED(format)
     qCritical() << "LDAP support not compiled";
     return -1;
 }

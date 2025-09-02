@@ -186,9 +186,8 @@ int LdapModel::rowCount(const QModelIndex &parent) const
     return mLdapServerInfo.count();
 }
 
-int LdapModel::columnCount(const QModelIndex &parent) const
+int LdapModel::columnCount([[maybe_unused]] const QModelIndex &parent) const
 {
-    Q_UNUSED(parent)
     constexpr int nbCol = static_cast<int>(LdapRoles::LastColumn) + 1;
     return nbCol;
 }
