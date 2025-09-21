@@ -15,7 +15,6 @@
 #include <QVBoxLayout>
 
 #include <KConfig>
-#include <KConfigGroup>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <QDialogButtonBox>
