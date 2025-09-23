@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-18 00:43+0000\n"
+"POT-Creation-Date: 2025-09-23 00:44+0000\n"
 "PO-Revision-Date: 2024-12-20 21:52+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -111,47 +111,47 @@ msgstr "विन्यस्तं कुर्वन्तु"
 msgid "Activities"
 msgstr "गतिविधयः"
 
-#: widgets/ldapconfigurewidgetng.cpp:39
+#: widgets/ldapconfigurewidgetng.cpp:38
 #, kde-format
 msgid "Show only ldap servers on current activity"
 msgstr "वर्तमानक्रियाकलापस्य उपरि केवलं ldap सर्वरान् दर्शयतु"
 
-#: widgets/ldapconfigurewidgetng.cpp:122
+#: widgets/ldapconfigurewidgetng.cpp:121
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "होस्ट सम्पादयतु"
 
-#: widgets/ldapconfigurewidgetng.cpp:139
+#: widgets/ldapconfigurewidgetng.cpp:138
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "किं भवान् \"%1\" होस्ट् कृते सेटिङ्ग् अपसारयितुम् इच्छति?"
 
-#: widgets/ldapconfigurewidgetng.cpp:140
+#: widgets/ldapconfigurewidgetng.cpp:139
 #, kde-format
 msgctxt "@title:window"
 msgid "Remove Host"
 msgstr "होस्ट् निष्कासयन्तु"
 
-#: widgets/ldapconfigurewidgetng.cpp:213
+#: widgets/ldapconfigurewidgetng.cpp:212
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Check all servers that should be used:"
 msgstr "येषां सर्वेषां सर्वराणां उपयोगः करणीयः, तेषां जाँचं कुर्वन्तु:"
 
-#: widgets/ldapconfigurewidgetng.cpp:261
+#: widgets/ldapconfigurewidgetng.cpp:260
 #, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
 msgstr "&Host योजयतु…"
 
-#: widgets/ldapconfigurewidgetng.cpp:263
+#: widgets/ldapconfigurewidgetng.cpp:262
 #, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
 msgstr "&सम्पादन मेजबान…"
 
-#: widgets/ldapconfigurewidgetng.cpp:266
+#: widgets/ldapconfigurewidgetng.cpp:265
 #, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"

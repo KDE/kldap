@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-18 00:43+0000\n"
+"POT-Creation-Date: 2025-09-23 00:44+0000\n"
 "PO-Revision-Date: 2024-12-24 16:59+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -108,47 +108,47 @@ msgstr "설정"
 msgid "Activities"
 msgstr "활동"
 
-#: widgets/ldapconfigurewidgetng.cpp:39
+#: widgets/ldapconfigurewidgetng.cpp:38
 #, kde-format
 msgid "Show only ldap servers on current activity"
 msgstr "현재 활동의 LDAP 서버만 표시"
 
-#: widgets/ldapconfigurewidgetng.cpp:122
+#: widgets/ldapconfigurewidgetng.cpp:121
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "호스트 편집"
 
-#: widgets/ldapconfigurewidgetng.cpp:139
+#: widgets/ldapconfigurewidgetng.cpp:138
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "호스트 \"%1\"의 설정을 삭제하시겠습니까?"
 
-#: widgets/ldapconfigurewidgetng.cpp:140
+#: widgets/ldapconfigurewidgetng.cpp:139
 #, kde-format
 msgctxt "@title:window"
 msgid "Remove Host"
 msgstr "호스트 삭제"
 
-#: widgets/ldapconfigurewidgetng.cpp:213
+#: widgets/ldapconfigurewidgetng.cpp:212
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Check all servers that should be used:"
 msgstr "사용될 모든 서버 확인:"
 
-#: widgets/ldapconfigurewidgetng.cpp:261
+#: widgets/ldapconfigurewidgetng.cpp:260
 #, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
 msgstr "호스트 추가(&A)…"
 
-#: widgets/ldapconfigurewidgetng.cpp:263
+#: widgets/ldapconfigurewidgetng.cpp:262
 #, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
 msgstr "호스트 편집(&E)…"
 
-#: widgets/ldapconfigurewidgetng.cpp:266
+#: widgets/ldapconfigurewidgetng.cpp:265
 #, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"

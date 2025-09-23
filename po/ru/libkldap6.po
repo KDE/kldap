@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdelibs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-18 00:43+0000\n"
+"POT-Creation-Date: 2025-09-23 00:44+0000\n"
 "PO-Revision-Date: 2025-04-01 14:42+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -125,47 +125,47 @@ msgstr "Настройка"
 msgid "Activities"
 msgstr "Комнаты"
 
-#: widgets/ldapconfigurewidgetng.cpp:39
+#: widgets/ldapconfigurewidgetng.cpp:38
 #, kde-format
 msgid "Show only ldap servers on current activity"
 msgstr "Показывать только серверы LDAP в текущей комнате Plasma"
 
-#: widgets/ldapconfigurewidgetng.cpp:122
+#: widgets/ldapconfigurewidgetng.cpp:121
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "Изменение конфигурации сервера"
 
-#: widgets/ldapconfigurewidgetng.cpp:139
+#: widgets/ldapconfigurewidgetng.cpp:138
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "Удалить конфигурацию для сервера «%1»?"
 
-#: widgets/ldapconfigurewidgetng.cpp:140
+#: widgets/ldapconfigurewidgetng.cpp:139
 #, kde-format
 msgctxt "@title:window"
 msgid "Remove Host"
 msgstr "Удаление сервера"
 
-#: widgets/ldapconfigurewidgetng.cpp:213
+#: widgets/ldapconfigurewidgetng.cpp:212
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Check all servers that should be used:"
 msgstr "Выберите все серверы, которые следует использовать:"
 
-#: widgets/ldapconfigurewidgetng.cpp:261
+#: widgets/ldapconfigurewidgetng.cpp:260
 #, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
 msgstr "&Добавить сервер…"
 
-#: widgets/ldapconfigurewidgetng.cpp:263
+#: widgets/ldapconfigurewidgetng.cpp:262
 #, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
 msgstr "&Изменить конфигурацию сервера…"
 
-#: widgets/ldapconfigurewidgetng.cpp:266
+#: widgets/ldapconfigurewidgetng.cpp:265
 #, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
