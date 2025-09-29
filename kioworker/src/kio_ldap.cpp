@@ -398,9 +398,8 @@ KIO::WorkerResult LDAPProtocol::get(const QUrl &_url)
     // QByteArray result;
     filesize_t processed_size = 0;
 
-    int ret;
     while (true) {
-        ret = mOp.waitForResult(id, -1);
+        const int ret = mOp.waitForResult(id, -1);
         if (ret == -1 || mConn.ldapErrorCode() != KLDAP_SUCCESS) {
             return LDAPErr();
         }
@@ -711,9 +710,8 @@ KIO::WorkerResult LDAPProtocol::listDir(const QUrl &_url)
     int id2;
     unsigned long total = 0;
 
-    int ret;
     while (true) {
-        ret = mOp.waitForResult(id, -1);
+        const int ret = mOp.waitForResult(id, -1);
         if (ret == -1 || mConn.ldapErrorCode() != KLDAP_SUCCESS) {
             return LDAPErr();
         }
