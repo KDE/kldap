@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-03 00:38+0000\n"
+"POT-Creation-Date: 2025-09-30 00:44+0000\n"
 "PO-Revision-Date: 2016-04-04 20:11+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -55,12 +55,12 @@ msgstr "Felaktigt information för behörighetskontroll."
 msgid "LDAP connection canceled."
 msgstr "LDAP-anslutning avbruten."
 
-#: kio_ldap.cpp:586 kio_ldap.cpp:652
+#: kio_ldap.cpp:585 kio_ldap.cpp:651
 #, kde-format
 msgid "The Ldif parser failed."
 msgstr "LDIF-tolken misslyckades."
 
-#: kio_ldap.cpp:663
+#: kio_ldap.cpp:662
 #, kde-format
 msgid "Invalid Ldif file in line %1."
 msgstr "Felaktig LDIF-fil på rad %1."

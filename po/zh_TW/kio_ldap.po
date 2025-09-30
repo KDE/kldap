@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kio_ldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-03 00:38+0000\n"
+"POT-Creation-Date: 2025-09-30 00:44+0000\n"
 "PO-Revision-Date: 2007-09-12 18:44+0800\n"
 "Last-Translator: Franklin Weng <franklin at goodhorse dot idv dot tw>\n"
 "Language-Team: Chinese Traditional <zh-l10n@lists.linux.org.tw>\n"
@@ -56,12 +56,12 @@ msgstr "不合法的認證資訊。"
 msgid "LDAP connection canceled."
 msgstr "LDAP 連線取消。"
 
-#: kio_ldap.cpp:586 kio_ldap.cpp:652
+#: kio_ldap.cpp:585 kio_ldap.cpp:651
 #, kde-format
 msgid "The Ldif parser failed."
 msgstr "LDIF 解析器失敗。"
 
-#: kio_ldap.cpp:663
+#: kio_ldap.cpp:662
 #, kde-format
 msgid "Invalid Ldif file in line %1."
 msgstr "LDIF 檔案內容第 %1 行語法錯誤。"

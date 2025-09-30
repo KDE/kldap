@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kio_ldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-03 00:38+0000\n"
+"POT-Creation-Date: 2025-09-30 00:44+0000\n"
 "PO-Revision-Date: 2025-05-29 15:19+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -56,12 +56,12 @@ msgstr "Virheelliset kirjautumistiedot."
 msgid "LDAP connection canceled."
 msgstr "LDAP-yhteys peruttu."
 
-#: kio_ldap.cpp:586 kio_ldap.cpp:652
+#: kio_ldap.cpp:585 kio_ldap.cpp:651
 #, kde-format
 msgid "The Ldif parser failed."
 msgstr "LDIF-jäsennys epäonnistui."
 
-#: kio_ldap.cpp:663
+#: kio_ldap.cpp:662
 #, kde-format
 msgid "Invalid Ldif file in line %1."
 msgstr "Virheellinen LDIF-tiedosto rivillä %1."

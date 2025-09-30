@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kio_ldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-03 00:38+0000\n"
+"POT-Creation-Date: 2025-09-30 00:44+0000\n"
 "PO-Revision-Date: 2004-08-09 04:17-0800\n"
 "Last-Translator: Tamil PC <tamilpc@ambalam.com>\n"
 "Language-Team: KDE <kde-i18n-doc@kde.org>\n"
@@ -46,12 +46,12 @@ msgstr "செல்லுபடியாகாத உறுதிபடுத�
 msgid "LDAP connection canceled."
 msgstr ""
 
-#: kio_ldap.cpp:586 kio_ldap.cpp:652
+#: kio_ldap.cpp:585 kio_ldap.cpp:651
 #, fuzzy, kde-format
 msgid "The Ldif parser failed."
 msgstr "LDIF பகுப்பான் தோல்வியுற்றது."
 
-#: kio_ldap.cpp:663
+#: kio_ldap.cpp:662
 #, fuzzy, kde-format
 msgid "Invalid Ldif file in line %1."
 msgstr "Invalid  %1 கோட்டில் LDIF கோப்பு செல்லுபடியாகாது."

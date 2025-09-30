@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kio_ldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-03 00:38+0000\n"
+"POT-Creation-Date: 2025-09-30 00:44+0000\n"
 "PO-Revision-Date: 2018-01-31 00:40+0300\n"
 "Last-Translator: Safa Alfulaij <safa1996alfulaij@gmail.com>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -55,12 +55,12 @@ msgstr "معلومات الاستيثاق غير صالحة."
 msgid "LDAP connection canceled."
 msgstr "أُلغي الاتّصال بِ‍ LDAP"
 
-#: kio_ldap.cpp:586 kio_ldap.cpp:652
+#: kio_ldap.cpp:585 kio_ldap.cpp:651
 #, kde-format
 msgid "The Ldif parser failed."
 msgstr "فشل محلّل Ldif."
 
-#: kio_ldap.cpp:663
+#: kio_ldap.cpp:662
 #, kde-format
 msgid "Invalid Ldif file in line %1."
 msgstr "ملفّ Ldif غير صالح في سطر %1."

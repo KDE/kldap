@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kio_ldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-03 00:38+0000\n"
+"POT-Creation-Date: 2025-09-30 00:44+0000\n"
 "PO-Revision-Date: 2007-09-19 11:24+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh\n"
@@ -55,12 +55,12 @@ msgstr "Мәлімет шындылық тексерістен өтпеді."
 msgid "LDAP connection canceled."
 msgstr "LDAP қосылым үзілді."
 
-#: kio_ldap.cpp:586 kio_ldap.cpp:652
+#: kio_ldap.cpp:585 kio_ldap.cpp:651
 #, kde-format
 msgid "The Ldif parser failed."
 msgstr "Ldif талдау жаңылысы."
 
-#: kio_ldap.cpp:663
+#: kio_ldap.cpp:662
 #, kde-format
 msgid "Invalid Ldif file in line %1."
 msgstr "Ldif файлының %1-жолында қате."

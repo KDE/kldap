@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kio_ldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-03 00:38+0000\n"
+"POT-Creation-Date: 2025-09-30 00:44+0000\n"
 "PO-Revision-Date: 2005-12-16 11:58+0100\n"
 "Last-Translator: Bozidar Proevski <bobibobi@freemail.com.mk>\n"
 "Language-Team: Macedonian <mkde-l10n@lists.sourceforge.net>\n"
@@ -55,12 +55,12 @@ msgstr "Невалидна информација за авторизација.
 msgid "LDAP connection canceled."
 msgstr ""
 
-#: kio_ldap.cpp:586 kio_ldap.cpp:652
+#: kio_ldap.cpp:585 kio_ldap.cpp:651
 #, fuzzy, kde-format
 msgid "The Ldif parser failed."
 msgstr "LDIF анализаторот не успеа."
 
-#: kio_ldap.cpp:663
+#: kio_ldap.cpp:662
 #, fuzzy, kde-format
 msgid "Invalid Ldif file in line %1."
 msgstr "Невалидна LDIF датотека во линија %1."

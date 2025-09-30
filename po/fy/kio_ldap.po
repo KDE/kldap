@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kio_ldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-03 00:38+0000\n"
+"POT-Creation-Date: 2025-09-30 00:44+0000\n"
 "PO-Revision-Date: 2006-01-30 09:07+0100\n"
 "Last-Translator: Berend Ytsma <berendy@bigfoot.com>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -55,13 +55,13 @@ msgstr "Unjildige autorisaasje-ynformaasje."
 msgid "LDAP connection canceled."
 msgstr ""
 
-#: kio_ldap.cpp:586 kio_ldap.cpp:652
+#: kio_ldap.cpp:585 kio_ldap.cpp:651
 #, fuzzy, kde-format
 #| msgid "The LDIF parser failed."
 msgid "The Ldif parser failed."
 msgstr "De LDIF-ûntleding is mislearre."
 
-#: kio_ldap.cpp:663
+#: kio_ldap.cpp:662
 #, fuzzy, kde-format
 #| msgid "Invalid LDIF file in line %1."
 msgid "Invalid Ldif file in line %1."
