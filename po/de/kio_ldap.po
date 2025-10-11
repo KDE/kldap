@@ -1,5 +1,5 @@
-# Thomas Diehl <thd@kde.org>, 2004.
-# Thomas Reitelbach <tr@erdfunkstelle.de>, 2005, 2006, 2007.
+# SPDX-FileCopyrightText: 2004 Thomas Diehl <thd@kde.org>
+# SPDX-FileCopyrightText: 2005, 2006, 2007 Thomas Reitelbach <tr@erdfunkstelle.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: kio_ldap\n"

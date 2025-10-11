@@ -1,8 +1,8 @@
 # SPDX-FileCopyrightText: 2024 Johannes Obermayr <johannesobermayr@gmx.de>
-# Stephan Johach <hunsum@gmx.de>, 2007.
-# Burkhard Lück <lueck@hube-lueck.de>, 2009, 2017, 2018, 2020, 2021.
-# Thomas Reitelbach <tr@erdfunkstelle.de>, 2009.
-# Frederik Schwarzer <schwarzer@kde.org>, 2010, 2014.
+# SPDX-FileCopyrightText: 2007 Stephan Johach <hunsum@gmx.de>
+# SPDX-FileCopyrightText: 2009, 2017, 2018, 2020, 2021 Burkhard Lück <lueck@hube-lueck.de>
+# SPDX-FileCopyrightText: 2009 Thomas Reitelbach <tr@erdfunkstelle.de>
+# SPDX-FileCopyrightText: 2010, 2014 Frederik Schwarzer <schwarzer@kde.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: libkldap6\n"
