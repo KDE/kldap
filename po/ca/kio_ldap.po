@@ -3,9 +3,9 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Sebastià Pla i Sanz <sps@sastia.com>, 2004.
-# Albert Astals Cid <aacid@kde.org>, 2005.
-# Josep M. Ferrer <txemaq@gmail.com>, 2007.
+# SPDX-FileCopyrightText: 2004 Sebastià Pla i Sanz <sps@sastia.com>
+# SPDX-FileCopyrightText: 2005 Albert Astals Cid <aacid@kde.org>
+# SPDX-FileCopyrightText: 2007 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kldap\n"
