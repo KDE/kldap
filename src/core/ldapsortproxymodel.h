@@ -27,6 +27,7 @@ protected:
     [[nodiscard]] bool lessThan(const QModelIndex &source_left, const QModelIndex &source_right) const override;
 
 private:
+    KLDAP_CORE_NO_EXPORT void slotInvalidateFilter();
     LdapActivitiesAbstract *mLdapActivitiesAbstract = nullptr;
     bool mEnablePlasmaActivities = false;
 };
