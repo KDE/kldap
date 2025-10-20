@@ -2,32 +2,33 @@
 # Copyright (C) 2008 This_file_is_part_of_KDE
 # This file is distributed under the same license as the libkldap package.
 # Laurenţiu Buzdugan <lbuz@rolix.org>, 2008".
-# Sergiu Bivol <sergiu@cip.md>, 2009.
+# SPDX-FileCopyrightText: 2009, 2025 Sergiu Bivol <sergiu@cip.md>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-23 00:44+0000\n"
-"PO-Revision-Date: 2009-01-05 10:56+0200\n"
+"PO-Revision-Date: 2025-10-19 09:44+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
-"Language-Team: Romanian <kde-i18n-ro@lists.kde.org>\n"
+"Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: core/ldapconnection.cpp:126
 #, kde-format
 msgid "No LDAP Support..."
-msgstr "Niciun suport LDAP..."
+msgstr "Niciun suport LDAP…"
 
 #: core/ldapconnection.cpp:243
 #, kde-format
 msgid "An error occurred during the connection initialization phase."
-msgstr ""
+msgstr "A intervenit o eroare în timpul fazei de inițializare a conexiunii."
 
 #: core/ldapconnection.cpp:250
 #, kde-format
@@ -35,34 +36,33 @@ msgid "Cannot set protocol version to %1."
 msgstr "Imposibil de stabilit versiunea protocolului la %1."
 
 #: core/ldapconnection.cpp:261
-#, fuzzy, kde-format
-#| msgid "Cannot set timeout to %1 seconds."
+#, kde-format
 msgid "Cannot set timeout to %1 second."
 msgid_plural "Cannot set timeout to %1 seconds."
-msgstr[0] "Imposibil de stabilit temporizarea la %1 secunde."
+msgstr[0] "Imposibil de stabilit temporizarea la %1 secundă."
 msgstr[1] "Imposibil de stabilit temporizarea la %1 secunde."
-msgstr[2] "Imposibil de stabilit temporizarea la %1 secunde."
+msgstr[2] "Imposibil de stabilit temporizarea la %1 de secunde."
 
 #: core/ldapconnection.cpp:273
 #, kde-format
 msgid "Could not set CA certificate file."
 msgstr ""
+"Nu s-a putut inițializa fișierul cu certificat al autorității de certificare."
 
 #: core/ldapconnection.cpp:298
 #, kde-format
 msgid "Invalid TLS require certificate mode."
-msgstr ""
+msgstr "Regim eronat de necesitate a certificatului TLS."
 
 #: core/ldapconnection.cpp:303
 #, kde-format
 msgid "Could not set TLS require certificate mode."
-msgstr ""
+msgstr "Nu s-a putut inițializa regimul de necesitate a certificatului TLS."
 
 #: core/ldapconnection.cpp:312
-#, fuzzy, kde-format
-#| msgid "Cannot initialize the SASL client."
+#, kde-format
 msgid "Could not initialize new TLS context."
-msgstr "Imposibil de inițializat clientul SASL."
+msgstr "Nu s-a putut inițializa noul context TLS."
 
 #: core/ldapconnection.cpp:329
 #, kde-format
@@ -91,77 +91,76 @@ msgid ""
 "LDAP support not compiled in. Please recompile libkldap with the OpenLDAP "
 "(or compatible) client libraries, or complain to your distribution packagers."
 msgstr ""
+"Suportul pentru LDAP nu e inclus. Recompilați libkldap împreună cu "
+"bibliotecile-client OpenLDAP (sau compatibile), sau anunțați împachetatorii "
+"distribuției."
 
 #: core/ldapsearch.cpp:222
 #, kde-format
 msgid "Cannot access to server. Please reconfigure it."
-msgstr ""
+msgstr "Serverul nu poate fi accesat. Reconfigurați-l."
 
 #: widgets/addhostdialog.cpp:75
-#, fuzzy, kde-format
-#| msgid "Host:"
+#, kde-format
 msgctxt "@title:window"
 msgid "Add Host"
-msgstr "Gazdă:"
+msgstr "Adaugă gazdă"
 
 #: widgets/addhostdialog.cpp:94
 #, kde-format
 msgid "Configure"
-msgstr ""
+msgstr "Configurează"
 
 #: widgets/addhostdialog.cpp:103
 #, kde-format
 msgid "Activities"
-msgstr ""
+msgstr "Activități"
 
 #: widgets/ldapconfigurewidgetng.cpp:38
 #, kde-format
 msgid "Show only ldap servers on current activity"
-msgstr ""
+msgstr "Arată numai servere LDAP din activitatea actuală"
 
 #: widgets/ldapconfigurewidgetng.cpp:121
-#, fuzzy, kde-format
-#| msgid "Host:"
+#, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
-msgstr "Gazdă:"
+msgstr "Modifică gazda"
 
 #: widgets/ldapconfigurewidgetng.cpp:138
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
-msgstr ""
+msgstr "Doriți să eliminați configurările pentru gazda „%1”?"
 
 #: widgets/ldapconfigurewidgetng.cpp:139
 #, kde-format
 msgctxt "@title:window"
 msgid "Remove Host"
-msgstr ""
+msgstr "Elimină gazda"
 
 #: widgets/ldapconfigurewidgetng.cpp:212
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Check all servers that should be used:"
-msgstr ""
+msgstr "Bifați toate serverele de utilizat:"
 
 #: widgets/ldapconfigurewidgetng.cpp:260
-#, fuzzy, kde-format
-#| msgid "Host:"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
-msgstr "Gazdă:"
+msgstr "&Adaugă gazdă…"
 
 #: widgets/ldapconfigurewidgetng.cpp:262
-#, fuzzy, kde-format
-#| msgid "Host:"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
-msgstr "Gazdă:"
+msgstr "&Modifică gazda…"
 
 #: widgets/ldapconfigurewidgetng.cpp:265
 #, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
-msgstr ""
+msgstr "Elimină g&azda"
 
 #: widgets/ldapconfigwidget.cpp:94
 #, kde-format
@@ -171,7 +170,7 @@ msgstr "Utilizator:"
 #: widgets/ldapconfigwidget.cpp:102
 #, kde-format
 msgid "Bind DN:"
-msgstr ""
+msgstr "DN de legătură:"
 
 #: widgets/ldapconfigwidget.cpp:110
 #, kde-format
@@ -236,8 +235,7 @@ msgid "Page size:"
 msgstr "Dimensiune pagină:"
 
 #: widgets/ldapconfigwidget.cpp:184 widgets/ldapconfigwidget.cpp:263
-#, fuzzy, kde-format
-#| msgid "Query Server"
+#, kde-format
 msgctxt "@action:button"
 msgid "Query Server"
 msgstr "Interoghează serverul"
@@ -246,7 +244,7 @@ msgstr "Interoghează serverul"
 #, kde-format
 msgctxt "Distinguished Name"
 msgid "DN:"
-msgstr ""
+msgstr "DN:"
 
 #: widgets/ldapconfigwidget.cpp:202
 #, kde-format
@@ -272,10 +270,9 @@ msgid "SSL"
 msgstr "SSL"
 
 #: widgets/ldapconfigwidget.cpp:232
-#, fuzzy, kde-format
-#| msgid "Security"
+#, kde-format
 msgid "Security:"
-msgstr "Securitate"
+msgstr "Securitate:"
 
 #: widgets/ldapconfigwidget.cpp:242
 #, kde-format
@@ -296,10 +293,9 @@ msgid "SASL"
 msgstr "SASL"
 
 #: widgets/ldapconfigwidget.cpp:251
-#, fuzzy, kde-format
-#| msgid "Authentication"
+#, kde-format
 msgid "Authentication:"
-msgstr "Autentificare"
+msgstr "Autentificare:"
 
 #: widgets/ldapconfigwidget.cpp:269
 #, kde-format
@@ -310,11 +306,10 @@ msgstr "Mecanism SASL:"
 #, kde-format
 msgctxt "@title:window"
 msgid "Check server"
-msgstr ""
+msgstr "Verificarea serverului"
 
 #: widgets/ldapconfigwidget.cpp:319
-#, fuzzy, kde-format
-#| msgid "LDAP Query"
+#, kde-format
 msgctxt "@title:window"
 msgid "LDAP Query"
 msgstr "Interogare LDAP"
@@ -323,7 +318,7 @@ msgstr "Interogare LDAP"
 #, kde-format
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
-msgstr ""
+msgstr "Eroare necunoscută la conectarea %1"
 
 #, fuzzy
 #~| msgid "Host:"
