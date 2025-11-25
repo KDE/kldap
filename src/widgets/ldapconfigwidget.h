@@ -27,7 +27,6 @@ namespace KLDAPWidgets
 class KLDAPWIDGETS_EXPORT LdapConfigWidget : public QWidget
 {
     Q_OBJECT
-    Q_FLAGS(WinFlags)
     Q_PROPERTY(WinFlags features READ features WRITE setFeatures)
     Q_PROPERTY(QString user READ user WRITE setUser)
     Q_PROPERTY(QString bindDn READ bindDn WRITE setBindDn)
@@ -64,6 +63,7 @@ public:
         W_ALL = 0x2fff
     };
     Q_DECLARE_FLAGS(WinFlags, WinFlag)
+    Q_FLAG(WinFlags)
 
     enum Security {
         None,
