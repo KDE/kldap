@@ -121,7 +121,7 @@ LdapAttrValue LdapObject::values(const QString &attributeName) const
 QByteArray LdapObject::value(const QString &attributeName) const
 {
     if (hasAttribute(attributeName)) {
-        return d->mAttrs.value(attributeName).first();
+        return d->mAttrs.value(attributeName).constFirst();
     } else {
         return {};
     }
