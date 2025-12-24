@@ -1,0 +1,33 @@
+include($KDE_DOCS/global/qt-module-defaults.qdocconf)
+
+project = LdapWidgets
+description = LDAP Widgets support library.
+
+
+documentationinheaders = true
+
+headerdirs += .
+sourcedirs += .
+
+outputformats = HTML
+
+depends += \
+    qtcore
+
+navigation.landingpage = "Ldap"
+
+qhp.projects            = LdapWidgets
+
+qhp.LdapWidgets.file                = kldapwidgets.qhp
+qhp.LdapWidgets.namespace           = org.kde.kldapwidgets.$QT_VERSION_TAG
+qhp.LdapWidgets.virtualFolder       = kldapwidgets
+qhp.LdapWidgets.indexTitle          = LdapWidgets
+qhp.LdapWidgets.indexRoot           =
+
+qhp.LdapWidgets.subprojects         = classes
+qhp.LdapWidgets.subprojects.classes.title = C++ Classes
+qhp.LdapWidgets.subprojects.classes.indexTitle = LdapWidgets C++ Classes
+qhp.LdapWidgets.subprojects.classes.selectors = class fake:headerfile
+qhp.LdapWidgets.subprojects.classes.sortPages = true
+
+tagfile = kldapwidgets.tags

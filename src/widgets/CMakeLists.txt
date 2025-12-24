@@ -121,32 +121,6 @@ install(
     COMPONENT Devel
 )
 
-if(BUILD_QCH)
-    ecm_add_qch(
-        KPim6LdapWidgets_QCH
-        NAME KLdapWidgets
-        BASE_NAME KPim6LdapWidgets
-        VERSION ${PIM_VERSION}
-        ORG_DOMAIN org.kde
-
-        SOURCES # using only public headers, to cover only public API
-        ${KLdapWidgets_HEADERS}
-        MD_MAINPAGE "${CMAKE_SOURCE_DIR}/README.md"
-        #IMAGE_DIRS "${CMAKE_SOURCE_DIR}/docs/pics"
-        LINK_QCHS
-        Qt6Core_QCH
-        Qt6Gui_QCH
-        Qt6Widgets_QCH
-        INCLUDE_DIRS
-        ${CMAKE_CURRENT_BINARY_DIR}
-        BLANK_MACROS
-        KLDAPWIDGETS_EXPORT
-        TAGFILE_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
-        QCH_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
-        COMPONENT Devel
-    )
-endif()
-
 if(BUILD_TESTING)
     add_subdirectory(tests)
     add_subdirectory(autotests)
@@ -161,16 +135,6 @@ install(
     NAMESPACE KPim6::
 )
 
-if(BUILD_QCH)
-    ecm_install_qch_export(
-        TARGETS KPim6LdapWidgets_QCH
-        FILE KPim6LdapWidgetsQchTargets.cmake
-        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-        COMPONENT Devel
-    )
-    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6LdapWidgetsQchTargets.cmake\")")
-endif()
-
 configure_package_config_file(
     "${CMAKE_CURRENT_SOURCE_DIR}/KPimLdapWidgetsConfig.cmake.in"
     "${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapWidgetsConfig.cmake"
@@ -184,3 +148,4 @@ install(
     DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
     COMPONENT Devel
 )
+ecm_generate_qdoc(KPim6LdapWidgets kldap-widgets.qdocconf)

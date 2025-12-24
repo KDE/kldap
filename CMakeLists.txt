@@ -75,7 +75,7 @@ endif()
 include(ECMQtDeclareLoggingCategory)
 include(ECMDeprecationSettings)
 include(ECMFeatureSummary)
-include(ECMAddQch)
+include(ECMGenerateQDoc)
 include(ECMCheckOutboundLicense)
 set(KLDAP_LIB_VERSION ${PIM_VERSION})
 
@@ -105,13 +105,6 @@ set_package_properties(
             OPTIONAL
         PURPOSE
             "Required to build documentation"
-)
-
-option(BUILD_QCH "Build API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)" OFF)
-add_feature_info(
-    QCH
-    ${BUILD_QCH}
-    "API documentation in QCH format (for e.g. Qt Assistant, Qt Creator & KDevelop)"
 )
 
 option(USE_UNITY_CMAKE_SUPPORT "Use UNITY cmake support (speedup compile time)" OFF)

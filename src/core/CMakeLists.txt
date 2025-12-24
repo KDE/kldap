@@ -209,40 +209,7 @@ install(
     COMPONENT Devel
 )
 
-if(BUILD_QCH)
-    ecm_add_qch(
-        KPim6LdapCore_QCH
-        NAME KLdapCore
-        BASE_NAME KPim6LdapCore
-        VERSION ${PIM_VERSION}
-        ORG_DOMAIN org.kde
-
-        SOURCES # using only public headers, to cover only public API
-        ${KLdapCore_HEADERS}
-        MD_MAINPAGE "${CMAKE_SOURCE_DIR}/README.md"
-        #IMAGE_DIRS "${CMAKE_SOURCE_DIR}/docs/pics"
-        LINK_QCHS
-        Qt6Core_QCH
-        INCLUDE_DIRS
-        ${CMAKE_CURRENT_BINARY_DIR}
-        BLANK_MACROS
-        KLDAP_CORE_EXPORT
-        TAGFILE_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
-        QCH_INSTALL_DESTINATION ${KDE_INSTALL_QTQCHDIR}
-        COMPONENT Devel
-    )
-endif()
 set(CMAKECONFIG_INSTALL_DIR "${KDE_INSTALL_CMAKEPACKAGEDIR}/KPim6LdapCore")
-
-if(BUILD_QCH)
-    ecm_install_qch_export(
-        TARGETS KPim6LdapCore_QCH
-        FILE KPim6LdapCoreQchTargets.cmake
-        DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
-        COMPONENT Devel
-    )
-    set(PACKAGE_INCLUDE_QCHTARGETS "include(\"\${CMAKE_CURRENT_LIST_DIR}/KPim6LdapCoreQchTargets.cmake\")")
-endif()
 
 install(
     EXPORT KPim6LdapCoreTargets
@@ -275,3 +242,4 @@ install(
 if(BUILD_TESTING)
     add_subdirectory(autotests)
 endif()
+ecm_generate_qdoc(KPim6LdapCore kldap-core.qdocconf)

@@ -1,0 +1,21 @@
+/*!
+    \page kldap-index.html
+    \title LdapCore
+
+    LDAP support library
+
+    \section1 Using the Module
+
+    \include {module-use.qdocinc} {using the c++ api}
+
+    \section2 Building with CMake
+
+    \include {module-use.qdocinc} {building with cmake} {KPim6} {LdapCore} {KPim6::LdapCore}
+
+    \section1 API Reference
+
+    \list
+        \li \l{Ldap Core C++ Classes}
+        \li \l{Ldap Widgets C++ Classes}
+    \endlist
+*/

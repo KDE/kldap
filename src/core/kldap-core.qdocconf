@@ -1,0 +1,33 @@
+include($KDE_DOCS/global/qt-module-defaults.qdocconf)
+
+project = LdapCore
+description = LDAP Core support library.
+
+
+documentationinheaders = true
+
+headerdirs += .
+sourcedirs += .
+
+outputformats = HTML
+
+depends += \
+    qtcore
+
+navigation.landingpage = "Ldap"
+
+qhp.projects            = LdapCore
+
+qhp.LdapCore.file                = kldapcore.qhp
+qhp.LdapCore.namespace           = org.kde.kldapcore.$QT_VERSION_TAG
+qhp.LdapCore.virtualFolder       = kldapcore
+qhp.LdapCore.indexTitle          = LdapCore
+qhp.LdapCore.indexRoot           =
+
+qhp.LdapCore.subprojects         = classes
+qhp.LdapCore.subprojects.classes.title = C++ Classes
+qhp.LdapCore.subprojects.classes.indexTitle = LdapCore C++ Classes
+qhp.LdapCore.subprojects.classes.selectors = class fake:headerfile
+qhp.LdapCore.subprojects.classes.sortPages = true
+
+tagfile = kldapcore.tags
