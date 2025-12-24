@@ -12,7 +12,7 @@ sourcedirs += .
 outputformats = HTML
 
 depends += \
-    qtcore
+    qtcore kldapwidgets
 
 navigation.landingpage = "Ldap"
 
