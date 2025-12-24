@@ -15,22 +15,22 @@
 
 namespace KLDAPCore
 {
-/**
+/*!
  * This class allows encoding and decoding Qt structures using Basic
  * Encoding Rules.
  */
 class KLDAP_CORE_EXPORT Ber
 {
 public:
-    /**
+    /*!
      * Constructs a Ber object.
      */
     Ber();
-    /**
+    /*!
      * Constructs a Ber object from the value.
      */
     explicit Ber(const QByteArray &value);
-    /**
+    /*!
      * Destroys the Ber object.
      */
     ~Ber();
@@ -38,12 +38,12 @@ public:
     Ber(const Ber &that);
     Ber &operator=(const Ber &that);
 
-    /**
+    /*!
      * Returns the Ber object as a flat QByteArray.
      */
     [[nodiscard]] QByteArray flatten() const;
 
-    /**
+    /*!
      * Appends the data with the specified format to the Ber object.
      * This function works like printf, except that it's appending the
      * parameters, not replacing them. The allowed format characters and

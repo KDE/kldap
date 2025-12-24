@@ -1,6 +1,6 @@
 /*!
     \module LdapWidgets
-    \title LdapWidgets C++ Classes
+    \title Ldap Widgets C++ Classes
     \ingroup modules
     \cmakepackage KPim6
     \cmakecomponent LdapWidgets

@@ -14,8 +14,8 @@ class KConfig;
 
 namespace KLDAPCore
 {
-/**
- * @brief The LdapClientSearchConfig class
+/*!
+ * \brief The LdapClientSearchConfig class
  * @author Laurent Montel <montel@kde.org>
  */
 class KLDAP_CORE_EXPORT LdapClientSearchConfig : public QObject
@@ -25,13 +25,12 @@ public:
     explicit LdapClientSearchConfig(QObject *parent = nullptr);
     ~LdapClientSearchConfig() override;
 
-    /**
+    /*!
      * Returns the global config object, which stores the LdapClient configurations.
      */
     static KConfig *config();
 
 private:
-    //@cond PRIVATE
     class LdapClientSearchConfigPrivate;
     std::unique_ptr<LdapClientSearchConfigPrivate> const d;
 };

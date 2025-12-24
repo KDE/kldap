@@ -25,8 +25,8 @@ class LdapActivitiesAbstract;
 
 namespace KLDAPWidgets
 {
-/**
- * @brief The LdapConfigureWidgetNg class
+/*!
+ * \brief The LdapConfigureWidgetNg class
  * @author Laurent Montel <montel@kde.org>
  */
 class KLDAPWIDGETS_EXPORT LdapConfigureWidgetNg : public QWidget

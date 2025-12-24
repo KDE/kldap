@@ -27,34 +27,34 @@ public:
 
     [[nodiscard]] bool isEmpty() const;
 
-    /**
+    /*!
      * \returns A QString representing the DN.
      */
     [[nodiscard]] QString toString() const;
 
-    /**
+    /*!
      * \param depth The depth of the DN to return using a zero-based index.
      * \returns A QString representing the DN levels deep in the directory.
      */
     [[nodiscard]] QString toString(int depth) const;
 
-    /**
+    /*!
      * \returns A QString representing the RDN of this DN.
      */
     [[nodiscard]] QString rdnString() const;
 
-    /**
+    /*!
      * \param depth The depth of the RDN to return using a zero-based index.
      * \returns A QString representing the RDN levels deep in the directory.
      */
     [[nodiscard]] QString rdnString(int depth) const;
 
-    /**
+    /*!
      * \returns True if this is a valid DN, false otherwise.
      */
     [[nodiscard]] bool isValid() const;
 
-    /**
+    /*!
      * \returns The depth of this DN in the directory.
      */
     [[nodiscard]] int depth() const;

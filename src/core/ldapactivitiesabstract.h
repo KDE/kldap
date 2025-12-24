@@ -8,8 +8,8 @@
 
 namespace KLDAPCore
 {
-/**
- * @brief The LdapActivitiesAbstract class
+/*!
+ * \brief The LdapActivitiesAbstract class
  * @author Laurent Montel <montel@kde.org>
  */
 class KLDAP_CORE_EXPORT LdapActivitiesAbstract : public QObject

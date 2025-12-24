@@ -1,6 +1,6 @@
 /*!
     \module LdapCore
-    \title LdapCore C++ Classes
+    \title Ldap Core C++ Classes
     \ingroup modules
     \cmakepackage KPim6
     \cmakecomponent LdapCore
