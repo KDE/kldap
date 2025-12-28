@@ -117,7 +117,7 @@ endif()
 find_package(KF6WidgetsAddons ${KF_MIN_VERSION} CONFIG REQUIRED)
 
 add_definitions(-DQT_NO_CONTEXTLESS_CONNECT)
-ecm_set_disabled_deprecation_versions(QT 6.10.0 KF 6.21.0)
+ecm_set_disabled_deprecation_versions(QT 6.11.0 KF 6.21.0)
 
 find_package(Ldap)
 set_package_properties(
