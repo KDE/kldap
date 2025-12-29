@@ -25,6 +25,10 @@ class LdapSearchPrivate;
 namespace KLDAPCore
 {
 /*!
+ * \class KLDAPCore::LdapSearch
+ * \inmodule LdapCore
+ * \inheaderfile KLDAPCore/LdapSearch
+ *
  * \brief
  * This class starts a search operation on a LDAP server and returns the
  * search values via a Qt signal.

@@ -46,6 +46,10 @@ struct LdapResult {
 };
 
 /*!
+ * \class KLDAPCore::LdapClientSearch
+ * \inmodule LdapCore
+ * \inheaderfile KLDAPCore/LdapClientSearch
+ *
  * \since 4.5
  */
 class KLDAP_CORE_EXPORT LdapClientSearch : public QObject

@@ -19,6 +19,10 @@
 namespace KLDAPCore
 {
 /*!
+ * \class KLDAPCore::LdapUrl
+ * \inmodule LdapCore
+ * \inheaderfile KLDAPCore/LdapUrl
+ *
  * \brief A special url class for LDAP.
  *
  * LdapUrl implements an RFC 2255 compliant LDAP Url parser, with minimal

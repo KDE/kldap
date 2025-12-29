@@ -9,17 +9,36 @@
 namespace KLDAPCore
 {
 class LdapActivitiesAbstract;
+/*!
+ * \class KLDAPCore::LdapSortProxyModel
+ * \inmodule LdapCore
+ * \inheaderfile KLDAPCore/LdapSortProxyModel
+ *
+ * \brief The LdapSortProxyModel class
+ */
 class KLDAP_CORE_EXPORT LdapSortProxyModel : public QSortFilterProxyModel
 {
     Q_OBJECT
 public:
+    /*!
+     */
     explicit LdapSortProxyModel(QObject *parent);
+    /*!
+     */
     ~LdapSortProxyModel() override;
 
+    /*!
+     */
     [[nodiscard]] LdapActivitiesAbstract *ldapActivitiesAbstract() const;
+    /*!
+     */
     void setLdapActivitiesAbstract(LdapActivitiesAbstract *newldapActivitiesAbstract);
 
+    /*!
+     */
     [[nodiscard]] bool enablePlasmaActivities() const;
+    /*!
+     */
     void setEnablePlasmaActivities(bool newEnablePlasmaActivities);
 
 protected:

@@ -13,26 +13,57 @@ namespace KLDAPCore
 {
 class LdapServer;
 class LdapClient;
+/*!
+ * \class KLDAPCore::LdapSearchClientReadConfigServerJob
+ * \inmodule LdapCore
+ * \inheaderfile KLDAPCore/LdapSearchClientReadConfigServerJob
+ *
+ * \brief The LdapSearchClientReadConfigServerJob class
+ */
 class KLDAP_CORE_EXPORT LdapSearchClientReadConfigServerJob : public QObject
 {
     Q_OBJECT
 public:
+    /*!
+     */
     explicit LdapSearchClientReadConfigServerJob(QObject *parent = nullptr);
+    /*!
+     */
     ~LdapSearchClientReadConfigServerJob() override;
 
+    /*!
+     */
     void start();
+    /*!
+     */
     [[nodiscard]] bool canStart() const;
 
+    /*!
+     */
     [[nodiscard]] int currentIndex() const;
+    /*!
+     */
     void setCurrentIndex(int currentIndex);
 
+    /*!
+     */
     [[nodiscard]] bool active() const;
+    /*!
+     */
     void setActive(bool active);
 
+    /*!
+     */
     [[nodiscard]] KConfigGroup config() const;
+    /*!
+     */
     void setConfig(const KConfigGroup &config);
 
+    /*!
+     */
     [[nodiscard]] LdapClient *ldapClient() const;
+    /*!
+     */
     void setLdapClient(LdapClient *ldapClient);
 
 private:

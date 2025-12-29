@@ -11,19 +11,23 @@
 #include <QMap>
 #include <QSharedDataPointer>
 #include <QString>
-class LdapObjectPrivate;
 
 #include "kldap_core_export.h"
 #include "ldapdn.h"
 
 // clazy:excludeall=copyable-polymorphic
 
+class LdapObjectPrivate;
 namespace KLDAPCore
 {
 using LdapAttrValue = QList<QByteArray>;
 using LdapAttrMap = QMap<QString, LdapAttrValue>;
 
 /*!
+ * \class KLDAPCore::LdapObject
+ * \inmodule LdapCore
+ * \inheaderfile KLDAPCore/LdapObject
+ *
  * \brief
  * This class represents an LDAP Object
  */

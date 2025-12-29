@@ -18,6 +18,10 @@
 namespace KLDAPCore
 {
 /*!
+ * \class KLDAPCore::LdapServer
+ * \inmodule LdapCore
+ * \inheaderfile KLDAPCore/LdapServer
+ *
  * \brief A class that contains LDAP server connection settings.
  *
  * This class holds various parameters that are needed to connect

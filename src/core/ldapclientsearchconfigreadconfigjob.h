@@ -15,26 +15,56 @@ class Job;
 }
 namespace KLDAPCore
 {
+/*!
+ * \class KLDAPCore::LdapClientSearchConfigReadConfigJob
+ * \inmodule LdapCore
+ * \inheaderfile KLDAPCore/LdapClientSearchConfigReadConfigJob
+ *
+ * \brief The LdapClientSearchConfigReadConfigJob class
+ * \author Laurent Montel <montel@kde.org>
+ */
 class KLDAP_CORE_EXPORT LdapClientSearchConfigReadConfigJob : public QObject
 {
     Q_OBJECT
 public:
+    /*!
+     */
     explicit LdapClientSearchConfigReadConfigJob(QObject *parent = nullptr);
+    /*!
+     */
     ~LdapClientSearchConfigReadConfigJob() override;
 
+    /*!
+     */
     [[nodiscard]] bool canStart() const;
+    /*!
+     */
     void start();
 
+    /*!
+     */
     [[nodiscard]] bool active() const;
+    /*!
+     */
     void setActive(bool newActive);
 
+    /*!
+     */
     [[nodiscard]] int serverIndex() const;
+    /*!
+     */
     void setServerIndex(int newServerIndex);
 
+    /*!
+     */
     [[nodiscard]] KConfigGroup config() const;
+    /*!
+     */
     void setConfig(const KConfigGroup &newConfig);
 
 Q_SIGNALS:
+    /*!
+     */
     void configLoaded(const KLDAPCore::LdapServer &server);
 
 private:

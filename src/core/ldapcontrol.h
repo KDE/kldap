@@ -22,6 +22,10 @@ class LdapControl;
 using LdapControls = QList<LdapControl>;
 
 /*!
+  \class KLDAPCore::LdapControl
+  \inmodule LdapCore
+  \inheaderfile KLDAPCore/LdapControl
+
   \brief
   This class represents an LDAP Control
 */

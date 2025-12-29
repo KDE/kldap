@@ -20,7 +20,7 @@ namespace KLDAPWidgets
 class AddHostDialogPrivate;
 /*!
  * \brief The AddHostDialog class
- * @author Laurent Montel <montel@kde.org>
+ * \author Laurent Montel <montel@kde.org>
  */
 class KLDAPWIDGETS_EXPORT AddHostDialog : public QDialog
 {

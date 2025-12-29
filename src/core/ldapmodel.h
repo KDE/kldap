@@ -10,11 +10,22 @@
 #include <QAbstractListModel>
 namespace KLDAPCore
 {
+/*!
+ * \class KLDAPCore::LdapModel
+ * \inmodule LdapCore
+ * \inheaderfile KLDAPCore/LdapModel
+ *
+ * \brief The LdapModel class
+ */
 class KLDAP_CORE_EXPORT LdapModel : public QAbstractListModel
 {
     Q_OBJECT
 public:
+    /*!
+     */
     explicit LdapModel(QObject *parent = nullptr);
+    /*!
+     */
     ~LdapModel() override;
 
     enum LdapRoles {
@@ -32,21 +43,43 @@ public:
         KLDAPCore::LdapServer server;
     };
 
+    /*!
+     */
     [[nodiscard]] QVariant data(const QModelIndex &index, int role = Qt::DisplayRole) const override;
+    /*!
+     */
     [[nodiscard]] int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    /*!
+     */
     [[nodiscard]] int columnCount(const QModelIndex &parent) const override;
+    /*!
+     */
     bool setData(const QModelIndex &modelIndex, const QVariant &value, int role) override;
 
+    /*!
+     */
     [[nodiscard]] QList<ServerInfo> ldapServerInfo() const;
+    /*!
+     */
     void setLdapServerInfo(const QList<ServerInfo> &newLdapServerInfo);
 
+    /*!
+     */
     [[nodiscard]] Qt::ItemFlags flags(const QModelIndex &index) const override;
 
+    /*!
+     */
     void save();
+    /*!
+     */
     void load();
 
+    /*!
+     */
     void insertServer(const KLDAPCore::LdapServer &server);
 
+    /*!
+     */
     void removeServer(int index);
 
 private:

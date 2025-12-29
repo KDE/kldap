@@ -17,6 +17,10 @@ namespace KLDAPCore
 class LdapObject;
 class LdapServer;
 /*!
+ * \class KLDAPCore::LdapClient
+ * \inmodule LdapCore
+ * \inheaderfile KLDAPCore/LdapClient
+ *
  * \brief An object that represents a configured LDAP server.
  *
  * This class represents a client that to an LDAP server that

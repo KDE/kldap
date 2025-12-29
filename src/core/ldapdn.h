@@ -12,6 +12,13 @@
 #include <memory>
 namespace KLDAPCore
 {
+/*!
+ * \class KLDAPCore::LdapDN
+ * \inmodule LdapCore
+ * \inheaderfile KLDAPCore/LdapDN
+ *
+ * \brief The LdapDN class
+ */
 class KLDAP_CORE_EXPORT LdapDN
 {
 public:

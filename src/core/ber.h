@@ -16,6 +16,10 @@
 namespace KLDAPCore
 {
 /*!
+ * \class KLDAPCore::Ber
+ * \inmodule LdapCore
+ * \inheaderfile KLDAPCore/Ber
+ *
  * This class allows encoding and decoding Qt structures using Basic
  * Encoding Rules.
  */

@@ -15,6 +15,14 @@ class Job;
 }
 namespace KLDAPCore
 {
+/*!
+ * \class KLDAPCore::LdapClientSearchConfigWriteConfigJob
+ * \inmodule LdapCore
+ * \inheaderfile KLDAPCore/LdapClientSearchConfigWriteConfigJob
+ *
+ * \brief The LdapClientSearchConfigWriteConfigJob class
+ * \author Laurent Montel <montel@kde.org>
+ */
 class KLDAP_CORE_EXPORT LdapClientSearchConfigWriteConfigJob : public QObject
 {
     Q_OBJECT
@@ -22,22 +30,44 @@ public:
     explicit LdapClientSearchConfigWriteConfigJob(QObject *parent = nullptr);
     ~LdapClientSearchConfigWriteConfigJob() override;
 
+    /*!
+     */
     [[nodiscard]] bool canStart() const;
+    /*!
+     */
     void start();
 
+    /*!
+     */
     [[nodiscard]] bool active() const;
+    /*!
+     */
     void setActive(bool newActive);
 
+    /*!
+     */
     [[nodiscard]] int serverIndex() const;
+    /*!
+     */
     void setServerIndex(int newServerIndex);
 
+    /*!
+     */
     [[nodiscard]] KConfigGroup config() const;
+    /*!
+     */
     void setConfig(const KConfigGroup &newConfig);
 
+    /*!
+     */
     [[nodiscard]] KLDAPCore::LdapServer server() const;
+    /*!
+     */
     void setServer(const KLDAPCore::LdapServer &server);
 
 Q_SIGNALS:
+    /*!
+     */
     void configSaved();
 
 private:

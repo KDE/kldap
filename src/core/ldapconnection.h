@@ -17,6 +17,10 @@
 namespace KLDAPCore
 {
 /*!
+ * \class KLDAPCore::LdapConnection
+ * \inmodule LdapCore
+ * \inheaderfile KLDAPCore/LdapConnection
+ *
  * \brief
  * This class represents a connection to an LDAP server.
  */

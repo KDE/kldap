@@ -15,8 +15,12 @@ class KConfig;
 namespace KLDAPCore
 {
 /*!
+ * \class KLDAPCore::LdapClientSearchConfig
+ * \inmodule LdapCore
+ * \inheaderfile KLDAPCore/LdapClientSearchConfig
+ *
  * \brief The LdapClientSearchConfig class
- * @author Laurent Montel <montel@kde.org>
+ * \author Laurent Montel <montel@kde.org>
  */
 class KLDAP_CORE_EXPORT LdapClientSearchConfig : public QObject
 {
