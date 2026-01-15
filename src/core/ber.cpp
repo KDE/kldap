@@ -411,23 +411,20 @@ int Ber::printf([[maybe_unused]] QString format, ...)
     return -1;
 }
 
-int Ber::scanf(QString format, ...)
+int Ber::scanf([[maybe_unused]] QString format, ...)
 {
-    Q_UNUSED(format)
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-unsigned int Ber::peekTag(int &size)
+unsigned int Ber::peekTag([[maybe_unused]] int &size)
 {
-    Q_UNUSED(size)
     qCritical() << "LDAP support not compiled";
     return 0;
 }
 
-unsigned int Ber::skipTag(int &size)
+unsigned int Ber::skipTag([[maybe_unused]] int &size)
 {
-    Q_UNUSED(size)
     qCritical() << "LDAP support not compiled";
     return 0;
 }
