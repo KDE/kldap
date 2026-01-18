@@ -223,7 +223,7 @@ public:
     /*!
      * Abandons a long-running operation. Requires the message id.
      */
-    [[nodiscard]] int abandon(int id);
+    int abandon(int id);
     /*!
      * Waits for up to \a msecs milliseconds for a result message from the LDAP
      * server. If \a msecs is -1, then this function will block indefinitely.
