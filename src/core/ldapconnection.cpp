@@ -117,7 +117,7 @@ void *LdapConnection::saslHandle() const
     return (void *)d->mSASLconn;
 }
 
-QString LdapConnection::errorString(int code)
+QString LdapConnection::errorString([[maybe_unused]] int code)
 {
     // No translated error messages yet
 #if LDAP_FOUND
@@ -380,13 +380,13 @@ void LdapConnection::close()
 
 #else // LDAP_FOUND
 
-int LdapConnection::getOption(int option, void *value) const
+int LdapConnection::getOption([[maybe_unused]] int option, [[maybe_unused]] void *value) const
 {
     qCritical() << "No LDAP support...";
     return -1;
 }
 
-int LdapConnection::setOption(int option, void *value)
+int LdapConnection::setOption([[maybe_unused]] int option, [[maybe_unused]] void *value)
 {
     qCritical() << "No LDAP support...";
     return -1;
@@ -404,7 +404,7 @@ QString LdapConnection::ldapErrorString() const
     return QString();
 }
 
-bool LdapConnection::setSizeLimit(int sizelimit)
+bool LdapConnection::setSizeLimit([[maybe_unused]] int sizelimit)
 {
     qCritical() << "No LDAP support...";
     return false;
@@ -416,7 +416,7 @@ int LdapConnection::sizeLimit() const
     return -1;
 }
 
-bool LdapConnection::setTimeLimit(int timelimit)
+bool LdapConnection::setTimeLimit([[maybe_unused]] int timelimit)
 {
     qCritical() << "No LDAP support...";
     return false;

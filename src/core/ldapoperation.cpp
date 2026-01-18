@@ -40,6 +40,7 @@ using namespace Qt::Literals::StringLiterals;
 static void extractControls(LdapControls &ctrls, LDAPControl **pctrls);
 #endif // LDAP_FOUND
 
+#if LDAP_FOUND
 /*
    Returns the difference between msecs and elapsed. If msecs is -1,
    however, -1 is returned.
@@ -53,6 +54,7 @@ static int kldap_timeout_value(int msecs, int elapsed)
     int timeout = msecs - elapsed;
     return timeout < 0 ? 0 : timeout;
 }
+#endif
 
 class Q_DECL_HIDDEN LdapOperation::LdapOperationPrivate
 {
@@ -1162,115 +1164,124 @@ int LdapOperation::waitForResult(int id, int msecs)
 
 #else
 
-int LdapOperation::bind(const QByteArray &creds, SASL_Callback_Proc *saslproc, void *data)
+int LdapOperation::bind([[maybe_unused]] const QByteArray &creds, [[maybe_unused]] SASL_Callback_Proc *saslproc, [[maybe_unused]] void *data)
 {
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-int LdapOperation::bind_s(SASL_Callback_Proc *saslproc, void *data)
+int LdapOperation::bind_s([[maybe_unused]] SASL_Callback_Proc *saslproc, [[maybe_unused]] void *data)
 {
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-int LdapOperation::search(const LdapDN &base, LdapUrl::Scope scope, const QString &filter, const QStringList &attributes)
+int LdapOperation::search([[maybe_unused]] const LdapDN &base,
+                          [[maybe_unused]] LdapUrl::Scope scope,
+                          [[maybe_unused]] const QString &filter,
+                          [[maybe_unused]] const QStringList &attributes)
 {
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-int LdapOperation::add(const LdapObject &object)
+int LdapOperation::add([[maybe_unused]] const LdapObject &object)
 {
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-int LdapOperation::add_s(const LdapObject &object)
+int LdapOperation::add_s([[maybe_unused]] const LdapObject &object)
 {
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-int LdapOperation::add(const LdapDN &dn, const ModOps &ops)
+int LdapOperation::add([[maybe_unused]] const LdapDN &dn, [[maybe_unused]] const ModOps &ops)
 {
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-int LdapOperation::add_s(const LdapDN &dn, const ModOps &ops)
+int LdapOperation::add_s([[maybe_unused]] const LdapDN &dn, [[maybe_unused]] const ModOps &ops)
 {
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-int LdapOperation::rename(const LdapDN &dn, const QString &newRdn, const QString &newSuperior, bool deleteold)
+int LdapOperation::rename([[maybe_unused]] const LdapDN &dn,
+                          [[maybe_unused]] const QString &newRdn,
+                          [[maybe_unused]] const QString &newSuperior,
+                          [[maybe_unused]] bool deleteold)
 {
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-int LdapOperation::rename_s(const LdapDN &dn, const QString &newRdn, const QString &newSuperior, bool deleteold)
+int LdapOperation::rename_s([[maybe_unused]] const LdapDN &dn,
+                            [[maybe_unused]] const QString &newRdn,
+                            [[maybe_unused]] const QString &newSuperior,
+                            [[maybe_unused]] bool deleteold)
 {
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-int LdapOperation::del(const LdapDN &dn)
+int LdapOperation::del([[maybe_unused]] const LdapDN &dn)
 {
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-int LdapOperation::del_s(const LdapDN &dn)
+int LdapOperation::del_s([[maybe_unused]] const LdapDN &dn)
 {
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-int LdapOperation::modify(const LdapDN &dn, const ModOps &ops)
+int LdapOperation::modify([[maybe_unused]] const LdapDN &dn, [[maybe_unused]] const ModOps &ops)
 {
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-int LdapOperation::modify_s(const LdapDN &dn, const ModOps &ops)
+int LdapOperation::modify_s([[maybe_unused]] const LdapDN &dn, [[maybe_unused]] const ModOps &ops)
 {
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-int LdapOperation::compare(const LdapDN &dn, const QString &attr, const QByteArray &value)
+int LdapOperation::compare([[maybe_unused]] const LdapDN &dn, [[maybe_unused]] const QString &attr, [[maybe_unused]] const QByteArray &value)
 {
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-int LdapOperation::exop(const QString &oid, const QByteArray &data)
+int LdapOperation::exop([[maybe_unused]] const QString &oid, [[maybe_unused]] const QByteArray &data)
 {
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-int LdapOperation::compare_s(const LdapDN &dn, const QString &attr, const QByteArray &value)
+int LdapOperation::compare_s([[maybe_unused]] const LdapDN &dn, [[maybe_unused]] const QString &attr, [[maybe_unused]] const QByteArray &value)
 {
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-int LdapOperation::exop_s(const QString &oid, const QByteArray &data)
+int LdapOperation::exop_s([[maybe_unused]] const QString &oid, [[maybe_unused]] const QByteArray &data)
 {
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-int LdapOperation::waitForResult(int id, int msecs)
+int LdapOperation::waitForResult([[maybe_unused]] int id, [[maybe_unused]] int msecs)
 {
     qCritical() << "LDAP support not compiled";
     return -1;
 }
 
-int LdapOperation::abandon(int id)
+int LdapOperation::abandon([[maybe_unused]] int id)
 {
     qCritical() << "LDAP support not compiled";
     return -1;
