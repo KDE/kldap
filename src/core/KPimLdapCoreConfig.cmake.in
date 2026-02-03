@@ -1,7 +1,6 @@
 # SPDX-FileCopyrightText: none
 # SPDX-License-Identifier: BSD-3-Clause
 
-
 @PACKAGE_INIT@
 
 include("${CMAKE_CURRENT_LIST_DIR}/KPim6LdapCoreTargets.cmake")

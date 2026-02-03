@@ -64,22 +64,19 @@ endif()
 if(EXISTS ${Ldap_INCLUDE_DIRS}/ldap_features.h)
     file(READ ${Ldap_INCLUDE_DIRS}/ldap_features.h LDAP_FEATURES_H_CONTENT)
     string(
-        REGEX
-        MATCH
+        REGEX MATCH
         "#define LDAP_VENDOR_VERSION_MAJOR[ ]+[0-9]+"
         _LDAP_VERSION_MAJOR_MATCH
         ${LDAP_FEATURES_H_CONTENT}
     )
     string(
-        REGEX
-        MATCH
+        REGEX MATCH
         "#define LDAP_VENDOR_VERSION_MINOR[ ]+[0-9]+"
         _LDAP_VERSION_MINOR_MATCH
         ${LDAP_FEATURES_H_CONTENT}
     )
     string(
-        REGEX
-        MATCH
+        REGEX MATCH
         "#define LDAP_VENDOR_VERSION_PATCH[ ]+[0-9]+"
         _LDAP_VERSION_PATCH_MATCH
         ${LDAP_FEATURES_H_CONTENT}
