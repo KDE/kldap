@@ -19,6 +19,10 @@ namespace KLDAPWidgets
 {
 class AddHostDialogPrivate;
 /*!
+ * \class KLDAPWidgets::LdapSortProxyModel
+ * \ inmodule LdapWidgets
+ * \inheaderfile KLDAPWidgets/LdapSortProxyModel
+ *
  * \brief The AddHostDialog class
  * \author Laurent Montel <montel@kde.org>
  */

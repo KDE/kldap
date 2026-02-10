@@ -19,6 +19,9 @@ namespace KLDAPWidgets
 {
 /*!
   \brief LDAP Configuration widget
+  \class KLDAPWidgets::LdapConfigWidget
+  \ inmodule LdapWidgets
+  \inheaderfile KLDAPWidgets/LdapConfigWidget
 
   This class can be used to query the user for LDAP connection parameters.
   It's KConfigXT compatible, using widget names starting with kcfg_

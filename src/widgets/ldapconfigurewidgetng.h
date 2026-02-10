@@ -26,6 +26,10 @@ class LdapActivitiesAbstract;
 namespace KLDAPWidgets
 {
 /*!
+ * \class KLDAPWidgets::LdapConfigureWidgetNg
+ * \ inmodule LdapWidgets
+ * \inheaderfile KLDAPWidgets/LdapConfigureWidgetNg
+ *
  * \brief The LdapConfigureWidgetNg class
  * \author Laurent Montel <montel@kde.org>
  */
