@@ -31,7 +31,8 @@ public:
      */
     Ber();
     /*!
-     * Constructs a Ber object from the value.
+     * Constructs a Ber object from the given value.
+     * \param value the QByteArray value to initialize from
      */
     explicit Ber(const QByteArray &value);
     /*!
@@ -40,10 +41,17 @@ public:
     ~Ber();
 
     Ber(const Ber &that);
+
+    /*!
+     * Assigns the given Ber object to this object.
+     * \param that the Ber object to assign
+     * \return a reference to this object
+     */
     Ber &operator=(const Ber &that);
 
     /*!
      * Returns the Ber object as a flat QByteArray.
+     * \return the encoded QByteArray
      */
     [[nodiscard]] QByteArray flatten() const;
 
@@ -105,10 +113,30 @@ public:
      *     ]  End set.  No parameter is required.
      *   </li>
      * </ul>
+     * \param format the format string
+     * \return the number of bytes appended
      */
     int printf(QString format, ...); // Passing by-value since it's used by va_start
+
+    /*!
+     * Scans from the Ber object according to the given format string.
+     * \param format the format string
+     * \return the number of bytes scanned
+     */
     int scanf(QString format, ...);
+
+    /*!
+     * Peeks at the next tag without removing it.
+     * \param size the size of the tag (output parameter)
+     * \return the tag value
+     */
     unsigned int peekTag(int &size);
+
+    /*!
+     * Skips the next tag.
+     * \param size the size of the tag (output parameter)
+     * \return the tag value
+     */
     unsigned int skipTag(int &size);
 
 private:

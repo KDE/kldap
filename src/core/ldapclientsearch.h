@@ -58,22 +58,20 @@ class KLDAP_CORE_EXPORT LdapClientSearch : public QObject
 
 public:
     /*!
-     * Creates a new ldap client search object.
-     *
-     * \a parent The parent object.
+     * Creates a new LDAP client search object.
+     * \param parent the parent object
      */
     explicit LdapClientSearch(QObject *parent = nullptr);
 
     /*!
-     * Creates a new ldap client search object.
-     *
-     * \a attr The attributes.
-     * \a parent The parent object.
+     * Creates a new LDAP client search object with specified attributes.
+     * \param attr the list of attributes to search for
+     * \param parent the parent object
      */
     explicit LdapClientSearch(const QStringList &attr, QObject *parent = nullptr);
 
     /*!
-     * Destroys the ldap client search object.
+     * Destroys the LDAP client search object.
      */
     ~LdapClientSearch() override;
 
@@ -90,8 +88,9 @@ public:
     /*!
      * Returns whether LDAP search is possible at all.
      *
-     * Note This method can return false if either no LDAP is configured
+     * Note: This method can return false if either no LDAP is configured
      *       or the system does not support the KIO LDAP protocol.
+     * \return true if LDAP search is available, false otherwise
      */
     [[nodiscard]] bool isAvailable() const;
 
@@ -107,32 +106,32 @@ public:
     [[nodiscard]] QList<KLDAPCore::LdapClient *> clients() const;
 
     /*!
-     * Returns the filter for the Query
-     *
+     * Returns the filter for the search query.
+     * \return the LDAP filter string
      * \since 4.14
      */
     [[nodiscard]] QString filter() const;
 
     /*!
-     * Sets the filter for the Query
-     *
+     * Sets the filter for the search query.
+     * \param filter the LDAP filter string to set
      * \since 4.14
      */
-    void setFilter(const QString &);
+    void setFilter(const QString &filter);
 
     /*!
-     * Returns the attributes, that are queried the LDAP Server.
-     *
+     * Returns the attributes that are queried from the LDAP server.
+     * \return the list of attribute names
      * \since 4.14
      */
     [[nodiscard]] QStringList attributes() const;
 
     /*!
-     * Sets the attributes, that are queried the LDAP Server.
-     *
+     * Sets the attributes that are queried from the LDAP server.
+     * \param attributes the list of attribute names to query
      * \since 4.14
      */
-    void setAttributes(const QStringList &);
+    void setAttributes(const QStringList &attributes);
 
     [[nodiscard]] static QStringList defaultAttributes();
 

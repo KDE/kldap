@@ -21,26 +21,41 @@ class KLDAP_CORE_EXPORT LdapActivitiesAbstract : public QObject
     Q_OBJECT
 public:
     /*!
+     * Constructs a LdapActivitiesAbstract object.
+     * \param parent the parent QObject
      */
     explicit LdapActivitiesAbstract(QObject *parent = nullptr);
+
     /*!
+     * Destroys the LdapActivitiesAbstract object.
      */
     ~LdapActivitiesAbstract() override;
 
     /*!
+     * Returns whether the given list of activities should be accepted by the filter.
+     * This is a pure virtual function that must be implemented by subclasses.
+     * \param activities the list of activities to filter
+     * \return true if the activities should be accepted, false otherwise
      */
     [[nodiscard]] virtual bool filterAcceptsRow(const QStringList &activities) const = 0;
 
     /*!
+     * Returns whether the system has support for activities.
+     * This is a pure virtual function that must be implemented by subclasses.
+     * \return true if activities are supported, false otherwise
      */
     [[nodiscard]] virtual bool hasActivitySupport() const = 0;
 
     /*!
+     * Returns the current activity.
+     * This is a pure virtual function that must be implemented by subclasses.
+     * \return the current activity string
      */
     [[nodiscard]] virtual QString currentActivity() const = 0;
 
 Q_SIGNALS:
     /*!
+     * Emitted when the activities have changed.
      */
     void activitiesChanged();
 };

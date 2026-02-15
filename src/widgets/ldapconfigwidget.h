@@ -82,121 +82,171 @@ public:
     };
     Q_ENUM(Auth)
 
-    /*! Constructs an empty configuration widget.
-     * You need to call setFlags() after this.
-     * \a parent the QWidget parent
-     * \a fl the window flags to set
+    /*!
+     * Constructs an empty configuration widget.
+     * You need to call setFeatures() after this.
+     * \param parent the parent widget
+     * \param fl the window flags to set
      */
     explicit LdapConfigWidget(QWidget *parent = nullptr, Qt::WindowFlags fl = {});
-    /*! Constructs a configuration widget */
+
+    /*!
+     * Constructs a configuration widget with the specified features.
+     * \param flags the configuration window flags
+     * \param parent the parent widget
+     * \param fl the window flags to set
+     */
     explicit LdapConfigWidget(WinFlags flags, QWidget *parent = nullptr, Qt::WindowFlags fl = {});
-    /*! Destructs a configuration widget */
+
+    /*!
+     * Destroys the configuration widget.
+     */
     ~LdapConfigWidget() override;
 
-    /*! Sets the user name. Kconfig widget name: kcfg_ldapuser
-     *  \a user the user name to set
+    /*!
+     * Sets the user name. KConfig widget name: kcfg_ldapuser
+     * \param user the user name to set
      */
     void setUser(const QString &user);
-    /*! Gets the user name. Kconfig widget name: kcfg_ldapuser */
+
+    /*!
+     * Returns the user name. KConfig widget name: kcfg_ldapuser
+     */
     [[nodiscard]] QString user() const;
 
-    /*! Sets the password. Kconfig widget name: kcfg_ldappassword
-     *  \a password the password to set
+    /*!
+     * Sets the password. KConfig widget name: kcfg_ldappassword
+     * \param password the password to set
      */
     void setPassword(const QString &password);
-    /*! Gets the password. Kconfig widget name: kcfg_ldappassword */
+
+    /*!
+     * Returns the password. KConfig widget name: kcfg_ldappassword
+     */
     [[nodiscard]] QString password() const;
 
     /*!
-     * Sets the bind dn.
-     * Kconfig widget name: kcfg_ldapbinddn
-     * \a binddn the LDAP Bind DN to set
+     * Sets the bind DN.
+     * KConfig widget name: kcfg_ldapbinddn
+     * \param binddn the LDAP Bind DN to set
      */
     void setBindDn(const QString &binddn);
-    /*! Gets the bind dn. Kconfig widget name: kcfg_ldapbinddn*/
+
+    /*!
+     * Returns the bind DN. KConfig widget name: kcfg_ldapbinddn
+     */
     [[nodiscard]] QString bindDn() const;
 
-    /*! Sets the SASL realm. Kconfig widget name: kcfg_ldaprealm
-     *  \a realm the SASL realm to set
+    /*!
+     * Sets the SASL realm. KConfig widget name: kcfg_ldaprealm
+     * \param realm the SASL realm to set
      */
     void setRealm(const QString &realm);
-    /*! Gets the SASL realm. Kconfig widget name: kcfg_ldaprealm */
+
+    /*!
+     * Returns the SASL realm. KConfig widget name: kcfg_ldaprealm
+     */
     [[nodiscard]] QString realm() const;
 
-    /*! Sets the host name. Kconfig widget name: kcfg_ldaphost
-     *  \a host the LDAP host to set
+    /*!
+     * Sets the host name. KConfig widget name: kcfg_ldaphost
+     * \param host the LDAP host to set
      */
     void setHost(const QString &host);
-    /*! Gets the host name. Kconfig widget name: kcfg_ldaphost */
+
+    /*!
+     * Returns the host name. KConfig widget name: kcfg_ldaphost
+     */
     [[nodiscard]] QString host() const;
 
-    /*! Sets the LDAP port. Kconfig widget name: kcfg_ldapport
-     *  \a port the LDAP port to set
+    /*!
+     * Sets the LDAP port. KConfig widget name: kcfg_ldapport
+     * \param port the LDAP port to set
      */
     void setPort(int port);
-    /*! Gets the LDAP port. Kconfig widget name: kcfg_ldapport */
+
+    /*!
+     * Returns the LDAP port. KConfig widget name: kcfg_ldapport
+     */
     [[nodiscard]] int port() const;
 
-    /*! Sets the LDAP protocol version. Kconfig widget name: kcfg_ldapver
-     *  \a version the LDAP protocol version to set
+    /*!
+     * Sets the LDAP protocol version. KConfig widget name: kcfg_ldapver
+     * \param version the LDAP protocol version to set
      */
     void setVersion(int version);
-    /*! Gets the LDAP protocol version. Kconfig widget name: kcfg_ldapver */
+
+    /*!
+     * Returns the LDAP protocol version. KConfig widget name: kcfg_ldapver
+     */
     [[nodiscard]] int version() const;
 
-    /*! Sets the LDAP Base DN. Kconfig widget name: kcfg_ldapdn
-     *  \a dn the LDAP Base DN to set
+    /*!
+     * Sets the LDAP Base DN. KConfig widget name: kcfg_ldapdn
+     * \param dn the LDAP Base DN to set
      */
     void setDn(const KLDAPCore::LdapDN &dn);
-    /*! Gets the LDAP Base DN. Kconfig widget name: kcfg_ldapdn */
+
+    /*!
+     * Returns the LDAP Base DN. KConfig widget name: kcfg_ldapdn
+     */
     [[nodiscard]] KLDAPCore::LdapDN dn() const;
 
-    /*! Sets the LDAP Filter. Kconfig widget name: kcfg_ldapfilter
-     *  \a filter the LDAP Filter to set
+    /*!
+     * Sets the LDAP Filter. KConfig widget name: kcfg_ldapfilter
+     * \param filter the LDAP Filter to set
      */
     void setFilter(const QString &filter);
-    /*! Gets the LDAP Filter. Kconfig widget name: kcfg_ldapfilter */
+
+    /*!
+     * Returns the LDAP Filter. KConfig widget name: kcfg_ldapfilter
+     */
     [[nodiscard]] QString filter() const;
 
-    /*! Sets the SASL Mechanism. Kconfig widget name: kcfg_ldapsaslmech
-     *  \a mech the SASL Mechanism to set
+    /*!
+     * Sets the SASL Mechanism. KConfig widget name: kcfg_ldapsaslmech
+     * \param mech the SASL Mechanism to set
      */
     void setMech(const QString &mech);
-    /*! Gets the SASL Mechanism. Kconfig widget name: kcfg_ldapsaslmech */
+
+    /*!
+     * Returns the SASL Mechanism. KConfig widget name: kcfg_ldapsaslmech
+     */
     [[nodiscard]] QString mech() const;
 
     /*!
      * Sets the security type (None, SSL, TLS).
-     * Kconfig widget names: kcfg_ldapnosec, kcfg_ldaptls, kcfg_ldapssl
-     * \a security the security type to set
+     * KConfig widget names: kcfg_ldapnosec, kcfg_ldaptls, kcfg_ldapssl
+     * \param security the security type to set
      */
     void setSecurity(Security security);
+
     /*!
      * Returns the security type.
-     * Kconfig widget names: kcfg_ldapnosec, kcfg_ldaptls, kcfg_ldapssl
-     * \a security the security type to set
+     * KConfig widget names: kcfg_ldapnosec, kcfg_ldaptls, kcfg_ldapssl
      */
     [[nodiscard]] Security security() const;
 
     /*!
      * Sets the authentication type (Anonymous, Simple, SASL).
-     * Kconfig widget names: kcfg_ldapanon, kcfg_ldapsimple, kcfg_ldapsasl
-     * \a auth the authentication type to set
+     * KConfig widget names: kcfg_ldapanon, kcfg_ldapsimple, kcfg_ldapsasl
+     * \param auth the authentication type to set
      */
     void setAuth(Auth auth);
+
     /*!
      * Returns the authentication type.
-     * Kconfig widget names: kcfg_ldapanon, kcfg_ldapsimple, kcfg_ldapsasl
-     * \a auth the authentication type to set
+     * KConfig widget names: kcfg_ldapanon, kcfg_ldapsimple, kcfg_ldapsasl
      */
     [[nodiscard]] Auth auth() const;
 
     /*!
      * Sets the size limit.
      * KConfig widget name: kcfg_ldapsizelimit
-     * \a sizelimit the size limit to set
+     * \param sizelimit the size limit to set
      */
     void setSizeLimit(int sizelimit);
+
     /*!
      * Returns the size limit.
      * KConfig widget name: kcfg_ldapsizelimit
@@ -206,9 +256,10 @@ public:
     /*!
      * Sets the time limit.
      * KConfig widget name: kcfg_ldaptimelimit
-     * \a timelimit the time limit to set
+     * \param timelimit the time limit to set
      */
     void setTimeLimit(int timelimit);
+
     /*!
      * Returns the time limit.
      * KConfig widget name: kcfg_ldaptimelimit
@@ -218,26 +269,36 @@ public:
     /*!
      * Sets the page size.
      * KConfig widget name: kcfg_ldappagesize
-     * \a pagesize the page size to set
+     * \param pagesize the page size to set
      */
     void setPageSize(int pagesize);
+
     /*!
      * Returns the page size.
      * KConfig widget name: kcfg_ldappagesize
      */
     [[nodiscard]] int pageSize() const;
 
+    /*!
+     * Returns the features flags.
+     */
     [[nodiscard]] WinFlags features() const;
+
+    /*!
+     * Sets the features flags.
+     * \param features the features to set
+     */
     void setFeatures(WinFlags features);
 
     /*!
-     * Returns a LDAP Url constructed from the settings given.
+     * Returns an LDAP URL constructed from the settings given.
      * Extensions are filled for use in the LDAP KIO worker.
      */
     [[nodiscard]] KLDAPCore::LdapUrl url() const;
+
     /*!
-     * Set up the widget via an LDAP Url.
-     * \a url the LDAP Url to set
+     * Sets up the widget via an LDAP URL.
+     * \param url the LDAP URL to set
      */
     void setUrl(const KLDAPCore::LdapUrl &url);
 
@@ -245,15 +306,18 @@ public:
      * Returns an LdapServer object constructed from the settings given.
      */
     [[nodiscard]] KLDAPCore::LdapServer server() const;
+
     /*!
-     * Set up the widget via an LdapServer object.
-     * \a server the LdapServer object to set
+     * Sets up the widget via an LdapServer object.
+     * \param server the LdapServer object to set
      */
     void setServer(const KLDAPCore::LdapServer &server);
 
 Q_SIGNALS:
     /*!
+     * Emitted when the host name has changed.
      * \since 4.13
+     * \param hostName the new host name
      */
     void hostNameChanged(const QString &);
 

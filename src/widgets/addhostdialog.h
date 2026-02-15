@@ -19,9 +19,9 @@ namespace KLDAPWidgets
 {
 class AddHostDialogPrivate;
 /*!
- * \class KLDAPWidgets::LdapSortProxyModel
+ * \class KLDAPWidgets::AddHostDialog
  * \ inmodule LdapWidgets
- * \inheaderfile KLDAPWidgets/LdapSortProxyModel
+ * \inheaderfile KLDAPWidgets/AddHostDialog
  *
  * \brief The AddHostDialog class
  * \author Laurent Montel <montel@kde.org>
@@ -31,10 +31,23 @@ class KLDAPWIDGETS_EXPORT AddHostDialog : public QDialog
     Q_OBJECT
 
 public:
+    /*!
+     * Constructs an AddHostDialog with the given LDAP server configuration.
+     * \param server the LDAP server configuration to edit
+     * \param parent the parent widget
+     */
     explicit AddHostDialog(KLDAPCore::LdapServer *server, QWidget *parent = nullptr);
+
+    /*!
+     * Destroys the AddHostDialog.
+     */
     ~AddHostDialog() override;
 
 Q_SIGNALS:
+    /*!
+     * Emitted when the dialog content has changed.
+     * \param changed true if the content has been modified
+     */
     void changed(bool);
 
 private:

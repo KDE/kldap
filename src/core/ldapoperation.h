@@ -83,193 +83,264 @@ public:
     };
 
     LdapOperation();
+
+    /*!
+     * Constructs an LdapOperation with the given LDAP connection.
+     * Without a living connection object, LDAP operations are not possible.
+     * \param conn the LDAP connection to use
+     */
     explicit LdapOperation(LdapConnection &conn);
+
+    /*!
+     * Destroys the LdapOperation object.
+     */
     ~LdapOperation();
 
     /*!
-     * Sets the connection object. Without living connection object,
-     * LDAP operations are not possible.
-     * \a the connection object to set
+     * Sets the connection object to use for LDAP operations.
+     * Without a living connection object, LDAP operations are not possible.
+     * \param conn the connection object to set
      */
     void setConnection(LdapConnection &conn);
+
     /*!
-     * Returns the connection object.
+     * Returns the connection object being used.
+     * \return the LDAP connection object
      */
     LdapConnection &connection();
+
     /*!
-     * Sets the client controls which will sent with each operation.
+     * Sets the client controls which will be sent with each operation.
+     * \param ctrls the controls to set
      */
     void setClientControls(const LdapControls &ctrls);
+
     /*!
-     * Sets the server controls which will sent with each operation.
+     * Sets the server controls which will be sent with each operation.
+     * \param ctrls the controls to set
      */
     void setServerControls(const LdapControls &ctrls);
+
     /*!
-     * Returns the client controls (which set by setClientControls()).
+     * Returns the client controls (which were set by setClientControls()).
+     * \return the list of client controls
      */
     [[nodiscard]] LdapControls clientControls() const;
+
     /*!
-     * Returns the server controls (which set by setServerControls()).
+     * Returns the server controls (which were set by setServerControls()).
+     * \return the list of server controls
      */
     [[nodiscard]] LdapControls serverControls() const;
 
     /*!
-     * Binds to the server which specified in the connection object.
+     * Starts an asynchronous bind operation to the server specified in the connection object.
      * Can do simple or SASL bind. Returns a message id if successful, negative value if not.
+     * \param creds optional credentials for the bind
+     * \param saslproc optional SASL callback procedure
+     * \param data optional data for the SASL callback
+     * \return the message ID if successful, negative value if not
      */
     [[nodiscard]] int bind(const QByteArray &creds = QByteArray(), SASL_Callback_Proc *saslproc = nullptr, void *data = nullptr);
 
     /*!
-     * Binds to the server which specified in the connection object.
-     * Can do simple or SASL bind. This is the synchronous version.
-     * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
+     * Performs a synchronous bind operation to the server.
+     * Can do simple or SASL bind.
+     * \param saslproc optional SASL callback procedure
+     * \param data optional data for the SASL callback
+     * \return KLDAP_SUCCESS if successful, else an LDAP error code
      */
     [[nodiscard]] int bind_s(SASL_Callback_Proc *saslproc = nullptr, void *data = nullptr);
 
     /*!
-     * Starts a search operation with the given base DN, scope, filter and
-     * result attributes. Returns a message id if successful, -1 if not.
+     * Starts an asynchronous search operation.
+     * \param base the base DN for the search
+     * \param scope the search scope
+     * \param filter the LDAP filter string
+     * \param attrs the list of attributes to retrieve
+     * \return a message id if successful, -1 if not
      */
     [[nodiscard]] int search(const LdapDN &base, LdapUrl::Scope scope, const QString &filter, const QStringList &attrs);
+
     /*!
-     * Starts an addition operation.
-     * Returns a message id if successful, -1 if not.
-     * \a object the additional operation to start
+     * Starts an asynchronous add operation.
+     * \param object the LDAP object to add
+     * \return a message id if successful, -1 if not
      */
     [[nodiscard]] int add(const LdapObject &object);
+
     /*!
-     * Adds the specified object to the LDAP database.
-     * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
-     * \a object the object to add to LDAP database
+     * Performs a synchronous add operation.
+     * \param object the LDAP object to add to the database
+     * \return KLDAP_SUCCESS if successful, else an LDAP error code
      */
     [[nodiscard]] int add_s(const LdapObject &object);
+
     /*!
-     * Starts an addition operation. This version accepts ModOps not LdapObject.
-     * Returns a message id if successful, -1 if not.
-     * \a dn the LdapDN operation to start
-     * \a ops the ModOps operation to start
+     * Starts an asynchronous add operation using ModOps.
+     * \param dn the DN to add
+     * \param ops the list of modification operations
+     * \return a message id if successful, -1 if not
      */
     [[nodiscard]] int add(const LdapDN &dn, const ModOps &ops);
+
     /*!
-     * Adds the specified object to the LDAP database. This version accepts ModOps not LdapObject.
-     * This is the synchronous version.
-     * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
-     * \a dn the LdapDN object to add
-     * \a ops the ModOps object to add
+     * Performs a synchronous add operation using ModOps.
+     * \param dn the DN to add
+     * \param ops the list of modification operations
+     * \return KLDAP_SUCCESS if successful, else an LDAP error code
      */
     [[nodiscard]] int add_s(const LdapDN &dn, const ModOps &ops);
+
     /*!
-     * Starts a modrdn operation on given DN, changing its RDN to newRdn,
-     * changing its parent to newSuperior (if it's not empty), and deletes
-     * the old dn if deleteold is true.
-     * Returns a message id if successful, -1 if not.
+     * Starts an asynchronous rename operation (modrdn).
+     * \param dn the DN to rename
+     * \param newRdn the new relative DN
+     * \param newSuperior the new parent DN (empty to keep parent)
+     * \param deleteold whether to delete the old DN
+     * \return a message id if successful, -1 if not
      */
     [[nodiscard]] int rename(const LdapDN &dn, const QString &newRdn, const QString &newSuperior, bool deleteold = true);
+
     /*!
-     * Performs a modrdn operation on given DN, changing its RDN to newRdn,
-     * changing its parent to newSuperior (if it's not empty), and deletes
-     * the old dn if deleteold is true. This is the synchronous version.
-     * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
+     * Performs a synchronous rename operation (modrdn).
+     * \param dn the DN to rename
+     * \param newRdn the new relative DN
+     * \param newSuperior the new parent DN (empty to keep parent)
+     * \param deleteold whether to delete the old DN
+     * \return KLDAP_SUCCESS if successful, else an LDAP error code
      */
     [[nodiscard]] int rename_s(const LdapDN &dn, const QString &newRdn, const QString &newSuperior, bool deleteold = true);
+
     /*!
-     * Starts a delete operation on the given DN.
-     * Returns a message id if successful, -1 if not.
+     * Starts an asynchronous delete operation.
+     * \param dn the DN to delete
+     * \return a message id if successful, -1 if not
      */
     [[nodiscard]] int del(const LdapDN &dn);
+
     /*!
-     * Deletes the given DN. This is the synchronous version.
-     * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
-     * \a dn the dn to delete
+     * Performs a synchronous delete operation.
+     * \param dn the DN to delete
+     * \return KLDAP_SUCCESS if successful, else an LDAP error code
      */
     [[nodiscard]] int del_s(const LdapDN &dn);
+
     /*!
-     * Starts a modify operation on the given DN.
-     * Returns a message id if successful, -1 if not.
-     * \a dn the DN to start modify operation on
+     * Starts an asynchronous modify operation.
+     * \param dn the DN to modify
+     * \param ops the list of modification operations
+     * \return a message id if successful, -1 if not
      */
     [[nodiscard]] int modify(const LdapDN &dn, const ModOps &ops);
+
     /*!
-     * Performs a modify operation on the given DN.
-     * This is the synchronous version.
-     * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
+     * Performs a synchronous modify operation.
+     * \param dn the DN to modify
+     * \param ops the list of modification operations
+     * \return KLDAP_SUCCESS if successful, else an LDAP error code
      */
     [[nodiscard]] int modify_s(const LdapDN &dn, const ModOps &ops);
+
     /*!
-     * Starts a compare operation on the given DN, compares the specified
-     * attribute with the given value.
-     * Returns a message id if successful, -1 if not.
+     * Starts an asynchronous compare operation.
+     * \param dn the DN to compare
+     * \param attr the attribute name to compare
+     * \param value the value to compare with
+     * \return a message id if successful, -1 if not
      */
     [[nodiscard]] int compare(const LdapDN &dn, const QString &attr, const QByteArray &value);
+
     /*!
-     * Performs a compare operation on the given DN, compares the specified
-     * attribute with the given value. This is the synchronous version.
-     * Returns KLDAP_COMPARE_TRUE if the entry contains the attribute value
-     * and KLDAP_COMPARE_FALSE if it does not. Otherwise, some error code
-     * is returned.
+     * Performs a synchronous compare operation.
+     * \param dn the DN to compare
+     * \param attr the attribute name to compare
+     * \param value the value to compare with
+     * \return KLDAP_COMPARE_TRUE if the entry contains the attribute value,
+     *         KLDAP_COMPARE_FALSE if it does not, or an LDAP error code
      */
     [[nodiscard]] int compare_s(const LdapDN &dn, const QString &attr, const QByteArray &value);
+
     /*!
-     * Starts an extended operation specified with oid and data.
-     * Returns a message id if successful, -1 if not.
+     * Starts an asynchronous extended operation.
+     * \param oid the OID of the extended operation
+     * \param data the data for the extended operation
+     * \return a message id if successful, -1 if not
      */
     [[nodiscard]] int exop(const QString &oid, const QByteArray &data);
+
     /*!
-     * Performs an extended operation specified with oid and data.
-     * This is the synchronous version.
-     * Returns KLDAP_SUCCESS id if successful, else an LDAP error code.
+     * Performs a synchronous extended operation.
+     * \param oid the OID of the extended operation
+     * \param data the data for the extended operation
+     * \return KLDAP_SUCCESS if successful, else an LDAP error code
      */
     [[nodiscard]] int exop_s(const QString &oid, const QByteArray &data);
+
     /*!
-     * Abandons a long-running operation. Requires the message id.
+     * Abandons a long-running operation.
+     * \param id the message id of the operation to abandon
+     * \return 0 on success, -1 on error
      */
     int abandon(int id);
+
     /*!
-     * Waits for up to \a msecs milliseconds for a result message from the LDAP
-     * server. If \a msecs is -1, then this function will block indefinitely.
-     * If \a msecs is 0, then this function will return immediately, that is it
-     * will perform a poll for a result message.
+     * Waits for a result message from the LDAP server.
+     * If msecs is -1, this function will block indefinitely.
+     * If msecs is 0, this function will return immediately (poll).
      *
      * Returns the type of the result LDAP message (RES_XXX constants).
-     * -1 if error occurred, 0 if the timeout value elapsed. Note!
-     * Return code -1 means that fetching the message resulted in error,
+     * -1 if an error occurred, 0 if the timeout value elapsed.
+     * Note: Return code -1 means fetching the message resulted in error,
      * not the LDAP operation error. Call connection().ldapErrorCode() to
      * determine if the operation succeeded.
+     * \param id the message id to wait for
+     * \param msecs timeout in milliseconds (-1 for infinite)
+     * \return the result type, 0 on timeout, -1 on error
      */
     [[nodiscard]] int waitForResult(int id, int msecs = -1);
+
     /*!
      * Returns the result object if result() returned RES_SEARCH_ENTRY.
+     * \return the LDAP result object
      */
     [[nodiscard]] LdapObject object() const;
+
     /*!
-     * Returns the server controls from the returned ldap message (grabbed
-     * by result()).
+     * Returns the result object controls from the returned LDAP message.
+     * \return the list of controls
      */
     [[nodiscard]] LdapControls controls() const;
+
     /*!
-     * Returns the OID of the extended operation response (result
-     * returned RES_EXTENDED).
+     * Returns the OID of the extended operation response.
+     * \return the OID of the extended operation
      */
     [[nodiscard]] QByteArray extendedOid() const;
+
     /*!
-     * Returns the data from the extended operation response (result
-     * returned RES_EXTENDED).
+     * Returns the data from the extended operation response.
+     * \return the extended operation data
      */
     [[nodiscard]] QByteArray extendedData() const;
+
     /*!
-     * The server might supply a matched DN string in the message indicating
-     * how much of a name in a request was recognized. This can be grabbed by
-     * matchedDn().
+     * Returns the matched DN string from the message.
+     * The server might supply this indicating how much of a name in a request was recognized.
+     * \return the matched DN
      */
     [[nodiscard]] QString matchedDn() const;
+
     /*!
-     * This function returns the referral strings from the parsed message
-     * (if any).
+     * Returns the referral strings from the parsed message (if any).
+     * \return the list of referral strings
      */
     [[nodiscard]] QList<QByteArray> referrals() const;
+
     /*!
-     * Returns the server response for a bind request (result
-     * returned RES_BIND).
+     * Returns the server response for a bind request.
+     * (result returned RES_BIND)
+     * \return the server credentials
      */
     [[nodiscard]] QByteArray serverCred() const;
 

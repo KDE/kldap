@@ -37,19 +37,56 @@ class KLDAPWIDGETS_EXPORT LdapConfigureWidgetNg : public QWidget
 {
     Q_OBJECT
 public:
+    /*!
+     * Constructs a LdapConfigureWidgetNg with the given parent widget.
+     * \param parent the parent widget
+     */
     explicit LdapConfigureWidgetNg(QWidget *parent = nullptr);
+
+    /*!
+     * Destroys the LdapConfigureWidgetNg.
+     */
     ~LdapConfigureWidgetNg() override;
 
+    /*!
+     * Saves the current configuration.
+     */
     void save();
+
+    /*!
+     * Loads the configuration.
+     */
     void load();
 
+    /*!
+     * Returns whether Plasma Activities support is enabled.
+     * \return true if Plasma Activities is enabled, false otherwise
+     */
     [[nodiscard]] bool enablePlasmaActivities() const;
+
+    /*!
+     * Sets whether Plasma Activities support is enabled.
+     * \param newEnablePlasmaActivities true to enable Plasma Activities, false to disable
+     */
     void setEnablePlasmaActivities(bool newEnablePlasmaActivities);
 
+    /*!
+     * Returns the LDAP Activities Abstract instance.
+     * \return the LDAP Activities Abstract instance, or nullptr if not set
+     */
     [[nodiscard]] KLDAPCore::LdapActivitiesAbstract *ldapActivitiesAbstract() const;
+
+    /*!
+     * Sets the LDAP Activities Abstract instance.
+     * \param newldapActivitiesAbstract the LDAP Activities Abstract instance to set
+     */
     void setLdapActivitiesAbstract(KLDAPCore::LdapActivitiesAbstract *newldapActivitiesAbstract);
 
 Q_SIGNALS:
+    /*!
+     * Emitted when the configuration has changed.
+     * \param changed true if the configuration has been modified
+     */
     void changed(bool);
 
 private:

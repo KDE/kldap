@@ -26,18 +26,25 @@ public:
     };
 
     /*!
-     * \brief LdapActivitiesAbstractPlugin
-     * \param parent
+     * Constructs a LdapActivitiesAbstractPlugin with the given parent widget.
+     * \param parent the parent widget
      */
     explicit LdapActivitiesAbstractPlugin(QWidget *parent = nullptr);
+
     /*!
+     * Destroys the LdapActivitiesAbstractPlugin.
      */
     ~LdapActivitiesAbstractPlugin() override;
 
     /*!
+     * Returns the activities settings for this plugin.
+     * \return the activities settings
      */
     [[nodiscard]] virtual LdapActivitiesAbstractPlugin::ActivitySettings activitiesSettings() const = 0;
+
     /*!
+     * Sets the activities settings for this plugin.
+     * \param activitySettings the activities settings to set
      */
     virtual void setActivitiesSettings(const LdapActivitiesAbstractPlugin::ActivitySettings &activitySettings) = 0;
 };
