@@ -58,10 +58,9 @@ msgid "Could not set TLS require certificate mode."
 msgstr ""
 
 #: core/ldapconnection.cpp:312
-#, fuzzy, kde-format
-#| msgid "Cannot initialize the SASL client."
+#, kde-format
 msgid "Could not initialize new TLS context."
-msgstr "Ní féidir an cliant SASL a thúsú."
+msgstr ""
 
 #: core/ldapconnection.cpp:329
 #, kde-format
@@ -99,11 +98,10 @@ msgid "Cannot access to server. Please reconfigure it."
 msgstr "Ní féidir an freastalaí a rochtain. Cumraigh é arís."
 
 #: widgets/addhostdialog.cpp:75
-#, fuzzy, kde-format
-#| msgid "Host:"
+#, kde-format
 msgctxt "@title:window"
 msgid "Add Host"
-msgstr "Óstríomhaire:"
+msgstr ""
 
 #: widgets/addhostdialog.cpp:94
 #, kde-format
@@ -144,18 +142,16 @@ msgid "Check all servers that should be used:"
 msgstr ""
 
 #: widgets/ldapconfigurewidgetng.cpp:260
-#, fuzzy, kde-format
-#| msgid "Host:"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
-msgstr "Óstríomhaire:"
+msgstr ""
 
 #: widgets/ldapconfigurewidgetng.cpp:262
-#, fuzzy, kde-format
-#| msgid "Host:"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
-msgstr "Óstríomhaire:"
+msgstr ""
 
 #: widgets/ldapconfigurewidgetng.cpp:265
 #, kde-format
@@ -236,11 +232,10 @@ msgid "Page size:"
 msgstr "Méid an leathanaigh:"
 
 #: widgets/ldapconfigwidget.cpp:184 widgets/ldapconfigwidget.cpp:263
-#, fuzzy, kde-format
-#| msgid "Query Server"
+#, kde-format
 msgctxt "@action:button"
 msgid "Query Server"
-msgstr "Freastalaí na nIarratas"
+msgstr ""
 
 # translated below
 #: widgets/ldapconfigwidget.cpp:194
@@ -274,10 +269,9 @@ msgid "SSL"
 msgstr "SSL"
 
 #: widgets/ldapconfigwidget.cpp:232
-#, fuzzy, kde-format
-#| msgid "Security"
+#, kde-format
 msgid "Security:"
-msgstr "Slándáil"
+msgstr ""
 
 #: widgets/ldapconfigwidget.cpp:242
 #, kde-format
@@ -298,10 +292,9 @@ msgid "SASL"
 msgstr "SASL"
 
 #: widgets/ldapconfigwidget.cpp:251
-#, fuzzy, kde-format
-#| msgid "Authentication"
+#, kde-format
 msgid "Authentication:"
-msgstr "Fíordheimhniú"
+msgstr ""
 
 #: widgets/ldapconfigwidget.cpp:269
 #, kde-format
@@ -315,41 +308,13 @@ msgid "Check server"
 msgstr ""
 
 #: widgets/ldapconfigwidget.cpp:319
-#, fuzzy, kde-format
-#| msgid "LDAP Query"
+#, kde-format
 msgctxt "@title:window"
 msgid "LDAP Query"
-msgstr "Iarratas LDAP"
+msgstr ""
 
 #: widgets/ldapconfigwidget.cpp:333
 #, kde-format
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
 msgstr ""
-
-#, fuzzy
-#~| msgid "LDAP version:"
-#~ msgid "LDAP Servers"
-#~ msgstr "Leagan LDAP:"
-
-#~ msgid "Attribute"
-#~ msgstr "Aitreabúid"
-
-#~ msgid "Value"
-#~ msgstr "Luach"
-
-# acronym above
-#~ msgid "Distinguished Name"
-#~ msgstr "Ainm Aitheanta"
-
-#~ msgid ""
-#~ "SASL support is not available. Please recompile libkldap with the Cyrus-"
-#~ "SASL (or compatible) client libraries, or complain to your distribution "
-#~ "packagers."
-#~ msgstr ""
-#~ "Níl tacaíocht SASL ar fáil. Ba chóir duit libkldap a thiomsú arís leis na "
-#~ "leabharlanna cliaint Cyrus-SASL (nó ceann comhoiriúnach), nó gearán a "
-#~ "dhéanamh le pacáisteoirí do dháileadh."
-
-#~ msgid "LDAP Operations error"
-#~ msgstr "Earráid oibríochta LDAP"
