@@ -98,7 +98,6 @@ include(ECMDeprecationSettings)
 include(ECMFeatureSummary)
 include(ECMGenerateQDoc)
 include(ECMCheckOutboundLicense)
-set(KLDAP_LIB_VERSION ${PIM_VERSION})
 
 find_package(KF6KIO ${KF_MIN_VERSION} CONFIG REQUIRED)
 find_package(KF6I18n ${KF_MIN_VERSION} CONFIG REQUIRED)
