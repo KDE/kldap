@@ -93,6 +93,7 @@ Ber &Ber::operator=(const Ber &that)
 
     struct berval *bv;
     if (ber_flatten(that.d->mBer, &bv) == 0) {
+        ber_free(d->mBer, 1);
         d->mBer = ber_init(bv);
         ber_bvfree(bv);
     }
