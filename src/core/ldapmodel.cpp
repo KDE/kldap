@@ -146,8 +146,8 @@ bool LdapModel::setData(const QModelIndex &modelIndex, const QVariant &value, in
         case Name: {
             const QModelIndex newIndex = index(modelIndex.row(), Name);
             auto &serverInfo = mLdapServerInfo[idx];
-            Q_EMIT dataChanged(newIndex, newIndex);
             serverInfo.enabled = value.toBool();
+            Q_EMIT dataChanged(newIndex, newIndex);
             return true;
         }
         default:
@@ -155,15 +155,15 @@ bool LdapModel::setData(const QModelIndex &modelIndex, const QVariant &value, in
         }
     }
     if (role != Qt::EditRole) {
-        return {};
+        return false;
     }
     const int idx = modelIndex.row();
     auto &serverInfo = mLdapServerInfo[idx];
     switch (static_cast<LdapRoles>(modelIndex.column())) {
     case Server: {
         const QModelIndex newIndex = index(modelIndex.row(), Server);
-        Q_EMIT dataChanged(newIndex, newIndex);
         serverInfo.server = value.value<KLDAPCore::LdapServer>();
+        Q_EMIT dataChanged(newIndex, newIndex);
         return true;
     }
     case Index: {
@@ -212,7 +212,7 @@ void LdapModel::removeServer(int index)
 
 void LdapModel::insertServer(const KLDAPCore::LdapServer &server)
 {
-    beginInsertRows(QModelIndex(), mLdapServerInfo.count() - 1, mLdapServerInfo.count() - 1);
+    beginInsertRows(QModelIndex(), mLdapServerInfo.count(), mLdapServerInfo.count());
     mLdapServerInfo.append({true, 0, server});
     endInsertRows();
 }
