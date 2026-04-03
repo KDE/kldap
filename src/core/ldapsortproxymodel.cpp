@@ -33,10 +33,8 @@ bool LdapSortProxyModel::lessThan(const QModelIndex &source_left, const QModelIn
         const int left = sourceModel()->index(source_left.row(), LdapModel::Index).data().toInt();
         const int right = sourceModel()->index(source_right.row(), LdapModel::Index).data().toInt();
         return left < right;
-    } else {
-        return false;
     }
-    return true;
+    return false;
 }
 
 LdapActivitiesAbstract *LdapSortProxyModel::ldapActivitiesAbstract() const
