@@ -583,8 +583,8 @@ static void addControlOp(LDAPControl ***pctrls, const QString &oid, const QByteA
         while (ctrls[i] != nullptr) {
             i++;
         }
-        ctrls[i + 1] = nullptr;
         ctrls = (LDAPControl **)realloc(ctrls, (i + 2) * sizeof(LDAPControl *));
+        ctrls[i + 1] = nullptr;
     }
     ctrls[i] = ctrl;
     *pctrls = ctrls;
