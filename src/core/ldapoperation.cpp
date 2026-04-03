@@ -211,8 +211,9 @@ static int kldap_sasl_interact(sasl_interact_t *interact, LdapOperation::SASL_Da
             interact->result = nullptr;
             interact->len = 0;
         } else {
-            interact->result = strdup(value.toUtf8().constData());
-            interact->len = strlen((const char *)interact->result);
+            const QByteArray utf8 = value.toUtf8();
+            interact->result = utf8.constData();
+            interact->len = utf8.size();
         }
         interact++;
     }
