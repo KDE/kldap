@@ -96,6 +96,7 @@ void LdapOperation::setConnection(LdapConnection &conn)
 
 LdapConnection &LdapOperation::connection()
 {
+    Q_ASSERT(d->mConnection);
     return *d->mConnection;
 }
 
