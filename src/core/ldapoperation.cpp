@@ -186,35 +186,34 @@ static int kldap_sasl_interact(sasl_interact_t *interact, LdapOperation::SASL_Da
         }
     }
 
-    QString value;
 
+    QByteArray *value = nullptr;
     while (interact->id != SASL_CB_LIST_END) {
-        value.clear();
+        value = nullptr;
         switch (interact->id) {
         case SASL_CB_GETREALM:
-            value = data->creds.realm;
+            value = &data->creds.realm;
             qCDebug(LDAP_CORE_LOG) << "SASL_REALM=" << value;
             break;
         case SASL_CB_AUTHNAME:
-            value = data->creds.authname;
+            value = &data->creds.authname;
             qCDebug(LDAP_CORE_LOG) << "SASL_AUTHNAME=" << value;
             break;
         case SASL_CB_PASS:
-            value = data->creds.password;
+            value = &data->creds.password;
             qCDebug(LDAP_CORE_LOG) << "SASL_PASSWD=[hidden]";
             break;
         case SASL_CB_USER:
-            value = data->creds.authzid;
+            value = &data->creds.authzid;
             qCDebug(LDAP_CORE_LOG) << "SASL_AUTHZID=" << value;
             break;
         }
-        if (value.isEmpty()) {
+        if (value == nullptr || value->isEmpty()) {
             interact->result = nullptr;
             interact->len = 0;
         } else {
-            const QByteArray utf8 = value.toUtf8();
-            interact->result = utf8.constData();
-            interact->len = utf8.size();
+            interact->result = value->constData();
+            interact->len = value->size();
         }
         interact++;
     }
@@ -251,10 +250,10 @@ int LdapOperation::LdapOperationPrivate::bind(const QByteArray &creds, SASL_Call
         sasldata.proc = saslproc;
         sasldata.data = data;
         sasldata.creds.fields = 0;
-        sasldata.creds.realm = server.realm();
-        sasldata.creds.authname = server.user();
-        sasldata.creds.authzid = server.bindDn();
-        sasldata.creds.password = server.password();
+        sasldata.creds.realm = server.realm().toUtf8();
+        sasldata.creds.authname = server.user().toUtf8();
+        sasldata.creds.authzid = server.bindDn().toUtf8();
+        sasldata.creds.password = server.password().toUtf8();
 
         do {
             if (sdata.isEmpty()) {
