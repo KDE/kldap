@@ -68,10 +68,10 @@ public:
 
     struct SASL_Credentials {
         int fields;
-        QString authname;
-        QString authzid;
-        QString realm;
-        QString password;
+        QByteArray authname;
+        QByteArray authzid;
+        QByteArray realm;
+        QByteArray password;
     };
 
     using SASL_Callback_Proc = int(SASL_Credentials &, void *);
