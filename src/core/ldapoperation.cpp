@@ -633,7 +633,7 @@ int LdapOperation::search(const LdapDN &base, LdapUrl::Scope scope, const QStrin
     LDAPControl **serverctrls = nullptr;
     LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
-    createControls(&serverctrls, d->mClientCtrls);
+    createControls(&clientctrls, d->mClientCtrls);
 
     int count = attributes.count();
     if (count > 0) {
@@ -698,7 +698,7 @@ int LdapOperation::add(const LdapObject &object)
     LDAPControl **serverctrls = nullptr;
     LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
-    createControls(&serverctrls, d->mClientCtrls);
+    createControls(&clientctrls, d->mClientCtrls);
 
     for (LdapAttrMap::ConstIterator it = object.attributes().begin(); it != object.attributes().end(); ++it) {
         QString attr = it.key();
@@ -728,7 +728,7 @@ int LdapOperation::add_s(const LdapObject &object)
     LDAPControl **serverctrls = nullptr;
     LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
-    createControls(&serverctrls, d->mClientCtrls);
+    createControls(&clientctrls, d->mClientCtrls);
 
     for (LdapAttrMap::ConstIterator it = object.attributes().begin(); it != object.attributes().end(); ++it) {
         QString attr = it.key();
@@ -756,7 +756,7 @@ int LdapOperation::add(const LdapDN &dn, const ModOps &ops)
     LDAPControl **serverctrls = nullptr;
     LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
-    createControls(&serverctrls, d->mClientCtrls);
+    createControls(&clientctrls, d->mClientCtrls);
 
     for (int i = 0; i < ops.count(); ++i) {
         for (int j = 0; j < ops[i].values.count(); ++j) {
@@ -785,7 +785,7 @@ int LdapOperation::add_s(const LdapDN &dn, const ModOps &ops)
     LDAPControl **serverctrls = nullptr;
     LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
-    createControls(&serverctrls, d->mClientCtrls);
+    createControls(&clientctrls, d->mClientCtrls);
 
     for (int i = 0; i < ops.count(); ++i) {
         for (int j = 0; j < ops[i].values.count(); ++j) {
@@ -811,7 +811,7 @@ int LdapOperation::rename(const LdapDN &dn, const QString &newRdn, const QString
     LDAPControl **serverctrls = nullptr;
     LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
-    createControls(&serverctrls, d->mClientCtrls);
+    createControls(&clientctrls, d->mClientCtrls);
 
     int retval = ldap_rename(ld,
                              dn.toString().toUtf8().data(),
@@ -839,7 +839,7 @@ int LdapOperation::rename_s(const LdapDN &dn, const QString &newRdn, const QStri
     LDAPControl **serverctrls = nullptr;
     LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
-    createControls(&serverctrls, d->mClientCtrls);
+    createControls(&clientctrls, d->mClientCtrls);
 
     int retval = ldap_rename_s(ld,
                                dn.toString().toUtf8().data(),
@@ -865,7 +865,7 @@ int LdapOperation::del(const LdapDN &dn)
     LDAPControl **serverctrls = nullptr;
     LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
-    createControls(&serverctrls, d->mClientCtrls);
+    createControls(&clientctrls, d->mClientCtrls);
 
     int retval = ldap_delete_ext(ld, dn.toString().toUtf8().data(), serverctrls, clientctrls, &msgid);
 
@@ -886,7 +886,7 @@ int LdapOperation::del_s(const LdapDN &dn)
     LDAPControl **serverctrls = nullptr;
     LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
-    createControls(&serverctrls, d->mClientCtrls);
+    createControls(&clientctrls, d->mClientCtrls);
 
     int retval = ldap_delete_ext_s(ld, dn.toString().toUtf8().data(), serverctrls, clientctrls);
 
@@ -907,7 +907,7 @@ int LdapOperation::modify(const LdapDN &dn, const ModOps &ops)
     LDAPControl **serverctrls = nullptr;
     LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
-    createControls(&serverctrls, d->mClientCtrls);
+    createControls(&clientctrls, d->mClientCtrls);
 
     for (int i = 0; i < ops.count(); ++i) {
         int mtype = 0;
@@ -952,7 +952,7 @@ int LdapOperation::modify_s(const LdapDN &dn, const ModOps &ops)
     LDAPControl **serverctrls = nullptr;
     LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
-    createControls(&serverctrls, d->mClientCtrls);
+    createControls(&clientctrls, d->mClientCtrls);
 
     for (int i = 0; i < ops.count(); ++i) {
         int mtype = 0;
@@ -993,7 +993,7 @@ int LdapOperation::compare(const LdapDN &dn, const QString &attr, const QByteArr
     LDAPControl **serverctrls = nullptr;
     LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
-    createControls(&serverctrls, d->mClientCtrls);
+    createControls(&clientctrls, d->mClientCtrls);
 
     int vallen = value.size();
     BerValue *berval;
@@ -1022,7 +1022,7 @@ int LdapOperation::compare_s(const LdapDN &dn, const QString &attr, const QByteA
     LDAPControl **serverctrls = nullptr;
     LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
-    createControls(&serverctrls, d->mClientCtrls);
+    createControls(&clientctrls, d->mClientCtrls);
 
     int vallen = value.size();
     BerValue *berval;
@@ -1050,7 +1050,7 @@ int LdapOperation::exop(const QString &oid, const QByteArray &data)
     LDAPControl **serverctrls = nullptr;
     LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
-    createControls(&serverctrls, d->mClientCtrls);
+    createControls(&clientctrls, d->mClientCtrls);
 
     int vallen = data.size();
     BerValue *berval;
@@ -1086,7 +1086,7 @@ int LdapOperation::exop_s(const QString &oid, const QByteArray &data)
     LDAPControl **serverctrls = nullptr;
     LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
-    createControls(&serverctrls, d->mClientCtrls);
+    createControls(&clientctrls, d->mClientCtrls);
 
     int vallen = data.size();
     BerValue *berval;
@@ -1118,7 +1118,7 @@ int LdapOperation::abandon(int id)
     LDAPControl **serverctrls = nullptr;
     LDAPControl **clientctrls = nullptr;
     createControls(&serverctrls, d->mServerCtrls);
-    createControls(&serverctrls, d->mClientCtrls);
+    createControls(&clientctrls, d->mClientCtrls);
 
     int retval = ldap_abandon_ext(ld, id, serverctrls, clientctrls);
 
