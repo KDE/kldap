@@ -7,13 +7,13 @@
 # Görkem Çetin <gorkem@kde.org>, 2004.
 # obsoleteman <tulliana@gmail.com>, 2008.
 # Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
-# Emir SARI <emir_sari@icloud.com>, 2023.
+# SPDX-FileCopyrightText: 2023, 2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdepimlibs-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:52+0000\n"
-"PO-Revision-Date: 2023-03-07 20:36+0300\n"
+"PO-Revision-Date: 2026-05-02 19:04+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.12.3\n"
 "(http: //www.transifex.com/projects/p/kdepimlibs-k-tr/language/tr/)\n"
 
 #: kio_ldap.cpp:88
@@ -39,18 +39,18 @@ msgid ""
 "LDAP server returned the error: %1 %2\n"
 "The LDAP URL was: %3"
 msgstr ""
-"LDAP sunucusu hatası döndürdü :%1 %2\n"
-"LDAP URL'si şöyleydi: %3"
+"LDAP sunucusu şu hatayı döndürdü: %1 %2\n"
+"LDAP URL’si şu idi: %3"
 
 #: kio_ldap.cpp:294
 #, kde-format
 msgid "LDAP Login"
-msgstr "LDAP Oturumu Açma"
+msgstr "LDAP Oturumu Aç"
 
 #: kio_ldap.cpp:296
 #, kde-format
 msgid "site:"
-msgstr "site:"
+msgstr "Site:"
 
 #: kio_ldap.cpp:321
 #, kde-format
@@ -70,4 +70,4 @@ msgstr "Ldif ayrıştırıcı başarısız oldu."
 #: kio_ldap.cpp:662
 #, kde-format
 msgid "Invalid Ldif file in line %1."
-msgstr "%1 satırında geçersiz Ldif dosyası."
+msgstr "%1. satırda geçersiz Ldif dosyası."
