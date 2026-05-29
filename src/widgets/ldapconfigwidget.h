@@ -11,9 +11,9 @@
 #include <QWidget>
 
 #include "kldapwidgets_export.h"
-#include "ldapdn.h"
-#include "ldapserver.h"
-#include "ldapurl.h"
+#include <KLDAPCore/LdapDN>
+#include <KLDAPCore/LdapServer>
+#include <KLDAPCore/LdapUrl>
 
 namespace KLDAPWidgets
 {
