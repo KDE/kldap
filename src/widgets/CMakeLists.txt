@@ -51,8 +51,8 @@ target_link_libraries(
     KPim6LdapWidgets
     PUBLIC
         KPim6::LdapCore
-    PRIVATE
         Qt::Widgets
+    PRIVATE
         KF6::I18n
         KF6::WidgetsAddons
         KF6::ConfigCore

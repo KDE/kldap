@@ -136,9 +136,11 @@ generate_export_header(KPim6LdapCore BASE_NAME kldap_core)
 
 target_link_libraries(
     KPim6LdapCore
+    PUBLIC
+        Qt::Core
+        KF6::ConfigCore
     PRIVATE
         KF6::I18n
-        KF6::ConfigCore
         KF6::CoreAddons
         KF6::KIOCore
         ${kldap_EXTRA_LIBS}
