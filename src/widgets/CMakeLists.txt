@@ -148,4 +148,16 @@ install(
     DESTINATION "${CMAKECONFIG_INSTALL_DIR}"
     COMPONENT Devel
 )
+
+ecm_add_installed_library_check(KPim6LdapWidgets
+    PACKAGE_NAME "KPim6LdapWidgets"
+    PACKAGE_VERSION ${PROJECT_VERSION}
+    PACKAGE_TARGET_NAMESPACE "KPim6::"
+)
+
+ecm_installed_library_check_include_strings(KPim6LdapWidgets
+    HEADERS  ${KLdapWidgets_CamelCase_HEADERS}
+    PREFIX KLDAPWidgets
+)
+
 ecm_generate_qdoc(KPim6LdapWidgets kldap-widgets.qdocconf)

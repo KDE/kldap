@@ -241,6 +241,17 @@ install(
     COMPONENT Devel
 )
 
+ecm_add_installed_library_check(KPim6LdapCore
+    PACKAGE_NAME "KPim6LdapCore"
+    PACKAGE_VERSION ${PROJECT_VERSION}
+    PACKAGE_TARGET_NAMESPACE "KPim6::"
+)
+
+ecm_installed_library_check_include_strings(KPim6LdapCore
+    HEADERS  ${KLdapCore_CamelCase_HEADERS}
+    PREFIX KLDAPCore
+)
+
 if(BUILD_TESTING)
     add_subdirectory(autotests)
 endif()

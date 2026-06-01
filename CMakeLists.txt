@@ -11,7 +11,7 @@ set(KF_MIN_VERSION "6.26.0")
 set(QT6KEYCHAIN_LIB_VERSION "0.15.0")
 find_package(ECM ${KF_MIN_VERSION} CONFIG REQUIRED)
 set(CMAKE_MODULE_PATH
-    ${KLdap_SOURCE_DIR}/cmake
+    ${CMAKE_CURRENT_SOURCE_DIR}/cmake/ecmcopy
     ${ECM_MODULE_PATH}
 )
 
@@ -19,6 +19,7 @@ include(KDEInstallDirs)
 include(KDECMakeSettings)
 include(KDECompilerSettings NO_POLICY_SCOPE)
 
+include(ECMInstalledLibraryCheck)
 include(GenerateExportHeader)
 include(ECMGenerateHeaders)
 
