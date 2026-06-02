@@ -8,14 +8,15 @@ msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:52+0000\n"
-"PO-Revision-Date: 2013-09-08 07:05+0900\n"
-"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+"PO-Revision-Date: 2026-05-31 18:54-0400\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.9\n"
 
 #: core/ldapconnection.cpp:126
 #, kde-format
@@ -91,21 +92,20 @@ msgid "Cannot access to server. Please reconfigure it."
 msgstr ""
 
 #: widgets/addhostdialog.cpp:75
-#, fuzzy, kde-format
-#| msgid "Host:"
+#, kde-format
 msgctxt "@title:window"
 msgid "Add Host"
-msgstr "كومپيۇتېر:"
+msgstr ""
 
 #: widgets/addhostdialog.cpp:94
 #, kde-format
 msgid "Configure"
-msgstr ""
+msgstr "سەپلە"
 
 #: widgets/addhostdialog.cpp:103
 #, kde-format
 msgid "Activities"
-msgstr ""
+msgstr "پائالىيەت"
 
 #: widgets/ldapconfigurewidgetng.cpp:38
 #, kde-format
@@ -136,18 +136,16 @@ msgid "Check all servers that should be used:"
 msgstr ""
 
 #: widgets/ldapconfigurewidgetng.cpp:260
-#, fuzzy, kde-format
-#| msgid "Host:"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
-msgstr "كومپيۇتېر:"
+msgstr ""
 
 #: widgets/ldapconfigurewidgetng.cpp:262
-#, fuzzy, kde-format
-#| msgid "Host:"
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
-msgstr "كومپيۇتېر:"
+msgstr ""
 
 #: widgets/ldapconfigurewidgetng.cpp:265
 #, kde-format
@@ -178,7 +176,7 @@ msgstr "ئىم:"
 #: widgets/ldapconfigwidget.cpp:127
 #, kde-format
 msgid "Host:"
-msgstr "كومپيۇتېر:"
+msgstr "مۇلازىمېتىر:"
 
 #: widgets/ldapconfigwidget.cpp:136
 #, kde-format
@@ -263,10 +261,9 @@ msgid "SSL"
 msgstr "SSL"
 
 #: widgets/ldapconfigwidget.cpp:232
-#, fuzzy, kde-format
-#| msgid "Security"
+#, kde-format
 msgid "Security:"
-msgstr "بىخەتەرلىك"
+msgstr "بىخەتەرلىك:"
 
 #: widgets/ldapconfigwidget.cpp:242
 #, kde-format
@@ -287,10 +284,9 @@ msgid "SASL"
 msgstr ""
 
 #: widgets/ldapconfigwidget.cpp:251
-#, fuzzy, kde-format
-#| msgid "Authentication"
+#, kde-format
 msgid "Authentication:"
-msgstr "كىملىك دەلىللەش"
+msgstr "كىملىك دەلىللەش:"
 
 #: widgets/ldapconfigwidget.cpp:269
 #, kde-format
