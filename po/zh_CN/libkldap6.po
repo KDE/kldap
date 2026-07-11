@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/kldap/libkldap6.pot\n"
-"X-Crowdin-File-ID: 48978\n"
+"X-Crowdin-File: /kf6-stable/messages/kldap/libkldap6.pot\n"
+"X-Crowdin-File-ID: 52804\n"
 
 #: core/ldapconnection.cpp:126
 #, kde-format
