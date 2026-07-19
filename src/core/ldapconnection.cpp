@@ -16,6 +16,7 @@ using namespace Qt::Literals::StringLiterals;
 #include <cstdlib>
 
 #include <sasl/sasl.h>
+#if LDAP_FOUND
 static const sasl_callback_t callbacks[] = {{SASL_CB_ECHOPROMPT, nullptr, nullptr},
                                             {SASL_CB_NOECHOPROMPT, nullptr, nullptr},
                                             {SASL_CB_GETREALM, nullptr, nullptr},
@@ -24,7 +25,7 @@ static const sasl_callback_t callbacks[] = {{SASL_CB_ECHOPROMPT, nullptr, nullpt
                                             {SASL_CB_PASS, nullptr, nullptr},
                                             {SASL_CB_CANON_USER, nullptr, nullptr},
                                             {SASL_CB_LIST_END, nullptr, nullptr}};
-
+#endif
 static bool ldapoperation_sasl_initialized = false;
 
 #if LDAP_FOUND
