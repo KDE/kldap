@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:52+0000\n"
+"POT-Creation-Date: 2026-07-20 00:44+0000\n"
 "PO-Revision-Date: 2024-12-20 21:52+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -19,69 +19,69 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n>2);\n"
 "X-Generator: Lokalize 24.08.2\n"
 
-#: core/ldapconnection.cpp:126
+#: core/ldapconnection.cpp:127
 #, kde-format
 msgid "No LDAP Support..."
 msgstr "LDAP समर्थनं नास्ति..."
 
-#: core/ldapconnection.cpp:243
+#: core/ldapconnection.cpp:244
 #, kde-format
 msgid "An error occurred during the connection initialization phase."
 msgstr "संयोजनप्रारम्भचरणस्य समये त्रुटिः अभवत् ।"
 
-#: core/ldapconnection.cpp:250
+#: core/ldapconnection.cpp:251
 #, kde-format
 msgid "Cannot set protocol version to %1."
 msgstr "प्रोटोकॉलसंस्करणं %1 इति सेट् कर्तुं न शक्यते ।"
 
-#: core/ldapconnection.cpp:261
+#: core/ldapconnection.cpp:262
 #, kde-format
 msgid "Cannot set timeout to %1 second."
 msgid_plural "Cannot set timeout to %1 seconds."
 msgstr[0] "%1 सेकण्ड् इति समयसमाप्तिः सेट् कर्तुं न शक्यते ।"
 msgstr[1] "%1 सेकण्ड् इति समयसमाप्तिः सेट् कर्तुं न शक्यते ।"
 
-#: core/ldapconnection.cpp:273
+#: core/ldapconnection.cpp:274
 #, kde-format
 msgid "Could not set CA certificate file."
 msgstr "CA प्रमाणपत्रसञ्चिकां सेट् कर्तुं न शक्तवान् ।"
 
-#: core/ldapconnection.cpp:298
+#: core/ldapconnection.cpp:299
 #, kde-format
 msgid "Invalid TLS require certificate mode."
 msgstr "अमान्य TLS प्रमाणपत्रविधानस्य आवश्यकता भवति ।"
 
-#: core/ldapconnection.cpp:303
+#: core/ldapconnection.cpp:304
 #, kde-format
 msgid "Could not set TLS require certificate mode."
 msgstr "TLS इत्यस्य प्रमाणपत्रविधानस्य आवश्यकता सेट् कर्तुं न शक्तम् ।"
 
-#: core/ldapconnection.cpp:312
+#: core/ldapconnection.cpp:313
 #, kde-format
 msgid "Could not initialize new TLS context."
 msgstr "नूतनं TLS सन्दर्भं आरभुं न शक्तवान् ।"
 
-#: core/ldapconnection.cpp:329
+#: core/ldapconnection.cpp:330
 #, kde-format
 msgid "TLS support not available in the LDAP client libraries."
 msgstr "LDAP क्लायन्ट् पुस्तकालयेषु TLS समर्थनं उपलब्धं नास्ति ।"
 
-#: core/ldapconnection.cpp:339
+#: core/ldapconnection.cpp:340
 #, kde-format
 msgid "Cannot set size limit."
 msgstr "आकारसीमा निर्धारयितुं न शक्यते।"
 
-#: core/ldapconnection.cpp:349
+#: core/ldapconnection.cpp:350
 #, kde-format
 msgid "Cannot set time limit."
 msgstr "समयसीमा निर्धारयितुं न शक्यते।"
 
-#: core/ldapconnection.cpp:357
+#: core/ldapconnection.cpp:358
 #, kde-format
 msgid "Cannot initialize the SASL client."
 msgstr "SASL क्लायन्ट् प्रारम्भं कर्तुं न शक्यते ।"
 
-#: core/ldapconnection.cpp:434
+#: core/ldapconnection.cpp:435
 #, kde-format
 msgid ""
 "LDAP support not compiled in. Please recompile libkldap with the OpenLDAP "
