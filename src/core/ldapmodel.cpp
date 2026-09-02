@@ -30,10 +30,10 @@ void LdapModel::init()
     for (int i = 0; i < countSelectedHost; ++i) {
         auto job = new KLDAPCore::LdapClientSearchConfigReadConfigJob(this);
         connect(job, &KLDAPCore::LdapClientSearchConfigReadConfigJob::configLoaded, this, [this, i](const KLDAPCore::LdapServer &server) {
+            const int count = mLdapServerInfo.count();
+            beginInsertRows(QModelIndex(), count, count);
             mLdapServerInfo.append({true, i, server});
-            // TODO improve it
-            beginResetModel();
-            endResetModel();
+            endInsertRows();
         });
         job->setActive(true);
         job->setConfig(group);
@@ -45,10 +45,10 @@ void LdapModel::init()
     for (int i = 0; i < countUnselectedHost; ++i) {
         auto job = new KLDAPCore::LdapClientSearchConfigReadConfigJob(this);
         connect(job, &KLDAPCore::LdapClientSearchConfigReadConfigJob::configLoaded, this, [this, i, countSelectedHost](const KLDAPCore::LdapServer &server) {
+            const int count = mLdapServerInfo.count();
+            beginInsertRows(QModelIndex(), count, count);
             mLdapServerInfo.append({false, i + countSelectedHost, server});
-            // TODO improve it
-            beginResetModel();
-            endResetModel();
+            endInsertRows();
         });
         job->setActive(false);
         job->setConfig(group);
@@ -59,7 +59,9 @@ void LdapModel::init()
 
 void LdapModel::load()
 {
+    beginResetModel();
     mLdapServerInfo.clear();
+    endResetModel();
     init();
 }
 
@@ -104,7 +106,9 @@ QList<LdapModel::ServerInfo> LdapModel::ldapServerInfo() const
 
 void LdapModel::setLdapServerInfo(const QList<ServerInfo> &newLdapServerInfo)
 {
+    beginResetModel();
     mLdapServerInfo = newLdapServerInfo;
+    endResetModel();
 }
 
 QVariant LdapModel::data(const QModelIndex &index, int role) const
