@@ -41,7 +41,12 @@ public:
     {
     }
 
-    ~LdapClientSearchPrivate() = default;
+    ~LdapClientSearchPrivate()
+    {
+        if (!mConfigFile.isEmpty()) {
+            KDirWatch::self()->removeFile(mConfigFile);
+        }
+    }
 
     void readWeighForClient(KLDAPCore::LdapClient *client, const KConfigGroup &config, int clientNumber);
     void readConfig();
@@ -96,6 +101,9 @@ void LdapClientSearch::LdapClientSearchPrivate::init(const QStringList &attribut
     mFilter = QStringLiteral(
         "&(|(objectclass=person)(objectclass=groupOfNames)(mail=*))"
         "(|(cn=%1*)(mail=%1*)(givenName=%1*)(sn=%1*))");
+
+    mConfigFile = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + u"/kabldaprc"_s;
+    KDirWatch::self()->addFile(mConfigFile);
 
     readConfig();
     q->connect(KDirWatch::self(), &KDirWatch::dirty, q, [this](const QString &filename) {
@@ -158,7 +166,6 @@ void LdapClientSearch::LdapClientSearchPrivate::readConfig()
     q->cancelSearch();
     qDeleteAll(mClients);
     mClients.clear();
-
     // stolen from KAddressBook
     KConfigGroup config(KLDAPCore::LdapClientSearchConfig::config(), u"LDAP"_s);
     const int numHosts = config.readEntry("NumSelectedHosts", 0);
@@ -196,8 +203,6 @@ void LdapClientSearch::LdapClientSearchPrivate::readConfig()
             slotDataTimer();
         });
     }
-    mConfigFile = QStandardPaths::writableLocation(QStandardPaths::ConfigLocation) + u"/kabldaprc"_s;
-    KDirWatch::self()->addFile(mConfigFile);
 }
 
 void LdapClientSearch::LdapClientSearchPrivate::slotFileChanged(const QString &file)
