@@ -494,7 +494,8 @@ static void addModOp(LDAPMod ***pmods, int mod_type, const QString &attr, const 
         mods[1] = nullptr;
         memset(mods[0], 0, sizeof(LDAPMod));
     } else {
-        while (mods[i] != nullptr && (strcmp(attr.toUtf8().constData(), mods[i]->mod_type) != 0 || (mods[i]->mod_op & ~LDAP_MOD_BVALUES) != mod_type)) {
+        const QByteArray attrUtf8 = attr.toUtf8();
+        while (mods[i] != nullptr && (strcmp(attrUtf8.constData(), mods[i]->mod_type) != 0 || (mods[i]->mod_op & ~LDAP_MOD_BVALUES) != mod_type)) {
             i++;
         }
 

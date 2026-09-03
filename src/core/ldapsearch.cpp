@@ -153,7 +153,7 @@ void LdapSearchPrivate::result()
 
     // If not reached the requested entries, continue
     if (mMaxCount <= 0 || mCount < mMaxCount) {
-        QTimer::singleShot(0, mParent, [this]() {
+        QTimer::singleShot(300, mParent, [this]() {
             result();
         });
     }

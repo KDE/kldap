@@ -111,19 +111,21 @@ void LdapObject::addValue(const QString &attributeName, const QByteArray &value)
 
 LdapAttrValue LdapObject::values(const QString &attributeName) const
 {
-    if (hasAttribute(attributeName)) {
-        return d->mAttrs.value(attributeName);
-    } else {
+    const auto value = d->mAttrs.constFind(attributeName);
+    if (value == d->mAttrs.constEnd()) {
         return {};
+    } else {
+        return *value;
     }
 }
 
 QByteArray LdapObject::value(const QString &attributeName) const
 {
-    if (hasAttribute(attributeName)) {
-        return d->mAttrs.value(attributeName).constFirst();
-    } else {
+    const auto value = d->mAttrs.constFind(attributeName);
+    if (value == d->mAttrs.constEnd() || value->isEmpty()) {
         return {};
+    } else {
+        return (*value).constFirst();
     }
 }
 
