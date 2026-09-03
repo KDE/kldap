@@ -116,7 +116,7 @@ QVariant LdapModel::data(const QModelIndex &index, int role) const
     if (!index.isValid()) {
         return {};
     }
-    const auto serverInfo = mLdapServerInfo[index.row()];
+    const auto &serverInfo = mLdapServerInfo[index.row()];
     if (role == Qt::CheckStateRole && static_cast<LdapRoles>(index.column()) == Name) {
         return serverInfo.enabled ? Qt::CheckState::Checked : Qt::CheckState::Unchecked;
     }
