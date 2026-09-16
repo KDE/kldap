@@ -30,7 +30,7 @@
 <para
 ><userinput
 >ldap://màquina:port/ou=Gent,o=on,c=de??sub</userinput
-> per a una petició subarbrada.</para>
+> per a una petició de subarbre.</para>
 
 <para
 >o <userinput
