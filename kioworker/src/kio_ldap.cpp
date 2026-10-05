@@ -6,7 +6,6 @@
 */
 
 #include "kio_ldap.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "kldap_debug.h"
 
@@ -24,6 +23,7 @@ using namespace Qt::Literals::StringLiterals;
 #endif
 #include <sys/stat.h>
 
+using namespace Qt::Literals::StringLiterals;
 using namespace KIO;
 using namespace KLDAPCore;
 

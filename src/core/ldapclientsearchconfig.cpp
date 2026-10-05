@@ -5,12 +5,12 @@
  */
 
 #include "ldapclientsearchconfig.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "kldapcore/ldapserver.h"
 
 #include <KConfig>
 #include <qt6keychain/keychain.h>
+using namespace Qt::Literals::StringLiterals;
 using namespace QKeychain;
 using namespace KLDAPCore;
 

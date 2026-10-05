@@ -6,10 +6,10 @@
 */
 
 #include "ldapserver.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "ldap_core_debug.h"
 
+using namespace Qt::Literals::StringLiterals;
 using namespace KLDAPCore;
 
 class Q_DECL_HIDDEN LdapServer::LdapServerPrivate

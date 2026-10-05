@@ -6,7 +6,6 @@
 */
 
 #include "ldapconnection.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "kldap_config.h" // LDAP_FOUND
 #include "ldapdefs.h"
@@ -16,6 +15,9 @@ using namespace Qt::Literals::StringLiterals;
 #include <cstdlib>
 
 #include <sasl/sasl.h>
+
+using namespace Qt::Literals::StringLiterals;
+
 #if LDAP_FOUND
 static const sasl_callback_t callbacks[] = {{SASL_CB_ECHOPROMPT, nullptr, nullptr},
                                             {SASL_CB_NOECHOPROMPT, nullptr, nullptr},

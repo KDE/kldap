@@ -6,7 +6,6 @@
 */
 
 #include "ldapconfigwidget.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "ldapsearch.h"
 
@@ -26,6 +25,7 @@ using namespace Qt::Literals::StringLiterals;
 #include <QRadioButton>
 #include <QSpinBox>
 
+using namespace Qt::Literals::StringLiterals;
 using namespace KLDAPWidgets;
 
 class Q_DECL_HIDDEN LdapConfigWidget::LdapConfigWidgetPrivate

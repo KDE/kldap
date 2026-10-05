@@ -6,12 +6,12 @@
 */
 
 #include "ldapcontrol.h"
-using namespace Qt::Literals::StringLiterals;
 
 #include "ber.h"
 
 #include <QSharedData>
 
+using namespace Qt::Literals::StringLiterals;
 using namespace KLDAPCore;
 
 class LdapControlPrivate : public QSharedData
