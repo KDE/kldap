@@ -16,7 +16,6 @@ class LdapSearchPrivate;
 #include "ldapconnection.h"
 #include "ldapcontrol.h"
 #include "ldapobject.h"
-#include "ldapoperation.h"
 #include "ldapserver.h"
 #include "ldapurl.h"
 

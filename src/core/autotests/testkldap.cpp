@@ -12,9 +12,7 @@
 #include "ldapconnection.h"
 #include "ldapdn.h"
 #include "ldapoperation.h"
-#include "ldapserver.h"
 #include "ldapurl.h"
-#include "ldif.h"
 
 #include <QDebug>
 #include <QFile>

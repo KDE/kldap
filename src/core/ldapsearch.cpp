@@ -8,6 +8,7 @@
 #include "ldapsearch.h"
 #include "ldapdefs.h"
 #include "ldapdn.h"
+#include "ldapoperation.h"
 
 #include <QTimer>
 
