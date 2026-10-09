@@ -105,7 +105,6 @@ include(FindPackageHandleStandardArgs)
 
 find_package_handle_standard_args(
     Ldap
-    FOUND_VAR Ldap_FOUND
     REQUIRED_VARS
         Ldap_LIBRARIES
         Ldap_INCLUDE_DIRS
