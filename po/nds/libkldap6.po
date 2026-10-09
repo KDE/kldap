@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-06 00:48+0000\n"
+"POT-Creation-Date: 2026-10-09 00:48+0000\n"
 "PO-Revision-Date: 2014-06-05 16:27+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -93,7 +93,7 @@ msgstr ""
 "de Client-Bibliotheken vun OpenLDAP (oder mit anner, kompatibel "
 "Bibliotheken), oder snack dor de Paketmakers vun Dien Distributschoon op an."
 
-#: core/ldapsearch.cpp:222
+#: core/ldapsearch.cpp:223
 #, kde-format
 msgid "Cannot access to server. Please reconfigure it."
 msgstr "Keen Togriep op Server. Bitte nieg instellen."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdepimlibs\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-06 00:48+0000\n"
+"POT-Creation-Date: 2026-10-09 00:48+0000\n"
 "PO-Revision-Date: 2012-09-03 15:44+0000\n"
 "Last-Translator: Launchpad Translations Administrators <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -94,7 +94,7 @@ msgstr ""
 "koristeći OpenLDAP (ili kompatibilnu) klijent biblioteku ili se obratite "
 "izdavaču distribucije."
 
-#: core/ldapsearch.cpp:222
+#: core/ldapsearch.cpp:223
 #, kde-format
 msgid "Cannot access to server. Please reconfigure it."
 msgstr "Ne mogu pristupiti serveru. Molimo  podesite."

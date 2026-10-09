@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-06 00:48+0000\n"
+"POT-Creation-Date: 2026-10-09 00:48+0000\n"
 "PO-Revision-Date: 2021-07-29 08:41+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -92,7 +92,7 @@ msgstr ""
 "Δεν υπάρχει υποστήριξη LDAP. Παρακαλώ κάντε compile το libkldap με τις "
 "βιβλιοθήκες OpenLDAP (ή συμβατές), ή ενημερώστε τη διανομή σας."
 
-#: core/ldapsearch.cpp:222
+#: core/ldapsearch.cpp:223
 #, kde-format
 msgid "Cannot access to server. Please reconfigure it."
 msgstr ""

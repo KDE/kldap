@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-06 00:48+0000\n"
+"POT-Creation-Date: 2026-10-09 00:48+0000\n"
 "PO-Revision-Date: 2007-04-15 19:05-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -92,7 +92,7 @@ msgstr ""
 "leabharlanna cliaint OpenLDAP (nó ceann comhoiriúnach), nó gearán a dhéanamh "
 "le pacáisteoirí do dháileadh."
 
-#: core/ldapsearch.cpp:222
+#: core/ldapsearch.cpp:223
 #, kde-format
 msgid "Cannot access to server. Please reconfigure it."
 msgstr "Ní féidir an freastalaí a rochtain. Cumraigh é arís."

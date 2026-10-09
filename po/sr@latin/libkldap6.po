@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-06 00:48+0000\n"
+"POT-Creation-Date: 2026-10-09 00:48+0000\n"
 "PO-Revision-Date: 2017-10-06 17:14+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -94,7 +94,7 @@ msgstr ""
 "bibliotekama OpenLDAP‑a (ili saglasnim), ili se požalite paketarima svoje "
 "distribucije."
 
-#: core/ldapsearch.cpp:222
+#: core/ldapsearch.cpp:223
 #, kde-format
 msgid "Cannot access to server. Please reconfigure it."
 msgstr "Ne mogu da pristupim serveru. Podesite ga ponovo."

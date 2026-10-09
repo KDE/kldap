@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-06 00:48+0000\n"
+"POT-Creation-Date: 2026-10-09 00:48+0000\n"
 "PO-Revision-Date: 2010-12-13 09:23+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -90,7 +90,7 @@ msgstr ""
 "ការ​គាំទ្រ LDAP មិន​បាន​ចងក្រង​នៅ ។ សូម​ចងក្រង​ libkldap ដោយ​បណ្ណាល័យ​ម៉ាស៊ីន​ភ្ញៀវ OpenLDAP (ឬ​"
 "ឆបគ្នា) ឬ​តវ៉ា​ទៅ​​អ្នកគ្រប់គ្រង​កញ្ចប់​ចែកចាយ​របស់​អ្នក ។"
 
-#: core/ldapsearch.cpp:222
+#: core/ldapsearch.cpp:223
 #, kde-format
 msgid "Cannot access to server. Please reconfigure it."
 msgstr "មិន​អាច​ចូលដំណើរការ​ទៅកាន់​ម៉ាស៊ីន​បម្រើ​បានទេ ។ សូម​កំណត់​រចនាសម្ព័ន្ធ​វា​ម្ដង​ទៀត ។"

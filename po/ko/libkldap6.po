@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-06 00:48+0000\n"
+"POT-Creation-Date: 2026-10-09 00:48+0000\n"
 "PO-Revision-Date: 2024-12-24 16:59+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -87,7 +87,7 @@ msgstr ""
 "LDAP 지원을 사용할 수 없습니다. libkldap을 OpenLDAP 및 호환되는 클라이언트 라"
 "이브러리와 같이 컴파일하거나, 배포판 패키지 관리자에게 문의하십시오."
 
-#: core/ldapsearch.cpp:222
+#: core/ldapsearch.cpp:223
 #, kde-format
 msgid "Cannot access to server. Please reconfigure it."
 msgstr "서버에 접근할 수 없습니다. 다시 설정하십시오."
