@@ -30,7 +30,7 @@ using namespace Qt::Literals::StringLiterals;
 using namespace KLDAPWidgets;
 namespace
 {
-static const char myAddHostDialogPrivateGroupName[] = "AddHostDialog";
+const char myAddHostDialogPrivateGroupName[] = "AddHostDialog";
 }
 class KLDAPWidgets::AddHostDialogPrivate
 {
