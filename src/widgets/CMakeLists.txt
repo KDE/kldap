@@ -19,8 +19,6 @@ target_sources(
         addhostdialog.h
         ldapconfigwidget.h
         ldapconfigurewidgetng.h
-        ldapconfigurewidgetng.cpp
-        ldapconfigurewidgetng.h
         ldapactivitiesabstractplugin.h
         ldapactivitiesabstractplugin.cpp
 )
