@@ -12,13 +12,13 @@ sourcedirs += .
 outputformats = HTML
 
 depends += \
-    qtcore kldapcore
+    qtcore ldapcore
 
-navigation.landingpage = "Ldap"
+navigation.landingpage = "LdapCore"
 
 qhp.projects            = LdapWidgets
 
-qhp.LdapWidgets.file                = kldapwidgets.qhp
+qhp.LdapWidgets.file                = ldapwidgets.qhp
 qhp.LdapWidgets.namespace           = org.kde.kldapwidgets.$QT_VERSION_TAG
 qhp.LdapWidgets.virtualFolder       = kldapwidgets
 qhp.LdapWidgets.indexTitle          = LdapWidgets
@@ -30,4 +30,4 @@ qhp.LdapWidgets.subprojects.classes.indexTitle = Ldap Widgets C++ Classes
 qhp.LdapWidgets.subprojects.classes.selectors = class fake:headerfile
 qhp.LdapWidgets.subprojects.classes.sortPages = true
 
-tagfile = kldapwidgets.tags
+tagfile = ldapwidgets.tags

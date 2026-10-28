@@ -255,4 +255,4 @@ ecm_installed_library_check_include_strings(KPim6LdapCore
 if(BUILD_TESTING)
     add_subdirectory(autotests)
 endif()
-ecm_generate_qdoc(KPim6LdapCore kldap-core.qdocconf)
+ecm_generate_qdoc(KPim6LdapCore ldapcore.qdocconf)

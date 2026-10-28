@@ -160,4 +160,4 @@ ecm_installed_library_check_include_strings(KPim6LdapWidgets
     PREFIX KLDAPWidgets
 )
 
-ecm_generate_qdoc(KPim6LdapWidgets kldap-widgets.qdocconf)
+ecm_generate_qdoc(KPim6LdapWidgets ldapwidgets.qdocconf)
