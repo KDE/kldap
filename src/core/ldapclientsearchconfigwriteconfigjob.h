@@ -9,10 +9,6 @@
 #include <KConfigGroup>
 #include <KLDAPCore/LdapServer>
 #include <QObject>
-namespace QKeychain
-{
-class Job;
-}
 namespace KLDAPCore
 {
 /*!

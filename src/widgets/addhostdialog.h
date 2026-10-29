@@ -10,6 +10,7 @@
 
 #include "kldapwidgets_export.h"
 #include <QDialog>
+#include <memory>
 
 namespace KLDAPCore
 {

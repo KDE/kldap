@@ -12,6 +12,7 @@
 #include <KLDAPCore/LdapObject>
 #include <QObject>
 #include <QStringList>
+#include <memory>
 
 namespace KLDAPCore
 {

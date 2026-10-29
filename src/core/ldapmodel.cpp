@@ -6,7 +6,6 @@
 
 #include "ldapmodel.h"
 #include "ldap_core_debug.h"
-#include "ldapserver.h"
 #include <KConfig>
 #include <KConfigGroup>
 #include <KLDAPCore/LdapClientSearchConfig>

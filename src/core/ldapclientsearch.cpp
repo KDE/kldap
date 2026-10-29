@@ -16,19 +16,14 @@
 
 #include "ldapclient.h"
 
-#include "kldapcore/ldapserver.h"
-#include "kldapcore/ldapurl.h"
-#include "kldapcore/ldif.h"
-
 #include <KConfig>
 #include <KConfigGroup>
 #include <KDirWatch>
 #include <KProtocolInfo>
 
-#include <KIO/Job>
-
 #include <QStandardPaths>
 #include <QTimer>
+#include <QUrl>
 
 using namespace KLDAPCore;
 using namespace Qt::Literals::StringLiterals;

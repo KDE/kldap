@@ -9,8 +9,6 @@
 #include "ldap_core_debug.h"
 
 #include "kldapcore/ldapdn.h"
-#include <KConfig>
-#include <KLocalizedString>
 #include <qt6keychain/keychain.h>
 using namespace QKeychain;
 using namespace Qt::Literals::StringLiterals;

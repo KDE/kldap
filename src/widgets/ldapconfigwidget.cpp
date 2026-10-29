@@ -20,7 +20,8 @@
 
 #include <QCheckBox>
 #include <QFormLayout>
-#include <QObject>
+#include <QHBoxLayout>
+#include <QLineEdit>
 #include <QPushButton>
 #include <QRadioButton>
 #include <QSpinBox>

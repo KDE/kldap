@@ -6,8 +6,6 @@
 
 #include "ldapclientsearchconfig.h"
 
-#include "kldapcore/ldapserver.h"
-
 #include <KConfig>
 using namespace Qt::Literals::StringLiterals;
 using namespace KLDAPCore;

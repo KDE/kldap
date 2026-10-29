@@ -14,7 +14,6 @@
 #include <QTreeView>
 #include <QVBoxLayout>
 
-#include <KConfig>
 #include <KLocalizedString>
 #include <KMessageBox>
 #include <QDialogButtonBox>

@@ -9,6 +9,7 @@
 
 #include <QObject>
 #include <QString>
+#include <memory>
 class LdapSearchPrivate;
 
 #include "kldap_core_export.h"

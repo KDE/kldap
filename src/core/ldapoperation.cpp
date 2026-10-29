@@ -13,6 +13,7 @@
 #include <QElapsedTimer>
 
 #include <cstdlib>
+#include <cstring>
 
 // for struct timeval
 #if HAVE_SYS_TIME_H
