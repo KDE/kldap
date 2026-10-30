@@ -180,13 +180,13 @@ void LdapUrl::updateQuery()
     q += u'?';
     switch (d->m_scope) {
     case Sub:
-        q += u"sub"_s;
+        q += u"sub";
         break;
     case One:
-        q += u"one"_s;
+        q += u"one";
         break;
     case Base:
-        q += u"base"_s;
+        q += u"base";
         break;
     }
 
