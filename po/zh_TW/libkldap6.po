@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-09 00:48+0000\n"
+"POT-Creation-Date: 2026-10-30 00:54+0000\n"
 "PO-Revision-Date: 2024-12-29 01:55+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -91,7 +91,7 @@ msgstr ""
 "未將 LDAP 支援編譯進來。請重新編譯 libkldap，加入 OpenLDAP 或相容的用戶端函式"
 "庫，或是向您的散布版打包者反應。"
 
-#: core/ldapsearch.cpp:223
+#: core/ldapsearch.cpp:222
 #, kde-format
 msgid "Cannot access to server. Please reconfigure it."
 msgstr "無法存取伺服器。請重新設定。"
@@ -112,205 +112,205 @@ msgstr "設定"
 msgid "Activities"
 msgstr "活動"
 
-#: widgets/ldapconfigurewidgetng.cpp:38
+#: widgets/ldapconfigurewidgetng.cpp:37
 #, kde-format
 msgid "Show only ldap servers on current activity"
 msgstr "只顯示目前活動裡的 LDAP 伺服器"
 
-#: widgets/ldapconfigurewidgetng.cpp:121
+#: widgets/ldapconfigurewidgetng.cpp:120
 #, kde-format
 msgctxt "@title:window"
 msgid "Edit Host"
 msgstr "編輯主機"
 
-#: widgets/ldapconfigurewidgetng.cpp:138
+#: widgets/ldapconfigurewidgetng.cpp:137
 #, kde-format
 msgid "Do you want to remove setting for host \"%1\"?"
 msgstr "您確定要刪除主機 \"%1\" 的設定嗎？"
 
-#: widgets/ldapconfigurewidgetng.cpp:139
+#: widgets/ldapconfigurewidgetng.cpp:138
 #, kde-format
 msgctxt "@title:window"
 msgid "Remove Host"
 msgstr "移除主機"
 
-#: widgets/ldapconfigurewidgetng.cpp:212
+#: widgets/ldapconfigurewidgetng.cpp:211
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Check all servers that should be used:"
 msgstr "勾選所有要使用的伺服器："
 
-#: widgets/ldapconfigurewidgetng.cpp:260
+#: widgets/ldapconfigurewidgetng.cpp:259
 #, kde-format
 msgctxt "@action:button"
 msgid "&Add Host…"
 msgstr "新增主機(&A)…"
 
-#: widgets/ldapconfigurewidgetng.cpp:262
+#: widgets/ldapconfigurewidgetng.cpp:261
 #, kde-format
 msgctxt "@action:button"
 msgid "&Edit Host…"
 msgstr "編輯主機(&E)…"
 
-#: widgets/ldapconfigurewidgetng.cpp:265
+#: widgets/ldapconfigurewidgetng.cpp:264
 #, kde-format
 msgctxt "@action:button"
 msgid "&Remove Host"
 msgstr "移除主機(&R)"
 
-#: widgets/ldapconfigwidget.cpp:94
+#: widgets/ldapconfigwidget.cpp:95
 #, kde-format
 msgid "User:"
 msgstr "使用者："
 
-#: widgets/ldapconfigwidget.cpp:102
+#: widgets/ldapconfigwidget.cpp:103
 #, kde-format
 msgid "Bind DN:"
 msgstr "域名："
 
-#: widgets/ldapconfigwidget.cpp:110
+#: widgets/ldapconfigwidget.cpp:111
 #, kde-format
 msgid "Realm:"
 msgstr "領域："
 
-#: widgets/ldapconfigwidget.cpp:119
+#: widgets/ldapconfigwidget.cpp:120
 #, kde-format
 msgid "Password:"
 msgstr "密碼："
 
-#: widgets/ldapconfigwidget.cpp:127
+#: widgets/ldapconfigwidget.cpp:128
 #, kde-format
 msgid "Host:"
 msgstr "主機："
 
-#: widgets/ldapconfigwidget.cpp:136
+#: widgets/ldapconfigwidget.cpp:137
 #, kde-format
 msgid "Port:"
 msgstr "埠號："
 
-#: widgets/ldapconfigwidget.cpp:144
+#: widgets/ldapconfigwidget.cpp:145
 #, kde-format
 msgid "LDAP version:"
 msgstr "LDAP 版本："
 
-#: widgets/ldapconfigwidget.cpp:152
+#: widgets/ldapconfigwidget.cpp:153
 #, kde-format
 msgctxt "default ldap size limit"
 msgid "Default"
 msgstr "預設"
 
-#: widgets/ldapconfigwidget.cpp:153
+#: widgets/ldapconfigwidget.cpp:154
 #, kde-format
 msgid "Size limit:"
 msgstr "大小限制："
 
-#: widgets/ldapconfigwidget.cpp:161
+#: widgets/ldapconfigwidget.cpp:162
 #, kde-format
 msgid " sec"
 msgstr " 秒"
 
-#: widgets/ldapconfigwidget.cpp:162
+#: widgets/ldapconfigwidget.cpp:163
 #, kde-format
 msgctxt "default ldap time limit"
 msgid "Default"
 msgstr "預設"
 
-#: widgets/ldapconfigwidget.cpp:163
+#: widgets/ldapconfigwidget.cpp:164
 #, kde-format
 msgid "Time limit:"
 msgstr "時間限制："
 
-#: widgets/ldapconfigwidget.cpp:171
+#: widgets/ldapconfigwidget.cpp:172
 #, kde-format
 msgid "No paging"
 msgstr "不分頁"
 
-#: widgets/ldapconfigwidget.cpp:172
+#: widgets/ldapconfigwidget.cpp:173
 #, kde-format
 msgid "Page size:"
 msgstr "頁面大小："
 
-#: widgets/ldapconfigwidget.cpp:184 widgets/ldapconfigwidget.cpp:263
+#: widgets/ldapconfigwidget.cpp:185 widgets/ldapconfigwidget.cpp:264
 #, kde-format
 msgctxt "@action:button"
 msgid "Query Server"
 msgstr "查詢伺服器"
 
-#: widgets/ldapconfigwidget.cpp:194
+#: widgets/ldapconfigwidget.cpp:195
 #, kde-format
 msgctxt "Distinguished Name"
 msgid "DN:"
 msgstr "區別名稱："
 
-#: widgets/ldapconfigwidget.cpp:202
+#: widgets/ldapconfigwidget.cpp:203
 #, kde-format
 msgid "Filter:"
 msgstr "過濾器："
 
-#: widgets/ldapconfigwidget.cpp:211
+#: widgets/ldapconfigwidget.cpp:212
 #, kde-format
 msgctxt "@option:radio set no security"
 msgid "No"
 msgstr "無"
 
-#: widgets/ldapconfigwidget.cpp:214
+#: widgets/ldapconfigwidget.cpp:215
 #, kde-format
 msgctxt "@option:radio use TLS security"
 msgid "TLS"
 msgstr "TLS"
 
-#: widgets/ldapconfigwidget.cpp:217
+#: widgets/ldapconfigwidget.cpp:218
 #, kde-format
 msgctxt "@option:radio use SSL security"
 msgid "SSL"
 msgstr "SSL"
 
-#: widgets/ldapconfigwidget.cpp:232
+#: widgets/ldapconfigwidget.cpp:233
 #, kde-format
 msgid "Security:"
 msgstr "安全性："
 
-#: widgets/ldapconfigwidget.cpp:242
+#: widgets/ldapconfigwidget.cpp:243
 #, kde-format
 msgctxt "@option:radio anonymous authentication"
 msgid "Anonymous"
 msgstr "匿名"
 
-#: widgets/ldapconfigwidget.cpp:245
+#: widgets/ldapconfigwidget.cpp:246
 #, kde-format
 msgctxt "@option:radio simple authentication"
 msgid "Simple"
 msgstr "簡單"
 
-#: widgets/ldapconfigwidget.cpp:248
+#: widgets/ldapconfigwidget.cpp:249
 #, kde-format
 msgctxt "@option:radio SASL authentication"
 msgid "SASL"
 msgstr "SASL"
 
-#: widgets/ldapconfigwidget.cpp:251
+#: widgets/ldapconfigwidget.cpp:252
 #, kde-format
 msgid "Authentication:"
 msgstr "認證："
 
-#: widgets/ldapconfigwidget.cpp:269
+#: widgets/ldapconfigwidget.cpp:270
 #, kde-format
 msgid "SASL mechanism:"
 msgstr "SASL 機制："
 
-#: widgets/ldapconfigwidget.cpp:313
+#: widgets/ldapconfigwidget.cpp:314
 #, kde-format
 msgctxt "@title:window"
 msgid "Check server"
 msgstr "檢查伺服器"
 
-#: widgets/ldapconfigwidget.cpp:319
+#: widgets/ldapconfigwidget.cpp:320
 #, kde-format
 msgctxt "@title:window"
 msgid "LDAP Query"
 msgstr "LDAP 查詢"
 
-#: widgets/ldapconfigwidget.cpp:333
+#: widgets/ldapconfigwidget.cpp:334
 #, kde-format
 msgctxt "%1 is a url to ldap server"
 msgid "Unknown error connecting %1"
