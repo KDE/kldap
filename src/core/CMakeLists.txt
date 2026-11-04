@@ -7,7 +7,7 @@ include(CheckSymbolExists)
 ecm_setup_version(PROJECT VARIABLE_PREFIX KLDAPCORE
     VERSION_HEADER "${CMAKE_CURRENT_BINARY_DIR}/kldap_core_version.h"
     PACKAGE_VERSION_FILE "${CMAKE_CURRENT_BINARY_DIR}/KPim6LdapCoreConfigVersion.cmake"
-    SOVERSION 6
+    SOVERSION ${PROJECT_SOVERSION}
 )
 
 check_include_files(
