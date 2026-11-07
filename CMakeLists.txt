@@ -1,7 +1,7 @@
 # SPDX-FileCopyrightText: none
 # SPDX-License-Identifier: BSD-3-Clause
 cmake_minimum_required(VERSION 3.29)
-set(PIM_VERSION "6.8.40")
+set(PIM_VERSION "6.9.40")
 # use a different SOVERSION for each minor release because we don't guarantee any ABI stability;
 # bump the SOVERSION with the first development version, i.e. major.minor.40
 if(PROJECT_VERSION_PATCH VERSION_GREATER_EQUAL "40")
