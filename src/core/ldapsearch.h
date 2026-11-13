@@ -155,6 +155,5 @@ Q_SIGNALS:
 
 private:
     std::unique_ptr<LdapSearchPrivate> const d;
-    Q_DISABLE_COPY(LdapSearch)
 };
 }
