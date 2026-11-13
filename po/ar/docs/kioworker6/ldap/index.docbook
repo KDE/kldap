@@ -1,0 +1,54 @@
+<?xml version="1.0" ?>
+<!DOCTYPE article PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN"
+"dtd/kdedbx45.dtd" [
+<!ENTITY % addindex "IGNORE">
+<!ENTITY % Arabic "INCLUDE"
+> <!-- change language only here -->
+]>
+
+<article lang="&language;" id="ldap">
+<title
+>ldap</title>
+<articleinfo>
+<authorgroup>
+<author
+>&Lauri.Watts; &Lauri.Watts.mail;</author>
+<othercredit role="translator"
+><firstname
+>زايد</firstname
+><surname
+>السعيدي</surname
+><affiliation
+><address
+><email
+>zayed.alsaidi@gmail.com</email
+></address
+></affiliation
+><contrib
+>التّرجمة العربيّة</contrib
+></othercredit
+> 
+</authorgroup>
+</articleinfo>
+
+<para
+><acronym
+>ldap</acronym
+> هو ميفاق الوصول الخفيف إلى الدليل. وهو يتيح الوصول إلى دليل X.500 أو إلى خادم <acronym
+>LDAP</acronym
+> مستقل.</para>
+
+<para
+>يمكنك استخدام عامل KIO الخاص بـ LDAP على النحو التالي:</para>
+
+<para
+><userinput
+>ldap://host:port/ou=People,o=where,c=de??sub</userinput
+> لاستعلام عن شجرة فرعية</para>
+
+<para
+>أو <userinput
+>ldap://host:port/cn=MM,ou=People,o=where,c=de??base</userinput
+> للحصول على فرع كامل.</para>
+
+</article>
