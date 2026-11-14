@@ -1,6 +1,7 @@
 include($KDE_DOCS/global/qt-module-defaults.qdocconf)
 
 project = LdapCore
+moduleheader = ldapcore_qdocmoduleheader.h
 description = LDAP Core support library.
 
 

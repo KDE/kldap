@@ -1,6 +1,7 @@
 include($KDE_DOCS/global/qt-module-defaults.qdocconf)
 
 project = LdapWidgets
+moduleheader = ldapwidgets_qdocmoduleheader.h
 description = LDAP Widgets support library.
 
 
