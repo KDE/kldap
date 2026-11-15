@@ -45,8 +45,13 @@ LdapActivitiesAbstract *LdapSortProxyModel::ldapActivitiesAbstract() const
 void LdapSortProxyModel::setLdapActivitiesAbstract(LdapActivitiesAbstract *newIdentityActivitiesAbstract)
 {
     if (mLdapActivitiesAbstract != newIdentityActivitiesAbstract) {
+        if (mLdapActivitiesAbstract) {
+            disconnect(mLdapActivitiesAbstract, &LdapActivitiesAbstract::activitiesChanged, this, &LdapSortProxyModel::slotInvalidateFilter);
+        }
         mLdapActivitiesAbstract = newIdentityActivitiesAbstract;
-        connect(mLdapActivitiesAbstract, &LdapActivitiesAbstract::activitiesChanged, this, &LdapSortProxyModel::slotInvalidateFilter);
+        if (mLdapActivitiesAbstract) {
+            connect(mLdapActivitiesAbstract, &LdapActivitiesAbstract::activitiesChanged, this, &LdapSortProxyModel::slotInvalidateFilter);
+        }
         slotInvalidateFilter();
     }
 }
