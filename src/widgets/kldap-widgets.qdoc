@@ -2,8 +2,8 @@
     \module LdapWidgets
     \title Ldap Widgets C++ Classes
     \ingroup modules
-    \cmakepackage KPim6
-    \cmakecomponent LdapWidgets
+    \cmakepackage KPim6LdapWidgets
+    \cmaketargetitem KPim6::LdapWidgets
 
     \brief LDAP Widgets support library.
 */

@@ -2,8 +2,8 @@
     \module LdapCore
     \title Ldap Core C++ Classes
     \ingroup modules
-    \cmakepackage KPim6
-    \cmakecomponent LdapCore
+    \cmakepackage KPim6LdapCore
+    \cmaketargetitem KPim6::LdapCore
 
     \brief LDAP Core support library.
 */
