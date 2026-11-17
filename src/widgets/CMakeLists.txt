@@ -57,9 +57,8 @@ target_link_libraries(
         KF6::CoreAddons
         KF6::KIOCore
         KF6::ConfigGui
+        qt6keychain
 )
-
-target_link_libraries(KPim6LdapWidgets PRIVATE qt6keychain)
 
 target_include_directories(
     KPim6LdapWidgets

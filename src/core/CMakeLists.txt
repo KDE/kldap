@@ -144,9 +144,8 @@ target_link_libraries(
         KF6::CoreAddons
         KF6::KIOCore
         ${kldap_EXTRA_LIBS}
+        qt6keychain
 )
-
-target_link_libraries(KPim6LdapCore PRIVATE qt6keychain)
 
 target_include_directories(KPim6LdapCore INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}/KPim6/KLDAPCore>")
 target_include_directories(
