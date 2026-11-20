@@ -8,6 +8,7 @@
 #include "ldapurl.h"
 
 #include "ldap_core_debug.h"
+#include <QMap>
 
 using namespace KLDAPCore;
 using namespace Qt::Literals::StringLiterals;

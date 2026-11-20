@@ -8,6 +8,7 @@
 #include "ldapdn.h"
 
 #include "ldap_core_debug.h"
+#include <QStringList>
 #include <algorithm>
 
 using namespace KLDAPCore;
