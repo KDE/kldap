@@ -62,7 +62,7 @@ QByteArray Ldif::assembleLine(const QString &fieldname, const QByteArray &value,
         result = fieldname.toUtf8() + ":< " + value;
     } else {
         bool safe = false;
-        bool isDn = fieldname.toLower() == "dn"_L1;
+        bool isDn = fieldname.compare("dn"_L1, Qt::CaseInsensitive) == 0;
         // SAFE-INIT-CHAR
         if (!value.isEmpty() && value[0] > 0 && value[0] != '\n' && value[0] != '\r' && value[0] != ':' && value[0] != '<') {
             safe = true;

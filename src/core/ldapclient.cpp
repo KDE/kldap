@@ -187,7 +187,7 @@ void LdapClient::LdapClientPrivate::finishCurrentObject()
     KLDAPCore::LdapAttrValue objectclasses;
     const KLDAPCore::LdapAttrMap::ConstIterator end = mCurrentObject.attributes().constEnd();
     for (KLDAPCore::LdapAttrMap::ConstIterator it = mCurrentObject.attributes().constBegin(); it != end; ++it) {
-        if (it.key().toLower() == QLatin1StringView("objectclass")) {
+        if (it.key().compare(QLatin1StringView("objectclass"), Qt::CaseInsensitive) == 0) {
             objectclasses = it.value();
             break;
         }
