@@ -5,13 +5,13 @@
 # Serdar Soytetir <tulliana@gmail.com>, 2008, 2009.
 # Volkan Gezer <volkangezer@gmail.com>, 2013, 2014.
 # Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
-# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022-2024, 2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: libkldap\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-30 00:54+0000\n"
-"PO-Revision-Date: 2024-11-27 16:05+0300\n"
+"PO-Revision-Date: 2026-11-23 17:58+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.03.70\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #: core/ldapconnection.cpp:129
 #, kde-format
@@ -199,7 +199,7 @@ msgstr "LDAP sürümü:"
 #, kde-format
 msgctxt "default ldap size limit"
 msgid "Default"
-msgstr "Öntanımlı"
+msgstr "Varsayılan"
 
 #: widgets/ldapconfigwidget.cpp:154
 #, kde-format
@@ -215,7 +215,7 @@ msgstr " sn"
 #, kde-format
 msgctxt "default ldap time limit"
 msgid "Default"
-msgstr "Öntanımlı"
+msgstr "Varsayılan"
 
 #: widgets/ldapconfigwidget.cpp:164
 #, kde-format
