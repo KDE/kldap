@@ -7,7 +7,7 @@
 
 #pragma once
 
-/**
+/*!
  * LDAP Error codes.
  * These codes taken from openldap's ldap.h, and prefixed with KLDAP_
  * instead of LDAP_, just for applications which uses the kldap library
@@ -112,7 +112,7 @@
 /* for the LDAP No-Op control */
 #define KLDAP_X_NO_OPERATION 0x410e
 
-/** API Error Codes
+/*! API Error Codes
  *
  * Based on draft-ietf-ldap-c-api-xx
  * but with new negative code values

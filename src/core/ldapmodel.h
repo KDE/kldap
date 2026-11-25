@@ -28,6 +28,8 @@ public:
      */
     ~LdapModel() override;
 
+    /*!
+     */
     enum LdapRoles {
         Name,
         Index,
@@ -37,9 +39,20 @@ public:
         LastColumn = Server,
     };
 
+    /*!
+     * \class KLDAPCore::LdapModel::ServerInfo
+     * \inmodule LdapCore
+     * \inheaderfile KLDAPCore/LdapModel
+     */
     struct ServerInfo {
+        /*!
+         */
         bool enabled = false;
+        /*!
+         */
         int index = 0;
+        /*!
+         */
         KLDAPCore::LdapServer server;
     };
 

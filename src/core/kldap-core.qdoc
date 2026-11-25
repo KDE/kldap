@@ -7,3 +7,9 @@
 
     \brief LDAP Core support library.
 */
+
+/*!
+    \namespace KLDAPCore
+    \inmodule LdapCore
+    \brief The KLDAPCore namespace contains the classes of the LdapCore module.
+*/

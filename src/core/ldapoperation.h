@@ -23,6 +23,9 @@
 namespace KLDAPCore
 {
 /*!
+ * \class KLDAPCore::LdapOperation
+ * \inmodule LdapCore
+ * \inheaderfile KLDAPCore/LdapOperation
  * \brief
  * This class allows sending an ldap operation
  * (search, rename, modify, delete, compare, exop) to an LDAP server.
@@ -51,14 +54,27 @@ public:
         RES_EXTENDED_PARTIAL = 0x79,
     };
 
+    /*!
+     * \class KLDAPCore::LdapOperation::
+     * \inmodule LdapCore
+     * \inheaderfile KLDAPCore/LdapOperation
+     */
     using ModOp = struct {
+        /*!
+         */
         ModType type;
+        /*!
+         */
         QString attr;
+        /*!
+         */
         QList<QByteArray> values;
     };
 
     using ModOps = QList<ModOp>;
 
+    /*!
+     */
     enum SASL_Fields {
         SASL_Authname = 0x1,
         SASL_Authzid = 0x2,
@@ -66,22 +82,50 @@ public:
         SASL_Password = 0x8,
     };
 
+    /*!
+     * \class KLDAPCore::LdapOperation::SASL_Credentials
+     * \inmodule LdapCore
+     * \inheaderfile KLDAPCore/LdapOperation
+     */
     struct SASL_Credentials {
+        /*!
+         */
         int fields;
+        /*!
+         */
         QString authname;
+        /*!
+         */
         QString authzid;
+        /*!
+         */
         QString realm;
+        /*!
+         */
         QString password;
     };
 
     using SASL_Callback_Proc = int(SASL_Credentials &, void *);
 
+    /*!
+     * \class KLDAPCore::LdapOperation::SASL_Data
+     * \inmodule LdapCore
+     * \inheaderfile KLDAPCore/LdapOperation
+     */
     struct SASL_Data {
+        /*!
+         */
         SASL_Callback_Proc *proc;
+        /*!
+         */
         void *data;
+        /*!
+         */
         SASL_Credentials creds;
     };
 
+    /*!
+     */
     LdapOperation();
 
     /*!

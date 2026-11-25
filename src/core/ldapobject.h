@@ -34,11 +34,21 @@ using LdapAttrMap = QMap<QString, LdapAttrValue>;
 class KLDAP_CORE_EXPORT LdapObject
 {
 public:
+    /*!
+     */
     LdapObject();
+    /*!
+     */
     explicit LdapObject(const QString &dn);
+    /*!
+     */
     ~LdapObject();
 
+    /*!
+     */
     LdapObject(const LdapObject &that);
+    /*!
+     */
     LdapObject &operator=(const LdapObject &that);
 
     /*!

@@ -7,3 +7,9 @@
 
     \brief LDAP Widgets support library.
 */
+
+/*!
+    \namespace KLDAPWidgets
+    \inmodule LdapWidgets
+    \brief The KLDAPWidgets namespace contains the classes of the LdapWidgets module.
+*/

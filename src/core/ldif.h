@@ -18,6 +18,9 @@
 namespace KLDAPCore
 {
 /*!
+ * \class KLDAPCore::Ldif
+ * \inmodule LdapCore
+ * \inheaderfile KLDAPCore/Ldif
  * Ldif
  *
  * Ldif implements an RFC 2849 compliant Ldif parser. Ldif files are used to
@@ -53,11 +56,19 @@ public:
         Mod_Del
     };
 
+    /*!
+     */
     Ldif();
 
+    /*!
+     */
     Ldif(const Ldif &that);
+    /*!
+     */
     Ldif &operator=(const Ldif &that);
 
+    /*!
+     */
     ~Ldif();
 
     /*!

@@ -20,8 +20,17 @@ class KLDAPWIDGETS_EXPORT LdapActivitiesAbstractPlugin : public QWidget
 {
     Q_OBJECT
 public:
+    /*!
+     * \class KLDAPWidgets::LdapActivitiesAbstractPlugin::ActivitySettings
+     * \inmodule LdapWidgets
+     * \inheaderfile KLDAPWidgets/LdapActivitiesAbstractPlugin
+     */
     struct ActivitySettings {
+        /*!
+         */
         QStringList activities;
+        /*!
+         */
         bool enabled = false;
     };
 

@@ -22,16 +22,30 @@ namespace KLDAPCore
 class KLDAP_CORE_EXPORT LdapDN
 {
 public:
+    /*!
+     */
     explicit LdapDN();
+    /*!
+     */
     explicit LdapDN(const QString &dn);
 
+    /*!
+     */
     LdapDN(const LdapDN &that);
+    /*!
+     */
     LdapDN &operator=(const LdapDN &that);
 
+    /*!
+     */
     ~LdapDN();
 
+    /*!
+     */
     void clear();
 
+    /*!
+     */
     [[nodiscard]] bool isEmpty() const;
 
     /*!
@@ -66,8 +80,12 @@ public:
      */
     [[nodiscard]] int depth() const;
 
+    /*!
+     */
     [[nodiscard]] bool operator==(const LdapDN &rhs) const;
 
+    /*!
+     */
     [[nodiscard]] bool operator!=(const LdapDN &rhs) const;
 
 private:

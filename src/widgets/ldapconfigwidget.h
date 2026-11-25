@@ -48,6 +48,8 @@ class KLDAPWIDGETS_EXPORT LdapConfigWidget : public QWidget
     Q_PROPERTY(int pageSize READ pageSize WRITE setPageSize)
 
 public:
+    /*!
+     */
     enum WinFlag {
         W_USER = 0x1,
         W_BINDDN = 0x2,
@@ -68,6 +70,8 @@ public:
     Q_DECLARE_FLAGS(WinFlags, WinFlag)
     Q_FLAG(WinFlags)
 
+    /*!
+     */
     enum Security {
         None,
         SSL,
@@ -75,6 +79,8 @@ public:
     };
     Q_ENUM(Security)
 
+    /*!
+     */
     enum Auth {
         Anonymous,
         Simple,

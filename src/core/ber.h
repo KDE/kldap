@@ -40,6 +40,8 @@ public:
      */
     ~Ber();
 
+    /*!
+     */
     Ber(const Ber &that);
 
     /*!

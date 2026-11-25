@@ -34,11 +34,18 @@ class KLDAP_CORE_EXPORT LdapUrl : public QUrl
 {
 public:
     /*!
+     * \class KLDAPCore::LdapUrl::
+     * \inmodule LdapCore
+     * \inheaderfile KLDAPCore/LdapUrl
      * A class holding the extension name and state whether
      * the extension is critical.
      */
     using Extension = struct {
+        /*!
+         */
         QString value;
+        /*!
+         */
         bool critical;
     };
 

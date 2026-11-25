@@ -18,17 +18,27 @@ namespace KLDAPCore
 {
 class LdapClient;
 /*!
+ * \class KLDAPCore::LdapResultObject
+ * \inmodule LdapCore
+ * \inheaderfile KLDAPCore/LdapClientSearch
  * Describes the result returned by an LdapClientSearch query.
  *
  * \since 4.14
  */
 struct LdapResultObject {
     using List = QList<LdapResultObject>;
+    /*!
+     */
     const KLDAPCore::LdapClient *client = nullptr;
+    /*!
+     */
     KLDAPCore::LdapObject object;
 };
 
 /*!
+ * \class KLDAPCore::LdapResult
+ * \inmodule LdapCore
+ * \inheaderfile KLDAPCore/LdapClientSearch
  * Describes the result returned by an LdapClientSearch query.
  *
  * \since 4.5
@@ -39,10 +49,20 @@ struct LdapResult {
      */
     using List = QList<LdapResult>;
 
+    /*!
+     */
     KLDAPCore::LdapDN dn;
+    /*!
+     */
     QString name; ///< The full name of the contact.
+    /*!
+     */
     QStringList email; ///< The list of emails of the contact.
+    /*!
+     */
     int clientNumber; ///< The client the contact comes from (used for sorting in a ldap-only lookup).
+    /*!
+     */
     int completionWeight; ///< The weight of the contact (used for sorting in a completion list).
 };
 
@@ -134,6 +154,8 @@ public:
      */
     void setAttributes(const QStringList &attributes);
 
+    /*!
+     */
     [[nodiscard]] static QStringList defaultAttributes();
 
 Q_SIGNALS:

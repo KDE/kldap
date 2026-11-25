@@ -23,7 +23,11 @@ class KLDAP_CORE_EXPORT LdapClientSearchConfigWriteConfigJob : public QObject
 {
     Q_OBJECT
 public:
+    /*!
+     */
     explicit LdapClientSearchConfigWriteConfigJob(QObject *parent = nullptr);
+    /*!
+     */
     ~LdapClientSearchConfigWriteConfigJob() override;
 
     /*!
